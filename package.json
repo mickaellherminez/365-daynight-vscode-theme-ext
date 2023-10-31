@@ -1,0 +1,49 @@
+{
+  "name": "365-daynight-vscode-theme-ext",
+  "displayName": "365 DayNight VSCode Theme Ext",
+  "description": "365 DayNight VSCode Themes energizes your coding experience with themes that automatically change according to the time of day, month of the year and holidays. Designed to minimize eye fatigue and maximize readability, this extension makes every coding session rich and adapted to the surrounding light. With 365 DayNight, let your development environment evolve with you all year round.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "365-daynight-vscode-theme-ext.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "themes": [
+      {
+        "label": "365 DayNight October Light Theme",
+        "uiTheme": "vs",
+        "path": "./themes/untitled-color-theme.json"
+      },
+      {
+        "label": "My Awesome Dark Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/my-dark-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.83.0",
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.6"
+  }
+}
