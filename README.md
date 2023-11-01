@@ -1,65 +1,62 @@
-# 365-daynight-vscode-theme-ext README
+# README for the "365-daynight-vscode-theme-ext" extension
 
-This is the README for your extension "365-daynight-vscode-theme-ext". After writing up a brief description, we recommend including the following sections.
+![365DayNight VSCode Themes](assets/logo-web.png)
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext?nocache?)
+
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
+
+*Read this document in other languages: [English](README.md).
+
+Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode. 
+
+365DayNight VSCode Themes is an extension designed to enhance your coding experience all year round with dynamic, visually rewarding themes. Designed to minimize eye strain and optimize readability, 365DayNight adapts your VSCode theme according to natural or artificial light, and offers an uninterrupted coding experience 24/7.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+365DayNight offers coding themes for day and night, and includes special themes for holiday periods. The benefits of this extension are:
 
-For example if there is an image subfolder under your extension project workspace:
+- Two themes oriented for natural light during the day and artificial light at night.
+- Minimizes eye fatigue and maximizes legibility.
+- Automatically adapts your theme to the time of day.
+- Special themes for holiday periods.
 
-\!\[feature X\]\(images/feature-x.png\)
+## Extension settings 
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+The extension offers the following settings:
 
-## Requirements
+* `365DayNight.enable`: Enable/disable the extension.
+* `365DayNight.mode`: Set the mode to `day`, `night` or `auto` for automatic changeover.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Accessibility
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+We attach great importance to accessibility and have optimized the extension to be more accessible, especially for people with color blindness. If you have any suggestions or ideas for improving accessibility, please let us know.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+Details of each version are provided below:
 
 ### 1.0.0
 
-Initial release of ...
+Initial version of 365DayNight.
 
 ### 1.0.1
 
-Fixed issue #.
+Minor bug fixes.
 
 ### 1.1.0
 
-Added features X, Y, and Z.
+Added special holiday themes.
 
 ---
 
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
 ## For more information
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
+For more information on using MarkDown in Visual Studio Code, see the following links:
+
+* [Visual Studio Code Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
-**Enjoy!**
+Enjoy the flexibility and dynamics of the 365DayNight extension for an enriching coding experience!
+
+**Have fun with 365DayNight VSCode Themes!
