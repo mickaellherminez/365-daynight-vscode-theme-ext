@@ -4,6 +4,8 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## [Unreleased]
 
 ### Added
@@ -45,16 +47,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ---
 
 ## [0.0.2] - 2023-11-01
-
-### Added
+### Changed
+- 
 
 ## [0.0.1] - 2023-10-21
-
 ### Added
 - Initial release
-
-
----
+- Add README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
 [0.0.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0

@@ -2,7 +2,7 @@
 
 ![365DayNight VSCode Themes](assets/logo-web.png)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/nom_utilisateur/nom_repository)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
 
 *Lire ce document dans d'autres langues : [English](README.md).
