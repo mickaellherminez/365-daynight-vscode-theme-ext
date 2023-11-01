@@ -45,17 +45,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
+## [0.0.3] - 2023-11-02
+### Changed
+- Modification of extension image URL in README.md file
+- Updated package.json file 
+### Added
+- Added LICENSE file
 
 ## [0.0.2] - 2023-11-01
 ### Changed
-- 
+- Changed README.md file
 
 ## [0.0.1] - 2023-10-21
 ### Added
 - Initial release
-- Add README_fr.md file
+- Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[0.0.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.2.0...0.3.0
+[0.0.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0...0.2.0
 [0.0.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0
 
 ---
