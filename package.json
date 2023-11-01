@@ -6,6 +6,10 @@
   "engines": {
     "vscode": "^1.83.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mickaellherminez/365-daynight-vscode-theme-ext.git"
+  },
   "categories": [
     "Other"
   ],
