@@ -1,9 +1,11 @@
 # README pour l'extension "365-daynight-vscode-theme-ext"
 
-![365DayNight VSCode Themes](assets/logo-web-small.png)
+![365DayNight VSCode Themes](assets/logo-web.png)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/nom_utilisateur/nom_repository)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
+
+*Lire ce document dans d'autres langues : [English](README.md).
 
 Bienvenue sur la page README de l'extension "365-daynight-vscode-theme-ext" pour VSCode. 
 
