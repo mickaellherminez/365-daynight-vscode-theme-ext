@@ -53,6 +53,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 - Initial release
 
+
+---
+
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[0.0.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0
+
 ---
 
 ### How do I make a good changelog?
