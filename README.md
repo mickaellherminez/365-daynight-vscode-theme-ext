@@ -4,7 +4,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext?nocache?)
 
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365-daynight-vscode-theme-ext)
 
 *Read this document in other languages: [Français](README_fr.md).*
 
