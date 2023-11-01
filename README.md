@@ -6,7 +6,7 @@
 
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
 
-*Read this document in other languages: [English](README.md).
+*Read this document in other languages: [Français](README_fr.md).*
 
 Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode. 
 
