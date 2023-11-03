@@ -45,6 +45,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
+## [0.0.4] - 2023-11-03
+### Changed
+- change extension icon
+### Added
+- Add an icon to package.json for Microsoft store
+- Add October theme
+
 ## [0.0.3] - 2023-11-02
 ### Changed
 - Modification of extension image URL in README.md file
@@ -62,6 +69,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[0.0.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.3.0...0.4.0
 [0.0.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.2.0...0.3.0
 [0.0.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0...0.2.0
 [0.0.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0
