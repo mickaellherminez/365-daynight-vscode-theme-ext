@@ -45,34 +45,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
-## [0.0.4] - 2023-11-03
+## [0.5.0] - 2023-11-05
+### Changed
+- October Light theme update
+- License update
+- Correction of README_fr.md and README.md files
+
+## [0.4.0] - 2023-11-03
 ### Changed
 - change extension icon
 ### Added
 - Add an icon to package.json for Microsoft store
 - Add October theme
 
-## [0.0.3] - 2023-11-02
+## [0.3.0] - 2023-11-02
 ### Changed
 - Modification of extension image URL in README.md file
 - Updated package.json file 
 ### Added
 - Added LICENSE file
 
-## [0.0.2] - 2023-11-01
+## [0.2.0] - 2023-11-01
 ### Changed
 - Changed README.md file
 
-## [0.0.1] - 2023-10-21
+## [0.1.0] - 2023-10-21
 ### Added
 - Initial release
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
-[0.0.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.3.0...0.4.0
-[0.0.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.2.0...0.3.0
-[0.0.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0...0.2.0
-[0.0.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0
+[0.5.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.0.4...0.5.0
+[0.4.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.3.0...0.0.4
+[0.3.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...0.2.0
+[0.1.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0
 
 ---
 

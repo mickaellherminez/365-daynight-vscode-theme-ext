@@ -3,10 +3,9 @@
 ![365DayNight VSCode Themes](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/assets/logo-web-small.png?raw=true)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext?nocache?)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/mickaellherminez.365-daynight-vscode-theme-ext)
 
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/365daynight.vscode-theme-ext)
-
-*Lire ce document dans d'autres langues : [English](README.md).
+*Lire ce document dans d'autres langues : [English](README.md).*
 
 Bienvenue sur la page README de l'extension "365-daynight-vscode-theme-ext" pour VSCode. 
 
@@ -34,19 +33,7 @@ Nous accordons une grande importance à l'accessibilité et nous avons optimisé
 
 ## Notes de Version
 
-Les détails de chaque version sont fournis ci-dessous :
-
-### 1.0.0
-
-Version initiale de 365DayNight.
-
-### 1.0.1
-
-Correction de bugs mineurs.
-
-### 1.1.0
-
-Ajout de thèmes spéciaux pour les fêtes.
+Les détails de chaque version sont fournis [ici](CHANGELOG.md).
 
 ---
 

@@ -33,19 +33,7 @@ We attach great importance to accessibility and have optimized the extension to 
 
 ## Release Notes
 
-Details of each version are provided below:
-
-### 1.0.0
-
-Initial version of 365DayNight.
-
-### 1.0.1
-
-Minor bug fixes.
-
-### 1.1.0
-
-Added special holiday themes.
+Details of each version are provided [here](CHANGELOG.md).
 
 ---
 
@@ -58,15 +46,4 @@ For more information on using MarkDown in Visual Studio Code, see the following 
 
 Enjoy the flexibility and dynamics of the 365DayNight extension for an enriching coding experience!
 
-**Have fun with 365DayNight VSCode Themes!
-
-
-
-
-365DayNight VSCode Themes est une extension unique qui ajoute une dynamique visuelle à votre expérience de codage. Chaque jour de l'année, de janvier à décembre, cette extension offre deux thèmes adaptés à la lumière naturelle pendant la journée et à la lumière artificielle pendant la nuit, offrant ainsi une expérience de codage optimale 24/7.
-
-Conçue pour minimiser la fatigue oculaire et optimiser la lisibilité, 365DayNight adapte automatiquement votre thème VSCode en fonction du moment de la journée. Cette extension innovante donne une nouvelle dimension à vos sessions de codage et tient compte de l'environnement de travail en perpétuel changement des développeurs.
-
-De plus, 365DayNight comprend des thèmes spéciaux pour les périodes de fêtes, ajoutant une touche festive à votre environnement de développement.
-
-365DayNight est une véritable révolution dans l'optimisation de l'environnement de codage, offrant des thèmes soigneusement conçus pour tous les moments de votre journée. Installez 365DayNight et laissez votre environnement de développement évoluer avec vous tout au long de l'année.
+**Have fun with 365DayNight VSCode Themes!**

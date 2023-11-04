@@ -2,7 +2,7 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 DayNight VSCode Theme Ext",
   "description": "365 DayNight VSCode Themes energizes your coding experience with themes that automatically change according to the time of day, month of the year and holidays. Designed to minimize eye fatigue and maximize readability, this extension makes every coding session rich and adapted to the surrounding light. With 365 DayNight, let your development environment evolve with you all year round.",
-  "version": "0.0.4",
+  "version": "0.5.0",
   "publisher": "mickaellherminez",
   "icon": "assets/logo-web-small.png",
   "engines": {
@@ -20,14 +20,14 @@
   "contributes": {
     "themes": [
       {
-        "label": "365 DayNight October Light Theme",
+        "label": "365 DayNight October Night",
         "uiTheme": "vs",
         "path": "./themes/untitled-color-theme.json"
       },
       {
-        "label": "365 Day october light.json",
+        "label": "365 DayNight October light",
         "uiTheme": "vs",
-        "path": "./themes/365-day-vscode-theme-october-light.json"
+        "path": "./themes/365-day-october-light-color-theme.json"
       }
     ]
   },
