@@ -35,6 +35,10 @@ We attach great importance to accessibility and have optimized the extension to 
 
 Details of each version are provided [here](CHANGELOG.md).
 
+## package
+
+Utilisez la commande ```vsce package``` pour créer le fichier [.vsix](https://learn.microsoft.com/fr-fr/visualstudio/extensibility/walkthrough-publishing-a-visual-studio-extension-via-command-line?view=vs-2022).
+
 ---
 
 ## For more information

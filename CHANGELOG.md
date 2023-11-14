@@ -45,6 +45,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
+
+## [0.6.0] - 2023-11-14
+### Changed
+- Update of the extension images
+- Updated '365-day-october-light-color-theme.json' file for testing purposes
+
 ## [0.5.0] - 2023-11-05
 ### Changed
 - October Light theme update
@@ -75,6 +81,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[0.6.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.0.4...0.5.0
 [0.4.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.3.0...0.0.4
 [0.3.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.2.0...0.3.0
