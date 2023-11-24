@@ -1,0 +1,16 @@
+{
+    "name": "January Dark",
+    "type": "dark",
+    "colors": {
+        "editor.background": "#1E1E1E",
+        "editor.foreground": "#E0E0E0",
+        "editorCursor.foreground": "#ADD8E6",
+        "editor.lineHighlightBackground": "#333333",
+        "activityBar.background": "#4B8EB0",
+        "sideBar.background": "#2B2B2B",
+        "sideBar.foreground": "#E0E0E0",
+        "statusBar.background": "#4B8EB0",
+        "statusBar.foreground": "#FFFFFF",
+        "button.background": "#4B8EB0"
+    }
+}

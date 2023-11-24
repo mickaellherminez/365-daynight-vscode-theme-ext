@@ -46,6 +46,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ---
 
+## [0.7.0] - 2023-11-xx
+### Added
+- Add all the themes in the package.json
+
 ## [0.6.0] - 2023-11-14
 ### Changed
 - Update of the extension images
@@ -81,6 +85,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[0.7.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.0.4...0.5.0
 [0.4.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.3.0...0.0.4
