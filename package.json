@@ -20,8 +20,13 @@
   "contributes": {
     "themes": [
       {
-        "label": "365 DayNight October dark",
+        "label": "365 DayNight January light",
         "uiTheme": "vs",
+        "path": "./themes/365-day-january-light-color-theme.json"
+      },
+      {
+        "label": "365 DayNight October dark",
+        "uiTheme": "vs-dark",
         "path": "./themes/365-day-october-dark-color-theme.json"
       },
       {
