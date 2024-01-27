@@ -45,6 +45,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
+## [0.8.0] - 2024-xx-xx
+
 
 ## [0.7.0] - 2024-01-14
 ### Changed
