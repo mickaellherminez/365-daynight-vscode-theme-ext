@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- Check if it is possible to deploy directly to the Microsoft Store during tagging using GitHub actions.
 - Two daily themes for each month of the year.
   - January: Light theme for the day, dark theme for the night
   - February: Light theme for the day, dark theme for the night
