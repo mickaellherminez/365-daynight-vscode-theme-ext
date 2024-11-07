@@ -23,7 +23,7 @@
     "button.border": "#2E8B57",
     "button.foreground": "#E8ECEF",
     "button.hoverBackground": "#2E8B57",
-    "button.secondaryBackground": "#FFD700",
+    "button.secondaryBackground": "#FF6347",
     "button.secondaryForeground": "#35596D",
     "button.secondaryHoverBackground": "#FFA500",
     "checkbox.background": "#DDE0E5",
@@ -89,8 +89,8 @@
     "editorGutter.foldingControlForeground": "#35596D",
     "editorGutter.modifiedBackground": "#2E8B57",
     "editorHint.background": "#FFD70000",
-    "editorHint.border": "#FFD700",
-    "editorHint.foreground": "#FFD700",
+    "editorHint.border": "#FF6347",
+    "editorHint.foreground": "#FF6347",
     "editorHoverWidget.background": "#DDE0E5",
     "editorHoverWidget.border": "#C4D1DC",
     "editorIndentGuide.activeBackground": "#8795A1",
@@ -98,8 +98,8 @@
     "editorInfo.background": "#8B451300",
     "editorInfo.border": "#8B4513",
     "editorInfo.foreground": "#8B4513",
-    "editorLightBulb.foreground": "#FFD700",
-    "editorLightBulbAutoFix.foreground": "#FFD700",
+    "editorLightBulb.foreground": "#FF6347",
+    "editorLightBulbAutoFix.foreground": "#FF6347",
     "editorLineNumber.activeForeground": "#4682B4",
     "editorLineNumber.foreground": "#8795A1",
     "editorLink.activeForeground": "#4682B4",
@@ -142,7 +142,7 @@
     "extensionButton.prominentForeground": "#E8ECEF",
     "extensionButton.prominentHoverBackground": "#2E8B57",
     "gitDecoration.addedResourceForeground": "#32CD32",
-    "gitDecoration.conflictingResourceForeground": "#FFD700",
+    "gitDecoration.conflictingResourceForeground": "#FF6347",
     "gitDecoration.deletedResourceForeground": "#FF4500",
     "gitDecoration.ignoredResourceForeground": "#8795A1",
     "gitDecoration.modifiedResourceForeground": "#2E8B57",
@@ -157,9 +157,9 @@
     "inputValidation.errorBackground": "#FF4500",
     "inputValidation.errorBorder": "#4682B4",
     "inputValidation.infoBackground": "#8B4513",
-    "inputValidation.infoBorder": "#FFD700",
+    "inputValidation.infoBorder": "#FF6347",
     "inputValidation.warningBackground": "#DAA520",
-    "inputValidation.warningBorder": "#FFD700",
+    "inputValidation.warningBorder": "#FF6347",
     "list.activeSelectionBackground": "#C4D1DC",
     "list.activeSelectionForeground": "#35596D",
     "list.dropBackground": "#C4D1DC",
@@ -271,7 +271,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#FFD700"
+        "foreground": "#FF6347"
       }
     },
     {
@@ -284,7 +284,7 @@
         "constant.numeric.octal"
       ],
       "settings": {
-        "foreground": "#FFD700"
+        "foreground": "#FF6347"
       }
     },
     {
@@ -365,7 +365,7 @@
       "name": "Markdown Liens",
       "scope": ["markup.underline.link", "string.other.link"],
       "settings": {
-        "foreground": "#FFD700"
+        "foreground": "#FF6347"
       }
     },
     {
@@ -385,7 +385,7 @@
     "enum": "#DAA520",
     "interface": "#8B4513",
     "namespace": "#8795A1",
-    "typeParameter": "#FFD700",
+    "typeParameter": "#FF6347",
     "enumMember": "#D4A15D",
     "property": "#35596D",
     "variable.defaultLibrary": "#8B0000",

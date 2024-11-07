@@ -46,6 +46,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ---
 
+## [0.7.2] - 2024-11-08
+### Changed
+- Updated color for numbers to improve readability for colorblind users in `365-11-light-theme.json`.
+
 ## [0.7.1] - 2024-11-07
 ### Added
 - Updated the 3 themes for the month of November
@@ -88,11 +92,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HAED
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HEAD
+[0.7.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.1...0.7.2
+[0.7.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.6.0...0.7.0
 [0.6.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.5.0...0.6.0
-[0.5.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.0.4...0.5.0
-[0.4.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.3.0...0.0.4
+[0.5.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases/tag/0.1.0

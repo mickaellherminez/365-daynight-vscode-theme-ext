@@ -185,6 +185,7 @@
     {
       "scope": ["markup.deleted", "markup.inserted", "markup.changed"],
       "settings": {
+
         "foreground": "#424242"
       }
     },
