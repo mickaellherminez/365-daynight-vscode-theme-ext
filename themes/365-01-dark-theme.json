@@ -1,16 +1,51 @@
 {
-    "name": "January Dark",
-    "type": "dark",
-    "colors": {
-        "editor.background": "#1E1E1E",
-        "editor.foreground": "#E0E0E0",
-        "editorCursor.foreground": "#ADD8E6",
-        "editor.lineHighlightBackground": "#333333",
-        "activityBar.background": "#4B8EB0",
-        "sideBar.background": "#2B2B2B",
-        "sideBar.foreground": "#E0E0E0",
-        "statusBar.background": "#4B8EB0",
-        "statusBar.foreground": "#FFFFFF",
-        "button.background": "#4B8EB0"
+  "name": "January Dark Theme",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1E1E1E",
+    "editor.foreground": "#D4D4D4",
+    "editorLineNumber.foreground": "#858585",
+    "editor.lineHighlightBackground": "#2C2C2C",
+    "editor.selectionBackground": "#264F78",
+    "activityBar.background": "#000000",
+    "activityBar.foreground": "#D4D4D4",
+    "activityBar.inactiveForeground": "#D4D4D460",
+    "activityBarBadge.background": "#007ACC",
+    "activityBarBadge.foreground": "#FFFFFF",
+    "sideBar.background": "#252526",
+    "sideBar.foreground": "#D4D4D4",
+    "statusBar.background": "#007ACC",
+    "statusBar.foreground": "#FFFFFF",
+    "titleBar.activeBackground": "#000000",
+    "titleBar.activeForeground": "#D4D4D4",
+    "titleBar.inactiveBackground": "#00000099",
+    "titleBar.inactiveForeground": "#D4D4D499"
+  },
+  "tokenColors": [
+    {
+      "name": "Comments",
+      "scope": ["comment", "punctuation.definition.comment"],
+      "settings": { "foreground": "#6A9955" }
+    },
+    {
+      "name": "Keywords",
+      "scope": ["keyword"],
+      "settings": { "foreground": "#569CD6" }
+    },
+    {
+      "name": "Strings",
+      "scope": ["string"],
+      "settings": { "foreground": "#CE9178" }
+    },
+    {
+      "name": "Functions",
+      "scope": ["entity.name.function"],
+      "settings": { "foreground": "#DCDCAA" }
+    },
+    {
+      "name": "Variables",
+      "scope": ["variable"],
+      "settings": { "foreground": "#9CDCFE" }
     }
+  ]
 }

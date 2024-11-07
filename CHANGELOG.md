@@ -46,7 +46,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ---
 
-## [0.7.0] - 2023-11-xx
+## [0.7.1] - 2024-11-07
+### Added
+- Updated the 3 themes for the month of November
+
+## [0.7.0] - 2023-11-14
 ### Added
 - Add all the themes in the package.json
 
