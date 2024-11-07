@@ -1,52 +1,56 @@
-# README for the "365-daynight-vscode-theme-ext" extension
+# README for the "365-daynight-vscode-theme-ext" Extension
 
 ![365DayNight VSCode Themes](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/assets/logo-web.png?raw=true)
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext?nocache?)
 ![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/mickaellherminez.365-daynight-vscode-theme-ext)
 
-*Read this document in other languages: [Français](README_fr.md).*
+*Read this document in other languages: [Français](docs/README_fr.md), [中文](docs/README_zh.md), [हिंदी](docs/README_hi.md), [Deutsch](docs/README_de.md), [Русский](docs/README_ru.md), [Português](docs/README_pt.md), [日本語](docs/README_ja.md), [Español](docs/README_es.md), [العربية](docs/README_ar.md).*
 
-Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode. 
+## Introduction
 
-365DayNight VSCode Themes is an extension designed to enhance your coding experience all year round with dynamic, visually rewarding themes. Designed to minimize eye strain and optimize readability, 365DayNight adapts your VSCode theme according to natural or artificial light, and offers an uninterrupted coding experience 24/7.
+Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode.
+
+## Overview
+
+365DayNight VSCode Themes is an extension designed to enhance your coding experience throughout the year with dynamic and visually appealing themes. It is crafted to minimize eye strain and optimize readability by adapting your VSCode theme according to natural or artificial light, providing an uninterrupted coding experience 24/7.
 
 ## Features
 
-365DayNight offers coding themes for day and night, and includes special themes for holiday periods. The benefits of this extension are:
+- **Day and Night Themes**: Two themes tailored for natural light during the day and artificial light at night.
+- **Special Holiday Themes**: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
+- **Automatic Theme Switching**: Seamlessly adapts your theme based on the time of day.
+- **Accessibility**: Enhanced accessibility features, especially for users with color blindness.
 
-- Two themes oriented for natural light during the day and artificial light at night.
-- Minimizes eye fatigue and maximizes legibility.
-- Automatically adapts your theme to the time of day.
-- Special themes for holiday periods.
+## Extension Settings
 
-## Extension settings 
-
-The extension offers the following settings:
-
-* `365DayNight.enable`: Enable/disable the extension.
-* `365DayNight.mode`: Set the mode to `day`, `night` or `auto` for automatic changeover.
+- `365DayNight.enable`: Enable or disable the extension.
+- `365DayNight.mode`: Set the mode to `day`, `night`, or `auto` for automatic switching.
 
 ## Accessibility
 
-We attach great importance to accessibility and have optimized the extension to be more accessible, especially for people with color blindness. If you have any suggestions or ideas for improving accessibility, please let us know.
+We prioritize accessibility and have optimized the extension to be more inclusive, particularly for individuals with color vision deficiencies. We welcome any suggestions or ideas for further improvements.
+
+## Installation
+
+To install the extension, visit the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) and click "Install".
 
 ## Release Notes
 
-Details of each version are provided [here](CHANGELOG.md).
+For detailed information on each version, please refer to the [CHANGELOG](CHANGELOG.md).
 
-## package
+## Packaging
 
-Utilisez la commande ```vsce package``` pour créer le fichier [.vsix](https://learn.microsoft.com/fr-fr/visualstudio/extensibility/walkthrough-publishing-a-visual-studio-extension-via-command-line?view=vs-2022).
+Use the command `vsce package` to create the [.vsix](https://learn.microsoft.com/fr-fr/visualstudio/extensibility/walkthrough-publishing-a-visual-studio-extension-via-command-line?view=vs-2022) file.
 
----
+## Additional Resources
 
-## For more information
+For more information on using Markdown in Visual Studio Code, see the following links:
 
-For more information on using MarkDown in Visual Studio Code, see the following links:
+- [Visual Studio Code Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
+- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
-* [Visual Studio Code Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Conclusion
 
 Enjoy the flexibility and dynamics of the 365DayNight extension for an enriching coding experience!
 

@@ -31,6 +31,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ### Changed
 - Optimized color usage to minimize eye fatigue and maximize legibility.
+- Updated README files with correct links to all languages.
+- Updated `package.json` to version 0.7.3.
+- Improved color contrast for numbers in `365-11-light-theme.json`.
 
 ### Fixed
 - At present, no known problems have been resolved.
@@ -45,6 +48,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - At present, no elements have been deprecated.
 
 ---
+
+## [0.7.3] - 2024-11-09
+### Changed
+- Updated README files with correct links to all languages.
+- Improved color contrast for numbers in `365-11-light-theme.json`.
 
 ## [0.7.2] - 2024-11-08
 ### Changed
@@ -92,7 +100,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.1.0...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.3...HEAD
+[0.7.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.1...0.7.2
 [0.7.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.6.0...0.7.0
