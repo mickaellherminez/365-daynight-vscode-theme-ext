@@ -2,8 +2,27 @@
 
 ![365DayNight VSCode Themes](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/assets/logo-web.png?raw=true)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext?nocache?)
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/mickaellherminez.365-daynight-vscode-theme-ext)
+[![License](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/LICENSE)
+[![Issues](https://img.shields.io/github/issues/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/pulls)
+[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Last Commit](https://img.shields.io/github/last-commit/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/commits/main)
+
+<!-- Badges de qualité de code -->
+[![CodeFactor](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext/badge)](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext)
+[![codecov](https://codecov.io/gh/mickaellherminez/365-daynight-vscode-theme-ext/branch/main/graph/badge.svg)](https://codecov.io/gh/mickaellherminez/365-daynight-vscode-theme-ext)
+
+<!-- Badges de version -->
+[![npm version](https://badge.fury.io/js/mickaellherminez.365-daynight-vscode-theme-ext.svg)](https://badge.fury.io/js/mickaellherminez.365-daynight-vscode-theme-ext)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases)
+
+<!-- Badges de statut -->
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/main.yml)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/graphs/commit-activity)
+
+<!-- Badges de stats -->
+[![GitHub stars](https://img.shields.io/github/stars/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/network/members)
 
 *Read this document in other languages: [Français](docs/README_fr.md), [中文](docs/README_zh.md), [हिंदी](docs/README_hi.md), [Deutsch](docs/README_de.md), [Русский](docs/README_ru.md), [Português](docs/README_pt.md), [日本語](docs/README_ja.md), [Español](docs/README_es.md), [العربية](docs/README_ar.md).*
 

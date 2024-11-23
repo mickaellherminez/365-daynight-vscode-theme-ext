@@ -6,6 +6,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.5] - 2024-01-09
+
+### Changed
+- Updated README.md badges:
+  - Added Visual Studio Marketplace Downloads badge
+  - Removed Contributors badge
+  - Reorganized badges layout for better readability
+
 ## [0.7.4] - 2024-01-08
 
 ### Changed
