@@ -6,48 +6,40 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-### Added
-- Two daily themes for each month of the year.
-  - January: Light theme for the day, dark theme for the night
-  - February: Light theme for the day, dark theme for the night
-  - March: Light theme for the day, dark theme for the night
-  - April: Light theme for the day, dark theme for the night
-  - May: Light theme for the day, dark theme for the night
-  - June: Light theme for the day, dark theme for the night
-  - July: Light theme for the day, dark theme for the night
-  - August: Light theme for the day, dark theme for the night
-  - September: Light theme for the day, dark theme for the night
-  - October: Light theme for the day, dark theme for the night
-  - November: Light theme for the day, dark theme for the night
-  - December: Light theme for the day, dark theme for the night
-- Special themes for holiday periods.
-   - New Year: Festive day theme, festive night theme.
-   - Easter: Festive day theme, festive night theme.
-   - Halloween: Festive day theme, festive night theme.
-   - Christmas: Festive day theme, festive night theme.
-- Automatic theme change according to time and day.
+## [0.7.4] - 2024-01-08
 
 ### Changed
-- Optimized color usage to minimize eye fatigue and maximize legibility.
-- Updated README files with correct links to all languages.
-- Updated `package.json` to version 0.7.3.
-- Improved color contrast for numbers in `365-11-light-theme.json`.
+- Updated version number in package.json to 0.7.4
+- Improved documentation organization and clarity
+
+## [0.7.3] - 2024-01-08
+
+### Added
+- Two daily themes for each month of the year:
+  - January through December: Each month has its own light theme for day and dark theme for night
+- Special holiday themes:
+   - New Year: Festive day and night themes
+   - Easter: Festive day and night themes
+   - Halloween: Festive day and night themes
+   - Christmas: Festive day and night themes
+- Automatic theme switching based on time of day
+- Multi-language support for documentation (9 languages)
+
+### Changed
+- Optimized color schemes for reduced eye strain and improved readability
+- Enhanced color contrast in number highlighting for `365-11-light-theme.json`
+- Updated documentation with comprehensive language support
+- Updated `package.json` to version 0.7.3
 
 ### Fixed
-- At present, no known problems have been resolved.
+- No fixes in this release
 
-### Removed
-- No items have been removed at this time.
+### Security
+- No security updates in this release
 
-### Security 
-- There are currently no security updates.
-
-### Deprecated
-- At present, no elements have been deprecated.
-
----
+## [Unreleased]
+- Planned improvements for theme transitions
+- Additional language support for documentation
 
 ## [0.7.3] - 2024-11-09
 ### Changed
@@ -100,7 +92,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.3...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.4...HEAD
+[0.7.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.3...0.7.4
 [0.7.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.1...0.7.2
 [0.7.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.0...0.7.1

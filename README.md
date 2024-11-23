@@ -17,6 +17,7 @@ Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for
 
 ## Features
 
+- **Monthly Theme Collection**: Twelve unique theme pairs, one for each month of the year
 - **Day and Night Themes**: Two themes tailored for natural light during the day and artificial light at night.
 - **Special Holiday Themes**: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
 - **Automatic Theme Switching**: Seamlessly adapts your theme based on the time of day.

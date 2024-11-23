@@ -1,8 +1,8 @@
 {
   "name": "365-daynight-vscode-theme-ext",
-  "displayName": "365 DayNight VSCode Theme Ext",
-  "description": "365 DayNight VSCode Themes energizes your coding experience with themes that automatically change according to the time of day, month of the year and public holidays. Designed to minimize eye strain and maximize readability, this extension makes every coding session rich and tailored to your surroundings.",
-  "version": "0.7.3",
+  "displayName": "365 Day & Night Themes",
+  "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
+  "version": "0.7.4",
   "publisher": "mickaellherminez",
   "icon": "assets/logo-web.png",
   "engines": {
@@ -12,8 +12,38 @@
     "type": "git",
     "url": "https://github.com/mickaellherminez/365-daynight-vscode-theme-ext.git"
   },
+  "homepage": "https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext",
+  "bugs": {
+    "url": "https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues"
+  },
   "categories": [
-    "Other"
+    "Themes"
+  ],
+  "keywords": [
+    "color-theme",
+    "theme",
+    "visual",
+    "editor",
+    "vscode-themes",
+    "day-night-themes",
+    "dynamic-themes",
+    "automatic-theme-switcher",
+    "light-dark-themes",
+    "holiday-themes",
+    "festive-themes",
+    "color-accessibility",
+    "color-blind-friendly",
+    "developer-tools",
+    "coding-visuals",
+    "eye-strain-reduction",
+    "coding-aesthetics",
+    "vscode-color-schemes",
+    "productivity-tools",
+    "custom-vscode-theme",
+    "minimalist-themes",
+    "modern-vscode-themes",
+    "seasonal-themes",
+    "adaptive-themes"
   ],
   "activationEvents": [
     "onCommand:extension.activate"
@@ -50,13 +80,34 @@
         "label": "365 11-november high contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-11-hc-dark-theme.json"
+      },
+      {
+        "label": "365 12-december light",
+        "uiTheme": "vs",
+        "path": "./themes/365-12-light-theme.json"
+      },
+      {
+        "label": "365 12-december dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/365-12-dark-theme.json"
+      },
+      {
+        "label": "365 12-december high contrast",
+        "uiTheme": "hc-black",
+        "path": "./themes/365-12-hc-dark-theme.json"
       }
     ]
+  },
+  "galleryBanner": {
+    "color": "#1E1E1E",
+    "theme": "dark"
   },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+    "test": "node ./test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/vscode": "^1.83.0",
