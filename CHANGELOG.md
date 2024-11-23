@@ -6,6 +6,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.6] - 2024-01-09
+
+### Added
+- Enhanced accessibility features in January theme:
+  - Improved color contrast for better readability
+  - Added support for color blindness and dyslexia
+  - Optimized color combinations for visual comfort
+
 ## [0.7.5] - 2024-01-09
 
 ### Changed
