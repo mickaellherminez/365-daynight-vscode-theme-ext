@@ -6,6 +6,15 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.8] - 2024-01-09
+
+### Changed
+- Standardized theme labels in package.json:
+  - Translated all month names to English
+  - Unified capitalization across all theme names
+  - Standardized format to "365 MM-Month Theme_Type"
+  - Fixed inconsistencies in naming conventions
+
 ## [0.7.7] - 2024-01-09
 
 ### Added
@@ -118,7 +127,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.7...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[0.7.8]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.7...0.7.8
 [0.7.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.6...0.7.7
 [0.7.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.5...0.7.6
 [0.7.5]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.4...0.7.5
