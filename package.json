@@ -2,7 +2,7 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "publisher": "mickaellherminez",
   "icon": "assets/logo-web.png",
   "engines": {
@@ -85,6 +85,11 @@
         "label": "365 05-May High Contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-05-hc-dark-theme.json"
+      },
+      {
+        "label": "365 05-May Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-05-light-theme.json"
       },
       {
         "label": "365 06-June High Contrast",
