@@ -127,7 +127,7 @@ For more information on using Markdown in Visual Studio Code, see the following 
 #### September
 - [ ] #28 🌞 365 09-september-light
 - [ ] #29 🌙 365 09-september-dark
-- [*] #30 ⚡ 365 09-september-high-contrast
+- [x] #30 ⚡ 365 09-september-high-contrast
 
 > 💡 Follow our progress or contribute via our [GitHub Issues page](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
 
