@@ -92,37 +92,37 @@ For more information on using Markdown in Visual Studio Code, see the following 
 #### February
 - [ ] #7 🌞 365 02-february-light
 - [ ] #8 🌙 365 02-february-dark 
-- [*] #9 ⚡ 365 02-february-high-contrast
+- [x] #9 ⚡ 365 02-february-high-contrast
 
 #### March
 - [ ] #10 🌞 365 03-march-light
 - [ ] #11 🌙 365 03-march-dark
-- [*] #12 ⚡ 365 03-march-high-contrast
+- [x] #12 ⚡ 365 03-march-high-contrast
 
 #### April
 - [ ] #13 🌞 365 04-april-light
 - [ ] #14 🌙 365 04-april-dark
-- [*] #15 ⚡ 365 04-april-high-contrast
+- [x] #15 ⚡ 365 04-april-high-contrast
 
 #### May
-- [*] #16 🌞 365 05-may-light
+- [x] #16 🌞 365 05-may-light
 - [ ] #17 🌙 365 05-may-dark
-- [*] #18 ⚡ 365 05-may-high-contrast
+- [x] #18 ⚡ 365 05-may-high-contrast
 
 #### June
 - [ ] #19 🌞 365 06-june-light
 - [ ] #20 🌙 365 06-june-dark
-- [*] #21 ⚡ 365 06-june-high-contrast
+- [x] #21 ⚡ 365 06-june-high-contrast
 
 #### July
 - [ ] #22 🌞 365 07-july-light
 - [ ] #23 🌙 365 07-july-dark
-- [*] #24 ⚡ 365 07-july-high-contrast
+- [x] #24 ⚡ 365 07-july-high-contrast
 
 #### August
 - [ ] #25 🌞 365 08-august-light
 - [ ] #26 🌙 365 08-august-dark
-- [*] #27 ⚡ 365 08-august-high-contrast
+- [x] #27 ⚡ 365 08-august-high-contrast
 
 #### September
 - [ ] #28 🌞 365 09-september-light
