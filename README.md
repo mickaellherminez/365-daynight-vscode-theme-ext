@@ -90,17 +90,17 @@ For more information on using Markdown in Visual Studio Code, see the following 
 ### Themes to Create
 
 #### February
-- [ ] #7 🌞 365 02-february-light
+- [x] #7 🌞 365 02-february-light
 - [ ] #8 🌙 365 02-february-dark 
 - [x] #9 ⚡ 365 02-february-high-contrast
 
 #### March
-- [ ] #10 🌞 365 03-march-light
+- [x] #10 🌞 365 03-march-light
 - [ ] #11 🌙 365 03-march-dark
 - [x] #12 ⚡ 365 03-march-high-contrast
 
 #### April
-- [ ] #13 🌞 365 04-april-light
+- [x] #13 🌞 365 04-april-light
 - [ ] #14 🌙 365 04-april-dark
 - [x] #15 ⚡ 365 04-april-high-contrast
 
@@ -110,22 +110,22 @@ For more information on using Markdown in Visual Studio Code, see the following 
 - [x] #18 ⚡ 365 05-may-high-contrast
 
 #### June
-- [ ] #19 🌞 365 06-june-light
+- [x] #19 🌞 365 06-june-light
 - [ ] #20 🌙 365 06-june-dark
 - [x] #21 ⚡ 365 06-june-high-contrast
 
 #### July
-- [ ] #22 🌞 365 07-july-light
+- [x] #22 🌞 365 07-july-light
 - [ ] #23 🌙 365 07-july-dark
 - [x] #24 ⚡ 365 07-july-high-contrast
 
 #### August
-- [ ] #25 🌞 365 08-august-light
+- [x] #25 🌞 365 08-august-light
 - [ ] #26 🌙 365 08-august-dark
 - [x] #27 ⚡ 365 08-august-high-contrast
 
 #### September
-- [ ] #28 🌞 365 09-september-light
+- [x] #28 🌞 365 09-september-light
 - [ ] #29 🌙 365 09-september-dark
 - [x] #30 ⚡ 365 09-september-high-contrast
 

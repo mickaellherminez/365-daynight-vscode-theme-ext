@@ -2,7 +2,7 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
-  "version": "0.7.9",
+  "version": "0.8.0",
   "publisher": "mickaellherminez",
   "icon": "assets/logo-web.png",
   "engines": {
@@ -72,14 +72,29 @@
         "path": "./themes/365-02-hc-dark-theme.json"
       },
       {
+        "label": "365 02-February Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-02-light-theme.json"
+      },
+      {
         "label": "365 03-March High Contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-03-hc-dark-theme.json"
       },
       {
+        "label": "365 03-March Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-03-light-theme.json"
+      },
+      {
         "label": "365 04-April High Contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-04-hc-dark-theme.json"
+      },
+      {
+        "label": "365 04-April Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-04-light-theme.json"
       },
       {
         "label": "365 05-May High Contrast",
@@ -97,9 +112,19 @@
         "path": "./themes/365-06-hc-dark-theme.json"
       },
       {
+        "label": "365 06-June Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-06-light-theme.json"
+      },
+      {
         "label": "365 07-July High Contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-07-hc-dark-theme.json"
+      },
+      {
+        "label": "365 07-July Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-07-light-theme.json"
       },
       {
         "label": "365 08-August High Contrast",
@@ -107,9 +132,19 @@
         "path": "./themes/365-08-hc-dark-theme.json"
       },
       {
+        "label": "365 08-August Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-08-light-theme.json"
+      },
+      {
         "label": "365 09-September High Contrast",
         "uiTheme": "hc-black",
         "path": "./themes/365-09-hc-dark-theme.json"
+      },
+      {
+        "label": "365 09-September Light",
+        "uiTheme": "vs",
+        "path": "./themes/365-09-light-theme.json"
       },
       {
         "label": "365 10-October Light",

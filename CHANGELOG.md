@@ -1,10 +1,24 @@
-# Change Log
+# Journal des modifications
+# Changelog
 
 All notable changes to the "365-daynight-vscode-theme-ext" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.8.0] - 2024-01-10
+
+### Added
+- Added light themes for multiple months:
+  - `365-02-light-theme.json`: Light theme for February
+  - `365-03-light-theme.json`: Light theme for March
+  - `365-04-light-theme.json`: Light theme for April
+  - `365-06-light-theme.json`: Light theme for June
+  - `365-07-light-theme.json`: Light theme for July
+  - `365-08-light-theme.json`: Light theme for August
+  - `365-09-light-theme.json`: Light theme for September
+
+### Changed
+- Updated version number in `package.json` to 0.8.0
 
 ## [0.7.9]
 
@@ -133,7 +147,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
-[0.7.8]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.7.9
+[0.8.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.8.0
+[0.7.9]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.7.9
 [0.7.8]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.7...0.7.8
 [0.7.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.6...0.7.7
 [0.7.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.5...0.7.6
