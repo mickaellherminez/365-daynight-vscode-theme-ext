@@ -2,8 +2,8 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
-  "version": "0.8.0",
-  "publisher": "mickaellherminez",
+  "version": "0.8.1",
+  "publisher": "MickaelLherminez",
   "icon": "assets/logo-web.png",
   "engines": {
     "vscode": "^1.83.1"
@@ -200,21 +200,28 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node ./test/runTest.js",
+    "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 node ./test/runTest.cjs",
     "package": "vsce package",
-    "publish": "vsce publish"
+    "prepublish": "NODE_TLS_REJECT_UNAUTHORIZED=0 npm run test",
+    "publish": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_NO_WARNINGS=1 vsce publish"
   },
   "devDependencies": {
-    "@types/vscode": "^1.83.0",
+    "@eslint/js": "^9.17.0",
     "@types/mocha": "^10.0.3",
-    "@types/node": "18.x",
-    "eslint": "^8.52.0",
-    "glob": "^10.3.10",
-    "mocha": "^10.2.0",
+    "@types/node": "^22.10.2",
+    "@types/vscode": "^1.83.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^9.17.0",
+    "glob": "^11.0.0",
+    "mocha": "^11.0.1",
     "typescript": "^5.2.2",
-    "@vscode/test-electron": "^2.3.6"
+    "@vscode/vsce": "^2.24.0"
   },
-  "dependencies": {
-    "punycode": "^2.1.1"
+  "type": "module",
+  "exports": {
+    "./test/*": {
+      "require": "./test/*.js"
+    }
   }
 }

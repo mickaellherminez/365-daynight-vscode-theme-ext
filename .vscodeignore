@@ -2,8 +2,11 @@
 .vscode-test/**
 test/**
 .gitignore
-.yarnrc
-vsc-extension-quickstart.md
-**/jsconfig.json
-**/*.map
-**/.eslintrc.json
+.eslintrc.json
+.eslintignore
+tsconfig.json
+Logo 1.pxd
+logo 2.pxd
+package copy.json
+notes.md
+docs/**

@@ -11,7 +11,7 @@ function activate(context) {
         holiday: [
           {
             name: "New Year",
-            date: new Date(2022, 00, 01),
+            date: new Date(2024, 0, 1),
             dayTheme: "New Year Day",
             nightTheme: "New Year Night",
           },
