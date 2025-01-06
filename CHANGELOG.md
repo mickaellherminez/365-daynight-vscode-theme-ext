@@ -5,6 +5,24 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.2] - 2025-01-12
+
+### Changed
+- Added dark themes for multiple months:
+  - `365-07-hc-dark-theme.json`: dark theme for July
+  - `365-08-hc-dark-theme.json`: dark theme for August
+  - `365-09-hc-dark-theme.json`: dark theme for September
+
+## [0.9.1] - 2025-01-05
+
+### Added
+- Added dark themes for multiple months:
+  - `365-02-hc-dark-theme.json`: dark theme for February
+  - `365-03-hc-dark-theme.json`: dark theme for March
+  - `365-04-hc-dark-theme.json`: dark theme for April
+  - `365-05-hc-dark-theme.json`: dark theme for May
+  - `365-06-hc-dark-theme.json`: dark theme for June
+
 ## [0.8.0] - 2024-01-10
 
 ### Added
@@ -147,6 +165,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[0.9.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.0...0.9.1
+[0.9.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.8.0
 [0.7.9]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.7.9
 [0.7.8]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.7...0.7.8
