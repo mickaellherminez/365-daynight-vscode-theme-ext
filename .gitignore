@@ -8,6 +8,5 @@ vsix-archive/
 
 # Fichiers de développement
 notes.md
-package copy.json
 .DS_Store
 
