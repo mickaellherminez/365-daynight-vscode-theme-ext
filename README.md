@@ -131,6 +131,32 @@ For more information on using Markdown in Visual Studio Code, see the following 
 
 > 💡 Follow our progress or contribute via our [GitHub Issues page](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
 
+## Developer Guide
+
+### Project Structure
+* `package.json` - Manifest file that defines the extension, its commands and configurations.
+* `extension.js` - Main file containing the implementation of the extension's functionality.
+* `themes/` - Directory containing all theme files.
+
+### Development
+* Press `F5` to open a new VS Code window with your extension loaded.
+* You can reload the extension after making changes using `Ctrl+R` (or `Cmd+R` on Mac).
+* Set breakpoints in `extension.js` to debug your extension.
+* Check your extension's output in the debug console.
+
+### Testing
+* Open the debug view (`Ctrl+Shift+D` or `Cmd+Shift+D` on Mac) and select `Extension Tests` from the launch configuration dropdown.
+* Press `F5` to run the tests in a new window with your extension loaded.
+* Tests are located in the `test/suite/` folder.
+
+### API Exploration
+* To explore the complete VS Code API, open the file `node_modules/@types/vscode/index.d.ts`.
+
+### Additional Resources
+* [Follow UX Guidelines](https://code.visualstudio.com/api/ux-guidelines/overview) to create extensions that seamlessly integrate with VS Code's native interface.
+* [Configure Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration) to automate builds.
+
+
 ## Conclusion
 
 Enjoy the flexibility and dynamics of the 365DayNight extension for an enriching coding experience!

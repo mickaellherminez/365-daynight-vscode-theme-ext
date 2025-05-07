@@ -11,5 +11,3 @@ notes.md
 package copy.json
 .DS_Store
 
-# Fichiers de design
-*.pxd
