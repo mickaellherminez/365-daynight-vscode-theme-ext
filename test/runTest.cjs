@@ -48,7 +48,7 @@ async function main() {
 		const testOptions = {
 			extensionDevelopmentPath,
 			extensionTestsPath,
-			version: '1.83.1',
+			version: '1.99.0',
 			launchArgs: [
 				'--no-sandbox',
 				'--disable-gpu',

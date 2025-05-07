@@ -1,5 +1,15 @@
-node_modules
+# Dépendances
+node_modules/
 .vscode-test/
-*.vsix
 
+# Fichiers de build
+*.vsix
+vsix-archive/
+
+# Fichiers de développement
 notes.md
+package copy.json
+.DS_Store
+
+# Fichiers de design
+*.pxd

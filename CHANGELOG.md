@@ -5,13 +5,26 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.2] - 2025-01-12
+## [0.9.4] - 2025-05-07
 
 ### Changed
-- Added dark themes for multiple months:
-  - `365-07-hc-dark-theme.json`: dark theme for July
-  - `365-08-hc-dark-theme.json`: dark theme for August
-  - `365-09-hc-dark-theme.json`: dark theme for September
+- Improved accessibility in dark themes:
+  - Enhanced `365-05-dark-theme.json` with better color contrast and semantic token support
+  - Improved `365-05-hc-dark-theme.json` with additional UI elements for better accessibility
+  - Added semantic token colors for better syntax highlighting
+  - Optimized colors for editor widgets and notifications
+  - Improved Git decorations and debugging experience
+  - Enhanced Markdown support with better styling for various elements
+
+## [0.9.3] - 2025-02-27
+
+### Changed
+- Improved accessibility in `365-02-light-theme.json`:
+  - Enhanced color contrast for better readability
+  - Optimized colors for people with color blindness
+  - Added bold styling to important syntax elements
+  - Improved focus indicators and selection highlights
+- Updated version number in `package.json` to 0.9.
 
 ## [0.9.1] - 2025-01-05
 
@@ -165,6 +178,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.3...0.9.4
+[0.9.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.3
+[0.9.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.1...0.9.2
 [0.9.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.0...0.9.1
 [0.9.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.8.0
