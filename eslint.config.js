@@ -43,7 +43,12 @@ export default [
         rules: {
             'no-unused-vars': 'warn',
             'no-undef': 'warn',
-            'no-console': 'off'
+            'no-console': 'off',
+            'no-const-assign': 'warn',
+            'no-this-before-super': 'warn',
+            'no-unreachable': 'warn',
+            'constructor-super': 'warn',
+            'valid-typeof': 'warn'
         }
     },
     {
@@ -78,7 +83,12 @@ export default [
         rules: {
             'no-unused-vars': 'warn',
             'no-undef': 'warn',
-            'no-console': 'off'
+            'no-console': 'off',
+            'no-const-assign': 'warn',
+            'no-this-before-super': 'warn',
+            'no-unreachable': 'warn',
+            'constructor-super': 'warn',
+            'valid-typeof': 'warn'
         }
     },
     ...compat.extends('eslint:recommended')
