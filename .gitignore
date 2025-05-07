@@ -1,5 +1,6 @@
 # Dépendances
 node_modules/
+.vscode/
 .vscode-test/
 
 # Fichiers de build
