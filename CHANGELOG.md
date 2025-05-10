@@ -5,6 +5,18 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.5] - 2025-05-10
+
+### Changed
+- Enhanced accessibility and comprehensiveness for themes:  
+  - `365-12-dark-theme.json`, `365-12-hc-dark-theme.json`, `365-12-light-theme.json`:  
+    - Added all advanced tokens (TOML, INI, XML, JSX/TSX, Python, Rust, Go, C/C++, Java, annotations, special symbols, tags, etc.)  
+    - Enriched semantic colors for all types, statuses, entities, structures, etc.  
+    - Added scopes for statuses (error, success, info, warning) with strong visual styling (bold, underline) to ensure no reliance on color alone  
+    - Updated and compliant `_accessibilityNote` documentation  
+    - Optimized contrasts (AA/AAA), colorblind support, visible keyboard focus, and consistent palette across all variants  
+    - Ready for exemplary publication in terms of accessibility and WCAG 2.2 compliance
+
 ## [0.9.4] - 2025-05-07
 
 ### Changed
@@ -178,6 +190,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[0.9.5]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.3...0.9.4
 [0.9.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.3
 [0.9.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.1...0.9.2

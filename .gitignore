@@ -1,5 +1,6 @@
 # Dépendances
 node_modules/
+.cursor/
 .vscode/
 .vscode-test/
 

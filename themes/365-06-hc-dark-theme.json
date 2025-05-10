@@ -2,12 +2,13 @@
   "name": "Thème Dark Juin - High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
+  "_accessibilityNote": "Palette à contraste maximal (noir, blanc, orange, fuchsia, bleu vif, vert chartreuse, jaune or, corail, etc.) pour garantir un ratio de contraste AAA (≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte (erreur, succès, info, warning) sont très saturées et différenciées, testées pour éviter toute confusion daltonienne (simulations protanopie, deuteranopie, tritanopie). Jamais de couleur seule pour l'information : toujours icône, bordure ou motif en plus. Focus clavier très visible. Documentation à jour après chaque changement. Voir guide accessibilité du projet.",
   "colors": {
-    "editor.background": "#000000", // Noir profond pour maximiser la lisibilité
-    "editor.foreground": "#FFFFFF", // Blanc éclatant pour le texte principal
-    "editorLineNumber.foreground": "#CCCCCC", // Gris clair pour garder le focus sur le texte principal
-    "editorCursor.foreground": "#FFA500", // Orange vif pour le curseur
-    "editor.selectionBackground": "#FF00FF", // Fuchsia pour les selections - très visible
+    "editor.background": "#000000",
+    "editor.foreground": "#FFFFFF",
+    "editorLineNumber.foreground": "#CCCCCC",
+    "editorCursor.foreground": "#FFA500",
+    "editor.selectionBackground": "#FF00FF",
     "editor.lineHighlightBackground": "#222222",
     "editorLineNumber.activeForeground": "#FFA500",
     "editorIndentGuide.background": "#444444",
@@ -21,7 +22,7 @@
     "activityBar.background": "#000000",
     "activityBar.foreground": "#FFFFFF",
     "activityBar.inactiveForeground": "#666666",
-    "activityBarBadge.background": "#FF4500", // Rouge orangé pour attirer l'attention
+    "activityBarBadge.background": "#FF4500",
     "activityBarBadge.foreground": "#000000",
     "sideBar.background": "#000000",
     "sideBar.foreground": "#FFFFFF",
@@ -44,7 +45,7 @@
     "terminal.foreground": "#FFFFFF",
     "terminalCursor.foreground": "#FFA500",
     "terminal.ansiBlack": "#000000",
-    "terminal.ansiBlue": "#00AFFF", // Bleu vif
+    "terminal.ansiBlue": "#00AFFF",
     "terminal.ansiBrightBlack": "#555555",
     "terminal.ansiBrightBlue": "#00AFFF",
     "terminal.ansiBrightCyan": "#00FAFA",
@@ -59,9 +60,9 @@
     "terminal.ansiRed": "#FF3333",
     "terminal.ansiWhite": "#FFFFFF",
     "terminal.ansiYellow": "#FFFF33",
-    "button.background": "#FF5733", // Une teinte de corail pour créer contraste 
+    "button.background": "#FF5733",
     "button.foreground": "#000000",
-    "button.hoverBackground": "#CC462A", // Teinte plus sombre au survol
+    "button.hoverBackground": "#CC462A",
     "dropdown.background": "#333333",
     "dropdown.foreground": "#FFFFFF",
     "input.background": "#333333",
@@ -108,7 +109,7 @@
         "punctuation.definition.comment"
       ],
       "settings": {
-        "foreground": "#FFD700" // Jaune or brillant pour les commentaires
+        "foreground": "#FFD700"
       }
     },
     {
@@ -133,7 +134,7 @@
         "string.quoted.double"
       ],
       "settings": {
-        "foreground": "#FFA07A" // Rose saumon scintillant
+        "foreground": "#FFA07A"
       }
     },
     {
@@ -157,7 +158,7 @@
         "variable.function"
       ],
       "settings": {
-        "foreground": "#B0E0E6" // Bleu pâle pour une différence
+        "foreground": "#B0E0E6"
       }
     },
     {
@@ -170,7 +171,7 @@
         "support.class"
       ],
       "settings": {
-        "foreground": "#7FFF00" // Vert chartreuse pour un effet lumineux
+        "foreground": "#7FFF00"
       }
     },
     {
@@ -180,7 +181,7 @@
         "meta.method.declaration"
       ],
       "settings": {
-        "foreground": "#BA55D3" // Orchidée moyenne pour splendeur
+        "foreground": "#BA55D3"
       }
     },
     {
@@ -192,7 +193,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#FF4500" // Orange red pour emphase
+        "foreground": "#FF4500"
       }
     },
     {
@@ -312,28 +313,146 @@
         "markup.inline.raw"
       ],
       "settings": {
-        "foreground": "#ADFF2F"
+        "foreground": "#FFD700"
       }
     },
     {
-      "name": "Caractères spéciaux",
-      "scope": "constant.character.escape",
+      "name": "Markup Lists",
+      "scope": [
+        "markup.list.unnumbered",
+        "markup.list.numbered"
+      ],
       "settings": {
-        "foreground": "#FF4500"
+        "foreground": "#FFFFFF"
       }
     },
     {
-      "name": "Stockage",
-      "scope": "storage",
+      "name": "Markup Quotes",
+      "scope": [
+        "markup.quote"
+      ],
       "settings": {
-        "foreground": "#FF4500"
+        "foreground": "#00FF00",
+        "fontStyle": "italic"
       }
     },
     {
-      "name": "Entités",
-      "scope": "entity.other.inherited-class",
+      "name": "RegExp String",
+      "scope": [
+        "string.regexp",
+        "string.regexp keyword.other"
+      ],
       "settings": {
-        "foreground": "#32CD32"
+        "foreground": "#00FFFF"
+      }
+    },
+    {
+      "name": "Escape Characters",
+      "scope": [
+        "constant.character.escape"
+      ],
+      "settings": {
+        "foreground": "#FF8800"
+      }
+    },
+    {
+      "name": "URL",
+      "scope": [
+        "meta.tag.inline.any.html",
+        "*url*",
+        "*link*",
+        "*uri*"
+      ],
+      "settings": {
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Changed",
+      "scope": [
+        "markup.changed",
+        "meta.diff.header.git",
+        "meta.diff.header.from-file",
+        "meta.diff.header.to-file"
+      ],
+      "settings": {
+        "foreground": "#00FFFF",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Deleted",
+      "scope": [
+        "markup.deleted"
+      ],
+      "settings": {
+        "foreground": "#FF0000"
+      }
+    },
+    {
+      "name": "Inserted",
+      "scope": [
+        "markup.inserted"
+      ],
+      "settings": {
+        "foreground": "#00FF00"
+      }
+    },
+    {
+      "name": "Invalid",
+      "scope": [
+        "invalid",
+        "invalid.illegal"
+      ],
+      "settings": {
+        "foreground": "#FF0000",
+        "fontStyle": "underline wavy"
+      }
+    },
+    {
+      "name": "Deprecated",
+      "scope": [
+        "invalid.deprecated"
+      ],
+      "settings": {
+        "foreground": "#FFD700",
+        "fontStyle": "underline wavy"
+      }
+    },
+    {
+      "name": "Diff Header",
+      "scope": [
+        "meta.diff.header"
+      ],
+      "settings": {
+        "foreground": "#00FFFF"
+      }
+    },
+    {
+      "name": "Diff Deleted",
+      "scope": [
+        "markup.deleted.diff"
+      ],
+      "settings": {
+        "foreground": "#FF0000"
+      }
+    },
+    {
+      "name": "Diff Inserted",
+      "scope": [
+        "markup.inserted.diff"
+      ],
+      "settings": {
+        "foreground": "#00FF00"
+      }
+    },
+    {
+      "name": "Diff Changed",
+      "scope": [
+        "markup.changed.diff"
+      ],
+      "settings": {
+        "foreground": "#FFD700"
       }
     }
   ]

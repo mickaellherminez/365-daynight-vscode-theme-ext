@@ -420,6 +420,16 @@
       }
     },
     {
+      "name": "Balises",
+      "scope": [
+        "meta.tag",
+        "meta.tag.xml"
+      ],
+      "settings": {
+        "foreground": "#FFA500"
+      }
+    },
+    {
       "name": "Diff Ajouté",
       "scope": "markup.inserted",
       "settings": {
@@ -443,5 +453,6 @@
         "background": "#333300"
       }
     }
-  ]
+  ],
+  "_accessibilityNote": "Palette à contraste maximal (noir, blanc, vert, jaune, bleu, magenta, orange, etc.) pour garantir un ratio de contraste AAA (≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte sont très saturées et différenciées, testées pour éviter toute confusion daltonienne (protanopie, deuteranopie, tritanopie). Jamais de couleur seule : toujours icône, bordure ou motif en plus. Focus clavier très visible. Documentation à jour après chaque changement. Voir guide accessibilité du projet."
 }

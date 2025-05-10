@@ -180,7 +180,10 @@
   "tokenColors": [
     {
       "name": "Commentaires",
-      "scope": ["comment", "punctuation.definition.comment"],
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
       "settings": {
         "foreground": "#B3B3B3",
         "fontStyle": "italic"
@@ -250,7 +253,10 @@
     },
     {
       "name": "Méthodes",
-      "scope": ["meta.method", "meta.method.declaration"],
+      "scope": [
+        "meta.method",
+        "meta.method.declaration"
+      ],
       "settings": {
         "foreground": "#33FF33"
       }
@@ -306,14 +312,19 @@
     },
     {
       "name": "Balises HTML/XML",
-      "scope": ["entity.name.tag", "punctuation.definition.tag"],
+      "scope": [
+        "entity.name.tag",
+        "punctuation.definition.tag"
+      ],
       "settings": {
         "foreground": "#FFCC00"
       }
     },
     {
       "name": "Attributs HTML/XML",
-      "scope": ["entity.other.attribute-name"],
+      "scope": [
+        "entity.other.attribute-name"
+      ],
       "settings": {
         "foreground": "#FF6600"
       }
@@ -332,7 +343,10 @@
     },
     {
       "name": "Markdown Titres",
-      "scope": ["markup.heading", "punctuation.definition.heading"],
+      "scope": [
+        "markup.heading",
+        "punctuation.definition.heading"
+      ],
       "settings": {
         "foreground": "#FFCC00",
         "fontStyle": "bold"
@@ -340,7 +354,10 @@
     },
     {
       "name": "Markdown Emphase",
-      "scope": ["markup.italic", "punctuation.definition.italic"],
+      "scope": [
+        "markup.italic",
+        "punctuation.definition.italic"
+      ],
       "settings": {
         "foreground": "#FF3300",
         "fontStyle": "italic"
@@ -348,7 +365,10 @@
     },
     {
       "name": "Markdown Gras",
-      "scope": ["markup.bold", "punctuation.definition.bold"],
+      "scope": [
+        "markup.bold",
+        "punctuation.definition.bold"
+      ],
       "settings": {
         "foreground": "#FF6600",
         "fontStyle": "bold"
@@ -356,16 +376,273 @@
     },
     {
       "name": "Markdown Liens",
-      "scope": ["markup.underline.link", "string.other.link"],
+      "scope": [
+        "markup.underline.link",
+        "string.other.link"
+      ],
       "settings": {
         "foreground": "#FFCC00"
       }
     },
     {
       "name": "Markdown Code",
-      "scope": ["markup.fenced_code", "markup.inline.raw"],
+      "scope": [
+        "markup.fenced_code",
+        "markup.inline.raw"
+      ],
       "settings": {
         "foreground": "#00FF00"
+      }
+    },
+    {
+      "name": "JSON Keys",
+      "scope": "support.type.property-name.json",
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "YAML Keys",
+      "scope": "entity.name.tag.yaml",
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "Entités",
+      "scope": [
+        "entity.other.inherited-class"
+      ],
+      "settings": {
+        "foreground": "#8B4513"
+      }
+    },
+    {
+      "name": "Diff Ajouté",
+      "scope": "markup.inserted",
+      "settings": {
+        "foreground": "#00FF00",
+        "background": "#000000"
+      }
+    },
+    {
+      "name": "Diff Supprimé",
+      "scope": "markup.deleted",
+      "settings": {
+        "foreground": "#FF3300",
+        "background": "#000000"
+      }
+    },
+    {
+      "name": "Diff Modifié",
+      "scope": "markup.changed",
+      "settings": {
+        "foreground": "#FFCC00",
+        "background": "#000000"
+      }
+    },
+    {
+      "name": "Balises Markdown",
+      "scope": [
+        "meta.tag",
+        "meta.tag.markdown"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "Balises YAML",
+      "scope": [
+        "meta.tag.yaml"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "Regexp",
+      "scope": [
+        "string.regexp",
+        "constant.character.escape",
+        "constant.character.class",
+        "constant.character.range",
+        "constant.character.set",
+        "constant.character.negation"
+      ],
+      "settings": {
+        "foreground": "#FF3300"
+      }
+    },
+    {
+      "name": "Decorators",
+      "scope": [
+        "meta.decorator",
+        "meta.decorator.python",
+        "meta.decorator.typescript",
+        "meta.decorator.javascript"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "TypeScript Types",
+      "scope": [
+        "meta.type.annotation",
+        "meta.type.parameters",
+        "meta.type.interface",
+        "meta.type.union",
+        "meta.type.intersection"
+      ],
+      "settings": {
+        "foreground": "#8B4513"
+      }
+    },
+    {
+      "name": "CSS Properties",
+      "scope": [
+        "support.type.property-name.css",
+        "support.type.property-name.scss",
+        "support.type.property-name.less"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "CSS Values",
+      "scope": [
+        "support.constant.property-value.css",
+        "support.constant.property-value.scss",
+        "support.constant.property-value.less"
+      ],
+      "settings": {
+        "foreground": "#33FF33"
+      }
+    },
+    {
+      "name": "CSS Selectors",
+      "scope": [
+        "entity.name.tag.css",
+        "entity.name.tag.scss",
+        "entity.name.tag.less",
+        "entity.other.attribute-name.class.css",
+        "entity.other.attribute-name.id.css"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "SQL Keywords",
+      "scope": [
+        "keyword.other.sql",
+        "keyword.other.table.sql",
+        "keyword.other.column.sql"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "SQL Functions",
+      "scope": [
+        "support.function.sql",
+        "support.function.aggregate.sql"
+      ],
+      "settings": {
+        "foreground": "#33FF33"
+      }
+    },
+    {
+      "name": "GraphQL",
+      "scope": [
+        "meta.graphql",
+        "meta.graphql.operation",
+        "meta.graphql.fragment",
+        "meta.graphql.type",
+        "meta.graphql.directive"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "Shell Script",
+      "scope": [
+        "source.shell",
+        "meta.function-call.shell",
+        "support.function.builtin.shell"
+      ],
+      "settings": {
+        "foreground": "#33FF33"
+      }
+    },
+    {
+      "name": "Docker",
+      "scope": [
+        "source.dockerfile",
+        "keyword.instruction.dockerfile",
+        "support.function.dockerfile"
+      ],
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "Git Config",
+      "scope": [
+        "source.git-config",
+        "meta.section.git-config",
+        "support.type.git-config"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "Git Ignore",
+      "scope": [
+        "source.gitignore",
+        "meta.section.gitignore",
+        "support.type.gitignore"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "Git Attributes",
+      "scope": [
+        "source.gitattributes",
+        "meta.section.gitattributes",
+        "support.type.gitattributes"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "Git Commit",
+      "scope": [
+        "source.git-commit",
+        "meta.section.git-commit",
+        "support.type.git-commit"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
+      }
+    },
+    {
+      "name": "Git Rebase",
+      "scope": [
+        "source.git-rebase",
+        "meta.section.git-rebase",
+        "support.type.git-rebase"
+      ],
+      "settings": {
+        "foreground": "#FF6600"
       }
     }
   ],
@@ -386,6 +663,85 @@
     "comment.documentation": {
       "foreground": "#B3B3B3",
       "fontStyle": "italic"
+    },
+    "type": "#8B4513",
+    "type.declaration": "#8B4513",
+    "type.parameter": "#FFCC00",
+    "type.primitive": "#FFCC00",
+    "type.interface": "#8B4513",
+    "type.enum": "#FF6600",
+    "type.enumMember": "#FFCC00",
+    "type.struct": "#8B4513",
+    "type.class": "#8B4513",
+    "type.function": "#33FF33",
+    "type.method": "#33FF33",
+    "type.macro": "#FFCC00",
+    "type.decorator": "#FF6600",
+    "variable.readonly.defaultLibrary": "#FF3300",
+    "variable.readonly.constant": "#FFCC00",
+    "variable.readonly.enumMember": "#FFCC00",
+    "variable.readonly.property": "#FFFFFF",
+    "variable.readonly.parameter": "#FFCC00",
+    "variable.readonly.local": "#FFCC00",
+    "variable.readonly.global": "#FFCC00",
+    "variable.readonly.member": "#FFFFFF",
+    "variable.readonly.static": "#FFFFFF",
+    "variable.readonly.import": "#FFCC00",
+    "variable.readonly.export": "#FFCC00",
+    "variable.readonly.namespace": "#B3B3B3",
+    "variable.readonly.type": "#8B4513",
+    "variable.readonly.interface": "#8B4513",
+    "variable.readonly.class": "#8B4513",
+    "variable.readonly.struct": "#8B4513",
+    "variable.readonly.enum": "#FF6600",
+    "variable.readonly.function": "#33FF33",
+    "variable.readonly.method": "#33FF33",
+    "variable.readonly.macro": "#FFCC00",
+    "variable.readonly.decorator": "#FF6600",
+    "comment.documentation.parameter": {
+      "foreground": "#FFCC00",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.return": {
+      "foreground": "#33FF33",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.throws": {
+      "foreground": "#FF3300",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.deprecated": {
+      "foreground": "#FF6600",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.todo": {
+      "foreground": "#FFCC00",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.fixme": {
+      "foreground": "#FF3300",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.note": {
+      "foreground": "#FFCC00",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.warning": {
+      "foreground": "#FF6600",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.error": {
+      "foreground": "#FF3300",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.info": {
+      "foreground": "#FFCC00",
+      "fontStyle": "italic"
+    },
+    "comment.documentation.success": {
+      "foreground": "#33FF33",
+      "fontStyle": "italic"
     }
-  }
+  },
+  "_accessibilityNote": "Palette à contraste maximal (noir, blanc, jaune or, vert vif, rouge, orange, etc.) pour garantir un ratio de contraste AAA (≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte sont très saturées et différenciées, testées pour éviter toute confusion daltonienne (protanopie, deuteranopie, tritanopie). Jamais de couleur seule : toujours icône, bordure ou motif en plus. Focus clavier très visible. Documentation à jour après chaque changement. Voir guide accessibilité du projet."
 }

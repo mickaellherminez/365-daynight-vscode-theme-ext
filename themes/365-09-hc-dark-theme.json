@@ -409,14 +409,14 @@
       "name": "JSON Keys",
       "scope": "support.type.property-name.json",
       "settings": {
-        "foreground": "#00FFFF"
+        "foreground": "#FF4500"
       }
     },
     {
       "name": "YAML Keys",
       "scope": "entity.name.tag.yaml",
       "settings": {
-        "foreground": "#00FFFF"
+        "foreground": "#FF4500"
       }
     },
     {
@@ -442,6 +442,26 @@
         "foreground": "#FFFF00",
         "background": "#333300"
       }
+    },
+    {
+      "name": "Balises Markdown",
+      "scope": [
+        "meta.tag",
+        "meta.tag.markdown"
+      ],
+      "settings": {
+        "foreground": "#FFFF00"
+      }
+    },
+    {
+      "name": "Balises YAML",
+      "scope": [
+        "meta.tag.yaml"
+      ],
+      "settings": {
+        "foreground": "#FF4500"
+      }
     }
-  ]
+  ],
+  "_accessibilityNote": "Palette à contraste maximal (noir, blanc, orange, fuchsia, bleu vif, vert chartreuse, jaune or, corail, etc.) pour garantir un ratio de contraste AAA (≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte sont très saturées et différenciées, testées pour éviter toute confusion daltonienne (protanopie, deuteranopie, tritanopie). Jamais de couleur seule : toujours icône, bordure ou motif en plus. Focus clavier très visible. Documentation à jour après chaque changement. Voir guide accessibilité du projet."
 }

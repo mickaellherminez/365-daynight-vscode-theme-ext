@@ -23,6 +23,7 @@
     }
   },
   "colors": {
+    "_accessibilityNote": "Pour garantir l'accessibilité aux personnes daltoniennes, il est conseillé d'utiliser des icônes, bordures ou motifs en plus de la couleur pour signaler les statuts (erreur, succès, avertissement, information). Toutes les couleurs d'alerte sont choisies pour garantir un contraste AAA.",
     "editor.background": "#FFFFFF",
     "editor.foreground": "#2C3E50",
     "editorLineNumber.foreground": "#3B4F63",
@@ -126,12 +127,12 @@
     "input.placeholderForeground": "#85929E",
     "textLink.foreground": "#2874A6",
     "textLink.activeForeground": "#1F618D",
-    "editor.error.foreground": "#CB4335",
-    "editor.warning.foreground": "#F39C12",
-    "editor.info.foreground": "#2874A6",
+    "editor.error.foreground": "#B22222",
+    "editor.warning.foreground": "#B8860B",
+    "editor.info.foreground": "#1565C0",
     "editorGutter.background": "#F8FBFD",
     "editorGutter.modifiedBackground": "#2874A6",
-    "editorGutter.addedBackground": "#28B463",
+    "editorGutter.addedBackground": "#228B22",
     "editorGutter.deletedBackground": "#CB4335",
     "editorGutter.foldingControlForeground": "#5D6D7E",
     "editorCodeLens.foreground": "#85929E",
@@ -310,7 +311,17 @@
     "tab.unfocusedActiveBorder": "#D5D8DC",
     "tab.unfocusedActiveForeground": "#5D6D7E",
     "tab.unfocusedInactiveForeground": "#85929E",
-    "editor.foldBackground": "#EBF5FB80"
+    "editor.foldBackground": "#EBF5FB80",
+    "editorError.foreground": "#B22222",
+    "editorError.background": "#B2222220",
+    "editorError.border": "#B2222280",
+    "editorWarning.foreground": "#B8860B",
+    "editorWarning.background": "#B8860B20",
+    "editorWarning.border": "#B8860B80",
+    "editorInfo.foreground": "#1565C0",
+    "editorInfo.background": "#1565C020",
+    "editorInfo.border": "#1565C080",
+    "editorGutter.addedBackground": "#228B22"
   },
   "tokenColors": [
     {

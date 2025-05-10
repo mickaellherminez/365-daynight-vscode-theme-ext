@@ -87,48 +87,6 @@ For more information on using Markdown in Visual Studio Code, see the following 
 ### CI/CD Pipeline
 - [ ] #6 📦 Create automatic deployment pipeline (GitHub + Marketplace)
 
-### Themes to Create
-
-#### February
-- [x] #7 🌞 365 02-february-light
-- [x] #8 🌙 365 02-february-dark 
-- [x] #9 ⚡ 365 02-february-high-contrast
-
-#### March
-- [x] #10 🌞 365 03-march-light
-- [x] #11 🌙 365 03-march-dark
-- [x] #12 ⚡ 365 03-march-high-contrast
-
-#### April
-- [x] #13 🌞 365 04-april-light
-- [x] #14 🌙 365 04-april-dark
-- [x] #15 ⚡ 365 04-april-high-contrast
-
-#### May
-- [x] #16 🌞 365 05-may-light
-- [x] #17 🌙 365 05-may-dark
-- [x] #18 ⚡ 365 05-may-high-contrast
-
-#### June
-- [x] #19 🌞 365 06-june-light
-- [x] #20 🌙 365 06-june-dark
-- [x] #21 ⚡ 365 06-june-high-contrast
-
-#### July
-- [x] #22 🌞 365 07-july-light
-- [x] #23 🌙 365 07-july-dark
-- [x] #24 ⚡ 365 07-july-high-contrast
-
-#### August
-- [x] #25 🌞 365 08-august-light
-- [x] #26 🌙 365 08-august-dark
-- [x] #27 ⚡ 365 08-august-high-contrast
-
-#### September
-- [x] #28 🌞 365 09-september-light
-- [x] #29 🌙 365 09-september-dark
-- [x] #30 ⚡ 365 09-september-high-contrast
-
 > 💡 Follow our progress or contribute via our [GitHub Issues page](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
 
 ## Developer Guide
