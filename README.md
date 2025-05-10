@@ -40,6 +40,7 @@ Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for
 - **Day and Night Themes**: Two themes tailored for natural light during the day and artificial light at night.
 - **Special Holiday Themes**: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
 - **Automatic Theme Switching**: Seamlessly adapts your theme based on the time of day.
+- **Quick Theme Toggle**: Dedicated status bar button to quickly switch between day, night and high contrast themes with a single click.
 - **Accessibility**: Enhanced accessibility features, especially for users with color blindness.
 
 ## Extension Settings

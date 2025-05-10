@@ -2,11 +2,12 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "publisher": "MickaelLherminez",
+  "type": "commonjs",
   "icon": "assets/logo-web.png",
   "engines": {
-    "vscode": "^1.99.0"
+    "vscode": "^1.96.0"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
     "url": "https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues"
   },
   "categories": [
+    "Other",
     "Themes"
   ],
   "keywords": [
@@ -46,10 +48,16 @@
     "adaptive-themes"
   ],
   "activationEvents": [
-    "onCommand:extension.activate"
+    "onStartupFinished"
   ],
   "main": "./extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "extension.toggleTheme",
+        "title": "365: Basculer entre thème jour/nuit"
+      }
+    ],
     "themes": [
       {
         "label": "365 01-January Light",
@@ -172,11 +180,6 @@
         "path": "./themes/365-08-dark-theme.json"
       },
       {
-        "label": "365 09-September High Contrast",
-        "uiTheme": "hc-black",
-        "path": "./themes/365-09-hc-dark-theme.json"
-      },
-      {
         "label": "365 09-September Light",
         "uiTheme": "vs",
         "path": "./themes/365-09-light-theme.json"
@@ -185,6 +188,11 @@
         "label": "365 09-September Dark",
         "uiTheme": "vs-dark",
         "path": "./themes/365-09-dark-theme.json"
+      },
+      {
+        "label": "365 09-September High Contrast",
+        "uiTheme": "hc-black",
+        "path": "./themes/365-09-hc-dark-theme.json"
       },
       {
         "label": "365 10-October Light",
@@ -238,7 +246,7 @@
     "theme": "dark"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint --config eslint.config.cjs .",
     "pretest": "npm run lint",
     "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 node ./test/runTest.cjs",
     "package": "vsce package",
@@ -249,7 +257,7 @@
     "@eslint/js": "^9.26.0",
     "@types/mocha": "^10.0.3",
     "@types/node": "^22.15.15",
-    "@types/vscode": "^1.99.1",
+    "@types/vscode": "^1.96.0",
     "@typescript-eslint/eslint-plugin": "^8.32.0",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.3.2",
@@ -258,7 +266,6 @@
     "mocha": "^11.2.2",
     "typescript": "^5.8.3"
   },
-  "type": "module",
   "exports": {
     "./test/*": {
       "require": "./test/*.js"

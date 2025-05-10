@@ -5,6 +5,17 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.6] - 2025-05-10
+
+### Added
+- New quick toggle button for day/night/high contrast in the status bar:
+  - Allows manual switching between day, night and high contrast themes with a single click
+  - Displays day, night or high contrast icon based on active mode
+  - Improves accessibility by enabling quick theme changes without menu navigation
+  - New `extension.toggleTheme` command available in command palette
+  - Full support for customizable keyboard shortcuts
+  - Shows confirmation message when theme changes
+
 ## [0.9.5] - 2025-05-10
 
 ### Changed
@@ -190,6 +201,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Added README_fr.md file
 
 [unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[0.9.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.5...0.9.6
 [0.9.5]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.3...0.9.4
 [0.9.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.3
