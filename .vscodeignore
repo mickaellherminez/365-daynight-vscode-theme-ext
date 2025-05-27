@@ -12,6 +12,7 @@ logo 2.pxd
 package copy.json
 notes.md
 docs/**
+assets/preview/**
 node_modules/**
 .git/**
 .cursor/**

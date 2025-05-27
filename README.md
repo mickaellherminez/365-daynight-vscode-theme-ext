@@ -30,6 +30,8 @@
 
 Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode.
 
+> For complete and detailed documentation, check our guides: [English (coming soon)], [Français](docs/guide_complet_fr.md).
+
 ## Overview
 
 365DayNight VSCode Themes is an extension designed to enhance your coding experience throughout the year with dynamic and visually appealing themes. It is crafted to minimize eye strain and optimize readability by adapting your VSCode theme according to natural or artificial light, providing an uninterrupted coding experience 24/7.

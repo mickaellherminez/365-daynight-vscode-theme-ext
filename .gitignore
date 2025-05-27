@@ -3,7 +3,7 @@ node_modules/
 .cursor/
 .vscode/
 .vscode-test/
-
+assets/preview/
 code.md
 
 # Fichiers de build

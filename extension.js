@@ -45,8 +45,8 @@ function activate(context) {
   statusBarItem.command = 'extension.toggleTheme';
   statusBarItem.show();
 
-  // Enregistrer la commande
-  let command = vscode.commands.registerCommand('extension.toggleTheme', function () {
+  // Fonction commune pour basculer entre les thèmes
+  function toggleThemeHandler() {
     // Basculer les types de thèmes en cycle
     if (currentThemeType === ThemeType.LIGHT) {
       currentThemeType = ThemeType.DARK;
@@ -59,6 +59,11 @@ function activate(context) {
     // Mettre à jour le texte du bouton
     updateStatusBarItem();
 
+    applyCurrentTheme();
+  }
+
+  // Fonction pour appliquer le thème actuel
+  function applyCurrentTheme() {
     // Obtenir le thème actuel
     const currentMonth = new Date().getMonth();
     const monthNames = [
@@ -93,10 +98,38 @@ function activate(context) {
       }, (error) => {
         vscode.window.showErrorMessage(`Erreur lors du changement de thème: ${error.message}`);
       });
-  });
+  }
+
+  // Fonctions pour définir directement un type de thème spécifique
+  function setLightTheme() {
+    currentThemeType = ThemeType.LIGHT;
+    updateStatusBarItem();
+    applyCurrentTheme();
+  }
+
+  function setDarkTheme() {
+    currentThemeType = ThemeType.DARK;
+    updateStatusBarItem();
+    applyCurrentTheme();
+  }
+
+  function setHighContrastTheme() {
+    currentThemeType = ThemeType.HIGH_CONTRAST;
+    updateStatusBarItem();
+    applyCurrentTheme();
+  }
+
+  // Enregistrer les commandes
+  let toggleThemeCommand = vscode.commands.registerCommand('extension.toggleTheme', toggleThemeHandler);
+  let setLightThemeCommand = vscode.commands.registerCommand('extension.setLightTheme', setLightTheme);
+  let setDarkThemeCommand = vscode.commands.registerCommand('extension.setDarkTheme', setDarkTheme);
+  let setHighContrastThemeCommand = vscode.commands.registerCommand('extension.setHighContrastTheme', setHighContrastTheme);
 
   // Ajouter au contexte
-  context.subscriptions.push(command);
+  context.subscriptions.push(toggleThemeCommand);
+  context.subscriptions.push(setLightThemeCommand);
+  context.subscriptions.push(setDarkThemeCommand);
+  context.subscriptions.push(setHighContrastThemeCommand);
   context.subscriptions.push(statusBarItem);
 }
 

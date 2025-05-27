@@ -2,8 +2,8 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "Dynamic VS Code themes with automatic day/night switching and festive holiday modes. Enhance your coding experience with themes designed to reduce eye strain and improve accessibility.",
-  "version": "0.9.6",
-  "publisher": "MickaelLherminez",
+  "version": "0.9.7",
+  "publisher": "mickaellherminez",
   "type": "commonjs",
   "icon": "assets/logo-web.png",
   "engines": {
@@ -55,7 +55,81 @@
     "commands": [
       {
         "command": "extension.toggleTheme",
-        "title": "365: Basculer entre thème jour/nuit"
+        "title": "365: Basculer entre thème light, dark et high contrast"
+      },
+      {
+        "command": "extension.setLightTheme",
+        "title": "365: Appliquer le thème clair"
+      },
+      {
+        "command": "extension.setDarkTheme",
+        "title": "365: Appliquer le thème sombre"
+      },
+      {
+        "command": "extension.setHighContrastTheme",
+        "title": "365: Appliquer le thème à contraste élevé"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "extension.toggleTheme",
+          "group": "365Themes"
+        },
+        {
+          "command": "extension.setLightTheme",
+          "group": "365Themes"
+        },
+        {
+          "command": "extension.setDarkTheme",
+          "group": "365Themes"
+        },
+        {
+          "command": "extension.setHighContrastTheme",
+          "group": "365Themes"
+        }
+      ],
+      "editor/context": [
+        {
+          "submenu": "365themes.themeSelector",
+          "group": "9_cutcopypaste"
+        }
+      ],
+      "365themes.themeSelector": [
+        {
+          "command": "extension.setLightTheme",
+          "group": "1_themes"
+        },
+        {
+          "command": "extension.setDarkTheme",
+          "group": "1_themes"
+        },
+        {
+          "command": "extension.setHighContrastTheme",
+          "group": "1_themes"
+        },
+        {
+          "command": "extension.toggleTheme",
+          "group": "2_toggle"
+        }
+      ],
+      "view/title": [
+        {
+          "submenu": "365themes.themeSelector",
+          "group": "appearance"
+        }
+      ],
+      "menuBar/appearance": [
+        {
+          "submenu": "365themes.themeSelector",
+          "group": "1_themes"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "365themes.themeSelector",
+        "label": "365 Thèmes"
       }
     ],
     "themes": [
