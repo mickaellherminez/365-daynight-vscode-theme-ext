@@ -1,5 +1,5 @@
 {
-  "name": "Thème Dark Avril - Vert Printemps",
+  "name": "365 05-May High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
   "semanticTokenColors": {
@@ -46,7 +46,7 @@
       "foreground": "#76A829"
     },
     "variable": {
-      "foreground": "#DAAEOA"
+      "foreground": "#DAAE0A"
     },
     "string": {
       "foreground": "#FFD248"
@@ -154,7 +154,6 @@
     "sideBarSectionHeader.background": "#22364B",
     "sideBarSectionHeader.foreground": "#F0F0F0",
     "sideBar.border": "#22364B",
-    "sideBar.dropBackground": "#25436372",
     "statusBar.background": "#152238",
     "statusBar.foreground": "#F0F0F0",
     "statusBar.debuggingBackground": "#94D248",
@@ -205,7 +204,6 @@
     "button.secondaryHoverBackground": "#254363",
     "dropdown.background": "#22364B",
     "dropdown.foreground": "#F0F0F0",
-    "dropdown.border": "#2A5370",
     "input.background": "#22364B",
     "input.foreground": "#F0F0F0",
     "input.placeholderForeground": "#B0BFCF",
@@ -233,34 +231,12 @@
     "editorWidget.background": "#22364B",
     "editorWidget.foreground": "#F0F0F0",
     "editorWidget.border": "#2A5370",
-    "editorSuggestWidget.background": "#152238",
-    "editorSuggestWidget.border": "#2543635E",
-    "editorSuggestWidget.foreground": "#F0F0F0",
-    "editorSuggestWidget.highlightForeground": "#94D248",
-    "editorSuggestWidget.selectedBackground": "#254363",
-    "editorHoverWidget.background": "#152238",
-    "editorHoverWidget.foreground": "#F0F0F0",
-    "editorHoverWidget.border": "#254363",
-    "peekView.border": "#254363",
     "peekViewEditor.background": "#152238",
     "peekViewEditor.matchHighlightBackground": "#2543634D",
     "peekViewResult.background": "#22364B",
-    "peekViewResult.matchHighlightBackground": "#2543634D",
     "peekViewTitle.background": "#22364B",
     "peekViewTitleLabel.foreground": "#F0F0F0",
     "peekViewTitleDescription.foreground": "#B0BFCF",
-    "peekViewResult.selectionBackground": "#25436333",
-    "peekViewResult.selectionForeground": "#F0F0F0",
-    "notificationCenter.border": "#2A5370",
-    "notificationCenterHeader.foreground": "#F0F0F0",
-    "notificationCenterHeader.background": "#254363",
-    "notificationToast.border": "#2A5370",
-    "notifications.foreground": "#F0F0F0",
-    "notifications.background": "#22364B",
-    "notifications.border": "#2A5370",
-    "notificationsErrorIcon.foreground": "#FF6666",
-    "notificationsWarningIcon.foreground": "#FFD248",
-    "notificationsInfoIcon.foreground": "#33A6F0",
     "pickerGroup.border": "#33A6F0",
     "pickerGroup.foreground": "#F0F0F0",
     "progressBar.background": "#33A6F0",
@@ -278,23 +254,10 @@
     "menubar.selectionBackground": "#22364B",
     "menubar.selectionForeground": "#F0F0F0",
     "minimap.findMatchHighlight": "#94D248",
-    "minimap.selectionHighlight": "#2A5370",
-    "minimap.errorHighlight": "#FF6666",
-    "minimap.warningHighlight": "#FFD248",
     "minimap.background": "#152238",
     "diffEditor.insertedTextBackground": "#2AD88133",
     "diffEditor.removedTextBackground": "#FF666633",
     "diffEditor.border": "#2A5370",
-    "gitDecoration.addedResourceForeground": "#2AD881",
-    "gitDecoration.modifiedResourceForeground": "#33A6F0",
-    "gitDecoration.deletedResourceForeground": "#FF6666",
-    "gitDecoration.untrackedResourceForeground": "#94D248",
-    "gitDecoration.ignoredResourceForeground": "#667A88",
-    "gitDecoration.conflictingResourceForeground": "#BB59CC",
-    "icon.foreground": "#F0F0F0",
-    "checkbox.background": "#22364B",
-    "checkbox.foreground": "#F0F0F0",
-    "checkbox.border": "#2A5370",
     "selection.background": "#2A5370",
     "focusBorder": "#94D248",
     "textLink.foreground": "#33A6F0",
@@ -400,7 +363,7 @@
         "variable.language"
       ],
       "settings": {
-        "foreground": "#DAAEOA"
+        "foreground": "#DAAE0A"
       }
     },
     {

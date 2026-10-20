@@ -1,10 +1,30 @@
-const { FlatCompat } = require('@eslint/eslintrc');
 const js = require('@eslint/js');
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended
-});
+const nodeGlobals = {
+  require: 'readonly',
+  module: 'readonly',
+  exports: 'readonly',
+  __dirname: 'readonly',
+  __filename: 'readonly',
+  process: 'readonly',
+  console: 'readonly',
+  Buffer: 'readonly',
+  setTimeout: 'readonly',
+  clearTimeout: 'readonly',
+  setInterval: 'readonly',
+  clearInterval: 'readonly'
+};
+
+const mochaGlobals = {
+  suite: 'readonly',
+  test: 'readonly',
+  describe: 'readonly',
+  it: 'readonly',
+  before: 'readonly',
+  after: 'readonly',
+  beforeEach: 'readonly',
+  afterEach: 'readonly'
+};
 
 module.exports = [
   {
@@ -15,76 +35,25 @@ module.exports = [
       'dist/**'
     ]
   },
+  js.configs.recommended,
   {
-    files: ['**/*.js'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        process: 'readonly',
-        console: 'readonly',
-        Buffer: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly'
-      }
-    },
-    rules: {
-      'no-unused-vars': 'warn',
-      'no-undef': 'warn',
-      'no-console': 'off',
-      'no-const-assign': 'warn',
-      'no-this-before-super': 'warn',
-      'no-unreachable': 'warn',
-      'constructor-super': 'warn',
-      'valid-typeof': 'warn'
-    }
-  },
-  {
-    files: ['**/*.cjs'],
+    // extension.js et les tests sont des modules CommonJS
+    files: ['**/*.js', '**/*.cjs'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'commonjs',
-      globals: {
-        console: true,
-        process: true,
-        __dirname: true,
-        __filename: true,
-        require: true,
-        module: true,
-        exports: true,
-        setTimeout: true,
-        clearTimeout: true,
-        setInterval: true,
-        clearInterval: true,
-        Buffer: true,
-        // Test globals
-        suite: true,
-        test: true,
-        describe: true,
-        it: true,
-        before: true,
-        after: true,
-        beforeEach: true,
-        afterEach: true
-      }
+      globals: nodeGlobals
     },
     rules: {
       'no-unused-vars': 'warn',
       'no-undef': 'warn',
-      'no-console': 'off',
-      'no-const-assign': 'warn',
-      'no-this-before-super': 'warn',
-      'no-unreachable': 'warn',
-      'constructor-super': 'warn',
-      'valid-typeof': 'warn'
+      'no-console': 'off'
     }
   },
-  ...compat.extends('eslint:recommended')
-]; 
+  {
+    files: ['test/**/*.cjs'],
+    languageOptions: {
+      globals: mochaGlobals
+    }
+  }
+];

@@ -1,5 +1,5 @@
 {
-  "name": "High Contrast March Dark Theme",
+  "name": "365 06-June Dark",
   "type": "dark",
   "semanticHighlighting": true,
   "_accessibilityNote": "Contraste élevé (fond bleu nuit, texte clair, orange vif, bleu, vert, jaune, magenta, etc.) pour garantir un ratio de contraste AA/AAA (≥4.5:1, idéalement ≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte sont différenciées et testées pour éviter toute confusion daltonienne (protanopie, deuteranopie, tritanopie). Jamais de couleur seule : toujours icône, bordure ou motif en plus. Focus clavier visible et contrasté. Palette cohérente sur toutes les variantes. Documentation à jour après chaque changement. Voir guide accessibilité du projet.",

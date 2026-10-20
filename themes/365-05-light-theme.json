@@ -1,5 +1,6 @@
 {
-  "name": "High Contrast May Light Theme",
+  "_accessibilityNote": "Pour garantir l'accessibilité aux personnes daltoniennes, il est conseillé d'utiliser des icônes, bordures ou motifs en plus de la couleur pour signaler les statuts (erreur, succès, avertissement, information). Toutes les couleurs d'alerte sont choisies pour garantir un contraste AAA.",
+  "name": "365 05-May Light",
   "type": "light",
   "semanticHighlighting": true,
   "semanticTokenColors": {
@@ -23,7 +24,6 @@
     }
   },
   "colors": {
-    "_accessibilityNote": "Pour garantir l'accessibilité aux personnes daltoniennes, il est conseillé d'utiliser des icônes, bordures ou motifs en plus de la couleur pour signaler les statuts (erreur, succès, avertissement, information). Toutes les couleurs d'alerte sont choisies pour garantir un contraste AAA.",
     "editor.background": "#FFFFFF",
     "editor.foreground": "#2C3E50",
     "editorLineNumber.foreground": "#3B4F63",
@@ -132,7 +132,6 @@
     "editor.info.foreground": "#1565C0",
     "editorGutter.background": "#F8FBFD",
     "editorGutter.modifiedBackground": "#2874A6",
-    "editorGutter.addedBackground": "#228B22",
     "editorGutter.deletedBackground": "#CB4335",
     "editorGutter.foldingControlForeground": "#5D6D7E",
     "editorCodeLens.foreground": "#85929E",

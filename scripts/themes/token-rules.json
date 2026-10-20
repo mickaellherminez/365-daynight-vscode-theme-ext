@@ -1,0 +1,327 @@
+[
+  {
+    "name": "Commentaires",
+    "scope": [
+      "comment",
+      "punctuation.definition.comment"
+    ],
+    "role": "comment",
+    "fontStyle": "italic"
+  },
+  {
+    "name": "Variables",
+    "scope": [
+      "variable",
+      "string constant.other.placeholder",
+      "variable.other.constant",
+      "variable.language"
+    ],
+    "role": "variable"
+  },
+  {
+    "name": "Chaînes de caractères",
+    "scope": [
+      "string",
+      "string.template",
+      "punctuation.definition.string",
+      "string.quoted.single",
+      "string.quoted.double"
+    ],
+    "role": "string"
+  },
+  {
+    "name": "Mots-clés",
+    "scope": [
+      "keyword",
+      "keyword.control",
+      "storage.type",
+      "storage.modifier"
+    ],
+    "role": "keyword"
+  },
+  {
+    "name": "Fonctions",
+    "scope": [
+      "entity.name.function",
+      "support.function",
+      "meta.function-call",
+      "variable.function"
+    ],
+    "role": "function"
+  },
+  {
+    "name": "Classes",
+    "scope": [
+      "entity.name.type",
+      "entity.name.class",
+      "entity.name.namespace",
+      "entity.name.scope-resolution",
+      "support.class"
+    ],
+    "role": "klass"
+  },
+  {
+    "name": "Méthodes",
+    "scope": [
+      "meta.method",
+      "meta.method.declaration"
+    ],
+    "role": "function"
+  },
+  {
+    "name": "Constantes",
+    "scope": [
+      "constant",
+      "constant.language",
+      "constant.character",
+      "constant.other"
+    ],
+    "role": "number"
+  },
+  {
+    "name": "Nombres",
+    "scope": [
+      "constant.numeric",
+      "constant.numeric.integer",
+      "constant.numeric.float",
+      "constant.numeric.hex",
+      "constant.numeric.octal"
+    ],
+    "role": "number"
+  },
+  {
+    "name": "Opérateurs",
+    "scope": [
+      "keyword.operator",
+      "keyword.operator.assignment",
+      "keyword.operator.arithmetic",
+      "keyword.operator.logical"
+    ],
+    "role": "operator"
+  },
+  {
+    "name": "Ponctuation",
+    "scope": [
+      "punctuation",
+      "punctuation.definition",
+      "punctuation.separator",
+      "punctuation.terminator"
+    ],
+    "role": "punctuation"
+  },
+  {
+    "name": "Balises HTML/XML",
+    "scope": [
+      "entity.name.tag",
+      "punctuation.definition.tag"
+    ],
+    "role": "tag"
+  },
+  {
+    "name": "Attributs HTML/XML",
+    "scope": [
+      "entity.other.attribute-name"
+    ],
+    "role": "attribute",
+    "fontStyle": "italic"
+  },
+  {
+    "name": "Support",
+    "scope": [
+      "support.type",
+      "support.class",
+      "support.constant",
+      "support.variable"
+    ],
+    "role": "support"
+  },
+  {
+    "name": "Markdown Titres",
+    "scope": [
+      "markup.heading",
+      "punctuation.definition.heading"
+    ],
+    "role": "heading",
+    "fontStyle": "bold"
+  },
+  {
+    "name": "Markdown Emphase",
+    "scope": [
+      "markup.italic",
+      "punctuation.definition.italic"
+    ],
+    "role": "variable",
+    "fontStyle": "italic"
+  },
+  {
+    "name": "Markdown Gras",
+    "scope": [
+      "markup.bold",
+      "punctuation.definition.bold"
+    ],
+    "role": "variable",
+    "fontStyle": "bold"
+  },
+  {
+    "name": "Markdown Liens",
+    "scope": [
+      "markup.underline.link",
+      "string.other.link"
+    ],
+    "role": "link",
+    "fontStyle": "underline"
+  },
+  {
+    "name": "Markdown Code",
+    "scope": [
+      "markup.fenced_code",
+      "markup.inline.raw"
+    ],
+    "role": "code"
+  },
+  {
+    "name": "Markup Lists",
+    "scope": [
+      "markup.list.unnumbered",
+      "markup.list.numbered"
+    ],
+    "role": "keyword"
+  },
+  {
+    "name": "Markup Quotes",
+    "scope": [
+      "markup.quote"
+    ],
+    "role": "comment",
+    "fontStyle": "italic"
+  },
+  {
+    "name": "RegExp String",
+    "scope": [
+      "string.regexp",
+      "string.regexp keyword.other"
+    ],
+    "role": "regex"
+  },
+  {
+    "name": "Escape Characters",
+    "scope": [
+      "constant.character.escape"
+    ],
+    "role": "regex",
+    "fontStyle": "bold"
+  },
+  {
+    "name": "URL",
+    "scope": [
+      "meta.tag.inline.any.html",
+      "*url*",
+      "*link*",
+      "*uri*"
+    ],
+    "fontStyle": "underline"
+  },
+  {
+    "name": "Changed",
+    "scope": [
+      "markup.changed",
+      "meta.diff.header.git",
+      "meta.diff.header.from-file",
+      "meta.diff.header.to-file"
+    ],
+    "role": "changed"
+  },
+  {
+    "name": "Deleted",
+    "scope": [
+      "markup.deleted"
+    ],
+    "role": "deleted"
+  },
+  {
+    "name": "Inserted",
+    "scope": [
+      "markup.inserted"
+    ],
+    "role": "inserted"
+  },
+  {
+    "name": "Invalid",
+    "scope": [
+      "invalid",
+      "invalid.illegal"
+    ],
+    "role": "invalid",
+    "fontStyle": "underline"
+  },
+  {
+    "name": "Deprecated",
+    "scope": [
+      "invalid.deprecated"
+    ],
+    "role": "deprecated",
+    "fontStyle": "strikethrough"
+  },
+  {
+    "name": "Diff Header",
+    "scope": [
+      "meta.diff.header"
+    ],
+    "role": "klass",
+    "fontStyle": "bold"
+  },
+  {
+    "name": "Diff Deleted",
+    "scope": [
+      "markup.deleted.diff"
+    ],
+    "role": "deleted"
+  },
+  {
+    "name": "Diff Inserted",
+    "scope": [
+      "markup.inserted.diff"
+    ],
+    "role": "inserted"
+  },
+  {
+    "name": "Diff Changed",
+    "scope": [
+      "markup.changed.diff"
+    ],
+    "role": "changed"
+  },
+  {
+    "name": "JSON Keys",
+    "scope": "support.type.property-name.json",
+    "role": "jsonKey"
+  },
+  {
+    "name": "YAML Keys",
+    "scope": "entity.name.tag.yaml",
+    "role": "jsonKey"
+  },
+  {
+    "name": "Balises Markdown",
+    "scope": [
+      "meta.tag",
+      "meta.tag.markdown"
+    ],
+    "role": "punctuation"
+  },
+  {
+    "name": "Balises YAML",
+    "scope": [
+      "meta.tag.yaml"
+    ],
+    "role": "tag"
+  },
+  {
+    "name": "Entités",
+    "scope": [
+      "entity.other.inherited-class"
+    ],
+    "role": "klass",
+    "fontStyle": "italic"
+  }
+]

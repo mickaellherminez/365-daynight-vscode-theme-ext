@@ -1,5 +1,5 @@
 {
-  "name": "High Contrast February Dark Theme",
+  "name": "365 02-February Dark",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -29,7 +29,6 @@
     "peekViewEditor.background": "#2E3440",
     "peekViewEditor.matchHighlightBackground": "#5E81AC80",
     "peekViewResult.background": "#3B4252",
-    "peekViewResult.matchHighlightBackground": "#81A1C180",
     "peekViewTitle.background": "#2E3440",
     "peekViewTitleLabel.foreground": "#D8DEE9",
     "peekViewTitleDescription.foreground": "#81A1C1",

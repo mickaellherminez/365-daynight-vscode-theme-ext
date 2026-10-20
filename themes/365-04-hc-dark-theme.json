@@ -1,5 +1,5 @@
 {
-  "name": "High Contrast April Theme",
+  "name": "365 04-April High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -29,7 +29,6 @@
     "peekViewEditor.background": "#1B4F6B",
     "peekViewEditor.matchHighlightBackground": "#FFD70040",
     "peekViewResult.background": "#1B4F6B",
-    "peekViewResult.matchHighlightBackground": "#FFD70040",
     "peekViewTitle.background": "#143D59",
     "peekViewTitleLabel.foreground": "#E6FFFA",
     "peekViewTitleDescription.foreground": "#C3F3EE",
