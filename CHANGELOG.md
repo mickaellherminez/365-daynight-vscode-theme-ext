@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Changed
+- November and December themes (Light, Dark, High Contrast) regenerated from accessible palettes, keeping each month's identity:
+  - November: misty slate and steel blue, with rust and gold accents; black and gold High Contrast
+  - December: frost and teal by day, fireside slate and ember orange by night; winter night and icy cyan High Contrast
+  - All UI colors defined (terminal, panel, sidebar, status bar, tabs, notifications...), blue text selection in the editor, terminal and debug console
+  - Syntax colors meet WCAG AA (Light, Dark) and AAA (High Contrast) and stay distinguishable with protanopia, deuteranopia and tritanopia
+
 ## [0.10.0] - 2026-10-20
 
 ### Added
