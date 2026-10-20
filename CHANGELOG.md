@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-10-20
+
 ### Added
 - Theme generator and accessibility audit in `scripts/themes/` (`npm run themes:audit`, `npm run themes:build`)
 - Automatic theme switching with the `365DayNight.enable` and `365DayNight.mode` settings (`auto`, `day`, `night`), as documented in the README
@@ -99,7 +101,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
   - `365-05-hc-dark-theme.json`: dark theme for May
   - `365-06-hc-dark-theme.json`: dark theme for June
 
-## [0.8.0] - 2024-01-10
+## [0.8.0] - 2024-12-14
 
 ### Added
 - Added light themes for multiple months:
@@ -114,12 +116,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ### Changed
 - Updated version number in `package.json` to 0.8.0
 
-## [0.7.9]
+## [0.7.9] - 2024-12-11
 
 ### Changed
 - Added the theme 365-05-light-theme.json
 
-## [0.7.8] - 2024-01-09
+## [0.7.8] - 2024-12-11
 
 ### Changed
 - Standardized theme labels in package.json:
@@ -128,7 +130,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
   - Standardized format to "365 MM-Month Theme_Type"
   - Fixed inconsistencies in naming conventions
 
-## [0.7.7] - 2024-01-09
+## [0.7.7] - 2024-12-10
 
 ### Added
 - Added comprehensive Backlog and Future Updates section to README.md:
@@ -138,7 +140,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
   - Detailed theme creation roadmap for February through September
   - GitHub Issues integration
 
-## [0.7.6] - 2024-01-09
+## [0.7.6] - 2024-11-24
 
 ### Added
 - Enhanced accessibility features in January theme:
@@ -146,7 +148,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
   - Added support for color blindness and dyslexia
   - Optimized color combinations for visual comfort
 
-## [0.7.5] - 2024-01-09
+## [0.7.5] - 2024-11-23
 
 ### Changed
 - Updated README.md badges:
@@ -154,47 +156,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
   - Removed Contributors badge
   - Reorganized badges layout for better readability
 
-## [0.7.4] - 2024-01-08
+## [0.7.4] - 2024-11-23
 
 ### Changed
 - Updated version number in package.json to 0.7.4
 - Improved documentation organization and clarity
 
-## [0.7.3] - 2024-01-08
-
-### Added
-- Two daily themes for each month of the year:
-  - January through December: Each month has its own light theme for day and dark theme for night
-- Special holiday themes:
-   - New Year: Festive day and night themes
-   - Easter: Festive day and night themes
-   - Halloween: Festive day and night themes
-   - Christmas: Festive day and night themes
-- Automatic theme switching based on time of day
-- Multi-language support for documentation (9 languages)
-
-### Changed
-- Optimized color schemes for reduced eye strain and improved readability
-- Enhanced color contrast in number highlighting for `365-11-light-theme.json`
-- Updated documentation with comprehensive language support
-- Updated `package.json` to version 0.7.3
-
-### Fixed
-- No fixes in this release
-
-### Security
-- No security updates in this release
-
-## [Unreleased]
-- Planned improvements for theme transitions
-- Additional language support for documentation
-
-## [0.7.3] - 2024-11-09
+## [0.7.3] - 2024-11-07
 ### Changed
 - Updated README files with correct links to all languages.
 - Improved color contrast for numbers in `365-11-light-theme.json`.
 
-## [0.7.2] - 2024-11-08
+## [0.7.2] - 2024-11-07
 ### Changed
 - Updated color for numbers to improve readability for colorblind users in `365-11-light-theme.json`.
 
@@ -240,16 +213,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.7...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.10.0...HEAD
+[0.10.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.7...0.10.0
 [0.9.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.6...0.9.7
 [0.9.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.5...0.9.6
 [0.9.5]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.4...0.9.5
-[0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.3...0.9.4
-[0.9.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.3
-[0.9.2]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.1...0.9.2
-[0.9.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.0...0.9.1
-[0.9.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.8.0...0.9.0
-[0.8.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.8.0
+[0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.4
+[0.9.3]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.2...0.9.4
+[0.9.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.0...0.9.2
+[0.8.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.9...0.8.0
 [0.7.9]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...0.7.9
 [0.7.8]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.7...0.7.8
 [0.7.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.6...0.7.7
