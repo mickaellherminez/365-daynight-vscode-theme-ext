@@ -345,11 +345,11 @@
     "@types/mocha": "^10.0.3",
     "@types/node": "^22.15.15",
     "@types/vscode": "^1.96.0",
-    "@vscode/test-electron": "^2.5.2",
+    "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.3.2",
     "eslint": "^9.26.0",
     "glob": "^11.0.2",
-    "mocha": "^11.2.2",
+    "mocha": "^12.0.3",
     "typescript": "^5.8.3"
   }
 }

@@ -1,8 +1,9 @@
 const path = require('path');
-const Mocha = require('mocha');
 const { glob } = require('glob');
 
 async function run() {
+	// Mocha 12 est un module ES : import() fonctionne aussi sous le Node de VS Code
+	const { default: Mocha } = await import('mocha');
 	const mocha = new Mocha({
 		ui: 'tdd',
 		color: true
@@ -13,6 +14,7 @@ async function run() {
 	try {
 		const files = await glob('**/*.test.cjs', { cwd: testsRoot });
 		files.forEach(f => mocha.addFile(path.resolve(testsRoot, f)));
+		await mocha.loadFilesAsync();
 
 		return new Promise((resolve, reject) => {
 			mocha.run(failures => {
