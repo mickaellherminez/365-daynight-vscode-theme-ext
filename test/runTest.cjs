@@ -1,5 +1,3 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 const path = require('path');
 const os = require('os');
 const fs = require('fs').promises;
@@ -48,7 +46,7 @@ async function main() {
 		const testOptions = {
 			extensionDevelopmentPath,
 			extensionTestsPath,
-			version: '1.99.0',
+			version: 'stable',
 			launchArgs: [
 				'--no-sandbox',
 				'--disable-gpu',
