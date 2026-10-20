@@ -10,14 +10,12 @@
 
 <!-- Badges de qualité de code -->
 [![CodeFactor](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext/badge)](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext)
-[![codecov](https://codecov.io/gh/mickaellherminez/365-daynight-vscode-theme-ext/branch/main/graph/badge.svg)](https://codecov.io/gh/mickaellherminez/365-daynight-vscode-theme-ext)
 
 <!-- Badges de version -->
-[![npm version](https://badge.fury.io/js/mickaellherminez.365-daynight-vscode-theme-ext.svg)](https://badge.fury.io/js/mickaellherminez.365-daynight-vscode-theme-ext)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases)
 
 <!-- Badges de statut -->
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/main.yml)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/graphs/commit-activity)
 
 <!-- Badges de stats -->
@@ -30,25 +28,32 @@
 
 Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode.
 
-> For complete and detailed documentation, check our guides: [English (coming soon)], [Français](docs/guide_complet_fr.md).
-
 ## Overview
 
 365DayNight VSCode Themes is an extension designed to enhance your coding experience throughout the year with dynamic and visually appealing themes. It is crafted to minimize eye strain and optimize readability by adapting your VSCode theme according to natural or artificial light, providing an uninterrupted coding experience 24/7.
 
 ## Features
 
-- **Monthly Theme Collection**: Twelve unique theme pairs, one for each month of the year
-- **Day and Night Themes**: Two themes tailored for natural light during the day and artificial light at night.
-- **Special Holiday Themes**: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
-- **Automatic Theme Switching**: Seamlessly adapts your theme based on the time of day.
-- **Quick Theme Toggle**: Dedicated status bar button to quickly switch between day, night and high contrast themes with a single click.
+- **Monthly Theme Collection**: Twelve monthly sets of three themes (Light, Dark and High Contrast), named `365 01-January Light`, `365 01-January Dark`, `365 01-January High Contrast`, etc.
+- **Day and Night Themes**: A Light theme tailored for natural light during the day and a Dark theme for artificial light at night.
+- **Automatic Theme Switching**: When enabled, applies the theme of the current month and switches between Light (7:00–19:00) and Dark according to the time of day.
+- **Quick Theme Toggle**: Dedicated status bar button to quickly switch between Light, Dark and High Contrast themes with a single click.
 - **Accessibility**: Enhanced accessibility features, especially for users with color blindness.
+- **Special Holiday Themes** *(coming soon)*: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
 
 ## Extension Settings
 
-- `365DayNight.enable`: Enable or disable the extension.
-- `365DayNight.mode`: Set the mode to `day`, `night`, or `auto` for automatic switching.
+- `365DayNight.enable`: Enable or disable automatic theme switching (default: `false`).
+- `365DayNight.mode`: Set the mode to `day`, `night`, or `auto` for automatic switching according to the time of day (default: `auto`).
+
+When automatic switching is enabled, a theme chosen manually is kept until the next change of period (day/night or month). A High Contrast theme is never replaced by a Light or Dark theme: only its month is updated.
+
+## Commands
+
+- `365: Toggle between Light, Dark and High Contrast themes` (also available from the status bar button)
+- `365: Apply Light theme`
+- `365: Apply Dark theme`
+- `365: Apply High Contrast theme`
 
 ## Accessibility
 
@@ -64,14 +69,7 @@ For detailed information on each version, please refer to the [CHANGELOG](CHANGE
 
 ## Packaging
 
-Use the command `vsce package` to create the [.vsix](https://learn.microsoft.com/fr-fr/visualstudio/extensibility/walkthrough-publishing-a-visual-studio-extension-via-command-line?view=vs-2022) file.
-
-## Additional Resources
-
-For more information on using Markdown in Visual Studio Code, see the following links:
-
-- [Visual Studio Code Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+Use the command `npm run package` (or `vsce package`) to create the `.vsix` file. See [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) for more details.
 
 ## Backlog and Future Updates
 
@@ -79,13 +77,14 @@ For more information on using Markdown in Visual Studio Code, see the following 
 
 ### Next Developments
 
-- [ ] #1 🔗 Update Image URL in README_fr.md
+- [x] #1 🔗 Update Image URL in README_fr.md
 - [ ] #2 📝 Update all README_* files to align with README.md
+- [ ] 🎉 Special holiday themes (New Year, Easter, Halloween, Christmas)
 
 ### Configuration and Testing
 - [ ] #3 🧪 Set up unit tests
 - [ ] #4 ⚙️ Prettier configuration
-- [ ] #5 🔍 ESLint configuration (to evaluate)
+- [x] #5 🔍 ESLint configuration
 
 ### CI/CD Pipeline
 - [ ] #6 📦 Create automatic deployment pipeline (GitHub + Marketplace)
@@ -98,6 +97,11 @@ For more information on using Markdown in Visual Studio Code, see the following 
 * `package.json` - Manifest file that defines the extension, its commands and configurations.
 * `extension.js` - Main file containing the implementation of the extension's functionality.
 * `themes/` - Directory containing all theme files.
+* `scripts/themes/` - Theme generator and accessibility audit (WCAG contrast, color blindness simulation). See [scripts/themes/README.md](scripts/themes/README.md).
+
+### Theme Accessibility
+* Run `npm run themes:audit` to check the contrast and color-blind distinctness of all themes (Python 3.8+ required).
+* Run `npm run themes:build -- 10 --write` to regenerate the October themes from `scripts/themes/palettes/10.json`.
 
 ### Development
 * Press `F5` to open a new VS Code window with your extension loaded.
@@ -106,8 +110,7 @@ For more information on using Markdown in Visual Studio Code, see the following 
 * Check your extension's output in the debug console.
 
 ### Testing
-* Open the debug view (`Ctrl+Shift+D` or `Cmd+Shift+D` on Mac) and select `Extension Tests` from the launch configuration dropdown.
-* Press `F5` to run the tests in a new window with your extension loaded.
+* Run `npm test` to lint the code and run the tests in a downloaded VS Code instance.
 * Tests are located in the `test/suite/` folder.
 
 ### API Exploration

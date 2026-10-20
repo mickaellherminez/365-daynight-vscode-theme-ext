@@ -1,9 +1,49 @@
-# Journal des modifications
 # Changelog
 
 All notable changes to the "365-daynight-vscode-theme-ext" extension will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Theme generator and accessibility audit in `scripts/themes/` (`npm run themes:audit`, `npm run themes:build`)
+- Automatic theme switching with the `365DayNight.enable` and `365DayNight.mode` settings (`auto`, `day`, `night`), as documented in the README
+- The status bar button now stays in sync when the theme is changed from the theme picker or `settings.json`
+
+### Changed
+- October themes (Light, Dark, High Contrast) redesigned for accessibility:
+  - Light and High Contrast were missing ~240 UI colors (terminal, panel, sidebar, status bar, tabs, notifications...), which fell back to VS Code defaults
+  - Blue text selection in the editor, terminal and debug console, clearly distinct from find matches (orange) and the current line
+  - High Contrast: selected text is black on light blue in the editor and terminal
+  - Syntax colors meet WCAG AA (Light, Dark) and AAA (High Contrast) and stay distinguishable with protanopia, deuteranopia and tritanopia
+  - Italic, bold, underline and strikethrough complement colors (parameters, comments, deprecated code...)
+- Theme `name` fields aligned with their labels in `package.json` (several themes had the wrong month or type, e.g. "High Contrast March Dark Theme" for May and June)
+- Command titles translated to English and grouped under the `365` category
+- Simplified ESLint configuration (no more dependency on the undeclared `@eslint/eslintrc` package)
+- README files updated: removed broken badges and links, documented commands and settings, holiday themes marked as coming soon
+
+### Fixed
+- High Contrast themes whose name contains "Dark" (e.g. "Dark High Contrast") were detected as Dark themes
+- Invalid color `#DAAEOA` in `365-05-hc-dark-theme.json`
+- Duplicate color keys in the February, March, April and May themes
+- `_accessibilityNote` placed inside `colors` in `365-05-light-theme.json`
+- Broken logo in `docs/README_fr.md`
+- `npm install` no longer runs the whole test suite (deprecated `prepublish` script replaced by `vscode:prepublish`)
+
+### Removed
+- Large source images (`logo-web-full.png`, `logo-web-tshirt.png`) and `themes/exemple-conf.json` excluded from the `.vsix` package (~52 MB less)
+- Unused `@typescript-eslint/*` dependencies and the invalid `exports` field in `package.json`
+- `NODE_TLS_REJECT_UNAUTHORIZED=0` from the npm scripts (TLS certificate verification was disabled during tests and publishing)
+
+## [0.9.7] - 2025-05-27
+
+### Added
+- New commands `extension.setLightTheme`, `extension.setDarkTheme` and `extension.setHighContrastTheme`
+- "365 Themes" submenu in the editor context menu and view title bars
+
+### Changed
+- Publisher id set to `mickaellherminez`
 
 ## [0.9.6] - 2025-05-10
 
@@ -200,7 +240,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.7.8...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.7...HEAD
+[0.9.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.6...0.9.7
 [0.9.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.5...0.9.6
 [0.9.5]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.3...0.9.4
