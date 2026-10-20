@@ -55,40 +55,51 @@
     "commands": [
       {
         "command": "extension.toggleTheme",
-        "title": "365: Basculer entre thème light, dark et high contrast"
+        "title": "Toggle between Light, Dark and High Contrast themes",
+        "category": "365"
       },
       {
         "command": "extension.setLightTheme",
-        "title": "365: Appliquer le thème clair"
+        "title": "Apply Light theme",
+        "category": "365"
       },
       {
         "command": "extension.setDarkTheme",
-        "title": "365: Appliquer le thème sombre"
+        "title": "Apply Dark theme",
+        "category": "365"
       },
       {
         "command": "extension.setHighContrastTheme",
-        "title": "365: Appliquer le thème à contraste élevé"
+        "title": "Apply High Contrast theme",
+        "category": "365"
       }
     ],
-    "menus": {
-      "commandPalette": [
-        {
-          "command": "extension.toggleTheme",
-          "group": "365Themes"
+    "configuration": {
+      "title": "365 Day & Night Themes",
+      "properties": {
+        "365DayNight.enable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically apply the 365 theme matching the current month (and time of day in `auto` mode)."
         },
-        {
-          "command": "extension.setLightTheme",
-          "group": "365Themes"
-        },
-        {
-          "command": "extension.setDarkTheme",
-          "group": "365Themes"
-        },
-        {
-          "command": "extension.setHighContrastTheme",
-          "group": "365Themes"
+        "365DayNight.mode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "day",
+            "night"
+          ],
+          "enumDescriptions": [
+            "Light theme from 7:00 to 19:00, Dark theme otherwise.",
+            "Always use the Light theme of the current month.",
+            "Always use the Dark theme of the current month."
+          ],
+          "default": "auto",
+          "description": "Theme selection mode used when `365DayNight.enable` is on."
         }
-      ],
+      }
+    },
+    "menus": {
       "editor/context": [
         {
           "submenu": "365themes.themeSelector",
@@ -129,7 +140,7 @@
     "submenus": [
       {
         "id": "365themes.themeSelector",
-        "label": "365 Thèmes"
+        "label": "365 Themes"
       }
     ],
     "themes": [
@@ -322,30 +333,23 @@
   "scripts": {
     "lint": "eslint --config eslint.config.cjs .",
     "pretest": "npm run lint",
-    "test": "NODE_TLS_REJECT_UNAUTHORIZED=0 node ./test/runTest.cjs",
+    "test": "node ./test/runTest.cjs",
     "package": "vsce package",
-    "prepublish": "NODE_TLS_REJECT_UNAUTHORIZED=0 npm run test",
-    "publish": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_NO_WARNINGS=1 vsce publish"
+    "vscode:prepublish": "npm run lint",
+    "publish": "NODE_NO_WARNINGS=1 vsce publish",
+    "themes:audit": "python3 scripts/themes/audit.py",
+    "themes:build": "python3 scripts/themes/build.py"
   },
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@types/mocha": "^10.0.3",
     "@types/node": "^22.15.15",
     "@types/vscode": "^1.96.0",
-    "@typescript-eslint/eslint-plugin": "^8.32.0",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.3.2",
     "eslint": "^9.26.0",
     "glob": "^11.0.2",
     "mocha": "^11.2.2",
     "typescript": "^5.8.3"
-  },
-  "exports": {
-    "./test/*": {
-      "require": "./test/*.js"
-    }
-  },
-  "dependencies": {
-    "@typescript-eslint/parser": "^8.32.0"
   }
 }
