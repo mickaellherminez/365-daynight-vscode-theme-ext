@@ -1,5 +1,5 @@
 {
-  "name": "High Contrast February Theme - Accessible",
+  "name": "365 02-February High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -29,7 +29,6 @@
     "peekViewEditor.background": "#102A44",
     "peekViewEditor.matchHighlightBackground": "#FFD70050",
     "peekViewResult.background": "#102A44",
-    "peekViewResult.matchHighlightBackground": "#FFD70050",
     "peekViewTitle.background": "#0D1B2A",
     "peekViewTitleLabel.foreground": "#FFFFFF",
     "peekViewTitleDescription.foreground": "#A9A9A9",

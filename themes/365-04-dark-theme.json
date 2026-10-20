@@ -1,5 +1,5 @@
 {
-  "name": "April Dark Theme",
+  "name": "365 04-April Dark",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -29,7 +29,6 @@
     "peekViewEditor.background": "#273243",
     "peekViewEditor.matchHighlightBackground": "#48659080",
     "peekViewResult.background": "#303C50",
-    "peekViewResult.matchHighlightBackground": "#6D91C380",
     "peekViewTitle.background": "#273243",
     "peekViewTitleLabel.foreground": "#E0E2EE",
     "peekViewTitleDescription.foreground": "#6D91C3",

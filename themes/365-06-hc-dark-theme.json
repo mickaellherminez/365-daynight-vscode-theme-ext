@@ -1,5 +1,5 @@
 {
-  "name": "Thème Dark Juin - High Contrast",
+  "name": "365 06-June High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
   "_accessibilityNote": "Palette à contraste maximal (noir, blanc, orange, fuchsia, bleu vif, vert chartreuse, jaune or, corail, etc.) pour garantir un ratio de contraste AAA (≥7:1) sur tous les éléments principaux et interactifs. Les couleurs d'alerte (erreur, succès, info, warning) sont très saturées et différenciées, testées pour éviter toute confusion daltonienne (simulations protanopie, deuteranopie, tritanopie). Jamais de couleur seule pour l'information : toujours icône, bordure ou motif en plus. Focus clavier très visible. Documentation à jour après chaque changement. Voir guide accessibilité du projet.",

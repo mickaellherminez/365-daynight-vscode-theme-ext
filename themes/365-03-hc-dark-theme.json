@@ -1,5 +1,5 @@
 {
-  "name": "High Contrast March Theme - Accessible",
+  "name": "365 03-March High Contrast",
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
@@ -29,7 +29,6 @@
     "peekViewEditor.background": "#1C3E4F",
     "peekViewEditor.matchHighlightBackground": "#FFD70050",
     "peekViewResult.background": "#1C3E4F",
-    "peekViewResult.matchHighlightBackground": "#FFD70050",
     "peekViewTitle.background": "#162C36",
     "peekViewTitleLabel.foreground": "#E5E5E5",
     "peekViewTitleDescription.foreground": "#A9A9A9",
