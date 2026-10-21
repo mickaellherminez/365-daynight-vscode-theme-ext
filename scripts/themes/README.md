@@ -9,6 +9,7 @@ pour les personnes daltoniennes.
 | `audit.py` | Audite un ou plusieurs thèmes existants (`npm run themes:audit`) |
 | `build.py` | Génère les 3 thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
+| `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`) avec Google Chrome en mode headless |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme |
 | `token-rules.json` | Règles de coloration syntaxique communes à tous les mois (scopes → rôle de couleur) |
 | `palettes/` | Une palette par mois (`10.json` = octobre) |

@@ -35,3 +35,5 @@ yarn-error.log
 *.tgz
 .editorconfig
 .mailmap
+assets/screenshots/**
+CONTRIBUTING.md
