@@ -2,7 +2,7 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night Themes",
   "description": "36 accessible VS Code color themes: a Light, Dark and High Contrast theme for every month of the year, with one-click and optional automatic day/night switching. WCAG AA/AAA contrast, color-blind friendly.",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "publisher": "mickaellherminez",
   "type": "commonjs",
   "icon": "assets/logo-web.png",
