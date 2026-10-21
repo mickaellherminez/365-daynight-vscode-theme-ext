@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.11.1] - 2026-10-21
+
+### Changed
+- New README in 10 languages: installation, getting started, gallery of the 12 months, automatic mode, accessibility, commands, settings and FAQ
+- Preview images of the themes in the README
+- More accurate Marketplace description and search keywords
+
+### Added
+- CONTRIBUTING.md with the developer guide
+
 ## [0.11.0] - 2026-10-21
 
 ### Changed
@@ -240,7 +250,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.11.0...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.11.1...HEAD
+[0.11.1]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.11.0...0.11.1
 [0.11.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.7...0.10.0
 [0.9.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.6...0.9.7

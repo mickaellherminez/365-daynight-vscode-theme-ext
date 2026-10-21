@@ -1,128 +1,162 @@
-# README for the "365-daynight-vscode-theme-ext" Extension
+# 365 Day & Night Themes – Accessible VS Code Themes for Every Month
 
-![365DayNight VSCode Themes](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/assets/logo-web.png?raw=true)
+**36 color themes for Visual Studio Code: a Light, a Dark and a High Contrast theme for each month of the year.** Switch between day and night in one click, or let the extension do it for you. Every theme is tested for readability (WCAG contrast) and for color blindness.
 
-[![License](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/LICENSE)
-[![Issues](https://img.shields.io/github/issues/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/pulls)
-[![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![Last Commit](https://img.shields.io/github/last-commit/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/commits/main)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![License: MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/LICENSE)
 
-<!-- Badges de qualité de code -->
-[![CodeFactor](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext/badge)](https://www.codefactor.io/repository/github/mickaellherminez/365-daynight-vscode-theme-ext)
+*Read this page in: [Français](docs/README_fr.md) · [Español](docs/README_es.md) · [Deutsch](docs/README_de.md) · [Português](docs/README_pt.md) · [Русский](docs/README_ru.md) · [中文](docs/README_zh.md) · [日本語](docs/README_ja.md) · [हिंदी](docs/README_hi.md) · [العربية](docs/README_ar.md)*
 
-<!-- Badges de version -->
-[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases)
+![October Light, Dark and High Contrast themes in VS Code: explorer, tabs, syntax highlighting, text selection and status bar](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
-<!-- Badges de statut -->
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/graphs/commit-activity)
+## Why you'll like it
 
-<!-- Badges de stats -->
-[![GitHub stars](https://img.shields.io/github/stars/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/network/members)
-
-*Read this document in other languages: [Français](docs/README_fr.md), [中文](docs/README_zh.md), [हिंदी](docs/README_hi.md), [Deutsch](docs/README_de.md), [Русский](docs/README_ru.md), [Português](docs/README_pt.md), [日本語](docs/README_ja.md), [Español](docs/README_es.md), [العربية](docs/README_ar.md).*
-
-## Introduction
-
-Welcome to the README page for the "365-daynight-vscode-theme-ext" extension for VSCode.
-
-## Overview
-
-365DayNight VSCode Themes is an extension designed to enhance your coding experience throughout the year with dynamic and visually appealing themes. It is crafted to minimize eye strain and optimize readability by adapting your VSCode theme according to natural or artificial light, providing an uninterrupted coding experience 24/7.
-
-## Features
-
-- **Monthly Theme Collection**: Twelve monthly sets of three themes (Light, Dark and High Contrast), named `365 01-January Light`, `365 01-January Dark`, `365 01-January High Contrast`, etc.
-- **Day and Night Themes**: A Light theme tailored for natural light during the day and a Dark theme for artificial light at night.
-- **Automatic Theme Switching**: When enabled, applies the theme of the current month and switches between Light (7:00–19:00) and Dark according to the time of day.
-- **Quick Theme Toggle**: Dedicated status bar button to quickly switch between Light, Dark and High Contrast themes with a single click.
-- **Accessibility**: Enhanced accessibility features, especially for users with color blindness.
-- **Special Holiday Themes** *(coming soon)*: Unique themes for festive periods like New Year, Easter, Halloween, and Christmas.
-
-## Extension Settings
-
-- `365DayNight.enable`: Enable or disable automatic theme switching (default: `false`).
-- `365DayNight.mode`: Set the mode to `day`, `night`, or `auto` for automatic switching according to the time of day (default: `auto`).
-
-When automatic switching is enabled, a theme chosen manually is kept until the next change of period (day/night or month). A High Contrast theme is never replaced by a Light or Dark theme: only its month is updated.
-
-## Commands
-
-- `365: Toggle between Light, Dark and High Contrast themes` (also available from the status bar button)
-- `365: Apply Light theme`
-- `365: Apply Dark theme`
-- `365: Apply High Contrast theme`
-
-## Accessibility
-
-We prioritize accessibility and have optimized the extension to be more inclusive, particularly for individuals with color vision deficiencies. We welcome any suggestions or ideas for further improvements.
+- 🗓️ **A new look every month.** Snow and winter blue in January, spring green in March, full sun in July, autumn colors in October, a fireside glow in December. Your editor follows the seasons.
+- ☀️🌙 **Day and night, always matched.** Each month has a Light theme for daylight, a Dark theme for the evening, and a High Contrast theme when you need maximum readability.
+- 🔁 **One-click switch.** A button in the status bar cycles between Light, Dark and High Contrast.
+- ⏰ **Optional automatic mode.** The extension can apply the current month's theme by itself, Light during the day and Dark at night.
+- 👁️ **Easy on the eyes, readable for everyone.** All text meets WCAG contrast levels, and syntax colors stay distinct for people with color blindness.
+- 🖥️ **Complete themes.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled. Nothing falls back to the default colors.
 
 ## Installation
 
-To install the extension, visit the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) and click "Install".
+**From VS Code:** open the Extensions view (`Ctrl+Shift+X`, or `Cmd+Shift+X` on Mac), search for **365 Day & Night Themes**, then click **Install**.
 
-## Release Notes
+**From the Marketplace:** [install 365 Day & Night Themes](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext).
 
-For detailed information on each version, please refer to the [CHANGELOG](CHANGELOG.md).
+**From the command line:**
 
-## Packaging
+```sh
+code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
+```
 
-Use the command `npm run package` (or `vsce package`) to create the `.vsix` file. See [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) for more details.
+Requires Visual Studio Code 1.96 or later.
 
-## Backlog and Future Updates
+## Getting started
 
-> ⚠️ Note: This section presents planned features and improvements for upcoming versions.
+1. Open the theme picker: `Ctrl+K` then `Ctrl+T` (`Cmd+K` then `Cmd+T` on Mac).
+2. Type **365** to see all 36 themes, for example `365 10-October Dark`.
+3. Pick one. That's it!
 
-### Next Developments
+Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light, Dark and High Contrast versions of the current month.
 
-- [x] #1 🔗 Update Image URL in README_fr.md
-- [ ] #2 📝 Update all README_* files to align with README.md
-- [ ] 🎉 Special holiday themes (New Year, Easter, Halloween, Christmas)
+## The 12 months
 
-### Configuration and Testing
-- [ ] #3 🧪 Set up unit tests
-- [ ] #4 ⚙️ Prettier configuration
-- [x] #5 🔍 ESLint configuration
+![Preview of the 36 themes: a Light, Dark and High Contrast version for each month from January to December](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
-### CI/CD Pipeline
-- [ ] #6 📦 Create automatic deployment pipeline (GitHub + Marketplace)
+| Month | Light | Dark | High Contrast |
+| --- | --- | --- | --- |
+| January | Snow white and winter blue | Navy night lit with gold | Black and bright blue |
+| February | White and green, with a Valentine's red touch | Nordic slate and frost | Navy and gold |
+| March | Cream and spring green | Indigo night | Dark teal and red-orange |
+| April | Cream and Easter orange | Bluish slate and gold | Deep blue and gold |
+| May | Bright white and orange | Ocean night with orange | Navy and sky blue |
+| June | Sky blue and indigo ink | Blue night lit with orange | Black and coral |
+| July | Full sun: cream, brown and orange | Solarized-inspired summer night | Navy, orange and gold |
+| August | Warm cream and indigo ink | Slate night with yellow | Black and neon green |
+| September | Back-to-school sky and navy ink | Slate and teal | Black and bright orange |
+| October | Autumn cream, burnt orange and amber | Dark brown and ember | Warm black and amber |
+| November | Misty slate and steel blue | Deep slate with orange and gold | Black and gold |
+| December | Frost and teal | Fireside slate and ember | Winter night and icy cyan |
 
-> 💡 Follow our progress or contribute via our [GitHub Issues page](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)
+## Automatic day and night switching
 
-## Developer Guide
+Want your editor to follow the clock? Turn on the automatic mode:
 
-### Project Structure
-* `package.json` - Manifest file that defines the extension, its commands and configurations.
-* `extension.js` - Main file containing the implementation of the extension's functionality.
-* `themes/` - Directory containing all theme files.
-* `scripts/themes/` - Theme generator and accessibility audit (WCAG contrast, color blindness simulation). See [scripts/themes/README.md](scripts/themes/README.md).
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Check **365DayNight: Enable**.
 
-### Theme Accessibility
-* Run `npm run themes:audit` to check the contrast and color-blind distinctness of all themes (Python 3.8+ required).
-* Run `npm run themes:build -- 10 --write` to regenerate the October themes from `scripts/themes/palettes/10.json`.
+Or add this to your `settings.json`:
 
-### Development
-* Press `F5` to open a new VS Code window with your extension loaded.
-* You can reload the extension after making changes using `Ctrl+R` (or `Cmd+R` on Mac).
-* Set breakpoints in `extension.js` to debug your extension.
-* Check your extension's output in the debug console.
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "auto"
+}
+```
 
-### Testing
-* Run `npm test` to lint the code and run the tests in a downloaded VS Code instance.
-* Tests are located in the `test/suite/` folder.
+| Mode | What it does |
+| --- | --- |
+| `auto` | Light theme from 7:00 to 19:00, Dark theme the rest of the time |
+| `day` | Always the Light theme of the current month |
+| `night` | Always the Dark theme of the current month |
 
-### API Exploration
-* To explore the complete VS Code API, open the file `node_modules/@types/vscode/index.d.ts`.
+The extension also moves to the next month's theme on the first day of each month.
 
-### Additional Resources
-* [Follow UX Guidelines](https://code.visualstudio.com/api/ux-guidelines/overview) to create extensions that seamlessly integrate with VS Code's native interface.
-* [Configure Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration) to automate builds.
+Good to know:
+- **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to.
+- **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
+- **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
 
+## Accessibility first
 
-## Conclusion
+Every theme passes an automated accessibility audit of more than 130 checks:
 
-Enjoy the flexibility and dynamics of the 365DayNight extension for an enriching coding experience!
+- **Readable text:** editor text and syntax colors reach a contrast ratio of at least **4.5:1 (WCAG AA)** in Light and Dark themes, and **7:1 (WCAG AAA)** in High Contrast themes.
+- **Color blind friendly:** syntax colors (keywords, functions, strings, numbers, classes, comments) and alerts (errors, warnings, Git changes) are simulated for **protanopia, deuteranopia and tritanopia** to make sure they stay distinct.
+- **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
+- **Visible selection everywhere:** text selection is clearly visible in the editor, the terminal and the debug console, and never confused with search results.
+- **High Contrast themes:** selected text turns black on light blue, and all panels have visible borders and a strong keyboard focus outline.
 
-**Have fun with 365DayNight VSCode Themes!**
+Found something hard to read? Please [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Accessibility feedback is always welcome.
+
+## Commands
+
+Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
+
+| Command | Action |
+| --- | --- |
+| `365: Toggle between Light, Dark and High Contrast themes` | Cycles Light → Dark → High Contrast (same as the status bar button) |
+| `365: Apply Light theme` | Applies the current month's Light theme |
+| `365: Apply Dark theme` | Applies the current month's Dark theme |
+| `365: Apply High Contrast theme` | Applies the current month's High Contrast theme |
+
+These commands are also available in the **365 Themes** menu, from a right-click in the editor. You can assign your own keyboard shortcuts to them (`Ctrl+K Ctrl+S`).
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `365DayNight.enable` | `false` | Automatically apply the theme of the current month |
+| `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light) or `night` (always Dark) |
+
+## FAQ
+
+**How do I automatically switch VS Code between a light and a dark theme?**
+Install the extension and set `"365DayNight.enable": true`. The Light theme is applied from 7:00 to 19:00 and the Dark theme at night.
+
+**Is there a color blind friendly VS Code theme?**
+Yes. All 36 themes are tested with protanopia, deuteranopia and tritanopia simulations, and they use italics, underline and strikethrough so that information never relies on color alone.
+
+**Will the extension change my theme without asking?**
+No. Automatic mode is off by default. Without it, the theme only changes when you pick one or click the status bar button.
+
+**Can I use only one theme, for example October Dark?**
+Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mode off.
+
+**What are the High Contrast themes for?**
+They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline.
+
+**Are holiday themes available?**
+Not yet. Themes for New Year, Easter, Halloween and Christmas are planned. Follow the [project on GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext) to be notified.
+
+## Roadmap
+
+- 🎉 Holiday themes (New Year, Easter, Halloween, Christmas)
+- ⏰ Configurable day and night hours
+
+Ideas and suggestions are welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+
+## Feedback and contributing
+
+- ⭐ Enjoying the themes? A [review on the Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) helps other developers find them.
+- 🐞 Bug, unreadable color or idea: [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+- 🛠️ Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Release notes are in the [CHANGELOG](CHANGELOG.md).
+
+## License
+
+[MIT](LICENSE) © Mickaël Lherminez
