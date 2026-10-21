@@ -6,12 +6,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-10-21
+
 ### Changed
-- November and December themes (Light, Dark, High Contrast) regenerated from accessible palettes, keeping each month's identity:
-  - November: misty slate and steel blue, with rust and gold accents; black and gold High Contrast
-  - December: frost and teal by day, fireside slate and ember orange by night; winter night and icy cyan High Contrast
-  - All UI colors defined (terminal, panel, sidebar, status bar, tabs, notifications...), blue text selection in the editor, terminal and debug console
-  - Syntax colors meet WCAG AA (Light, Dark) and AAA (High Contrast) and stay distinguishable with protanopia, deuteranopia and tritanopia
+- The 33 remaining themes (Light, Dark and High Contrast for every month except October, redesigned in 0.10.0) regenerated from accessible palettes, keeping each month's identity:
+  - January: snow white and winter blue; navy night lit with gold; black and bright blue High Contrast
+  - February: white and green with a Valentine's red touch; Nordic slate and frost; navy and gold High Contrast
+  - March: cream and spring green; indigo night; dark teal and red-orange High Contrast
+  - April: cream and Easter orange; bluish slate and gold; deep blue and gold High Contrast
+  - May: bright white and orange; ocean night with orange; navy and sky blue High Contrast
+  - June: sky blue and indigo ink; blue night lit with orange; black and coral High Contrast
+  - July: full sun (cream, brown, orange); Solarized-inspired summer night; navy, orange and gold High Contrast
+  - August: warm cream and indigo ink; slate night with yellow; black and neon green High Contrast
+  - September: back-to-school sky and navy ink; slate and teal; black and bright orange High Contrast
+  - November: misty slate and steel blue, with rust and gold; black and gold High Contrast
+  - December: frost and teal by day, fireside slate and ember by night; winter night and icy cyan High Contrast
+- All 36 themes now define all UI colors (terminal, panel, sidebar, status bar, tabs, notifications...) instead of falling back to VS Code defaults
+- Blue text selection in the editor, terminal and debug console, clearly distinct from find matches and the current line
+- Syntax colors meet WCAG AA (Light, Dark) and AAA (High Contrast) and stay distinguishable with protanopia, deuteranopia and tritanopia
+- Integration tests now run on the latest stable VS Code
+
+### Removed
+- Unused `themes/exemple-conf.json`
+
+### Security
+- Development dependencies updated (mocha 12, @vscode/test-electron 3): 0 known vulnerabilities
+- TLS certificate verification is no longer disabled when running the tests
 
 ## [0.10.0] - 2026-10-20
 
@@ -220,7 +240,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - Initial release
 - Added README_fr.md file
 
-[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.10.0...HEAD
+[unreleased]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.11.0...HEAD
+[0.11.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.7...0.10.0
 [0.9.7]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.6...0.9.7
 [0.9.6]: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/compare/0.9.5...0.9.6
