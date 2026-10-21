@@ -3,7 +3,6 @@
 test/**
 assets/logo-web-full.png
 assets/logo-web-tshirt.png
-themes/exemple-conf.json
 scripts/**
 .gitignore
 .eslintrc.json
