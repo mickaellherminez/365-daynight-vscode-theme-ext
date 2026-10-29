@@ -1,0 +1,49 @@
+# Publishes the extension to the VS Code Marketplace.
+# - Automatically when a version tag (for example 0.11.2) is pushed.
+# - Manually from the Actions tab ("Run workflow"), which publishes the
+#   version currently in package.json on the selected branch.
+# Authentication uses Marketplace Trusted Publishing (OIDC): no token is stored.
+# It requires a Trusted Publishing policy for this repository and this workflow
+# file (publish.yml) on the publisher's management page.
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check that the tag matches package.json
+        if: github.ref_type == 'tag'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - name: Accessibility audit of the themes
+        run: npm run themes:audit
+
+      - name: Lint and tests
+        run: xvfb-run -a npm test
+
+      - name: Publish to the Marketplace
+        run: npm run publish -- --oidc --githubBranch main
