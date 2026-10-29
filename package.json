@@ -347,16 +347,16 @@
     "themes:build": "python3 scripts/themes/build.py"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^10.0.1",
     "@types/mocha": "^10.0.3",
-    "@types/node": "^22.15.15",
-    "@types/vscode": "^1.96.0",
+    "@types/node": "^22.20.5",
+    "@types/vscode": "1.96.0",
     "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^4.1.0",
-    "eslint": "^9.26.0",
-    "glob": "^11.0.2",
+    "eslint": "^10.13.0",
+    "glob": "^14.0.3",
     "mocha": "^12.0.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "overrides": {
     "@azure/msal-node": "^7.1.0"
