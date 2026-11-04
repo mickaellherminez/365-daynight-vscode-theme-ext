@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ### Removed
 - "365 Themes" menu in the right-click menu of the editor and in the title bars of views: use the status bar button or the Command Palette instead
+- "Theme changed" notification: the change is visible on screen, and errors are still reported
 
 ## [0.11.1] - 2026-10-21
 
