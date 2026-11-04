@@ -17,7 +17,7 @@
 - 🔁 **Wechsel mit einem Klick.** Eine Schaltfläche in der Statusleiste wechselt zwischen hell, dunkel und kontrastreich.
 - ⏰ **Optionaler Automatikmodus.** Die Erweiterung kann das Theme des aktuellen Monats selbst anwenden: tagsüber hell, nachts dunkel.
 - 👁️ **Augenschonend und für alle lesbar.** Der gesamte Text erfüllt die WCAG-Kontraststufen, und die Syntaxfarben bleiben auch für farbenblinde Menschen unterscheidbar.
-- 🖥️ **Vollständige Themes.** Editor, Seitenleiste, Tabs, Terminal, Debugkonsole, Benachrichtigungen und Statusleiste: Alles ist gestaltet, nichts fällt auf die Standardfarben zurück.
+- 🖥️ **Sorgfältig gestaltet.** Editor, Seitenleiste, Tabs, Terminal, Debugkonsole, Benachrichtigungen und Statusleiste: Alles ist gestaltet, mit mehr als 400 Farben pro Theme. Neuere Bereiche wie Chat, Tests und Notebooks verwenden vorerst noch die Standardfarben von VS Code.
 
 ## Installation
 
@@ -139,12 +139,8 @@ Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automa
 **Wofür sind die kontrastreichen Themes?**
 Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung.
 
-**Gibt es Feiertags-Themes?**
-Noch nicht. Themes für Neujahr, Ostern, Halloween und Weihnachten sind geplant. Folge dem [Projekt auf GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext), um benachrichtigt zu werden.
-
 ## Roadmap
 
-- 🎉 Feiertags-Themes (Neujahr, Ostern, Halloween, Weihnachten)
 - ⏰ Einstellbare Tag- und Nachtzeiten
 
 Ideen und Vorschläge sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen.

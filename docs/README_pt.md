@@ -17,7 +17,7 @@
 - 🔁 **Troca com um clique.** Um botão na barra de status alterna entre claro, escuro e alto contraste.
 - ⏰ **Modo automático opcional.** A extensão pode aplicar sozinha o tema do mês atual: claro de dia e escuro à noite.
 - 👁️ **Confortável para os olhos e legível para todos.** Todo o texto atende aos níveis de contraste WCAG, e as cores de sintaxe continuam distintas para pessoas com daltonismo.
-- 🖥️ **Temas completos.** Editor, barra lateral, abas, terminal, console de depuração, notificações e barra de status: tudo é estilizado, nada volta às cores padrão.
+- 🖥️ **Temas cuidados.** Editor, barra lateral, abas, terminal, console de depuração, notificações e barra de status: tudo é estilizado, com mais de 400 cores por tema. Áreas mais recentes, como chat, testes e notebooks, ainda usam as cores padrão do VS Code por enquanto.
 
 ## Instalação
 
@@ -139,12 +139,8 @@ Claro. Escolha-o no seletor de temas (`Ctrl+K Ctrl+T`) e deixe o modo automátic
 **Para que servem os temas de alto contraste?**
 Eles foram pensados para baixa visão, ambientes muito claros ou longas sessões de programação, com contraste máximo (AAA), bordas visíveis e um contorno de foco bem marcado.
 
-**Há temas de datas comemorativas?**
-Ainda não. Temas de Ano-Novo, Páscoa, Halloween e Natal estão planejados. Acompanhe o [projeto no GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext) para ser avisado.
-
 ## Roteiro
 
-- 🎉 Temas de datas comemorativas (Ano-Novo, Páscoa, Halloween, Natal)
 - ⏰ Horários de dia e de noite configuráveis
 
 Ideias e sugestões são bem-vindas nas [issues do GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
