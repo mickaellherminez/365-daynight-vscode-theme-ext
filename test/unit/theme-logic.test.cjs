@@ -9,6 +9,7 @@ const {
 	getThemeState,
 	getThemeLabel,
 	getAutoThemeType,
+	getAutoPeriod,
 	getNextThemeType,
 	getToggleThemeType,
 	isThemeMaskedByWorkspace
@@ -75,6 +76,20 @@ suite('Theme logic', () => {
 				assert.strictEqual(getAutoThemeType('day', hour), ThemeType.LIGHT);
 				assert.strictEqual(getAutoThemeType('night', hour), ThemeType.DARK);
 			}
+		});
+	});
+
+	suite('getAutoPeriod', () => {
+		test('stays the same within a month and a type', () => {
+			assert.strictEqual(getAutoPeriod(ThemeType.DARK, new Date(2026, 4, 1)), getAutoPeriod(ThemeType.DARK, new Date(2026, 4, 31, 23)));
+		});
+
+		test('changes with the type, the month and the year', () => {
+			const period = getAutoPeriod(ThemeType.DARK, new Date(2026, 4, 1));
+			assert.strictEqual(period, '2026-05 Dark');
+			assert.notStrictEqual(getAutoPeriod(ThemeType.LIGHT, new Date(2026, 4, 1)), period);
+			assert.notStrictEqual(getAutoPeriod(ThemeType.DARK, new Date(2026, 5, 1)), period);
+			assert.notStrictEqual(getAutoPeriod(ThemeType.DARK, new Date(2027, 4, 1)), period);
 		});
 	});
 

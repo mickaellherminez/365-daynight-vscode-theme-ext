@@ -19,6 +19,140 @@ suite('Extension behavior', () => {
 
 	teardown(() => fake.dispose());
 
+	suite('In automatic mode', () => {
+		const NOVEMBER_NIGHT = new Date(2026, 10, 10, 22, 0);
+		const NOVEMBER_DARK = getThemeLabel(ThemeType.DARK, NOVEMBER_NIGHT);
+		const NOVEMBER_LIGHT = getThemeLabel(ThemeType.LIGHT, NOVEMBER_NIGHT);
+		const autoSettings = { '365DayNight.enable': true };
+
+		/**
+		 * Rouvre l'extension avec la même mémoire : rechargement, nouvelle fenêtre ou redémarrage
+		 * @param {Date} now
+		 */
+		const reopen = async (now) => {
+			const { globalState } = fake;
+			const theme = fake.theme();
+			fake.dispose();
+			load({ theme, settings: autoSettings, globalState, now });
+			await fake.settle();
+		};
+
+		const startAtNight = async () => {
+			load({ theme: 'Monokai', settings: autoSettings, now: NOVEMBER_NIGHT });
+			await fake.settle();
+			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		};
+
+		test('a theme picked by hand survives a reload, a new window or a restart', async () => {
+			await startAtNight();
+
+			await fake.setTheme('Dracula');
+			await reopen(NOVEMBER_NIGHT);
+
+			assert.strictEqual(fake.theme(), 'Dracula');
+			assert.deepStrictEqual(fake.writes, []);
+		});
+
+		test('a choice made with a command survives too', async () => {
+			await startAtNight();
+
+			await fake.run('extension.setLightTheme');
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+			await reopen(NOVEMBER_NIGHT);
+
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+		});
+
+		test('a choice survives later checks of the same period', async () => {
+			await startAtNight();
+
+			await fake.setTheme('Dracula');
+			fake.setNow(new Date(2026, 10, 10, 23, 30));
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), 'Dracula');
+		});
+
+		test('switching resumes when the day starts', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			fake.setNow(new Date(2026, 10, 11, 7, 0));
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+		});
+
+		test('switching resumes at the next period, even if VS Code was closed meanwhile', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			await reopen(new Date(2026, 10, 11, 12, 0));
+
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+		});
+
+		test('switching resumes when the month changes', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			const december = new Date(2026, 11, 1, 22, 0);
+			fake.setNow(december);
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), getThemeLabel(ThemeType.DARK, december));
+		});
+
+		test('the same month in a later year counts as a new period', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			await reopen(new Date(2027, 10, 10, 22, 0));
+
+			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		});
+
+		test('a failed change is not remembered: another window tries again', async () => {
+			load({ theme: 'Monokai', settings: autoSettings, now: NOVEMBER_NIGHT, failWrites: true });
+			await fake.settle();
+			assert.strictEqual(fake.theme(), 'Monokai');
+
+			await reopen(NOVEMBER_NIGHT);
+
+			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		});
+
+		test('changing a 365DayNight setting applies the matching theme again', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			await fake.setSetting('365DayNight.mode', 'day');
+
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+		});
+
+		test('changing a 365DayNight setting applies the theme again even within the same period', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			await fake.setSetting('365DayNight.mode', 'night');
+
+			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		});
+
+		test('turning automatic mode off forgets the period without writing at every check', async () => {
+			await startAtNight();
+
+			await fake.setSetting('365DayNight.enable', false);
+			assert.strictEqual(fake.globalState.size, 0);
+
+			const writes = fake.globalStateWrites;
+			await fake.runAutoCheck();
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.globalStateWrites, writes);
+		});
+	});
+
 	suite('When writing the setting fails', () => {
 		test('the button and the state do not change', async () => {
 			load({ theme: LIGHT });
@@ -43,8 +177,7 @@ suite('Extension behavior', () => {
 		});
 
 		test('the next automatic check retries until it succeeds, then stops', async () => {
-			load({ theme: 'Monokai', settings: { '365DayNight.mode': 'night' } });
-			fake.failWrites = true;
+			load({ theme: 'Monokai', settings: { '365DayNight.mode': 'night' }, failWrites: true });
 			await enableAutoMode(fake);
 			assert.notStrictEqual(fake.theme(), DARK);
 
