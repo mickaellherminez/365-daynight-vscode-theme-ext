@@ -244,6 +244,83 @@ suite('Extension behavior', () => {
 		});
 	});
 
+	suite('When VS Code follows the system color mode', () => {
+		const following = { theme: LIGHT, settings: { 'window.autoDetectColorScheme': true } };
+
+		test('a command does not write the setting nor announce a success', async () => {
+			load(following);
+			const text = fake.statusBarItem.text;
+
+			await fake.run(TOGGLE);
+			await fake.runTimeouts();
+
+			assert.deepStrictEqual(fake.writes, []);
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.strictEqual(fake.statusBarItem.text, text);
+			assert.strictEqual(fake.errorMessages.length, 1);
+			assert.ok(fake.errorMessages[0].includes('window.autoDetectColorScheme'));
+		});
+
+		test('the automatic mode stays silent, then applies the theme once the setting is off', async () => {
+			load({ theme: 'Monokai', settings: { ...following.settings, '365DayNight.enable': true, '365DayNight.mode': 'night' } });
+			await fake.settle();
+			await fake.runAutoCheck();
+
+			assert.deepStrictEqual(fake.writes, []);
+			assert.deepStrictEqual(fake.errorMessages, []);
+
+			await fake.setSetting('window.autoDetectColorScheme', false);
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), DARK);
+		});
+	});
+
+	suite('When the system uses high contrast', () => {
+		test('a change that VS Code does not activate is reported, not announced as a success', async () => {
+			load({ theme: 'Monokai', systemHighContrast: true });
+
+			await fake.run('extension.setLightTheme');
+			await fake.runTimeouts();
+
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.strictEqual(fake.errorMessages.length, 1);
+			assert.ok(fake.errorMessages[0].includes('window.autoDetectHighContrast'));
+			assert.strictEqual(fake.getThemeState().type, ThemeType.HIGH_CONTRAST);
+		});
+
+		test('nothing is reported once VS Code no longer follows it', async () => {
+			load({ theme: LIGHT, systemHighContrast: true, settings: { 'window.autoDetectHighContrast': false } });
+
+			await fake.run(TOGGLE);
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.theme(), DARK);
+			assert.deepStrictEqual(fake.errorMessages, []);
+			assert.strictEqual(fake.infoMessages.length, 1);
+		});
+
+		test('the message does not blame high contrast when the detection is off', async () => {
+			load({ theme: LIGHT, holdThemeEvents: true, settings: { 'window.autoDetectHighContrast': false } });
+
+			await fake.run(TOGGLE);
+			fake.pendingThemeEvents.length = 0;
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.errorMessages.length, 1);
+			assert.ok(!fake.errorMessages[0].includes('window.autoDetectHighContrast'));
+		});
+
+		test('a high contrast theme picked by hand is not mistaken for it', async () => {
+			load({ theme: HIGH_CONTRAST });
+
+			await fake.run(TOGGLE);
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.theme(), LIGHT);
+			assert.deepStrictEqual(fake.errorMessages, []);
+		});
+	});
+
 	suite('When changing the theme succeeds', () => {
 		test('the button changes and a success message is shown', async () => {
 			load({ theme: LIGHT });
@@ -279,9 +356,41 @@ suite('Extension behavior', () => {
 			await fake.run(TOGGLE);
 			assert.strictEqual(fake.getThemeState().type, ThemeType.DARK);
 
+			assert.deepStrictEqual(fake.infoMessages, []);
+
 			fake.pendingThemeEvents.length = 0;
 			await fake.runTimeouts();
 			assert.strictEqual(fake.getThemeState().type, ThemeType.LIGHT);
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.strictEqual(fake.errorMessages.length, 1);
+		});
+
+		test('the success message waits for VS Code to activate the theme', async () => {
+			load({ theme: LIGHT, holdThemeEvents: true });
+
+			await fake.run(TOGGLE);
+			assert.deepStrictEqual(fake.infoMessages, []);
+
+			fake.deliverThemeEvent();
+			await fake.settle();
+			assert.strictEqual(fake.infoMessages.length, 1);
+		});
+
+		test('fast clicks announce only the last theme', async () => {
+			load({ theme: LIGHT, holdThemeEvents: true });
+
+			fake.commands.get(TOGGLE)();
+			fake.commands.get(TOGGLE)();
+			await fake.settle();
+
+			// Le délai d'attente du premier clic ne doit pas juger le thème du second
+			assert.strictEqual(fake.timeouts.size, 1);
+
+			fake.deliverThemeEvent();
+			fake.deliverThemeEvent();
+			await fake.settle();
+
+			assert.deepStrictEqual(fake.infoMessages, [`Theme changed to ${HIGH_CONTRAST}`]);
 		});
 
 		test('a theme picked elsewhere right after a click is taken into account', async () => {

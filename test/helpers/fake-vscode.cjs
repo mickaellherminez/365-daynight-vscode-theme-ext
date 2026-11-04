@@ -29,6 +29,7 @@ function kindOf(themeName) {
  * @param {Record<string, unknown>} [options.settings] Réglages utilisateur
  * @param {Record<string, unknown>} [options.workspaceSettings] Réglages de workspace
  * @param {boolean} [options.holdThemeEvents] Retenir les changements de thème jusqu'à deliverThemeEvent()
+ * @param {boolean} [options.systemHighContrast] Le système d'exploitation est en contraste élevé
  * @param {boolean} [options.failWrites] Faire échouer les écritures dès le démarrage
  * @param {Map<string, unknown>} [options.globalState] Mémoire de l'extension, à réutiliser pour simuler
  *   un rechargement, une nouvelle fenêtre ou un redémarrage
@@ -39,6 +40,10 @@ function loadExtension(options = {}) {
   const userSettings = new Map(Object.entries({ [THEME_SETTING]: theme, ...options.settings }));
   const workspaceSettings = new Map(Object.entries(options.workspaceSettings || {}));
   const effective = (key) => (workspaceSettings.has(key) ? workspaceSettings.get(key) : userSettings.get(key));
+
+  // VS Code applique d'abord le contraste élevé du système (activé par défaut), puis le mode du système
+  const followsSystemHighContrast = () => Boolean(options.systemHighContrast) && effective('window.autoDetectHighContrast') !== false;
+  const followsSystem = () => followsSystemHighContrast() || effective('window.autoDetectColorScheme') === true;
 
   const fake = {
     writes: [],
@@ -52,7 +57,7 @@ function loadExtension(options = {}) {
     pendingThemeEvents: [],
     intervals: [],
     timeouts: new Map(),
-    activeKind: kindOf(effective(THEME_SETTING))
+    activeKind: followsSystemHighContrast() ? ColorThemeKind.HighContrast : kindOf(effective(THEME_SETTING))
   };
 
   const deliverThemeEvent = () => {
@@ -105,7 +110,7 @@ function loadExtension(options = {}) {
             }
             fake.writes.push(value);
             userSettings.set(fullKey(key), value);
-            if (fullKey(key) === THEME_SETTING && effective(THEME_SETTING) === value) {
+            if (fullKey(key) === THEME_SETTING && effective(THEME_SETTING) === value && !followsSystem()) {
               fake.pendingThemeEvents.push(kindOf(value));
               if (!options.holdThemeEvents) {
                 deliverThemeEvent();

@@ -48,6 +48,22 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(activeTheme(), getThemeLabel(ThemeType.DARK));
 	});
 
+	test('Commands should not write the theme while VS Code follows the system color mode', async function () {
+		this.timeout(10000);
+		await vscode.extensions.getExtension(EXTENSION_ID).activate();
+		const config = () => vscode.workspace.getConfiguration();
+
+		await setThemeAndWait(getThemeLabel(ThemeType.LIGHT), vscode.ColorThemeKind.Light);
+		await config().update('window.autoDetectColorScheme', true, vscode.ConfigurationTarget.Global);
+		try {
+			const before = config().inspect('workbench.colorTheme').globalValue;
+			await vscode.commands.executeCommand('extension.setDarkTheme');
+			assert.strictEqual(config().inspect('workbench.colorTheme').globalValue, before);
+		} finally {
+			await config().update('window.autoDetectColorScheme', undefined, vscode.ConfigurationTarget.Global);
+		}
+	});
+
 	test('ColorThemeKind values should match the VS Code API', () => {
 		assert.strictEqual(ColorThemeKind.LIGHT, vscode.ColorThemeKind.Light);
 		assert.strictEqual(ColorThemeKind.DARK, vscode.ColorThemeKind.Dark);
