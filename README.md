@@ -113,7 +113,7 @@ Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
 | `365: Apply Dark theme` | Applies the current month's Dark theme |
 | `365: Apply High Contrast theme` | Applies the current month's High Contrast theme |
 
-These commands are also available in the **365 Themes** menu, from a right-click in the editor. You can assign your own keyboard shortcuts to them (`Ctrl+K Ctrl+S`).
+You can assign your own keyboard shortcuts to these commands (`Ctrl+K Ctrl+S`).
 
 ## Settings
 

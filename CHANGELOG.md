@@ -15,6 +15,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - When VS Code follows the system color mode (`window.autoDetectColorScheme`) or high contrast (`window.autoDetectHighContrast`), the commands now say so instead of announcing a change that did not happen
 - Automatic mode no longer replaces a theme picked by hand when a new window opens or VS Code restarts: your choice stays until the next change of period, as documented
 
+### Removed
+- "365 Themes" menu in the right-click menu of the editor and in the title bars of views: use the status bar button or the Command Palette instead
+
 ## [0.11.1] - 2026-10-21
 
 ### Changed

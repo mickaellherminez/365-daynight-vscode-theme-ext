@@ -113,7 +113,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 | `365: Apply Dark theme` | 应用当月的深色主题 |
 | `365: Apply High Contrast theme` | 应用当月的高对比度主题 |
 
-这些命令也可以在编辑器中右键，通过 **365 Themes** 菜单使用。你还可以为它们设置自己的快捷键（`Ctrl+K Ctrl+S`）。
+你可以为这些命令设置自己的快捷键（`Ctrl+K Ctrl+S`）。
 
 ## 设置
 

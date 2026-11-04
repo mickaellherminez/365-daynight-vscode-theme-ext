@@ -139,5 +139,16 @@ suite('Theme logic', () => {
 			const contributed = contributes.themes.map((theme) => theme.label);
 			assert.deepStrictEqual([...contributed].sort(), computed.sort());
 		});
+
+		test('contributes the public commands without any menu', () => {
+			assert.deepStrictEqual(contributes.commands.map((command) => command.command).sort(), [
+				'extension.setDarkTheme',
+				'extension.setHighContrastTheme',
+				'extension.setLightTheme',
+				'extension.toggleTheme'
+			]);
+			assert.strictEqual(contributes.menus, undefined);
+			assert.strictEqual(contributes.submenus, undefined);
+		});
 	});
 });
