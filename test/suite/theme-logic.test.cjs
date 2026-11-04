@@ -3,26 +3,51 @@ const { contributes } = require('../../package.json');
 const {
 	ThemeType,
 	MONTH_NAMES,
-	getThemeTypeFromName,
+	ColorThemeKind,
+	getThemeTypeFromKind,
+	getThemeMonth,
+	getThemeState,
 	getThemeLabel,
 	getAutoThemeType,
-	getNextThemeType
+	getNextThemeType,
+	getToggleThemeType
 } = require('../../theme-logic');
 
 suite('Theme logic', () => {
-	suite('getThemeTypeFromName', () => {
-		test('recognizes the type of a 365 theme', () => {
-			assert.strictEqual(getThemeTypeFromName('365 05-May Light'), ThemeType.LIGHT);
-			assert.strictEqual(getThemeTypeFromName('365 05-May Dark'), ThemeType.DARK);
-			assert.strictEqual(getThemeTypeFromName('365 05-May High Contrast'), ThemeType.HIGH_CONTRAST);
+	suite('getThemeTypeFromKind', () => {
+		test('maps each kind of theme to a theme type', () => {
+			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.LIGHT), ThemeType.LIGHT);
+			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.DARK), ThemeType.DARK);
+			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.HIGH_CONTRAST), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.HIGH_CONTRAST_LIGHT), ThemeType.HIGH_CONTRAST);
+		});
+	});
+
+	suite('getThemeMonth', () => {
+		test('reads the month of every contributed theme', () => {
+			for (const { label } of contributes.themes) {
+				const expected = Number(label.slice(4, 6));
+				assert.strictEqual(getThemeMonth(label), expected, label);
+			}
 		});
 
-		test('checks High Contrast before Dark', () => {
-			assert.strictEqual(getThemeTypeFromName('Dark High Contrast'), ThemeType.HIGH_CONTRAST);
+		test('does not recognize other themes', () => {
+			const others = [undefined, '', 'Monokai', 'Dracula', 'Dark High Contrast', '365', '365 05-May', '365 05-May Night',
+				'365 05-June Dark', '365 13-December Dark', '365 00-January Dark', 'My 365 05-May Dark'];
+			for (const name of others) {
+				assert.strictEqual(getThemeMonth(name), undefined, String(name));
+			}
+		});
+	});
+
+	suite('getThemeState', () => {
+		test('uses the kind of theme for a dark theme whose name does not say so', () => {
+			assert.deepStrictEqual(getThemeState('Dracula', ColorThemeKind.DARK), { type: ThemeType.DARK, month: undefined });
 		});
 
-		test('falls back to Light without a theme name', () => {
-			assert.strictEqual(getThemeTypeFromName(undefined), ThemeType.LIGHT);
+		test('reads the type and the month of a 365 theme', () => {
+			assert.deepStrictEqual(getThemeState('365 05-May High Contrast', ColorThemeKind.HIGH_CONTRAST),
+				{ type: ThemeType.HIGH_CONTRAST, month: 5 });
 		});
 	});
 
@@ -57,6 +82,17 @@ suite('Theme logic', () => {
 			assert.strictEqual(getNextThemeType(ThemeType.LIGHT), ThemeType.DARK);
 			assert.strictEqual(getNextThemeType(ThemeType.DARK), ThemeType.HIGH_CONTRAST);
 			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST), ThemeType.LIGHT);
+		});
+	});
+
+	suite('getToggleThemeType', () => {
+		test('moves through the cycle from a 365 theme', () => {
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: 5 }), ThemeType.HIGH_CONTRAST);
+		});
+
+		test('keeps the same type from another theme', () => {
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: undefined }), ThemeType.DARK);
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.LIGHT, month: undefined }), ThemeType.LIGHT);
 		});
 	});
 

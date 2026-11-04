@@ -18,19 +18,47 @@ const MONTH_NAMES = [
 const DAY_START_HOUR = 7;
 const NIGHT_START_HOUR = 19;
 
+// Valeurs de vscode.ColorThemeKind
+const ColorThemeKind = {
+  LIGHT: 1,
+  DARK: 2,
+  HIGH_CONTRAST: 3,
+  HIGH_CONTRAST_LIGHT: 4
+};
+
+const THEME_LABEL_PATTERN = new RegExp(`^365 (\\d{2})-([A-Za-z]+) (?:${Object.values(ThemeType).join('|')})$`);
+
 /**
- * Déduit le type de thème à partir du nom du thème VS Code
- * @param {string | undefined} themeName
+ * Type de thème correspondant au genre de thème actif indiqué par VS Code
+ * @param {number} kind Valeur de vscode.ColorThemeKind
  */
-function getThemeTypeFromName(themeName) {
-  // "High Contrast" doit être testé avant "Dark" (ex. "Dark High Contrast")
-  if (themeName && themeName.includes('High Contrast')) {
+function getThemeTypeFromKind(kind) {
+  if (kind === ColorThemeKind.HIGH_CONTRAST || kind === ColorThemeKind.HIGH_CONTRAST_LIGHT) {
     return ThemeType.HIGH_CONTRAST;
   }
-  if (themeName && themeName.includes('Dark')) {
-    return ThemeType.DARK;
+  return kind === ColorThemeKind.DARK ? ThemeType.DARK : ThemeType.LIGHT;
+}
+
+/**
+ * Mois (de 1 à 12) d'un thème 365, ou undefined pour tout autre thème
+ * @param {string | undefined} themeName
+ */
+function getThemeMonth(themeName) {
+  const match = themeName && THEME_LABEL_PATTERN.exec(themeName);
+  if (!match) {
+    return undefined;
   }
-  return ThemeType.LIGHT;
+  const month = Number(match[1]);
+  return MONTH_NAMES[month - 1] === match[2] ? month : undefined;
+}
+
+/**
+ * État du thème actif : son type et, pour un thème 365, son mois
+ * @param {string | undefined} themeName
+ * @param {number} kind Valeur de vscode.ColorThemeKind
+ */
+function getThemeState(themeName, kind) {
+  return { type: getThemeTypeFromKind(kind), month: getThemeMonth(themeName) };
 }
 
 /**
@@ -73,11 +101,24 @@ function getNextThemeType(themeType) {
   return ThemeType.LIGHT;
 }
 
+/**
+ * Type de thème à appliquer au clic sur le bouton : depuis un thème qui n'est pas un thème 365,
+ * le premier clic applique le thème 365 du même type au lieu d'avancer dans le cycle
+ * @param {{ type: string, month: number | undefined }} state
+ */
+function getToggleThemeType(state) {
+  return state.month === undefined ? state.type : getNextThemeType(state.type);
+}
+
 module.exports = {
   ThemeType,
   MONTH_NAMES,
-  getThemeTypeFromName,
+  ColorThemeKind,
+  getThemeTypeFromKind,
+  getThemeMonth,
+  getThemeState,
   getThemeLabel,
   getAutoThemeType,
-  getNextThemeType
+  getNextThemeType,
+  getToggleThemeType
 };
