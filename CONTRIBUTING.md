@@ -14,7 +14,7 @@ Thanks for your interest! Bug reports, accessibility feedback and pull requests 
 | `theme-logic.js` | Theme selection logic, without any VS Code dependency |
 | `themes/` | The 36 generated color themes (`365-MM-light`, `365-MM-dark`, `365-MM-hc-dark`) |
 | `scripts/themes/` | Theme generator, accessibility audit and preview images ([documentation](scripts/themes/README.md)) |
-| `test/` | Tests run inside VS Code |
+| `test/` | Unit tests (`test/unit`) and integration tests run inside VS Code (`test/suite`) |
 | `docs/` | Translated README files |
 
 ## Development
@@ -33,8 +33,8 @@ npm install
 
 ```sh
 npm run lint
-npm test        # downloads the latest stable VS Code and runs the tests inside it
-npx mocha --ui tdd test/suite/theme-logic.test.cjs   # runs the logic tests only, without opening VS Code
+npm run test:unit   # fast tests that don't open VS Code (test/unit, with a fake VS Code API)
+npm test            # lint, unit tests, then downloads the latest stable VS Code and runs test/suite inside it
 ```
 
 If you run the tests from VS Code's integrated terminal, use `env -u ELECTRON_RUN_AS_NODE npm test`: that terminal sets `ELECTRON_RUN_AS_NODE`, which prevents the test instance of VS Code from starting.

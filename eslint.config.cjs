@@ -11,6 +11,8 @@ const nodeGlobals = {
   Buffer: 'readonly',
   setTimeout: 'readonly',
   clearTimeout: 'readonly',
+  setImmediate: 'readonly',
+  global: 'readonly',
   setInterval: 'readonly',
   clearInterval: 'readonly'
 };
@@ -18,6 +20,7 @@ const nodeGlobals = {
 const mochaGlobals = {
   suite: 'readonly',
   test: 'readonly',
+  teardown: 'readonly',
   describe: 'readonly',
   it: 'readonly',
   before: 'readonly',

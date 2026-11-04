@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ### Fixed
 - The status bar button now shows the real type of the active theme: dark themes whose name does not contain "Dark", such as Monokai or Dracula, were shown as `LGT`
 - From a theme of another publisher, the first click on the status bar button now applies the 365 theme of the same type
+- The status bar button only changes once the theme change has succeeded, and clicking quickly no longer shows an outdated state
+- Automatic mode tries again at its next check after a failed theme change
+- When a workspace sets its own theme, the commands now say so instead of announcing a change that did not happen
 
 ## [0.11.1] - 2026-10-21
 

@@ -110,6 +110,17 @@ function getToggleThemeType(state) {
   return state.month === undefined ? state.type : getNextThemeType(state.type);
 }
 
+/**
+ * Indique si un réglage de workspace empêcherait un thème de s'appliquer :
+ * il l'emporte sur le réglage utilisateur, seul à être écrit par l'extension
+ * @param {{ workspaceValue?: unknown, workspaceFolderValue?: unknown } | undefined} inspection
+ * @param {string} themeLabel
+ */
+function isThemeMaskedByWorkspace(inspection, themeLabel) {
+  const workspaceTheme = inspection?.workspaceFolderValue ?? inspection?.workspaceValue;
+  return workspaceTheme !== undefined && workspaceTheme !== themeLabel;
+}
+
 module.exports = {
   ThemeType,
   MONTH_NAMES,
@@ -120,5 +131,6 @@ module.exports = {
   getThemeLabel,
   getAutoThemeType,
   getNextThemeType,
-  getToggleThemeType
+  getToggleThemeType,
+  isThemeMaskedByWorkspace
 };
