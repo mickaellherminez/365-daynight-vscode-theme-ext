@@ -5,6 +5,7 @@ const vscode = require('vscode');
 const {
   ThemeType,
   getThemeState,
+  getThemeTypeFromKind,
   getThemeLabel,
   getAutoThemeType,
   getAutoPeriod,
@@ -39,7 +40,7 @@ let globalState;
 let lastAutoFailurePeriod;
 
 // Thème demandé que VS Code n'a pas encore activé
-/** @type {{ label: string, type: string, timer: ReturnType<typeof setTimeout> } | undefined} */
+/** @type {{ label: string, type: string, timer: ReturnType<typeof setTimeout>, resolve: (activated: boolean | undefined) => void } | undefined} */
 let pendingTheme;
 
 // Les changements de thème s'exécutent un par un : chacun part de l'état laissé par le précédent
@@ -60,12 +61,40 @@ function enqueueThemeChange(task) {
 
 /**
  * Ne plus attendre l'activation d'un thème demandé
+ * @param {boolean} [activated] true : activé ; false : pas activé à temps ; undefined : remplacé par un autre thème
  */
-function clearPendingTheme() {
+function settlePendingTheme(activated) {
   if (pendingTheme) {
-    clearTimeout(pendingTheme.timer);
+    const { timer, resolve } = pendingTheme;
     pendingTheme = undefined;
+    clearTimeout(timer);
+    resolve(activated);
   }
+}
+
+/**
+ * Attend que VS Code active le thème demandé. Le résultat n'est connu qu'ainsi : l'API ne dit pas
+ * si le système est en contraste élevé, un cas où VS Code ignore le réglage workbench.colorTheme.
+ * @param {string} label
+ * @param {string} type
+ * @returns {Promise<boolean | undefined>}
+ */
+function waitForThemeActivation(label, type) {
+  settlePendingTheme();
+  if (getThemeTypeFromKind(vscode.window.activeColorTheme.kind) === type) {
+    return Promise.resolve(true);
+  }
+  return new Promise((resolve) => {
+    pendingTheme = {
+      label,
+      type,
+      resolve,
+      timer: setTimeout(() => {
+        settlePendingTheme(false);
+        syncThemeState();
+      }, THEME_ACTIVATION_TIMEOUT_MS)
+    };
+  });
 }
 
 /**
@@ -75,12 +104,17 @@ function syncThemeState() {
   const themeName = vscode.workspace.getConfiguration().get('workbench.colorTheme');
   const state = getThemeState(themeName, vscode.window.activeColorTheme.kind);
 
-  // VS Code signale encore le thème précédent : le bouton garde le thème demandé
-  if (pendingTheme && pendingTheme.label === themeName && pendingTheme.type !== state.type) {
-    return;
+  if (pendingTheme && pendingTheme.label === themeName) {
+    // VS Code signale encore le thème précédent : le bouton garde le thème demandé
+    if (pendingTheme.type !== state.type) {
+      return;
+    }
+    settlePendingTheme(true);
+  } else {
+    // Un autre thème a été choisi entre-temps
+    settlePendingTheme();
   }
 
-  clearPendingTheme();
   themeState = state;
   updateStatusBarItem();
 }
@@ -88,17 +122,25 @@ function syncThemeState() {
 /**
  * Applique le thème du mois en cours pour le type donné. Le bouton ne change qu'après la réussite.
  * @param {string} themeType
- * @returns {Promise<{ ok: true, label: string } | { ok: false, masked?: boolean, message: string }>}
+ * @returns {Promise<{ ok: true, label: string, activated: Promise<boolean | undefined> } | { ok: false, blocked?: boolean, message: string }>}
  */
 async function applyTheme(themeType) {
   const now = new Date();
   const label = getThemeLabel(themeType, now);
   const config = vscode.workspace.getConfiguration();
 
+  // VS Code ignorerait le réglage workbench.colorTheme : rien n'est écrit
+  if (config.get('window.autoDetectColorScheme')) {
+    return {
+      ok: false,
+      blocked: true,
+      message: "VS Code follows your system's color mode (window.autoDetectColorScheme) and picks its preferred themes, so this 365 theme can't be applied. Turn this setting off to use it."
+    };
+  }
   if (isThemeMaskedByWorkspace(config.inspect('workbench.colorTheme'), label)) {
     return {
       ok: false,
-      masked: true,
+      blocked: true,
       message: "This workspace sets its own theme in its settings (workbench.colorTheme), so 365 themes can't be applied here."
     };
   }
@@ -109,15 +151,21 @@ async function applyTheme(themeType) {
     return { ok: false, message: `Failed to change theme: ${error.message}` };
   }
 
-  clearPendingTheme();
-  pendingTheme = { label, type: themeType, timer: setTimeout(() => {
-    pendingTheme = undefined;
-    syncThemeState();
-  }, THEME_ACTIVATION_TIMEOUT_MS) };
-
+  const activated = waitForThemeActivation(label, themeType);
   themeState = { type: themeType, month: now.getMonth() + 1 };
   updateStatusBarItem();
-  return { ok: true, label };
+  return { ok: true, label, activated };
+}
+
+/**
+ * Message affiché quand VS Code n'a pas activé le thème demandé
+ * @param {string} label
+ */
+function getNotActivatedMessage(label) {
+  const followsHighContrast = vscode.workspace.getConfiguration().get('window.autoDetectHighContrast', true);
+  return followsHighContrast
+    ? `VS Code did not switch to ${label}. If your system uses high contrast, VS Code follows it (window.autoDetectHighContrast).`
+    : `VS Code did not switch to ${label}.`;
 }
 
 /**
@@ -127,11 +175,19 @@ async function applyTheme(themeType) {
 function applyThemeFromCommand(getThemeType) {
   return enqueueThemeChange(async () => {
     const result = await applyTheme(getThemeType());
-    if (result.ok) {
-      vscode.window.showInformationMessage(`Theme changed to ${result.label}`);
-    } else {
+    if (!result.ok) {
       vscode.window.showErrorMessage(result.message);
+      return;
     }
+
+    // Sans attendre : les clics suivants ne doivent pas dépendre de l'activation de ce thème
+    result.activated.then((activated) => {
+      if (activated === true) {
+        vscode.window.showInformationMessage(`Theme changed to ${result.label}`);
+      } else if (activated === false) {
+        vscode.window.showErrorMessage(getNotActivatedMessage(result.label));
+      }
+    });
   });
 }
 
@@ -169,9 +225,9 @@ function checkAutoTheme() {
     if (result.ok) {
       await globalState.update(LAST_AUTO_PERIOD_KEY, period);
       lastAutoFailurePeriod = undefined;
-    } else if (!result.masked && lastAutoFailurePeriod !== period) {
+    } else if (!result.blocked && lastAutoFailurePeriod !== period) {
       // Le contrôle suivant réessaiera : l'échec n'est signalé qu'une fois par période.
-      // Un thème fixé par le workspace est un choix de l'utilisateur : rien à signaler.
+      // Un thème fixé par le workspace ou le système est un choix de l'utilisateur : rien à signaler.
       lastAutoFailurePeriod = period;
       vscode.window.showErrorMessage(result.message);
     }
@@ -200,7 +256,7 @@ function activate(context) {
     vscode.commands.registerCommand('extension.setDarkTheme', () => applyThemeFromCommand(() => ThemeType.DARK)),
     vscode.commands.registerCommand('extension.setHighContrastTheme', () => applyThemeFromCommand(() => ThemeType.HIGH_CONTRAST)),
     statusBarItem,
-    { dispose: clearPendingTheme }
+    { dispose: () => settlePendingTheme() }
   );
 
   // Garder le bouton synchronisé quand le thème est changé ailleurs (sélecteur de thèmes, settings.json...)

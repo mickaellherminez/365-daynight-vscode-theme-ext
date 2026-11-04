@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - The status bar button only changes once the theme change has succeeded, and clicking quickly no longer shows an outdated state
 - Automatic mode tries again at its next check after a failed theme change
 - When a workspace sets its own theme, the commands now say so instead of announcing a change that did not happen
+- When VS Code follows the system color mode (`window.autoDetectColorScheme`) or high contrast (`window.autoDetectHighContrast`), the commands now say so instead of announcing a change that did not happen
 - Automatic mode no longer replaces a theme picked by hand when a new window opens or VS Code restarts: your choice stays until the next change of period, as documented
 
 ## [0.11.1] - 2026-10-21

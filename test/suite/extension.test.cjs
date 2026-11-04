@@ -10,6 +10,11 @@ const EXTENSION_ID = 'mickaellherminez.365-daynight-vscode-theme-ext';
  * @param {number} kind Genre attendu du thème
  */
 async function setThemeAndWait(themeName, kind) {
+	// Déjà actif : VS Code ne signalerait aucun changement
+	if (vscode.window.activeColorTheme.kind === kind && vscode.workspace.getConfiguration().get('workbench.colorTheme') === themeName) {
+		return;
+	}
+
 	const applied = new Promise((resolve, reject) => {
 		const timer = setTimeout(() => reject(new Error(`${themeName} did not become active`)), 8000);
 		const listener = vscode.window.onDidChangeActiveColorTheme((theme) => {
@@ -46,6 +51,22 @@ suite('Extension Test Suite', () => {
 
 		await vscode.commands.executeCommand('extension.toggleTheme');
 		assert.strictEqual(activeTheme(), getThemeLabel(ThemeType.DARK));
+	});
+
+	test('Commands should not write the theme while VS Code follows the system color mode', async function () {
+		this.timeout(10000);
+		await vscode.extensions.getExtension(EXTENSION_ID).activate();
+		const config = () => vscode.workspace.getConfiguration();
+
+		await setThemeAndWait(getThemeLabel(ThemeType.LIGHT), vscode.ColorThemeKind.Light);
+		await config().update('window.autoDetectColorScheme', true, vscode.ConfigurationTarget.Global);
+		try {
+			const before = config().inspect('workbench.colorTheme').globalValue;
+			await vscode.commands.executeCommand('extension.setDarkTheme');
+			assert.strictEqual(config().inspect('workbench.colorTheme').globalValue, before);
+		} finally {
+			await config().update('window.autoDetectColorScheme', undefined, vscode.ConfigurationTarget.Global);
+		}
 	});
 
 	test('ColorThemeKind values should match the VS Code API', () => {
