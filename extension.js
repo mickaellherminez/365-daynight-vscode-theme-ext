@@ -7,6 +7,7 @@ const {
   getThemeState,
   getThemeLabel,
   getAutoThemeType,
+  getAutoPeriod,
   getToggleThemeType,
   isThemeMaskedByWorkspace
 } = require('./theme-logic');
@@ -25,10 +26,13 @@ const THEME_ACTIVATION_TIMEOUT_MS = 2000;
 /** @type {{ type: string, month: number | undefined }} */
 let themeState = { type: ThemeType.LIGHT, month: undefined };
 
-// Dernière période traitée par le mode automatique (ex. "365 05-May Light") : un choix
-// manuel est conservé jusqu'au prochain changement de période (jour/nuit ou mois)
-/** @type {string | undefined} */
-let lastAutoPeriod;
+// Dernière période traitée par le mode automatique (ex. "2026-05 Light"), conservée entre les
+// fenêtres et les redémarrages : un choix manuel reste jusqu'au prochain changement de période
+const LAST_AUTO_PERIOD_KEY = 'lastAutoPeriod';
+
+// Mémoire de l'extension, partagée entre les fenêtres
+/** @type {vscode.Memento} */
+let globalState;
 
 // Dernière période pour laquelle un échec du mode automatique a été signalé
 /** @type {string | undefined} */
@@ -132,21 +136,30 @@ function applyThemeFromCommand(getThemeType) {
 }
 
 /**
+ * Oublie la dernière période traitée, sans écriture inutile si elle est déjà oubliée
+ */
+async function forgetAutoPeriod() {
+  if (globalState.get(LAST_AUTO_PERIOD_KEY) !== undefined) {
+    await globalState.update(LAST_AUTO_PERIOD_KEY, undefined);
+  }
+}
+
+/**
  * Applique le thème automatique s'il a changé depuis la dernière réussite
  */
 function checkAutoTheme() {
   const config = vscode.workspace.getConfiguration('365DayNight');
   if (!config.get('enable', false)) {
-    lastAutoPeriod = undefined;
     lastAutoFailurePeriod = undefined;
-    return Promise.resolve();
+    return forgetAutoPeriod();
   }
 
-  const themeType = getAutoThemeType(config.get('mode', 'auto'), new Date().getHours());
-  const period = getThemeLabel(themeType);
+  const now = new Date();
+  const themeType = getAutoThemeType(config.get('mode', 'auto'), now.getHours());
+  const period = getAutoPeriod(themeType, now);
 
   return enqueueThemeChange(async () => {
-    if (period === lastAutoPeriod) {
+    if (period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
       return;
     }
 
@@ -154,7 +167,7 @@ function checkAutoTheme() {
     // seul le mois est mis à jour
     const result = await applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType);
     if (result.ok) {
-      lastAutoPeriod = period;
+      await globalState.update(LAST_AUTO_PERIOD_KEY, period);
       lastAutoFailurePeriod = undefined;
     } else if (!result.masked && lastAutoFailurePeriod !== period) {
       // Le contrôle suivant réessaiera : l'échec n'est signalé qu'une fois par période.
@@ -171,6 +184,7 @@ function checkAutoTheme() {
  */
 function activate(context) {
   console.log("Extension 365-daynight activée");
+  globalState = context.globalState;
 
   // Créer le bouton et lire le thème actif au démarrage
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
@@ -195,9 +209,8 @@ function activate(context) {
     vscode.window.onDidChangeActiveColorTheme(syncThemeState),
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (event.affectsConfiguration('365DayNight')) {
-        lastAutoPeriod = undefined;
         lastAutoFailurePeriod = undefined;
-        checkAutoTheme();
+        forgetAutoPeriod().then(checkAutoTheme);
       }
     })
   );

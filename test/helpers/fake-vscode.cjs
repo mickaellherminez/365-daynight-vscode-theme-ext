@@ -29,6 +29,10 @@ function kindOf(themeName) {
  * @param {Record<string, unknown>} [options.settings] Réglages utilisateur
  * @param {Record<string, unknown>} [options.workspaceSettings] Réglages de workspace
  * @param {boolean} [options.holdThemeEvents] Retenir les changements de thème jusqu'à deliverThemeEvent()
+ * @param {boolean} [options.failWrites] Faire échouer les écritures dès le démarrage
+ * @param {Map<string, unknown>} [options.globalState] Mémoire de l'extension, à réutiliser pour simuler
+ *   un rechargement, une nouvelle fenêtre ou un redémarrage
+ * @param {Date} [options.now] Date et heure simulées
  */
 function loadExtension(options = {}) {
   const theme = options.theme || 'Monokai';
@@ -40,7 +44,7 @@ function loadExtension(options = {}) {
     writes: [],
     infoMessages: [],
     errorMessages: [],
-    failWrites: false,
+    failWrites: Boolean(options.failWrites),
     statusBarItem: undefined,
     commands: new Map(),
     themeListeners: [],
@@ -137,6 +141,37 @@ function loadExtension(options = {}) {
   };
   global.clearTimeout = (id) => fake.timeouts.delete(id);
 
+  const RealDate = global.Date;
+  let currentTime = options.now ? options.now.getTime() : RealDate.now();
+  global.Date = class extends RealDate {
+    constructor(...args) {
+      if (args.length === 0) {
+        super(currentTime);
+      } else {
+        super(...args);
+      }
+    }
+
+    static now() {
+      return currentTime;
+    }
+  };
+
+  const globalState = options.globalState || new Map();
+  fake.globalState = globalState;
+  fake.globalStateWrites = 0;
+  const memento = {
+    get: (key, defaultValue) => (globalState.has(key) ? globalState.get(key) : defaultValue),
+    async update(key, value) {
+      fake.globalStateWrites++;
+      if (value === undefined) {
+        globalState.delete(key);
+      } else {
+        globalState.set(key, value);
+      }
+    }
+  };
+
   const realLoad = Module._load;
   Module._load = function (request, ...rest) {
     return request === 'vscode' ? vscode : realLoad.call(this, request, ...rest);
@@ -144,7 +179,7 @@ function loadExtension(options = {}) {
 
   delete require.cache[EXTENSION_PATH];
   const extension = require(EXTENSION_PATH);
-  const api = extension.activate({ subscriptions: [] });
+  const api = extension.activate({ subscriptions: [], globalState: memento });
 
   const settle = () => new Promise((resolve) => setImmediate(resolve));
 
@@ -153,6 +188,10 @@ function loadExtension(options = {}) {
     theme: () => effective(THEME_SETTING),
     deliverThemeEvent,
     settle,
+    /** Avance l'horloge simulée */
+    setNow(date) {
+      currentTime = date.getTime();
+    },
     /** Modifie un réglage comme le ferait l'utilisateur et prévient l'extension */
     async setSetting(key, value) {
       userSettings.set(key, value);
@@ -164,9 +203,16 @@ function loadExtension(options = {}) {
     removeWorkspaceSetting(key) {
       workspaceSettings.delete(key);
     },
-    /** Choisit un thème hors de l'extension, par exemple dans le sélecteur de thèmes */
+    /** Choisit un thème hors de l'extension, sans prévenir encore l'extension */
     async configurationUpdate(themeName) {
       userSettings.set(THEME_SETTING, themeName);
+      await settle();
+    },
+    /** Choisit un thème dans le sélecteur de thèmes de VS Code */
+    async setTheme(themeName) {
+      userSettings.set(THEME_SETTING, themeName);
+      fake.pendingThemeEvents.push(kindOf(themeName));
+      deliverThemeEvent();
       await settle();
     },
     /** Exécute une commande de l'extension et attend sa fin */
@@ -190,6 +236,7 @@ function loadExtension(options = {}) {
     dispose() {
       Module._load = realLoad;
       Object.assign(global, realTimers);
+      global.Date = RealDate;
       delete require.cache[EXTENSION_PATH];
     }
   });

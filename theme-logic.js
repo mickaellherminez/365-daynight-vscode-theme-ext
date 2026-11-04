@@ -88,6 +88,16 @@ function getAutoThemeType(mode, hour) {
 }
 
 /**
+ * Période du mode automatique : elle change avec le jour et la nuit, le mois et l'année
+ * @param {string} themeType Type attendu par le mode automatique
+ * @param {Date} date
+ */
+function getAutoPeriod(themeType, date) {
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  return `${date.getFullYear()}-${month} ${themeType}`;
+}
+
+/**
  * Type de thème suivant dans le cycle du bouton : Light, Dark, High Contrast, puis Light
  * @param {string} themeType
  */
@@ -130,6 +140,7 @@ module.exports = {
   getThemeState,
   getThemeLabel,
   getAutoThemeType,
+  getAutoPeriod,
   getNextThemeType,
   getToggleThemeType,
   isThemeMaskedByWorkspace
