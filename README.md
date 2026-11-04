@@ -18,7 +18,7 @@
 - 🔁 **One-click switch.** A button in the status bar cycles between Light, Dark and High Contrast.
 - ⏰ **Optional automatic mode.** The extension can apply the current month's theme by itself, Light during the day and Dark at night.
 - 👁️ **Easy on the eyes, readable for everyone.** All text meets WCAG contrast levels, and syntax colors stay distinct for people with color blindness.
-- 🖥️ **Complete themes.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled. Nothing falls back to the default colors.
+- 🖥️ **Carefully styled.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled, with more than 400 colors in each theme. Newer areas such as chat, tests and notebooks still use VS Code's default colors for now.
 
 ## Installation
 
@@ -139,12 +139,8 @@ Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mod
 **What are the High Contrast themes for?**
 They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline.
 
-**Are holiday themes available?**
-Not yet. Themes for New Year, Easter, Halloween and Christmas are planned. Follow the [project on GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext) to be notified.
-
 ## Roadmap
 
-- 🎉 Holiday themes (New Year, Easter, Halloween, Christmas)
 - ⏰ Configurable day and night hours
 
 Ideas and suggestions are welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).

@@ -17,7 +17,7 @@
 - 🔁 **Bascule en un clic.** Un bouton dans la barre d'état passe du thème clair au sombre puis au contraste élevé.
 - ⏰ **Mode automatique (optionnel).** L'extension peut appliquer seule le thème du mois en cours : clair le jour, sombre la nuit.
 - 👁️ **Reposant pour les yeux, lisible par tous.** Tout le texte respecte les niveaux de contraste WCAG, et les couleurs de syntaxe restent distinctes pour les personnes daltoniennes.
-- 🖥️ **Des thèmes complets.** Éditeur, barre latérale, onglets, terminal, console de débogage, notifications et barre d'état : tout est stylé, rien ne retombe sur les couleurs par défaut.
+- 🖥️ **Des thèmes soignés.** Éditeur, barre latérale, onglets, terminal, console de débogage, notifications et barre d'état : tout est stylé, avec plus de 400 couleurs par thème. Les zones plus récentes, comme le chat, les tests et les notebooks, utilisent encore les couleurs par défaut de VS Code pour le moment.
 
 ## Installation
 
@@ -139,12 +139,8 @@ Bien sûr. Choisissez-le dans le sélecteur de thèmes (`Ctrl+K Ctrl+T`) et lais
 **À quoi servent les thèmes à contraste élevé ?**
 Ils sont pensés pour la basse vision, les environnements très lumineux ou les longues sessions de code. Ils offrent un contraste maximal (AAA), des bordures visibles et un contour de focus très marqué.
 
-**Les thèmes de fêtes sont-ils disponibles ?**
-Pas encore. Des thèmes pour le Nouvel An, Pâques, Halloween et Noël sont prévus. Suivez le [projet sur GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext) pour être prévenu.
-
 ## Feuille de route
 
-- 🎉 Thèmes de fêtes (Nouvel An, Pâques, Halloween, Noël)
 - ⏰ Heures de jour et de nuit configurables
 
 Idées et suggestions sont les bienvenues dans les [tickets GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
