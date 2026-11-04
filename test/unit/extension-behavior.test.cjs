@@ -296,7 +296,6 @@ suite('Extension behavior', () => {
 
 			assert.strictEqual(fake.theme(), DARK);
 			assert.deepStrictEqual(fake.errorMessages, []);
-			assert.strictEqual(fake.infoMessages.length, 1);
 		});
 
 		test('the message does not blame high contrast when the detection is off', async () => {
@@ -322,16 +321,18 @@ suite('Extension behavior', () => {
 	});
 
 	suite('When changing the theme succeeds', () => {
-		test('the button changes and a success message is shown', async () => {
+		test('the button changes without any notification', async () => {
 			load({ theme: LIGHT });
 			const text = fake.statusBarItem.text;
 
 			await fake.run(TOGGLE);
+			await fake.runTimeouts();
 
 			assert.strictEqual(fake.theme(), DARK);
 			assert.notStrictEqual(fake.statusBarItem.text, text);
 			assert.deepStrictEqual(fake.getThemeState(), { type: ThemeType.DARK, month: MONTH });
-			assert.strictEqual(fake.infoMessages.length, 1);
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.deepStrictEqual(fake.errorMessages, []);
 		});
 
 		test('fast clicks follow the cycle, even before VS Code activates each theme', async () => {
@@ -356,8 +357,6 @@ suite('Extension behavior', () => {
 			await fake.run(TOGGLE);
 			assert.strictEqual(fake.getThemeState().type, ThemeType.DARK);
 
-			assert.deepStrictEqual(fake.infoMessages, []);
-
 			fake.pendingThemeEvents.length = 0;
 			await fake.runTimeouts();
 			assert.strictEqual(fake.getThemeState().type, ThemeType.LIGHT);
@@ -365,18 +364,19 @@ suite('Extension behavior', () => {
 			assert.strictEqual(fake.errorMessages.length, 1);
 		});
 
-		test('the success message waits for VS Code to activate the theme', async () => {
+		test('a theme that VS Code activates a little later reports nothing', async () => {
 			load({ theme: LIGHT, holdThemeEvents: true });
 
 			await fake.run(TOGGLE);
-			assert.deepStrictEqual(fake.infoMessages, []);
-
 			fake.deliverThemeEvent();
 			await fake.settle();
-			assert.strictEqual(fake.infoMessages.length, 1);
+			await fake.runTimeouts();
+
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.deepStrictEqual(fake.errorMessages, []);
 		});
 
-		test('fast clicks announce only the last theme', async () => {
+		test('fast clicks report nothing once the last theme is active', async () => {
 			load({ theme: LIGHT, holdThemeEvents: true });
 
 			fake.commands.get(TOGGLE)();
@@ -389,8 +389,10 @@ suite('Extension behavior', () => {
 			fake.deliverThemeEvent();
 			fake.deliverThemeEvent();
 			await fake.settle();
+			await fake.runTimeouts();
 
-			assert.deepStrictEqual(fake.infoMessages, [`Theme changed to ${HIGH_CONTRAST}`]);
+			assert.deepStrictEqual(fake.infoMessages, []);
+			assert.deepStrictEqual(fake.errorMessages, []);
 		});
 
 		test('a theme picked elsewhere right after a click is taken into account', async () => {

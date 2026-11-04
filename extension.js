@@ -169,7 +169,7 @@ function getNotActivatedMessage(label) {
 }
 
 /**
- * Applique un thème à la demande de l'utilisateur et indique le résultat
+ * Applique un thème à la demande de l'utilisateur et signale un échec : la réussite se voit à l'écran
  * @param {() => string} getThemeType Évalué au moment du changement, dans l'ordre des clics
  */
 function applyThemeFromCommand(getThemeType) {
@@ -182,9 +182,7 @@ function applyThemeFromCommand(getThemeType) {
 
     // Sans attendre : les clics suivants ne doivent pas dépendre de l'activation de ce thème
     result.activated.then((activated) => {
-      if (activated === true) {
-        vscode.window.showInformationMessage(`Theme changed to ${result.label}`);
-      } else if (activated === false) {
+      if (activated === false) {
         vscode.window.showErrorMessage(getNotActivatedMessage(result.label));
       }
     });
