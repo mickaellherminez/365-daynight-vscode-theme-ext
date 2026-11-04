@@ -9,7 +9,7 @@ Thanks for your interest! Bug reports, accessibility feedback and pull requests 
 
 | Path | Content |
 | --- | --- |
-| `package.json` | Extension manifest: themes, commands, menus and settings |
+| `package.json` | Extension manifest: themes, commands and settings |
 | `extension.js` | Status bar toggle, commands and automatic day/night switching |
 | `theme-logic.js` | Theme selection logic, without any VS Code dependency |
 | `themes/` | The 36 generated color themes (`365-MM-light`, `365-MM-dark`, `365-MM-hc-dark`) |

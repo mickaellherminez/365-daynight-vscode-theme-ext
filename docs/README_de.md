@@ -113,7 +113,7 @@ Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellhermin
 | `365: Apply Dark theme` | Wendet das dunkle Theme des aktuellen Monats an |
 | `365: Apply High Contrast theme` | Wendet das kontrastreiche Theme des aktuellen Monats an |
 
-Diese Befehle findest du auch im Menü **365 Themes** per Rechtsklick im Editor. Du kannst ihnen eigene Tastenkürzel zuweisen (`Ctrl+K Ctrl+S`).
+Du kannst diesen Befehlen eigene Tastenkürzel zuweisen (`Ctrl+K Ctrl+S`).
 
 ## Einstellungen
 

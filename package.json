@@ -105,50 +105,6 @@
         }
       }
     },
-    "menus": {
-      "editor/context": [
-        {
-          "submenu": "365themes.themeSelector",
-          "group": "9_cutcopypaste"
-        }
-      ],
-      "365themes.themeSelector": [
-        {
-          "command": "extension.setLightTheme",
-          "group": "1_themes"
-        },
-        {
-          "command": "extension.setDarkTheme",
-          "group": "1_themes"
-        },
-        {
-          "command": "extension.setHighContrastTheme",
-          "group": "1_themes"
-        },
-        {
-          "command": "extension.toggleTheme",
-          "group": "2_toggle"
-        }
-      ],
-      "view/title": [
-        {
-          "submenu": "365themes.themeSelector",
-          "group": "appearance"
-        }
-      ],
-      "menuBar/appearance": [
-        {
-          "submenu": "365themes.themeSelector",
-          "group": "1_themes"
-        }
-      ]
-    },
-    "submenus": [
-      {
-        "id": "365themes.themeSelector",
-        "label": "365 Themes"
-      }
-    ],
     "themes": [
       {
         "label": "365 01-January Light",

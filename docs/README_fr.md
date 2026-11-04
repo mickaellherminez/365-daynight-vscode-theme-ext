@@ -113,7 +113,7 @@ Ouvrez la palette de commandes (`Ctrl+Shift+P` ou `Cmd+Shift+P`) et tapez **365*
 | `365: Apply Dark theme` | Applique le thème sombre du mois en cours |
 | `365: Apply High Contrast theme` | Applique le thème à contraste élevé du mois en cours |
 
-Ces commandes sont aussi disponibles dans le menu **365 Themes**, par un clic droit dans l'éditeur. Vous pouvez leur attribuer vos propres raccourcis clavier (`Ctrl+K Ctrl+S`).
+Vous pouvez attribuer vos propres raccourcis clavier à ces commandes (`Ctrl+K Ctrl+S`).
 
 ## Paramètres
 
