@@ -10,6 +10,11 @@ const EXTENSION_ID = 'mickaellherminez.365-daynight-vscode-theme-ext';
  * @param {number} kind Genre attendu du thème
  */
 async function setThemeAndWait(themeName, kind) {
+	// Déjà actif : VS Code ne signalerait aucun changement
+	if (vscode.window.activeColorTheme.kind === kind && vscode.workspace.getConfiguration().get('workbench.colorTheme') === themeName) {
+		return;
+	}
+
 	const applied = new Promise((resolve, reject) => {
 		const timer = setTimeout(() => reject(new Error(`${themeName} did not become active`)), 8000);
 		const listener = vscode.window.onDidChangeActiveColorTheme((theme) => {
