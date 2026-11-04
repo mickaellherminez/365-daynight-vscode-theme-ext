@@ -1,10 +1,16 @@
-# Publishes the extension to the VS Code Marketplace.
+# Publishes one verified package to the VS Code Marketplace and Open VSX.
 # - Automatically when a version tag (for example 0.11.2) is pushed.
 # - Manually from the Actions tab ("Run workflow"), which publishes the
 #   version currently in package.json on the selected branch.
-# Authentication uses Marketplace Trusted Publishing (OIDC): no token is stored.
+#   With "dry_run", it only builds and verifies the package and checks the
+#   Open VSX token.
+# If one registry fails, use "Re-run failed jobs": it publishes the same package
+# to that registry only. --skip-duplicate also keeps a full re-run from failing
+# on a registry that already has this version.
+# Marketplace authentication uses Trusted Publishing (OIDC): no token is stored.
 # It requires a Trusted Publishing policy for this repository and this workflow
 # file (publish.yml) on the publisher's management page.
+# Open VSX authentication uses the OVSX_PAT repository secret.
 
 name: Publish
 
@@ -13,13 +19,18 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build and verify the package without publishing
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -45,5 +56,62 @@ jobs:
       - name: Lint and tests
         run: xvfb-run -a npm test
 
+      - name: Build the package
+        run: npm run package -- --githubBranch main --out extension.vsix
+
+      - name: Verify the package
+        run: |
+          unzip -q extension.vsix -d "$RUNNER_TEMP/vsix"
+          node scripts/verify-package.cjs "$RUNNER_TEMP/vsix"
+          sha256sum extension.vsix
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vsix
+          path: extension.vsix
+          if-no-files-found: error
+
+  marketplace:
+    needs: build
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: vsix
+
       - name: Publish to the Marketplace
-        run: npm run publish -- --oidc --githubBranch main
+        run: npm run publish -- --packagePath extension.vsix --oidc --skip-duplicate
+
+  open-vsx:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: vsix
+
+      - name: Check the Open VSX token
+        run: npx --yes ovsx@1.3.0 verify-pat mickaellherminez
+
+      - name: Publish to Open VSX
+        if: ${{ !inputs.dry_run }}
+        run: npx --yes ovsx@1.3.0 publish extension.vsix --skip-duplicate

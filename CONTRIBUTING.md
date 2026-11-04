@@ -63,7 +63,19 @@ npm run package   # creates 365-daynight-vscode-theme-ext-<version>.vsix
 
 ## Publishing
 
-Pushing a version tag that matches `package.json` (for example `git tag 0.11.2 && git push origin 0.11.2`) runs the [Publish workflow](.github/workflows/publish.yml): theme audit, lint, tests, then publication to the Marketplace with Trusted Publishing (OIDC, no token). The workflow can also be started manually from the Actions tab.
+Pushing a version tag that matches `package.json` (for example `git tag 0.11.2 && git push origin 0.11.2`) runs the [Publish workflow](.github/workflows/publish.yml):
+
+1. Theme audit, lint and tests.
+2. Build and verification of one `.vsix` package.
+3. Publication of that same package to the Marketplace, with Trusted Publishing (OIDC, no token), and to Open VSX, with the `OVSX_PAT` repository secret.
+
+The workflow can also be started manually from the Actions tab. To check everything except the publication, use the `dry_run` option:
+
+```sh
+gh workflow run publish.yml --ref <branch> -f dry_run=true
+```
+
+If one registry fails, open the workflow run and choose **Re-run failed jobs**: this publishes the same package to that registry only. A full re-run is also safe, because `--skip-duplicate` skips a registry that already has this version.
 
 ## Pull requests
 
