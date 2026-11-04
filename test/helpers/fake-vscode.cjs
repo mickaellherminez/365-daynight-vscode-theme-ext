@@ -1,0 +1,198 @@
+'use strict';
+
+// Faux module vscode : fait tourner le vrai extension.js sans lancer l'éditeur,
+// pour simuler ce que VS Code ne permet pas de provoquer (échec d'écriture, réglage de workspace...)
+
+const Module = require('module');
+const path = require('path');
+
+const EXTENSION_PATH = path.resolve(__dirname, '../../extension.js');
+const THEME_SETTING = 'workbench.colorTheme';
+
+const ColorThemeKind = { Light: 1, Dark: 2, HighContrast: 3, HighContrastLight: 4 };
+
+/**
+ * Genre du thème d'après son nom : suffit pour les thèmes utilisés dans les tests
+ * @param {string} themeName
+ */
+function kindOf(themeName) {
+  if (themeName.includes('High Contrast')) {
+    return ColorThemeKind.HighContrast;
+  }
+  return themeName.includes('Dark') || themeName === 'Monokai' ? ColorThemeKind.Dark : ColorThemeKind.Light;
+}
+
+/**
+ * Active extension.js avec un faux VS Code
+ * @param {object} [options]
+ * @param {string} [options.theme] Thème actif au démarrage
+ * @param {Record<string, unknown>} [options.settings] Réglages utilisateur
+ * @param {Record<string, unknown>} [options.workspaceSettings] Réglages de workspace
+ * @param {boolean} [options.holdThemeEvents] Retenir les changements de thème jusqu'à deliverThemeEvent()
+ */
+function loadExtension(options = {}) {
+  const theme = options.theme || 'Monokai';
+  const userSettings = new Map(Object.entries({ [THEME_SETTING]: theme, ...options.settings }));
+  const workspaceSettings = new Map(Object.entries(options.workspaceSettings || {}));
+  const effective = (key) => (workspaceSettings.has(key) ? workspaceSettings.get(key) : userSettings.get(key));
+
+  const fake = {
+    writes: [],
+    infoMessages: [],
+    errorMessages: [],
+    failWrites: false,
+    statusBarItem: undefined,
+    commands: new Map(),
+    themeListeners: [],
+    configListeners: [],
+    pendingThemeEvents: [],
+    intervals: [],
+    timeouts: new Map(),
+    activeKind: kindOf(effective(THEME_SETTING))
+  };
+
+  const deliverThemeEvent = () => {
+    const kind = fake.pendingThemeEvents.shift();
+    if (kind !== undefined) {
+      fake.activeKind = kind;
+      fake.themeListeners.forEach((listener) => listener({ kind }));
+    }
+  };
+
+  const vscode = {
+    ColorThemeKind,
+    ConfigurationTarget: { Global: 1, Workspace: 2, WorkspaceFolder: 3 },
+    StatusBarAlignment: { Left: 1, Right: 2 },
+    window: {
+      get activeColorTheme() {
+        return { kind: fake.activeKind };
+      },
+      createStatusBarItem() {
+        fake.statusBarItem = { text: '', show() {}, dispose() {} };
+        return fake.statusBarItem;
+      },
+      showInformationMessage: (message) => fake.infoMessages.push(message),
+      showErrorMessage: (message) => fake.errorMessages.push(message),
+      onDidChangeActiveColorTheme(listener) {
+        fake.themeListeners.push(listener);
+        return { dispose() {} };
+      }
+    },
+    commands: {
+      registerCommand(id, handler) {
+        fake.commands.set(id, handler);
+        return { dispose() {} };
+      }
+    },
+    workspace: {
+      getConfiguration(section) {
+        const fullKey = (key) => (section ? `${section}.${key}` : key);
+        return {
+          get(key, defaultValue) {
+            const value = effective(fullKey(key));
+            return value === undefined ? defaultValue : value;
+          },
+          inspect(key) {
+            return { globalValue: userSettings.get(fullKey(key)), workspaceValue: workspaceSettings.get(fullKey(key)) };
+          },
+          async update(key, value) {
+            if (fake.failWrites) {
+              throw new Error('simulated write failure');
+            }
+            fake.writes.push(value);
+            userSettings.set(fullKey(key), value);
+            if (fullKey(key) === THEME_SETTING && effective(THEME_SETTING) === value) {
+              fake.pendingThemeEvents.push(kindOf(value));
+              if (!options.holdThemeEvents) {
+                deliverThemeEvent();
+              }
+            }
+          }
+        };
+      },
+      onDidChangeConfiguration(listener) {
+        fake.configListeners.push(listener);
+        return { dispose() {} };
+      }
+    }
+  };
+
+  // Le temps est piloté par le test : les vrais minuteurs de mocha restent intacts
+  const realTimers = {
+    setInterval: global.setInterval,
+    clearInterval: global.clearInterval,
+    setTimeout: global.setTimeout,
+    clearTimeout: global.clearTimeout
+  };
+  let nextTimerId = 1;
+  global.setInterval = (callback) => {
+    fake.intervals.push(callback);
+    return nextTimerId++;
+  };
+  global.clearInterval = () => {};
+  global.setTimeout = (callback) => {
+    const id = nextTimerId++;
+    fake.timeouts.set(id, callback);
+    return id;
+  };
+  global.clearTimeout = (id) => fake.timeouts.delete(id);
+
+  const realLoad = Module._load;
+  Module._load = function (request, ...rest) {
+    return request === 'vscode' ? vscode : realLoad.call(this, request, ...rest);
+  };
+
+  delete require.cache[EXTENSION_PATH];
+  const extension = require(EXTENSION_PATH);
+  const api = extension.activate({ subscriptions: [] });
+
+  const settle = () => new Promise((resolve) => setImmediate(resolve));
+
+  return Object.assign(fake, {
+    getThemeState: api.getThemeState,
+    theme: () => effective(THEME_SETTING),
+    deliverThemeEvent,
+    settle,
+    /** Modifie un réglage comme le ferait l'utilisateur et prévient l'extension */
+    async setSetting(key, value) {
+      userSettings.set(key, value);
+      const prefix = key.split('.')[0];
+      fake.configListeners.forEach((listener) => listener({ affectsConfiguration: (section) => section === prefix }));
+      await settle();
+    },
+    /** Retire un réglage de workspace */
+    removeWorkspaceSetting(key) {
+      workspaceSettings.delete(key);
+    },
+    /** Choisit un thème hors de l'extension, par exemple dans le sélecteur de thèmes */
+    async configurationUpdate(themeName) {
+      userSettings.set(THEME_SETTING, themeName);
+      await settle();
+    },
+    /** Exécute une commande de l'extension et attend sa fin */
+    async run(commandId) {
+      await fake.commands.get(commandId)();
+      await settle();
+    },
+    /** Lance le contrôle périodique du mode automatique */
+    async runAutoCheck() {
+      fake.intervals.forEach((callback) => callback());
+      await settle();
+    },
+    /** Écoule les délais en attente */
+    async runTimeouts() {
+      const callbacks = [...fake.timeouts.values()];
+      fake.timeouts.clear();
+      callbacks.forEach((callback) => callback());
+      await settle();
+    },
+    /** Rétablit l'environnement d'origine */
+    dispose() {
+      Module._load = realLoad;
+      Object.assign(global, realTimers);
+      delete require.cache[EXTENSION_PATH];
+    }
+  });
+}
+
+module.exports = { loadExtension };

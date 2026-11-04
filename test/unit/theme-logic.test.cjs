@@ -10,7 +10,8 @@ const {
 	getThemeLabel,
 	getAutoThemeType,
 	getNextThemeType,
-	getToggleThemeType
+	getToggleThemeType,
+	isThemeMaskedByWorkspace
 } = require('../../theme-logic');
 
 suite('Theme logic', () => {
@@ -93,6 +94,25 @@ suite('Theme logic', () => {
 		test('keeps the same type from another theme', () => {
 			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: undefined }), ThemeType.DARK);
 			assert.strictEqual(getToggleThemeType({ type: ThemeType.LIGHT, month: undefined }), ThemeType.LIGHT);
+		});
+	});
+
+	suite('isThemeMaskedByWorkspace', () => {
+		const label = '365 05-May Dark';
+
+		test('detects another theme in the workspace or the workspace folder', () => {
+			assert.strictEqual(isThemeMaskedByWorkspace({ workspaceValue: 'Monokai' }, label), true);
+			assert.strictEqual(isThemeMaskedByWorkspace({ workspaceFolderValue: 'Monokai' }, label), true);
+		});
+
+		test('gives priority to the workspace folder', () => {
+			assert.strictEqual(isThemeMaskedByWorkspace({ workspaceValue: 'Monokai', workspaceFolderValue: label }, label), false);
+		});
+
+		test('ignores user settings and the same theme in the workspace', () => {
+			assert.strictEqual(isThemeMaskedByWorkspace({ globalValue: 'Monokai' }, label), false);
+			assert.strictEqual(isThemeMaskedByWorkspace({ workspaceValue: label }, label), false);
+			assert.strictEqual(isThemeMaskedByWorkspace(undefined, label), false);
 		});
 	});
 
