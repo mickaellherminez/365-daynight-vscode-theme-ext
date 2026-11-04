@@ -1,0 +1,33 @@
+# Runs the checks on every branch push and pull request.
+# Version tags are left to the Publish workflow, which runs the same checks.
+
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Accessibility audit of the themes
+        run: npm run themes:audit
+
+      # `npm test` runs the lint first (pretest)
+      - name: Lint and tests
+        run: xvfb-run -a npm test

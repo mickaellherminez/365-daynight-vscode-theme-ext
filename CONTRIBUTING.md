@@ -37,6 +37,10 @@ npm test        # downloads the latest stable VS Code and runs the tests inside 
 
 If you run the tests from VS Code's integrated terminal, use `env -u ELECTRON_RUN_AS_NODE npm test`: that terminal sets `ELECTRON_RUN_AS_NODE`, which prevents the test instance of VS Code from starting.
 
+### Continuous integration
+
+The [CI workflow](.github/workflows/ci.yml) runs the theme audit, the lint and the tests on every branch push and pull request. If a check fails, the workflow fails.
+
 ## Changing a theme
 
 Theme files are **generated**: do not edit `themes/*.json` by hand.
