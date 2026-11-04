@@ -9,8 +9,9 @@ async function run() {
 		color: true
 	});
 
-	const testsRoot = path.resolve(__dirname, '..');
-	
+	// test/unit tourne hors de VS Code (npm run test:unit)
+	const testsRoot = __dirname;
+
 	try {
 		const files = await glob('**/*.test.cjs', { cwd: testsRoot });
 		files.forEach(f => mocha.addFile(path.resolve(testsRoot, f)));
