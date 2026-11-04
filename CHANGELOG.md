@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Fixed
+- The status bar button now shows the real type of the active theme: dark themes whose name does not contain "Dark", such as Monokai or Dracula, were shown as `LGT`
+- From a theme of another publisher, the first click on the status bar button now applies the 365 theme of the same type
+
 ## [0.11.1] - 2026-10-21
 
 ### Changed

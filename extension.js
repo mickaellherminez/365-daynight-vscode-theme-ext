@@ -4,10 +4,10 @@
 const vscode = require('vscode');
 const {
   ThemeType,
-  getThemeTypeFromName,
+  getThemeState,
   getThemeLabel,
   getAutoThemeType,
-  getNextThemeType
+  getToggleThemeType
 } = require('./theme-logic');
 
 // Variable globale pour le bouton de la barre d'état
@@ -17,8 +17,9 @@ let statusBarItem;
 // Fréquence de vérification du mode automatique (1 minute)
 const AUTO_CHECK_INTERVAL_MS = 60 * 1000;
 
-// Variable pour suivre l'état du thème actuel
-let currentThemeType = ThemeType.LIGHT;
+// État du thème actif : son type et, pour un thème 365, son mois
+/** @type {{ type: string, month: number | undefined }} */
+let themeState = { type: ThemeType.LIGHT, month: undefined };
 
 // Dernière période traitée par le mode automatique (ex. "365 05-May Light") : un choix
 // manuel est conservé jusqu'au prochain changement de période (jour/nuit ou mois)
@@ -26,15 +27,27 @@ let currentThemeType = ThemeType.LIGHT;
 let lastAutoPeriod;
 
 /**
+ * Relit l'état du thème actif dans VS Code et met à jour le bouton
+ */
+function syncThemeState() {
+  themeState = getThemeState(
+    vscode.workspace.getConfiguration().get('workbench.colorTheme'),
+    vscode.window.activeColorTheme.kind
+  );
+  updateStatusBarItem();
+}
+
+/**
  * Applique le thème du mois en cours pour le type donné
  * @param {string} themeType
  * @param {boolean} notify Afficher un message de confirmation
  */
 function applyTheme(themeType, notify) {
-  currentThemeType = themeType;
+  const now = new Date();
+  themeState = { type: themeType, month: now.getMonth() + 1 };
   updateStatusBarItem();
 
-  const themeToApply = getThemeLabel(themeType);
+  const themeToApply = getThemeLabel(themeType, now);
 
   // Changer le thème de VS Code
   return vscode.workspace
@@ -68,7 +81,7 @@ function checkAutoTheme() {
   lastAutoPeriod = period;
   // Le contraste élevé est un choix d'accessibilité : il n'est jamais remplacé,
   // seul le mois est mis à jour
-  applyTheme(currentThemeType === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType, false);
+  applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType, false);
 }
 
 /**
@@ -78,19 +91,16 @@ function checkAutoTheme() {
 function activate(context) {
   console.log("Extension 365-daynight activée");
 
-  // Déterminer le thème actuel au démarrage
-  currentThemeType = getThemeTypeFromName(vscode.workspace.getConfiguration().get('workbench.colorTheme'));
-
-  // Créer le bouton
+  // Créer le bouton et lire le thème actif au démarrage
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  updateStatusBarItem(); // Définir le texte initial
+  syncThemeState();
   statusBarItem.tooltip = 'Switch between Light, Dark, and High Contrast themes.';
   statusBarItem.command = 'extension.toggleTheme';
   statusBarItem.show();
 
   // Enregistrer les commandes
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.toggleTheme', () => applyTheme(getNextThemeType(currentThemeType), true)),
+    vscode.commands.registerCommand('extension.toggleTheme', () => applyTheme(getToggleThemeType(themeState), true)),
     vscode.commands.registerCommand('extension.setLightTheme', () => applyTheme(ThemeType.LIGHT, true)),
     vscode.commands.registerCommand('extension.setDarkTheme', () => applyTheme(ThemeType.DARK, true)),
     vscode.commands.registerCommand('extension.setHighContrastTheme', () => applyTheme(ThemeType.HIGH_CONTRAST, true)),
@@ -100,11 +110,8 @@ function activate(context) {
   // Garder le bouton synchronisé quand le thème est changé ailleurs (sélecteur de thèmes, settings.json...)
   // et réagir aux changements de configuration du mode automatique
   context.subscriptions.push(
+    vscode.window.onDidChangeActiveColorTheme(syncThemeState),
     vscode.workspace.onDidChangeConfiguration((event) => {
-      if (event.affectsConfiguration('workbench.colorTheme')) {
-        currentThemeType = getThemeTypeFromName(vscode.workspace.getConfiguration().get('workbench.colorTheme'));
-        updateStatusBarItem();
-      }
       if (event.affectsConfiguration('365DayNight')) {
         lastAutoPeriod = undefined;
         checkAutoTheme();
@@ -116,13 +123,16 @@ function activate(context) {
   checkAutoTheme();
   const autoThemeTimer = setInterval(checkAutoTheme, AUTO_CHECK_INTERVAL_MS);
   context.subscriptions.push({ dispose: () => clearInterval(autoThemeTimer) });
+
+  // Accessible depuis les tests d'intégration
+  return { getThemeState: () => themeState };
 }
 
 /**
  * Met à jour l'apparence du bouton dans la barre d'état
  */
 function updateStatusBarItem() {
-  switch (currentThemeType) {
+  switch (themeState.type) {
     case ThemeType.LIGHT:
       statusBarItem.text = '$(symbol-color) LGT';
       break;
