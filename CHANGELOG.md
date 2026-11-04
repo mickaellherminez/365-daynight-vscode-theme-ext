@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.11.2] - 2026-11-05
+
 ### Changed
 - README: the description of the UI colors now matches what the themes cover
 
