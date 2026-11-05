@@ -240,11 +240,17 @@ function loadExtension(options = {}) {
       userSettings.set(THEME_SETTING, themeName);
       await settle();
     },
-    /** Choisit un thème dans le sélecteur de thèmes de VS Code */
+    /**
+     * Choisit un thème dans le sélecteur de thèmes de VS Code, dans le même ordre que lui :
+     * l'aperçu active le thème sans écrire le réglage, puis la validation écrit le réglage
+     * sans nouveau signal de changement de thème
+     */
     async setTheme(themeName) {
-      userSettings.set(THEME_SETTING, themeName);
       fake.pendingThemeEvents.push(kindOf(themeName));
       deliverThemeEvent();
+      userSettings.set(THEME_SETTING, themeName);
+      const affectsConfiguration = (section) => THEME_SETTING === section || THEME_SETTING.startsWith(`${section}.`);
+      fake.configListeners.forEach((listener) => listener({ affectsConfiguration }));
       await settle();
     },
     /** Exécute une commande de l'extension et attend sa fin */

@@ -35,6 +35,18 @@ suite('Extension behavior', () => {
 			assert.strictEqual(new Set([previous.alignment, center.alignment, next.alignment]).size, 1);
 			assert.ok(previous.visible && center.visible && next.visible);
 			assert.strictEqual(center.text, '03 DRK');
+			assert.strictEqual(previous.text, '$(chevron-left)');
+			assert.strictEqual(next.text, '$(chevron-right)');
+		});
+
+		test('no VS Code item can slip between the three items', () => {
+			load({ theme: MARCH_DARK });
+
+			// VS Code place ses propres éléments de 100,1 à 100,5 : les nôtres doivent rester du même côté
+			for (const item of [fake.itemFor(PREVIOUS), fake.statusBarItem, fake.itemFor(NEXT)]) {
+				assert.ok(item.priority > 99 && item.priority < 100, `${item.id}: ${item.priority}`);
+			}
+			assert.ok(fake.itemFor(PREVIOUS).priority - fake.itemFor(NEXT).priority < 0.1);
 		});
 
 		test('the month always has two digits and the round icon is gone', () => {
@@ -124,6 +136,26 @@ suite('Extension behavior', () => {
 
 			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
 			assert.strictEqual(fake.errorMessages.length, 1);
+		});
+
+		test('a dark theme picked after a 365 dark theme hides the arrows and the number', async () => {
+			load({ theme: MARCH_DARK, now: NOVEMBER });
+			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
+
+			await fake.setTheme('Monokai');
+
+			assert.strictEqual(fake.statusBarItem.text, 'DRK');
+			assert.strictEqual(fake.itemFor(PREVIOUS).visible, false);
+			assert.strictEqual(fake.itemFor(NEXT).visible, false);
+			assert.deepStrictEqual(fake.getThemeState(), { type: ThemeType.DARK, month: undefined });
+		});
+
+		test('a 365 theme picked in the theme picker updates the month', async () => {
+			load({ theme: MARCH_DARK, now: NOVEMBER });
+
+			await fake.setTheme('365 07-July Dark');
+
+			assert.strictEqual(fake.statusBarItem.text, '07 DRK');
 		});
 
 		test('another theme hides the arrows and the month number', async () => {
