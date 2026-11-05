@@ -39,6 +39,8 @@ Requiere Visual Studio Code 1.96 o posterior.
 2. Escribe **365** para ver los 36 temas, por ejemplo `365 10-October Dark`.
 3. Elige uno. ¡Listo!
 
+La primera vez que usas un tema 365, una notificación ofrece el cambio automático: **Follow the clock** (seguir la hora: claro de día, oscuro de noche), **Follow my system** (seguir el modo claro u oscuro de tu sistema) o **No thanks** (no, gracias). Nada cambia sin tu elección, y la pregunta se hace una sola vez. Tras elegir, un mensaje confirma lo que está activado, con un botón **Open Settings** para cambiar las horas o desactivarlo. Para cambiar de opinión más tarde, consulta la sección sobre el cambio automático más abajo.
+
 El **botón de la barra de estado** (abajo a la derecha: `LGT`, `DRK` o `HCT`) cambia entre las versiones clara y oscura del mes actual. Para el alto contraste, ejecuta `365: Apply High Contrast theme` desde la paleta de comandos.
 
 Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). El número es el mes, de `01` a `12`, y las flechas conservan claro, oscuro o alto contraste. Después de diciembre viene enero. Para volver, ejecuta `365: Back to the current month` desde la paleta de comandos. Las flechas y el número solo aparecen con un tema 365. Pasa el cursor sobre el botón para ver el nombre completo del tema, con enlaces al alto contraste y al mes actual.
@@ -89,7 +91,7 @@ La extensión también pasa al tema del mes siguiente el primer día de cada mes
 
 Bueno saber:
 
-- **Tú decides.** El modo automático está desactivado por defecto: la extensión nunca cambia tu tema sin que se lo pidas.
+- **Tú decides.** El modo automático está desactivado por defecto: la extensión nunca cambia tu tema sin que se lo pidas. La primera vez que usas un tema 365, una notificación te pregunta una sola vez si lo quieres.
 - **Tu elección se respeta.** Si eliges un tema a mano, se mantiene hasta el siguiente cambio de periodo (de día a noche o un nuevo mes).
 - **Tu mes también se mantiene.** Si eliges otro mes, con las flechas o el selector de temas, el modo automático sigue alternando claro y oscuro en ese mes hasta que empiece el siguiente mes real, incluso después de reiniciar. Para volver antes, ejecuta `365: Back to the current month`.
 - **El alto contraste se mantiene.** Si usas un tema de alto contraste, el modo automático solo actualiza el mes, nunca el nivel de contraste.
@@ -204,7 +206,7 @@ Sí. Configura `"365DayNight.enable": true` y `"365DayNight.mode": "system"`. Tu
 Sí. Los 36 temas se prueban con simulaciones de protanopía, deuteranopía y tritanopía, y usan cursiva, subrayado y tachado para que la información nunca dependa solo del color.
 
 **¿La extensión cambiará mi tema sin preguntar?**
-No. El modo automático está desactivado por defecto. Sin él, el tema solo cambia cuando eliges uno o pulsas el botón de la barra de estado.
+No. El modo automático está desactivado por defecto. Sin él, el tema solo cambia cuando eliges uno o pulsas el botón de la barra de estado. La primera vez que usas un tema 365, una notificación lo ofrece, y nada cambia sin tu elección.
 
 **¿Puedo usar un solo tema, por ejemplo October Dark?**
 Por supuesto. Elígelo en el selector de temas (`Ctrl+K Ctrl+T`) y deja el modo automático desactivado.

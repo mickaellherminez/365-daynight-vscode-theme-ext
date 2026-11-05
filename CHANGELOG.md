@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- The first time you use a 365 theme, a notification offers automatic switching once: follow the clock, follow your system, or no thanks. Nothing changes unless you choose
 - `365DayNight.dayStart` and `365DayNight.nightStart` settings: choose when the Light and Dark themes start in `auto` mode, in the HH:MM format (7:00 and 19:00 by default). A day that starts after the night runs past midnight, and an invalid time falls back to its default with a warning
 - `system` value for `365DayNight.mode`: follow the light, dark and high contrast appearance of your system with the themes of the month. The original settings come back when leaving the mode, except those you changed in the meantime
 - The status bar button now uses a color of the month, so that its three parts read as one control. It stays readable in every theme, and takes the normal color while debugging

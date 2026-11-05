@@ -699,7 +699,7 @@ suite('Extension behavior', () => {
 			await startAtNight();
 
 			await fake.setSetting('365DayNight.enable', false);
-			assert.strictEqual(fake.globalState.size, 0);
+			assert.strictEqual(fake.globalState.get('lastAutoPeriod'), undefined);
 
 			const writes = fake.globalStateWrites;
 			await fake.runAutoCheck();
@@ -812,6 +812,184 @@ suite('Extension behavior', () => {
 			}
 			await start(at(12), { '365DayNight.enable': false, '365DayNight.dayStart': '25:00' });
 			assert.deepStrictEqual(fake.warningMessages, []);
+		});
+	});
+
+	suite('Offer of the automatic mode on first use', () => {
+		const CLOCK = 'Follow the clock';
+		const SYSTEM = 'Follow my system';
+		const NO = 'No thanks';
+		const OPEN_SETTINGS = 'Open Settings';
+		const NOON = new Date(2026, 10, 10, 12, 0);
+		const offers = () => fake.infoItems.filter((items) => items.includes(CLOCK));
+
+		/** Premier lancement, avec un thème d'un autre éditeur */
+		const start = (options = {}) => load({ theme: 'Monokai', now: NOON, firstUse: true, ...options });
+
+		/** Répond à la proposition, puis éventuellement au message de confirmation */
+		const answerWith = (choice, confirmation) => {
+			fake.answer = (message, items) => (items.includes(CLOCK) ? choice : confirmation);
+		};
+
+		test('the first 365 theme picked offers the automatic mode, once', async () => {
+			start();
+			await fake.settle();
+			assert.deepStrictEqual(offers(), []);
+
+			await fake.setTheme('365 03-March Dark');
+			assert.deepStrictEqual(offers(), [[CLOCK, SYSTEM, NO]]);
+
+			await fake.setTheme('Monokai');
+			await fake.setTheme('365 04-April Dark');
+			assert.strictEqual(offers().length, 1);
+
+			// La proposition a été faite : rien ne s'active sans réponse
+			assert.strictEqual(fake.hasUserValue('365DayNight.enable'), false);
+		});
+
+		test('the status bar button bringing a 365 theme counts as a first use', async () => {
+			start();
+
+			await fake.run(TOGGLE);
+
+			assert.strictEqual(offers().length, 1);
+		});
+
+		test('the offer is not repeated after a restart or in another window', async () => {
+			start();
+			await fake.setTheme('365 03-March Dark');
+			const { globalState } = fake;
+			fake.dispose();
+
+			load({ theme: '365 03-March Dark', now: NOON, globalState });
+			await fake.settle();
+			await fake.setTheme('365 04-April Light');
+
+			assert.deepStrictEqual(offers(), []);
+		});
+
+		test('the offer follows Settings Sync, like the answer it remembers', async () => {
+			start();
+
+			assert.ok(fake.keysForSync.includes('autoModeOffered'));
+		});
+
+		test('following the clock turns the auto mode on, and says how to change it', async () => {
+			start();
+			answerWith(CLOCK);
+
+			await fake.setTheme('365 03-March Dark');
+
+			assert.strictEqual(fake.userValue('365DayNight.enable'), true);
+			assert.strictEqual(fake.hasUserValue('365DayNight.mode'), false);
+			// Midi : le thème clair du mois choisi
+			assert.strictEqual(fake.theme(), '365 03-March Light');
+			const confirmation = fake.infoMessages.at(-1);
+			assert.ok(confirmation.includes('07:00') && confirmation.includes('19:00'));
+			assert.deepStrictEqual(fake.infoItems.at(-1), [OPEN_SETTINGS]);
+		});
+
+		test('following the clock keeps the hours already set, and sets the mode back to auto', async () => {
+			start({ settings: { '365DayNight.mode': 'night', '365DayNight.dayStart': '08:30' } });
+			answerWith(CLOCK);
+
+			await fake.setTheme('365 03-March Dark');
+
+			assert.strictEqual(fake.userValue('365DayNight.mode'), 'auto');
+			assert.ok(fake.infoMessages.at(-1).includes('08:30'));
+		});
+
+		test('following the system turns the system mode on', async () => {
+			start({ systemDark: true });
+			answerWith(SYSTEM);
+
+			await fake.setTheme('365 03-March Light');
+
+			assert.strictEqual(fake.userValue('365DayNight.enable'), true);
+			assert.strictEqual(fake.userValue('365DayNight.mode'), 'system');
+			assert.strictEqual(fake.userValue('window.autoDetectColorScheme'), true);
+			// Le mois choisi, en variante sombre comme le système, sans passer par le mode auto
+			assert.strictEqual(fake.activeTheme(), '365 03-March Dark');
+			assert.strictEqual(fake.theme(), '365 03-March Light');
+			assert.ok(fake.infoMessages.at(-1).includes('system'));
+			assert.deepStrictEqual(fake.infoItems.at(-1), [OPEN_SETTINGS]);
+		});
+
+		test('the confirmation opens the settings on request', async () => {
+			start();
+			answerWith(CLOCK, OPEN_SETTINGS);
+
+			await fake.setTheme('365 03-March Dark');
+
+			assert.deepStrictEqual(fake.executedCommands, [['workbench.action.openSettings', '365DayNight']]);
+		});
+
+		test('declining or closing the offer changes nothing', async () => {
+			for (const choice of [NO, undefined]) {
+				start();
+				answerWith(choice);
+
+				await fake.setTheme('365 03-March Dark');
+
+				assert.strictEqual(fake.hasUserValue('365DayNight.enable'), false, String(choice));
+				assert.strictEqual(fake.infoMessages.length, 1, String(choice));
+				fake.dispose();
+			}
+			start();
+		});
+
+		test('a 365 theme already in use at startup is offered once, to existing users', async () => {
+			start({ theme: '365 03-March Dark' });
+			await fake.settle();
+
+			assert.strictEqual(offers().length, 1);
+		});
+
+		test('only a focused window asks, once it gets the focus', async () => {
+			start({ theme: '365 03-March Dark', focused: false });
+			await fake.settle();
+			assert.deepStrictEqual(offers(), []);
+
+			fake.setFocused(true);
+			fake.setFocused(false);
+			fake.setFocused(true);
+			await fake.settle();
+
+			assert.strictEqual(offers().length, 1);
+		});
+
+		test('the theme picker preview does not count as a choice', async () => {
+			start({ holdThemeEvents: false });
+
+			// Aperçu seulement : le réglage n'est pas écrit
+			fake.pendingThemeEvents.push(2);
+			fake.deliverThemeEvent();
+			await fake.settle();
+
+			assert.deepStrictEqual(offers(), []);
+		});
+
+		test('users who already turned the automatic mode on are never asked, even after turning it off', async () => {
+			start({ theme: '365 03-March Dark', settings: { '365DayNight.enable': true } });
+			await fake.settle();
+
+			await fake.setSetting('365DayNight.enable', false);
+			await fake.setTheme('365 04-April Dark');
+
+			assert.deepStrictEqual(offers(), []);
+		});
+
+		test('a failed write is reported, and the offer is not repeated', async () => {
+			start();
+			answerWith(CLOCK);
+			fake.failWrites = true;
+
+			await fake.configurationUpdate('365 03-March Dark');
+			await fake.setTheme('365 03-March Dark');
+
+			assert.strictEqual(fake.errorMessages.length, 1);
+			assert.strictEqual(fake.hasUserValue('365DayNight.enable'), false);
+			assert.strictEqual(offers().length, 1);
 		});
 	});
 
@@ -1412,7 +1590,7 @@ suite('Extension behavior', () => {
 			test('the original values follow Settings Sync, like the settings they restore', async () => {
 				await start();
 
-				assert.deepStrictEqual(fake.keysForSync, ['systemModeBackup']);
+				assert.ok(fake.keysForSync.includes('systemModeBackup'));
 			});
 
 			test('the original values are read again when the mode is turned on again', async () => {

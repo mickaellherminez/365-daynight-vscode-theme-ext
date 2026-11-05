@@ -19,6 +19,7 @@ const {
   getStatusBarText,
   getAutoThemeType,
   resolveSchedule,
+  formatTime,
   getAutoPeriod,
   getToggleThemeType,
   isThemeMaskedByWorkspace,
@@ -69,6 +70,15 @@ const SYSTEM_SETTINGS = [DETECT_COLOR_SCHEME_SETTING, ...PREFERRED_SETTINGS];
 
 // Explication quand un changement de variante est demandé en mode system
 const SYSTEM_DECIDES_MESSAGE = 'Your system decides between Light and Dark, because 365DayNight.mode is set to system. The arrows still change the month.';
+
+// Le mode automatique a été proposé, ou n'a pas besoin de l'être : la question n'est posée qu'une fois
+const AUTO_MODE_OFFER_KEY = 'autoModeOffered';
+
+// Boutons de la proposition et de sa confirmation
+const FOLLOW_CLOCK = 'Follow the clock';
+const FOLLOW_SYSTEM = 'Follow my system';
+const NO_THANKS = 'No thanks';
+const OPEN_SETTINGS = 'Open Settings';
 
 // Mémoire de l'extension, partagée entre les fenêtres
 /** @type {vscode.ExtensionContext['globalState']} */
@@ -242,6 +252,7 @@ async function rememberSelectedMonth(month) {
  */
 function onActiveThemeChanged() {
   syncThemeState();
+  maybeOfferAutoMode();
   // Quand VS Code suit le système, un changement de thème ne vient pas forcément d'un choix
   if (vscode.workspace.getConfiguration().get(DETECT_COLOR_SCHEME_SETTING)) {
     return;
@@ -249,6 +260,58 @@ function onActiveThemeChanged() {
   const month = getThemeMonth(getActiveThemeName());
   if (month !== undefined) {
     rememberSelectedMonth(month);
+  }
+}
+
+/**
+ * Propose une seule fois le mode automatique, dès qu'un thème 365 est utilisé, dans la fenêtre qui
+ * a le focus. Rien ne s'active sans réponse. Qui l'a déjà activé connaît la fonction : la question
+ * ne lui est jamais posée, même s'il l'a désactivé depuis.
+ */
+function maybeOfferAutoMode() {
+  if (globalState.get(AUTO_MODE_OFFER_KEY) || !vscode.window.state.focused || themeState.month === undefined) {
+    return;
+  }
+  // VS Code garde la valeur en mémoire dès l'appel : un autre événement ne reposera pas la question
+  globalState.update(AUTO_MODE_OFFER_KEY, true);
+  if (!vscode.workspace.getConfiguration('365DayNight').get('enable', false)) {
+    offerAutoMode();
+  }
+}
+
+/**
+ * Pose la question du mode automatique et applique la réponse
+ */
+async function offerAutoMode() {
+  const choice = await vscode.window.showInformationMessage(
+    'Switch 365 themes automatically? They can follow the clock, with Light by day and Dark at night, or the light and dark mode of your system. Nothing changes unless you choose, and you can change your mind in the settings.',
+    FOLLOW_CLOCK,
+    FOLLOW_SYSTEM,
+    NO_THANKS
+  );
+  if (choice !== FOLLOW_CLOCK && choice !== FOLLOW_SYSTEM) {
+    return;
+  }
+
+  const config = vscode.workspace.getConfiguration('365DayNight');
+  const mode = choice === FOLLOW_CLOCK ? 'auto' : 'system';
+  try {
+    // Le mode d'abord : l'activation applique aussitôt le bon mode
+    if (config.get('mode', 'auto') !== mode) {
+      await config.update('mode', mode, vscode.ConfigurationTarget.Global);
+    }
+    await config.update('enable', true, vscode.ConfigurationTarget.Global);
+  } catch (error) {
+    vscode.window.showErrorMessage(`Failed to turn on automatic switching: ${error.message}`);
+    return;
+  }
+
+  const schedule = resolveSchedule({ dayStart: config.get('dayStart'), nightStart: config.get('nightStart') });
+  const confirmation = mode === 'auto'
+    ? `Automatic switching is on: the Light theme of the month from ${formatTime(schedule.dayStart)} to ${formatTime(schedule.nightStart)}, and the Dark theme the rest of the time. To change the hours or turn it off, open the settings.`
+    : '365 themes now follow the light and dark mode of your system, with the theme of the month. To turn it off, uncheck 365DayNight: Enable in the settings.';
+  if (await vscode.window.showInformationMessage(confirmation, OPEN_SETTINGS) === OPEN_SETTINGS) {
+    await vscode.commands.executeCommand('workbench.action.openSettings', '365DayNight');
   }
 }
 
@@ -655,7 +718,7 @@ function activate(context) {
   console.log("Extension 365-daynight activée");
   globalState = context.globalState;
   // Les réglages suivent Settings Sync : leurs valeurs d'origine doivent les suivre
-  globalState.setKeysForSync([SYSTEM_BACKUP_KEY]);
+  globalState.setKeysForSync([SYSTEM_BACKUP_KEY, AUTO_MODE_OFFER_KEY]);
 
   // Créer les trois éléments du bouton, ‹ 10 DRK ›, et lire le thème actif au démarrage.
   // À droite de la barre d'état, la priorité la plus haute est la plus à gauche. Ces valeurs très
@@ -666,6 +729,7 @@ function activate(context) {
   nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 99.1, 'extension.nextMonth', '$(chevron-right)');
   syncThemeState();
   statusBarItem.show();
+  maybeOfferAutoMode();
 
   // Enregistrer les commandes
   context.subscriptions.push(
@@ -687,6 +751,11 @@ function activate(context) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveColorTheme(onActiveThemeChanged),
     vscode.debug.onDidChangeActiveDebugSession(updateStatusBarItem),
+    vscode.window.onDidChangeWindowState((state) => {
+      if (state.focused) {
+        maybeOfferAutoMode();
+      }
+    }),
     vscode.workspace.onDidChangeConfiguration((event) => {
       // Le sélecteur de thèmes signale le changement à l'aperçu, avant d'écrire le réglage :
       // son nom n'est connu qu'ici, à la validation

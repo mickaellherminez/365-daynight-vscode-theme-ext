@@ -39,6 +39,8 @@ Erfordert Visual Studio Code 1.96 oder neuer.
 2. Tippe **365**, um alle 36 Themes zu sehen, zum Beispiel `365 10-October Dark`.
 3. Wähle eines aus. Fertig!
 
+Wenn du zum ersten Mal ein 365-Theme verwendest, bietet eine Benachrichtigung den automatischen Wechsel an: **Follow the clock** (der Uhrzeit folgen: tagsüber hell, nachts dunkel), **Follow my system** (dem hellen oder dunklen Modus deines Systems folgen) oder **No thanks** (nein danke). Ohne deine Wahl ändert sich nichts, und die Frage wird nur einmal gestellt. Nach einer Wahl bestätigt eine Meldung, was aktiv ist, mit einer Schaltfläche **Open Settings**, um die Uhrzeiten zu ändern oder den Wechsel auszuschalten. Um es dir später anders zu überlegen, siehe den Abschnitt zum automatischen Wechsel weiter unten.
+
 Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus.
 
 Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten hell, dunkel oder kontrastreich bei. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme. Fahre mit der Maus über die Schaltfläche, um den vollständigen Theme-Namen zu sehen, mit Links zum kontrastreichen Modus und zum aktuellen Monat.
@@ -89,7 +91,7 @@ Am ersten Tag jedes Monats wechselt die Erweiterung außerdem zum Theme des neue
 
 Gut zu wissen:
 
-- **Du entscheidest.** Der Automatikmodus ist standardmäßig ausgeschaltet: Die Erweiterung ändert dein Theme nie ungefragt.
+- **Du entscheidest.** Der Automatikmodus ist standardmäßig ausgeschaltet: Die Erweiterung ändert dein Theme nie ungefragt. Wenn du zum ersten Mal ein 365-Theme verwendest, fragt dich eine Benachrichtigung ein einziges Mal, ob du ihn möchtest.
 - **Deine Wahl zählt.** Wählst du ein Theme von Hand, bleibt es bis zum nächsten Periodenwechsel (Tag/Nacht oder neuer Monat).
 - **Dein Monat bleibt auch.** Wählst du einen anderen Monat, mit den Pfeilen oder in der Theme-Auswahl, wechselt der Automatikmodus weiter zwischen hell und dunkel in diesem Monat, bis der nächste tatsächliche Monat beginnt, auch nach einem Neustart. Um früher zurückzukehren, führe `365: Back to the current month` aus.
 - **Kontrastreich bleibt kontrastreich.** Nutzt du ein kontrastreiches Theme, aktualisiert der Automatikmodus nur den Monat, nie die Kontraststufe.
@@ -204,7 +206,7 @@ Ja. Setze `"365DayNight.enable": true` und `"365DayNight.mode": "system"`. Dein 
 Ja. Alle 36 Themes werden mit Simulationen von Protanopie, Deuteranopie und Tritanopie getestet und nutzen Kursivschrift, Unterstreichung und Durchstreichung, damit Informationen nie nur von der Farbe abhängen.
 
 **Ändert die Erweiterung mein Theme ungefragt?**
-Nein. Der Automatikmodus ist standardmäßig aus. Ohne ihn ändert sich das Theme nur, wenn du eines auswählst oder auf die Schaltfläche in der Statusleiste klickst.
+Nein. Der Automatikmodus ist standardmäßig aus. Ohne ihn ändert sich das Theme nur, wenn du eines auswählst oder auf die Schaltfläche in der Statusleiste klickst. Wenn du zum ersten Mal ein 365-Theme verwendest, bietet eine Benachrichtigung ihn an, und ohne deine Wahl ändert sich nichts.
 
 **Kann ich nur ein Theme verwenden, zum Beispiel October Dark?**
 Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automatikmodus aus.
