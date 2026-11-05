@@ -9,6 +9,13 @@ const ThemeType = {
   HIGH_CONTRAST: 'High Contrast'
 };
 
+// Libellés à 3 lettres du bouton : leur largeur reste stable
+const VARIANT_LABELS = {
+  [ThemeType.LIGHT]: 'LGT',
+  [ThemeType.DARK]: 'DRK',
+  [ThemeType.HIGH_CONTRAST]: 'HCT'
+};
+
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -67,9 +74,42 @@ function getThemeState(themeName, kind) {
  * @param {Date} [date]
  */
 function getThemeLabel(themeType, date = new Date()) {
-  const month = date.getMonth();
-  const monthNumber = (month + 1).toString().padStart(2, '0');
-  return `365 ${monthNumber}-${MONTH_NAMES[month]} ${themeType}`;
+  return getThemeLabelForMonth(themeType, date.getMonth() + 1);
+}
+
+/**
+ * Construit le label du thème 365 pour un type et un mois, ex. "365 05-May Dark"
+ * @param {string} themeType
+ * @param {number} month Mois, de 1 à 12
+ */
+function getThemeLabelForMonth(themeType, month) {
+  return `365 ${formatMonth(month)}-${MONTH_NAMES[month - 1]} ${themeType}`;
+}
+
+/**
+ * Mois sur deux chiffres : le bouton garde la même largeur et les flèches ne bougent pas sous le curseur
+ * @param {number} month Mois, de 1 à 12
+ */
+function formatMonth(month) {
+  return month.toString().padStart(2, '0');
+}
+
+/**
+ * Mois atteint en avançant ou en reculant, décembre étant suivi de janvier
+ * @param {number} month Mois de départ, de 1 à 12
+ * @param {number} steps Nombre de mois, négatif pour reculer
+ */
+function getAdjacentMonth(month, steps) {
+  return ((month - 1 + steps) % 12 + 12) % 12 + 1;
+}
+
+/**
+ * Texte du bouton central : le mois et la variante, ex. "10 DRK", ou la variante seule hors thème 365
+ * @param {{ type: string, month: number | undefined }} state
+ */
+function getStatusBarText(state) {
+  const variant = VARIANT_LABELS[state.type];
+  return state.month === undefined ? variant : `${formatMonth(state.month)} ${variant}`;
 }
 
 /**
@@ -142,6 +182,9 @@ module.exports = {
   getThemeMonth,
   getThemeState,
   getThemeLabel,
+  getThemeLabelForMonth,
+  getAdjacentMonth,
+  getStatusBarText,
   getAutoThemeType,
   getAutoPeriod,
   getNextThemeType,

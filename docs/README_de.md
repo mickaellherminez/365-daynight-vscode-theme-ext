@@ -41,6 +41,8 @@ Erfordert Visual Studio Code 1.96 oder neuer.
 
 Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus.
 
+Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten hell, dunkel oder kontrastreich bei. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme.
+
 ## Die 12 Monate
 
 ![Vorschau der 36 Themes: eine helle, dunkle und kontrastreiche Version für jeden Monat von Januar bis Dezember](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellhermin
 | Befehl | Aktion |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | Wechselt zwischen hell und dunkel (wie die Schaltfläche in der Statusleiste) |
-| `365: Apply Light theme` | Wendet das helle Theme des aktuellen Monats an |
-| `365: Apply Dark theme` | Wendet das dunkle Theme des aktuellen Monats an |
-| `365: Apply High Contrast theme` | Wendet das kontrastreiche Theme des aktuellen Monats an |
+| `365: Apply Light theme` | Wendet das helle Theme des angezeigten Monats an |
+| `365: Apply Dark theme` | Wendet das dunkle Theme des angezeigten Monats an |
+| `365: Apply High Contrast theme` | Wendet das kontrastreiche Theme des angezeigten Monats an |
+| `365: Next month` | Wendet das Theme des nächsten Monats in derselben Variante an |
+| `365: Previous month` | Wendet das Theme des vorherigen Monats in derselben Variante an |
+| `365: Back to the current month` | Wendet das Theme des tatsächlichen aktuellen Monats in derselben Variante an |
 
-Du kannst diesen Befehlen eigene Tastenkürzel zuweisen (`Ctrl+K Ctrl+S`).
+Die Erweiterung legt standardmäßig keine Tastenkürzel fest. Um eigene zuzuweisen, öffne die Liste der Tastenkürzel (`Ctrl+K Ctrl+S`, auf dem Mac `Cmd+K Cmd+S`), gib **365** ein, doppelklicke auf einen Befehl und drücke deine Tasten.
 
 ## Einstellungen
 

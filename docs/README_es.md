@@ -41,6 +41,8 @@ Requiere Visual Studio Code 1.96 o posterior.
 
 El **botón de la barra de estado** (abajo a la derecha: `LGT`, `DRK` o `HCT`) cambia entre las versiones clara y oscura del mes actual. Para el alto contraste, ejecuta `365: Apply High Contrast theme` desde la paleta de comandos.
 
+Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). El número es el mes, de `01` a `12`, y las flechas conservan claro, oscuro o alto contraste. Después de diciembre viene enero. Para volver, ejecuta `365: Back to the current month` desde la paleta de comandos. Las flechas y el número solo aparecen con un tema 365.
+
 ## Los 12 meses
 
 ![Vista previa de los 36 temas: una versión clara, oscura y de alto contraste para cada mes, de enero a diciembre](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Abre la paleta de comandos (`Ctrl+Shift+P` o `Cmd+Shift+P`) y escribe **365**:
 | Comando | Acción |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | Alterna entre claro y oscuro (igual que el botón de la barra de estado) |
-| `365: Apply Light theme` | Aplica el tema claro del mes actual |
-| `365: Apply Dark theme` | Aplica el tema oscuro del mes actual |
-| `365: Apply High Contrast theme` | Aplica el tema de alto contraste del mes actual |
+| `365: Apply Light theme` | Aplica el tema claro del mes mostrado |
+| `365: Apply Dark theme` | Aplica el tema oscuro del mes mostrado |
+| `365: Apply High Contrast theme` | Aplica el tema de alto contraste del mes mostrado |
+| `365: Next month` | Aplica el tema del mes siguiente, en la misma variante |
+| `365: Previous month` | Aplica el tema del mes anterior, en la misma variante |
+| `365: Back to the current month` | Aplica el tema del mes actual real, en la misma variante |
 
-Puedes asignar tus propios atajos de teclado a estos comandos (`Ctrl+K Ctrl+S`).
+La extensión no define ningún atajo de teclado por defecto. Para asignar los tuyos, abre la lista de atajos (`Ctrl+K Ctrl+S`, o `Cmd+K Cmd+S` en Mac), escribe **365**, haz doble clic en un comando y pulsa tus teclas.
 
 ## Configuración
 

@@ -41,6 +41,8 @@ Visual Studio Code 1.96 以降が必要です。
 
 **ステータスバーのボタン**（右下：`LGT`、`DRK`、`HCT`）で、当月のライト版とダーク版を切り替えられます。ハイコントラストを使うには、コマンドパレットで `365: Apply High Contrast theme` を実行します。
 
+別の月を試すには、その両側の矢印をクリックします（`‹ 10 DRK ›`）。数字は `01` から `12` までの月を表し、矢印を使ってもライト、ダーク、ハイコントラストの種類は変わりません。12 月の次は 1 月です。元に戻すには、コマンドパレットで `365: Back to the current month` を実行します。矢印と数字は 365 テーマの使用中にのみ表示されます。
+
 ## 12 か月
 
 ![36 種類のテーマのプレビュー：1 月から 12 月まで各月のライト・ダーク・ハイコントラスト版](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Visual Studio Code 1.96 以降が必要です。
 | コマンド | 動作 |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | ライトとダークを切り替え（ステータスバーのボタンと同じ） |
-| `365: Apply Light theme` | 当月のライトテーマを適用 |
-| `365: Apply Dark theme` | 当月のダークテーマを適用 |
-| `365: Apply High Contrast theme` | 当月のハイコントラストテーマを適用 |
+| `365: Apply Light theme` | 表示中の月のライトテーマを適用 |
+| `365: Apply Dark theme` | 表示中の月のダークテーマを適用 |
+| `365: Apply High Contrast theme` | 表示中の月のハイコントラストテーマを適用 |
+| `365: Next month` | 次の月のテーマを同じ種類で適用 |
+| `365: Previous month` | 前の月のテーマを同じ種類で適用 |
+| `365: Back to the current month` | 実際の当月のテーマを同じ種類で適用 |
 
-これらのコマンドには、お好みのキーボードショートカットを割り当てることができます（`Ctrl+K Ctrl+S`）。
+この拡張機能には、既定のキーボードショートカットはありません。自分で割り当てるには、ショートカット一覧を開き（`Ctrl+K Ctrl+S`、Mac では `Cmd+K Cmd+S`）、**365** と入力してコマンドをダブルクリックし、使いたいキーを押します。
 
 ## 設定
 

@@ -78,6 +78,21 @@
         "command": "extension.setHighContrastTheme",
         "title": "Apply High Contrast theme",
         "category": "365"
+      },
+      {
+        "command": "extension.nextMonth",
+        "title": "Next month",
+        "category": "365"
+      },
+      {
+        "command": "extension.previousMonth",
+        "title": "Previous month",
+        "category": "365"
+      },
+      {
+        "command": "extension.currentMonth",
+        "title": "Back to the current month",
+        "category": "365"
       }
     ],
     "configuration": {
