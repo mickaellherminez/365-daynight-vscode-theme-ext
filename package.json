@@ -61,7 +61,7 @@
     "commands": [
       {
         "command": "extension.toggleTheme",
-        "title": "Toggle between Light, Dark and High Contrast themes",
+        "title": "Toggle between Light and Dark themes",
         "category": "365"
       },
       {
@@ -102,6 +102,11 @@
           ],
           "default": "auto",
           "description": "Theme selection mode used when `365DayNight.enable` is on."
+        },
+        "365DayNight.toggleIncludesHighContrast": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also include High Contrast when switching with the status bar button."
         }
       }
     },

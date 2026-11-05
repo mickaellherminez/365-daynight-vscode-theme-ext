@@ -19,6 +19,55 @@ suite('Extension behavior', () => {
 
 	teardown(() => fake.dispose());
 
+	suite('When clicking the button', () => {
+		const withHighContrast = { '365DayNight.toggleIncludesHighContrast': true };
+
+		test('Dark goes back to Light in one click', async () => {
+			load({ theme: DARK });
+
+			await fake.run(TOGGLE);
+
+			assert.strictEqual(fake.theme(), LIGHT);
+		});
+
+		test('High Contrast stays out of the cycle by default', async () => {
+			load({ theme: LIGHT });
+
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), DARK);
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), LIGHT);
+		});
+
+		test('the setting adds High Contrast to the cycle', async () => {
+			load({ theme: LIGHT, settings: withHighContrast });
+
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), DARK);
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), HIGH_CONTRAST);
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), LIGHT);
+		});
+
+		test('the setting is taken into account without a reload', async () => {
+			load({ theme: DARK });
+
+			await fake.setSetting('365DayNight.toggleIncludesHighContrast', true);
+			await fake.run(TOGGLE);
+
+			assert.strictEqual(fake.theme(), HIGH_CONTRAST);
+		});
+
+		test('the High Contrast command still works', async () => {
+			load({ theme: LIGHT });
+
+			await fake.run('extension.setHighContrastTheme');
+
+			assert.strictEqual(fake.theme(), HIGH_CONTRAST);
+		});
+	});
+
 	suite('In automatic mode', () => {
 		const NOVEMBER_NIGHT = new Date(2026, 10, 10, 22, 0);
 		const NOVEMBER_DARK = getThemeLabel(ThemeType.DARK, NOVEMBER_NIGHT);
@@ -138,6 +187,15 @@ suite('Extension behavior', () => {
 			await fake.setSetting('365DayNight.mode', 'night');
 
 			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		});
+
+		test('changing the button setting does not replace a theme picked by hand', async () => {
+			await startAtNight();
+			await fake.setTheme('Dracula');
+
+			await fake.setSetting('365DayNight.toggleIncludesHighContrast', true);
+
+			assert.strictEqual(fake.theme(), 'Dracula');
 		});
 
 		test('turning automatic mode off forgets the period without writing at every check', async () => {
@@ -336,7 +394,7 @@ suite('Extension behavior', () => {
 		});
 
 		test('fast clicks follow the cycle, even before VS Code activates each theme', async () => {
-			load({ theme: LIGHT, holdThemeEvents: true });
+			load({ theme: LIGHT, holdThemeEvents: true, settings: { '365DayNight.toggleIncludesHighContrast': true } });
 
 			fake.commands.get(TOGGLE)();
 			fake.commands.get(TOGGLE)();
@@ -377,7 +435,7 @@ suite('Extension behavior', () => {
 		});
 
 		test('fast clicks report nothing once the last theme is active', async () => {
-			load({ theme: LIGHT, holdThemeEvents: true });
+			load({ theme: LIGHT, holdThemeEvents: true, settings: { '365DayNight.toggleIncludesHighContrast': true } });
 
 			fake.commands.get(TOGGLE)();
 			fake.commands.get(TOGGLE)();

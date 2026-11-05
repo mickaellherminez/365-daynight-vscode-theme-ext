@@ -243,13 +243,16 @@ function activate(context) {
   // Créer le bouton et lire le thème actif au démarrage
   statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   syncThemeState();
-  statusBarItem.tooltip = 'Switch between Light, Dark, and High Contrast themes.';
+  statusBarItem.tooltip = 'Switch between Light and Dark themes.';
   statusBarItem.command = 'extension.toggleTheme';
   statusBarItem.show();
 
   // Enregistrer les commandes
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.toggleTheme', () => applyThemeFromCommand(() => getToggleThemeType(themeState))),
+    vscode.commands.registerCommand('extension.toggleTheme', () => applyThemeFromCommand(() => getToggleThemeType(
+      themeState,
+      vscode.workspace.getConfiguration('365DayNight').get('toggleIncludesHighContrast', false)
+    ))),
     vscode.commands.registerCommand('extension.setLightTheme', () => applyThemeFromCommand(() => ThemeType.LIGHT)),
     vscode.commands.registerCommand('extension.setDarkTheme', () => applyThemeFromCommand(() => ThemeType.DARK)),
     vscode.commands.registerCommand('extension.setHighContrastTheme', () => applyThemeFromCommand(() => ThemeType.HIGH_CONTRAST)),
@@ -262,7 +265,7 @@ function activate(context) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveColorTheme(syncThemeState),
     vscode.workspace.onDidChangeConfiguration((event) => {
-      if (event.affectsConfiguration('365DayNight')) {
+      if (event.affectsConfiguration('365DayNight.enable') || event.affectsConfiguration('365DayNight.mode')) {
         lastAutoFailurePeriod = undefined;
         forgetAutoPeriod().then(checkAutoTheme);
       }

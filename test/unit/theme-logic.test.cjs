@@ -94,21 +94,32 @@ suite('Theme logic', () => {
 	});
 
 	suite('getNextThemeType', () => {
-		test('cycles through Light, Dark and High Contrast', () => {
+		test('switches between Light and Dark by default', () => {
 			assert.strictEqual(getNextThemeType(ThemeType.LIGHT), ThemeType.DARK);
-			assert.strictEqual(getNextThemeType(ThemeType.DARK), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getNextThemeType(ThemeType.DARK), ThemeType.LIGHT);
+		});
+
+		test('leaves High Contrast for Light as long as it has no Light variant', () => {
 			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST), ThemeType.LIGHT);
+		});
+
+		test('cycles through High Contrast too when asked', () => {
+			assert.strictEqual(getNextThemeType(ThemeType.LIGHT, true), ThemeType.DARK);
+			assert.strictEqual(getNextThemeType(ThemeType.DARK, true), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, true), ThemeType.LIGHT);
 		});
 	});
 
 	suite('getToggleThemeType', () => {
 		test('moves through the cycle from a 365 theme', () => {
-			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: 5 }), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: 5 }), ThemeType.LIGHT);
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: 5 }, true), ThemeType.HIGH_CONTRAST);
 		});
 
 		test('keeps the same type from another theme', () => {
 			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: undefined }), ThemeType.DARK);
 			assert.strictEqual(getToggleThemeType({ type: ThemeType.LIGHT, month: undefined }), ThemeType.LIGHT);
+			assert.strictEqual(getToggleThemeType({ type: ThemeType.DARK, month: undefined }, true), ThemeType.DARK);
 		});
 	});
 

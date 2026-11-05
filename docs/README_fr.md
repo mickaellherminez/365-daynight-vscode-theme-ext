@@ -14,7 +14,7 @@
 
 - 🗓️ **Un nouveau style chaque mois.** Neige et bleu d'hiver en janvier, vert printanier en mars, plein soleil en juillet, couleurs d'automne en octobre, ambiance coin du feu en décembre : votre éditeur suit les saisons.
 - ☀️🌙 **Jour et nuit, toujours assortis.** Chaque mois propose un thème clair pour la journée, un thème sombre pour le soir et un thème à contraste élevé quand vous avez besoin d'une lisibilité maximale.
-- 🔁 **Bascule en un clic.** Un bouton dans la barre d'état passe du thème clair au sombre puis au contraste élevé.
+- 🔁 **Bascule en un clic.** Un bouton dans la barre d'état passe du thème clair au sombre, et inversement. Le contraste élevé est accessible par une commande.
 - ⏰ **Mode automatique (optionnel).** L'extension peut appliquer seule le thème du mois en cours : clair le jour, sombre la nuit.
 - 👁️ **Reposant pour les yeux, lisible par tous.** Tout le texte respecte les niveaux de contraste WCAG, et les couleurs de syntaxe restent distinctes pour les personnes daltoniennes.
 - 🖥️ **Des thèmes soignés.** Éditeur, barre latérale, onglets, terminal, console de débogage, notifications et barre d'état : tout est stylé, avec plus de 400 couleurs par thème. Les zones plus récentes, comme le chat, les tests et les notebooks, utilisent encore les couleurs par défaut de VS Code pour le moment.
@@ -39,7 +39,7 @@ Nécessite Visual Studio Code 1.96 ou plus récent.
 2. Tapez **365** pour afficher les 36 thèmes, par exemple `365 10-October Dark`.
 3. Choisissez-en un. C'est tout !
 
-Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK` ou `HCT`) permet de passer d'une version à l'autre du mois en cours : clair, sombre, contraste élevé.
+Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK` ou `HCT`) permet de passer de la version claire à la version sombre du mois en cours. Pour le contraste élevé, lancez `365: Apply High Contrast theme` depuis la palette de commandes.
 
 ## Les 12 mois
 
@@ -108,7 +108,7 @@ Ouvrez la palette de commandes (`Ctrl+Shift+P` ou `Cmd+Shift+P`) et tapez **365*
 
 | Commande | Action |
 | --- | --- |
-| `365: Toggle between Light, Dark and High Contrast themes` | Passe de clair à sombre puis à contraste élevé (comme le bouton de la barre d'état) |
+| `365: Toggle between Light and Dark themes` | Passe de clair à sombre, et inversement (comme le bouton de la barre d'état) |
 | `365: Apply Light theme` | Applique le thème clair du mois en cours |
 | `365: Apply Dark theme` | Applique le thème sombre du mois en cours |
 | `365: Apply High Contrast theme` | Applique le thème à contraste élevé du mois en cours |
@@ -121,6 +121,7 @@ Vous pouvez attribuer vos propres raccourcis clavier à ces commandes (`Ctrl+K C
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Applique automatiquement le thème du mois en cours |
 | `365DayNight.mode` | `auto` | `auto` (selon l'heure), `day` (toujours clair) ou `night` (toujours sombre) |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Inclure aussi le contraste élevé dans la bascule du bouton de la barre d'état |
 
 ## Questions fréquentes
 

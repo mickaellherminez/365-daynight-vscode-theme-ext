@@ -200,8 +200,8 @@ function loadExtension(options = {}) {
     /** Modifie un réglage comme le ferait l'utilisateur et prévient l'extension */
     async setSetting(key, value) {
       userSettings.set(key, value);
-      const prefix = key.split('.')[0];
-      fake.configListeners.forEach((listener) => listener({ affectsConfiguration: (section) => section === prefix }));
+      const affectsConfiguration = (section) => key === section || key.startsWith(`${section}.`);
+      fake.configListeners.forEach((listener) => listener({ affectsConfiguration }));
       await settle();
     },
     /** Retire un réglage de workspace */

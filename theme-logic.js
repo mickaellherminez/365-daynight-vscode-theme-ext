@@ -98,14 +98,16 @@ function getAutoPeriod(themeType, date) {
 }
 
 /**
- * Type de thème suivant dans le cycle du bouton : Light, Dark, High Contrast, puis Light
+ * Type de thème suivant dans le cycle du bouton : Light et Dark, avec High Contrast si demandé.
+ * Tant que High Contrast n'a pas de variante claire, il mène à Light : un clic doit toujours agir.
  * @param {string} themeType
+ * @param {boolean} [includeHighContrast]
  */
-function getNextThemeType(themeType) {
+function getNextThemeType(themeType, includeHighContrast = false) {
   if (themeType === ThemeType.LIGHT) {
     return ThemeType.DARK;
   }
-  if (themeType === ThemeType.DARK) {
+  if (themeType === ThemeType.DARK && includeHighContrast) {
     return ThemeType.HIGH_CONTRAST;
   }
   return ThemeType.LIGHT;
@@ -115,9 +117,10 @@ function getNextThemeType(themeType) {
  * Type de thème à appliquer au clic sur le bouton : depuis un thème qui n'est pas un thème 365,
  * le premier clic applique le thème 365 du même type au lieu d'avancer dans le cycle
  * @param {{ type: string, month: number | undefined }} state
+ * @param {boolean} [includeHighContrast]
  */
-function getToggleThemeType(state) {
-  return state.month === undefined ? state.type : getNextThemeType(state.type);
+function getToggleThemeType(state, includeHighContrast = false) {
+  return state.month === undefined ? state.type : getNextThemeType(state.type, includeHighContrast);
 }
 
 /**
