@@ -334,10 +334,12 @@ function activate(context) {
   globalState = context.globalState;
 
   // Créer les trois éléments du bouton, ‹ 10 DRK ›, et lire le thème actif au démarrage.
-  // À droite de la barre d'état, la priorité la plus haute est la plus à gauche.
-  previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', 102, 'extension.previousMonth', '$(chevron-left)');
-  statusBarItem = createStatusBarControl('theme', 'Light and Dark', 101, 'extension.toggleTheme', '');
-  nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 100, 'extension.nextMonth', '$(chevron-right)');
+  // À droite de la barre d'état, la priorité la plus haute est la plus à gauche. Ces valeurs très
+  // proches, sous celles de VS Code (100,1 à 100,5), gardent les trois éléments côte à côte :
+  // sans place, VS Code masque d'abord les éléments les plus à gauche.
+  previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', 99.12, 'extension.previousMonth', '$(chevron-left)');
+  statusBarItem = createStatusBarControl('theme', 'Light and Dark', 99.11, 'extension.toggleTheme', '');
+  nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 99.1, 'extension.nextMonth', '$(chevron-right)');
   syncThemeState();
   statusBarItem.show();
 
@@ -364,6 +366,11 @@ function activate(context) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveColorTheme(onActiveThemeChanged),
     vscode.workspace.onDidChangeConfiguration((event) => {
+      // Le sélecteur de thèmes signale le changement à l'aperçu, avant d'écrire le réglage :
+      // son nom n'est connu qu'ici, à la validation
+      if (event.affectsConfiguration('workbench.colorTheme')) {
+        onActiveThemeChanged();
+      }
       if (event.affectsConfiguration('365DayNight.toggleIncludesHighContrast')) {
         updateStatusBarItem();
       }
