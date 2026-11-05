@@ -41,7 +41,7 @@ Erfordert Visual Studio Code 1.96 oder neuer.
 
 Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus.
 
-Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten hell, dunkel oder kontrastreich bei. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme.
+Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten hell, dunkel oder kontrastreich bei. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme. Fahre mit der Maus über die Schaltfläche, um den vollständigen Theme-Namen zu sehen, mit Links zum kontrastreichen Modus und zum aktuellen Monat.
 
 ## Die 12 Monate
 
@@ -102,6 +102,7 @@ Jedes Theme besteht ein automatisiertes Barrierefreiheits-Audit mit mehr als 130
 - **Nicht nur Farbe:** Kommentare, Parameter und Attribute sind *kursiv*, veralteter Code ist ~~durchgestrichen~~, ungültiger Code unterstrichen.
 - **Überall sichtbare Auswahl:** Die Textauswahl ist im Editor, im Terminal und in der Debugkonsole gut sichtbar und wird nie mit Suchtreffern verwechselt.
 - **Kontrastreiche Themes:** Ausgewählter Text wird schwarz auf Hellblau, und alle Bereiche haben sichtbare Rahmen und eine deutliche Tastaturfokus-Markierung.
+- **Screenreader:** Jeder Teil der Schaltfläche in der Statusleiste hat eine eigene gesprochene Bezeichnung, zum Beispiel „Next month: November“.
 
 Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues): Rückmeldungen zur Barrierefreiheit sind immer willkommen.
 

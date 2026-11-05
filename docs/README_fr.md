@@ -41,7 +41,7 @@ Nécessite Visual Studio Code 1.96 ou plus récent.
 
 Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK` ou `HCT`) permet de passer de la version claire à la version sombre du mois en cours. Pour le contraste élevé, lancez `365: Apply High Contrast theme` depuis la palette de commandes.
 
-Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DRK ›`). Le chiffre est le mois, de `01` à `12`, et les flèches gardent le clair, le sombre ou le contraste élevé. Décembre est suivi de janvier. Pour revenir, lancez `365: Back to the current month` depuis la palette de commandes. Les flèches et le chiffre n'apparaissent qu'avec un thème 365.
+Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DRK ›`). Le chiffre est le mois, de `01` à `12`, et les flèches gardent le clair, le sombre ou le contraste élevé. Décembre est suivi de janvier. Pour revenir, lancez `365: Back to the current month` depuis la palette de commandes. Les flèches et le chiffre n'apparaissent qu'avec un thème 365. Survolez le bouton pour voir le nom complet du thème, avec des liens vers le contraste élevé et le mois en cours.
 
 ## Les 12 mois
 
@@ -102,6 +102,7 @@ Chaque thème passe un audit d'accessibilité automatisé de plus de 130 contrô
 - **Pas seulement la couleur :** commentaires, paramètres et attributs sont en *italique*, le code obsolète est ~~barré~~ et le code invalide souligné.
 - **Une sélection visible partout :** la sélection de texte se voit clairement dans l'éditeur, le terminal et la console de débogage, sans jamais se confondre avec les résultats de recherche.
 - **Thèmes à contraste élevé :** le texte sélectionné passe en noir sur bleu clair, et tous les panneaux ont des bordures visibles et un contour de focus clavier très marqué.
+- **Lecteurs d'écran :** chaque partie du bouton de la barre d'état a son propre libellé vocal, par exemple « Next month: November ».
 
 Une couleur difficile à lire ? [Ouvrez un ticket](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) : les retours sur l'accessibilité sont toujours les bienvenus.
 

@@ -41,7 +41,7 @@ Requiere Visual Studio Code 1.96 o posterior.
 
 El **botón de la barra de estado** (abajo a la derecha: `LGT`, `DRK` o `HCT`) cambia entre las versiones clara y oscura del mes actual. Para el alto contraste, ejecuta `365: Apply High Contrast theme` desde la paleta de comandos.
 
-Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). El número es el mes, de `01` a `12`, y las flechas conservan claro, oscuro o alto contraste. Después de diciembre viene enero. Para volver, ejecuta `365: Back to the current month` desde la paleta de comandos. Las flechas y el número solo aparecen con un tema 365.
+Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). El número es el mes, de `01` a `12`, y las flechas conservan claro, oscuro o alto contraste. Después de diciembre viene enero. Para volver, ejecuta `365: Back to the current month` desde la paleta de comandos. Las flechas y el número solo aparecen con un tema 365. Pasa el cursor sobre el botón para ver el nombre completo del tema, con enlaces al alto contraste y al mes actual.
 
 ## Los 12 meses
 
@@ -102,6 +102,7 @@ Cada tema supera una auditoría de accesibilidad automatizada de más de 130 com
 - **No solo el color:** comentarios, parámetros y atributos van en *cursiva*, el código obsoleto aparece ~~tachado~~ y el código no válido, subrayado.
 - **Selección visible en todas partes:** la selección de texto se ve claramente en el editor, la terminal y la consola de depuración, sin confundirse con los resultados de búsqueda.
 - **Temas de alto contraste:** el texto seleccionado se vuelve negro sobre azul claro, y todos los paneles tienen bordes visibles y un contorno de foco de teclado muy marcado.
+- **Lectores de pantalla:** cada parte del botón de la barra de estado tiene su propia etiqueta hablada, por ejemplo «Next month: November».
 
 ¿Algún color difícil de leer? [Abre una incidencia](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues): los comentarios sobre accesibilidad siempre son bienvenidos.
 

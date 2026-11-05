@@ -152,6 +152,100 @@ suite('Extension behavior', () => {
 		});
 	});
 
+	suite('Tooltip and screen reader labels', () => {
+		const NOVEMBER = new Date(2026, 10, 10, 12, 0);
+		const NEXT = 'extension.nextMonth';
+		const PREVIOUS = 'extension.previousMonth';
+		const CURRENT_LINK = '(command:extension.currentMonth)';
+		const HIGH_CONTRAST_LINK = '(command:extension.setHighContrastTheme)';
+
+		test('the tooltip shows the full theme name and what a click does', () => {
+			load({ theme: '365 10-October Dark', now: NOVEMBER });
+
+			const tooltip = fake.statusBarItem.tooltip.value;
+			assert.ok(tooltip.includes('October Dark'));
+			assert.ok(tooltip.includes('Click to switch to Light'));
+		});
+
+		test('the tooltip offers the current month only when another month is displayed', async () => {
+			load({ theme: '365 10-October Dark', now: NOVEMBER });
+			assert.ok(fake.statusBarItem.tooltip.value.includes(CURRENT_LINK));
+
+			await fake.run('extension.currentMonth');
+			assert.ok(!fake.statusBarItem.tooltip.value.includes(CURRENT_LINK));
+		});
+
+		test('the tooltip offers High Contrast, except when it is already active', async () => {
+			load({ theme: '365 11-November Dark', now: NOVEMBER });
+			assert.ok(fake.statusBarItem.tooltip.value.includes(HIGH_CONTRAST_LINK));
+
+			await fake.run('extension.setHighContrastTheme');
+			assert.ok(fake.statusBarItem.tooltip.value.includes('November High Contrast'));
+			assert.ok(!fake.statusBarItem.tooltip.value.includes(HIGH_CONTRAST_LINK));
+		});
+
+		test('the tooltip links only run the expected commands', () => {
+			load({ theme: '365 10-October Dark', now: NOVEMBER });
+
+			const { value, isTrusted } = fake.statusBarItem.tooltip;
+			const linked = [...value.matchAll(/\(command:([^)]+)\)/g)].map((match) => match[1]);
+			assert.deepStrictEqual(linked, ['extension.currentMonth', 'extension.setHighContrastTheme']);
+			assert.deepStrictEqual(isTrusted, { enabledCommands: ['extension.currentMonth', 'extension.setHighContrastTheme'] });
+		});
+
+		test('the tooltip follows the High Contrast setting', async () => {
+			load({ theme: '365 11-November Dark', now: NOVEMBER });
+			assert.ok(fake.statusBarItem.tooltip.value.includes('Click to switch to Light'));
+
+			await fake.setSetting('365DayNight.toggleIncludesHighContrast', true);
+			assert.ok(fake.statusBarItem.tooltip.value.includes('Click to switch to High Contrast'));
+		});
+
+		test('the current month link appears when the real month changes', async () => {
+			load({ theme: '365 11-November Dark', now: NOVEMBER });
+			assert.ok(!fake.statusBarItem.tooltip.value.includes(CURRENT_LINK));
+
+			fake.setNow(new Date(2026, 11, 1, 9, 0));
+			await fake.runAutoCheck();
+
+			assert.ok(fake.statusBarItem.tooltip.value.includes(CURRENT_LINK));
+		});
+
+		test('with another theme, the tooltip explains the first click', () => {
+			load({ theme: 'Monokai', now: NOVEMBER });
+
+			const tooltip = fake.statusBarItem.tooltip.value;
+			assert.ok(tooltip.includes('Click to apply the 365 Dark theme'));
+			assert.ok(!tooltip.includes(CURRENT_LINK));
+			assert.ok(tooltip.includes(HIGH_CONTRAST_LINK));
+		});
+
+		test('screen readers get a label and a role on the three items', async () => {
+			load({ theme: '365 12-December Light', now: NOVEMBER });
+
+			assert.deepStrictEqual(fake.itemFor(PREVIOUS).accessibilityInformation, { label: 'Previous month: November', role: 'button' });
+			assert.deepStrictEqual(fake.itemFor(NEXT).accessibilityInformation, { label: 'Next month: January', role: 'button' });
+			assert.deepStrictEqual(fake.statusBarItem.accessibilityInformation, { label: 'December Light. Click to switch to Dark.', role: 'button' });
+
+			await fake.run(NEXT);
+			assert.deepStrictEqual(fake.itemFor(NEXT).accessibilityInformation, { label: 'Next month: February', role: 'button' });
+			assert.strictEqual(fake.statusBarItem.accessibilityInformation.label, 'January Light. Click to switch to Dark.');
+		});
+
+		test('the arrows name the month they lead to in their tooltip', () => {
+			load({ theme: '365 03-March Dark', now: NOVEMBER });
+
+			assert.strictEqual(fake.itemFor(PREVIOUS).tooltip, 'Previous month: February');
+			assert.strictEqual(fake.itemFor(NEXT).tooltip, 'Next month: April');
+		});
+
+		test('the visible text stays short', () => {
+			load({ theme: '365 03-March Dark', now: NOVEMBER });
+
+			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
+		});
+	});
+
 	suite('Selected month in automatic mode', () => {
 		const autoSettings = { '365DayNight.enable': true };
 		const OCTOBER_NOON = new Date(2026, 9, 10, 12, 0);
