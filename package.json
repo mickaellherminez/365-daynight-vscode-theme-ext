@@ -95,6 +95,18 @@
         "category": "365"
       }
     ],
+    "colors": [
+      {
+        "id": "365DayNight.statusBarButton",
+        "description": "Color of the 365 Day & Night status bar button: the month arrows, the month and the variant.",
+        "defaults": {
+          "dark": "statusBar.foreground",
+          "light": "statusBar.foreground",
+          "highContrast": "statusBar.foreground",
+          "highContrastLight": "statusBar.foreground"
+        }
+      }
+    ],
     "configuration": {
       "title": "365 Day & Night Themes",
       "properties": {

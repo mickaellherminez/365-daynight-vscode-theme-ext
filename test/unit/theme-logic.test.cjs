@@ -241,6 +241,17 @@ suite('Theme logic', () => {
 			assert.deepStrictEqual([...contributed].sort(), computed.sort());
 		});
 
+		test('contributes the button color, with the normal color for other themes', () => {
+			const color = contributes.colors.find(({ id }) => id === '365DayNight.statusBarButton');
+			assert.ok(color);
+			assert.deepStrictEqual(color.defaults, {
+				dark: 'statusBar.foreground',
+				light: 'statusBar.foreground',
+				highContrast: 'statusBar.foreground',
+				highContrastLight: 'statusBar.foreground'
+			});
+		});
+
 		test('contributes the public commands without any menu', () => {
 			assert.deepStrictEqual(contributes.commands.map((command) => command.command).sort(), [
 				'extension.currentMonth',

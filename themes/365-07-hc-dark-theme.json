@@ -3,6 +3,7 @@
   "type": "dark",
   "semanticHighlighting": true,
   "colors": {
+    "365DayNight.statusBarButton": "#FF9A1F",
     "activityBar.activeBackground": "#0A3350",
     "activityBar.activeBorder": "#FF9A1F",
     "activityBar.background": "#000B14",

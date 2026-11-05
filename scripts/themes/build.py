@@ -15,9 +15,24 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from audit import ROOT, report  # noqa: E402
+from colorlib import delta_e, readable_on  # noqa: E402
 
 # Variante de palette -> suffixe du fichier de thème
 VARIANTS = {'light': 'light', 'dark': 'dark', 'hc': 'hc-dark'}
+
+
+def status_bar_button_color(p, hc):
+    """Accent du mois pour le bouton de l'extension : le contraste le plus élevé possible, sans délaver
+    la couleur au point de la confondre avec le texte normal de la barre d'état."""
+    minimum = 7 if hc else 4.5
+    color = readable_on(p['accent'], p['statusBg'], minimum)
+    for target in (7, 6.5, 6, 5.5, 5, 4.5):
+        if target < minimum:
+            break
+        candidate = readable_on(p['accent'], p['statusBg'], target)
+        if candidate and delta_e(candidate, p['statusFg']) >= 20:
+            return candidate
+    return color
 
 
 def a(color, alpha):
@@ -194,6 +209,7 @@ def ui(p, hc):
     # Barre d'état, barre de titre et menus
     c.update({
         'statusBar.background': p['statusBg'], 'statusBar.foreground': p['statusFg'], 'statusBar.border': p['contrastBorder'] or p['statusBg'],
+        '365DayNight.statusBarButton': status_bar_button_color(p, hc),
         'statusBar.noFolderBackground': p['statusBg'], 'statusBar.noFolderForeground': p['statusFg'],
         'statusBar.debuggingBackground': p['statusDebugBg'], 'statusBar.debuggingForeground': '#FFFFFF',
         'statusBar.debuggingBorder': p['contrastBorder'] or p['statusDebugBg'], 'statusBar.focusBorder': p['statusFg'],

@@ -69,6 +69,32 @@ def min_delta_e(a, b):
     return min((delta_e(a, b, m), name) for name, m in VIEWS.items())
 
 
+def readable_on(color, background, minimum):
+    """Version de la couleur lisible sur un fond : même teinte, juste assez éclaircie ou foncée, la plus vive possible."""
+    if contrast(color, background) >= minimum:
+        return color
+    L, a, b = lab(color)
+    chroma, hue = math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
+    target = 100 if luminance(background) < 0.18 else 0
+    direction = 1 if target > L else -1
+    best = None
+    start = None
+    step = 0
+    while 0 <= L + direction * step / 4 <= 100:
+        lightness = L + direction * step / 4
+        step += 1
+        if start is not None and abs(lightness - start) > 8:
+            break
+        for tenth in range(10, -1, -1):
+            candidate = lch_to_hex(lightness, chroma * tenth / 10, hue)
+            if candidate and contrast(candidate, background) >= minimum:
+                start = lightness if start is None else start
+                if best is None or tenth > best[0]:
+                    best = (tenth, candidate)
+                break
+    return best[1] if best else None
+
+
 def lch_to_hex(L, C, H):
     """CIE LCh -> '#RRGGBB', ou None si la couleur sort du gamut sRGB."""
     a, b = C * math.cos(math.radians(H)), C * math.sin(math.radians(H))

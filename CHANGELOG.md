@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- The status bar button now uses a color of the month, so that its three parts read as one control. It stays readable in every theme, and takes the normal color while debugging
 - Status bar tooltip with the full theme name, what a click does, and links to High Contrast and to the current month
 - Screen reader labels on the three parts of the status bar button
 - Automatic mode keeps a month you picked, with the arrows or the theme picker, until the next real month begins, even after a restart. Light and Dark keep alternating on that month
