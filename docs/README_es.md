@@ -90,6 +90,7 @@ Bueno saber:
 
 - **Tú decides.** El modo automático está desactivado por defecto: la extensión nunca cambia tu tema sin que se lo pidas.
 - **Tu elección se respeta.** Si eliges un tema a mano, se mantiene hasta el siguiente cambio de periodo (de día a noche o un nuevo mes).
+- **Tu mes también se mantiene.** Si eliges otro mes, con las flechas o el selector de temas, el modo automático sigue alternando claro y oscuro en ese mes hasta que empiece el siguiente mes real, incluso después de reiniciar. Para volver antes, ejecuta `365: Back to the current month`.
 - **El alto contraste se mantiene.** Si usas un tema de alto contraste, el modo automático solo actualiza el mes, nunca el nivel de contraste.
 
 ## La accesibilidad, primero

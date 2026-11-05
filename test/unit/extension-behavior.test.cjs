@@ -152,6 +152,187 @@ suite('Extension behavior', () => {
 		});
 	});
 
+	suite('Selected month in automatic mode', () => {
+		const autoSettings = { '365DayNight.enable': true };
+		const OCTOBER_NOON = new Date(2026, 9, 10, 12, 0);
+		const OCTOBER_NIGHT = new Date(2026, 9, 10, 22, 0);
+
+		/** Rouvre l'extension avec la même mémoire : rechargement, nouvelle fenêtre ou redémarrage */
+		const reopen = async (now, settings = autoSettings) => {
+			const { globalState } = fake;
+			const theme = fake.theme();
+			fake.dispose();
+			load({ theme, settings, globalState, now });
+			await fake.settle();
+		};
+
+		const startInOctober = async (now = OCTOBER_NOON) => {
+			load({ theme: 'Monokai', settings: autoSettings, now });
+			await fake.settle();
+		};
+
+		test('day and night keep alternating on the month selected with the arrows', async () => {
+			await startInOctober();
+			assert.strictEqual(fake.theme(), '365 10-October Light');
+
+			await fake.run('extension.previousMonth');
+			assert.strictEqual(fake.theme(), '365 09-September Light');
+
+			fake.setNow(OCTOBER_NIGHT);
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 09-September Dark');
+
+			fake.setNow(new Date(2026, 9, 11, 9, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 09-September Light');
+		});
+
+		test('a month picked in the theme picker counts as selected too', async () => {
+			await startInOctober();
+
+			await fake.setTheme('365 03-March Light');
+			fake.setNow(OCTOBER_NIGHT);
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), '365 03-March Dark');
+		});
+
+		test('March selected on October 10 lasts until November 1, even after a restart', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+
+			await reopen(new Date(2026, 9, 20, 22, 0));
+			assert.strictEqual(fake.theme(), '365 03-March Dark');
+			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
+
+			await reopen(new Date(2026, 9, 31, 12, 0));
+			assert.strictEqual(fake.theme(), '365 03-March Light');
+
+			fake.setNow(new Date(2026, 9, 31, 23, 59));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 03-March Dark');
+
+			fake.setNow(new Date(2026, 10, 1, 0, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 11-November Dark');
+			assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+		});
+
+		test('the selection ends even if VS Code stayed closed on November 1', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+
+			await reopen(new Date(2026, 10, 5, 12, 0));
+
+			assert.strictEqual(fake.theme(), '365 11-November Light');
+		});
+
+		test('a restart after the selection ended does not select the old month again', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+			const { globalState } = fake;
+			fake.dispose();
+
+			// VS Code rouvre sur l'ancien thème en novembre, mode automatique désactivé
+			load({ theme: '365 03-March Light', settings: {}, globalState, now: new Date(2026, 10, 5, 12, 0) });
+			await fake.setSetting('365DayNight.enable', true);
+
+			assert.strictEqual(fake.theme(), '365 11-November Light');
+		});
+
+		test('the same month a year later does not extend the selection', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+
+			await reopen(new Date(2027, 9, 10, 12, 0));
+
+			assert.strictEqual(fake.theme(), '365 10-October Light');
+		});
+
+		test('going back to the current month ends the selection', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+
+			await fake.run('extension.currentMonth');
+			assert.strictEqual(fake.theme(), '365 10-October Light');
+
+			fake.setNow(OCTOBER_NIGHT);
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 10-October Dark');
+		});
+
+		test('reaching the current month with the arrows ends the selection', async () => {
+			await startInOctober();
+			await fake.run('extension.previousMonth');
+			await fake.run('extension.nextMonth');
+
+			fake.setNow(OCTOBER_NIGHT);
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), '365 10-October Dark');
+		});
+
+		test('High Contrast keeps the selected month and stays High Contrast', async () => {
+			await startInOctober(OCTOBER_NIGHT);
+			await fake.setTheme('365 03-March High Contrast');
+
+			fake.setNow(new Date(2026, 9, 11, 9, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 03-March High Contrast');
+
+			fake.setNow(new Date(2026, 10, 1, 9, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), '365 11-November High Contrast');
+		});
+
+		test('a theme from another publisher does not cancel the selection', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+			await fake.setTheme('Dracula');
+
+			fake.setNow(OCTOBER_NIGHT);
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.theme(), '365 03-March Dark');
+		});
+
+		test('a month selected before turning automatic mode on is kept', async () => {
+			load({ theme: '365 10-October Light', settings: {}, now: OCTOBER_NOON });
+			await fake.run('extension.previousMonth');
+
+			await fake.setSetting('365DayNight.enable', true);
+
+			assert.strictEqual(fake.theme(), '365 09-September Light');
+		});
+
+		test('changing variant writes nothing when the month does not change', async () => {
+			load({ theme: '365 03-March Light', settings: {}, now: OCTOBER_NOON });
+			await fake.run('extension.setDarkTheme');
+			const writes = fake.globalStateWrites;
+			assert.strictEqual(writes, 1);
+
+			await fake.run(TOGGLE);
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.globalStateWrites, writes);
+
+			fake.dispose();
+			load({ theme: '365 10-October Light', settings: {}, now: OCTOBER_NOON });
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.globalStateWrites, 0);
+		});
+
+		test('checks do not write the selection again and again', async () => {
+			await startInOctober();
+			await fake.setTheme('365 03-March Light');
+
+			const writes = fake.globalStateWrites;
+			await fake.runAutoCheck();
+			await fake.runAutoCheck();
+
+			assert.strictEqual(fake.globalStateWrites, writes);
+		});
+	});
+
 	suite('When clicking the button', () => {
 		const withHighContrast = { '365DayNight.toggleIncludesHighContrast': true };
 

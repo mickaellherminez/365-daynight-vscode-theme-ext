@@ -90,6 +90,7 @@ Gut zu wissen:
 
 - **Du entscheidest.** Der Automatikmodus ist standardmäßig ausgeschaltet: Die Erweiterung ändert dein Theme nie ungefragt.
 - **Deine Wahl zählt.** Wählst du ein Theme von Hand, bleibt es bis zum nächsten Periodenwechsel (Tag/Nacht oder neuer Monat).
+- **Dein Monat bleibt auch.** Wählst du einen anderen Monat, mit den Pfeilen oder in der Theme-Auswahl, wechselt der Automatikmodus weiter zwischen hell und dunkel in diesem Monat, bis der nächste tatsächliche Monat beginnt, auch nach einem Neustart. Um früher zurückzukehren, führe `365: Back to the current month` aus.
 - **Kontrastreich bleibt kontrastreich.** Nutzt du ein kontrastreiches Theme, aktualisiert der Automatikmodus nur den Monat, nie die Kontraststufe.
 
 ## Barrierefreiheit zuerst

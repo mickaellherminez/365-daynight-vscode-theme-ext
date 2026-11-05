@@ -87,6 +87,34 @@ function getThemeLabelForMonth(themeType, month) {
 }
 
 /**
+ * Année et mois réels d'une date, ex. "2026-10"
+ * @param {Date} date
+ */
+function getRealMonth(date) {
+  return `${date.getFullYear()}-${formatMonth(date.getMonth() + 1)}`;
+}
+
+/**
+ * Sélection à mémoriser pour un mois : elle vaut jusqu'à la fin du mois réel.
+ * Choisir le mois réel revient à n'avoir aucune sélection.
+ * @param {number} month Mois choisi, de 1 à 12
+ * @param {Date} date Date du choix
+ * @returns {{ month: number, realMonth: string } | undefined}
+ */
+function createMonthSelection(month, date) {
+  return month === date.getMonth() + 1 ? undefined : { month, realMonth: getRealMonth(date) };
+}
+
+/**
+ * Mois choisi encore valable à cette date, ou undefined
+ * @param {{ month: number, realMonth: string } | undefined} selection
+ * @param {Date} date
+ */
+function getSelectedMonth(selection, date) {
+  return selection && selection.realMonth === getRealMonth(date) ? selection.month : undefined;
+}
+
+/**
  * Mois sur deux chiffres : le bouton garde la même largeur et les flèches ne bougent pas sous le curseur
  * @param {number} month Mois, de 1 à 12
  */
@@ -183,6 +211,8 @@ module.exports = {
   getThemeState,
   getThemeLabel,
   getThemeLabelForMonth,
+  createMonthSelection,
+  getSelectedMonth,
   getAdjacentMonth,
   getStatusBarText,
   getAutoThemeType,

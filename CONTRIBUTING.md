@@ -56,7 +56,7 @@ The button has three items: `‹ 10 DRK ›`. These rules include the planned Hi
 | `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
 | Commands that apply a variant | Keep the displayed month |
 | `365: Back to the current month` | Applies the real month and keeps the variant |
-| Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month |
+| Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month, even after a restart. A month picked in the theme picker counts as selected, and a theme from another publisher does not cancel the selection |
 | Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants |
 | Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
 | `system` mode | The arrows change the month. The center button explains that the system decides between light and dark |
