@@ -1,6 +1,6 @@
 const assert = require('assert');
 const vscode = require('vscode');
-const { ThemeType, ColorThemeKind, getThemeLabel } = require('../../theme-logic');
+const { ThemeType, ColorThemeKind, getThemeLabel, getThemeLabelForMonth, getAdjacentMonth } = require('../../theme-logic');
 
 const EXTENSION_ID = 'mickaellherminez.365-daynight-vscode-theme-ext';
 
@@ -37,7 +37,7 @@ suite('Extension Test Suite', () => {
 	test('Extension should activate and register its commands', async () => {
 		await vscode.extensions.getExtension(EXTENSION_ID).activate();
 		const commands = await vscode.commands.getCommands(true);
-		for (const command of ['toggleTheme', 'setLightTheme', 'setDarkTheme', 'setHighContrastTheme']) {
+		for (const command of ['toggleTheme', 'setLightTheme', 'setDarkTheme', 'setHighContrastTheme', 'nextMonth', 'previousMonth', 'currentMonth']) {
 			assert.ok(commands.includes(`extension.${command}`), `extension.${command} is not registered`);
 		}
 	});
@@ -67,6 +67,28 @@ suite('Extension Test Suite', () => {
 		} finally {
 			await config().update('window.autoDetectColorScheme', undefined, vscode.ConfigurationTarget.Global);
 		}
+	});
+
+	test('Month commands should change the theme and stay fast when clicked quickly', async function () {
+		this.timeout(20000);
+		await vscode.extensions.getExtension(EXTENSION_ID).activate();
+		const activeTheme = () => vscode.workspace.getConfiguration().get('workbench.colorTheme');
+		const month = new Date().getMonth() + 1;
+
+		await setThemeAndWait(getThemeLabelForMonth(ThemeType.DARK, month), vscode.ColorThemeKind.Dark);
+
+		await vscode.commands.executeCommand('extension.nextMonth');
+		assert.strictEqual(activeTheme(), getThemeLabelForMonth(ThemeType.DARK, getAdjacentMonth(month, 1)));
+
+		const start = Date.now();
+		await Promise.all(Array.from({ length: 5 }, () => vscode.commands.executeCommand('extension.nextMonth')));
+		const duration = Date.now() - start;
+		console.log(`5 fast clicks on an arrow: ${duration} ms`);
+		assert.strictEqual(activeTheme(), getThemeLabelForMonth(ThemeType.DARK, getAdjacentMonth(month, 6)));
+		assert.ok(duration < 3000, `5 fast clicks took ${duration} ms`);
+
+		await vscode.commands.executeCommand('extension.currentMonth');
+		assert.strictEqual(activeTheme(), getThemeLabelForMonth(ThemeType.DARK, month));
 	});
 
 	test('ColorThemeKind values should match the VS Code API', () => {

@@ -8,6 +8,9 @@ const {
 	getThemeMonth,
 	getThemeState,
 	getThemeLabel,
+	getThemeLabelForMonth,
+	getAdjacentMonth,
+	getStatusBarText,
 	getAutoThemeType,
 	getAutoPeriod,
 	getNextThemeType,
@@ -60,6 +63,41 @@ suite('Theme logic', () => {
 
 		test('handles the last month of the year', () => {
 			assert.strictEqual(getThemeLabel(ThemeType.HIGH_CONTRAST, new Date(2026, 11, 31)), '365 12-December High Contrast');
+		});
+	});
+
+	suite('getThemeLabelForMonth', () => {
+		test('builds the label of any month', () => {
+			assert.strictEqual(getThemeLabelForMonth(ThemeType.DARK, 3), '365 03-March Dark');
+			assert.strictEqual(getThemeLabelForMonth(ThemeType.HIGH_CONTRAST, 12), '365 12-December High Contrast');
+		});
+	});
+
+	suite('getAdjacentMonth', () => {
+		test('moves within the year', () => {
+			assert.strictEqual(getAdjacentMonth(3, 1), 4);
+			assert.strictEqual(getAdjacentMonth(3, -1), 2);
+		});
+
+		test('wraps around the year in both directions', () => {
+			assert.strictEqual(getAdjacentMonth(12, 1), 1);
+			assert.strictEqual(getAdjacentMonth(1, -1), 12);
+			assert.strictEqual(getAdjacentMonth(11, 3), 2);
+			assert.strictEqual(getAdjacentMonth(2, -3), 11);
+			assert.strictEqual(getAdjacentMonth(5, 12), 5);
+			assert.strictEqual(getAdjacentMonth(5, -24), 5);
+		});
+	});
+
+	suite('getStatusBarText', () => {
+		test('shows the month on two digits before the variant', () => {
+			assert.strictEqual(getStatusBarText({ type: ThemeType.LIGHT, month: 1 }), '01 LGT');
+			assert.strictEqual(getStatusBarText({ type: ThemeType.DARK, month: 10 }), '10 DRK');
+			assert.strictEqual(getStatusBarText({ type: ThemeType.HIGH_CONTRAST, month: 12 }), '12 HCT');
+		});
+
+		test('shows only the variant for another theme', () => {
+			assert.strictEqual(getStatusBarText({ type: ThemeType.DARK, month: undefined }), 'DRK');
 		});
 	});
 
@@ -153,6 +191,9 @@ suite('Theme logic', () => {
 
 		test('contributes the public commands without any menu', () => {
 			assert.deepStrictEqual(contributes.commands.map((command) => command.command).sort(), [
+				'extension.currentMonth',
+				'extension.nextMonth',
+				'extension.previousMonth',
 				'extension.setDarkTheme',
 				'extension.setHighContrastTheme',
 				'extension.setLightTheme',

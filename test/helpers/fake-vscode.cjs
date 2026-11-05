@@ -50,7 +50,15 @@ function loadExtension(options = {}) {
     infoMessages: [],
     errorMessages: [],
     failWrites: Boolean(options.failWrites),
-    statusBarItem: undefined,
+    statusBarItems: [],
+    /** Élément central de la barre d'état, celui qui change de variante */
+    get statusBarItem() {
+      return fake.statusBarItems.find((item) => item.command === 'extension.toggleTheme');
+    },
+    /** Élément de la barre d'état relié à une commande */
+    itemFor(command) {
+      return fake.statusBarItems.find((item) => item.command === command);
+    },
     commands: new Map(),
     themeListeners: [],
     configListeners: [],
@@ -76,9 +84,23 @@ function loadExtension(options = {}) {
       get activeColorTheme() {
         return { kind: fake.activeKind };
       },
-      createStatusBarItem() {
-        fake.statusBarItem = { text: '', show() {}, dispose() {} };
-        return fake.statusBarItem;
+      createStatusBarItem(id, alignment, priority) {
+        const item = {
+          id,
+          alignment,
+          priority,
+          text: '',
+          visible: false,
+          show() {
+            item.visible = true;
+          },
+          hide() {
+            item.visible = false;
+          },
+          dispose() {}
+        };
+        fake.statusBarItems.push(item);
+        return item;
       },
       showInformationMessage: (message) => fake.infoMessages.push(message),
       showErrorMessage: (message) => fake.errorMessages.push(message),

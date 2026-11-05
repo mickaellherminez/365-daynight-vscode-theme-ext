@@ -42,6 +42,8 @@ Requires Visual Studio Code 1.96 or later.
 
 Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette.
 
+To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep Light, Dark or High Contrast. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme.
+
 ## The 12 months
 
 ![Preview of the 36 themes: a Light, Dark and High Contrast version for each month from January to December](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
 | Command | Action |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | Switches between Light and Dark (same as the status bar button) |
-| `365: Apply Light theme` | Applies the current month's Light theme |
-| `365: Apply Dark theme` | Applies the current month's Dark theme |
-| `365: Apply High Contrast theme` | Applies the current month's High Contrast theme |
+| `365: Apply Light theme` | Applies the Light theme of the displayed month |
+| `365: Apply Dark theme` | Applies the Dark theme of the displayed month |
+| `365: Apply High Contrast theme` | Applies the High Contrast theme of the displayed month |
+| `365: Next month` | Applies the next month's theme, in the same variant |
+| `365: Previous month` | Applies the previous month's theme, in the same variant |
+| `365: Back to the current month` | Applies the theme of the real current month, in the same variant |
 
-You can assign your own keyboard shortcuts to these commands (`Ctrl+K Ctrl+S`).
+The extension defines no keyboard shortcut by default. To assign your own, open the shortcuts list (`Ctrl+K Ctrl+S`, or `Cmd+K Cmd+S` on Mac), type **365**, double-click a command and press your keys.
 
 ## Settings
 

@@ -41,6 +41,8 @@ Requer o Visual Studio Code 1.96 ou mais recente.
 
 O **botão da barra de status** (canto inferior direito: `LGT`, `DRK` ou `HCT`) alterna entre as versões clara e escura do mês atual. Para o alto contraste, execute `365: Apply High Contrast theme` na paleta de comandos.
 
+Para experimentar outro mês, clique nas setas ao redor dele (`‹ 10 DRK ›`). O número é o mês, de `01` a `12`, e as setas mantêm claro, escuro ou alto contraste. Depois de dezembro vem janeiro. Para voltar, execute `365: Back to the current month` na paleta de comandos. As setas e o número só aparecem com um tema 365.
+
 ## Os 12 meses
 
 ![Prévia dos 36 temas: uma versão clara, escura e de alto contraste para cada mês, de janeiro a dezembro](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Abra a paleta de comandos (`Ctrl+Shift+P` ou `Cmd+Shift+P`) e digite **365**:
 | Comando | Ação |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | Alterna entre claro e escuro (igual ao botão da barra de status) |
-| `365: Apply Light theme` | Aplica o tema claro do mês atual |
-| `365: Apply Dark theme` | Aplica o tema escuro do mês atual |
-| `365: Apply High Contrast theme` | Aplica o tema de alto contraste do mês atual |
+| `365: Apply Light theme` | Aplica o tema claro do mês exibido |
+| `365: Apply Dark theme` | Aplica o tema escuro do mês exibido |
+| `365: Apply High Contrast theme` | Aplica o tema de alto contraste do mês exibido |
+| `365: Next month` | Aplica o tema do próximo mês, na mesma variante |
+| `365: Previous month` | Aplica o tema do mês anterior, na mesma variante |
+| `365: Back to the current month` | Aplica o tema do mês atual real, na mesma variante |
 
-Você pode atribuir seus próprios atalhos de teclado a esses comandos (`Ctrl+K Ctrl+S`).
+A extensão não define nenhum atalho de teclado por padrão. Para atribuir os seus, abra a lista de atalhos (`Ctrl+K Ctrl+S`, ou `Cmd+K Cmd+S` no Mac), digite **365**, clique duas vezes em um comando e pressione suas teclas.
 
 ## Configurações
 

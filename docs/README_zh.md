@@ -41,6 +41,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 使用**状态栏按钮**（右下角：`LGT`、`DRK` 或 `HCT`）可在当月的浅色和深色版本之间切换。如需高对比度，请在命令面板中运行 `365: Apply High Contrast theme`。
 
+要试用其他月份，请点击两侧的箭头（`‹ 10 DRK ›`）。数字表示月份，从 `01` 到 `12`，箭头会保持浅色、深色或高对比度版本不变。12 月之后是 1 月。要返回，请在命令面板中运行 `365: Back to the current month`。箭头和数字仅在使用 365 主题时显示。
+
 ## 12 个月
 
 ![36 款主题预览：一月到十二月每个月的浅色、深色和高对比度版本](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 | 命令 | 作用 |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | 在浅色和深色之间切换（与状态栏按钮相同） |
-| `365: Apply Light theme` | 应用当月的浅色主题 |
-| `365: Apply Dark theme` | 应用当月的深色主题 |
-| `365: Apply High Contrast theme` | 应用当月的高对比度主题 |
+| `365: Apply Light theme` | 应用所显示月份的浅色主题 |
+| `365: Apply Dark theme` | 应用所显示月份的深色主题 |
+| `365: Apply High Contrast theme` | 应用所显示月份的高对比度主题 |
+| `365: Next month` | 以相同版本应用下个月的主题 |
+| `365: Previous month` | 以相同版本应用上个月的主题 |
+| `365: Back to the current month` | 以相同版本应用实际当月的主题 |
 
-你可以为这些命令设置自己的快捷键（`Ctrl+K Ctrl+S`）。
+此扩展默认不定义任何键盘快捷键。要设置自己的快捷键，请打开快捷键列表（`Ctrl+K Ctrl+S`，Mac 上为 `Cmd+K Cmd+S`），输入 **365**，双击某个命令，然后按下你的按键。
 
 ## 设置
 

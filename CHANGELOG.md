@@ -7,9 +7,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- Month arrows in the status bar (`‹ 10 DRK ›`): browse the 12 months while keeping Light, Dark or High Contrast. The number shows the month, from `01` to `12`
+- `365: Next month`, `365: Previous month` and `365: Back to the current month` commands, to use from the keyboard
 - `365DayNight.toggleIncludesHighContrast` setting: also include High Contrast when switching with the status bar button
 
 ### Changed
+- The `365: Apply Light theme`, `365: Apply Dark theme` and `365: Apply High Contrast theme` commands now keep the displayed month
+- The status bar button no longer shows an icon, to save space
 - The status bar button now switches between Light and Dark in one click. High Contrast is available with the `365: Apply High Contrast theme` command, or with the new setting
 
 ## [0.11.2] - 2026-11-05

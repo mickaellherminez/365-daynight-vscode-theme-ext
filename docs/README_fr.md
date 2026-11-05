@@ -41,6 +41,8 @@ Nécessite Visual Studio Code 1.96 ou plus récent.
 
 Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK` ou `HCT`) permet de passer de la version claire à la version sombre du mois en cours. Pour le contraste élevé, lancez `365: Apply High Contrast theme` depuis la palette de commandes.
 
+Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DRK ›`). Le chiffre est le mois, de `01` à `12`, et les flèches gardent le clair, le sombre ou le contraste élevé. Décembre est suivi de janvier. Pour revenir, lancez `365: Back to the current month` depuis la palette de commandes. Les flèches et le chiffre n'apparaissent qu'avec un thème 365.
+
 ## Les 12 mois
 
 ![Aperçu des 36 thèmes : une version claire, sombre et à contraste élevé pour chaque mois, de janvier à décembre](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
@@ -109,11 +111,14 @@ Ouvrez la palette de commandes (`Ctrl+Shift+P` ou `Cmd+Shift+P`) et tapez **365*
 | Commande | Action |
 | --- | --- |
 | `365: Toggle between Light and Dark themes` | Passe de clair à sombre, et inversement (comme le bouton de la barre d'état) |
-| `365: Apply Light theme` | Applique le thème clair du mois en cours |
-| `365: Apply Dark theme` | Applique le thème sombre du mois en cours |
-| `365: Apply High Contrast theme` | Applique le thème à contraste élevé du mois en cours |
+| `365: Apply Light theme` | Applique le thème clair du mois affiché |
+| `365: Apply Dark theme` | Applique le thème sombre du mois affiché |
+| `365: Apply High Contrast theme` | Applique le thème à contraste élevé du mois affiché |
+| `365: Next month` | Applique le thème du mois suivant, dans la même variante |
+| `365: Previous month` | Applique le thème du mois précédent, dans la même variante |
+| `365: Back to the current month` | Applique le thème du mois réel, dans la même variante |
 
-Vous pouvez attribuer vos propres raccourcis clavier à ces commandes (`Ctrl+K Ctrl+S`).
+L'extension ne définit aucun raccourci clavier par défaut. Pour attribuer les vôtres, ouvrez la liste des raccourcis (`Ctrl+K Ctrl+S`, ou `Cmd+K Cmd+S` sur Mac), tapez **365**, double-cliquez sur une commande, puis appuyez sur vos touches.
 
 ## Paramètres
 

@@ -6,16 +6,25 @@ const {
   ThemeType,
   getThemeState,
   getThemeTypeFromKind,
-  getThemeLabel,
+  getThemeLabelForMonth,
+  getAdjacentMonth,
+  getStatusBarText,
   getAutoThemeType,
   getAutoPeriod,
   getToggleThemeType,
   isThemeMaskedByWorkspace
 } = require('./theme-logic');
 
-// Variable globale pour le bouton de la barre d'état
+// Éléments de la barre d'état : VS Code n'autorise qu'une action par élément, d'où trois éléments côte à côte
+/** @type {vscode.StatusBarItem} */
+let previousMonthItem;
 /** @type {vscode.StatusBarItem} */
 let statusBarItem;
+/** @type {vscode.StatusBarItem} */
+let nextMonthItem;
+
+// Clics sur les flèches pas encore appliqués : des clics rapides donnent un seul changement de thème
+let pendingMonthSteps = 0;
 
 // Fréquence de vérification du mode automatique (1 minute)
 const AUTO_CHECK_INTERVAL_MS = 60 * 1000;
@@ -120,13 +129,27 @@ function syncThemeState() {
 }
 
 /**
- * Applique le thème du mois en cours pour le type donné. Le bouton ne change qu'après la réussite.
+ * Mois réel, de 1 à 12
+ */
+function getCurrentMonth() {
+  return new Date().getMonth() + 1;
+}
+
+/**
+ * Mois affiché par le bouton, ou le mois réel si le thème actif n'est pas un thème 365
+ */
+function getDisplayedMonth() {
+  return themeState.month ?? getCurrentMonth();
+}
+
+/**
+ * Applique le thème d'un type et d'un mois. Le bouton ne change qu'après la réussite.
  * @param {string} themeType
+ * @param {number} [month] Mois, de 1 à 12 : le mois réel par défaut
  * @returns {Promise<{ ok: true, label: string, activated: Promise<boolean | undefined> } | { ok: false, blocked?: boolean, message: string }>}
  */
-async function applyTheme(themeType) {
-  const now = new Date();
-  const label = getThemeLabel(themeType, now);
+async function applyTheme(themeType, month = getCurrentMonth()) {
+  const label = getThemeLabelForMonth(themeType, month);
   const config = vscode.workspace.getConfiguration();
 
   // VS Code ignorerait le réglage workbench.colorTheme : rien n'est écrit
@@ -152,7 +175,7 @@ async function applyTheme(themeType) {
   }
 
   const activated = waitForThemeActivation(label, themeType);
-  themeState = { type: themeType, month: now.getMonth() + 1 };
+  themeState = { type: themeType, month };
   updateStatusBarItem();
   return { ok: true, label, activated };
 }
@@ -169,23 +192,57 @@ function getNotActivatedMessage(label) {
 }
 
 /**
- * Applique un thème à la demande de l'utilisateur et signale un échec : la réussite se voit à l'écran
+ * Signale l'échec d'un changement demandé par l'utilisateur : la réussite se voit à l'écran
+ * @param {Awaited<ReturnType<typeof applyTheme>>} result
+ */
+function reportThemeChange(result) {
+  if (!result.ok) {
+    vscode.window.showErrorMessage(result.message);
+    return;
+  }
+
+  // Sans attendre : les clics suivants ne doivent pas dépendre de l'activation de ce thème
+  result.activated.then((activated) => {
+    if (activated === false) {
+      vscode.window.showErrorMessage(getNotActivatedMessage(result.label));
+    }
+  });
+}
+
+/**
+ * Change de variante à la demande de l'utilisateur, en gardant le mois affiché
  * @param {() => string} getThemeType Évalué au moment du changement, dans l'ordre des clics
  */
 function applyThemeFromCommand(getThemeType) {
   return enqueueThemeChange(async () => {
-    const result = await applyTheme(getThemeType());
-    if (!result.ok) {
-      vscode.window.showErrorMessage(result.message);
+    reportThemeChange(await applyTheme(getThemeType(), getDisplayedMonth()));
+  });
+}
+
+/**
+ * Avance ou recule d'un mois en gardant la variante
+ * @param {number} steps 1 pour le mois suivant, -1 pour le précédent
+ */
+function moveMonth(steps) {
+  pendingMonthSteps += steps;
+  return enqueueThemeChange(async () => {
+    const stepsToApply = pendingMonthSteps;
+    pendingMonthSteps = 0;
+    // Déjà appliqué avec un clic précédent, ou clics opposés qui s'annulent
+    if (stepsToApply === 0) {
       return;
     }
+    reportThemeChange(await applyTheme(themeState.type, getAdjacentMonth(getDisplayedMonth(), stepsToApply)));
+  });
+}
 
-    // Sans attendre : les clics suivants ne doivent pas dépendre de l'activation de ce thème
-    result.activated.then((activated) => {
-      if (activated === false) {
-        vscode.window.showErrorMessage(getNotActivatedMessage(result.label));
-      }
-    });
+/**
+ * Revient au mois réel en gardant la variante
+ */
+function goToCurrentMonth() {
+  return enqueueThemeChange(async () => {
+    pendingMonthSteps = 0;
+    reportThemeChange(await applyTheme(themeState.type));
   });
 }
 
@@ -240,11 +297,13 @@ function activate(context) {
   console.log("Extension 365-daynight activée");
   globalState = context.globalState;
 
-  // Créer le bouton et lire le thème actif au démarrage
-  statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  syncThemeState();
+  // Créer les trois éléments du bouton, ‹ 10 DRK ›, et lire le thème actif au démarrage.
+  // À droite de la barre d'état, la priorité la plus haute est la plus à gauche.
+  previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', 102, 'extension.previousMonth', '$(chevron-left)');
+  statusBarItem = createStatusBarControl('theme', 'Light and Dark', 101, 'extension.toggleTheme', '');
+  nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 100, 'extension.nextMonth', '$(chevron-right)');
   statusBarItem.tooltip = 'Switch between Light and Dark themes.';
-  statusBarItem.command = 'extension.toggleTheme';
+  syncThemeState();
   statusBarItem.show();
 
   // Enregistrer les commandes
@@ -256,7 +315,12 @@ function activate(context) {
     vscode.commands.registerCommand('extension.setLightTheme', () => applyThemeFromCommand(() => ThemeType.LIGHT)),
     vscode.commands.registerCommand('extension.setDarkTheme', () => applyThemeFromCommand(() => ThemeType.DARK)),
     vscode.commands.registerCommand('extension.setHighContrastTheme', () => applyThemeFromCommand(() => ThemeType.HIGH_CONTRAST)),
+    vscode.commands.registerCommand('extension.nextMonth', () => moveMonth(1)),
+    vscode.commands.registerCommand('extension.previousMonth', () => moveMonth(-1)),
+    vscode.commands.registerCommand('extension.currentMonth', goToCurrentMonth),
+    previousMonthItem,
     statusBarItem,
+    nextMonthItem,
     { dispose: () => settlePendingTheme() }
   );
 
@@ -282,19 +346,33 @@ function activate(context) {
 }
 
 /**
- * Met à jour l'apparence du bouton dans la barre d'état
+ * Crée un élément de la barre d'état, sans l'afficher
+ * @param {string} id
+ * @param {string} name Nom affiché dans le menu de la barre d'état
+ * @param {number} priority
+ * @param {string} command
+ * @param {string} text
+ */
+function createStatusBarControl(id, name, priority, command, text) {
+  const item = vscode.window.createStatusBarItem(`365DayNight.${id}`, vscode.StatusBarAlignment.Right, priority);
+  item.name = `365 Day & Night: ${name}`;
+  item.tooltip = name;
+  item.command = command;
+  item.text = text;
+  return item;
+}
+
+/**
+ * Met à jour le bouton dans la barre d'état : les flèches n'apparaissent qu'avec un thème 365
  */
 function updateStatusBarItem() {
-  switch (themeState.type) {
-    case ThemeType.LIGHT:
-      statusBarItem.text = '$(symbol-color) LGT';
-      break;
-    case ThemeType.DARK:
-      statusBarItem.text = '$(circle-large-filled) DRK';
-      break;
-    case ThemeType.HIGH_CONTRAST:
-      statusBarItem.text = '$(lightbulb-autofix) HCT';
-      break;
+  statusBarItem.text = getStatusBarText(themeState);
+  for (const item of [previousMonthItem, nextMonthItem]) {
+    if (themeState.month === undefined) {
+      item.hide();
+    } else {
+      item.show();
+    }
   }
 }
 

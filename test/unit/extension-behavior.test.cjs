@@ -19,6 +19,139 @@ suite('Extension behavior', () => {
 
 	teardown(() => fake.dispose());
 
+	suite('Month controls', () => {
+		const NEXT = 'extension.nextMonth';
+		const PREVIOUS = 'extension.previousMonth';
+		const CURRENT = 'extension.currentMonth';
+		const NOVEMBER = new Date(2026, 10, 10, 12, 0);
+		const MARCH_DARK = '365 03-March Dark';
+
+		test('three adjacent items show the arrows, the month and the variant', () => {
+			load({ theme: MARCH_DARK });
+
+			const [previous, center, next] = [fake.itemFor(PREVIOUS), fake.statusBarItem, fake.itemFor(NEXT)];
+			assert.ok(previous && center && next);
+			assert.ok(previous.priority > center.priority && center.priority > next.priority);
+			assert.strictEqual(new Set([previous.alignment, center.alignment, next.alignment]).size, 1);
+			assert.ok(previous.visible && center.visible && next.visible);
+			assert.strictEqual(center.text, '03 DRK');
+		});
+
+		test('the month always has two digits and the round icon is gone', () => {
+			load({ theme: '365 12-December High Contrast' });
+			assert.strictEqual(fake.statusBarItem.text, '12 HCT');
+			fake.dispose();
+
+			load({ theme: '365 01-January Light' });
+			assert.strictEqual(fake.statusBarItem.text, '01 LGT');
+		});
+
+		test('the arrows change the month and keep the variant', async () => {
+			load({ theme: MARCH_DARK });
+
+			await fake.run(NEXT);
+			assert.strictEqual(fake.theme(), '365 04-April Dark');
+			assert.strictEqual(fake.statusBarItem.text, '04 DRK');
+
+			await fake.run(PREVIOUS);
+			await fake.run(PREVIOUS);
+			assert.strictEqual(fake.theme(), '365 02-February Dark');
+
+			fake.dispose();
+			load({ theme: '365 05-May High Contrast' });
+			await fake.run(NEXT);
+			assert.strictEqual(fake.theme(), '365 06-June High Contrast');
+		});
+
+		test('December is followed by January, and January by December backwards', async () => {
+			load({ theme: '365 12-December Light' });
+			await fake.run(NEXT);
+			assert.strictEqual(fake.theme(), '365 01-January Light');
+
+			await fake.run(PREVIOUS);
+			assert.strictEqual(fake.theme(), '365 12-December Light');
+		});
+
+		test('the center item and the commands keep the displayed month', async () => {
+			load({ theme: MARCH_DARK });
+
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), '365 03-March Light');
+
+			await fake.run('extension.setHighContrastTheme');
+			assert.strictEqual(fake.theme(), '365 03-March High Contrast');
+
+			await fake.run('extension.setDarkTheme');
+			assert.strictEqual(fake.theme(), MARCH_DARK);
+		});
+
+		test('going back to the current month keeps the variant', async () => {
+			load({ theme: MARCH_DARK, now: NOVEMBER });
+
+			await fake.run(CURRENT);
+
+			assert.strictEqual(fake.theme(), '365 11-November Dark');
+			assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+		});
+
+		test('fast clicks on an arrow are grouped into one change', async () => {
+			load({ theme: MARCH_DARK });
+
+			fake.commands.get(NEXT)();
+			fake.commands.get(NEXT)();
+			fake.commands.get(NEXT)();
+			await fake.settle();
+
+			assert.deepStrictEqual(fake.writes, ['365 06-June Dark']);
+			assert.strictEqual(fake.statusBarItem.text, '06 DRK');
+		});
+
+		test('opposite fast clicks cancel each other', async () => {
+			load({ theme: MARCH_DARK });
+
+			fake.commands.get(NEXT)();
+			fake.commands.get(PREVIOUS)();
+			await fake.settle();
+
+			assert.deepStrictEqual(fake.writes, []);
+			assert.strictEqual(fake.theme(), MARCH_DARK);
+		});
+
+		test('a failed change keeps the displayed month and shows an error', async () => {
+			load({ theme: MARCH_DARK, failWrites: true });
+
+			await fake.run(NEXT);
+
+			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
+			assert.strictEqual(fake.errorMessages.length, 1);
+		});
+
+		test('another theme hides the arrows and the month number', async () => {
+			load({ theme: 'Monokai', now: NOVEMBER });
+
+			assert.strictEqual(fake.itemFor(PREVIOUS).visible, false);
+			assert.strictEqual(fake.itemFor(NEXT).visible, false);
+			assert.strictEqual(fake.statusBarItem.visible, true);
+			assert.strictEqual(fake.statusBarItem.text, 'DRK');
+
+			await fake.run(TOGGLE);
+			assert.strictEqual(fake.theme(), '365 11-November Dark');
+			assert.strictEqual(fake.itemFor(NEXT).visible, true);
+			assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+
+			await fake.setTheme('Dracula');
+			assert.strictEqual(fake.itemFor(NEXT).visible, false);
+		});
+
+		test('from another theme, the month commands start from the current month', async () => {
+			load({ theme: 'Monokai', now: NOVEMBER });
+
+			await fake.run(NEXT);
+
+			assert.strictEqual(fake.theme(), '365 12-December Dark');
+		});
+	});
+
 	suite('When clicking the button', () => {
 		const withHighContrast = { '365DayNight.toggleIncludesHighContrast': true };
 

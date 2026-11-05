@@ -45,7 +45,7 @@ The [CI workflow](.github/workflows/ci.yml) runs the theme audit, the lint and t
 
 ## Status bar button rules
 
-These rules include the planned High Contrast Light variant and the planned month arrows (`‹ 10 DRK ›`).
+The button has three items: `‹ 10 DRK ›`. These rules include the planned High Contrast Light variant.
 
 | Situation | Behavior |
 | --- | --- |
@@ -53,7 +53,9 @@ These rules include the planned High Contrast Light variant and the planned mont
 | Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. Until High Contrast Light exists, it goes to Light |
 | `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant |
 | Reaching High Contrast | With the `365: Apply High Contrast theme` command, or a link in the tooltip |
-| `‹` and `›` | Change the month and keep the variant. December is followed by January |
+| `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
+| Commands that apply a variant | Keep the displayed month |
+| `365: Back to the current month` | Applies the real month and keeps the variant |
 | Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month |
 | Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants |
 | Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
