@@ -81,7 +81,7 @@ Or add this to your `settings.json`:
 
 | Mode | What it does |
 | --- | --- |
-| `auto` | Light theme from 7:00 to 19:00, Dark theme the rest of the time |
+| `auto` | Light theme from 7:00 to 19:00 by default, Dark theme the rest of the time. You can change these hours (see below) |
 | `day` | Always the Light theme of the current month |
 | `night` | Always the Dark theme of the current month |
 | `system` | Follows the light, dark and high contrast appearance of your system (see below) |
@@ -93,6 +93,28 @@ Good to know:
 - **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
 - **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
 - **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
+
+### Choose your hours
+
+By default, the Light theme starts at 7:00 and the Dark theme at 19:00. To change these hours:
+
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Set **365DayNight: Day Start** and **365DayNight: Night Start**, in the HH:MM format on a 24-hour clock.
+
+Or add this to your `settings.json`:
+
+```json
+{
+  "365DayNight.dayStart": "08:30",
+  "365DayNight.nightStart": "20:00"
+}
+```
+
+- **Applied quickly.** A new time applies about 2 seconds after you stop typing, even if you picked a theme by hand. Then the theme changes at the minute you chose.
+- **Past midnight.** If the day starts after the night, for example `"20:00"` and `"06:00"`, the Light theme runs past midnight. Handy if you work at night.
+- **Invalid values.** A time that cannot be read, such as `"25:00"` or `"7h"`, is replaced by its default value, and a warning tells you once. Two identical times give 7:00 and 19:00.
+- **Only in `auto` mode.** The `day`, `night` and `system` modes ignore these hours.
+- **Back to 7:00 and 19:00.** In the settings, click the gear icon next to each time and choose **Reset Setting**, or remove both lines from your `settings.json`.
 
 ### Follow your system
 
@@ -166,12 +188,14 @@ The extension defines no keyboard shortcut by default. To assign your own, open 
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Automatically apply the theme of the current month |
 | `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light), `night` (always Dark) or `system` (follows your system) |
+| `365DayNight.dayStart` | `"07:00"` | Time when the Light theme starts in `auto` mode, in the HH:MM format |
+| `365DayNight.nightStart` | `"19:00"` | Time when the Dark theme starts in `auto` mode, in the HH:MM format |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Also include High Contrast when switching with the status bar button |
 
 ## FAQ
 
 **How do I automatically switch VS Code between a light and a dark theme?**
-Install the extension and set `"365DayNight.enable": true`. The Light theme is applied from 7:00 to 19:00 and the Dark theme at night.
+Install the extension and set `"365DayNight.enable": true`. The Light theme is applied from 7:00 to 19:00 and the Dark theme at night. You can change these hours with `365DayNight.dayStart` and `365DayNight.nightStart`.
 
 **Can VS Code follow the light or dark mode of my system with these themes?**
 Yes. Set `"365DayNight.enable": true` and `"365DayNight.mode": "system"`. Your system decides between Light and Dark, and the extension keeps the themes on the current month.
@@ -189,8 +213,6 @@ Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mod
 They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline.
 
 ## Roadmap
-
-- ⏰ Configurable day and night hours
 
 Ideas and suggestions are welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
 

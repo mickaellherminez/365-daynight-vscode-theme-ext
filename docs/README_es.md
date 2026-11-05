@@ -80,7 +80,7 @@ O añade esto a tu `settings.json`:
 
 | Modo | Qué hace |
 | --- | --- |
-| `auto` | Tema claro de 7:00 a 19:00 y tema oscuro el resto del tiempo |
+| `auto` | Tema claro de 7:00 a 19:00 por defecto y tema oscuro el resto del tiempo. Puedes cambiar estas horas (ver abajo) |
 | `day` | Siempre el tema claro del mes actual |
 | `night` | Siempre el tema oscuro del mes actual |
 | `system` | Sigue la apariencia clara, oscura y de alto contraste de tu sistema (ver abajo) |
@@ -93,6 +93,28 @@ Bueno saber:
 - **Tu elección se respeta.** Si eliges un tema a mano, se mantiene hasta el siguiente cambio de periodo (de día a noche o un nuevo mes).
 - **Tu mes también se mantiene.** Si eliges otro mes, con las flechas o el selector de temas, el modo automático sigue alternando claro y oscuro en ese mes hasta que empiece el siguiente mes real, incluso después de reiniciar. Para volver antes, ejecuta `365: Back to the current month`.
 - **El alto contraste se mantiene.** Si usas un tema de alto contraste, el modo automático solo actualiza el mes, nunca el nivel de contraste.
+
+### Elegir tus horas
+
+Por defecto, el tema claro empieza a las 7:00 y el oscuro a las 19:00. Para cambiar estas horas:
+
+1. Abre la configuración (`Ctrl+,` o `Cmd+,`) y busca **365DayNight**.
+2. Configura **365DayNight: Day Start** y **365DayNight: Night Start** en formato HH:MM de 24 horas.
+
+O añade esto a tu `settings.json`:
+
+```json
+{
+  "365DayNight.dayStart": "08:30",
+  "365DayNight.nightStart": "20:00"
+}
+```
+
+- **Se aplica enseguida.** Una nueva hora se aplica unos 2 segundos después de terminar de escribir, aunque hayas elegido un tema a mano. Después, el tema cambia en el minuto elegido.
+- **Pasada la medianoche.** Si el día empieza después de la noche, por ejemplo `"20:00"` y `"06:00"`, el tema claro pasa la medianoche. Útil si trabajas de noche.
+- **Valores no válidos.** Una hora ilegible, como `"25:00"` o `"7h"`, se sustituye por su valor por defecto, y un aviso te lo indica una vez. Dos horas iguales dan 7:00 y 19:00.
+- **Solo en el modo `auto`.** Los modos `day`, `night` y `system` ignoran estas horas.
+- **Volver a 7:00 y 19:00.** En la configuración, haz clic en el engranaje junto a cada hora y elige **Reset Setting**, o elimina ambas líneas de tu `settings.json`.
 
 ### Seguir tu sistema
 
@@ -166,12 +188,14 @@ La extensión no define ningún atajo de teclado por defecto. Para asignar los t
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Aplica automáticamente el tema del mes actual |
 | `365DayNight.mode` | `auto` | `auto` (según la hora), `day` (siempre claro), `night` (siempre oscuro) o `system` (sigue tu sistema) |
+| `365DayNight.dayStart` | `"07:00"` | Hora en que empieza el tema claro en el modo `auto`, en formato HH:MM |
+| `365DayNight.nightStart` | `"19:00"` | Hora en que empieza el tema oscuro en el modo `auto`, en formato HH:MM |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Incluir también el alto contraste al cambiar con el botón de la barra de estado |
 
 ## Preguntas frecuentes
 
 **¿Cómo cambio VS Code automáticamente entre un tema claro y uno oscuro?**
-Instala la extensión y configura `"365DayNight.enable": true`. El tema claro se aplica de 7:00 a 19:00 y el oscuro por la noche.
+Instala la extensión y configura `"365DayNight.enable": true`. El tema claro se aplica de 7:00 a 19:00 y el oscuro por la noche. Puedes cambiar estas horas con `365DayNight.dayStart` y `365DayNight.nightStart`.
 
 **¿Puede VS Code seguir el modo claro u oscuro de mi sistema con estos temas?**
 Sí. Configura `"365DayNight.enable": true` y `"365DayNight.mode": "system"`. Tu sistema decide entre claro y oscuro, y la extensión mantiene los temas en el mes actual.
@@ -189,8 +213,6 @@ Por supuesto. Elígelo en el selector de temas (`Ctrl+K Ctrl+T`) y deja el modo 
 Están pensados para baja visión, entornos muy luminosos o largas sesiones de programación. Ofrecen el máximo contraste (AAA), bordes visibles y un contorno de foco muy marcado.
 
 ## Hoja de ruta
-
-- ⏰ Horas de día y de noche configurables
 
 Las ideas y sugerencias son bienvenidas en las [incidencias de GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
 

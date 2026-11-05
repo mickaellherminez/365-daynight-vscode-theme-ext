@@ -21,9 +21,12 @@ const MONTH_NAMES = [
   "July", "August", "September", "October", "November", "December"
 ];
 
-// Plage horaire du thème clair en mode automatique (7h - 19h)
-const DAY_START_HOUR = 7;
-const NIGHT_START_HOUR = 19;
+// Horaires par défaut du thème clair en mode automatique, au format des réglages
+const DEFAULT_TIMES = { dayStart: '07:00', nightStart: '19:00' };
+
+// Heure sur 24 heures, avec ou sans zéro initial : 7:05, 07:05 ou 23:59.
+// Le même motif valide les réglages dans package.json.
+const TIME_PATTERN = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/;
 
 // Valeurs de vscode.ColorThemeKind
 const ColorThemeKind = {
@@ -194,18 +197,61 @@ function getStatusBarText(state) {
 }
 
 /**
+ * Minutes écoulées depuis minuit pour une heure au format HH:MM, ou undefined si elle est invalide
+ * @param {unknown} value
+ */
+function parseTime(value) {
+  const match = typeof value === 'string' ? TIME_PATTERN.exec(value) : null;
+  return match ? Number(match[1]) * 60 + Number(match[2]) : undefined;
+}
+
+/**
+ * Horaires du mode automatique, en minutes depuis minuit. Une heure invalide est remplacée par
+ * sa valeur par défaut. Deux heures identiques ne laissent aucune place au jour ou à la nuit :
+ * les deux valeurs par défaut sont alors utilisées. Un début de journée placé après le début de
+ * la nuit est valable : le thème clair passe minuit.
+ * @param {{ dayStart?: unknown, nightStart?: unknown }} times Valeurs des réglages
+ * @returns {{ dayStart: number, nightStart: number, problem: string | undefined }}
+ */
+function resolveSchedule(times) {
+  const problems = [];
+  const resolved = {};
+  for (const name of ['dayStart', 'nightStart']) {
+    const value = times[name] ?? DEFAULT_TIMES[name];
+    resolved[name] = parseTime(value);
+    if (resolved[name] === undefined) {
+      resolved[name] = parseTime(DEFAULT_TIMES[name]);
+      problems.push(`365DayNight.${name} "${value}" is not a valid time, so ${DEFAULT_TIMES[name]} is used instead. Use the HH:MM format, for example ${DEFAULT_TIMES[name]}.`);
+    }
+  }
+  if (problems.length === 0 && resolved.dayStart === resolved.nightStart) {
+    resolved.dayStart = parseTime(DEFAULT_TIMES.dayStart);
+    resolved.nightStart = parseTime(DEFAULT_TIMES.nightStart);
+    problems.push(`365DayNight.dayStart and 365DayNight.nightStart have the same time, so ${DEFAULT_TIMES.dayStart} and ${DEFAULT_TIMES.nightStart} are used instead.`);
+  }
+  return { dayStart: resolved.dayStart, nightStart: resolved.nightStart, problem: problems.length ? problems.join(' ') : undefined };
+}
+
+/**
  * Type de thème (clair ou sombre) attendu par le mode automatique
  * @param {string} mode Valeur du réglage 365DayNight.mode
- * @param {number} hour Heure locale, de 0 à 23
+ * @param {Date} date Date et heure locales
+ * @param {{ dayStart: number, nightStart: number }} [schedule] Horaires, 7:00 et 19:00 par défaut
  */
-function getAutoThemeType(mode, hour) {
+function getAutoThemeType(mode, date, schedule = resolveSchedule({})) {
   if (mode === 'day') {
     return ThemeType.LIGHT;
   }
   if (mode === 'night') {
     return ThemeType.DARK;
   }
-  return hour >= DAY_START_HOUR && hour < NIGHT_START_HOUR ? ThemeType.LIGHT : ThemeType.DARK;
+  const minutes = date.getHours() * 60 + date.getMinutes();
+  const { dayStart, nightStart } = schedule;
+  // Si le jour commence après la nuit, il passe minuit
+  const isDay = dayStart < nightStart
+    ? minutes >= dayStart && minutes < nightStart
+    : minutes >= dayStart || minutes < nightStart;
+  return isDay ? ThemeType.LIGHT : ThemeType.DARK;
 }
 
 /**
@@ -314,6 +360,8 @@ module.exports = {
   getThemeDisplayName,
   getSwitchHint,
   getAutoThemeType,
+  parseTime,
+  resolveSchedule,
   getAutoPeriod,
   getNextThemeType,
   getToggleThemeType,

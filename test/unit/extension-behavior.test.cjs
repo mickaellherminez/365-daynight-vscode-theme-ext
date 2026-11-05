@@ -640,6 +640,24 @@ suite('Extension behavior', () => {
 			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
 		});
 
+		test('a window does not fight another window that applied another theme', async () => {
+			await startAtNight();
+
+			// Une autre fenêtre, avec d'autres réglages ou une autre version, applique son thème
+			fake.globalState.set('lastAutoPeriod', '2026-11 Light');
+			await fake.configurationUpdate(NOVEMBER_LIGHT);
+			await fake.runAutoCheck();
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), NOVEMBER_LIGHT);
+
+			// À sa prochaine période, cette fenêtre applique de nouveau son thème
+			fake.setNow(new Date(2026, 10, 11, 7, 0));
+			await fake.runAutoCheck();
+			fake.setNow(new Date(2026, 10, 11, 19, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), NOVEMBER_DARK);
+		});
+
 		test('a failed change is not remembered: another window tries again', async () => {
 			load({ theme: 'Monokai', settings: autoSettings, now: NOVEMBER_NIGHT, failWrites: true });
 			await fake.settle();
@@ -687,6 +705,113 @@ suite('Extension behavior', () => {
 			await fake.runAutoCheck();
 			await fake.runAutoCheck();
 			assert.strictEqual(fake.globalStateWrites, writes);
+		});
+	});
+
+	suite('Day and night times', () => {
+		const auto = { '365DayNight.enable': true };
+		const at = (hours, minutes = 0) => new Date(2026, 10, 10, hours, minutes);
+		const LIGHT_NOV = '365 11-November Light';
+		const DARK_NOV = '365 11-November Dark';
+
+		const start = async (now, settings = {}) => {
+			load({ theme: 'Monokai', now, settings: { ...auto, ...settings } });
+			await fake.settle();
+		};
+
+		test('the configured times decide, to the minute', async () => {
+			await start(at(8, 29), { '365DayNight.dayStart': '08:30', '365DayNight.nightStart': '20:15' });
+			assert.strictEqual(fake.theme(), DARK_NOV);
+
+			fake.setNow(at(8, 30));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+
+			fake.setNow(at(20, 15));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), DARK_NOV);
+			assert.deepStrictEqual(fake.warningMessages, []);
+		});
+
+		test('the Light theme can run past midnight', async () => {
+			await start(at(23), { '365DayNight.dayStart': '20:00', '365DayNight.nightStart': '06:00' });
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+
+			fake.setNow(new Date(2026, 10, 11, 6, 0));
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.theme(), DARK_NOV);
+			assert.deepStrictEqual(fake.warningMessages, []);
+		});
+
+		test('changing a time applies it after a short pause', async () => {
+			await start(at(7, 30));
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+
+			await fake.setSetting('365DayNight.dayStart', '08:00');
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.theme(), DARK_NOV);
+		});
+
+		test('a time being typed applies once, with no warning for the unfinished values', async () => {
+			await start(at(7, 30));
+			const writes = fake.writes.length;
+
+			// L'éditeur de paramètres écrit la valeur pendant la saisie
+			for (const value of ['', '0', '08', '08:', '08:0', '08:00']) {
+				await fake.setSetting('365DayNight.dayStart', value);
+			}
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+			// Chaque frappe repousse l'application : un seul délai reste en attente
+			assert.strictEqual(fake.timeouts.size, 1);
+
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.theme(), DARK_NOV);
+			assert.strictEqual(fake.writes.length - writes, 1);
+			assert.deepStrictEqual(fake.warningMessages, []);
+		});
+
+		test('an invalid time falls back to its default, with one warning', async () => {
+			await start(at(7, 30), { '365DayNight.dayStart': '25:00' });
+
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+			assert.strictEqual(fake.warningMessages.length, 1);
+			assert.ok(fake.warningMessages[0].includes('365DayNight.dayStart'));
+
+			await fake.runAutoCheck();
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.warningMessages.length, 1);
+		});
+
+		test('a corrected time ends the warnings, and a new mistake is reported again', async () => {
+			await start(at(12), { '365DayNight.dayStart': '25:00' });
+
+			await fake.setSetting('365DayNight.dayStart', '08:00');
+			await fake.runTimeouts();
+			await fake.runAutoCheck();
+			assert.strictEqual(fake.warningMessages.length, 1);
+
+			await fake.setSetting('365DayNight.dayStart', '25:00');
+			await fake.runTimeouts();
+			assert.strictEqual(fake.warningMessages.length, 2);
+		});
+
+		test('two identical times fall back to 7:00 and 19:00, with a warning', async () => {
+			await start(at(7, 30), { '365DayNight.dayStart': '12:00', '365DayNight.nightStart': '12:00' });
+
+			assert.strictEqual(fake.theme(), LIGHT_NOV);
+			assert.strictEqual(fake.warningMessages.length, 1);
+		});
+
+		test('the times are ignored, and not checked, in the other modes', async () => {
+			for (const mode of ['day', 'night', 'system']) {
+				await start(at(12), { '365DayNight.mode': mode, '365DayNight.dayStart': '25:00' });
+				assert.deepStrictEqual(fake.warningMessages, [], mode);
+				fake.dispose();
+			}
+			await start(at(12), { '365DayNight.enable': false, '365DayNight.dayStart': '25:00' });
+			assert.deepStrictEqual(fake.warningMessages, []);
 		});
 	});
 

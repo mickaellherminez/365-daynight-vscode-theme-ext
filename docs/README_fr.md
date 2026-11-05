@@ -80,7 +80,7 @@ Ou ajoutez ceci à votre `settings.json` :
 
 | Mode | Effet |
 | --- | --- |
-| `auto` | Thème clair de 7 h à 19 h, thème sombre le reste du temps |
+| `auto` | Thème clair de 7 h à 19 h par défaut, thème sombre le reste du temps. Ces heures se changent (voir plus bas) |
 | `day` | Toujours le thème clair du mois en cours |
 | `night` | Toujours le thème sombre du mois en cours |
 | `system` | Suit l'apparence claire, sombre et à contraste élevé de votre système (voir ci-dessous) |
@@ -93,6 +93,28 @@ Bon à savoir :
 - **Votre choix est respecté.** Si vous choisissez un thème à la main, il reste en place jusqu'au prochain changement de période (passage jour/nuit ou nouveau mois).
 - **Votre mois reste aussi.** Si vous choisissez un autre mois, avec les flèches ou le sélecteur de thèmes, le mode automatique continue d'alterner clair et sombre sur ce mois jusqu'au début du prochain mois réel, même après un redémarrage. Pour revenir plus tôt, lancez `365: Back to the current month`.
 - **Le contraste élevé reste en contraste élevé.** Si vous utilisez un thème à contraste élevé, le mode automatique met seulement à jour le mois, jamais le niveau de contraste.
+
+### Choisir vos heures
+
+Par défaut, le thème clair commence à 7 h et le thème sombre à 19 h. Pour changer ces heures :
+
+1. Ouvrez les paramètres (`Ctrl+,` ou `Cmd+,`) et cherchez **365DayNight**.
+2. Réglez **365DayNight: Day Start** et **365DayNight: Night Start**, au format HH:MM sur 24 heures.
+
+Ou ajoutez ceci à votre `settings.json` :
+
+```json
+{
+  "365DayNight.dayStart": "08:30",
+  "365DayNight.nightStart": "20:00"
+}
+```
+
+- **Appliqué rapidement.** Une nouvelle heure s'applique environ 2 secondes après la fin de la saisie, même si vous aviez choisi un thème à la main. Ensuite, le thème change à la minute choisie.
+- **Après minuit.** Si le jour commence après la nuit, par exemple `"20:00"` et `"06:00"`, le thème clair passe minuit. Pratique si vous travaillez la nuit.
+- **Valeurs invalides.** Une heure illisible, comme `"25:00"` ou `"7h"`, est remplacée par sa valeur par défaut, et un avertissement vous le signale une fois. Deux heures identiques donnent 7 h et 19 h.
+- **Seulement en mode `auto`.** Les modes `day`, `night` et `system` ignorent ces heures.
+- **Revenir à 7 h et 19 h.** Dans les paramètres, cliquez sur l'engrenage à côté de chaque heure et choisissez **Reset Setting**, ou retirez les deux lignes de votre `settings.json`.
 
 ### Suivre votre système
 
@@ -166,12 +188,14 @@ L'extension ne définit aucun raccourci clavier par défaut. Pour attribuer les 
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Applique automatiquement le thème du mois en cours |
 | `365DayNight.mode` | `auto` | `auto` (selon l'heure), `day` (toujours clair), `night` (toujours sombre) ou `system` (suit votre système) |
+| `365DayNight.dayStart` | `"07:00"` | Heure de début du thème clair en mode `auto`, au format HH:MM |
+| `365DayNight.nightStart` | `"19:00"` | Heure de début du thème sombre en mode `auto`, au format HH:MM |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Inclure aussi le contraste élevé dans la bascule du bouton de la barre d'état |
 
 ## Questions fréquentes
 
 **Comment faire passer VS Code automatiquement d'un thème clair à un thème sombre ?**
-Installez l'extension et réglez `"365DayNight.enable": true`. Le thème clair s'applique de 7 h à 19 h, le thème sombre la nuit.
+Installez l'extension et réglez `"365DayNight.enable": true`. Le thème clair s'applique de 7 h à 19 h, le thème sombre la nuit. Vous pouvez changer ces heures avec `365DayNight.dayStart` et `365DayNight.nightStart`.
 
 **VS Code peut-il suivre le mode clair ou sombre de mon système avec ces thèmes ?**
 Oui. Réglez `"365DayNight.enable": true` et `"365DayNight.mode": "system"`. Votre système décide entre clair et sombre, et l'extension garde les thèmes sur le mois en cours.
@@ -189,8 +213,6 @@ Bien sûr. Choisissez-le dans le sélecteur de thèmes (`Ctrl+K Ctrl+T`) et lais
 Ils sont pensés pour la basse vision, les environnements très lumineux ou les longues sessions de code. Ils offrent un contraste maximal (AAA), des bordures visibles et un contour de focus très marqué.
 
 ## Feuille de route
-
-- ⏰ Heures de jour et de nuit configurables
 
 Idées et suggestions sont les bienvenues dans les [tickets GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
 

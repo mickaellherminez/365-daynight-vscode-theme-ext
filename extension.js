@@ -18,6 +18,7 @@ const {
   getAdjacentMonth,
   getStatusBarText,
   getAutoThemeType,
+  resolveSchedule,
   getAutoPeriod,
   getToggleThemeType,
   isThemeMaskedByWorkspace,
@@ -70,12 +71,29 @@ const SYSTEM_SETTINGS = [DETECT_COLOR_SCHEME_SETTING, ...PREFERRED_SETTINGS];
 const SYSTEM_DECIDES_MESSAGE = 'Your system decides between Light and Dark, because 365DayNight.mode is set to system. The arrows still change the month.';
 
 // Mémoire de l'extension, partagée entre les fenêtres
-/** @type {vscode.Memento} */
+/** @type {vscode.ExtensionContext['globalState']} */
 let globalState;
 
 // Dernière période pour laquelle un échec du mode automatique a été signalé
 /** @type {string | undefined} */
 let lastAutoFailurePeriod;
+
+// Dernier avertissement sur les horaires : il n'est répété que si le problème change
+/** @type {string | undefined} */
+let lastScheduleWarning;
+
+// Dernière période appliquée par cette fenêtre. Une autre fenêtre peut vouloir un autre thème,
+// avec d'autres réglages de workspace ou une autre version de l'extension : chacune n'applique
+// le sien qu'à sa propre prochaine période, au lieu de le réappliquer à chaque contrôle.
+/** @type {string | undefined} */
+let lastHandledPeriod;
+
+// Pause laissée après la modification d'un horaire : l'éditeur de paramètres écrit la valeur
+// pendant la saisie, et une heure à moitié tapée ne doit ni changer le thème ni être signalée
+const TIME_EDIT_DELAY_MS = 2000;
+
+/** @type {ReturnType<typeof setTimeout> | undefined} */
+let timeEditTimer;
 
 // L'échec de la restauration des réglages n'est signalé qu'une fois
 let restoreFailureReported = false;
@@ -511,9 +529,19 @@ function goToCurrentMonth() {
  * Oublie la dernière période traitée, sans écriture inutile si elle est déjà oubliée
  */
 async function forgetAutoPeriod() {
+  lastHandledPeriod = undefined;
   if (globalState.get(LAST_AUTO_PERIOD_KEY) !== undefined) {
     await globalState.update(LAST_AUTO_PERIOD_KEY, undefined);
   }
+}
+
+/**
+ * Réapplique le thème automatique après un changement de réglage, même dans la même période
+ */
+function reapplyAutoTheme() {
+  timeEditTimer = undefined;
+  lastAutoFailurePeriod = undefined;
+  return forgetAutoPeriod().then(checkAutoTheme);
 }
 
 /**
@@ -524,6 +552,11 @@ function checkAutoTheme() {
   updateStatusBarItem();
 
   const config = vscode.workspace.getConfiguration('365DayNight');
+  const mode = config.get('mode', 'auto');
+  // Les horaires ne servent qu'en mode auto : ils ne sont vérifiés que là
+  if (!config.get('enable', false) || mode !== 'auto') {
+    lastScheduleWarning = undefined;
+  }
   if (!config.get('enable', false)) {
     lastAutoFailurePeriod = undefined;
     return enqueueThemeChange(async () => {
@@ -533,15 +566,24 @@ function checkAutoTheme() {
   }
 
   const now = new Date();
-  if (config.get('mode', 'auto') === 'system') {
+  if (mode === 'system') {
     return checkSystemMode(now);
   }
 
-  const themeType = getAutoThemeType(config.get('mode', 'auto'), now.getHours());
+  const themeType = getAutoThemeType(mode, now, mode === 'auto' ? getSchedule(config) : undefined);
   const period = getAutoPeriod(themeType, now);
 
   return enqueueThemeChange(async () => {
-    if (!await leaveSystemMode() || period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
+    if (!await leaveSystemMode()) {
+      return;
+    }
+    // Déjà traitée, par cette fenêtre ou par une autre : cette fenêtre la note aussi comme traitée,
+    // car le nom d'une période (ex. "2026-11 Dark") revient chaque jour du mois
+    if (period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
+      lastHandledPeriod = period;
+      return;
+    }
+    if (period === lastHandledPeriod) {
       return;
     }
 
@@ -550,6 +592,7 @@ function checkAutoTheme() {
     const month = getSelectedMonth(globalState.get(SELECTED_MONTH_KEY), now) ?? now.getMonth() + 1;
     const result = await applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType, month);
     if (result.ok) {
+      lastHandledPeriod = period;
       await globalState.update(LAST_AUTO_PERIOD_KEY, period);
       lastAutoFailurePeriod = undefined;
     } else if (!result.blocked && lastAutoFailurePeriod !== period) {
@@ -559,6 +602,20 @@ function checkAutoTheme() {
       vscode.window.showErrorMessage(result.message);
     }
   });
+}
+
+/**
+ * Horaires du mode automatique. Une erreur dans les réglages est signalée une fois, sans bloquer :
+ * les valeurs par défaut prennent le relais.
+ * @param {vscode.WorkspaceConfiguration} config Configuration de la section 365DayNight
+ */
+function getSchedule(config) {
+  const schedule = resolveSchedule({ dayStart: config.get('dayStart'), nightStart: config.get('nightStart') });
+  if (schedule.problem && schedule.problem !== lastScheduleWarning) {
+    vscode.window.showWarningMessage(schedule.problem);
+  }
+  lastScheduleWarning = schedule.problem;
+  return schedule;
 }
 
 /**
@@ -646,8 +703,12 @@ function activate(context) {
         updateStatusBarItem();
       }
       if (event.affectsConfiguration('365DayNight.enable') || event.affectsConfiguration('365DayNight.mode')) {
-        lastAutoFailurePeriod = undefined;
-        forgetAutoPeriod().then(checkAutoTheme);
+        clearTimeout(timeEditTimer);
+        reapplyAutoTheme();
+      } else if (event.affectsConfiguration('365DayNight.dayStart') || event.affectsConfiguration('365DayNight.nightStart')) {
+        // Chaque nouvelle frappe repousse l'application de l'horaire
+        clearTimeout(timeEditTimer);
+        timeEditTimer = setTimeout(reapplyAutoTheme, TIME_EDIT_DELAY_MS);
       }
     })
   );
@@ -655,7 +716,10 @@ function activate(context) {
   // Mode automatique : vérification au démarrage puis à intervalle régulier
   checkAutoTheme();
   const autoThemeTimer = setInterval(checkAutoTheme, AUTO_CHECK_INTERVAL_MS);
-  context.subscriptions.push({ dispose: () => clearInterval(autoThemeTimer) });
+  context.subscriptions.push({ dispose: () => {
+    clearInterval(autoThemeTimer);
+    clearTimeout(timeEditTimer);
+  } });
 
   // Accessible depuis les tests d'intégration
   return { getThemeState: () => themeState };

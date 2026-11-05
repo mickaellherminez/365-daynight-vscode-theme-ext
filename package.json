@@ -124,13 +124,27 @@
             "system"
           ],
           "enumDescriptions": [
-            "Light theme from 7:00 to 19:00, Dark theme otherwise.",
+            "Light theme from Day Start to Night Start (7:00 to 19:00 by default), Dark theme otherwise.",
             "Always use the Light theme of the current month.",
             "Always use the Dark theme of the current month.",
             "Follow the light, dark and high contrast appearance of your system, with the themes of the current month. Your system decides the variant; the arrows still change the month."
           ],
           "default": "auto",
           "description": "Theme selection mode used when `365DayNight.enable` is on."
+        },
+        "365DayNight.dayStart": {
+          "type": "string",
+          "default": "07:00",
+          "pattern": "^([01]?[0-9]|2[0-3]):([0-5][0-9])$",
+          "patternErrorMessage": "Use the HH:MM format on a 24-hour clock, for example 07:00.",
+          "markdownDescription": "Time when the Light theme starts, in the HH:MM format on a 24-hour clock. Used when `#365DayNight.mode#` is `auto`."
+        },
+        "365DayNight.nightStart": {
+          "type": "string",
+          "default": "19:00",
+          "pattern": "^([01]?[0-9]|2[0-3]):([0-5][0-9])$",
+          "patternErrorMessage": "Use the HH:MM format on a 24-hour clock, for example 19:00.",
+          "markdownDescription": "Time when the Dark theme starts, in the HH:MM format on a 24-hour clock. Used when `#365DayNight.mode#` is `auto`. If it is earlier than `#365DayNight.dayStart#`, the Light theme runs past midnight."
         },
         "365DayNight.toggleIncludesHighContrast": {
           "type": "boolean",

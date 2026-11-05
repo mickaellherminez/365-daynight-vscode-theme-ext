@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- `365DayNight.dayStart` and `365DayNight.nightStart` settings: choose when the Light and Dark themes start in `auto` mode, in the HH:MM format (7:00 and 19:00 by default). A day that starts after the night runs past midnight, and an invalid time falls back to its default with a warning
 - `system` value for `365DayNight.mode`: follow the light, dark and high contrast appearance of your system with the themes of the month. The original settings come back when leaving the mode, except those you changed in the meantime
 - The status bar button now uses a color of the month, so that its three parts read as one control. It stays readable in every theme, and takes the normal color while debugging
 - Status bar tooltip with the full theme name, what a click does, and links to High Contrast and to the current month
@@ -23,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - The status bar button now switches between Light and Dark in one click. High Contrast is available with the `365: Apply High Contrast theme` command, or with the new setting
 
 ### Fixed
+- With several windows open, windows that want different themes, because of other workspace settings for example, no longer take turns applying them: each window applies its theme at its own next change of period
 - With the high contrast of a light system, the status bar button no longer shows a month that is not active, and a 365 High Contrast theme that VS Code ignores is now reported
 
 ## [0.11.2] - 2026-11-05

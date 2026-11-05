@@ -83,6 +83,7 @@ function loadExtension(options = {}) {
     writes: [],
     infoMessages: [],
     errorMessages: [],
+    warningMessages: [],
     failWrites: Boolean(options.failWrites),
     debugSession: undefined,
     debugListeners: [],
@@ -193,6 +194,7 @@ function loadExtension(options = {}) {
       },
       showInformationMessage: (message) => fake.infoMessages.push(message),
       showErrorMessage: (message) => fake.errorMessages.push(message),
+      showWarningMessage: (message) => fake.warningMessages.push(message),
       onDidChangeActiveColorTheme(listener) {
         fake.themeListeners.push(listener);
         return { dispose() {} };
