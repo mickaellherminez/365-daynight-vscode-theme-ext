@@ -80,7 +80,7 @@ Oder füge Folgendes zu deiner `settings.json` hinzu:
 
 | Modus | Wirkung |
 | --- | --- |
-| `auto` | Helles Theme von 7:00 bis 19:00 Uhr, sonst dunkles Theme |
+| `auto` | Standardmäßig helles Theme von 7:00 bis 19:00 Uhr, sonst dunkles Theme. Die Uhrzeiten lassen sich ändern (siehe unten) |
 | `day` | Immer das helle Theme des aktuellen Monats |
 | `night` | Immer das dunkle Theme des aktuellen Monats |
 | `system` | Folgt der hellen, dunklen und kontrastreichen Darstellung deines Systems (siehe unten) |
@@ -93,6 +93,28 @@ Gut zu wissen:
 - **Deine Wahl zählt.** Wählst du ein Theme von Hand, bleibt es bis zum nächsten Periodenwechsel (Tag/Nacht oder neuer Monat).
 - **Dein Monat bleibt auch.** Wählst du einen anderen Monat, mit den Pfeilen oder in der Theme-Auswahl, wechselt der Automatikmodus weiter zwischen hell und dunkel in diesem Monat, bis der nächste tatsächliche Monat beginnt, auch nach einem Neustart. Um früher zurückzukehren, führe `365: Back to the current month` aus.
 - **Kontrastreich bleibt kontrastreich.** Nutzt du ein kontrastreiches Theme, aktualisiert der Automatikmodus nur den Monat, nie die Kontraststufe.
+
+### Uhrzeiten wählen
+
+Standardmäßig beginnt das helle Theme um 7:00 Uhr und das dunkle um 19:00 Uhr. So änderst du diese Uhrzeiten:
+
+1. Öffne die Einstellungen (`Ctrl+,` oder `Cmd+,`) und suche nach **365DayNight**.
+2. Setze **365DayNight: Day Start** und **365DayNight: Night Start** im Format HH:MM (24-Stunden-Uhr).
+
+Oder füge Folgendes zu deiner `settings.json` hinzu:
+
+```json
+{
+  "365DayNight.dayStart": "08:30",
+  "365DayNight.nightStart": "20:00"
+}
+```
+
+- **Schnell angewendet.** Eine neue Uhrzeit gilt etwa 2 Sekunden nach dem Ende der Eingabe, auch wenn du ein Theme von Hand gewählt hast. Danach wechselt das Theme zur gewählten Minute.
+- **Über Mitternacht.** Beginnt der Tag nach der Nacht, zum Beispiel `"20:00"` und `"06:00"`, läuft das helle Theme über Mitternacht. Praktisch, wenn du nachts arbeitest.
+- **Ungültige Werte.** Eine unlesbare Uhrzeit wie `"25:00"` oder `"7h"` wird durch ihren Standardwert ersetzt, und eine Warnung weist dich einmal darauf hin. Zwei gleiche Uhrzeiten ergeben 7:00 und 19:00 Uhr.
+- **Nur im Modus `auto`.** Die Modi `day`, `night` und `system` ignorieren diese Uhrzeiten.
+- **Zurück zu 7:00 und 19:00 Uhr.** Klicke in den Einstellungen auf das Zahnrad neben jeder Uhrzeit und wähle **Reset Setting**, oder entferne beide Zeilen aus deiner `settings.json`.
 
 ### Deinem System folgen
 
@@ -166,12 +188,14 @@ Die Erweiterung legt standardmäßig keine Tastenkürzel fest. Um eigene zuzuwei
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Wendet automatisch das Theme des aktuellen Monats an |
 | `365DayNight.mode` | `auto` | `auto` (nach Uhrzeit), `day` (immer hell), `night` (immer dunkel) oder `system` (folgt deinem System) |
+| `365DayNight.dayStart` | `"07:00"` | Uhrzeit, zu der das helle Theme im Modus `auto` beginnt, im Format HH:MM |
+| `365DayNight.nightStart` | `"19:00"` | Uhrzeit, zu der das dunkle Theme im Modus `auto` beginnt, im Format HH:MM |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Den kontrastreichen Modus auch beim Wechsel mit der Schaltfläche in der Statusleiste einbeziehen |
 
 ## Häufige Fragen
 
 **Wie wechselt VS Code automatisch zwischen hellem und dunklem Theme?**
-Installiere die Erweiterung und setze `"365DayNight.enable": true`. Das helle Theme gilt von 7:00 bis 19:00 Uhr, das dunkle nachts.
+Installiere die Erweiterung und setze `"365DayNight.enable": true`. Das helle Theme gilt von 7:00 bis 19:00 Uhr, das dunkle nachts. Du kannst diese Uhrzeiten mit `365DayNight.dayStart` und `365DayNight.nightStart` ändern.
 
 **Kann VS Code mit diesen Themes dem hellen oder dunklen Modus meines Systems folgen?**
 Ja. Setze `"365DayNight.enable": true` und `"365DayNight.mode": "system"`. Dein System entscheidet zwischen hell und dunkel, und die Erweiterung hält die Themes auf dem aktuellen Monat.
@@ -189,8 +213,6 @@ Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automa
 Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung.
 
 ## Roadmap
-
-- ⏰ Einstellbare Tag- und Nachtzeiten
 
 Ideen und Vorschläge sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen.
 

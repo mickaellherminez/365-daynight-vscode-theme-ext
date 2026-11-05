@@ -17,6 +17,8 @@ const {
 	getThemeDisplayName,
 	getSwitchHint,
 	getAutoThemeType,
+	parseTime,
+	resolveSchedule,
 	getAutoPeriod,
 	getNextThemeType,
 	getToggleThemeType,
@@ -243,18 +245,85 @@ suite('Theme logic', () => {
 	});
 
 	suite('getAutoThemeType', () => {
-		test('switches to Light at 7:00 and to Dark at 19:00 in auto mode', () => {
-			assert.strictEqual(getAutoThemeType('auto', 6), ThemeType.DARK);
-			assert.strictEqual(getAutoThemeType('auto', 7), ThemeType.LIGHT);
-			assert.strictEqual(getAutoThemeType('auto', 18), ThemeType.LIGHT);
-			assert.strictEqual(getAutoThemeType('auto', 19), ThemeType.DARK);
+		const at = (hours, minutes = 0) => new Date(2026, 10, 10, hours, minutes);
+
+		test('switches to Light at 7:00 and to Dark at 19:00 in auto mode by default', () => {
+			assert.strictEqual(getAutoThemeType('auto', at(6, 59)), ThemeType.DARK);
+			assert.strictEqual(getAutoThemeType('auto', at(7)), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(18, 59)), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(19)), ThemeType.DARK);
 		});
 
-		test('ignores the hour in day and night modes', () => {
-			for (const hour of [0, 12, 23]) {
-				assert.strictEqual(getAutoThemeType('day', hour), ThemeType.LIGHT);
-				assert.strictEqual(getAutoThemeType('night', hour), ThemeType.DARK);
+		test('follows the configured times, to the minute', () => {
+			const schedule = resolveSchedule({ dayStart: '08:30', nightStart: '20:15' });
+			assert.strictEqual(getAutoThemeType('auto', at(8, 29), schedule), ThemeType.DARK);
+			assert.strictEqual(getAutoThemeType('auto', at(8, 30), schedule), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(20, 14), schedule), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(20, 15), schedule), ThemeType.DARK);
+		});
+
+		test('keeps Light past midnight when the day starts after the night', () => {
+			const schedule = resolveSchedule({ dayStart: '20:00', nightStart: '06:00' });
+			assert.strictEqual(getAutoThemeType('auto', at(19, 59), schedule), ThemeType.DARK);
+			assert.strictEqual(getAutoThemeType('auto', at(20), schedule), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(0), schedule), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(5, 59), schedule), ThemeType.LIGHT);
+			assert.strictEqual(getAutoThemeType('auto', at(6), schedule), ThemeType.DARK);
+			assert.strictEqual(getAutoThemeType('auto', at(12), schedule), ThemeType.DARK);
+		});
+
+		test('ignores the time in day and night modes', () => {
+			const schedule = resolveSchedule({ dayStart: '20:00', nightStart: '06:00' });
+			for (const hours of [0, 12, 23]) {
+				assert.strictEqual(getAutoThemeType('day', at(hours), schedule), ThemeType.LIGHT);
+				assert.strictEqual(getAutoThemeType('night', at(hours), schedule), ThemeType.DARK);
 			}
+		});
+	});
+
+	suite('parseTime', () => {
+		test('reads a 24-hour time, with or without a leading zero', () => {
+			assert.strictEqual(parseTime('00:00'), 0);
+			assert.strictEqual(parseTime('07:00'), 420);
+			assert.strictEqual(parseTime('7:05'), 425);
+			assert.strictEqual(parseTime('23:59'), 1439);
+		});
+
+		test('rejects anything else', () => {
+			for (const value of ['24:00', '7', '07:60', '07h00', ' 07:00', '7:5', '-1:00', '', 'abc', 7, null, undefined]) {
+				assert.strictEqual(parseTime(value), undefined, String(value));
+			}
+		});
+	});
+
+	suite('resolveSchedule', () => {
+		test('gives 7:00 and 19:00 by default', () => {
+			assert.deepStrictEqual(resolveSchedule({}), { dayStart: 420, nightStart: 1140, problem: undefined });
+		});
+
+		test('replaces an invalid time by its default and names it', () => {
+			const schedule = resolveSchedule({ dayStart: '25:00', nightStart: '20:00' });
+			assert.strictEqual(schedule.dayStart, 420);
+			assert.strictEqual(schedule.nightStart, 1200);
+			assert.ok(schedule.problem.includes('365DayNight.dayStart'));
+			assert.ok(schedule.problem.includes('25:00'));
+			assert.ok(schedule.problem.includes('07:00'));
+		});
+
+		test('names every invalid time', () => {
+			const { problem } = resolveSchedule({ dayStart: 'x', nightStart: 'y' });
+			assert.ok(problem.includes('365DayNight.dayStart') && problem.includes('365DayNight.nightStart'));
+		});
+
+		test('uses both defaults when the two times are the same', () => {
+			const schedule = resolveSchedule({ dayStart: '08:00', nightStart: '8:00' });
+			assert.strictEqual(schedule.dayStart, 420);
+			assert.strictEqual(schedule.nightStart, 1140);
+			assert.ok(schedule.problem.includes('same'));
+		});
+
+		test('accepts a day that starts after the night', () => {
+			assert.strictEqual(resolveSchedule({ dayStart: '20:00', nightStart: '06:00' }).problem, undefined);
 		});
 	});
 
@@ -328,6 +397,18 @@ suite('Theme logic', () => {
 			);
 			const contributed = contributes.themes.map((theme) => theme.label);
 			assert.deepStrictEqual([...contributed].sort(), computed.sort());
+		});
+
+		test('contributes the two times, with defaults and a format that the extension accepts', () => {
+			const { properties } = contributes.configuration;
+			assert.strictEqual(properties['365DayNight.dayStart'].default, '07:00');
+			assert.strictEqual(properties['365DayNight.nightStart'].default, '19:00');
+			for (const key of ['365DayNight.dayStart', '365DayNight.nightStart']) {
+				const pattern = new RegExp(properties[key].pattern);
+				for (const value of ['00:00', '07:00', '7:05', '23:59', '24:00', '7', '07:60', '07h00', ' 07:00', '7:5']) {
+					assert.strictEqual(pattern.test(value), parseTime(value) !== undefined, `${key}: ${value}`);
+				}
+			}
 		});
 
 		test('contributes the system mode with its description', () => {
