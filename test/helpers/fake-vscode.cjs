@@ -9,7 +9,24 @@ const path = require('path');
 const EXTENSION_PATH = path.resolve(__dirname, '../../extension.js');
 const THEME_SETTING = 'workbench.colorTheme';
 
+const DETECT_COLOR_SCHEME = 'window.autoDetectColorScheme';
+const DETECT_HIGH_CONTRAST = 'window.autoDetectHighContrast';
+const PREFERRED_LIGHT = 'workbench.preferredLightColorTheme';
+const PREFERRED_DARK = 'workbench.preferredDarkColorTheme';
+const PREFERRED_HIGH_CONTRAST = 'workbench.preferredHighContrastColorTheme';
+const PREFERRED_HIGH_CONTRAST_LIGHT = 'workbench.preferredHighContrastLightColorTheme';
+
 const ColorThemeKind = { Light: 1, Dark: 2, HighContrast: 3, HighContrastLight: 4 };
+
+// Valeurs par défaut de VS Code : elles sont lues mais n'apparaissent pas dans les réglages utilisateur
+const DEFAULT_SETTINGS = {
+  [DETECT_COLOR_SCHEME]: false,
+  [DETECT_HIGH_CONTRAST]: true,
+  [PREFERRED_LIGHT]: 'Default Light Modern',
+  [PREFERRED_DARK]: 'Default Dark Modern',
+  [PREFERRED_HIGH_CONTRAST]: 'Default High Contrast',
+  [PREFERRED_HIGH_CONTRAST_LIGHT]: 'Default High Contrast Light'
+};
 
 /**
  * Genre du thème d'après son nom : suffit pour les thèmes utilisés dans les tests
@@ -17,9 +34,9 @@ const ColorThemeKind = { Light: 1, Dark: 2, HighContrast: 3, HighContrastLight: 
  */
 function kindOf(themeName) {
   if (themeName.includes('High Contrast')) {
-    return ColorThemeKind.HighContrast;
+    return themeName.includes('Light') ? ColorThemeKind.HighContrastLight : ColorThemeKind.HighContrast;
   }
-  return themeName.includes('Dark') || themeName === 'Monokai' ? ColorThemeKind.Dark : ColorThemeKind.Light;
+  return themeName.includes('Dark') || themeName === 'Monokai' || themeName === 'Dracula' ? ColorThemeKind.Dark : ColorThemeKind.Light;
 }
 
 /**
@@ -30,6 +47,8 @@ function kindOf(themeName) {
  * @param {Record<string, unknown>} [options.workspaceSettings] Réglages de workspace
  * @param {boolean} [options.holdThemeEvents] Retenir les changements de thème jusqu'à deliverThemeEvent()
  * @param {boolean} [options.systemHighContrast] Le système d'exploitation est en contraste élevé
+ * @param {boolean} [options.systemDark] Le système d'exploitation est en mode sombre
+ * @param {boolean} [options.focused] La fenêtre a le focus (oui par défaut)
  * @param {boolean} [options.failWrites] Faire échouer les écritures dès le démarrage
  * @param {Map<string, unknown>} [options.globalState] Mémoire de l'extension, à réutiliser pour simuler
  *   un rechargement, une nouvelle fenêtre ou un redémarrage
@@ -39,13 +58,28 @@ function loadExtension(options = {}) {
   const theme = options.theme || 'Monokai';
   const userSettings = new Map(Object.entries({ [THEME_SETTING]: theme, ...options.settings }));
   const workspaceSettings = new Map(Object.entries(options.workspaceSettings || {}));
-  const effective = (key) => (workspaceSettings.has(key) ? workspaceSettings.get(key) : userSettings.get(key));
+  const effective = (key) => {
+    if (workspaceSettings.has(key)) {
+      return workspaceSettings.get(key);
+    }
+    return userSettings.has(key) ? userSettings.get(key) : DEFAULT_SETTINGS[key];
+  };
+  const system = { dark: Boolean(options.systemDark), highContrast: Boolean(options.systemHighContrast) };
 
-  // VS Code applique d'abord le contraste élevé du système (activé par défaut), puis le mode du système
-  const followsSystemHighContrast = () => Boolean(options.systemHighContrast) && effective('window.autoDetectHighContrast') !== false;
-  const followsSystem = () => followsSystemHighContrast() || effective('window.autoDetectColorScheme') === true;
+  // Comme VS Code : d'abord le contraste élevé du système, puis le mode du système, sinon workbench.colorTheme
+  const activeThemeSetting = () => {
+    if (system.highContrast && effective(DETECT_HIGH_CONTRAST)) {
+      return system.dark ? PREFERRED_HIGH_CONTRAST : PREFERRED_HIGH_CONTRAST_LIGHT;
+    }
+    if (effective(DETECT_COLOR_SCHEME)) {
+      return system.dark ? PREFERRED_DARK : PREFERRED_LIGHT;
+    }
+    return THEME_SETTING;
+  };
+  const activeTheme = () => effective(activeThemeSetting());
 
   const fake = {
+    focused: options.focused !== false,
     writes: [],
     infoMessages: [],
     errorMessages: [],
@@ -72,7 +106,7 @@ function loadExtension(options = {}) {
     pendingThemeEvents: [],
     intervals: [],
     timeouts: new Map(),
-    activeKind: followsSystemHighContrast() ? ColorThemeKind.HighContrast : kindOf(effective(THEME_SETTING))
+    activeKind: kindOf(activeTheme())
   };
 
   const deliverThemeEvent = () => {
@@ -81,6 +115,32 @@ function loadExtension(options = {}) {
       fake.activeKind = kind;
       fake.themeListeners.forEach((listener) => listener({ kind }));
     }
+  };
+
+  /**
+   * Signale le thème devenu actif, seulement s'il a changé, comme VS Code après un changement de réglage
+   * @param {string} previousTheme
+   */
+  const signalThemeChange = (previousTheme) => {
+    if (activeTheme() !== previousTheme) {
+      fake.pendingThemeEvents.push(kindOf(activeTheme()));
+      if (!options.holdThemeEvents) {
+        deliverThemeEvent();
+      }
+    }
+  };
+
+  /** Écrit un réglage utilisateur et prévient l'extension, comme VS Code */
+  const writeUserSetting = (key, value) => {
+    const previousTheme = activeTheme();
+    if (value === undefined) {
+      userSettings.delete(key);
+    } else {
+      userSettings.set(key, value);
+    }
+    const affectsConfiguration = (section) => key === section || key.startsWith(`${section}.`);
+    fake.configListeners.forEach((listener) => listener({ affectsConfiguration }));
+    signalThemeChange(previousTheme);
   };
 
   const vscode = {
@@ -107,6 +167,9 @@ function loadExtension(options = {}) {
       }
     },
     window: {
+      get state() {
+        return { focused: fake.focused };
+      },
       get activeColorTheme() {
         return { kind: fake.activeKind };
       },
@@ -157,13 +220,7 @@ function loadExtension(options = {}) {
               throw new Error('simulated write failure');
             }
             fake.writes.push(value);
-            userSettings.set(fullKey(key), value);
-            if (fullKey(key) === THEME_SETTING && effective(THEME_SETTING) === value && !followsSystem()) {
-              fake.pendingThemeEvents.push(kindOf(value));
-              if (!options.holdThemeEvents) {
-                deliverThemeEvent();
-              }
-            }
+            writeUserSetting(fullKey(key), value);
           }
         };
       },
@@ -214,6 +271,9 @@ function loadExtension(options = {}) {
   fake.globalState = globalState;
   fake.globalStateWrites = 0;
   const memento = {
+    setKeysForSync(keys) {
+      fake.keysForSync = keys;
+    },
     get: (key, defaultValue) => (globalState.has(key) ? globalState.get(key) : defaultValue),
     async update(key, value) {
       fake.globalStateWrites++;
@@ -239,6 +299,12 @@ function loadExtension(options = {}) {
   return Object.assign(fake, {
     getThemeState: api.getThemeState,
     theme: () => effective(THEME_SETTING),
+    /** Thème réellement affiché par VS Code, selon les détections et l'apparence du système */
+    activeTheme,
+    /** Valeur écrite dans les réglages utilisateur, undefined si le réglage en est absent */
+    userValue: (key) => userSettings.get(key),
+    /** Le réglage figure-t-il dans les réglages utilisateur ? */
+    hasUserValue: (key) => userSettings.has(key),
     deliverThemeEvent,
     settle,
     /** Avance l'horloge simulée */
@@ -247,9 +313,14 @@ function loadExtension(options = {}) {
     },
     /** Modifie un réglage comme le ferait l'utilisateur et prévient l'extension */
     async setSetting(key, value) {
-      userSettings.set(key, value);
-      const affectsConfiguration = (section) => key === section || key.startsWith(`${section}.`);
-      fake.configListeners.forEach((listener) => listener({ affectsConfiguration }));
+      writeUserSetting(key, value);
+      await settle();
+    },
+    /** Change l'apparence du système, comme le système d'exploitation le signale à VS Code */
+    async setSystemAppearance(appearance) {
+      const previousTheme = activeTheme();
+      Object.assign(system, appearance);
+      signalThemeChange(previousTheme);
       await settle();
     },
     /** Retire un réglage de workspace */
@@ -264,13 +335,15 @@ function loadExtension(options = {}) {
     /**
      * Choisit un thème dans le sélecteur de thèmes de VS Code, dans le même ordre que lui :
      * l'aperçu active le thème sans écrire le réglage, puis la validation écrit le réglage
+     * qui décide du thème actif (un réglage préféré si une détection est active),
      * sans nouveau signal de changement de thème
      */
     async setTheme(themeName) {
       fake.pendingThemeEvents.push(kindOf(themeName));
       deliverThemeEvent();
-      userSettings.set(THEME_SETTING, themeName);
-      const affectsConfiguration = (section) => THEME_SETTING === section || THEME_SETTING.startsWith(`${section}.`);
+      const setting = activeThemeSetting();
+      userSettings.set(setting, themeName);
+      const affectsConfiguration = (section) => setting === section || setting.startsWith(`${section}.`);
       fake.configListeners.forEach((listener) => listener({ affectsConfiguration }));
       await settle();
     },

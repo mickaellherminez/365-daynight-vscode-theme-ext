@@ -29,6 +29,21 @@ async function setThemeAndWait(themeName, kind) {
 	await applied;
 }
 
+/**
+ * Attend qu'une condition devienne vraie
+ * @param {() => boolean} condition
+ * @param {string} description
+ */
+async function waitFor(condition, description) {
+	const deadline = Date.now() + 8000;
+	while (!condition()) {
+		if (Date.now() > deadline) {
+			throw new Error(`Timed out waiting for: ${description}`);
+		}
+		await new Promise((resolve) => setTimeout(resolve, 50));
+	}
+}
+
 suite('Extension Test Suite', () => {
 	test('Extension should be present', () => {
 		assert.ok(vscode.extensions.getExtension(EXTENSION_ID));
@@ -116,5 +131,53 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabel(ThemeType.DARK));
 		await vscode.commands.executeCommand('extension.toggleTheme');
 		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabel(ThemeType.LIGHT));
+	});
+
+	test('System mode should apply the monthly themes through the preferred settings, then restore them', async function () {
+		this.timeout(30000);
+		// Seule la fenêtre qui a le focus met le mode en place
+		if (!vscode.window.state.focused) {
+			console.log('System mode test skipped: the test window has no focus');
+			this.skip();
+		}
+		const { getThemeState } = await vscode.extensions.getExtension(EXTENSION_ID).activate();
+		const month = new Date().getMonth() + 1;
+		const config = () => vscode.workspace.getConfiguration();
+		const userValue = (key) => config().inspect(key).globalValue;
+		const preferredLight = 'workbench.preferredLightColorTheme';
+		const preferredDark = 'workbench.preferredDarkColorTheme';
+
+		await setThemeAndWait('Monokai', vscode.ColorThemeKind.Dark);
+		await config().update(preferredDark, 'Default Dark Modern', vscode.ConfigurationTarget.Global);
+		await config().update('365DayNight.mode', 'system', vscode.ConfigurationTarget.Global);
+		await config().update('365DayNight.enable', true, vscode.ConfigurationTarget.Global);
+		try {
+			await waitFor(() => userValue('window.autoDetectColorScheme') === true, 'the detection to be on');
+			assert.strictEqual(userValue(preferredLight), getThemeLabelForMonth(ThemeType.LIGHT, month));
+			assert.strictEqual(userValue(preferredDark), getThemeLabelForMonth(ThemeType.DARK, month));
+			assert.strictEqual(userValue('workbench.preferredHighContrastColorTheme'), getThemeLabelForMonth(ThemeType.HIGH_CONTRAST, month));
+
+			// VS Code a bien activé un thème du mois, sans toucher au réglage workbench.colorTheme
+			await waitFor(() => getThemeState().month === month, 'a theme of the month to be active');
+			assert.strictEqual(userValue('workbench.colorTheme'), 'Monokai');
+
+			// Le système choisit la variante : le bouton central ne change rien
+			await vscode.commands.executeCommand('extension.toggleTheme');
+			assert.strictEqual(getThemeState().month, month);
+
+			await vscode.commands.executeCommand('extension.nextMonth');
+			assert.strictEqual(userValue(preferredDark), getThemeLabelForMonth(ThemeType.DARK, getAdjacentMonth(month, 1)));
+			await waitFor(() => getThemeState().month === getAdjacentMonth(month, 1), 'the next month to be active');
+			await vscode.commands.executeCommand('extension.currentMonth');
+		} finally {
+			await config().update('365DayNight.enable', undefined, vscode.ConfigurationTarget.Global);
+			await config().update('365DayNight.mode', undefined, vscode.ConfigurationTarget.Global);
+		}
+
+		await waitFor(() => userValue('window.autoDetectColorScheme') === undefined, 'the detection to be restored');
+		await waitFor(() => userValue(preferredLight) === undefined, 'the absent setting to be removed');
+		await waitFor(() => userValue(preferredDark) === 'Default Dark Modern', 'the original value to come back');
+		await waitFor(() => getThemeState().month === undefined, 'the previous theme to come back');
+		await config().update(preferredDark, undefined, vscode.ConfigurationTarget.Global);
 	});
 });

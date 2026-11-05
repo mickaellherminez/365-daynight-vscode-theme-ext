@@ -5,6 +5,7 @@ const {
 	MONTH_NAMES,
 	ColorThemeKind,
 	getThemeTypeFromKind,
+	getThemeKind,
 	getThemeMonth,
 	getThemeState,
 	getThemeLabel,
@@ -19,7 +20,10 @@ const {
 	getAutoPeriod,
 	getNextThemeType,
 	getToggleThemeType,
-	isThemeMaskedByWorkspace
+	isThemeMaskedByWorkspace,
+	getActiveThemeSetting,
+	getSystemThemeSettings,
+	isSystemThemeValue
 } = require('../../theme-logic');
 
 suite('Theme logic', () => {
@@ -151,6 +155,91 @@ suite('Theme logic', () => {
 		test('explains the first click from another theme', () => {
 			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: undefined }), 'Click to apply the 365 Dark theme.');
 		});
+
+		test('says that the system decides in system mode', () => {
+			const hint = 'Your system decides between Light and Dark.';
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }, false, true), hint);
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }, true, true), hint);
+		});
+
+		test('still explains the first click from another theme in system mode', () => {
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: undefined }, false, true), 'Click to apply the 365 Dark theme.');
+		});
+	});
+
+	suite('getActiveThemeSetting', () => {
+		const COLOR_THEME = 'workbench.colorTheme';
+		const none = { colorTheme: 'Monokai', followsColorScheme: false, followsHighContrast: false };
+		const both = { colorTheme: 'Monokai', followsColorScheme: true, followsHighContrast: true };
+
+		test('uses the theme setting without any detection', () => {
+			for (const kind of Object.values(ColorThemeKind)) {
+				assert.strictEqual(getActiveThemeSetting(kind, none), COLOR_THEME);
+			}
+		});
+
+		test('uses the preference of the active kind when VS Code follows the system', () => {
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.LIGHT, both), 'workbench.preferredLightColorTheme');
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.DARK, both), 'workbench.preferredDarkColorTheme');
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, both), 'workbench.preferredHighContrastColorTheme');
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, both), 'workbench.preferredHighContrastLightColorTheme');
+		});
+
+		test('a light or dark kind means no system high contrast', () => {
+			const highContrastOnly = { ...none, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.DARK, highContrastOnly), COLOR_THEME);
+		});
+
+		test('a high contrast kind without the high contrast detection comes from elsewhere', () => {
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, { ...both, followsHighContrast: false }), COLOR_THEME);
+		});
+
+		test('a High Contrast theme picked by hand is not mistaken for system high contrast', () => {
+			const picked = { colorTheme: '365 03-March High Contrast', followsColorScheme: false, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, picked), COLOR_THEME);
+		});
+
+		test('the 365 High Contrast themes are dark: a light high contrast kind comes from the system', () => {
+			const picked = { colorTheme: '365 03-March High Contrast', followsColorScheme: false, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, picked), 'workbench.preferredHighContrastLightColorTheme');
+		});
+
+		test('with the color mode detection, a high contrast kind can only come from the system', () => {
+			const picked = { colorTheme: '365 03-March High Contrast', followsColorScheme: true, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, picked), 'workbench.preferredHighContrastColorTheme');
+		});
+	});
+
+	suite('getThemeKind', () => {
+		test('gives the kind of a 365 theme of each type, High Contrast being dark', () => {
+			assert.strictEqual(getThemeKind(ThemeType.LIGHT), ColorThemeKind.LIGHT);
+			assert.strictEqual(getThemeKind(ThemeType.DARK), ColorThemeKind.DARK);
+			assert.strictEqual(getThemeKind(ThemeType.HIGH_CONTRAST), ColorThemeKind.HIGH_CONTRAST);
+		});
+	});
+
+	suite('getSystemThemeSettings', () => {
+		test('gives the theme of the month for each preference', () => {
+			assert.deepStrictEqual(getSystemThemeSettings(11), {
+				'workbench.preferredLightColorTheme': '365 11-November Light',
+				'workbench.preferredDarkColorTheme': '365 11-November Dark',
+				'workbench.preferredHighContrastColorTheme': '365 11-November High Contrast'
+			});
+		});
+	});
+
+	suite('isSystemThemeValue', () => {
+		test('accepts the matching variant of any month', () => {
+			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', '365 03-March Dark'), true);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredLightColorTheme', '365 12-December Light'), true);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredHighContrastColorTheme', '365 01-January High Contrast'), true);
+		});
+
+		test('rejects another variant, another theme or no value', () => {
+			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', '365 03-March Light'), false);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', 'Dracula'), false);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', undefined), false);
+		});
 	});
 
 	suite('getAutoThemeType', () => {
@@ -239,6 +328,12 @@ suite('Theme logic', () => {
 			);
 			const contributed = contributes.themes.map((theme) => theme.label);
 			assert.deepStrictEqual([...contributed].sort(), computed.sort());
+		});
+
+		test('contributes the system mode with its description', () => {
+			const mode = contributes.configuration.properties['365DayNight.mode'];
+			assert.ok(mode.enum.includes('system'));
+			assert.strictEqual(mode.enumDescriptions.length, mode.enum.length);
 		});
 
 		test('contributes the button color, with the normal color for other themes', () => {

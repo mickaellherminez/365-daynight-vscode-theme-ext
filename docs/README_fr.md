@@ -83,6 +83,7 @@ Ou ajoutez ceci à votre `settings.json` :
 | `auto` | Thème clair de 7 h à 19 h, thème sombre le reste du temps |
 | `day` | Toujours le thème clair du mois en cours |
 | `night` | Toujours le thème sombre du mois en cours |
+| `system` | Suit l'apparence claire, sombre et à contraste élevé de votre système (voir ci-dessous) |
 
 L'extension passe aussi au thème du mois suivant le premier jour de chaque mois.
 
@@ -92,6 +93,43 @@ Bon à savoir :
 - **Votre choix est respecté.** Si vous choisissez un thème à la main, il reste en place jusqu'au prochain changement de période (passage jour/nuit ou nouveau mois).
 - **Votre mois reste aussi.** Si vous choisissez un autre mois, avec les flèches ou le sélecteur de thèmes, le mode automatique continue d'alterner clair et sombre sur ce mois jusqu'au début du prochain mois réel, même après un redémarrage. Pour revenir plus tôt, lancez `365: Back to the current month`.
 - **Le contraste élevé reste en contraste élevé.** Si vous utilisez un thème à contraste élevé, le mode automatique met seulement à jour le mois, jamais le niveau de contraste.
+
+### Suivre votre système
+
+Vous préférez suivre l'apparence de votre système plutôt que l'heure ? Utilisez le mode `system` :
+
+1. Ouvrez les paramètres (`Ctrl+,` ou `Cmd+,`) et cherchez **365DayNight**.
+2. Cochez **365DayNight: Enable**.
+3. Réglez **365DayNight: Mode** sur `system`.
+
+Ou ajoutez ceci à votre `settings.json` :
+
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "system"
+}
+```
+
+| Votre système utilise | Thème appliqué |
+| --- | --- |
+| L'apparence claire | Thème clair du mois |
+| L'apparence sombre | Thème sombre du mois |
+| Le contraste élevé, avec une apparence sombre | Thème à contraste élevé du mois |
+| Le contraste élevé, avec une apparence claire | Le thème High Contrast Light de VS Code, en attendant que les thèmes 365 aient cette variante |
+
+Le bouton dans ce mode :
+- **Flèches.** `‹` et `›` changent le mois de toutes les variantes. Ce mois reste jusqu'au début du prochain mois réel, même après un redémarrage. Pour revenir plus tôt, lancez `365: Back to the current month`.
+- **Bouton central.** Votre système décide entre clair et sombre : un clic se contente donc de l'expliquer. Les commandes `365: Apply Light theme`, `365: Apply Dark theme` et `365: Apply High Contrast theme` disent la même chose et ne changent rien.
+- **Sélecteur de thèmes.** Choisir un thème 365 applique son mois à toutes les variantes. Choisir le thème d'un autre éditeur remplace seulement la variante en cours : il reste les mois suivants, et le bouton n'affiche alors ni flèches ni mois. Cliquez sur le bouton central pour retrouver le thème 365.
+
+
+- **Ce que le mode change.** Il active `window.autoDetectColorScheme` et écrit les thèmes du mois dans `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme` et `workbench.preferredHighContrastColorTheme`. `workbench.colorTheme` ne change pas.
+- **Pour revenir en arrière.** Décochez **365DayNight: Enable** ou choisissez un autre mode. Vos réglages d'origine reviennent, et ceux qui n'existaient pas sont de nouveau retirés. Un réglage que vous avez changé entre-temps garde votre valeur.
+- **Avant de désinstaller ou de désactiver l'extension.** Quittez d'abord ce mode, car une extension ne peut plus rien restaurer ensuite. En cas d'oubli, retirez les quatre réglages ci-dessus de votre `settings.json`.
+- **Contraste élevé.** VS Code donne la priorité au contraste élevé de votre système. Pour l'ignorer, désactivez `window.autoDetectHighContrast` : le mode ne change jamais ce réglage.
+- **Désactiver la détection.** Si vous désactivez vous-même `window.autoDetectColorScheme`, l'extension le laisse désactivé et le bouton fonctionne comme d'habitude. Un réglage de thème dans un workspace garde la priorité dans ce workspace.
+- **Systèmes d'exploitation.** D'après la documentation de VS Code, l'apparence claire ou sombre est détectée sous Windows et macOS.
 
 ## L'accessibilité avant tout
 
@@ -127,13 +165,16 @@ L'extension ne définit aucun raccourci clavier par défaut. Pour attribuer les 
 | Paramètre | Valeur par défaut | Description |
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Applique automatiquement le thème du mois en cours |
-| `365DayNight.mode` | `auto` | `auto` (selon l'heure), `day` (toujours clair) ou `night` (toujours sombre) |
+| `365DayNight.mode` | `auto` | `auto` (selon l'heure), `day` (toujours clair), `night` (toujours sombre) ou `system` (suit votre système) |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Inclure aussi le contraste élevé dans la bascule du bouton de la barre d'état |
 
 ## Questions fréquentes
 
 **Comment faire passer VS Code automatiquement d'un thème clair à un thème sombre ?**
 Installez l'extension et réglez `"365DayNight.enable": true`. Le thème clair s'applique de 7 h à 19 h, le thème sombre la nuit.
+
+**VS Code peut-il suivre le mode clair ou sombre de mon système avec ces thèmes ?**
+Oui. Réglez `"365DayNight.enable": true` et `"365DayNight.mode": "system"`. Votre système décide entre clair et sombre, et l'extension garde les thèmes sur le mois en cours.
 
 **Existe-t-il un thème VS Code adapté aux daltoniens ?**
 Oui. Les 36 thèmes sont testés avec des simulations de protanopie, deutéranopie et tritanopie. Ils utilisent aussi l'italique, le soulignement et le barré pour que l'information ne repose jamais sur la couleur seule.

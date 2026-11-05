@@ -58,6 +58,14 @@ suite('Extension behavior', () => {
 			assert.strictEqual(fake.statusBarItem.text, '01 LGT');
 		});
 
+		test('the arrows of a High Contrast theme picked by hand show the new month at once', async () => {
+			load({ theme: '365 05-May High Contrast', holdThemeEvents: true });
+
+			await fake.run(NEXT);
+
+			assert.strictEqual(fake.statusBarItem.text, '06 HCT');
+		});
+
 		test('the arrows change the month and keep the variant', async () => {
 			load({ theme: MARCH_DARK });
 
@@ -804,6 +812,622 @@ suite('Extension behavior', () => {
 		});
 	});
 
+	suite('Reading the active theme outside system mode', () => {
+		const PREFERRED_HC = 'workbench.preferredHighContrastColorTheme';
+
+		test('with system high contrast, the month comes from the preferred theme', () => {
+			load({ theme: '365 03-March Dark', systemHighContrast: true, systemDark: true });
+			assert.strictEqual(fake.activeTheme(), 'Default High Contrast');
+			assert.strictEqual(fake.statusBarItem.text, 'HCT');
+			fake.dispose();
+
+			load({ theme: '365 03-March Dark', systemHighContrast: true, systemDark: true, settings: { [PREFERRED_HC]: '365 05-May High Contrast' } });
+			assert.strictEqual(fake.statusBarItem.text, '05 HCT');
+		});
+
+		test('a High Contrast theme picked by hand keeps its own month', () => {
+			load({ theme: '365 03-March High Contrast', settings: { [PREFERRED_HC]: '365 05-May High Contrast' } });
+
+			assert.strictEqual(fake.statusBarItem.text, '03 HCT');
+		});
+
+		test('with the system color mode, the month comes from the preferred theme of the active kind', async () => {
+			load({
+				theme: 'Monokai',
+				systemDark: true,
+				now: new Date(2026, 10, 10, 12, 0),
+				settings: {
+					'window.autoDetectColorScheme': true,
+					'workbench.preferredDarkColorTheme': '365 05-May Dark',
+					'workbench.preferredLightColorTheme': '365 06-June Light'
+				}
+			});
+			assert.strictEqual(fake.statusBarItem.text, '05 DRK');
+
+			await fake.setSystemAppearance({ dark: false });
+			assert.strictEqual(fake.statusBarItem.text, '06 LGT');
+
+			// Le système a changé de mode : personne n'a choisi de mois
+			assert.strictEqual(fake.globalState.get('selectedMonth'), undefined);
+		});
+
+		test('the blocked message mentions the system mode', async () => {
+			load({ theme: LIGHT, settings: { 'window.autoDetectColorScheme': true } });
+
+			await fake.run(TOGGLE);
+
+			assert.ok(fake.errorMessages[0].includes('365DayNight.mode'));
+		});
+	});
+
+	suite('System mode', () => {
+		const NEXT = 'extension.nextMonth';
+		const PREVIOUS = 'extension.previousMonth';
+		const CURRENT = 'extension.currentMonth';
+		const DETECT = 'window.autoDetectColorScheme';
+		const DETECT_HC = 'window.autoDetectHighContrast';
+		const PREFERRED_LIGHT = 'workbench.preferredLightColorTheme';
+		const PREFERRED_DARK = 'workbench.preferredDarkColorTheme';
+		const PREFERRED_HC = 'workbench.preferredHighContrastColorTheme';
+		const NOVEMBER = new Date(2026, 10, 10, 12, 0);
+		const DECEMBER = new Date(2026, 11, 1, 9, 0);
+		const SYSTEM = { '365DayNight.enable': true, '365DayNight.mode': 'system' };
+
+		/** Démarre l'extension en mode system, système en mode sombre et mois de novembre */
+		const start = async (options = {}) => {
+			load({ theme: 'Monokai', systemDark: true, now: NOVEMBER, ...options, settings: { ...SYSTEM, ...options.settings } });
+			await fake.settle();
+		};
+
+		/** Rouvre l'extension avec la même mémoire : rechargement, nouvelle fenêtre ou redémarrage */
+		const reopen = async (now, settings) => {
+			const { globalState } = fake;
+			const kept = { '365DayNight.enable': true, '365DayNight.mode': 'system' };
+			for (const key of [DETECT, PREFERRED_LIGHT, PREFERRED_DARK, PREFERRED_HC]) {
+				if (fake.hasUserValue(key)) {
+					kept[key] = fake.userValue(key);
+				}
+			}
+			const theme = fake.theme();
+			fake.dispose();
+			load({ theme, systemDark: true, settings: { ...kept, ...settings }, globalState, now });
+			await fake.settle();
+		};
+
+		const assertMonthSettings = (monthLabel) => {
+			assert.strictEqual(fake.userValue(PREFERRED_LIGHT), `365 ${monthLabel} Light`);
+			assert.strictEqual(fake.userValue(PREFERRED_DARK), `365 ${monthLabel} Dark`);
+			assert.strictEqual(fake.userValue(PREFERRED_HC), `365 ${monthLabel} High Contrast`);
+		};
+
+		suite('Following the system', () => {
+			test('turning it on sets the preferred themes and the detection, not the theme setting', async () => {
+				await start();
+
+				assertMonthSettings('11-November');
+				assert.strictEqual(fake.userValue(DETECT), true);
+				assert.strictEqual(fake.theme(), 'Monokai');
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+				assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+			});
+
+			test('it needs the enable setting', async () => {
+				load({ theme: 'Monokai', systemDark: true, now: NOVEMBER, settings: { '365DayNight.mode': 'system' } });
+				await fake.settle();
+
+				assert.deepStrictEqual(fake.writes, []);
+				assert.strictEqual(fake.activeTheme(), 'Monokai');
+			});
+
+			test('the system switching between light and dark selects the matching theme', async () => {
+				await start();
+
+				await fake.setSystemAppearance({ dark: false });
+				assert.strictEqual(fake.activeTheme(), '365 11-November Light');
+				assert.strictEqual(fake.statusBarItem.text, '11 LGT');
+
+				await fake.setSystemAppearance({ dark: true });
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+				assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+			});
+
+			test('system high contrast takes priority over the color mode', async () => {
+				await start();
+
+				await fake.setSystemAppearance({ highContrast: true });
+				assert.strictEqual(fake.activeTheme(), '365 11-November High Contrast');
+				assert.strictEqual(fake.statusBarItem.text, '11 HCT');
+
+				await fake.setSystemAppearance({ highContrast: false });
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+			});
+
+			test('without a High Contrast Light theme yet, a light high contrast system shows no month', async () => {
+				await start({ systemDark: false });
+
+				await fake.setSystemAppearance({ highContrast: true });
+
+				assert.strictEqual(fake.activeTheme(), 'Default High Contrast Light');
+				assert.strictEqual(fake.statusBarItem.text, 'HCT');
+				assert.strictEqual(fake.itemFor(NEXT).visible, false);
+
+				// Aucun thème 365 ne peut encore le remplacer : le clic ne doit rien promettre
+				assert.ok(fake.statusBarItem.tooltip.value.includes('Your system decides'));
+				const writes = fake.writes.length;
+				await fake.run(TOGGLE);
+				assert.strictEqual(fake.writes.length, writes);
+				assert.strictEqual(fake.infoMessages.length, 1);
+			});
+
+			test('the high contrast detection is left to the user', async () => {
+				await start({ settings: { [DETECT_HC]: false } });
+
+				await fake.setSystemAppearance({ highContrast: true });
+
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+				assert.strictEqual(fake.userValue(DETECT_HC), false);
+				fake.dispose();
+
+				await start();
+				assert.strictEqual(fake.hasUserValue(DETECT_HC), false);
+			});
+
+			test('the system switching does not count as choosing a month', async () => {
+				await start();
+
+				await fake.setSystemAppearance({ dark: false });
+				await fake.setSystemAppearance({ dark: true });
+
+				assert.strictEqual(fake.globalState.get('selectedMonth'), undefined);
+			});
+		});
+
+		suite('Month changes', () => {
+			test('the preferred themes follow the real month', async () => {
+				await start();
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+
+				assertMonthSettings('12-December');
+				assert.strictEqual(fake.activeTheme(), '365 12-December Dark');
+				assert.strictEqual(fake.statusBarItem.text, '12 DRK');
+			});
+
+			test('they follow it even if VS Code stayed closed on the first of the month', async () => {
+				await start();
+
+				await reopen(DECEMBER);
+
+				assertMonthSettings('12-December');
+			});
+
+			test('checks and restarts in the same month write nothing', async () => {
+				await start();
+				await reopen(NOVEMBER);
+				const writes = fake.globalStateWrites;
+
+				await fake.runAutoCheck();
+				await fake.runAutoCheck();
+
+				assert.deepStrictEqual(fake.writes, []);
+				assert.strictEqual(fake.globalStateWrites, writes);
+			});
+
+			test('the arrows change the month of the three preferred themes', async () => {
+				await start();
+
+				await fake.run(NEXT);
+
+				assertMonthSettings('12-December');
+				assert.strictEqual(fake.activeTheme(), '365 12-December Dark');
+				assert.strictEqual(fake.theme(), 'Monokai');
+				assert.strictEqual(fake.statusBarItem.text, '12 DRK');
+
+				await fake.setSystemAppearance({ dark: false });
+				assert.strictEqual(fake.activeTheme(), '365 12-December Light');
+			});
+
+			test('fast clicks are grouped into one change of each preferred theme', async () => {
+				await start();
+				const before = fake.writes.length;
+
+				fake.commands.get(NEXT)();
+				fake.commands.get(NEXT)();
+				fake.commands.get(NEXT)();
+				await fake.settle();
+
+				assert.strictEqual(fake.writes.length - before, 3);
+				assertMonthSettings('02-February');
+			});
+
+			test('a selected month lasts until the next real month, even after a restart', async () => {
+				await start();
+				await fake.run(PREVIOUS);
+				assertMonthSettings('10-October');
+
+				await reopen(new Date(2026, 10, 20, 22, 0));
+				assertMonthSettings('10-October');
+				assert.strictEqual(fake.statusBarItem.text, '10 DRK');
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+				assertMonthSettings('12-December');
+			});
+
+			test('going back to the current month ends the selection', async () => {
+				await start();
+				await fake.run(PREVIOUS);
+				assert.strictEqual(fake.globalState.get('selectedMonth').month, 10);
+
+				await fake.run(CURRENT);
+
+				assertMonthSettings('11-November');
+				assert.strictEqual(fake.globalState.get('selectedMonth'), undefined);
+			});
+
+			test('a selected month is kept when switching to another mode', async () => {
+				await start();
+				await fake.run(PREVIOUS);
+
+				await fake.setSetting('365DayNight.mode', 'auto');
+
+				assert.strictEqual(fake.theme(), '365 10-October Light');
+			});
+
+			test('a month selected before turning the mode on is kept', async () => {
+				load({ theme: '365 11-November Dark', systemDark: true, now: NOVEMBER });
+				await fake.run(PREVIOUS);
+
+				await fake.setSetting('365DayNight.mode', 'system');
+				await fake.setSetting('365DayNight.enable', true);
+
+				assertMonthSettings('10-October');
+			});
+
+			test('a month picked in the theme picker applies to the three preferred themes and is remembered', async () => {
+				await start();
+
+				await fake.setTheme('365 03-March Dark');
+
+				assertMonthSettings('03-March');
+				assert.strictEqual(fake.theme(), 'Monokai');
+				assert.strictEqual(fake.statusBarItem.text, '03 DRK');
+
+				await reopen(new Date(2026, 10, 20, 22, 0));
+				assertMonthSettings('03-March');
+			});
+
+			test('another window changing a preferred theme that is not active is not a choice', async () => {
+				await start();
+
+				await fake.setSetting(PREFERRED_LIGHT, '365 12-December Light');
+
+				assert.strictEqual(fake.userValue(PREFERRED_LIGHT), '365 12-December Light');
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), '365 11-November Dark');
+				assert.strictEqual(fake.globalState.get('selectedMonth'), undefined);
+			});
+
+			test('a window without focus does not treat a change as a choice', async () => {
+				await start();
+				fake.focused = false;
+
+				await fake.setSetting(PREFERRED_DARK, '365 03-March Dark');
+
+				assert.strictEqual(fake.userValue(PREFERRED_LIGHT), '365 11-November Light');
+				assert.strictEqual(fake.globalState.get('selectedMonth'), undefined);
+			});
+		});
+
+		suite('The button', () => {
+			const HIGH_CONTRAST_LINK = '(command:extension.setHighContrastTheme)';
+
+			test('the center button explains that the system decides, and changes nothing', async () => {
+				await start();
+				const writes = fake.writes.length;
+
+				await fake.run(TOGGLE);
+
+				assert.strictEqual(fake.writes.length, writes);
+				assert.strictEqual(fake.infoMessages.length, 1);
+				assert.ok(fake.infoMessages[0].includes('system'));
+				assert.deepStrictEqual(fake.errorMessages, []);
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+			});
+
+			test('the tooltip and the screen reader label say so too', async () => {
+				await start();
+
+				const tooltip = fake.statusBarItem.tooltip.value;
+				assert.ok(tooltip.includes('November Dark'));
+				assert.ok(tooltip.includes('Your system decides between Light and Dark'));
+				assert.ok(!tooltip.includes('Click to switch'));
+				assert.ok(!tooltip.includes(HIGH_CONTRAST_LINK));
+				assert.strictEqual(fake.statusBarItem.accessibilityInformation.label, 'November Dark. Your system decides between Light and Dark.');
+			});
+
+			test('the tooltip still offers the current month', async () => {
+				await start();
+
+				await fake.run(NEXT);
+
+				assert.ok(fake.statusBarItem.tooltip.value.includes('(command:extension.currentMonth)'));
+			});
+
+			test('the variant commands explain that the system decides, and change nothing', async () => {
+				await start();
+				const writes = fake.writes.length;
+
+				await fake.run('extension.setLightTheme');
+				await fake.run('extension.setHighContrastTheme');
+
+				assert.strictEqual(fake.writes.length, writes);
+				assert.strictEqual(fake.errorMessages.length, 2);
+				assert.ok(fake.errorMessages[0].includes('Your system decides'));
+				assert.strictEqual(fake.theme(), 'Monokai');
+			});
+		});
+
+		suite('A theme from another publisher', () => {
+			const pickDracula = async () => {
+				await start();
+				await fake.setTheme('Dracula');
+			};
+
+			test('the picker writes it to the active preference: no arrows and no month', async () => {
+				await pickDracula();
+
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+				assert.strictEqual(fake.activeTheme(), 'Dracula');
+				assert.strictEqual(fake.statusBarItem.text, 'DRK');
+				assert.strictEqual(fake.itemFor(NEXT).visible, false);
+				assert.ok(fake.statusBarItem.tooltip.value.includes('Click to apply the 365 Dark theme'));
+			});
+
+			test('the other preferences keep following the month', async () => {
+				await pickDracula();
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+				assert.strictEqual(fake.userValue(PREFERRED_LIGHT), '365 12-December Light');
+				assert.strictEqual(fake.userValue(PREFERRED_HC), '365 12-December High Contrast');
+
+				await fake.setSystemAppearance({ dark: false });
+				assert.strictEqual(fake.statusBarItem.text, '12 LGT');
+				assert.strictEqual(fake.itemFor(NEXT).visible, true);
+			});
+
+			test('the center button brings back the 365 theme, which follows the months again', async () => {
+				await pickDracula();
+
+				await fake.run(TOGGLE);
+
+				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
+				assert.strictEqual(fake.statusBarItem.text, '11 DRK');
+				assert.deepStrictEqual(fake.infoMessages, []);
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+				assert.strictEqual(fake.activeTheme(), '365 12-December Dark');
+			});
+
+			test('the month commands bring it back too', async () => {
+				await pickDracula();
+
+				await fake.run(NEXT);
+
+				assertMonthSettings('12-December');
+			});
+		});
+
+		suite('Leaving the mode', () => {
+			const leaveWith = (key, value) => fake.setSetting(key, value);
+
+			test('absent settings become absent again and the previous theme comes back', async () => {
+				await start();
+
+				await leaveWith('365DayNight.enable', false);
+
+				for (const key of [DETECT, PREFERRED_LIGHT, PREFERRED_DARK, PREFERRED_HC]) {
+					assert.strictEqual(fake.hasUserValue(key), false, key);
+				}
+				assert.strictEqual(fake.activeTheme(), 'Monokai');
+				assert.strictEqual(fake.statusBarItem.text, 'DRK');
+				assert.strictEqual(fake.globalState.get('systemModeBackup'), undefined);
+			});
+
+			test('existing settings get their original values back', async () => {
+				const original = { [DETECT]: true, [PREFERRED_DARK]: 'Dracula', [PREFERRED_LIGHT]: 'Quiet Light', [PREFERRED_HC]: 'Default High Contrast' };
+				await start({ settings: original });
+				assertMonthSettings('11-November');
+
+				await leaveWith('365DayNight.mode', 'night');
+
+				for (const [key, value] of Object.entries(original)) {
+					assert.strictEqual(fake.userValue(key), value, key);
+				}
+			});
+
+			test('switching to another mode applies that mode', async () => {
+				await start();
+
+				await leaveWith('365DayNight.mode', 'auto');
+
+				assert.strictEqual(fake.hasUserValue(DETECT), false);
+				assert.strictEqual(fake.theme(), '365 11-November Light');
+				assert.strictEqual(fake.activeTheme(), '365 11-November Light');
+				assert.strictEqual(fake.statusBarItem.text, '11 LGT');
+			});
+
+			test('settings the user changed meanwhile are kept', async () => {
+				await start();
+				await fake.setSetting(PREFERRED_LIGHT, 'Quiet Light');
+				await fake.setSetting(PREFERRED_DARK, undefined);
+
+				await leaveWith('365DayNight.enable', false);
+
+				assert.strictEqual(fake.userValue(PREFERRED_LIGHT), 'Quiet Light');
+				assert.strictEqual(fake.hasUserValue(PREFERRED_DARK), false);
+				assert.strictEqual(fake.hasUserValue(PREFERRED_HC), false);
+			});
+
+			test('the original values survive a restart and later months', async () => {
+				await start({ settings: { [PREFERRED_DARK]: 'Dracula' } });
+				await reopen(DECEMBER);
+				assertMonthSettings('12-December');
+
+				await leaveWith('365DayNight.enable', false);
+
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+				assert.strictEqual(fake.hasUserValue(PREFERRED_LIGHT), false);
+			});
+
+			test('the original values follow Settings Sync, like the settings they restore', async () => {
+				await start();
+
+				assert.deepStrictEqual(fake.keysForSync, ['systemModeBackup']);
+			});
+
+			test('the original values are read again when the mode is turned on again', async () => {
+				await start();
+				await leaveWith('365DayNight.enable', false);
+				await fake.setSetting(PREFERRED_DARK, 'Dracula');
+
+				await fake.setSetting('365DayNight.enable', true);
+				assertMonthSettings('11-November');
+
+				await leaveWith('365DayNight.enable', false);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+			});
+
+			test('a window opened after the mode was turned off still restores the settings', async () => {
+				await start();
+
+				await reopen(NOVEMBER, { '365DayNight.enable': false });
+
+				assert.strictEqual(fake.hasUserValue(DETECT), false);
+				assert.strictEqual(fake.hasUserValue(PREFERRED_DARK), false);
+			});
+
+			test('a failed restoration is reported once, kept, and tried again', async () => {
+				await start({ settings: { [PREFERRED_DARK]: 'Dracula' } });
+				fake.failWrites = true;
+
+				await leaveWith('365DayNight.enable', false);
+				await fake.runAutoCheck();
+				await fake.runAutoCheck();
+
+				assert.strictEqual(fake.errorMessages.length, 1);
+				assert.ok(fake.globalState.get('systemModeBackup'));
+
+				fake.failWrites = false;
+				await fake.runAutoCheck();
+
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+				assert.strictEqual(fake.globalState.get('systemModeBackup'), undefined);
+			});
+
+			test('without the mode, checks write nothing', async () => {
+				await start();
+				await leaveWith('365DayNight.enable', false);
+				const writes = [fake.writes.length, fake.globalStateWrites];
+
+				await fake.runAutoCheck();
+				await fake.runAutoCheck();
+
+				assert.deepStrictEqual([fake.writes.length, fake.globalStateWrites], writes);
+			});
+		});
+
+		suite('When something gets in the way', () => {
+			test('the user turning the detection off is respected, and the button works as usual', async () => {
+				await start();
+
+				await fake.setSetting(DETECT, false);
+				assert.strictEqual(fake.activeTheme(), 'Monokai');
+				assert.strictEqual(fake.statusBarItem.text, 'DRK');
+
+				await fake.run(TOGGLE);
+				assert.strictEqual(fake.theme(), '365 11-November Dark');
+				assert.deepStrictEqual(fake.infoMessages, []);
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+				assert.strictEqual(fake.userValue(DETECT), false);
+
+				await fake.setSetting('365DayNight.enable', false);
+				assert.strictEqual(fake.userValue(DETECT), false);
+			});
+
+			test('a failed write is reported once per period and tried again, original values included', async () => {
+				await start({ failWrites: true, settings: { [PREFERRED_DARK]: 'Dracula' } });
+				await fake.runAutoCheck();
+
+				assert.strictEqual(fake.errorMessages.length, 1);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+
+				fake.failWrites = false;
+				await fake.runAutoCheck();
+				assertMonthSettings('11-November');
+
+				await fake.setSetting('365DayNight.enable', false);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Dracula');
+			});
+
+			test('a window without focus waits, so that two windows never save the settings at once', async () => {
+				await start({ focused: false });
+
+				assert.deepStrictEqual(fake.writes, []);
+				assert.strictEqual(fake.globalState.get('systemModeBackup'), undefined);
+
+				fake.focused = true;
+				await fake.runAutoCheck();
+				assertMonthSettings('11-November');
+			});
+
+			test('settings saved earlier but now lost are saved again, even in the same month', async () => {
+				const globalState = new Map([['lastAutoPeriod', '2026-11 System']]);
+				await start({ globalState });
+
+				assertMonthSettings('11-November');
+				assert.ok(fake.globalState.get('systemModeBackup'));
+			});
+
+			test('once the mode is set up, a window without focus follows the month too', async () => {
+				await start();
+				fake.focused = false;
+
+				fake.setNow(DECEMBER);
+				await fake.runAutoCheck();
+
+				assertMonthSettings('12-December');
+			});
+
+			test('a preferred theme set by the workspace wins, and the button shows it', async () => {
+				await start({ workspaceSettings: { [PREFERRED_DARK]: 'Monokai' } });
+
+				assert.strictEqual(fake.activeTheme(), 'Monokai');
+				assert.strictEqual(fake.statusBarItem.text, 'DRK');
+				assert.strictEqual(fake.itemFor(NEXT).visible, false);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), '365 11-November Dark');
+				assert.deepStrictEqual(fake.errorMessages, []);
+			});
+
+			test('a workspace turning the detection off gets the usual button', async () => {
+				await start({ workspaceSettings: { [DETECT]: false } });
+
+				assert.strictEqual(fake.activeTheme(), 'Monokai');
+
+				await fake.run(TOGGLE);
+
+				assert.strictEqual(fake.theme(), '365 11-November Dark');
+				assert.deepStrictEqual(fake.infoMessages, []);
+			});
+		});
+	});
+
 	suite('When the system uses high contrast', () => {
 		test('a change that VS Code does not activate is reported, not announced as a success', async () => {
 			load({ theme: 'Monokai', systemHighContrast: true });
@@ -815,6 +1439,44 @@ suite('Extension behavior', () => {
 			assert.strictEqual(fake.errorMessages.length, 1);
 			assert.ok(fake.errorMessages[0].includes('window.autoDetectHighContrast'));
 			assert.strictEqual(fake.getThemeState().type, ThemeType.HIGH_CONTRAST);
+		});
+
+		test('on a light system, a High Contrast theme that VS Code ignores is reported and shows no month', async () => {
+			load({ theme: '365 11-November Light', systemHighContrast: true, systemDark: false });
+			assert.strictEqual(fake.activeTheme(), 'Default High Contrast Light');
+			assert.strictEqual(fake.statusBarItem.text, 'HCT');
+
+			await fake.run(TOGGLE);
+
+			// Pendant l'attente, le bouton ne promet ni mois ni flèches
+			assert.strictEqual(fake.statusBarItem.text, 'HCT');
+			assert.strictEqual(fake.itemFor('extension.nextMonth').visible, false);
+
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.activeTheme(), 'Default High Contrast Light');
+			assert.strictEqual(fake.statusBarItem.text, 'HCT');
+			assert.strictEqual(fake.itemFor('extension.nextMonth').visible, false);
+			assert.strictEqual(fake.errorMessages.length, 1);
+			assert.ok(fake.errorMessages[0].includes('window.autoDetectHighContrast'));
+		});
+
+		test('without the high contrast detection, the button changes at once, before VS Code', async () => {
+			load({ theme: HIGH_CONTRAST, holdThemeEvents: true, settings: { 'window.autoDetectHighContrast': false } });
+
+			await fake.run(TOGGLE);
+
+			assert.strictEqual(fake.statusBarItem.text, `${String(MONTH).padStart(2, '0')} LGT`);
+		});
+
+		test('a settings change before the delay does not hide the report', async () => {
+			load({ theme: 'Monokai', systemHighContrast: true });
+
+			await fake.run('extension.setLightTheme');
+			await fake.setSetting('window.autoDetectHighContrast', true);
+			await fake.runTimeouts();
+
+			assert.strictEqual(fake.errorMessages.length, 1);
 		});
 
 		test('nothing is reported once VS Code no longer follows it', async () => {
@@ -842,6 +1504,7 @@ suite('Extension behavior', () => {
 			load({ theme: HIGH_CONTRAST });
 
 			await fake.run(TOGGLE);
+			assert.strictEqual(fake.statusBarItem.text, `${String(MONTH).padStart(2, '0')} LGT`);
 			await fake.runTimeouts();
 
 			assert.strictEqual(fake.theme(), LIGHT);
