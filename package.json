@@ -120,12 +120,14 @@
           "enum": [
             "auto",
             "day",
-            "night"
+            "night",
+            "system"
           ],
           "enumDescriptions": [
             "Light theme from 7:00 to 19:00, Dark theme otherwise.",
             "Always use the Light theme of the current month.",
-            "Always use the Dark theme of the current month."
+            "Always use the Dark theme of the current month.",
+            "Follow the light, dark and high contrast appearance of your system, with the themes of the current month. Your system decides the variant; the arrows still change the month."
           ],
           "default": "auto",
           "description": "Theme selection mode used when `365DayNight.enable` is on."

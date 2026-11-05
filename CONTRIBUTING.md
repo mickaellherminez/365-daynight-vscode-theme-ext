@@ -59,7 +59,10 @@ The button has three items: `‹ 10 DRK ›`. These rules include the planned Hi
 | Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month, even after a restart. A month picked in the theme picker counts as selected, and a theme from another publisher does not cancel the selection |
 | Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants |
 | Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
-| `system` mode | The arrows change the month. The center button explains that the system decides between light and dark |
+| `system` mode | The arrows change the month of the three preferred themes. The center button and the variant commands explain that the system decides between light and dark, and change nothing |
+| `system` mode, theme from another publisher | Picked in the theme picker, it stays in the preference in use, month after month: no arrows and no month number. The first click brings back the 365 theme |
+| `system` mode, leaving it | The settings get their original values back, and absent settings are removed again. A setting that no longer holds a 365 theme of the right variant is a choice of the user: it is kept |
+| `system` mode, several windows | Only the focused window saves the original settings and treats a change of the active preference as a choice of month |
 
 The three items share the `365DayNight.statusBarButton` color, so that they read as one control. Each theme derives it from its accent color, and the audit checks that it stays readable on the status bar. While debugging, the items use the normal status bar color, because the bar has another background. Other themes also get the normal color.
 

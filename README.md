@@ -84,6 +84,7 @@ Or add this to your `settings.json`:
 | `auto` | Light theme from 7:00 to 19:00, Dark theme the rest of the time |
 | `day` | Always the Light theme of the current month |
 | `night` | Always the Dark theme of the current month |
+| `system` | Follows the light, dark and high contrast appearance of your system (see below) |
 
 The extension also moves to the next month's theme on the first day of each month.
 
@@ -92,6 +93,43 @@ Good to know:
 - **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
 - **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
 - **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
+
+### Follow your system
+
+Prefer to follow the appearance of your system rather than the clock? Use the `system` mode:
+
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Check **365DayNight: Enable**.
+3. Set **365DayNight: Mode** to `system`.
+
+Or add this to your `settings.json`:
+
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "system"
+}
+```
+
+| Your system uses | Theme applied |
+| --- | --- |
+| Light appearance | Light theme of the month |
+| Dark appearance | Dark theme of the month |
+| High contrast, with a dark appearance | High Contrast theme of the month |
+| High contrast, with a light appearance | VS Code's own High Contrast Light theme, until the 365 themes get this variant |
+
+Using the button in this mode:
+- **Arrows.** `‹` and `›` change the month of all the variants. That month stays until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
+- **Center button.** Your system decides between Light and Dark, so a click only explains this. The `365: Apply Light theme`, `365: Apply Dark theme` and `365: Apply High Contrast theme` commands say the same and change nothing.
+- **Theme picker.** Picking a 365 theme applies its month to all the variants. Picking a theme from another publisher replaces only the variant in use: it stays during the following months, and the button shows no arrows and no month with it. Click the center button to get the 365 theme back.
+
+Good to know:
+- **What it changes.** The mode turns on `window.autoDetectColorScheme` and writes the themes of the month in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme` and `workbench.preferredHighContrastColorTheme`. `workbench.colorTheme` does not change.
+- **How to go back.** Uncheck **365DayNight: Enable**, or choose another mode. Your original settings come back, and settings that did not exist are removed again. A setting you changed in the meantime keeps your value.
+- **Before uninstalling or disabling the extension.** Leave this mode first, because an extension can no longer restore anything afterwards. If you forgot, remove the four settings above from your `settings.json`.
+- **High contrast.** VS Code gives priority to the high contrast of your system. To ignore it, turn off `window.autoDetectHighContrast`: the mode never changes this setting.
+- **Turning the detection off.** If you turn off `window.autoDetectColorScheme` yourself, the extension leaves it off and the button works as usual. A theme setting in a workspace still wins in that workspace.
+- **Operating systems.** According to the VS Code documentation, the light and dark appearance is detected on Windows and macOS.
 
 ## Accessibility first
 
@@ -127,13 +165,16 @@ The extension defines no keyboard shortcut by default. To assign your own, open 
 | Setting | Default | Description |
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Automatically apply the theme of the current month |
-| `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light) or `night` (always Dark) |
+| `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light), `night` (always Dark) or `system` (follows your system) |
 | `365DayNight.toggleIncludesHighContrast` | `false` | Also include High Contrast when switching with the status bar button |
 
 ## FAQ
 
 **How do I automatically switch VS Code between a light and a dark theme?**
 Install the extension and set `"365DayNight.enable": true`. The Light theme is applied from 7:00 to 19:00 and the Dark theme at night.
+
+**Can VS Code follow the light or dark mode of my system with these themes?**
+Yes. Set `"365DayNight.enable": true` and `"365DayNight.mode": "system"`. Your system decides between Light and Dark, and the extension keeps the themes on the current month.
 
 **Is there a color blind friendly VS Code theme?**
 Yes. All 36 themes are tested with protanopia, deuteranopia and tritanopia simulations, and they use italics, underline and strikethrough so that information never relies on color alone.

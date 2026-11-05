@@ -33,6 +33,24 @@ const ColorThemeKind = {
   HIGH_CONTRAST_LIGHT: 4
 };
 
+// Ce que dit le bouton central quand le système choisit la variante
+const SYSTEM_DECIDES_HINT = 'Your system decides between Light and Dark.';
+
+// Réglages préférés de VS Code, utilisés quand il suit le système
+const PREFERRED_THEME_SETTINGS = {
+  [ColorThemeKind.LIGHT]: 'workbench.preferredLightColorTheme',
+  [ColorThemeKind.DARK]: 'workbench.preferredDarkColorTheme',
+  [ColorThemeKind.HIGH_CONTRAST]: 'workbench.preferredHighContrastColorTheme',
+  [ColorThemeKind.HIGH_CONTRAST_LIGHT]: 'workbench.preferredHighContrastLightColorTheme'
+};
+
+// Réglages préférés tenus par le mode system. Le contraste élevé clair attend ses thèmes.
+const SYSTEM_THEME_TYPES = {
+  [PREFERRED_THEME_SETTINGS[ColorThemeKind.LIGHT]]: ThemeType.LIGHT,
+  [PREFERRED_THEME_SETTINGS[ColorThemeKind.DARK]]: ThemeType.DARK,
+  [PREFERRED_THEME_SETTINGS[ColorThemeKind.HIGH_CONTRAST]]: ThemeType.HIGH_CONTRAST
+};
+
 const THEME_LABEL_PATTERN = new RegExp(`^365 (\\d{2})-([A-Za-z]+) (?:${Object.values(ThemeType).join('|')})$`);
 
 /**
@@ -44,6 +62,18 @@ function getThemeTypeFromKind(kind) {
     return ThemeType.HIGH_CONTRAST;
   }
   return kind === ColorThemeKind.DARK ? ThemeType.DARK : ThemeType.LIGHT;
+}
+
+/**
+ * Genre de thème qu'un thème 365 de ce type donne une fois actif.
+ * Les thèmes 365 à contraste élevé sont tous sombres.
+ * @param {string} themeType
+ */
+function getThemeKind(themeType) {
+  if (themeType === ThemeType.HIGH_CONTRAST) {
+    return ColorThemeKind.HIGH_CONTRAST;
+  }
+  return themeType === ThemeType.DARK ? ColorThemeKind.DARK : ColorThemeKind.LIGHT;
 }
 
 /**
@@ -98,10 +128,14 @@ function getThemeDisplayName(state) {
  * Ce que fait un clic sur le bouton central
  * @param {{ type: string, month: number | undefined }} state
  * @param {boolean} [includeHighContrast]
+ * @param {boolean} [systemDecides] Le mode system est actif : c'est le système qui choisit la variante
  */
-function getSwitchHint(state, includeHighContrast = false) {
-  return state.month === undefined
-    ? `Click to apply the 365 ${state.type} theme.`
+function getSwitchHint(state, includeHighContrast = false, systemDecides = false) {
+  if (state.month === undefined) {
+    return `Click to apply the 365 ${state.type} theme.`;
+  }
+  return systemDecides
+    ? SYSTEM_DECIDES_HINT
     : `Click to switch to ${getNextThemeType(state.type, includeHighContrast)}.`;
 }
 
@@ -221,11 +255,54 @@ function isThemeMaskedByWorkspace(inspection, themeLabel) {
   return workspaceTheme !== undefined && workspaceTheme !== themeLabel;
 }
 
+/**
+ * Réglage qui décide du thème actif, dans l'ordre de VS Code : le contraste élevé du système,
+ * puis le mode du système, sinon workbench.colorTheme. L'API ne dit pas si le système est en
+ * contraste élevé : un genre de thème à contraste élevé est attribué au système, sauf si le
+ * réglage workbench.colorTheme contient lui-même un thème 365 à contraste élevé et que le genre
+ * actif est le sien : un genre à contraste élevé clair ne peut donc pas venir de ce réglage.
+ * @param {number} kind Valeur de vscode.ColorThemeKind
+ * @param {{ colorTheme: string | undefined, followsColorScheme: boolean, followsHighContrast: boolean }} context
+ */
+function getActiveThemeSetting(kind, { colorTheme, followsColorScheme, followsHighContrast }) {
+  const isHighContrast = getThemeTypeFromKind(kind) === ThemeType.HIGH_CONTRAST;
+  if (isHighContrast) {
+    const pickedByHand = !followsColorScheme && kind === getThemeKind(ThemeType.HIGH_CONTRAST)
+      && getThemeMonth(colorTheme) !== undefined && colorTheme.endsWith(ThemeType.HIGH_CONTRAST);
+    return followsHighContrast && !pickedByHand ? PREFERRED_THEME_SETTINGS[kind] : 'workbench.colorTheme';
+  }
+  return followsColorScheme ? PREFERRED_THEME_SETTINGS[kind] : 'workbench.colorTheme';
+}
+
+/**
+ * Valeurs des réglages préférés pour un mois en mode system
+ * @param {number} month Mois, de 1 à 12
+ * @returns {Record<string, string>}
+ */
+function getSystemThemeSettings(month) {
+  return Object.fromEntries(
+    Object.entries(SYSTEM_THEME_TYPES).map(([setting, type]) => [setting, getThemeLabelForMonth(type, month)])
+  );
+}
+
+/**
+ * Indique si un réglage préféré contient ce que le mode system y écrit, pour n'importe quel mois.
+ * Toute autre valeur est un choix de l'utilisateur.
+ * @param {string} setting
+ * @param {string | undefined} value
+ */
+function isSystemThemeValue(setting, value) {
+  const month = getThemeMonth(value);
+  return month !== undefined && value === getThemeLabelForMonth(SYSTEM_THEME_TYPES[setting], month);
+}
+
 module.exports = {
   ThemeType,
+  SYSTEM_DECIDES_HINT,
   MONTH_NAMES,
   ColorThemeKind,
   getThemeTypeFromKind,
+  getThemeKind,
   getThemeMonth,
   getThemeState,
   getThemeLabel,
@@ -240,5 +317,8 @@ module.exports = {
   getAutoPeriod,
   getNextThemeType,
   getToggleThemeType,
-  isThemeMaskedByWorkspace
+  isThemeMaskedByWorkspace,
+  getActiveThemeSetting,
+  getSystemThemeSettings,
+  isSystemThemeValue
 };

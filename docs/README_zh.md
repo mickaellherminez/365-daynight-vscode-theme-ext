@@ -83,6 +83,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 | `auto` | 7:00 至 19:00 使用浅色主题，其余时间使用深色主题 |
 | `day` | 始终使用当月的浅色主题 |
 | `night` | 始终使用当月的深色主题 |
+| `system` | 跟随系统的浅色、深色和高对比度外观（见下文） |
 
 每个月的第一天，扩展还会切换到新月份的主题。
 
@@ -92,6 +93,43 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 - **尊重你的选择。** 如果你手动选择了主题，它会一直保留到下一次时段变化（白天转夜晚或新的月份）。
 - **你选择的月份也会保留。** 如果你通过箭头或主题选择器选择了其他月份，自动模式会继续在该月份的浅色和深色之间切换，直到下一个实际月份开始，重启后也一样。要提前返回，请运行 `365: Back to the current month`。
 - **高对比度保持高对比度。** 如果你使用高对比度主题，自动模式只会更新月份，不会改变对比度级别。
+
+### 跟随系统
+
+想跟随系统外观而不是时间？请使用 `system` 模式：
+
+1. 打开设置（`Ctrl+,` 或 `Cmd+,`），搜索 **365DayNight**。
+2. 勾选 **365DayNight: Enable**。
+3. 将 **365DayNight: Mode** 设为 `system`。
+
+或在 `settings.json` 中添加：
+
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "system"
+}
+```
+
+| 系统使用 | 应用的主题 |
+| --- | --- |
+| 浅色外观 | 当月的浅色主题 |
+| 深色外观 | 当月的深色主题 |
+| 高对比度，深色外观 | 当月的高对比度主题 |
+| 高对比度，浅色外观 | VS Code 自带的 High Contrast Light 主题，直到 365 主题提供此版本 |
+
+此模式下的按钮：
+- **箭头。** `‹` 和 `›` 更改所有版本的月份。该月份会一直保留到下一个实际月份开始，即使重启也不变。要提前返回，请运行 `365: Back to the current month`。
+- **中间按钮。** 浅色和深色由系统决定，因此点击只会显示说明。`365: Apply Light theme`、`365: Apply Dark theme` 和 `365: Apply High Contrast theme` 命令也会显示同样的说明，不做任何更改。
+- **主题选择器。** 选择 365 主题会把它的月份应用到所有版本。选择其他发布者的主题只会替换当前使用的版本：它在之后的月份中也会保留，按钮此时不显示箭头和月份。点击中间按钮可恢复 365 主题。
+
+
+- **更改的内容。** 此模式会开启 `window.autoDetectColorScheme`，并把当月主题写入 `workbench.preferredLightColorTheme`、`workbench.preferredDarkColorTheme` 和 `workbench.preferredHighContrastColorTheme`。`workbench.colorTheme` 不会改变。
+- **如何恢复。** 取消勾选 **365DayNight: Enable**，或选择其他模式。你的原始设置会恢复，原本不存在的设置会再次被移除。在此期间你更改过的设置会保留你的值。
+- **卸载或禁用扩展之前。** 请先退出此模式，因为之后扩展无法再恢复任何内容。如果忘记了，请从 `settings.json` 中删除上述四项设置。
+- **高对比度。** VS Code 优先采用系统的高对比度。要忽略它，请关闭 `window.autoDetectHighContrast`：此模式绝不会更改该设置。
+- **关闭检测。** 如果你自己关闭 `window.autoDetectColorScheme`，扩展会保持关闭，按钮照常工作。工作区中的主题设置在该工作区内仍然优先。
+- **操作系统。** 根据 VS Code 文档，浅色或深色外观可在 Windows 和 macOS 上检测。
 
 ## 无障碍优先
 
@@ -127,13 +165,16 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 | 设置 | 默认值 | 说明 |
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | 自动应用当月主题 |
-| `365DayNight.mode` | `auto` | `auto`（按时间）、`day`（始终浅色）或 `night`（始终深色） |
+| `365DayNight.mode` | `auto` | `auto`（按时间）、`day`（始终浅色）、`night`（始终深色）或 `system`（跟随系统） |
 | `365DayNight.toggleIncludesHighContrast` | `false` | 使用状态栏按钮切换时也包含高对比度 |
 
 ## 常见问题
 
 **如何让 VS Code 在浅色和深色主题之间自动切换？**
 安装扩展并设置 `"365DayNight.enable": true`。7:00 至 19:00 使用浅色主题，夜间使用深色主题。
+
+**VS Code 能否使用这些主题跟随系统的浅色或深色模式？**
+可以。设置 `"365DayNight.enable": true` 和 `"365DayNight.mode": "system"`。浅色和深色由系统决定，扩展会让主题保持在当前月份。
 
 **有适合色盲用户的 VS Code 主题吗？**
 有。全部 36 款主题都经过红色盲、绿色盲和蓝色盲模拟测试，并使用斜体、下划线和删除线，让信息从不只依赖颜色。

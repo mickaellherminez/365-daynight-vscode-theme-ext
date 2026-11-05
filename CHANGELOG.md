@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- `system` value for `365DayNight.mode`: follow the light, dark and high contrast appearance of your system with the themes of the month. The original settings come back when leaving the mode, except those you changed in the meantime
 - The status bar button now uses a color of the month, so that its three parts read as one control. It stays readable in every theme, and takes the normal color while debugging
 - Status bar tooltip with the full theme name, what a click does, and links to High Contrast and to the current month
 - Screen reader labels on the three parts of the status bar button
@@ -16,9 +17,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - `365DayNight.toggleIncludesHighContrast` setting: also include High Contrast when switching with the status bar button
 
 ### Changed
+- When VS Code follows the system, the status bar button now shows the month of the theme really in use, read from the preferred theme settings
 - The `365: Apply Light theme`, `365: Apply Dark theme` and `365: Apply High Contrast theme` commands now keep the displayed month
 - The status bar button no longer shows an icon, to save space
 - The status bar button now switches between Light and Dark in one click. High Contrast is available with the `365: Apply High Contrast theme` command, or with the new setting
+
+### Fixed
+- With the high contrast of a light system, the status bar button no longer shows a month that is not active, and a 365 High Contrast theme that VS Code ignores is now reported
 
 ## [0.11.2] - 2026-11-05
 
