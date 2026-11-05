@@ -365,6 +365,7 @@ function activate(context) {
   // et réagir aux changements de configuration du mode automatique
   context.subscriptions.push(
     vscode.window.onDidChangeActiveColorTheme(onActiveThemeChanged),
+    vscode.debug.onDidChangeActiveDebugSession(updateStatusBarItem),
     vscode.workspace.onDidChangeConfiguration((event) => {
       // Le sélecteur de thèmes signale le changement à l'aperçu, avant d'écrire le réglage :
       // son nom n'est connu qu'ici, à la validation
@@ -414,6 +415,12 @@ function updateStatusBarItem() {
   const includeHighContrast = vscode.workspace.getConfiguration('365DayNight').get('toggleIncludesHighContrast', false);
   const name = getThemeDisplayName(themeState);
   const hint = getSwitchHint(themeState, includeHighContrast);
+
+  // La barre d'état change de fond pendant un débogage : la couleur du mois n'y serait plus lisible
+  const color = vscode.debug.activeDebugSession ? undefined : new vscode.ThemeColor('365DayNight.statusBarButton');
+  for (const item of [previousMonthItem, statusBarItem, nextMonthItem]) {
+    item.color = color;
+  }
 
   statusBarItem.text = getStatusBarText(themeState);
   statusBarItem.tooltip = createThemeTooltip(name, hint);

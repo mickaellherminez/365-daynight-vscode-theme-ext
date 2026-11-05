@@ -61,6 +61,8 @@ The button has three items: `‹ 10 DRK ›`. These rules include the planned Hi
 | Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
 | `system` mode | The arrows change the month. The center button explains that the system decides between light and dark |
 
+The three items share the `365DayNight.statusBarButton` color, so that they read as one control. Each theme derives it from its accent color, and the audit checks that it stays readable on the status bar. While debugging, the items use the normal status bar color, because the bar has another background. Other themes also get the normal color.
+
 The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 existing themes and the public command IDs must not change.
 
 ## Changing a theme

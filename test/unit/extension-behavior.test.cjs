@@ -184,6 +184,37 @@ suite('Extension behavior', () => {
 		});
 	});
 
+	suite('Button color', () => {
+		const COLOR = '365DayNight.statusBarButton';
+		const items = () => [fake.itemFor('extension.previousMonth'), fake.statusBarItem, fake.itemFor('extension.nextMonth')];
+
+		test('the three items share the same theme color', () => {
+			load({ theme: '365 03-March Dark' });
+
+			assert.deepStrictEqual(items().map((item) => item.color.id), [COLOR, COLOR, COLOR]);
+		});
+
+		test('the normal color comes back while debugging, then the theme color returns', () => {
+			load({ theme: '365 03-March Dark' });
+
+			fake.setDebugging(true);
+			assert.deepStrictEqual(items().map((item) => item.color), [undefined, undefined, undefined]);
+
+			fake.setDebugging(false);
+			assert.deepStrictEqual(items().map((item) => item.color.id), [COLOR, COLOR, COLOR]);
+		});
+
+		test('a session already running when the extension starts is taken into account', () => {
+			load({ theme: '365 03-March Dark' });
+			fake.debugSession = { name: 'test' };
+
+			fake.statusBarItems.forEach((item) => { item.color = 'unset'; });
+			fake.setDebugging(true);
+
+			assert.strictEqual(fake.statusBarItem.color, undefined);
+		});
+	});
+
 	suite('Tooltip and screen reader labels', () => {
 		const NOVEMBER = new Date(2026, 10, 10, 12, 0);
 		const NEXT = 'extension.nextMonth';

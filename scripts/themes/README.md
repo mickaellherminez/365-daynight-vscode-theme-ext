@@ -29,6 +29,8 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
 - **Sélection** : visible dans l'éditeur, le terminal et la console de débogage, distincte de la ligne
   courante, et texte sélectionné toujours lisible.
 - **Interface** : barre latérale, onglets, barre d'état, boutons, champs, menus, notifications, vue peek, etc.
+- **Bouton de l'extension** : `365DayNight.statusBarButton` est lisible sur la barre d'état (≥ 4.5:1, ≥ 7:1 en High Contrast)
+  et se distingue du texte normal de la barre (ΔE ≥ 15). `build.py` la calcule depuis `accent`, en éclaircissant au minimum.
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
   et les alertes (erreur, avertissement, ajout, suppression) sont simulés en protanopie, deutéranopie et
   tritanopie ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)).

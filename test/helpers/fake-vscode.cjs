@@ -50,6 +50,13 @@ function loadExtension(options = {}) {
     infoMessages: [],
     errorMessages: [],
     failWrites: Boolean(options.failWrites),
+    debugSession: undefined,
+    debugListeners: [],
+    /** Démarre ou arrête une session de débogage */
+    setDebugging(active) {
+      fake.debugSession = active ? { name: 'test' } : undefined;
+      fake.debugListeners.forEach((listener) => listener(fake.debugSession));
+    },
     statusBarItems: [],
     /** Élément central de la barre d'état, celui qui change de variante */
     get statusBarItem() {
@@ -83,6 +90,20 @@ function loadExtension(options = {}) {
     MarkdownString: class {
       constructor(value = '') {
         this.value = value;
+      }
+    },
+    ThemeColor: class {
+      constructor(id) {
+        this.id = id;
+      }
+    },
+    debug: {
+      get activeDebugSession() {
+        return fake.debugSession;
+      },
+      onDidChangeActiveDebugSession(listener) {
+        fake.debugListeners.push(listener);
+        return { dispose() {} };
       }
     },
     window: {

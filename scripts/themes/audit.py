@@ -36,6 +36,7 @@ ALERT_KEYS = {
     'suppression': 'editorGutter.deletedBackground',
 }
 MIN_DELTA_E = 10
+MIN_BUTTON_DELTA_E = 15
 
 
 def load_theme(path):
@@ -199,6 +200,14 @@ def checks(theme, hc):
         if back is not None and len(back) == 9:
             back = over(back, side if bgk.startswith('list') else bg)
         chk(f'{fgk} / {bgk}', g(fgk), back, minimum)
+
+    # Bouton de l'extension dans la barre d'état : lisible et distinct du texte normal de la barre
+    button = g('365DayNight.statusBarButton')
+    chk('Bouton de la barre d\'état / barre', button, g('statusBar.background'), text)
+    if button and g('statusBar.foreground'):
+        distance = delta_e(button, g('statusBar.foreground'))
+        rows.append(('Bouton de la barre d\'état ≠ texte de la barre', distance, MIN_BUTTON_DELTA_E,
+                     'OK' if distance >= MIN_BUTTON_DELTA_E else 'ÉCHEC'))
 
     # Jetons de syntaxe
     for label, color in token_colors(theme).items():
