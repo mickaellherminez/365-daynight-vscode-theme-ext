@@ -14,7 +14,7 @@
 
 - 🗓️ **Um visual novo a cada mês.** Neve e azul de inverno em janeiro, verde primavera em março, sol pleno em julho, cores de outono em outubro e clima de lareira em dezembro: seu editor acompanha as estações.
 - ☀️🌙 **Dia e noite, sempre combinando.** Cada mês tem um tema claro para o dia, um escuro para a noite e um de alto contraste quando você precisa da máxima legibilidade.
-- 🔁 **Troca com um clique.** Um botão na barra de status alterna entre claro, escuro e alto contraste.
+- 🔁 **Troca com um clique.** Um botão na barra de status alterna entre claro e escuro. O alto contraste está disponível por um comando.
 - ⏰ **Modo automático opcional.** A extensão pode aplicar sozinha o tema do mês atual: claro de dia e escuro à noite.
 - 👁️ **Confortável para os olhos e legível para todos.** Todo o texto atende aos níveis de contraste WCAG, e as cores de sintaxe continuam distintas para pessoas com daltonismo.
 - 🖥️ **Temas cuidados.** Editor, barra lateral, abas, terminal, console de depuração, notificações e barra de status: tudo é estilizado, com mais de 400 cores por tema. Áreas mais recentes, como chat, testes e notebooks, ainda usam as cores padrão do VS Code por enquanto.
@@ -39,7 +39,7 @@ Requer o Visual Studio Code 1.96 ou mais recente.
 2. Digite **365** para ver os 36 temas, por exemplo `365 10-October Dark`.
 3. Escolha um. Pronto!
 
-O **botão da barra de status** (canto inferior direito: `LGT`, `DRK` ou `HCT`) alterna entre as versões clara, escura e de alto contraste do mês atual.
+O **botão da barra de status** (canto inferior direito: `LGT`, `DRK` ou `HCT`) alterna entre as versões clara e escura do mês atual. Para o alto contraste, execute `365: Apply High Contrast theme` na paleta de comandos.
 
 ## Os 12 meses
 
@@ -108,7 +108,7 @@ Abra a paleta de comandos (`Ctrl+Shift+P` ou `Cmd+Shift+P`) e digite **365**:
 
 | Comando | Ação |
 | --- | --- |
-| `365: Toggle between Light, Dark and High Contrast themes` | Alterna claro → escuro → alto contraste (igual ao botão da barra de status) |
+| `365: Toggle between Light and Dark themes` | Alterna entre claro e escuro (igual ao botão da barra de status) |
 | `365: Apply Light theme` | Aplica o tema claro do mês atual |
 | `365: Apply Dark theme` | Aplica o tema escuro do mês atual |
 | `365: Apply High Contrast theme` | Aplica o tema de alto contraste do mês atual |
@@ -121,6 +121,7 @@ Você pode atribuir seus próprios atalhos de teclado a esses comandos (`Ctrl+K 
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Aplica automaticamente o tema do mês atual |
 | `365DayNight.mode` | `auto` | `auto` (pelo horário), `day` (sempre claro) ou `night` (sempre escuro) |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Incluir também o alto contraste ao alternar com o botão da barra de status |
 
 ## Perguntas frequentes
 

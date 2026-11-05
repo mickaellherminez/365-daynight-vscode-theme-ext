@@ -43,6 +43,24 @@ If you run the tests from VS Code's integrated terminal, use `env -u ELECTRON_RU
 
 The [CI workflow](.github/workflows/ci.yml) runs the theme audit, the lint and the tests on every branch push and pull request. If a check fails, the workflow fails.
 
+## Status bar button rules
+
+These rules include the planned High Contrast Light variant and the planned month arrows (`‹ 10 DRK ›`).
+
+| Situation | Behavior |
+| --- | --- |
+| Click on a Light or Dark theme | Switches between Light and Dark, in one click |
+| Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. Until High Contrast Light exists, it goes to Light |
+| `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant |
+| Reaching High Contrast | With the `365: Apply High Contrast theme` command, or a link in the tooltip |
+| `‹` and `›` | Change the month and keep the variant. December is followed by January |
+| Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month |
+| Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants |
+| Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
+| `system` mode | The arrows change the month. The center button explains that the system decides between light and dark |
+
+The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 existing themes and the public command IDs must not change.
+
 ## Changing a theme
 
 Theme files are **generated**: do not edit `themes/*.json` by hand.

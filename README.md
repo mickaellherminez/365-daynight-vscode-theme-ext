@@ -15,7 +15,7 @@
 
 - 🗓️ **A new look every month.** Snow and winter blue in January, spring green in March, full sun in July, autumn colors in October, a fireside glow in December. Your editor follows the seasons.
 - ☀️🌙 **Day and night, always matched.** Each month has a Light theme for daylight, a Dark theme for the evening, and a High Contrast theme when you need maximum readability.
-- 🔁 **One-click switch.** A button in the status bar cycles between Light, Dark and High Contrast.
+- 🔁 **One-click switch.** A button in the status bar switches between Light and Dark. High Contrast is one command away.
 - ⏰ **Optional automatic mode.** The extension can apply the current month's theme by itself, Light during the day and Dark at night.
 - 👁️ **Easy on the eyes, readable for everyone.** All text meets WCAG contrast levels, and syntax colors stay distinct for people with color blindness.
 - 🖥️ **Carefully styled.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled, with more than 400 colors in each theme. Newer areas such as chat, tests and notebooks still use VS Code's default colors for now.
@@ -40,7 +40,7 @@ Requires Visual Studio Code 1.96 or later.
 2. Type **365** to see all 36 themes, for example `365 10-October Dark`.
 3. Pick one. That's it!
 
-Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light, Dark and High Contrast versions of the current month.
+Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette.
 
 ## The 12 months
 
@@ -108,7 +108,7 @@ Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
 
 | Command | Action |
 | --- | --- |
-| `365: Toggle between Light, Dark and High Contrast themes` | Cycles Light → Dark → High Contrast (same as the status bar button) |
+| `365: Toggle between Light and Dark themes` | Switches between Light and Dark (same as the status bar button) |
 | `365: Apply Light theme` | Applies the current month's Light theme |
 | `365: Apply Dark theme` | Applies the current month's Dark theme |
 | `365: Apply High Contrast theme` | Applies the current month's High Contrast theme |
@@ -121,6 +121,7 @@ You can assign your own keyboard shortcuts to these commands (`Ctrl+K Ctrl+S`).
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Automatically apply the theme of the current month |
 | `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light) or `night` (always Dark) |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Also include High Contrast when switching with the status bar button |
 
 ## FAQ
 

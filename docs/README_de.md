@@ -14,7 +14,7 @@
 
 - 🗓️ **Jeden Monat ein neuer Look.** Schnee und Winterblau im Januar, Frühlingsgrün im März, volle Sonne im Juli, Herbstfarben im Oktober, Kaminfeuer-Stimmung im Dezember: Dein Editor folgt den Jahreszeiten.
 - ☀️🌙 **Tag und Nacht, immer passend.** Jeder Monat hat ein helles Theme für den Tag, ein dunkles für den Abend und ein kontrastreiches, wenn du maximale Lesbarkeit brauchst.
-- 🔁 **Wechsel mit einem Klick.** Eine Schaltfläche in der Statusleiste wechselt zwischen hell, dunkel und kontrastreich.
+- 🔁 **Wechsel mit einem Klick.** Eine Schaltfläche in der Statusleiste wechselt zwischen hell und dunkel. Der kontrastreiche Modus ist per Befehl erreichbar.
 - ⏰ **Optionaler Automatikmodus.** Die Erweiterung kann das Theme des aktuellen Monats selbst anwenden: tagsüber hell, nachts dunkel.
 - 👁️ **Augenschonend und für alle lesbar.** Der gesamte Text erfüllt die WCAG-Kontraststufen, und die Syntaxfarben bleiben auch für farbenblinde Menschen unterscheidbar.
 - 🖥️ **Sorgfältig gestaltet.** Editor, Seitenleiste, Tabs, Terminal, Debugkonsole, Benachrichtigungen und Statusleiste: Alles ist gestaltet, mit mehr als 400 Farben pro Theme. Neuere Bereiche wie Chat, Tests und Notebooks verwenden vorerst noch die Standardfarben von VS Code.
@@ -39,7 +39,7 @@ Erfordert Visual Studio Code 1.96 oder neuer.
 2. Tippe **365**, um alle 36 Themes zu sehen, zum Beispiel `365 10-October Dark`.
 3. Wähle eines aus. Fertig!
 
-Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen, dunklen und kontrastreichen Version des aktuellen Monats.
+Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus.
 
 ## Die 12 Monate
 
@@ -108,7 +108,7 @@ Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellhermin
 
 | Befehl | Aktion |
 | --- | --- |
-| `365: Toggle between Light, Dark and High Contrast themes` | Wechselt hell → dunkel → kontrastreich (wie die Schaltfläche in der Statusleiste) |
+| `365: Toggle between Light and Dark themes` | Wechselt zwischen hell und dunkel (wie die Schaltfläche in der Statusleiste) |
 | `365: Apply Light theme` | Wendet das helle Theme des aktuellen Monats an |
 | `365: Apply Dark theme` | Wendet das dunkle Theme des aktuellen Monats an |
 | `365: Apply High Contrast theme` | Wendet das kontrastreiche Theme des aktuellen Monats an |
@@ -121,6 +121,7 @@ Du kannst diesen Befehlen eigene Tastenkürzel zuweisen (`Ctrl+K Ctrl+S`).
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | Wendet automatisch das Theme des aktuellen Monats an |
 | `365DayNight.mode` | `auto` | `auto` (nach Uhrzeit), `day` (immer hell) oder `night` (immer dunkel) |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Den kontrastreichen Modus auch beim Wechsel mit der Schaltfläche in der Statusleiste einbeziehen |
 
 ## Häufige Fragen
 

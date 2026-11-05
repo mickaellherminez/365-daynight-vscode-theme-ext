@@ -14,7 +14,7 @@
 
 - 🗓️ **每个月焕然一新。** 一月的白雪与冬日蓝、三月的春绿、七月的阳光、十月的秋色、十二月的炉火暖意：你的编辑器随季节变化。
 - ☀️🌙 **白天与夜晚，始终搭配。** 每个月都有适合白天的浅色主题、适合晚上的深色主题，以及需要最高可读性时使用的高对比度主题。
-- 🔁 **一键切换。** 状态栏上的按钮可在浅色、深色和高对比度之间循环切换。
+- 🔁 **一键切换。** 状态栏上的按钮可在浅色和深色之间切换。高对比度可通过命令启用。
 - ⏰ **可选的自动模式。** 扩展可以自动应用当月主题：白天浅色，夜晚深色。
 - 👁️ **护眼且人人可读。** 所有文字都符合 WCAG 对比度标准，语法颜色对色盲用户同样易于区分。
 - 🖥️ **精心设计。** 编辑器、侧边栏、标签页、终端、调试控制台、通知和状态栏全部经过设计，每个主题包含 400 多种颜色。聊天、测试和笔记本等较新的区域目前仍使用 VS Code 的默认颜色。
@@ -39,7 +39,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 2. 输入 **365** 查看全部 36 款主题，例如 `365 10-October Dark`。
 3. 选择一款，就完成了！
 
-使用**状态栏按钮**（右下角：`LGT`、`DRK` 或 `HCT`）可在当月的浅色、深色和高对比度版本之间切换。
+使用**状态栏按钮**（右下角：`LGT`、`DRK` 或 `HCT`）可在当月的浅色和深色版本之间切换。如需高对比度，请在命令面板中运行 `365: Apply High Contrast theme`。
 
 ## 12 个月
 
@@ -108,7 +108,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 | 命令 | 作用 |
 | --- | --- |
-| `365: Toggle between Light, Dark and High Contrast themes` | 在浅色 → 深色 → 高对比度之间循环（与状态栏按钮相同） |
+| `365: Toggle between Light and Dark themes` | 在浅色和深色之间切换（与状态栏按钮相同） |
 | `365: Apply Light theme` | 应用当月的浅色主题 |
 | `365: Apply Dark theme` | 应用当月的深色主题 |
 | `365: Apply High Contrast theme` | 应用当月的高对比度主题 |
@@ -121,6 +121,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 | --- | --- | --- |
 | `365DayNight.enable` | `false` | 自动应用当月主题 |
 | `365DayNight.mode` | `auto` | `auto`（按时间）、`day`（始终浅色）或 `night`（始终深色） |
+| `365DayNight.toggleIncludesHighContrast` | `false` | 使用状态栏按钮切换时也包含高对比度 |
 
 ## 常见问题
 

@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Added
+- `365DayNight.toggleIncludesHighContrast` setting: also include High Contrast when switching with the status bar button
+
+### Changed
+- The status bar button now switches between Light and Dark in one click. High Contrast is available with the `365: Apply High Contrast theme` command, or with the new setting
+
 ## [0.11.2] - 2026-11-05
 
 ### Changed

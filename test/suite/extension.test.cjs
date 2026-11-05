@@ -93,6 +93,6 @@ suite('Extension Test Suite', () => {
 		await vscode.commands.executeCommand('extension.toggleTheme');
 		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabel(ThemeType.DARK));
 		await vscode.commands.executeCommand('extension.toggleTheme');
-		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabel(ThemeType.HIGH_CONTRAST));
+		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabel(ThemeType.LIGHT));
 	});
 });
