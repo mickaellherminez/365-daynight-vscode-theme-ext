@@ -206,6 +206,14 @@ function parseTime(value) {
 }
 
 /**
+ * Heure au format HH:MM pour un nombre de minutes depuis minuit, ex. 420 -> "07:00"
+ * @param {number} minutes
+ */
+function formatTime(minutes) {
+  return `${formatMonth(Math.floor(minutes / 60))}:${formatMonth(minutes % 60)}`;
+}
+
+/**
  * Horaires du mode automatique, en minutes depuis minuit. Une heure invalide est remplacée par
  * sa valeur par défaut. Deux heures identiques ne laissent aucune place au jour ou à la nuit :
  * les deux valeurs par défaut sont alors utilisées. Un début de journée placé après le début de
@@ -361,6 +369,7 @@ module.exports = {
   getSwitchHint,
   getAutoThemeType,
   parseTime,
+  formatTime,
   resolveSchedule,
   getAutoPeriod,
   getNextThemeType,

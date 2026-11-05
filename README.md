@@ -40,6 +40,8 @@ Requires Visual Studio Code 1.96 or later.
 2. Type **365** to see all 36 themes, for example `365 10-October Dark`.
 3. Pick one. That's it!
 
+The first time you use a 365 theme, a notification offers automatic switching: **Follow the clock** (Light by day, Dark at night), **Follow my system** (the light and dark mode of your system) or **No thanks**. Nothing changes unless you choose, and the question is asked only once. After a choice, a message confirms what is on, with an **Open Settings** button to change the hours or turn it off. To change your mind later, see the automatic switching section below.
+
 Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette.
 
 To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep Light, Dark or High Contrast. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme. Hover over the button to see the full theme name, with links to High Contrast and to the current month.
@@ -89,7 +91,7 @@ Or add this to your `settings.json`:
 The extension also moves to the next month's theme on the first day of each month.
 
 Good to know:
-- **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to.
+- **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to. The first time you use a 365 theme, a notification asks you once whether you want it.
 - **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
 - **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
 - **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
@@ -204,7 +206,7 @@ Yes. Set `"365DayNight.enable": true` and `"365DayNight.mode": "system"`. Your s
 Yes. All 36 themes are tested with protanopia, deuteranopia and tritanopia simulations, and they use italics, underline and strikethrough so that information never relies on color alone.
 
 **Will the extension change my theme without asking?**
-No. Automatic mode is off by default. Without it, the theme only changes when you pick one or click the status bar button.
+No. Automatic mode is off by default. Without it, the theme only changes when you pick one or click the status bar button. The first time you use a 365 theme, a notification offers it, and nothing changes unless you pick an option.
 
 **Can I use only one theme, for example October Dark?**
 Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mode off.

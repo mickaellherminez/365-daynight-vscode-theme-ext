@@ -49,6 +49,8 @@ function kindOf(themeName) {
  * @param {boolean} [options.systemHighContrast] Le système d'exploitation est en contraste élevé
  * @param {boolean} [options.systemDark] Le système d'exploitation est en mode sombre
  * @param {boolean} [options.focused] La fenêtre a le focus (oui par défaut)
+ * @param {boolean} [options.firstUse] Première utilisation : la proposition du mode automatique n'a
+ *   pas encore été faite. Par défaut, elle l'a déjà été, comme pour un utilisateur qui y a répondu.
  * @param {boolean} [options.failWrites] Faire échouer les écritures dès le démarrage
  * @param {Map<string, unknown>} [options.globalState] Mémoire de l'extension, à réutiliser pour simuler
  *   un rechargement, une nouvelle fenêtre ou un redémarrage
@@ -84,6 +86,17 @@ function loadExtension(options = {}) {
     infoMessages: [],
     errorMessages: [],
     warningMessages: [],
+    /** Boutons proposés avec chaque message d'information */
+    infoItems: [],
+    /** Réponse de l'utilisateur à un message : le bouton choisi, ou undefined s'il le ferme */
+    answer: () => undefined,
+    executedCommands: [],
+    windowStateListeners: [],
+    /** Donne ou retire le focus à la fenêtre */
+    setFocused(focused) {
+      fake.focused = focused;
+      fake.windowStateListeners.forEach((listener) => listener({ focused }));
+    },
     failWrites: Boolean(options.failWrites),
     debugSession: undefined,
     debugListeners: [],
@@ -192,7 +205,15 @@ function loadExtension(options = {}) {
         fake.statusBarItems.push(item);
         return item;
       },
-      showInformationMessage: (message) => fake.infoMessages.push(message),
+      showInformationMessage(message, ...items) {
+        fake.infoMessages.push(message);
+        fake.infoItems.push(items);
+        return Promise.resolve(fake.answer(message, items));
+      },
+      onDidChangeWindowState(listener) {
+        fake.windowStateListeners.push(listener);
+        return { dispose() {} };
+      },
       showErrorMessage: (message) => fake.errorMessages.push(message),
       showWarningMessage: (message) => fake.warningMessages.push(message),
       onDidChangeActiveColorTheme(listener) {
@@ -204,6 +225,9 @@ function loadExtension(options = {}) {
       registerCommand(id, handler) {
         fake.commands.set(id, handler);
         return { dispose() {} };
+      },
+      async executeCommand(id, ...args) {
+        fake.executedCommands.push([id, ...args]);
       }
     },
     workspace: {
@@ -269,7 +293,7 @@ function loadExtension(options = {}) {
     }
   };
 
-  const globalState = options.globalState || new Map();
+  const globalState = options.globalState || new Map(options.firstUse ? [] : [['autoModeOffered', true]]);
   fake.globalState = globalState;
   fake.globalStateWrites = 0;
   const memento = {
