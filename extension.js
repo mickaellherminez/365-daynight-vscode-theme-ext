@@ -4,6 +4,9 @@
 const vscode = require('vscode');
 const {
   ThemeType,
+  MONTH_NAMES,
+  getThemeDisplayName,
+  getSwitchHint,
   getThemeState,
   getThemeMonth,
   getThemeTypeFromKind,
@@ -288,6 +291,9 @@ async function forgetAutoPeriod() {
  * Applique le thème automatique s'il a changé depuis la dernière réussite
  */
 function checkAutoTheme() {
+  // Le mois réel a pu changer : le lien « mois en cours » de l'infobulle en dépend
+  updateStatusBarItem();
+
   const config = vscode.workspace.getConfiguration('365DayNight');
   if (!config.get('enable', false)) {
     lastAutoFailurePeriod = undefined;
@@ -332,7 +338,6 @@ function activate(context) {
   previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', 102, 'extension.previousMonth', '$(chevron-left)');
   statusBarItem = createStatusBarControl('theme', 'Light and Dark', 101, 'extension.toggleTheme', '');
   nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 100, 'extension.nextMonth', '$(chevron-right)');
-  statusBarItem.tooltip = 'Switch between Light and Dark themes.';
   syncThemeState();
   statusBarItem.show();
 
@@ -359,6 +364,9 @@ function activate(context) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveColorTheme(onActiveThemeChanged),
     vscode.workspace.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration('365DayNight.toggleIncludesHighContrast')) {
+        updateStatusBarItem();
+      }
       if (event.affectsConfiguration('365DayNight.enable') || event.affectsConfiguration('365DayNight.mode')) {
         lastAutoFailurePeriod = undefined;
         forgetAutoPeriod().then(checkAutoTheme);
@@ -396,14 +404,53 @@ function createStatusBarControl(id, name, priority, command, text) {
  * Met à jour le bouton dans la barre d'état : les flèches n'apparaissent qu'avec un thème 365
  */
 function updateStatusBarItem() {
+  const includeHighContrast = vscode.workspace.getConfiguration('365DayNight').get('toggleIncludesHighContrast', false);
+  const name = getThemeDisplayName(themeState);
+  const hint = getSwitchHint(themeState, includeHighContrast);
+
   statusBarItem.text = getStatusBarText(themeState);
-  for (const item of [previousMonthItem, nextMonthItem]) {
-    if (themeState.month === undefined) {
-      item.hide();
-    } else {
-      item.show();
-    }
+  statusBarItem.tooltip = createThemeTooltip(name, hint);
+  statusBarItem.accessibilityInformation = { label: `${name}. ${hint}`, role: 'button' };
+
+  updateMonthArrow(previousMonthItem, 'Previous month', -1);
+  updateMonthArrow(nextMonthItem, 'Next month', 1);
+}
+
+/**
+ * Affiche une flèche avec un thème 365, en nommant le mois auquel elle mène
+ * @param {vscode.StatusBarItem} item
+ * @param {string} name
+ * @param {number} steps
+ */
+function updateMonthArrow(item, name, steps) {
+  if (themeState.month === undefined) {
+    item.hide();
+    return;
   }
+  const label = `${name}: ${MONTH_NAMES[getAdjacentMonth(themeState.month, steps) - 1]}`;
+  item.tooltip = label;
+  item.accessibilityInformation = { label, role: 'button' };
+  item.show();
+}
+
+/**
+ * Infobulle du bouton central : le thème, l'effet d'un clic et les liens utiles
+ * @param {string} name
+ * @param {string} hint
+ */
+function createThemeTooltip(name, hint) {
+  const links = [];
+  if (themeState.month !== undefined && themeState.month !== getCurrentMonth()) {
+    links.push('[Back to the current month](command:extension.currentMonth)');
+  }
+  if (themeState.type !== ThemeType.HIGH_CONTRAST) {
+    links.push('[High Contrast](command:extension.setHighContrastTheme)');
+  }
+
+  const tooltip = new vscode.MarkdownString([`**${name}**`, hint, links.join(' · ')].filter(Boolean).join('\n\n'));
+  // Seules ces deux commandes peuvent être lancées depuis l'infobulle
+  tooltip.isTrusted = { enabledCommands: ['extension.currentMonth', 'extension.setHighContrastTheme'] };
+  return tooltip;
 }
 
 /**

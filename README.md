@@ -42,7 +42,7 @@ Requires Visual Studio Code 1.96 or later.
 
 Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette.
 
-To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep Light, Dark or High Contrast. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme.
+To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep Light, Dark or High Contrast. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme. Hover over the button to see the full theme name, with links to High Contrast and to the current month.
 
 ## The 12 months
 
@@ -102,6 +102,7 @@ Every theme passes an automated accessibility audit of more than 130 checks:
 - **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
 - **Visible selection everywhere:** text selection is clearly visible in the editor, the terminal and the debug console, and never confused with search results.
 - **High Contrast themes:** selected text turns black on light blue, and all panels have visible borders and a strong keyboard focus outline.
+- **Screen readers:** each part of the status bar button has its own spoken label, such as "Next month: November".
 
 Found something hard to read? Please [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Accessibility feedback is always welcome.
 

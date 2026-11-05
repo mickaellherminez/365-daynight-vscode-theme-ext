@@ -87,6 +87,25 @@ function getThemeLabelForMonth(themeType, month) {
 }
 
 /**
+ * Nom complet du thème pour l'infobulle et les lecteurs d'écran, ex. "October Dark"
+ * @param {{ type: string, month: number | undefined }} state
+ */
+function getThemeDisplayName(state) {
+  return state.month === undefined ? state.type : `${MONTH_NAMES[state.month - 1]} ${state.type}`;
+}
+
+/**
+ * Ce que fait un clic sur le bouton central
+ * @param {{ type: string, month: number | undefined }} state
+ * @param {boolean} [includeHighContrast]
+ */
+function getSwitchHint(state, includeHighContrast = false) {
+  return state.month === undefined
+    ? `Click to apply the 365 ${state.type} theme.`
+    : `Click to switch to ${getNextThemeType(state.type, includeHighContrast)}.`;
+}
+
+/**
  * Année et mois réels d'une date, ex. "2026-10"
  * @param {Date} date
  */
@@ -215,6 +234,8 @@ module.exports = {
   getSelectedMonth,
   getAdjacentMonth,
   getStatusBarText,
+  getThemeDisplayName,
+  getSwitchHint,
   getAutoThemeType,
   getAutoPeriod,
   getNextThemeType,

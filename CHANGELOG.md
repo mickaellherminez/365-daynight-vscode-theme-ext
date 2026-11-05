@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
+- Status bar tooltip with the full theme name, what a click does, and links to High Contrast and to the current month
+- Screen reader labels on the three parts of the status bar button
 - Automatic mode keeps a month you picked, with the arrows or the theme picker, until the next real month begins, even after a restart. Light and Dark keep alternating on that month
 - Month arrows in the status bar (`‹ 10 DRK ›`): browse the 12 months while keeping Light, Dark or High Contrast. The number shows the month, from `01` to `12`
 - `365: Next month`, `365: Previous month` and `365: Back to the current month` commands, to use from the keyboard

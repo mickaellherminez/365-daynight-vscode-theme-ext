@@ -41,7 +41,7 @@ Requer o Visual Studio Code 1.96 ou mais recente.
 
 O **botão da barra de status** (canto inferior direito: `LGT`, `DRK` ou `HCT`) alterna entre as versões clara e escura do mês atual. Para o alto contraste, execute `365: Apply High Contrast theme` na paleta de comandos.
 
-Para experimentar outro mês, clique nas setas ao redor dele (`‹ 10 DRK ›`). O número é o mês, de `01` a `12`, e as setas mantêm claro, escuro ou alto contraste. Depois de dezembro vem janeiro. Para voltar, execute `365: Back to the current month` na paleta de comandos. As setas e o número só aparecem com um tema 365.
+Para experimentar outro mês, clique nas setas ao redor dele (`‹ 10 DRK ›`). O número é o mês, de `01` a `12`, e as setas mantêm claro, escuro ou alto contraste. Depois de dezembro vem janeiro. Para voltar, execute `365: Back to the current month` na paleta de comandos. As setas e o número só aparecem com um tema 365. Passe o cursor sobre o botão para ver o nome completo do tema, com links para o alto contraste e o mês atual.
 
 ## Os 12 meses
 
@@ -102,6 +102,7 @@ Cada tema passa por uma auditoria de acessibilidade automatizada com mais de 130
 - **Não só cor:** comentários, parâmetros e atributos ficam em *itálico*, código obsoleto aparece ~~riscado~~ e código inválido, sublinhado.
 - **Seleção visível em todo lugar:** a seleção de texto é bem visível no editor, no terminal e no console de depuração, sem se confundir com os resultados de busca.
 - **Temas de alto contraste:** o texto selecionado fica preto sobre azul-claro, e todos os painéis têm bordas visíveis e um contorno de foco do teclado bem marcado.
+- **Leitores de tela:** cada parte do botão da barra de status tem seu próprio rótulo falado, por exemplo “Next month: November”.
 
 Alguma cor difícil de ler? [Abra uma issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues): comentários sobre acessibilidade são sempre bem-vindos.
 

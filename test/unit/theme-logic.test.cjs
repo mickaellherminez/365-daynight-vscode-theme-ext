@@ -13,6 +13,8 @@ const {
 	getSelectedMonth,
 	getAdjacentMonth,
 	getStatusBarText,
+	getThemeDisplayName,
+	getSwitchHint,
 	getAutoThemeType,
 	getAutoPeriod,
 	getNextThemeType,
@@ -125,6 +127,29 @@ suite('Theme logic', () => {
 
 		test('shows only the variant for another theme', () => {
 			assert.strictEqual(getStatusBarText({ type: ThemeType.DARK, month: undefined }), 'DRK');
+		});
+	});
+
+	suite('getThemeDisplayName', () => {
+		test('gives the month and the variant of a 365 theme', () => {
+			assert.strictEqual(getThemeDisplayName({ type: ThemeType.DARK, month: 10 }), 'October Dark');
+			assert.strictEqual(getThemeDisplayName({ type: ThemeType.HIGH_CONTRAST, month: 1 }), 'January High Contrast');
+		});
+
+		test('gives only the variant for another theme', () => {
+			assert.strictEqual(getThemeDisplayName({ type: ThemeType.DARK, month: undefined }), 'Dark');
+		});
+	});
+
+	suite('getSwitchHint', () => {
+		test('names the next variant', () => {
+			assert.strictEqual(getSwitchHint({ type: ThemeType.LIGHT, month: 5 }), 'Click to switch to Dark.');
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }), 'Click to switch to Light.');
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }, true), 'Click to switch to High Contrast.');
+		});
+
+		test('explains the first click from another theme', () => {
+			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: undefined }), 'Click to apply the 365 Dark theme.');
 		});
 	});
 

@@ -41,7 +41,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 使用**状态栏按钮**（右下角：`LGT`、`DRK` 或 `HCT`）可在当月的浅色和深色版本之间切换。如需高对比度，请在命令面板中运行 `365: Apply High Contrast theme`。
 
-要试用其他月份，请点击两侧的箭头（`‹ 10 DRK ›`）。数字表示月份，从 `01` 到 `12`，箭头会保持浅色、深色或高对比度版本不变。12 月之后是 1 月。要返回，请在命令面板中运行 `365: Back to the current month`。箭头和数字仅在使用 365 主题时显示。
+要试用其他月份，请点击两侧的箭头（`‹ 10 DRK ›`）。数字表示月份，从 `01` 到 `12`，箭头会保持浅色、深色或高对比度版本不变。12 月之后是 1 月。要返回，请在命令面板中运行 `365: Back to the current month`。箭头和数字仅在使用 365 主题时显示。 将鼠标悬停在按钮上可查看完整的主题名称，以及指向高对比度和当前月份的链接。
 
 ## 12 个月
 
@@ -102,6 +102,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 - **不只依赖颜色：** 注释、参数和属性使用*斜体*，已弃用的代码显示~~删除线~~，无效代码带有下划线。
 - **处处可见的选择：** 在编辑器、终端和调试控制台中，文本选择都清晰可见，且不会与搜索结果混淆。
 - **高对比度主题：** 选中的文字变为浅蓝底黑字，所有面板都有可见边框和醒目的键盘焦点轮廓。
+- **屏幕阅读器：** 状态栏按钮的每个部分都有自己的语音标签，例如“Next month: November”。
 
 发现难以阅读的颜色？请[提交 issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)，我们随时欢迎关于无障碍的反馈。
 

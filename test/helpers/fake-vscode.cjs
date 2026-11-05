@@ -80,6 +80,11 @@ function loadExtension(options = {}) {
     ColorThemeKind,
     ConfigurationTarget: { Global: 1, Workspace: 2, WorkspaceFolder: 3 },
     StatusBarAlignment: { Left: 1, Right: 2 },
+    MarkdownString: class {
+      constructor(value = '') {
+        this.value = value;
+      }
+    },
     window: {
       get activeColorTheme() {
         return { kind: fake.activeKind };
