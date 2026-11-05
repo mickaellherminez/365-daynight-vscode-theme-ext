@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-06
+
 ### Added
 - The first time you use a 365 theme, a notification offers automatic switching once: follow the clock, follow your system, or no thanks. Nothing changes unless you choose
 - `365DayNight.dayStart` and `365DayNight.nightStart` settings: choose when the Light and Dark themes start in `auto` mode, in the HH:MM format (7:00 and 19:00 by default). A day that starts after the night runs past midnight, and an invalid time falls back to its default with a warning
