@@ -5,8 +5,11 @@ const vscode = require('vscode');
 const {
   ThemeType,
   getThemeState,
+  getThemeMonth,
   getThemeTypeFromKind,
   getThemeLabelForMonth,
+  createMonthSelection,
+  getSelectedMonth,
   getAdjacentMonth,
   getStatusBarText,
   getAutoThemeType,
@@ -39,6 +42,9 @@ let themeState = { type: ThemeType.LIGHT, month: undefined };
 // Dernière période traitée par le mode automatique (ex. "2026-05 Light"), conservée entre les
 // fenêtres et les redémarrages : un choix manuel reste jusqu'au prochain changement de période
 const LAST_AUTO_PERIOD_KEY = 'lastAutoPeriod';
+
+// Mois choisi par l'utilisateur, conservé jusqu'au prochain mois réel (ex. { month: 3, realMonth: "2026-10" })
+const SELECTED_MONTH_KEY = 'selectedMonth';
 
 // Mémoire de l'extension, partagée entre les fenêtres
 /** @type {vscode.Memento} */
@@ -140,6 +146,29 @@ function getCurrentMonth() {
  */
 function getDisplayedMonth() {
   return themeState.month ?? getCurrentMonth();
+}
+
+/**
+ * Mémorise le mois d'un thème 365 devenu actif, sans écriture inutile
+ * @param {number} month
+ */
+async function rememberSelectedMonth(month) {
+  const selection = createMonthSelection(month, new Date());
+  if (JSON.stringify(selection) !== JSON.stringify(globalState.get(SELECTED_MONTH_KEY))) {
+    await globalState.update(SELECTED_MONTH_KEY, selection);
+  }
+}
+
+/**
+ * Réagit à un changement de thème, y compris dans le sélecteur de thèmes.
+ * Le démarrage ne passe pas par ici : rouvrir VS Code sur un ancien mois n'est pas un nouveau choix.
+ */
+function onActiveThemeChanged() {
+  syncThemeState();
+  const month = getThemeMonth(vscode.workspace.getConfiguration().get('workbench.colorTheme'));
+  if (month !== undefined) {
+    rememberSelectedMonth(month);
+  }
 }
 
 /**
@@ -274,9 +303,10 @@ function checkAutoTheme() {
       return;
     }
 
-    // Le contraste élevé est un choix d'accessibilité : il n'est jamais remplacé,
-    // seul le mois est mis à jour
-    const result = await applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType);
+    // Le mois choisi reste jusqu'au prochain mois réel. Le contraste élevé est un choix
+    // d'accessibilité : il n'est jamais remplacé, seul le mois est mis à jour
+    const month = getSelectedMonth(globalState.get(SELECTED_MONTH_KEY), now) ?? now.getMonth() + 1;
+    const result = await applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType, month);
     if (result.ok) {
       await globalState.update(LAST_AUTO_PERIOD_KEY, period);
       lastAutoFailurePeriod = undefined;
@@ -327,7 +357,7 @@ function activate(context) {
   // Garder le bouton synchronisé quand le thème est changé ailleurs (sélecteur de thèmes, settings.json...)
   // et réagir aux changements de configuration du mode automatique
   context.subscriptions.push(
-    vscode.window.onDidChangeActiveColorTheme(syncThemeState),
+    vscode.window.onDidChangeActiveColorTheme(onActiveThemeChanged),
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (event.affectsConfiguration('365DayNight.enable') || event.affectsConfiguration('365DayNight.mode')) {
         lastAutoFailurePeriod = undefined;

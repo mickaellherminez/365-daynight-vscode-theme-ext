@@ -90,6 +90,7 @@ The extension also moves to the next month's theme on the first day of each mont
 Good to know:
 - **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to.
 - **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
+- **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
 - **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
 
 ## Accessibility first

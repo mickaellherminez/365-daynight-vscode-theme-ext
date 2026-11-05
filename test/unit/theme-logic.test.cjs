@@ -9,6 +9,8 @@ const {
 	getThemeState,
 	getThemeLabel,
 	getThemeLabelForMonth,
+	createMonthSelection,
+	getSelectedMonth,
 	getAdjacentMonth,
 	getStatusBarText,
 	getAutoThemeType,
@@ -70,6 +72,31 @@ suite('Theme logic', () => {
 		test('builds the label of any month', () => {
 			assert.strictEqual(getThemeLabelForMonth(ThemeType.DARK, 3), '365 03-March Dark');
 			assert.strictEqual(getThemeLabelForMonth(ThemeType.HIGH_CONTRAST, 12), '365 12-December High Contrast');
+		});
+	});
+
+	suite('Month selection', () => {
+		const OCTOBER = new Date(2026, 9, 10);
+
+		test('selecting the real month means no selection', () => {
+			assert.strictEqual(createMonthSelection(10, OCTOBER), undefined);
+		});
+
+		test('a selection lasts for the rest of the real month', () => {
+			const selection = createMonthSelection(3, OCTOBER);
+			assert.strictEqual(getSelectedMonth(selection, new Date(2026, 9, 1)), 3);
+			assert.strictEqual(getSelectedMonth(selection, new Date(2026, 9, 31, 23, 59)), 3);
+		});
+
+		test('a selection ends with the real month and does not come back a year later', () => {
+			const selection = createMonthSelection(3, OCTOBER);
+			assert.strictEqual(getSelectedMonth(selection, new Date(2026, 10, 1)), undefined);
+			assert.strictEqual(getSelectedMonth(selection, new Date(2026, 8, 30)), undefined);
+			assert.strictEqual(getSelectedMonth(selection, new Date(2027, 9, 10)), undefined);
+		});
+
+		test('no selection gives no month', () => {
+			assert.strictEqual(getSelectedMonth(undefined, OCTOBER), undefined);
 		});
 	});
 
