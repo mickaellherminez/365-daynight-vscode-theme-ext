@@ -299,6 +299,53 @@ def ui(p, hc):
         'walkThrough.embeddedEditorBackground': p['bgAlt'],
         'welcomePage.tileBackground': p['bgWidget'], 'welcomePage.tileHoverBackground': p['bgHover'],
     })
+    # Surfaces récentes dont VS Code fixe les couleurs sans tenir compte du thème. Les autres (chat dans
+    # l'éditeur, notebooks, centre de commande, sessions d'agents) héritent des widgets, listes, champs
+    # et barre de titre du thème : l'audit les vérifie sans qu'elles soient redéfinies ici.
+    c.update({
+        # Chat
+        'chat.slashCommandBackground': p['accent'], 'chat.slashCommandForeground': p['accentFg'],
+        'chat.avatarBackground': p['bgWidget'], 'chat.avatarForeground': p['fg'],
+        'chat.editedFileForeground': p['modified'],
+        'chat.linesAddedForeground': p['added'], 'chat.linesRemovedForeground': p['deleted'],
+        'chat.checkpointSeparator': p['borderStrong'],
+        # Tests
+        'testing.iconPassed': p['added'], 'testing.runAction': p['added'],
+        'testing.iconFailed': p['error'], 'testing.iconErrored': p['error'], 'testing.iconQueued': p['warning'],
+        'testing.iconSkipped': p['fgFaint'], 'testing.iconUnset': p['fgFaint'],
+        'testing.message.info.decorationForeground': p['fgMuted'],
+        # Graphe Git : 5 couleurs de syntaxe, déjà distinguées pour les daltoniens
+        'scmGraph.foreground1': t['keyword'], 'scmGraph.foreground2': t['function'], 'scmGraph.foreground3': t['string'],
+        'scmGraph.foreground4': t['number'], 'scmGraph.foreground5': t['klass'],
+        'scmGraph.historyItemRefColor': p['info'], 'scmGraph.historyItemRemoteRefColor': t['namespace'],
+        'scmGraph.historyItemBaseRefColor': p['warning'],
+        # Texte du survol : les couleurs de la gouttière, éclaircies ou foncées juste assez pour être lues
+        'scmGraph.historyItemHoverAdditionsForeground': readable_on(p['added'], p['bgWidget'], 7 if hc else 4.5),
+        'scmGraph.historyItemHoverDeletionsForeground': readable_on(p['deleted'], p['bgWidget'], 7 if hc else 4.5),
+        # Éditeur de fusion et multi-diff
+        'mergeEditor.change.background': a(p['added'], '26'), 'mergeEditor.change.word.background': a(p['added'], '4D'),
+        'mergeEditor.changeBase.background': a(p['deleted'], '26'), 'mergeEditor.changeBase.word.background': a(p['deleted'], '4D'),
+        'mergeEditor.conflictingLines.background': a(p['warning'], '33'),
+        'mergeEditor.conflict.unhandledFocused.border': p['warning'], 'mergeEditor.conflict.unhandledUnfocused.border': a(p['warning'], '99'),
+        'mergeEditor.conflict.handledFocused.border': p['fgMuted'], 'mergeEditor.conflict.handledUnfocused.border': p['border'],
+        'mergeEditor.conflict.unhandled.minimapOverViewRuler': p['warning'],
+        'mergeEditor.conflict.handled.minimapOverViewRuler': p['fgFaint'],
+        'multiDiffEditor.headerBackground': p['bgDeep'], 'multiDiffEditor.border': border,
+    })
+    # Icônes de symboles (structure, suggestions, fil d'Ariane) : la couleur de syntaxe du même rôle.
+    # Les symboles sans rôle de syntaxe (fichier, dossier, texte...) gardent la couleur du texte.
+    for role, kinds in {
+        'klass': ('class', 'enumerator', 'event', 'interface', 'struct', 'typeParameter'),
+        'function': ('function', 'method', 'constructor'),
+        'property': ('field', 'property'),
+        'variable': ('variable',),
+        'number': ('enumeratorMember', 'constant', 'boolean', 'number', 'null'),
+        'string': ('string',),
+        'keyword': ('keyword', 'operator'),
+        'namespace': ('namespace', 'module', 'package'),
+    }.items():
+        for kind in kinds:
+            c[f'symbolIcon.{kind}Foreground'] = t[role]
     return dict(sorted(c.items()))
 
 

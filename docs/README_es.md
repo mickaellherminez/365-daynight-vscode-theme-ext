@@ -17,7 +17,7 @@
 - 🔁 **Cambio con un clic.** Un botón en la barra de estado alterna entre claro y oscuro. El alto contraste está disponible con un comando.
 - ⏰ **Modo automático opcional.** La extensión puede aplicar sola el tema del mes actual: claro de día y oscuro de noche.
 - 👁️ **Descansa la vista y es legible para todos.** Todo el texto cumple los niveles de contraste WCAG y los colores de sintaxis siguen siendo distintos para personas con daltonismo.
-- 🖥️ **Temas cuidados.** Editor, barra lateral, pestañas, terminal, consola de depuración, notificaciones y barra de estado: todo tiene estilo, con más de 400 colores por tema. Las zonas más recientes, como el chat, las pruebas y los notebooks, todavía usan los colores por defecto de VS Code.
+- 🖥️ **Temas cuidados.** Editor, barra lateral, pestañas, terminal, consola de depuración, notificaciones y barra de estado: todo tiene estilo, con más de 480 colores por tema. El chat, los resultados de las pruebas, los iconos de símbolos, el grafo de Git, el editor de fusión y el multi-diff también siguen la paleta del mes.
 
 ## Instalación
 
@@ -157,7 +157,7 @@ El botón en este modo:
 
 ## La accesibilidad, primero
 
-Cada tema supera una auditoría de accesibilidad automatizada de más de 130 comprobaciones:
+Cada tema supera una auditoría de accesibilidad automatizada de más de 250 comprobaciones:
 
 - **Texto legible:** el texto del editor y los colores de sintaxis alcanzan un contraste de al menos **4,5:1 (WCAG AA)** en los temas claros y oscuros, y **7:1 (WCAG AAA)** en los de alto contraste.
 - **Apto para daltónicos:** los colores de sintaxis (palabras clave, funciones, cadenas, números, clases, comentarios) y las alertas (errores, advertencias, cambios de Git) se simulan en **protanopía, deuteranopía y tritanopía** para asegurar que siguen siendo distintos.

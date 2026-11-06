@@ -17,7 +17,7 @@
 - 🔁 **Bascule en un clic.** Un bouton dans la barre d'état passe du thème clair au sombre, et inversement. Le contraste élevé est accessible par une commande.
 - ⏰ **Mode automatique (optionnel).** L'extension peut appliquer seule le thème du mois en cours : clair le jour, sombre la nuit.
 - 👁️ **Reposant pour les yeux, lisible par tous.** Tout le texte respecte les niveaux de contraste WCAG, et les couleurs de syntaxe restent distinctes pour les personnes daltoniennes.
-- 🖥️ **Des thèmes soignés.** Éditeur, barre latérale, onglets, terminal, console de débogage, notifications et barre d'état : tout est stylé, avec plus de 400 couleurs par thème. Les zones plus récentes, comme le chat, les tests et les notebooks, utilisent encore les couleurs par défaut de VS Code pour le moment.
+- 🖥️ **Des thèmes soignés.** Éditeur, barre latérale, onglets, terminal, console de débogage, notifications et barre d'état : tout est stylé, avec plus de 480 couleurs par thème. Le chat, les résultats de tests, les icônes de symboles, le graphe Git, l'éditeur de fusion et le multi-diff suivent aussi la palette du mois.
 
 ## Installation
 
@@ -157,7 +157,7 @@ Le bouton dans ce mode :
 
 ## L'accessibilité avant tout
 
-Chaque thème passe un audit d'accessibilité automatisé de plus de 130 contrôles :
+Chaque thème passe un audit d'accessibilité automatisé de plus de 250 contrôles :
 
 - **Texte lisible :** le texte de l'éditeur et les couleurs de syntaxe atteignent un contraste d'au moins **4,5:1 (WCAG AA)** dans les thèmes clairs et sombres, et **7:1 (WCAG AAA)** dans les thèmes à contraste élevé.
 - **Adapté aux daltoniens :** les couleurs de syntaxe (mots-clés, fonctions, chaînes, nombres, classes, commentaires) et les alertes (erreurs, avertissements, modifications Git) sont simulées en **protanopie, deutéranopie et tritanopie** pour vérifier qu'elles restent distinctes.

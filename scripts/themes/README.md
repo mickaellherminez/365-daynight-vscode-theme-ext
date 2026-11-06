@@ -32,10 +32,15 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
 - **Jetons sémantiques** : chaque couleur de `semanticTokenColors` (fonction, méthode, propriété, paramètre...)
   respecte les mêmes minimums que les jetons de syntaxe, sur le fond et une fois sélectionnée. TypeScript, Python
   et d'autres langages les utilisent à la place des règles TextMate.
+- **Surfaces récentes** : chat, chat dans l'éditeur, tests, notebooks, éditeur de fusion, multi-diff, icônes de
+  symboles, graphe Git, centre de commande et sessions d'agents. Les couleurs que VS Code fixe sans tenir compte du
+  thème (`PRIORITY_KEYS` dans `audit.py`) doivent être définies. Les autres héritent d'une couleur du thème
+  (`INHERITED`) : l'audit suit cet héritage et contrôle le contraste obtenu. Les icônes et les lignes du graphe sont
+  vérifiées à 3:1, le texte à 4.5:1 (7:1 en High Contrast), et la syntaxe reste lisible sur le fond des cellules de notebook.
 - **Bouton de l'extension** : `365DayNight.statusBarButton` est lisible sur la barre d'état (≥ 4.5:1, ≥ 7:1 en High Contrast)
   et se distingue du texte normal de la barre (ΔE ≥ 15). `build.py` la calcule depuis `accent`, en éclaircissant au minimum.
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
-  et les alertes (erreur, avertissement, ajout, suppression) sont simulés en protanopie, deutéranopie et
+  et les alertes (erreur, avertissement, ajout, suppression, test réussi ou échoué, lignes du graphe Git) sont simulés en protanopie, deutéranopie et
   tritanopie ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)).
   Une différence perçue (ΔE) inférieure à 10 est signalée comme confusion possible.
 
@@ -59,8 +64,9 @@ vérification, lancée aussi par la CI et avant chaque publication. Pour corrige
 
 L'audit garantit les contrôles listés ci-dessus, rien de plus. En particulier :
 
-- **Couleurs non définies** : un thème définit environ 420 des quelque 970 couleurs documentées par VS Code. Les autres
-  prennent la couleur par défaut de VS Code et ne sont pas auditées (par exemple le chat, les tests, les notebooks).
+- **Couleurs non définies** : un thème définit environ 485 des quelque 970 couleurs documentées par VS Code. Les autres
+  prennent la couleur par défaut de VS Code. Seules celles des surfaces récentes listées ci-dessus sont auditées, en
+  suivant l'héritage de VS Code 1.145 : si une version future change une valeur par défaut, l'audit ne le voit pas.
 - **Paires contrôlées** : seules les combinaisons texte / fond listées dans `audit.py` sont mesurées. Une couleur
   posée sur un fond non prévu (un badge dans un widget, par exemple) n'est pas vérifiée.
 - **Rendu réel** : le contraste est calculé sur les couleurs déclarées. La police, son épaisseur, l'anticrénelage,
