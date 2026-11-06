@@ -1,8 +1,9 @@
-"""Génère les 3 variantes (Light, Dark, High Contrast) d'un mois à partir de sa palette, puis les audite.
+"""Génère les variantes d'un mois (Light, Dark, High Contrast et, si la palette la contient,
+High Contrast Light) à partir de sa palette, puis les audite.
 
 Usage :
     python3 scripts/themes/build.py 10           # aperçu de l'audit, aucun fichier modifié
-    python3 scripts/themes/build.py 10 --write   # écrit themes/365-10-{light,dark,hc-dark}-theme.json
+    python3 scripts/themes/build.py 10 --write   # écrit themes/365-10-{light,dark,hc-dark,hc-light}-theme.json
     python3 scripts/themes/build.py 10 -v        # affiche aussi les contrôles réussis
     python3 scripts/themes/build.py --check      # vérifie que themes/ correspond aux palettes (code 1 sinon)
 
@@ -18,8 +19,10 @@ sys.path.insert(0, HERE)
 from audit import ROOT, report  # noqa: E402
 from colorlib import delta_e, readable_on  # noqa: E402
 
-# Variante de palette -> suffixe du fichier de thème
-VARIANTS = {'light': 'light', 'dark': 'dark', 'hc': 'hc-dark'}
+# Variante de palette -> suffixe du fichier de thème. hcLight est facultative : seuls les mois dont
+# la palette la contient ont un thème High Contrast Light.
+VARIANTS = {'light': 'light', 'dark': 'dark', 'hc': 'hc-dark', 'hcLight': 'hc-light'}
+HIGH_CONTRAST_VARIANTS = ('hc', 'hcLight')
 
 
 def status_bar_button_color(p, hc):
@@ -125,7 +128,8 @@ def ui(p, hc):
         'editorUnnecessaryCode.opacity': '#000000AA',
     })
     if hc:
-        # En contraste élevé, le texte sélectionné passe en noir sur fond clair
+        # En contraste élevé, le texte sélectionné prend une couleur fixe : noir sur la sélection
+        # claire des thèmes sombres, blanc sur la sélection foncée des thèmes clairs
         c['editor.selectionForeground'] = p['selFg']
         # Bordures en plus des soulignements : l'information ne repose pas que sur la couleur
         c['editorError.border'] = p['error']
@@ -203,7 +207,7 @@ def ui(p, hc):
         'editor.stackFrameHighlightBackground': a(p['warning'], '33'), 'editor.focusedStackFrameHighlightBackground': a(p['added'], '33'),
     })
     if hc:
-        # Texte sélectionné du terminal forcé en noir sur la sélection claire
+        # Texte sélectionné du terminal forcé, comme dans l'éditeur
         c['terminal.selectionForeground'] = p['selFg']
     for name, color in p['ansi'].items():
         c['terminal.ansi' + name] = color
@@ -376,7 +380,7 @@ def semantic(p):
 
 
 def generate(month):
-    """Les 3 thèmes d'un mois : liste de (chemin relatif, thème, contraste élevé ?)."""
+    """Les thèmes d'un mois : liste de (chemin relatif, thème, contraste élevé ?)."""
     mm = '%02d' % int(month)
     palettes = json.load(open(os.path.join(HERE, 'palettes', f'{mm}.json'), encoding='utf-8'))
     rules = json.load(open(os.path.join(HERE, 'token-rules.json'), encoding='utf-8'))
@@ -384,7 +388,9 @@ def generate(month):
     labels = {t['path']: t['label'] for t in pkg['contributes']['themes']}
     themes = []
     for variant, suffix in VARIANTS.items():
-        p, hc = palettes[variant], variant == 'hc'
+        if variant not in palettes:
+            continue
+        p, hc = palettes[variant], variant in HIGH_CONTRAST_VARIANTS
         rel = f'./themes/365-{mm}-{suffix}-theme.json'
         theme = {
             'name': labels[rel], 'type': p['type'], 'semanticHighlighting': True,

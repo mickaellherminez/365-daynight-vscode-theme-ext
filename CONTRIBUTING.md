@@ -12,7 +12,7 @@ Thanks for your interest! Bug reports, accessibility feedback and pull requests 
 | `package.json` | Extension manifest: themes, commands and settings |
 | `extension.js` | Status bar toggle, commands and automatic day/night switching |
 | `theme-logic.js` | Theme selection logic, without any VS Code dependency |
-| `themes/` | The 36 generated color themes (`365-MM-light`, `365-MM-dark`, `365-MM-hc-dark`) |
+| `themes/` | The generated color themes (`365-MM-light`, `365-MM-dark`, `365-MM-hc-dark`, and `365-MM-hc-light` for the months that have it) |
 | `scripts/themes/` | Theme generator, accessibility audit and preview images ([documentation](scripts/themes/README.md)) |
 | `test/` | Unit tests (`test/unit`) and integration tests run inside VS Code (`test/suite`) |
 | `docs/` | Translated README files |
@@ -45,7 +45,7 @@ The [CI workflow](.github/workflows/ci.yml) runs these checks on every branch pu
 
 | Check | Command | What it verifies |
 | --- | --- | --- |
-| Theme audit | `npm run themes:audit` | Contrast and color blind distinction in the 36 themes, including semantic token colors. A missing color role counts as a failure |
+| Theme audit | `npm run themes:audit` | Contrast and color blind distinction in every theme, including semantic token colors. A missing color role counts as a failure |
 | Generated themes | `npm run themes:check` | Each file in `themes/` is exactly what the generator produces from its palette: no hand edit, no palette change without `--write`, no missing or extra file |
 | Lint and tests | `npm test` | The lint, the unit tests, then the tests inside VS Code |
 
@@ -53,28 +53,31 @@ The Publish workflow runs the same checks before building the package. See [scri
 
 ## Status bar button rules
 
-The button has three items: `‹ 10 DRK ›`. These rules include the planned High Contrast Light variant.
+The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists for the months listed in `HIGH_CONTRAST_LIGHT_MONTHS` (`theme-logic.js`), October for now: a unit test checks that this list matches the themes in `package.json`.
 
 | Situation | Behavior |
 | --- | --- |
 | Click on a Light or Dark theme | Switches between Light and Dark, in one click |
-| Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. Until High Contrast Light exists, it goes to Light |
-| `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant |
-| Reaching High Contrast | With the `365: Apply High Contrast theme` command, or a link in the tooltip |
+| Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. A month without High Contrast Light goes to Light |
+| `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant: Light, Dark, High Contrast, High Contrast Light |
+| Reaching High Contrast | With the `365: Apply High Contrast theme` or `365: Apply High Contrast Light theme` command, or a link in the tooltip. In a month without High Contrast Light, its command applies High Contrast and says so |
+| A month without High Contrast Light | The arrows and automatic mode apply High Contrast instead, to stay in high contrast |
 | `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
 | Commands that apply a variant | Keep the displayed month |
 | `365: Back to the current month` | Applies the real month and keeps the variant |
 | Automatic mode, Light or Dark theme | Alternates Light and Dark, on the selected month until the next real month, even after a restart. A month picked in the theme picker counts as selected, and a theme from another publisher does not cancel the selection |
-| Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants |
+| Automatic mode, High Contrast theme | Only updates the month: it never leaves High Contrast, nor switches between its two variants, except to High Contrast in a month without High Contrast Light |
 | Active theme from another publisher | No arrows and no month number. The first click applies the 365 theme of the same type |
 | `system` mode | The arrows change the month of the three preferred themes. The center button and the variant commands explain that the system decides between light and dark, and change nothing |
 | `system` mode, theme from another publisher | Picked in the theme picker, it stays in the preference in use, month after month: no arrows and no month number. The first click brings back the 365 theme |
 | `system` mode, leaving it | The settings get their original values back, and absent settings are removed again. A setting that no longer holds a 365 theme of the right variant is a choice of the user: it is kept |
 | `system` mode, several windows | Only the focused window saves the original settings and treats a change of the active preference as a choice of month |
+| `system` mode, 365 High Contrast theme picked in the theme picker | VS Code stores it in the preference of the current system mode, light or dark, whatever its variant. The button reads it there and shows its month, unless the high contrast preference itself holds a 365 theme of the active kind |
+| `system` mode, High Contrast Light | `workbench.preferredHighContrastLightColorTheme` gets the theme of the month when it exists. Otherwise it keeps or gets back its original value, and waits for the next month that has the theme, unless the user changes it. A setup made by 0.12.0, which did not save this setting, saves it before writing it |
 
 The three items share the `365DayNight.statusBarButton` color, so that they read as one control. Each theme derives it from its accent color, and the audit checks that it stays readable on the status bar. While debugging, the items use the normal status bar color, because the bar has another background. Other themes also get the normal color.
 
-The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 existing themes and the public command IDs must not change.
+The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 original themes and the public command IDs must not change.
 
 ## Changing a theme
 
@@ -83,10 +86,12 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 1. Edit the month's palette in `scripts/themes/palettes/MM.json`.
 2. Check accessibility: `npm run themes:build -- MM` (nothing is written).
 3. When the audit reports 0 problems, write the files: `npm run themes:build -- MM --write`.
-4. Regenerate the README previews: `python3 scripts/themes/preview.py`.
+4. Regenerate the README previews: `python3 scripts/themes/preview.py`. To look at them without changing `assets/`, add `--out <folder>`.
+
+To give a month its High Contrast Light theme, add an `hcLight` variant to its palette, declare `365 MM-Month High Contrast Light` with `"uiTheme": "hc-light"` in `package.json`, then add the month to `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
-`npm run themes:audit` checks all 36 themes, and `npm run themes:check` confirms that every theme file matches its palette. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles, the audit rules and the audit's limits.
+`npm run themes:audit` checks all the themes, and `npm run themes:check` confirms that every theme file matches its palette. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles, the audit rules and the audit's limits.
 
 ## Packaging
 

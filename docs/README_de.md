@@ -13,7 +13,7 @@
 ## Warum es dir gefallen wird
 
 - 🗓️ **Jeden Monat ein neuer Look.** Schnee und Winterblau im Januar, Frühlingsgrün im März, volle Sonne im Juli, Herbstfarben im Oktober, Kaminfeuer-Stimmung im Dezember: Dein Editor folgt den Jahreszeiten.
-- ☀️🌙 **Tag und Nacht, immer passend.** Jeder Monat hat ein helles Theme für den Tag, ein dunkles für den Abend und ein kontrastreiches, wenn du maximale Lesbarkeit brauchst.
+- ☀️🌙 **Tag und Nacht, immer passend.** Jeder Monat hat ein helles Theme für den Tag, ein dunkles für den Abend und ein kontrastreiches, wenn du maximale Lesbarkeit brauchst. Der Oktober hat außerdem ein helles kontrastreiches Theme (High Contrast Light), ein erster Versuch vor den anderen Monaten.
 - 🔁 **Wechsel mit einem Klick.** Eine Schaltfläche in der Statusleiste wechselt zwischen hell und dunkel. Der kontrastreiche Modus ist per Befehl erreichbar.
 - ⏰ **Optionaler Automatikmodus.** Die Erweiterung kann das Theme des aktuellen Monats selbst anwenden: tagsüber hell, nachts dunkel.
 - 👁️ **Augenschonend und für alle lesbar.** Der gesamte Text erfüllt die WCAG-Kontraststufen, und die Syntaxfarben bleiben auch für farbenblinde Menschen unterscheidbar.
@@ -36,14 +36,14 @@ Erfordert Visual Studio Code 1.96 oder neuer.
 ## Erste Schritte
 
 1. Öffne die Theme-Auswahl: `Ctrl+K`, dann `Ctrl+T` (auf dem Mac `Cmd+K`, dann `Cmd+T`).
-2. Tippe **365**, um alle 36 Themes zu sehen, zum Beispiel `365 10-October Dark`.
+2. Tippe **365**, um alle Themes zu sehen, zum Beispiel `365 10-October Dark`.
 3. Wähle eines aus. Fertig!
 
 Wenn du zum ersten Mal ein 365-Theme verwendest, bietet eine Benachrichtigung den automatischen Wechsel an: **Follow the clock** (der Uhrzeit folgen: tagsüber hell, nachts dunkel), **Follow my system** (dem hellen oder dunklen Modus deines Systems folgen) oder **No thanks** (nein danke). Ohne deine Wahl ändert sich nichts, und die Frage wird nur einmal gestellt. Nach einer Wahl bestätigt eine Meldung, was aktiv ist, mit einer Schaltfläche **Open Settings**, um die Uhrzeiten zu ändern oder den Wechsel auszuschalten. Um es dir später anders zu überlegen, siehe den Abschnitt zum automatischen Wechsel weiter unten.
 
-Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK` oder `HCT`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus.
+Mit der **Schaltfläche in der Statusleiste** (unten rechts: `LGT`, `DRK`, `HCT` oder `HCL`) wechselst du zwischen der hellen und der dunklen Version des aktuellen Monats. Für den kontrastreichen Modus führe `365: Apply High Contrast theme` in der Befehlspalette aus. In einem kontrastreichen Theme wechselt die Schaltfläche zwischen dunklem (`HCT`) und hellem (`HCL`) hohem Kontrast, damit ein Klick den hohen Kontrast nie verlässt. Ein Monat ohne helle kontrastreiche Variante wechselt stattdessen zum hellen Theme: Bisher hat nur der Oktober sie. Um den hohen Kontrast zu verlassen, führe `365: Apply Light theme` oder `365: Apply Dark theme` aus.
 
-Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten hell, dunkel oder kontrastreich bei. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme. Fahre mit der Maus über die Schaltfläche, um den vollständigen Theme-Namen zu sehen, mit Links zum kontrastreichen Modus und zum aktuellen Monat.
+Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DRK ›`). Die Zahl ist der Monat, von `01` bis `12`, und die Pfeile behalten die Variante bei: hell, dunkel, kontrastreich oder hell kontrastreich. Hell kontrastreich wird in einem Monat, der diese Variante noch nicht hat, zu kontrastreich. Auf Dezember folgt Januar. Zum Zurückkehren führe `365: Back to the current month` in der Befehlspalette aus. Pfeile und Zahl erscheinen nur mit einem 365-Theme. Fahre mit der Maus über die Schaltfläche, um den vollständigen Theme-Namen zu sehen, mit Links zum kontrastreichen Modus, zum hellen kontrastreichen Modus, wenn der Monat ihn hat, und zum aktuellen Monat.
 
 ## Die 12 Monate
 
@@ -94,7 +94,7 @@ Gut zu wissen:
 - **Du entscheidest.** Der Automatikmodus ist standardmäßig ausgeschaltet: Die Erweiterung ändert dein Theme nie ungefragt. Wenn du zum ersten Mal ein 365-Theme verwendest, fragt dich eine Benachrichtigung ein einziges Mal, ob du ihn möchtest.
 - **Deine Wahl zählt.** Wählst du ein Theme von Hand, bleibt es bis zum nächsten Periodenwechsel (Tag/Nacht oder neuer Monat).
 - **Dein Monat bleibt auch.** Wählst du einen anderen Monat, mit den Pfeilen oder in der Theme-Auswahl, wechselt der Automatikmodus weiter zwischen hell und dunkel in diesem Monat, bis der nächste tatsächliche Monat beginnt, auch nach einem Neustart. Um früher zurückzukehren, führe `365: Back to the current month` aus.
-- **Kontrastreich bleibt kontrastreich.** Nutzt du ein kontrastreiches Theme, aktualisiert der Automatikmodus nur den Monat, nie die Kontraststufe.
+- **Kontrastreich bleibt kontrastreich.** Nutzt du ein kontrastreiches Theme, dunkel oder hell, aktualisiert der Automatikmodus nur den Monat, nie die Variante. In einem Monat ohne helle kontrastreiche Variante wird die dunkle verwendet.
 
 ### Uhrzeiten wählen
 
@@ -140,17 +140,17 @@ Oder füge Folgendes zu deiner `settings.json` hinzu:
 | Helle Darstellung | Helles Theme des Monats |
 | Dunkle Darstellung | Dunkles Theme des Monats |
 | Hoher Kontrast, mit dunkler Darstellung | Kontrastreiches Theme des Monats |
-| Hoher Kontrast, mit heller Darstellung | Das High-Contrast-Light-Theme von VS Code, bis die 365-Themes diese Variante haben |
+| Hoher Kontrast, mit heller Darstellung | Das helle kontrastreiche Theme des Monats. Die anderen Monate behalten deine Einstellung, standardmäßig das High-Contrast-Light-Theme von VS Code, bis sie diese Variante haben |
 
 Die Schaltfläche in diesem Modus:
 - **Pfeile.** `‹` und `›` ändern den Monat aller Varianten. Dieser Monat bleibt bis zum Beginn des nächsten tatsächlichen Monats, auch nach einem Neustart. Um früher zurückzukehren, führe `365: Back to the current month` aus.
-- **Mittlere Schaltfläche.** Dein System entscheidet zwischen hell und dunkel, daher erklärt ein Klick dies nur. Die Befehle `365: Apply Light theme`, `365: Apply Dark theme` und `365: Apply High Contrast theme` sagen dasselbe und ändern nichts.
+- **Mittlere Schaltfläche.** Dein System entscheidet zwischen hell und dunkel, daher erklärt ein Klick dies nur. Die Befehle `365: Apply Light theme`, `365: Apply Dark theme`, `365: Apply High Contrast theme` und `365: Apply High Contrast Light theme` sagen dasselbe und ändern nichts.
 - **Theme-Auswahl.** Wählst du ein 365-Theme, gilt sein Monat für alle Varianten. Wählst du ein Theme eines anderen Anbieters, ersetzt es nur die aktive Variante: Es bleibt auch in den folgenden Monaten, und die Schaltfläche zeigt dann weder Pfeile noch Monat. Klicke auf die mittlere Schaltfläche, um das 365-Theme zurückzubekommen.
 
 
-- **Was der Modus ändert.** Er schaltet `window.autoDetectColorScheme` ein und schreibt die Themes des Monats in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme` und `workbench.preferredHighContrastColorTheme`. `workbench.colorTheme` ändert sich nicht.
+- **Was der Modus ändert.** Er schaltet `window.autoDetectColorScheme` ein und schreibt die Themes des Monats in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme`, `workbench.preferredHighContrastColorTheme` und `workbench.preferredHighContrastLightColorTheme`. Die letzte Einstellung wird nur für einen Monat mit hellem kontrastreichem Theme geschrieben und erhält in den anderen Monaten deinen Wert zurück. `workbench.colorTheme` ändert sich nicht.
 - **Zurückkehren.** Deaktiviere **365DayNight: Enable** oder wähle einen anderen Modus. Deine ursprünglichen Einstellungen kommen zurück, und Einstellungen, die es nicht gab, werden wieder entfernt. Eine Einstellung, die du inzwischen geändert hast, behält deinen Wert.
-- **Vor dem Deinstallieren oder Deaktivieren der Erweiterung.** Verlasse zuerst diesen Modus, denn danach kann eine Erweiterung nichts mehr wiederherstellen. Falls du es vergessen hast, entferne die vier oben genannten Einstellungen aus deiner `settings.json`.
+- **Vor dem Deinstallieren oder Deaktivieren der Erweiterung.** Verlasse zuerst diesen Modus, denn danach kann eine Erweiterung nichts mehr wiederherstellen. Falls du es vergessen hast, entferne die fünf oben genannten Einstellungen aus deiner `settings.json`.
 - **Hoher Kontrast.** VS Code gibt dem hohen Kontrast deines Systems Vorrang. Um ihn zu ignorieren, schalte `window.autoDetectHighContrast` aus: Der Modus ändert diese Einstellung nie.
 - **Erkennung ausschalten.** Schaltest du `window.autoDetectColorScheme` selbst aus, lässt die Erweiterung es aus, und die Schaltfläche funktioniert wie gewohnt. Eine Theme-Einstellung in einem Workspace hat dort weiterhin Vorrang.
 - **Betriebssysteme.** Laut der Dokumentation von VS Code wird die helle oder dunkle Darstellung unter Windows und macOS erkannt.
@@ -163,7 +163,7 @@ Jedes Theme besteht ein automatisiertes Barrierefreiheits-Audit mit mehr als 250
 - **Farbenblind-freundlich:** Syntaxfarben (Schlüsselwörter, Funktionen, Strings, Zahlen, Klassen, Kommentare) und Hinweise (Fehler, Warnungen, Git-Änderungen) werden für **Protanopie, Deuteranopie und Tritanopie** simuliert, damit sie unterscheidbar bleiben.
 - **Nicht nur Farbe:** Kommentare, Parameter und Attribute sind *kursiv*, veralteter Code ist ~~durchgestrichen~~, ungültiger Code unterstrichen.
 - **Überall sichtbare Auswahl:** Die Textauswahl ist im Editor, im Terminal und in der Debugkonsole gut sichtbar und wird nie mit Suchtreffern verwechselt.
-- **Kontrastreiche Themes:** Ausgewählter Text wird schwarz auf Hellblau, und alle Bereiche haben sichtbare Rahmen und eine deutliche Tastaturfokus-Markierung.
+- **Kontrastreiche Themes:** Ausgewählter Text wird schwarz auf Hellblau (weiß auf Dunkelblau im hellen kontrastreichen Theme), und alle Bereiche haben sichtbare Rahmen und eine deutliche Tastaturfokus-Markierung.
 - **Screenreader:** Jeder Teil der Schaltfläche in der Statusleiste hat eine eigene gesprochene Bezeichnung, zum Beispiel „Next month: November“.
 
 Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues): Rückmeldungen zur Barrierefreiheit sind immer willkommen.
@@ -178,6 +178,7 @@ Eine Farbe schwer lesbar? [Erstelle ein Issue](https://github.com/mickaellhermin
 | `365: Apply Light theme` | Wendet das helle Theme des angezeigten Monats an |
 | `365: Apply Dark theme` | Wendet das dunkle Theme des angezeigten Monats an |
 | `365: Apply High Contrast theme` | Wendet das kontrastreiche Theme des angezeigten Monats an |
+| `365: Apply High Contrast Light theme` | Wendet das helle kontrastreiche Theme des angezeigten Monats an. Ein Monat, der es noch nicht hat, erhält sein dunkles kontrastreiches Theme, und eine Meldung weist darauf hin |
 | `365: Next month` | Wendet das Theme des nächsten Monats in derselben Variante an |
 | `365: Previous month` | Wendet das Theme des vorherigen Monats in derselben Variante an |
 | `365: Back to the current month` | Wendet das Theme des tatsächlichen aktuellen Monats in derselben Variante an |
@@ -192,7 +193,7 @@ Die Erweiterung legt standardmäßig keine Tastenkürzel fest. Um eigene zuzuwei
 | `365DayNight.mode` | `auto` | `auto` (nach Uhrzeit), `day` (immer hell), `night` (immer dunkel) oder `system` (folgt deinem System) |
 | `365DayNight.dayStart` | `"07:00"` | Uhrzeit, zu der das helle Theme im Modus `auto` beginnt, im Format HH:MM |
 | `365DayNight.nightStart` | `"19:00"` | Uhrzeit, zu der das dunkle Theme im Modus `auto` beginnt, im Format HH:MM |
-| `365DayNight.toggleIncludesHighContrast` | `false` | Den kontrastreichen Modus auch beim Wechsel mit der Schaltfläche in der Statusleiste einbeziehen |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Die Schaltfläche in der Statusleiste durchläuft alle Varianten: hell, dunkel, kontrastreich, dann hell kontrastreich, wenn der Monat es hat |
 
 ## Häufige Fragen
 
@@ -203,7 +204,7 @@ Installiere die Erweiterung und setze `"365DayNight.enable": true`. Das helle Th
 Ja. Setze `"365DayNight.enable": true` und `"365DayNight.mode": "system"`. Dein System entscheidet zwischen hell und dunkel, und die Erweiterung hält die Themes auf dem aktuellen Monat.
 
 **Gibt es ein farbenblind-freundliches VS-Code-Theme?**
-Ja. Alle 36 Themes werden mit Simulationen von Protanopie, Deuteranopie und Tritanopie getestet und nutzen Kursivschrift, Unterstreichung und Durchstreichung, damit Informationen nie nur von der Farbe abhängen.
+Ja. Alle Themes werden mit Simulationen von Protanopie, Deuteranopie und Tritanopie getestet und nutzen Kursivschrift, Unterstreichung und Durchstreichung, damit Informationen nie nur von der Farbe abhängen.
 
 **Ändert die Erweiterung mein Theme ungefragt?**
 Nein. Der Automatikmodus ist standardmäßig aus. Ohne ihn ändert sich das Theme nur, wenn du eines auswählst oder auf die Schaltfläche in der Statusleiste klickst. Wenn du zum ersten Mal ein 365-Theme verwendest, bietet eine Benachrichtigung ihn an, und ohne deine Wahl ändert sich nichts.
@@ -212,7 +213,7 @@ Nein. Der Automatikmodus ist standardmäßig aus. Ohne ihn ändert sich das Them
 Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automatikmodus aus.
 
 **Wofür sind die kontrastreichen Themes?**
-Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung.
+Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung. Jeder Monat hat eine dunkle Version. Die helle, High Contrast Light, gibt es bisher für den Oktober, die anderen Monate folgen.
 
 ## Roadmap
 

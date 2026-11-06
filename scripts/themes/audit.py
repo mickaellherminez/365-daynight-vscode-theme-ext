@@ -249,6 +249,12 @@ def checks(theme, hc):
         ('gitDecoration.untrackedResourceForeground', 'sideBar.background', 4.5),
         ('gitDecoration.conflictingResourceForeground', 'sideBar.background', 4.5),
         ('gitDecoration.ignoredResourceForeground', 'sideBar.background', 3),
+        # Un fichier sélectionné garde la couleur de son état Git : elle doit rester visible sur la sélection
+        ('gitDecoration.modifiedResourceForeground', 'list.activeSelectionBackground', 3),
+        ('gitDecoration.addedResourceForeground', 'list.activeSelectionBackground', 3),
+        ('gitDecoration.deletedResourceForeground', 'list.activeSelectionBackground', 3),
+        ('gitDecoration.untrackedResourceForeground', 'list.activeSelectionBackground', 3),
+        ('gitDecoration.conflictingResourceForeground', 'list.activeSelectionBackground', 3),
         ('list.errorForeground', 'sideBar.background', 4.5),
         ('list.warningForeground', 'sideBar.background', 4.5),
         ('settings.headerForeground', 'editor.background', text),

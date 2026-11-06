@@ -14,7 +14,7 @@
 ## Why you'll like it
 
 - 🗓️ **A new look every month.** Snow and winter blue in January, spring green in March, full sun in July, autumn colors in October, a fireside glow in December. Your editor follows the seasons.
-- ☀️🌙 **Day and night, always matched.** Each month has a Light theme for daylight, a Dark theme for the evening, and a High Contrast theme when you need maximum readability.
+- ☀️🌙 **Day and night, always matched.** Each month has a Light theme for daylight, a Dark theme for the evening, and a High Contrast theme when you need maximum readability. October also has a High Contrast Light theme, a first trial before the other months.
 - 🔁 **One-click switch.** A button in the status bar switches between Light and Dark. High Contrast is one command away.
 - ⏰ **Optional automatic mode.** The extension can apply the current month's theme by itself, Light during the day and Dark at night.
 - 👁️ **Easy on the eyes, readable for everyone.** All text meets WCAG contrast levels, and syntax colors stay distinct for people with color blindness.
@@ -37,14 +37,14 @@ Requires Visual Studio Code 1.96 or later.
 ## Getting started
 
 1. Open the theme picker: `Ctrl+K` then `Ctrl+T` (`Cmd+K` then `Cmd+T` on Mac).
-2. Type **365** to see all 36 themes, for example `365 10-October Dark`.
+2. Type **365** to see all the themes, for example `365 10-October Dark`.
 3. Pick one. That's it!
 
 The first time you use a 365 theme, a notification offers automatic switching: **Follow the clock** (Light by day, Dark at night), **Follow my system** (the light and dark mode of your system) or **No thanks**. Nothing changes unless you choose, and the question is asked only once. After a choice, a message confirms what is on, with an **Open Settings** button to change the hours or turn it off. To change your mind later, see the automatic switching section below.
 
-Use the **status bar button** (bottom right: `LGT`, `DRK` or `HCT`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette.
+Use the **status bar button** (bottom right: `LGT`, `DRK`, `HCT` or `HCL`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette. In a High Contrast theme, the button switches between High Contrast (`HCT`) and High Contrast Light (`HCL`), so that a click never leaves high contrast. A month without High Contrast Light goes back to Light instead: only October has it for now. To leave high contrast, run `365: Apply Light theme` or `365: Apply Dark theme`.
 
-To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep Light, Dark or High Contrast. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme. Hover over the button to see the full theme name, with links to High Contrast and to the current month.
+To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep the variant: Light, Dark, High Contrast or High Contrast Light. High Contrast Light becomes High Contrast in a month that does not have it yet. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme. Hover over the button to see the full theme name, with links to High Contrast, to High Contrast Light when the month has it, and to the current month.
 
 ## The 12 months
 
@@ -94,7 +94,7 @@ Good to know:
 - **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to. The first time you use a 365 theme, a notification asks you once whether you want it.
 - **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
 - **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
-- **High Contrast stays High Contrast.** If you use a High Contrast theme, automatic mode only updates the month, never the contrast level.
+- **High Contrast stays High Contrast.** If you use a High Contrast or High Contrast Light theme, automatic mode only updates the month, never the variant. In a month without High Contrast Light, High Contrast is used.
 
 ### Choose your hours
 
@@ -140,17 +140,17 @@ Or add this to your `settings.json`:
 | Light appearance | Light theme of the month |
 | Dark appearance | Dark theme of the month |
 | High contrast, with a dark appearance | High Contrast theme of the month |
-| High contrast, with a light appearance | VS Code's own High Contrast Light theme, until the 365 themes get this variant |
+| High contrast, with a light appearance | High Contrast Light theme of the month. The other months keep your setting, VS Code's own High Contrast Light theme by default, until they get this variant |
 
 Using the button in this mode:
 - **Arrows.** `‹` and `›` change the month of all the variants. That month stays until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
-- **Center button.** Your system decides between Light and Dark, so a click only explains this. The `365: Apply Light theme`, `365: Apply Dark theme` and `365: Apply High Contrast theme` commands say the same and change nothing.
+- **Center button.** Your system decides between Light and Dark, so a click only explains this. The `365: Apply Light theme`, `365: Apply Dark theme`, `365: Apply High Contrast theme` and `365: Apply High Contrast Light theme` commands say the same and change nothing.
 - **Theme picker.** Picking a 365 theme applies its month to all the variants. Picking a theme from another publisher replaces only the variant in use: it stays during the following months, and the button shows no arrows and no month with it. Click the center button to get the 365 theme back.
 
 Good to know:
-- **What it changes.** The mode turns on `window.autoDetectColorScheme` and writes the themes of the month in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme` and `workbench.preferredHighContrastColorTheme`. `workbench.colorTheme` does not change.
+- **What it changes.** The mode turns on `window.autoDetectColorScheme` and writes the themes of the month in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme`, `workbench.preferredHighContrastColorTheme` and `workbench.preferredHighContrastLightColorTheme`. The last one is written only for a month that has a High Contrast Light theme, and gets your value back in the other months. `workbench.colorTheme` does not change.
 - **How to go back.** Uncheck **365DayNight: Enable**, or choose another mode. Your original settings come back, and settings that did not exist are removed again. A setting you changed in the meantime keeps your value.
-- **Before uninstalling or disabling the extension.** Leave this mode first, because an extension can no longer restore anything afterwards. If you forgot, remove the four settings above from your `settings.json`.
+- **Before uninstalling or disabling the extension.** Leave this mode first, because an extension can no longer restore anything afterwards. If you forgot, remove the five settings above from your `settings.json`.
 - **High contrast.** VS Code gives priority to the high contrast of your system. To ignore it, turn off `window.autoDetectHighContrast`: the mode never changes this setting.
 - **Turning the detection off.** If you turn off `window.autoDetectColorScheme` yourself, the extension leaves it off and the button works as usual. A theme setting in a workspace still wins in that workspace.
 - **Operating systems.** According to the VS Code documentation, the light and dark appearance is detected on Windows and macOS.
@@ -163,7 +163,7 @@ Every theme passes an automated accessibility audit of more than 250 checks:
 - **Color blind friendly:** syntax colors (keywords, functions, strings, numbers, classes, comments) and alerts (errors, warnings, Git changes) are simulated for **protanopia, deuteranopia and tritanopia** to make sure they stay distinct.
 - **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
 - **Visible selection everywhere:** text selection is clearly visible in the editor, the terminal and the debug console, and never confused with search results.
-- **High Contrast themes:** selected text turns black on light blue, and all panels have visible borders and a strong keyboard focus outline.
+- **High Contrast themes:** selected text turns black on light blue (white on dark blue in High Contrast Light), and all panels have visible borders and a strong keyboard focus outline.
 - **Screen readers:** each part of the status bar button has its own spoken label, such as "Next month: November".
 
 Found something hard to read? Please [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Accessibility feedback is always welcome.
@@ -178,6 +178,7 @@ Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
 | `365: Apply Light theme` | Applies the Light theme of the displayed month |
 | `365: Apply Dark theme` | Applies the Dark theme of the displayed month |
 | `365: Apply High Contrast theme` | Applies the High Contrast theme of the displayed month |
+| `365: Apply High Contrast Light theme` | Applies the High Contrast Light theme of the displayed month. A month that does not have it yet gets its High Contrast theme, and a message says so |
 | `365: Next month` | Applies the next month's theme, in the same variant |
 | `365: Previous month` | Applies the previous month's theme, in the same variant |
 | `365: Back to the current month` | Applies the theme of the real current month, in the same variant |
@@ -192,7 +193,7 @@ The extension defines no keyboard shortcut by default. To assign your own, open 
 | `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light), `night` (always Dark) or `system` (follows your system) |
 | `365DayNight.dayStart` | `"07:00"` | Time when the Light theme starts in `auto` mode, in the HH:MM format |
 | `365DayNight.nightStart` | `"19:00"` | Time when the Dark theme starts in `auto` mode, in the HH:MM format |
-| `365DayNight.toggleIncludesHighContrast` | `false` | Also include High Contrast when switching with the status bar button |
+| `365DayNight.toggleIncludesHighContrast` | `false` | The status bar button goes through all the variants: Light, Dark, High Contrast, then High Contrast Light when the month has it |
 
 ## FAQ
 
@@ -203,7 +204,7 @@ Install the extension and set `"365DayNight.enable": true`. The Light theme is a
 Yes. Set `"365DayNight.enable": true` and `"365DayNight.mode": "system"`. Your system decides between Light and Dark, and the extension keeps the themes on the current month.
 
 **Is there a color blind friendly VS Code theme?**
-Yes. All 36 themes are tested with protanopia, deuteranopia and tritanopia simulations, and they use italics, underline and strikethrough so that information never relies on color alone.
+Yes. All the themes are tested with protanopia, deuteranopia and tritanopia simulations, and they use italics, underline and strikethrough so that information never relies on color alone.
 
 **Will the extension change my theme without asking?**
 No. Automatic mode is off by default. Without it, the theme only changes when you pick one or click the status bar button. The first time you use a 365 theme, a notification offers it, and nothing changes unless you pick an option.
@@ -212,7 +213,7 @@ No. Automatic mode is off by default. Without it, the theme only changes when yo
 Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mode off.
 
 **What are the High Contrast themes for?**
-They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline.
+They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline. Each month has a dark one. The light one, High Contrast Light, exists for October for now, and the other months will follow.
 
 ## Roadmap
 

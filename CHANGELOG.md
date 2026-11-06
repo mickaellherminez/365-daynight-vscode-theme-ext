@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Added
+- A first High Contrast Light theme, `365 10-October High Contrast Light`, as a trial before the other months: dark text on a light background, at least 7:1 (AAA). The status bar button shows `HCL` for it
+- `365: Apply High Contrast Light theme` command, and a High Contrast Light link in the status bar tooltip for a month that has this theme. A month without it gets its High Contrast theme, and a message says so
+- In `system` mode, `workbench.preferredHighContrastLightColorTheme` now gets the High Contrast Light theme of the month, when the month has one. In the other months, it keeps or gets back your value
+
 ### Changed
+- In a High Contrast theme, the status bar button now switches between High Contrast and High Contrast Light, so that a click never leaves high contrast. A month without High Contrast Light still goes to Light. With `365DayNight.toggleIncludesHighContrast`, the button goes through the four variants
+- The month arrows and automatic mode keep High Contrast Light, and use High Contrast in a month that does not have it yet
+- December Dark: the selected file in the explorer is a little darker, so that a deleted file stays readable when selected
 - The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
 
 ## [0.12.0] - 2026-11-06

@@ -52,7 +52,7 @@ suite('Extension Test Suite', () => {
 	test('Extension should activate and register its commands', async () => {
 		await vscode.extensions.getExtension(EXTENSION_ID).activate();
 		const commands = await vscode.commands.getCommands(true);
-		for (const command of ['toggleTheme', 'setLightTheme', 'setDarkTheme', 'setHighContrastTheme', 'nextMonth', 'previousMonth', 'currentMonth']) {
+		for (const command of ['toggleTheme', 'setLightTheme', 'setDarkTheme', 'setHighContrastTheme', 'setHighContrastLightTheme', 'nextMonth', 'previousMonth', 'currentMonth']) {
 			assert.ok(commands.includes(`extension.${command}`), `extension.${command} is not registered`);
 		}
 	});
@@ -111,6 +111,25 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(ColorThemeKind.DARK, vscode.ColorThemeKind.Dark);
 		assert.strictEqual(ColorThemeKind.HIGH_CONTRAST, vscode.ColorThemeKind.HighContrast);
 		assert.strictEqual(ColorThemeKind.HIGH_CONTRAST_LIGHT, vscode.ColorThemeKind.HighContrastLight);
+	});
+
+	test('The click should switch October between its two High Contrast variants', async function () {
+		this.timeout(20000);
+		const { getThemeState } = await vscode.extensions.getExtension(EXTENSION_ID).activate();
+		const octoberHighContrast = getThemeLabelForMonth(ThemeType.HIGH_CONTRAST, 10);
+
+		await setThemeAndWait(octoberHighContrast, vscode.ColorThemeKind.HighContrast);
+		assert.deepStrictEqual(getThemeState(), { type: ThemeType.HIGH_CONTRAST, month: 10 });
+
+		// VS Code charge le nouveau thème comme un thème clair à contraste élevé
+		await vscode.commands.executeCommand('extension.toggleTheme');
+		await waitFor(() => vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.HighContrastLight, 'High Contrast Light to be active');
+		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), getThemeLabelForMonth(ThemeType.HIGH_CONTRAST_LIGHT, 10));
+		assert.deepStrictEqual(getThemeState(), { type: ThemeType.HIGH_CONTRAST_LIGHT, month: 10 });
+
+		await vscode.commands.executeCommand('extension.toggleTheme');
+		await waitFor(() => vscode.window.activeColorTheme.kind === vscode.ColorThemeKind.HighContrast, 'High Contrast to be active');
+		assert.strictEqual(vscode.workspace.getConfiguration().get('workbench.colorTheme'), octoberHighContrast);
 	});
 
 	test('State should follow the active theme, including a third-party dark theme', async function () {
