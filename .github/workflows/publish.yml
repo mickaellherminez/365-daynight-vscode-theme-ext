@@ -11,6 +11,12 @@
 # It requires a Trusted Publishing policy for this repository and this workflow
 # file (publish.yml) on the publisher's management page.
 # Open VSX authentication uses the OVSX_PAT repository secret.
+# Every publication waits for an approval in the protected "release" environment:
+# the build job uses it, and both publishing jobs depend on the build job.
+# That environment only accepts main and version tags. A dry run publishes
+# nothing and uses the unprotected "dry-run" environment, from any branch.
+# The publishing jobs themselves use no environment, so the Marketplace
+# Trusted Publishing policy (no environment) still matches.
 
 name: Publish
 
@@ -31,6 +37,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
     steps:
       - uses: actions/checkout@v4
 
