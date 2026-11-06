@@ -5,8 +5,12 @@ sélection, résultat de recherche, erreur, barre d'état) avec les couleurs ré
 puis la capture avec Google Chrome en mode headless.
 
 Usage :
-    python3 scripts/themes/preview.py            # hero.png (octobre) + year.png (les 12 mois)
-    python3 scripts/themes/preview.py --month 5  # hero.png pour un autre mois
+    python3 scripts/themes/preview.py                 # hero.png (octobre) + year.png (les 12 mois)
+    python3 scripts/themes/preview.py --month 5       # hero.png pour un autre mois
+    python3 scripts/themes/preview.py --out /tmp/x    # écrit les images dans un autre dossier
+
+hero.png montre toutes les variantes du mois, High Contrast Light comprise si le mois l'a.
+year.png ne montre que les variantes présentes dans les 12 palettes, pour que les mois restent comparables.
 """
 import html
 import json
@@ -19,9 +23,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.join(ROOT, 'assets', 'screenshots')
 CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-VARIANTS = (('light', 'light', 'Light'), ('dark', 'dark', 'Dark'), ('hc', 'hc-dark', 'High Contrast'))
+VARIANTS = (('light', 'light', 'Light'), ('dark', 'dark', 'Dark'), ('hc', 'hc-dark', 'High Contrast'),
+            ('hcLight', 'hc-light', 'High Contrast Light'))
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-STATUS = {'light': 'LGT', 'dark': 'DRK', 'hc': 'HCT'}
+STATUS = {'light': 'LGT', 'dark': 'DRK', 'hc': 'HCT', 'hcLight': 'HCL'}
 
 # Extrait de code : liste de lignes, chaque ligne = [(texte, rôle de couleur)]
 CODE = [
@@ -39,6 +44,15 @@ CODE = [
 SELECTED_LINE = 5   # ligne sélectionnée (index)
 FIND_WORD = ('ThemeClock', 4)
 ERROR_WORD = ('workspace', 1)
+
+
+def palettes(month):
+    return json.load(open(os.path.join(HERE, 'palettes', f'{month:02d}.json'), encoding='utf-8'))
+
+
+def variants(months):
+    """Variantes présentes dans les palettes de tous ces mois, dans l'ordre de VARIANTS."""
+    return [v for v in VARIANTS if all(v[0] in palettes(m) for m in months)]
 
 
 def load(month, variant_file):
@@ -77,7 +91,7 @@ def code_html(theme, palette, compact=False):
 
 def window_html(month, variant, variant_file, label):
     theme = load(month, variant_file)
-    palette = json.load(open(os.path.join(HERE, 'palettes', f'{month:02d}.json'), encoding='utf-8'))[variant]
+    palette = palettes(month)[variant]
     c = theme['colors']
     border = c.get('contrastBorder', c.get('sideBar.border'))
     files = [('extension.js', c['gitDecoration.modifiedResourceForeground'], 'M'),
@@ -161,23 +175,30 @@ def shoot(body, name, width, height):
 
 
 def hero(month):
-    cards = ''.join(window_html(month, v, f, label) for v, f, label in VARIANTS)
-    shoot(f'<div class=grid style="grid-template-columns:repeat(3,600px)">{cards}</div>', 'hero.png', 1896, 380)
+    shown = variants([month])
+    cards = ''.join(window_html(month, v, f, label) for v, f, label in shown)
+    # Trois variantes sur une ligne, quatre sur deux lignes
+    columns = 3 if len(shown) == 3 else 2
+    rows = -(-len(shown) // columns)
+    shoot(f'<div class=grid style="grid-template-columns:repeat({columns},600px)">{cards}</div>', 'hero.png',
+          52 + columns * 600 + (columns - 1) * 22, 48 + rows * 332 + (rows - 1) * 22)
 
 
 def year():
     tiles = []
     for m in range(1, 13):
         strips = []
-        for v, f, _ in VARIANTS:
+        for v, f, _ in variants(range(1, 13)):
             theme = load(m, f)
-            palette = json.load(open(os.path.join(HERE, 'palettes', f'{m:02d}.json'), encoding='utf-8'))[v]
+            palette = palettes(m)[v]
             strips.append(f"<div style=\"background:{theme['colors']['editor.background']}\">{code_html(theme, palette, compact=True)}</div>")
         tiles.append(f'<div class=tile><h3>{MONTHS[m - 1]}</h3><div class=strip>{"".join(strips)}</div></div>')
     shoot(f'<div class=grid style="grid-template-columns:repeat(4,440px)">{"".join(tiles)}</div>', 'year.png', 1876, 694)
 
 
 if __name__ == '__main__':
+    if '--out' in sys.argv:
+        OUT = os.path.abspath(sys.argv[sys.argv.index('--out') + 1])
     month = int(sys.argv[sys.argv.index('--month') + 1]) if '--month' in sys.argv else 10
     hero(month)
     year()

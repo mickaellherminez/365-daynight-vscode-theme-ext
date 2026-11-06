@@ -6,6 +6,9 @@ const {
 	ColorThemeKind,
 	getThemeTypeFromKind,
 	getThemeKind,
+	isHighContrastType,
+	hasThemeType,
+	getAvailableThemeType,
 	getThemeMonth,
 	getThemeState,
 	getThemeLabel,
@@ -34,7 +37,30 @@ suite('Theme logic', () => {
 			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.LIGHT), ThemeType.LIGHT);
 			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.DARK), ThemeType.DARK);
 			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.HIGH_CONTRAST), ThemeType.HIGH_CONTRAST);
-			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.HIGH_CONTRAST_LIGHT), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.HIGH_CONTRAST_LIGHT), ThemeType.HIGH_CONTRAST_LIGHT);
+		});
+	});
+
+	suite('High Contrast Light', () => {
+		test('only exists for the months that have its theme', () => {
+			assert.strictEqual(hasThemeType(ThemeType.HIGH_CONTRAST_LIGHT, 10), true);
+			assert.strictEqual(hasThemeType(ThemeType.HIGH_CONTRAST_LIGHT, 11), false);
+			for (const type of [ThemeType.LIGHT, ThemeType.DARK, ThemeType.HIGH_CONTRAST]) {
+				assert.strictEqual(hasThemeType(type, 11), true);
+			}
+		});
+
+		test('falls back on High Contrast, to stay in high contrast', () => {
+			assert.strictEqual(getAvailableThemeType(ThemeType.HIGH_CONTRAST_LIGHT, 10), ThemeType.HIGH_CONTRAST_LIGHT);
+			assert.strictEqual(getAvailableThemeType(ThemeType.HIGH_CONTRAST_LIGHT, 11), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getAvailableThemeType(ThemeType.DARK, 11), ThemeType.DARK);
+		});
+
+		test('counts as high contrast, like High Contrast', () => {
+			assert.strictEqual(isHighContrastType(ThemeType.HIGH_CONTRAST), true);
+			assert.strictEqual(isHighContrastType(ThemeType.HIGH_CONTRAST_LIGHT), true);
+			assert.strictEqual(isHighContrastType(ThemeType.LIGHT), false);
+			assert.strictEqual(isHighContrastType(ThemeType.DARK), false);
 		});
 	});
 
@@ -48,7 +74,8 @@ suite('Theme logic', () => {
 
 		test('does not recognize other themes', () => {
 			const others = [undefined, '', 'Monokai', 'Dracula', 'Dark High Contrast', '365', '365 05-May', '365 05-May Night',
-				'365 05-June Dark', '365 13-December Dark', '365 00-January Dark', 'My 365 05-May Dark'];
+				'365 05-June Dark', '365 13-December Dark', '365 00-January Dark', 'My 365 05-May Dark',
+				'365 11-November High Contrast Light', '365 10-October High Contrast Dark'];
 			for (const name of others) {
 				assert.strictEqual(getThemeMonth(name), undefined, String(name));
 			}
@@ -63,6 +90,8 @@ suite('Theme logic', () => {
 		test('reads the type and the month of a 365 theme', () => {
 			assert.deepStrictEqual(getThemeState('365 05-May High Contrast', ColorThemeKind.HIGH_CONTRAST),
 				{ type: ThemeType.HIGH_CONTRAST, month: 5 });
+			assert.deepStrictEqual(getThemeState('365 10-October High Contrast Light', ColorThemeKind.HIGH_CONTRAST_LIGHT),
+				{ type: ThemeType.HIGH_CONTRAST_LIGHT, month: 10 });
 		});
 	});
 
@@ -129,6 +158,7 @@ suite('Theme logic', () => {
 			assert.strictEqual(getStatusBarText({ type: ThemeType.LIGHT, month: 1 }), '01 LGT');
 			assert.strictEqual(getStatusBarText({ type: ThemeType.DARK, month: 10 }), '10 DRK');
 			assert.strictEqual(getStatusBarText({ type: ThemeType.HIGH_CONTRAST, month: 12 }), '12 HCT');
+			assert.strictEqual(getStatusBarText({ type: ThemeType.HIGH_CONTRAST_LIGHT, month: 10 }), '10 HCL');
 		});
 
 		test('shows only the variant for another theme', () => {
@@ -140,6 +170,7 @@ suite('Theme logic', () => {
 		test('gives the month and the variant of a 365 theme', () => {
 			assert.strictEqual(getThemeDisplayName({ type: ThemeType.DARK, month: 10 }), 'October Dark');
 			assert.strictEqual(getThemeDisplayName({ type: ThemeType.HIGH_CONTRAST, month: 1 }), 'January High Contrast');
+			assert.strictEqual(getThemeDisplayName({ type: ThemeType.HIGH_CONTRAST_LIGHT, month: 10 }), 'October High Contrast Light');
 		});
 
 		test('gives only the variant for another theme', () => {
@@ -152,6 +183,8 @@ suite('Theme logic', () => {
 			assert.strictEqual(getSwitchHint({ type: ThemeType.LIGHT, month: 5 }), 'Click to switch to Dark.');
 			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }), 'Click to switch to Light.');
 			assert.strictEqual(getSwitchHint({ type: ThemeType.DARK, month: 5 }, true), 'Click to switch to High Contrast.');
+			assert.strictEqual(getSwitchHint({ type: ThemeType.HIGH_CONTRAST, month: 10 }), 'Click to switch to High Contrast Light.');
+			assert.strictEqual(getSwitchHint({ type: ThemeType.HIGH_CONTRAST, month: 11 }), 'Click to switch to Light.');
 		});
 
 		test('explains the first click from another theme', () => {
@@ -201,9 +234,42 @@ suite('Theme logic', () => {
 			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, picked), COLOR_THEME);
 		});
 
-		test('the 365 High Contrast themes are dark: a light high contrast kind comes from the system', () => {
-			const picked = { colorTheme: '365 03-March High Contrast', followsColorScheme: false, followsHighContrast: true };
-			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, picked), 'workbench.preferredHighContrastLightColorTheme');
+		test('a High Contrast Light theme picked by hand is not mistaken for system high contrast', () => {
+			const picked = { colorTheme: '365 10-October High Contrast Light', followsColorScheme: false, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, picked), COLOR_THEME);
+		});
+
+		test('a high contrast kind that does not match the picked theme comes from the system', () => {
+			const dark = { colorTheme: '365 03-March High Contrast', followsColorScheme: false, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, dark), 'workbench.preferredHighContrastLightColorTheme');
+			const light = { colorTheme: '365 10-October High Contrast Light', followsColorScheme: false, followsHighContrast: true };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, light), 'workbench.preferredHighContrastColorTheme');
+		});
+
+		test('with the color mode detection, a 365 high contrast theme can come from the light or dark preference', () => {
+			// Le sélecteur de thèmes écrit dans la préférence du mode actuel du système, quel que soit le thème
+			const lightPicked = { ...both, preferredThemes: { 'workbench.preferredLightColorTheme': '365 10-October High Contrast Light' } };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, lightPicked), 'workbench.preferredLightColorTheme');
+
+			const darkPicked = { ...both, preferredThemes: {
+				'workbench.preferredDarkColorTheme': '365 11-November High Contrast',
+				'workbench.preferredHighContrastColorTheme': 'Default High Contrast'
+			} };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, darkPicked), 'workbench.preferredDarkColorTheme');
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST, { ...darkPicked, followsHighContrast: false }), 'workbench.preferredDarkColorTheme');
+		});
+
+		test('a 365 theme of the active kind in the high contrast preference comes first', () => {
+			const context = { ...both, preferredThemes: {
+				'workbench.preferredLightColorTheme': '365 10-October High Contrast Light',
+				'workbench.preferredHighContrastLightColorTheme': '365 10-October High Contrast Light'
+			} };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, context), 'workbench.preferredHighContrastLightColorTheme');
+		});
+
+		test('a 365 theme of another kind in the light or dark preference does not count', () => {
+			const context = { ...both, preferredThemes: { 'workbench.preferredLightColorTheme': '365 10-October High Contrast' } };
+			assert.strictEqual(getActiveThemeSetting(ColorThemeKind.HIGH_CONTRAST_LIGHT, context), 'workbench.preferredHighContrastLightColorTheme');
 		});
 
 		test('with the color mode detection, a high contrast kind can only come from the system', () => {
@@ -217,15 +283,26 @@ suite('Theme logic', () => {
 			assert.strictEqual(getThemeKind(ThemeType.LIGHT), ColorThemeKind.LIGHT);
 			assert.strictEqual(getThemeKind(ThemeType.DARK), ColorThemeKind.DARK);
 			assert.strictEqual(getThemeKind(ThemeType.HIGH_CONTRAST), ColorThemeKind.HIGH_CONTRAST);
+			assert.strictEqual(getThemeKind(ThemeType.HIGH_CONTRAST_LIGHT), ColorThemeKind.HIGH_CONTRAST_LIGHT);
 		});
 	});
 
 	suite('getSystemThemeSettings', () => {
 		test('gives the theme of the month for each preference', () => {
+			assert.deepStrictEqual(getSystemThemeSettings(10), {
+				'workbench.preferredLightColorTheme': '365 10-October Light',
+				'workbench.preferredDarkColorTheme': '365 10-October Dark',
+				'workbench.preferredHighContrastColorTheme': '365 10-October High Contrast',
+				'workbench.preferredHighContrastLightColorTheme': '365 10-October High Contrast Light'
+			});
+		});
+
+		test('leaves out High Contrast Light for a month that does not have it yet', () => {
 			assert.deepStrictEqual(getSystemThemeSettings(11), {
 				'workbench.preferredLightColorTheme': '365 11-November Light',
 				'workbench.preferredDarkColorTheme': '365 11-November Dark',
-				'workbench.preferredHighContrastColorTheme': '365 11-November High Contrast'
+				'workbench.preferredHighContrastColorTheme': '365 11-November High Contrast',
+				'workbench.preferredHighContrastLightColorTheme': undefined
 			});
 		});
 	});
@@ -235,12 +312,15 @@ suite('Theme logic', () => {
 			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', '365 03-March Dark'), true);
 			assert.strictEqual(isSystemThemeValue('workbench.preferredLightColorTheme', '365 12-December Light'), true);
 			assert.strictEqual(isSystemThemeValue('workbench.preferredHighContrastColorTheme', '365 01-January High Contrast'), true);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredHighContrastLightColorTheme', '365 10-October High Contrast Light'), true);
 		});
 
 		test('rejects another variant, another theme or no value', () => {
 			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', '365 03-March Light'), false);
 			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', 'Dracula'), false);
 			assert.strictEqual(isSystemThemeValue('workbench.preferredDarkColorTheme', undefined), false);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredHighContrastColorTheme', '365 10-October High Contrast Light'), false);
+			assert.strictEqual(isSystemThemeValue('workbench.preferredHighContrastLightColorTheme', '365 10-October High Contrast'), false);
 		});
 	});
 
@@ -347,14 +427,22 @@ suite('Theme logic', () => {
 			assert.strictEqual(getNextThemeType(ThemeType.DARK), ThemeType.LIGHT);
 		});
 
-		test('leaves High Contrast for Light as long as it has no Light variant', () => {
+		test('switches between the two High Contrast variants, to stay in high contrast', () => {
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, false, 10), ThemeType.HIGH_CONTRAST_LIGHT);
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST_LIGHT, false, 10), ThemeType.HIGH_CONTRAST);
+		});
+
+		test('leaves High Contrast for Light in a month without High Contrast Light', () => {
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, false, 11), ThemeType.LIGHT);
 			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST), ThemeType.LIGHT);
 		});
 
-		test('cycles through High Contrast too when asked', () => {
-			assert.strictEqual(getNextThemeType(ThemeType.LIGHT, true), ThemeType.DARK);
-			assert.strictEqual(getNextThemeType(ThemeType.DARK, true), ThemeType.HIGH_CONTRAST);
-			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, true), ThemeType.LIGHT);
+		test('cycles through the four variants when asked', () => {
+			assert.strictEqual(getNextThemeType(ThemeType.LIGHT, true, 10), ThemeType.DARK);
+			assert.strictEqual(getNextThemeType(ThemeType.DARK, true, 10), ThemeType.HIGH_CONTRAST);
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, true, 10), ThemeType.HIGH_CONTRAST_LIGHT);
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST_LIGHT, true, 10), ThemeType.LIGHT);
+			assert.strictEqual(getNextThemeType(ThemeType.HIGH_CONTRAST, true, 11), ThemeType.LIGHT);
 		});
 	});
 
@@ -393,10 +481,23 @@ suite('Theme logic', () => {
 	suite('package.json', () => {
 		test('contributes exactly the computed theme names', () => {
 			const computed = MONTH_NAMES.flatMap((_, month) =>
-				Object.values(ThemeType).map((type) => getThemeLabel(type, new Date(2026, month, 1)))
+				Object.values(ThemeType)
+					.filter((type) => hasThemeType(type, month + 1))
+					.map((type) => getThemeLabel(type, new Date(2026, month, 1)))
 			);
 			const contributed = contributes.themes.map((theme) => theme.label);
 			assert.deepStrictEqual([...contributed].sort(), computed.sort());
+		});
+
+		test('gives each theme the kind of its variant and the file of its variant', () => {
+			const uiThemes = { [ThemeType.LIGHT]: 'vs', [ThemeType.DARK]: 'vs-dark', [ThemeType.HIGH_CONTRAST]: 'hc-black', [ThemeType.HIGH_CONTRAST_LIGHT]: 'hc-light' };
+			const files = { [ThemeType.LIGHT]: 'light', [ThemeType.DARK]: 'dark', [ThemeType.HIGH_CONTRAST]: 'hc-dark', [ThemeType.HIGH_CONTRAST_LIGHT]: 'hc-light' };
+			for (const { label, uiTheme, path } of contributes.themes) {
+				const month = label.slice(4, 6);
+				const type = Object.values(ThemeType).find((candidate) => label === getThemeLabelForMonth(candidate, Number(month)));
+				assert.strictEqual(uiTheme, uiThemes[type], label);
+				assert.strictEqual(path, `./themes/365-${month}-${files[type]}-theme.json`, label);
+			}
 		});
 
 		test('contributes the two times, with defaults and a format that the extension accepts', () => {
@@ -434,6 +535,7 @@ suite('Theme logic', () => {
 				'extension.nextMonth',
 				'extension.previousMonth',
 				'extension.setDarkTheme',
+				'extension.setHighContrastLightTheme',
 				'extension.setHighContrastTheme',
 				'extension.setLightTheme',
 				'extension.toggleTheme'

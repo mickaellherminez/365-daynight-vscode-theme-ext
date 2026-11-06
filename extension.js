@@ -12,6 +12,9 @@ const {
   getThemeMonth,
   getThemeTypeFromKind,
   getThemeKind,
+  isHighContrastType,
+  hasThemeType,
+  getAvailableThemeType,
   getThemeLabelForMonth,
   createMonthSelection,
   getSelectedMonth,
@@ -56,8 +59,10 @@ const LAST_AUTO_PERIOD_KEY = 'lastAutoPeriod';
 // Mois choisi par l'utilisateur, conservé jusqu'au prochain mois réel (ex. { month: 3, realMonth: "2026-10" })
 const SELECTED_MONTH_KEY = 'selectedMonth';
 
-// Valeurs des réglages avant le mode system, pour les rendre en le quittant : { saved, complete }.
+// Valeurs des réglages avant le mode system, pour les rendre en le quittant : { saved, settings, waiting, complete }.
 // saved ne contient que les réglages présents chez l'utilisateur, une absence reste donc une absence.
+// settings liste les réglages sauvegardés : une version qui en gère un nouveau le sauvegarde à son tour.
+// waiting liste les réglages que le mode remplacera au premier mois qui a un thème pour eux.
 // complete devient vrai une fois tous les réglages écrits : avant, une écriture peut être à refaire.
 const SYSTEM_BACKUP_KEY = 'systemModeBackup';
 
@@ -67,6 +72,9 @@ const DETECT_COLOR_SCHEME_SETTING = 'window.autoDetectColorScheme';
 // pour que VS Code ne passe pas par les thèmes préférés d'origine.
 const PREFERRED_SETTINGS = Object.keys(getSystemThemeSettings(1));
 const SYSTEM_SETTINGS = [DETECT_COLOR_SCHEME_SETTING, ...PREFERRED_SETTINGS];
+
+// Réglages sauvegardés par la version 0.12.0, qui ne gérait pas le contraste élevé clair
+const LEGACY_SYSTEM_SETTINGS = SYSTEM_SETTINGS.filter((setting) => setting !== 'workbench.preferredHighContrastLightColorTheme');
 
 // Explication quand un changement de variante est demandé en mode system
 const SYSTEM_DECIDES_MESSAGE = 'Your system decides between Light and Dark, because 365DayNight.mode is set to system. The arrows still change the month.';
@@ -181,7 +189,8 @@ function getCurrentThemeSetting() {
   return getActiveThemeSetting(vscode.window.activeColorTheme.kind, {
     colorTheme: config.get('workbench.colorTheme'),
     followsColorScheme: Boolean(config.get(DETECT_COLOR_SCHEME_SETTING)),
-    followsHighContrast: Boolean(config.get('window.autoDetectHighContrast', true))
+    followsHighContrast: Boolean(config.get('window.autoDetectHighContrast', true)),
+    preferredThemes: Object.fromEntries(PREFERRED_SETTINGS.map((setting) => [setting, config.get(setting)]))
   });
 }
 
@@ -337,17 +346,42 @@ function onPreferredThemeChanged() {
 /**
  * Écrit le mois dans les réglages préférés. Un réglage qui contient autre chose qu'un thème 365 de
  * la bonne variante est un choix de l'utilisateur : il reste, sauf s'il fait partie de ceux à remplacer.
+ * Un mois qui n'a pas encore de thème pour un réglage lui laisse sa valeur d'origine, ou la lui rend :
+ * le réglage attend alors le premier mois qui en a un, tant que l'utilisateur ne le change pas.
  * @param {number} month
  * @param {string[]} [replacedSettings] Réglages à écrire, quelle que soit leur valeur
  */
 async function writeSystemThemes(month, replacedSettings = []) {
   const config = vscode.workspace.getConfiguration();
+  const backup = globalState.get(SYSTEM_BACKUP_KEY);
+  const waiting = new Set(backup?.waiting);
   for (const [setting, label] of Object.entries(getSystemThemeSettings(month))) {
     const current = config.inspect(setting)?.globalValue;
-    if (current !== label && (isSystemThemeValue(setting, current) || replacedSettings.includes(setting))) {
-      await config.update(setting, label, vscode.ConfigurationTarget.Global);
+    const original = backup?.saved[setting];
+    const isWaiting = waiting.delete(setting) && current === original;
+    if (label !== undefined) {
+      if (current !== label && (isSystemThemeValue(setting, current) || replacedSettings.includes(setting) || isWaiting)) {
+        await config.update(setting, label, vscode.ConfigurationTarget.Global);
+      }
+    } else if (isSystemThemeValue(setting, current) || replacedSettings.includes(setting) || isWaiting) {
+      waiting.add(setting);
+      if (current !== original) {
+        await config.update(setting, original, vscode.ConfigurationTarget.Global);
+      }
     }
   }
+  if (backup && JSON.stringify([...waiting]) !== JSON.stringify(backup.waiting ?? [])) {
+    await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), waiting: [...waiting] });
+  }
+}
+
+/**
+ * Réglages que le mode system gère mais que la sauvegarde ne contient pas encore
+ * @param {{ settings?: string[] } | undefined} backup
+ */
+function getUnsavedSystemSettings(backup) {
+  const saved = backup?.settings ?? LEGACY_SYSTEM_SETTINGS;
+  return SYSTEM_SETTINGS.filter((setting) => !saved.includes(setting));
 }
 
 /**
@@ -376,27 +410,31 @@ async function applySystemMonth(month, replacedSettings) {
 async function setUpSystemMode(month) {
   const config = vscode.workspace.getConfiguration();
   let backup = globalState.get(SYSTEM_BACKUP_KEY);
-  if (!backup) {
-    const saved = {};
-    for (const setting of SYSTEM_SETTINGS) {
+  // Une sauvegarde d'une version précédente ne contient pas les réglages gérés depuis : ils sont
+  // sauvegardés à leur tour, puis remplacés comme au premier passage
+  const unsaved = backup ? getUnsavedSystemSettings(backup) : SYSTEM_SETTINGS;
+  if (unsaved.length > 0) {
+    const saved = { ...backup?.saved };
+    for (const setting of unsaved) {
       const value = config.inspect(setting)?.globalValue;
       if (value !== undefined) {
         saved[setting] = value;
       }
     }
-    backup = { saved, complete: false };
+    backup = { saved, settings: SYSTEM_SETTINGS, complete: backup?.complete ?? false };
     await globalState.update(SYSTEM_BACKUP_KEY, backup);
   }
 
   try {
     if (backup.complete) {
-      await writeSystemThemes(month);
+      await writeSystemThemes(month, unsaved);
     } else {
       await writeSystemThemes(month, PREFERRED_SETTINGS);
       if (config.inspect(DETECT_COLOR_SCHEME_SETTING)?.globalValue !== true) {
         await config.update(DETECT_COLOR_SCHEME_SETTING, true, vscode.ConfigurationTarget.Global);
       }
-      await globalState.update(SYSTEM_BACKUP_KEY, { ...backup, complete: true });
+      // Relue : l'écriture des thèmes a pu noter des réglages en attente
+      await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), complete: true });
     }
   } catch (error) {
     return { ok: false, message: `Failed to change theme: ${error.message}` };
@@ -445,12 +483,14 @@ async function leaveSystemMode() {
  * @param {number} [month] Mois, de 1 à 12 : le mois réel par défaut
  * @returns {Promise<{ ok: true, label: string, activated: Promise<boolean | undefined> } | { ok: false, blocked?: boolean, message: string }>}
  */
-async function applyTheme(themeType, month = getCurrentMonth()) {
+async function applyTheme(requestedType, month = getCurrentMonth()) {
+  // Un mois sans High Contrast Light reste en contraste élevé, avec High Contrast
+  const themeType = getAvailableThemeType(requestedType, month);
   const label = getThemeLabelForMonth(themeType, month);
   const config = vscode.workspace.getConfiguration();
   // Un contraste élevé actif peut venir du système, que VS Code suit : le thème demandé ne
   // s'activera peut-être jamais, et le bouton attend donc le thème réellement actif
-  const mayBeSystemHighContrast = getThemeTypeFromKind(vscode.window.activeColorTheme.kind) === ThemeType.HIGH_CONTRAST
+  const mayBeSystemHighContrast = isHighContrastType(getThemeTypeFromKind(vscode.window.activeColorTheme.kind))
     && config.get('window.autoDetectHighContrast', true);
 
   if (isFollowingSystem()) {
@@ -522,7 +562,13 @@ function reportThemeChange(result) {
  */
 function applyThemeFromCommand(getThemeType) {
   return enqueueThemeChange(async () => {
-    reportThemeChange(await applyTheme(getThemeType(), getDisplayedMonth()));
+    const themeType = getThemeType();
+    const month = getDisplayedMonth();
+    const result = await applyTheme(themeType, month);
+    reportThemeChange(result);
+    if (result.ok && !hasThemeType(themeType, month)) {
+      vscode.window.showInformationMessage(`${MONTH_NAMES[month - 1]} has no ${themeType} theme yet, so its ${getAvailableThemeType(themeType, month)} theme is applied.`);
+    }
   });
 }
 
@@ -547,10 +593,12 @@ function toggleTheme() {
 
 /**
  * En mode system, un thème d'un autre éditeur est actif et un thème 365 peut le remplacer.
- * Ce n'est pas le cas en contraste élevé clair, tant que cette variante n'existe pas.
+ * Ce n'est pas le cas en contraste élevé clair pour un mois qui n'a pas encore cette variante.
  */
 function canBringBack365Theme() {
-  return themeState.month === undefined && PREFERRED_SETTINGS.includes(getCurrentThemeSetting());
+  const setting = getCurrentThemeSetting();
+  return themeState.month === undefined && PREFERRED_SETTINGS.includes(setting)
+    && getSystemThemeSettings(getDisplayedMonth())[setting] !== undefined;
 }
 
 /**
@@ -653,7 +701,7 @@ function checkAutoTheme() {
     // Le mois choisi reste jusqu'au prochain mois réel. Le contraste élevé est un choix
     // d'accessibilité : il n'est jamais remplacé, seul le mois est mis à jour
     const month = getSelectedMonth(globalState.get(SELECTED_MONTH_KEY), now) ?? now.getMonth() + 1;
-    const result = await applyTheme(themeState.type === ThemeType.HIGH_CONTRAST ? ThemeType.HIGH_CONTRAST : themeType, month);
+    const result = await applyTheme(isHighContrastType(themeState.type) ? themeState.type : themeType, month);
     if (result.ok) {
       lastHandledPeriod = period;
       await globalState.update(LAST_AUTO_PERIOD_KEY, period);
@@ -690,12 +738,13 @@ function checkSystemMode(now) {
 
   return enqueueThemeChange(async () => {
     const backup = globalState.get(SYSTEM_BACKUP_KEY);
-    if (backup?.complete && period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
+    const needsSaving = !backup || getUnsavedSystemSettings(backup).length > 0;
+    if (backup?.complete && !needsSaving && period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
       return;
     }
     // Avec plusieurs fenêtres ouvertes, seule celle qui a le focus sauvegarde les réglages : une autre
     // risquerait de lire les valeurs déjà écrites et de les prendre pour celles de l'utilisateur.
-    if (!backup && !vscode.window.state.focused) {
+    if (needsSaving && !vscode.window.state.focused) {
       return;
     }
 
@@ -737,6 +786,7 @@ function activate(context) {
     vscode.commands.registerCommand('extension.setLightTheme', () => applyThemeFromCommand(() => ThemeType.LIGHT)),
     vscode.commands.registerCommand('extension.setDarkTheme', () => applyThemeFromCommand(() => ThemeType.DARK)),
     vscode.commands.registerCommand('extension.setHighContrastTheme', () => applyThemeFromCommand(() => ThemeType.HIGH_CONTRAST)),
+    vscode.commands.registerCommand('extension.setHighContrastLightTheme', () => applyThemeFromCommand(() => ThemeType.HIGH_CONTRAST_LIGHT)),
     vscode.commands.registerCommand('extension.nextMonth', () => moveMonth(1)),
     vscode.commands.registerCommand('extension.previousMonth', () => moveMonth(-1)),
     vscode.commands.registerCommand('extension.currentMonth', goToCurrentMonth),
@@ -864,13 +914,17 @@ function createThemeTooltip(name, hint, followingSystem) {
   if (themeState.month !== undefined && themeState.month !== getCurrentMonth()) {
     links.push('[Back to the current month](command:extension.currentMonth)');
   }
-  if (themeState.type !== ThemeType.HIGH_CONTRAST && !followingSystem) {
+  // En contraste élevé, le clic mène déjà à l'autre variante à contraste élevé
+  if (!isHighContrastType(themeState.type) && !followingSystem) {
     links.push('[High Contrast](command:extension.setHighContrastTheme)');
+    if (hasThemeType(ThemeType.HIGH_CONTRAST_LIGHT, getDisplayedMonth())) {
+      links.push('[High Contrast Light](command:extension.setHighContrastLightTheme)');
+    }
   }
 
   const tooltip = new vscode.MarkdownString([`**${name}**`, hint, links.join(' · ')].filter(Boolean).join('\n\n'));
-  // Seules ces deux commandes peuvent être lancées depuis l'infobulle
-  tooltip.isTrusted = { enabledCommands: ['extension.currentMonth', 'extension.setHighContrastTheme'] };
+  // Seules ces commandes peuvent être lancées depuis l'infobulle
+  tooltip.isTrusted = { enabledCommands: ['extension.currentMonth', 'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme'] };
   return tooltip;
 }
 

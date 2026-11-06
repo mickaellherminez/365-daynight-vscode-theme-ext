@@ -6,15 +6,21 @@
 const ThemeType = {
   LIGHT: 'Light',
   DARK: 'Dark',
-  HIGH_CONTRAST: 'High Contrast'
+  HIGH_CONTRAST: 'High Contrast',
+  HIGH_CONTRAST_LIGHT: 'High Contrast Light'
 };
 
 // Libellés à 3 lettres du bouton : leur largeur reste stable
 const VARIANT_LABELS = {
   [ThemeType.LIGHT]: 'LGT',
   [ThemeType.DARK]: 'DRK',
-  [ThemeType.HIGH_CONTRAST]: 'HCT'
+  [ThemeType.HIGH_CONTRAST]: 'HCT',
+  [ThemeType.HIGH_CONTRAST_LIGHT]: 'HCL'
 };
+
+// Mois qui ont déjà un thème High Contrast Light : octobre sert d'essai avant les autres mois.
+// Doit correspondre aux thèmes déclarés dans package.json (vérifié par les tests).
+const HIGH_CONTRAST_LIGHT_MONTHS = [10];
 
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -36,6 +42,14 @@ const ColorThemeKind = {
   HIGH_CONTRAST_LIGHT: 4
 };
 
+// Genre de thème que donne chaque type de thème 365 une fois actif
+const KIND_BY_TYPE = {
+  [ThemeType.LIGHT]: ColorThemeKind.LIGHT,
+  [ThemeType.DARK]: ColorThemeKind.DARK,
+  [ThemeType.HIGH_CONTRAST]: ColorThemeKind.HIGH_CONTRAST,
+  [ThemeType.HIGH_CONTRAST_LIGHT]: ColorThemeKind.HIGH_CONTRAST_LIGHT
+};
+
 // Ce que dit le bouton central quand le système choisit la variante
 const SYSTEM_DECIDES_HINT = 'Your system decides between Light and Dark.';
 
@@ -47,36 +61,66 @@ const PREFERRED_THEME_SETTINGS = {
   [ColorThemeKind.HIGH_CONTRAST_LIGHT]: 'workbench.preferredHighContrastLightColorTheme'
 };
 
-// Réglages préférés tenus par le mode system. Le contraste élevé clair attend ses thèmes.
+// Réglages préférés tenus par le mode system
 const SYSTEM_THEME_TYPES = {
   [PREFERRED_THEME_SETTINGS[ColorThemeKind.LIGHT]]: ThemeType.LIGHT,
   [PREFERRED_THEME_SETTINGS[ColorThemeKind.DARK]]: ThemeType.DARK,
-  [PREFERRED_THEME_SETTINGS[ColorThemeKind.HIGH_CONTRAST]]: ThemeType.HIGH_CONTRAST
+  [PREFERRED_THEME_SETTINGS[ColorThemeKind.HIGH_CONTRAST]]: ThemeType.HIGH_CONTRAST,
+  [PREFERRED_THEME_SETTINGS[ColorThemeKind.HIGH_CONTRAST_LIGHT]]: ThemeType.HIGH_CONTRAST_LIGHT
 };
 
-const THEME_LABEL_PATTERN = new RegExp(`^365 (\\d{2})-([A-Za-z]+) (?:${Object.values(ThemeType).join('|')})$`);
+const THEME_LABEL_PATTERN = new RegExp(`^365 (\\d{2})-([A-Za-z]+) (${Object.values(ThemeType).join('|')})$`);
 
 /**
  * Type de thème correspondant au genre de thème actif indiqué par VS Code
  * @param {number} kind Valeur de vscode.ColorThemeKind
  */
 function getThemeTypeFromKind(kind) {
-  if (kind === ColorThemeKind.HIGH_CONTRAST || kind === ColorThemeKind.HIGH_CONTRAST_LIGHT) {
-    return ThemeType.HIGH_CONTRAST;
-  }
-  return kind === ColorThemeKind.DARK ? ThemeType.DARK : ThemeType.LIGHT;
+  const type = Object.keys(KIND_BY_TYPE).find((themeType) => KIND_BY_TYPE[themeType] === kind);
+  return type ?? ThemeType.LIGHT;
 }
 
 /**
- * Genre de thème qu'un thème 365 de ce type donne une fois actif.
- * Les thèmes 365 à contraste élevé sont tous sombres.
+ * Genre de thème qu'un thème 365 de ce type donne une fois actif
  * @param {string} themeType
  */
 function getThemeKind(themeType) {
-  if (themeType === ThemeType.HIGH_CONTRAST) {
-    return ColorThemeKind.HIGH_CONTRAST;
-  }
-  return themeType === ThemeType.DARK ? ColorThemeKind.DARK : ColorThemeKind.LIGHT;
+  return KIND_BY_TYPE[themeType];
+}
+
+/**
+ * Indique si un type de thème est l'une des deux variantes à contraste élevé
+ * @param {string} themeType
+ */
+function isHighContrastType(themeType) {
+  return themeType === ThemeType.HIGH_CONTRAST || themeType === ThemeType.HIGH_CONTRAST_LIGHT;
+}
+
+/**
+ * Indique si un mois a un thème de ce type. Seul High Contrast Light manque encore à certains mois.
+ * @param {string} themeType
+ * @param {number} month Mois, de 1 à 12
+ */
+function hasThemeType(themeType, month) {
+  return themeType !== ThemeType.HIGH_CONTRAST_LIGHT || HIGH_CONTRAST_LIGHT_MONTHS.includes(month);
+}
+
+/**
+ * Type de thème à appliquer pour un mois : High Contrast Light devient High Contrast pour un mois
+ * qui ne l'a pas encore, pour rester en contraste élevé
+ * @param {string} themeType
+ * @param {number} month Mois, de 1 à 12
+ */
+function getAvailableThemeType(themeType, month) {
+  return hasThemeType(themeType, month) ? themeType : ThemeType.HIGH_CONTRAST;
+}
+
+/**
+ * Type d'un thème 365 d'après son nom, ou undefined pour tout autre thème
+ * @param {string | undefined} themeName
+ */
+function getThemeNameType(themeName) {
+  return getThemeMonth(themeName) === undefined ? undefined : THEME_LABEL_PATTERN.exec(themeName)[3];
 }
 
 /**
@@ -89,7 +133,7 @@ function getThemeMonth(themeName) {
     return undefined;
   }
   const month = Number(match[1]);
-  return MONTH_NAMES[month - 1] === match[2] ? month : undefined;
+  return MONTH_NAMES[month - 1] === match[2] && hasThemeType(match[3], month) ? month : undefined;
 }
 
 /**
@@ -139,7 +183,7 @@ function getSwitchHint(state, includeHighContrast = false, systemDecides = false
   }
   return systemDecides
     ? SYSTEM_DECIDES_HINT
-    : `Click to switch to ${getNextThemeType(state.type, includeHighContrast)}.`;
+    : `Click to switch to ${getNextThemeType(state.type, includeHighContrast, state.month)}.`;
 }
 
 /**
@@ -273,19 +317,26 @@ function getAutoPeriod(themeType, date) {
 }
 
 /**
- * Type de thème suivant dans le cycle du bouton : Light et Dark, avec High Contrast si demandé.
- * Tant que High Contrast n'a pas de variante claire, il mène à Light : un clic doit toujours agir.
+ * Type de thème suivant dans le cycle du bouton. Light et Dark alternent. Les deux variantes à
+ * contraste élevé alternent entre elles, pour qu'un clic ne quitte pas le contraste élevé par erreur.
+ * Avec includeHighContrast, le cycle passe par les quatre variantes : Light, Dark, High Contrast,
+ * High Contrast Light. Un mois qui n'a pas encore High Contrast Light passe de High Contrast à Light :
+ * un clic doit toujours agir.
  * @param {string} themeType
  * @param {boolean} [includeHighContrast]
+ * @param {number} [month] Mois affiché, de 1 à 12 : sans mois, High Contrast Light n'est pas proposé
  */
-function getNextThemeType(themeType, includeHighContrast = false) {
-  if (themeType === ThemeType.LIGHT) {
-    return ThemeType.DARK;
+function getNextThemeType(themeType, includeHighContrast = false, month = undefined) {
+  switch (themeType) {
+    case ThemeType.LIGHT:
+      return ThemeType.DARK;
+    case ThemeType.DARK:
+      return includeHighContrast ? ThemeType.HIGH_CONTRAST : ThemeType.LIGHT;
+    case ThemeType.HIGH_CONTRAST:
+      return hasThemeType(ThemeType.HIGH_CONTRAST_LIGHT, month) ? ThemeType.HIGH_CONTRAST_LIGHT : ThemeType.LIGHT;
+    default:
+      return includeHighContrast ? ThemeType.LIGHT : ThemeType.HIGH_CONTRAST;
   }
-  if (themeType === ThemeType.DARK && includeHighContrast) {
-    return ThemeType.HIGH_CONTRAST;
-  }
-  return ThemeType.LIGHT;
 }
 
 /**
@@ -295,7 +346,7 @@ function getNextThemeType(themeType, includeHighContrast = false) {
  * @param {boolean} [includeHighContrast]
  */
 function getToggleThemeType(state, includeHighContrast = false) {
-  return state.month === undefined ? state.type : getNextThemeType(state.type, includeHighContrast);
+  return state.month === undefined ? state.type : getNextThemeType(state.type, includeHighContrast, state.month);
 }
 
 /**
@@ -312,31 +363,48 @@ function isThemeMaskedByWorkspace(inspection, themeLabel) {
 /**
  * Réglage qui décide du thème actif, dans l'ordre de VS Code : le contraste élevé du système,
  * puis le mode du système, sinon workbench.colorTheme. L'API ne dit pas si le système est en
- * contraste élevé : un genre de thème à contraste élevé est attribué au système, sauf si le
- * réglage workbench.colorTheme contient lui-même un thème 365 à contraste élevé et que le genre
- * actif est le sien : un genre à contraste élevé clair ne peut donc pas venir de ce réglage.
+ * contraste élevé : un genre de thème à contraste élevé est attribué au système, sauf si un autre
+ * réglage contient lui-même un thème 365 de ce genre :
+ * - workbench.colorTheme, quand VS Code ne suit pas le mode du système ;
+ * - la préférence claire ou sombre, quand il le suit et que la préférence de contraste élevé ne
+ *   contient pas un tel thème : le sélecteur de thèmes écrit dans la préférence du mode actuel du
+ *   système, quel que soit le thème choisi.
  * @param {number} kind Valeur de vscode.ColorThemeKind
- * @param {{ colorTheme: string | undefined, followsColorScheme: boolean, followsHighContrast: boolean }} context
+ * @param {{ colorTheme: string | undefined, followsColorScheme: boolean, followsHighContrast: boolean,
+ *   preferredThemes?: Record<string, string | undefined> }} context preferredThemes : valeur de chaque réglage préféré
  */
-function getActiveThemeSetting(kind, { colorTheme, followsColorScheme, followsHighContrast }) {
-  const isHighContrast = getThemeTypeFromKind(kind) === ThemeType.HIGH_CONTRAST;
-  if (isHighContrast) {
-    const pickedByHand = !followsColorScheme && kind === getThemeKind(ThemeType.HIGH_CONTRAST)
-      && getThemeMonth(colorTheme) !== undefined && colorTheme.endsWith(ThemeType.HIGH_CONTRAST);
-    return followsHighContrast && !pickedByHand ? PREFERRED_THEME_SETTINGS[kind] : 'workbench.colorTheme';
+function getActiveThemeSetting(kind, { colorTheme, followsColorScheme, followsHighContrast, preferredThemes = {} }) {
+  if (!isHighContrastType(getThemeTypeFromKind(kind))) {
+    return followsColorScheme ? PREFERRED_THEME_SETTINGS[kind] : 'workbench.colorTheme';
   }
-  return followsColorScheme ? PREFERRED_THEME_SETTINGS[kind] : 'workbench.colorTheme';
+  const isOfActiveKind = (themeName) => {
+    const type = getThemeNameType(themeName);
+    return type !== undefined && getThemeKind(type) === kind;
+  };
+  const highContrastSetting = PREFERRED_THEME_SETTINGS[kind];
+  if (!followsColorScheme) {
+    return followsHighContrast && !isOfActiveKind(colorTheme) ? highContrastSetting : 'workbench.colorTheme';
+  }
+  if (followsHighContrast && isOfActiveKind(preferredThemes[highContrastSetting])) {
+    return highContrastSetting;
+  }
+  const schemeSetting = [ColorThemeKind.LIGHT, ColorThemeKind.DARK]
+    .map((schemeKind) => PREFERRED_THEME_SETTINGS[schemeKind])
+    .find((setting) => isOfActiveKind(preferredThemes[setting]));
+  return schemeSetting ?? (followsHighContrast ? highContrastSetting : 'workbench.colorTheme');
 }
 
 /**
- * Valeurs des réglages préférés pour un mois en mode system
+ * Valeurs des réglages préférés pour un mois en mode system. Un réglage dont le mois n'a pas encore
+ * de thème vaut undefined : il garde la valeur de l'utilisateur.
  * @param {number} month Mois, de 1 à 12
- * @returns {Record<string, string>}
+ * @returns {Record<string, string | undefined>}
  */
 function getSystemThemeSettings(month) {
-  return Object.fromEntries(
-    Object.entries(SYSTEM_THEME_TYPES).map(([setting, type]) => [setting, getThemeLabelForMonth(type, month)])
-  );
+  return Object.fromEntries(Object.entries(SYSTEM_THEME_TYPES).map(([setting, type]) => [
+    setting,
+    hasThemeType(type, month) ? getThemeLabelForMonth(type, month) : undefined
+  ]));
 }
 
 /**
@@ -357,6 +425,9 @@ module.exports = {
   ColorThemeKind,
   getThemeTypeFromKind,
   getThemeKind,
+  isHighContrastType,
+  hasThemeType,
+  getAvailableThemeType,
   getThemeMonth,
   getThemeState,
   getThemeLabel,
