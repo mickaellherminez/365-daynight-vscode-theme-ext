@@ -60,6 +60,9 @@ jobs:
       - name: Accessibility audit of the themes
         run: npm run themes:audit
 
+      - name: Generated themes match the palettes
+        run: npm run themes:check
+
       - name: Lint and tests
         run: xvfb-run -a npm test
 

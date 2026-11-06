@@ -349,7 +349,8 @@
     "vscode:prepublish": "npm run lint",
     "publish": "NODE_NO_WARNINGS=1 vsce publish",
     "themes:audit": "python3 scripts/themes/audit.py",
-    "themes:build": "python3 scripts/themes/build.py"
+    "themes:build": "python3 scripts/themes/build.py",
+    "themes:check": "python3 scripts/themes/build.py --check"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

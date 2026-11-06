@@ -4,6 +4,7 @@ Usage :
     python3 scripts/themes/build.py 10           # aperçu de l'audit, aucun fichier modifié
     python3 scripts/themes/build.py 10 --write   # écrit themes/365-10-{light,dark,hc-dark}-theme.json
     python3 scripts/themes/build.py 10 -v        # affiche aussi les contrôles réussis
+    python3 scripts/themes/build.py --check      # vérifie que themes/ correspond aux palettes (code 1 sinon)
 
 La palette est lue dans scripts/themes/palettes/<mois>.json et les règles de syntaxe,
 communes à tous les mois, dans scripts/themes/token-rules.json.
@@ -327,13 +328,14 @@ def semantic(p):
     }
 
 
-def build(month, write=False, verbose=False):
+def generate(month):
+    """Les 3 thèmes d'un mois : liste de (chemin relatif, thème, contraste élevé ?)."""
     mm = '%02d' % int(month)
     palettes = json.load(open(os.path.join(HERE, 'palettes', f'{mm}.json'), encoding='utf-8'))
     rules = json.load(open(os.path.join(HERE, 'token-rules.json'), encoding='utf-8'))
     pkg = json.load(open(os.path.join(ROOT, 'package.json'), encoding='utf-8'))
     labels = {t['path']: t['label'] for t in pkg['contributes']['themes']}
-    failures = 0
+    themes = []
     for variant, suffix in VARIANTS.items():
         p, hc = palettes[variant], variant == 'hc'
         rel = f'./themes/365-{mm}-{suffix}-theme.json'
@@ -342,16 +344,54 @@ def build(month, write=False, verbose=False):
             'colors': ui(p, hc), 'tokenColors': tokens(p, rules), 'semanticTokenColors': semantic(p),
             '_accessibilityNote': p['note'],
         }
+        themes.append((rel, theme, hc))
+    return themes
+
+
+def serialize(theme):
+    """Texte exact d'un fichier de thème généré."""
+    return json.dumps(theme, indent=2, ensure_ascii=False) + '\n'
+
+
+def build(month, write=False, verbose=False):
+    failures = 0
+    for rel, theme, hc in generate(month):
         failures += report(theme, hc, verbose)
         if write:
             with open(os.path.join(ROOT, rel), 'w', encoding='utf-8') as f:
-                json.dump(theme, f, indent=2, ensure_ascii=False)
-                f.write('\n')
+                f.write(serialize(theme))
             print(f'   écrit : {rel}')
     return failures
 
 
+def check():
+    """Compare chaque fichier de themes/ au thème que le générateur produit depuis les palettes.
+    Un fichier modifié à la main, une palette changée sans --write ou un fichier en trop sont signalés."""
+    problems = []
+    expected = set()
+    for month in range(1, 13):
+        for rel, theme, _ in generate(month):
+            path = os.path.normpath(os.path.join(ROOT, rel))
+            expected.add(path)
+            if not os.path.exists(path):
+                problems.append(f'manquant : {rel}')
+            elif open(path, encoding='utf-8').read() != serialize(theme):
+                problems.append(f'différent du générateur : {rel}')
+    for name in sorted(os.listdir(os.path.join(ROOT, 'themes'))):
+        path = os.path.normpath(os.path.join(ROOT, 'themes', name))
+        if name.endswith('.json') and path not in expected:
+            problems.append(f'non généré : ./themes/{name}')
+    for problem in problems:
+        print('   ' + problem)
+    print(f'{len(expected) - sum(p.startswith(("manquant", "différent")) for p in problems)}/{len(expected)} thème(s) conformes aux palettes, {len(problems)} problème(s)')
+    if problems:
+        print('Modifier la palette puis relancer : python3 scripts/themes/build.py <mois> --write')
+    return len(problems)
+
+
 if __name__ == '__main__':
+    if '--check' in sys.argv:
+        sys.exit(1 if check() else 0)
     args = [x for x in sys.argv[1:] if not x.startswith('-')]
     if len(args) != 1:
         sys.exit(__doc__)

@@ -35,6 +35,12 @@ ALERT_KEYS = {
     'ajout': 'editorGutter.addedBackground', 'modification': 'editorGutter.modifiedBackground',
     'suppression': 'editorGutter.deletedBackground',
 }
+# Jetons sémantiques colorés que chaque thème doit définir (les langages comme TypeScript ou Python
+# les utilisent à la place des règles TextMate quand semanticHighlighting est actif)
+SEMANTIC_ROLES = (
+    'variable.readonly', 'parameter', 'function', 'method', 'class', 'enum', 'interface', 'namespace',
+    'typeParameter', 'enumMember', 'property', 'variable.defaultLibrary', 'keyword', 'comment.documentation',
+)
 MIN_DELTA_E = 10
 MIN_BUTTON_DELTA_E = 15
 
@@ -63,6 +69,14 @@ def token_colors(theme):
                 found[label] = color
     found.setdefault('variable', theme.get('colors', {}).get('editor.foreground'))
     return {k: v for k, v in found.items() if v}
+
+
+def semantic_colors(theme):
+    """Couleur de chaque jeton sémantique ; None pour une règle qui ne change que le style (ex. barré)."""
+    found = {}
+    for key, value in theme.get('semanticTokenColors', {}).items():
+        found[key] = value if isinstance(value, str) else value.get('foreground')
+    return found
 
 
 def checks(theme, hc):
@@ -209,11 +223,26 @@ def checks(theme, hc):
         rows.append(('Bouton de la barre d\'état ≠ texte de la barre', distance, MIN_BUTTON_DELTA_E,
                      'OK' if distance >= MIN_BUTTON_DELTA_E else 'ÉCHEC'))
 
-    # Jetons de syntaxe
-    for label, color in token_colors(theme).items():
+    # Jetons de syntaxe : une catégorie absente compte comme un échec, sinon elle prendrait la couleur
+    # du texte et ne serait plus distinguée
+    tokens = token_colors(theme)
+    for label in TOKEN_PROBES:
+        color = tokens.get(label)
         chk('Jeton : ' + label, color, bg, text)
-        if sel:
+        if sel and color:
             chk('Jeton : ' + label + ' sélectionné', g('editor.selectionForeground') if hc else color, sel, 7 if hc else 3)
+
+    # Jetons sémantiques : mêmes minimums que les jetons de syntaxe
+    semantic = semantic_colors(theme)
+    for key in SEMANTIC_ROLES:
+        if key not in semantic:
+            rows.append(('Sémantique : ' + key, None, text, 'MANQUANT'))
+    for key, color in sorted(semantic.items()):
+        if color is None:
+            continue
+        chk('Sémantique : ' + key, color, bg, text)
+        if sel:
+            chk('Sémantique : ' + key + ' sélectionné', g('editor.selectionForeground') if hc else color, sel, 7 if hc else 3)
     return rows
 
 
