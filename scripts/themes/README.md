@@ -7,7 +7,7 @@ pour les personnes daltoniennes.
 | Fichier | Rôle |
 |---|---|
 | `audit.py` | Audite un ou plusieurs thèmes existants (`npm run themes:audit`) |
-| `build.py` | Génère les 3 thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite |
+| `build.py` | Génère les 3 thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite. Avec `--check`, vérifie que `themes/` correspond aux palettes (`npm run themes:check`) |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
 | `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`) avec Google Chrome en mode headless |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme |
@@ -29,6 +29,9 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
 - **Sélection** : visible dans l'éditeur, le terminal et la console de débogage, distincte de la ligne
   courante, et texte sélectionné toujours lisible.
 - **Interface** : barre latérale, onglets, barre d'état, boutons, champs, menus, notifications, vue peek, etc.
+- **Jetons sémantiques** : chaque couleur de `semanticTokenColors` (fonction, méthode, propriété, paramètre...)
+  respecte les mêmes minimums que les jetons de syntaxe, sur le fond et une fois sélectionnée. TypeScript, Python
+  et d'autres langages les utilisent à la place des règles TextMate.
 - **Bouton de l'extension** : `365DayNight.statusBarButton` est lisible sur la barre d'état (≥ 4.5:1, ≥ 7:1 en High Contrast)
   et se distingue du texte normal de la barre (ΔE ≥ 15). `build.py` la calcule depuis `accent`, en éclaircissant au minimum.
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
@@ -37,6 +40,39 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
   Une différence perçue (ΔE) inférieure à 10 est signalée comme confusion possible.
 
 Une clé manquante compte comme un échec : VS Code la remplacerait par sa couleur par défaut, sans rapport avec le thème.
+C'est aussi le cas d'un rôle attendu : chacune des 14 catégories de jetons contrôlées (commentaire, mot-clé, fonction,
+chaîne, nombre, classe, variable, opérateur, ponctuation, balise, attribut, regex, clé JSON, invalide) et chacun des
+14 jetons sémantiques colorés doivent être présents.
+
+## Vérifier que les thèmes correspondent aux palettes
+
+```sh
+npm run themes:check
+```
+
+Le générateur recalcule les 36 thèmes en mémoire et les compare aux fichiers de `themes/`, octet par octet. Un fichier
+modifié à la main, une palette changée sans `--write`, un fichier manquant ou un fichier en trop font échouer la
+vérification, lancée aussi par la CI et avant chaque publication. Pour corriger, modifier la palette puis relancer
+`build.py <mois> --write`.
+
+## Ce que l'audit ne vérifie pas
+
+L'audit garantit les contrôles listés ci-dessus, rien de plus. En particulier :
+
+- **Couleurs non définies** : un thème définit environ 420 des quelque 970 couleurs documentées par VS Code. Les autres
+  prennent la couleur par défaut de VS Code et ne sont pas auditées (par exemple le chat, les tests, les notebooks).
+- **Paires contrôlées** : seules les combinaisons texte / fond listées dans `audit.py` sont mesurées. Une couleur
+  posée sur un fond non prévu (un badge dans un widget, par exemple) n'est pas vérifiée.
+- **Rendu réel** : le contraste est calculé sur les couleurs déclarées. La police, son épaisseur, l'anticrénelage,
+  la taille du texte et l'empilement de plusieurs fonds transparents ne sont pas mesurés.
+- **Langages** : chaque catégorie de jeton est testée avec un seul scope TextMate représentatif. Une grammaire qui
+  utilise d'autres scopes peut afficher d'autres couleurs.
+- **Norme** : les ratios sont ceux de WCAG 2.x. Le futur modèle APCA (WCAG 3) n'est pas appliqué.
+- **Daltonisme** : la simulation de Machado et al. (2009) porte sur les dichromaties complètes (protanopie,
+  deutéranopie, tritanopie). Les formes partielles, plus fréquentes, sont moins sévères mais pas simulées à part.
+  Le seuil ΔE de 10 (CIE76) est une règle pratique, pas une norme.
+- **Thèmes à contraste élevé clairs** : il n'en existe pas encore, l'audit ne les couvre donc pas.
+- **Personnes réelles** : aucun calcul ne remplace des essais avec des personnes concernées.
 
 ## Générer les thèmes d'un mois
 

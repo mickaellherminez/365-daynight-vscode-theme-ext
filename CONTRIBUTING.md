@@ -41,7 +41,15 @@ If you run the tests from VS Code's integrated terminal, use `env -u ELECTRON_RU
 
 ### Continuous integration
 
-The [CI workflow](.github/workflows/ci.yml) runs the theme audit, the lint and the tests on every branch push and pull request. If a check fails, the workflow fails.
+The [CI workflow](.github/workflows/ci.yml) runs these checks on every branch push and pull request. If one fails, the workflow fails.
+
+| Check | Command | What it verifies |
+| --- | --- | --- |
+| Theme audit | `npm run themes:audit` | Contrast and color blind distinction in the 36 themes, including semantic token colors. A missing color role counts as a failure |
+| Generated themes | `npm run themes:check` | Each file in `themes/` is exactly what the generator produces from its palette: no hand edit, no palette change without `--write`, no missing or extra file |
+| Lint and tests | `npm test` | The lint, the unit tests, then the tests inside VS Code |
+
+The Publish workflow runs the same checks before building the package. See [scripts/themes/README.md](scripts/themes/README.md) for what the audit covers and its limits.
 
 ## Status bar button rules
 
@@ -78,7 +86,7 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 4. Regenerate the README previews: `python3 scripts/themes/preview.py`.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
-`npm run themes:audit` checks all 36 themes. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles and the audit rules.
+`npm run themes:audit` checks all 36 themes, and `npm run themes:check` confirms that every theme file matches its palette. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles, the audit rules and the audit's limits.
 
 ## Packaging
 
@@ -91,7 +99,7 @@ npm run package   # creates 365-daynight-vscode-theme-ext-<version>.vsix
 Pushing a version tag that matches `package.json` (for example `git tag 0.11.2 && git push origin 0.11.2`) runs the [Publish workflow](.github/workflows/publish.yml):
 
 1. A pause until a repository admin approves the run in the protected `release` environment: open the run in the Actions tab, then **Review deployments** > **Approve and deploy**. Without approval, nothing is built or published.
-2. Theme audit, lint and tests.
+2. Theme audit, generated themes check, lint and tests.
 3. Build and verification of one `.vsix` package.
 4. Publication of that same package to the Marketplace, with Trusted Publishing (OIDC, no token), and to Open VSX, with the `OVSX_PAT` repository secret.
 
@@ -109,5 +117,5 @@ If one registry fails, open the workflow run and choose **Re-run failed jobs**: 
 
 - Create a branch from `main` (for example `feat/...` or `fix/...`).
 - Keep commits focused and use the existing prefixes: `ADDED:`, `CHANGED:`, `FIXED:`, `REMOVED:`, `DOCS:`.
-- Make sure `npm run lint`, `npm test` and `npm run themes:audit` pass.
+- Make sure `npm run lint`, `npm test`, `npm run themes:audit` and `npm run themes:check` pass.
 - Add a line to the `[Unreleased]` section of the [CHANGELOG](CHANGELOG.md) for user-facing changes.
