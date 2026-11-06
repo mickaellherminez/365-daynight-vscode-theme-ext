@@ -17,7 +17,7 @@
 - 🔁 **Wechsel mit einem Klick.** Eine Schaltfläche in der Statusleiste wechselt zwischen hell und dunkel. Der kontrastreiche Modus ist per Befehl erreichbar.
 - ⏰ **Optionaler Automatikmodus.** Die Erweiterung kann das Theme des aktuellen Monats selbst anwenden: tagsüber hell, nachts dunkel.
 - 👁️ **Augenschonend und für alle lesbar.** Der gesamte Text erfüllt die WCAG-Kontraststufen, und die Syntaxfarben bleiben auch für farbenblinde Menschen unterscheidbar.
-- 🖥️ **Sorgfältig gestaltet.** Editor, Seitenleiste, Tabs, Terminal, Debugkonsole, Benachrichtigungen und Statusleiste: Alles ist gestaltet, mit mehr als 400 Farben pro Theme. Neuere Bereiche wie Chat, Tests und Notebooks verwenden vorerst noch die Standardfarben von VS Code.
+- 🖥️ **Sorgfältig gestaltet.** Editor, Seitenleiste, Tabs, Terminal, Debugkonsole, Benachrichtigungen und Statusleiste: Alles ist gestaltet, mit mehr als 480 Farben pro Theme. Chat, Testergebnisse, Symbol-Icons, Git-Graph, Merge-Editor und Multi-Diff folgen ebenfalls der Palette des Monats.
 
 ## Installation
 
@@ -157,7 +157,7 @@ Die Schaltfläche in diesem Modus:
 
 ## Barrierefreiheit zuerst
 
-Jedes Theme besteht ein automatisiertes Barrierefreiheits-Audit mit mehr als 130 Prüfungen:
+Jedes Theme besteht ein automatisiertes Barrierefreiheits-Audit mit mehr als 250 Prüfungen:
 
 - **Lesbarer Text:** Editortext und Syntaxfarben erreichen einen Kontrast von mindestens **4,5:1 (WCAG AA)** in hellen und dunklen Themes und **7:1 (WCAG AAA)** in kontrastreichen Themes.
 - **Farbenblind-freundlich:** Syntaxfarben (Schlüsselwörter, Funktionen, Strings, Zahlen, Klassen, Kommentare) und Hinweise (Fehler, Warnungen, Git-Änderungen) werden für **Protanopie, Deuteranopie und Tritanopie** simuliert, damit sie unterscheidbar bleiben.

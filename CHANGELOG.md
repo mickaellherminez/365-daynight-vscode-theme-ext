@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Changed
+- The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
+
 ## [0.12.0] - 2026-11-06
 
 ### Added

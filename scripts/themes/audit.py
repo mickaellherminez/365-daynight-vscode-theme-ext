@@ -41,6 +41,35 @@ SEMANTIC_ROLES = (
     'variable.readonly', 'parameter', 'function', 'method', 'class', 'enum', 'interface', 'namespace',
     'typeParameter', 'enumMember', 'property', 'variable.defaultLibrary', 'keyword', 'comment.documentation',
 )
+# Surfaces récentes : couleurs que VS Code fixe sans tenir compte du thème, que chaque thème doit donc définir
+PRIORITY_KEYS = (
+    'chat.slashCommandBackground', 'chat.slashCommandForeground', 'chat.avatarBackground', 'chat.editedFileForeground',
+    'chat.linesAddedForeground', 'chat.linesRemovedForeground', 'chat.checkpointSeparator',
+    'testing.iconPassed', 'testing.iconFailed', 'testing.iconErrored', 'testing.iconQueued', 'testing.iconSkipped',
+    'testing.iconUnset', 'testing.runAction',
+    'scmGraph.foreground1', 'scmGraph.foreground2', 'scmGraph.foreground3', 'scmGraph.foreground4', 'scmGraph.foreground5',
+    'scmGraph.historyItemRefColor', 'scmGraph.historyItemRemoteRefColor', 'scmGraph.historyItemBaseRefColor',
+    'scmGraph.historyItemHoverAdditionsForeground', 'scmGraph.historyItemHoverDeletionsForeground',
+    'mergeEditor.change.background', 'mergeEditor.change.word.background', 'mergeEditor.changeBase.background',
+    'mergeEditor.changeBase.word.background', 'mergeEditor.conflictingLines.background',
+    'mergeEditor.conflict.unhandledFocused.border', 'mergeEditor.conflict.handledFocused.border',
+    'multiDiffEditor.headerBackground',
+) + tuple(f'symbolIcon.{kind}Foreground' for kind in (
+    'class', 'constructor', 'enumerator', 'enumeratorMember', 'event', 'field', 'function', 'interface', 'method',
+    'variable'))
+
+# Couleurs que VS Code dérive d'une autre quand le thème ne les définit pas (valeurs par défaut de VS Code
+# 1.145). L'audit suit cet héritage pour contrôler les surfaces qui n'ont pas besoin d'être redéfinies.
+INHERITED = {
+    'inlineChat.background': 'editorWidget.background', 'inlineChat.foreground': 'editorWidget.foreground',
+    'inlineChatInput.background': 'input.background', 'inlineChatInput.placeholderForeground': 'input.placeholderForeground',
+    'commandCenter.foreground': 'titleBar.activeForeground', 'commandCenter.inactiveForeground': 'titleBar.inactiveForeground',
+    'notebook.editorBackground': 'editor.background', 'notebook.focusedCellBorder': 'focusBorder',
+    'agentsPanel.foreground': 'sideBar.foreground',
+    'agentsChatInput.background': 'input.background', 'agentsChatInput.foreground': 'input.foreground',
+    'agentsChatInput.placeholderForeground': 'input.placeholderForeground',
+    'agentsBadge.background': 'activityBarBadge.background', 'agentsBadge.foreground': 'activityBarBadge.foreground',
+}
 MIN_DELTA_E = 10
 MIN_BUTTON_DELTA_E = 15
 
@@ -77,6 +106,21 @@ def semantic_colors(theme):
     for key, value in theme.get('semanticTokenColors', {}).items():
         found[key] = value if isinstance(value, str) else value.get('foreground')
     return found
+
+
+def resolve(theme, key, hc):
+    """Couleur effective d'une clé : celle du thème, sinon celle dont VS Code la dérive."""
+    c = theme.get('colors', {})
+    if key in c:
+        return c[key]
+    light = theme.get('type') == 'light'
+    if key == 'notebook.cellEditorBackground':
+        # Barre latérale en clair et en sombre, fond de l'éditeur en contraste élevé
+        return resolve(theme, 'editor.background' if hc else 'sideBar.background', hc)
+    if key == 'agentsPanel.background':
+        return resolve(theme, 'editor.background' if light and not hc else 'sideBar.background', hc)
+    parent = INHERITED.get(key)
+    return resolve(theme, parent, hc) if parent else None
 
 
 def checks(theme, hc):
@@ -223,9 +267,59 @@ def checks(theme, hc):
         rows.append(('Bouton de la barre d\'état ≠ texte de la barre', distance, MIN_BUTTON_DELTA_E,
                      'OK' if distance >= MIN_BUTTON_DELTA_E else 'ÉCHEC'))
 
+    tokens = token_colors(theme)
+    r = lambda key: resolve(theme, key, hc)  # noqa: E731
+
+    # Surfaces récentes : les clés que VS Code fixe sans tenir compte du thème doivent être définies
+    for key in PRIORITY_KEYS:
+        if key not in c:
+            rows.append(('Clé prioritaire : ' + key, None, 0, 'MANQUANT'))
+    # Chat
+    chk('Chat : commande / pastille', g('chat.slashCommandForeground'), g('chat.slashCommandBackground'), 4.5)
+    chk('Chat : avatar', g('chat.avatarForeground'), g('chat.avatarBackground'), text)
+    for key in ('chat.editedFileForeground', 'chat.linesAddedForeground', 'chat.linesRemovedForeground'):
+        chk(f'Chat : {key} / barre latérale', g(key), side, 4.5)
+    chk('Chat dans l\'éditeur : texte', r('inlineChat.foreground'), r('inlineChat.background'), text)
+    chk('Chat dans l\'éditeur : texte indicatif', r('inlineChatInput.placeholderForeground'), r('inlineChatInput.background'), 4.5)
+    # Tests : icônes de résultat dans l'explorateur, icône d'exécution dans la gouttière
+    for key in ('testing.iconPassed', 'testing.iconFailed', 'testing.iconErrored', 'testing.iconQueued',
+                'testing.iconSkipped', 'testing.iconUnset'):
+        chk(f'Tests : {key} / barre latérale', g(key), side, 3)
+    chk('Tests : testing.runAction / éditeur', g('testing.runAction'), bg, 3)
+    # Notebooks : le texte et la syntaxe restent lisibles sur le fond des cellules
+    cell = r('notebook.cellEditorBackground')
+    chk('Notebook : texte / cellule', g('editor.foreground'), cell, 7)
+    for label in DISTINCT_TOKENS:
+        chk(f'Notebook : jeton {label} / cellule', tokens.get(label), cell, text)
+    chk('Notebook : bordure de la cellule active', r('notebook.focusedCellBorder'), r('notebook.editorBackground'), 3)
+    # Éditeur de fusion et multi-diff
+    for key in ('mergeEditor.change.background', 'mergeEditor.change.word.background', 'mergeEditor.changeBase.background',
+                'mergeEditor.changeBase.word.background', 'mergeEditor.conflictingLines.background'):
+        chk(f'Fusion : texte / {key}', g('editor.foreground'), over(g(key), bg) if g(key) else None, text)
+    chk('Fusion : conflit à traiter', g('mergeEditor.conflict.unhandledFocused.border'), bg, 3)
+    chk('Fusion : conflit traité', g('mergeEditor.conflict.handledFocused.border'), bg, 3)
+    chk('Multi-diff : texte / en-tête', g('foreground'), g('multiDiffEditor.headerBackground'), text)
+    # Icônes de symboles : structure (barre latérale) et suggestions
+    for key in sorted(k for k in c if k.startswith('symbolIcon.')):
+        chk(f'Symbole : {key} / barre latérale', g(key), side, 3)
+        chk(f'Symbole : {key} / suggestions', g(key), g('editorSuggestWidget.background'), 3)
+    # Graphe Git
+    for i in range(1, 6):
+        chk(f'Graphe Git : ligne {i}', g(f'scmGraph.foreground{i}'), side, 3)
+    for key in ('scmGraph.historyItemRefColor', 'scmGraph.historyItemRemoteRefColor', 'scmGraph.historyItemBaseRefColor'):
+        chk(f'Graphe Git : {key}', g(key), side, 3)
+    for key in ('scmGraph.historyItemHoverAdditionsForeground', 'scmGraph.historyItemHoverDeletionsForeground'):
+        chk(f'Graphe Git : {key} / survol', g(key), g('editorHoverWidget.background'), 4.5)
+    # Centre de commande et sessions d'agents
+    chk('Centre de commande : texte', r('commandCenter.foreground'), g('titleBar.activeBackground'), text)
+    chk('Centre de commande : texte (fenêtre inactive)', r('commandCenter.inactiveForeground'), g('titleBar.inactiveBackground'), 4.5)
+    chk('Sessions d\'agents : texte des panneaux', r('agentsPanel.foreground'), r('agentsPanel.background'), text)
+    chk('Sessions d\'agents : champ de saisie', r('agentsChatInput.foreground'), r('agentsChatInput.background'), text)
+    chk('Sessions d\'agents : texte indicatif', r('agentsChatInput.placeholderForeground'), r('agentsChatInput.background'), 4.5)
+    chk('Sessions d\'agents : badges', r('agentsBadge.foreground'), r('agentsBadge.background'), 4.5)
+
     # Jetons de syntaxe : une catégorie absente compte comme un échec, sinon elle prendrait la couleur
     # du texte et ne serait plus distinguée
-    tokens = token_colors(theme)
     for label in TOKEN_PROBES:
         color = tokens.get(label)
         chk('Jeton : ' + label, color, bg, text)
@@ -249,11 +343,17 @@ def checks(theme, hc):
 def distinctness(theme):
     """Paires de couleurs les plus proches pour chaque vision (normale, protan, deutan, tritan)."""
     tokens = {k: v for k, v in token_colors(theme).items() if k in DISTINCT_TOKENS}
-    alerts = {k: theme.get('colors', {}).get(v) for k, v in ALERT_KEYS.items()}
+    c = theme.get('colors', {})
+    alerts = {k: c.get(v) for k, v in ALERT_KEYS.items()}
+    # Résultats des tests et lignes du graphe Git : distinguées entre elles comme les alertes
+    alerts.update({'test réussi': c.get('testing.iconPassed'), 'test échoué': c.get('testing.iconFailed')})
+    graph = [f'graphe {i}' for i in range(1, 6)]
+    alerts.update({name: c.get(f'scmGraph.foreground{i}') for i, name in enumerate(graph, 1)})
+    alert_pairs = list(DISTINCT_ALERTS) + [('test réussi', 'test échoué')] + list(itertools.combinations(graph, 2))
     result = {}
     for view, matrix in VIEWS.items():
         pairs = sorted((delta_e(tokens[a], tokens[b], matrix), a, b) for a, b in itertools.combinations(tokens, 2))
-        apairs = sorted((delta_e(alerts[a], alerts[b], matrix), a, b) for a, b in DISTINCT_ALERTS if alerts[a] and alerts[b])
+        apairs = sorted((delta_e(alerts[a], alerts[b], matrix), a, b) for a, b in alert_pairs if alerts[a] and alerts[b])
         result[view] = (pairs[:3], apairs[:1])
     return result
 

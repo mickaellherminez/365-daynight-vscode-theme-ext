@@ -18,7 +18,7 @@
 - 🔁 **One-click switch.** A button in the status bar switches between Light and Dark. High Contrast is one command away.
 - ⏰ **Optional automatic mode.** The extension can apply the current month's theme by itself, Light during the day and Dark at night.
 - 👁️ **Easy on the eyes, readable for everyone.** All text meets WCAG contrast levels, and syntax colors stay distinct for people with color blindness.
-- 🖥️ **Carefully styled.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled, with more than 400 colors in each theme. Newer areas such as chat, tests and notebooks still use VS Code's default colors for now.
+- 🖥️ **Carefully styled.** The editor, sidebar, tabs, terminal, debug console, notifications and status bar are all styled, with more than 480 colors in each theme. The chat, test results, symbol icons, Git graph, merge editor and multi-diff follow the month's palette too.
 
 ## Installation
 
@@ -157,7 +157,7 @@ Good to know:
 
 ## Accessibility first
 
-Every theme passes an automated accessibility audit of more than 130 checks:
+Every theme passes an automated accessibility audit of more than 250 checks:
 
 - **Readable text:** editor text and syntax colors reach a contrast ratio of at least **4.5:1 (WCAG AA)** in Light and Dark themes, and **7:1 (WCAG AAA)** in High Contrast themes.
 - **Color blind friendly:** syntax colors (keywords, functions, strings, numbers, classes, comments) and alerts (errors, warnings, Git changes) are simulated for **protanopia, deuteranopia and tritanopia** to make sure they stay distinct.
