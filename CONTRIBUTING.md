@@ -90,11 +90,14 @@ npm run package   # creates 365-daynight-vscode-theme-ext-<version>.vsix
 
 Pushing a version tag that matches `package.json` (for example `git tag 0.11.2 && git push origin 0.11.2`) runs the [Publish workflow](.github/workflows/publish.yml):
 
-1. Theme audit, lint and tests.
-2. Build and verification of one `.vsix` package.
-3. Publication of that same package to the Marketplace, with Trusted Publishing (OIDC, no token), and to Open VSX, with the `OVSX_PAT` repository secret.
+1. A pause until a repository admin approves the run in the protected `release` environment: open the run in the Actions tab, then **Review deployments** > **Approve and deploy**. Without approval, nothing is built or published.
+2. Theme audit, lint and tests.
+3. Build and verification of one `.vsix` package.
+4. Publication of that same package to the Marketplace, with Trusted Publishing (OIDC, no token), and to Open VSX, with the `OVSX_PAT` repository secret.
 
-The workflow can also be started manually from the Actions tab. To check everything except the publication, use the `dry_run` option:
+Only repository admins can create version tags, and nobody can move or delete one, so a published tag always points to the published code. The `release` environment only accepts `main` and version tags.
+
+The workflow can also be started manually from the Actions tab, which also asks for approval when it publishes. To check everything except the publication, without approval and from any branch, use the `dry_run` option:
 
 ```sh
 gh workflow run publish.yml --ref <branch> -f dry_run=true
