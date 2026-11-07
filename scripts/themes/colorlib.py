@@ -45,6 +45,11 @@ CVD = {
 # Vision normale + les 3 formes de dichromatie
 VIEWS = {'normal': None, **CVD}
 
+# Achromatopsie (vision sans couleur) : chaque couleur devient le gris de même luminance (CIE Y, coefficients
+# de sRGB). C'est une approximation : les personnes achromates voient avec les bâtonnets, dont la sensibilité
+# (scotopique) rend le bleu un peu plus clair et le rouge plus sombre. Seul l'écart de clarté reste visible.
+ACHROMATOPSIA = [[0.2126, 0.7152, 0.0722]] * 3
+
 
 def lab(color, matrix=None):
     """Couleur -> CIE L*a*b* (D65), éventuellement après simulation de daltonisme."""
@@ -62,6 +67,64 @@ def lab(color, matrix=None):
 def delta_e(a, b, matrix=None):
     """Différence perçue (CIE76). En dessous de ~10, deux couleurs de texte se confondent."""
     return math.dist(lab(a, matrix), lab(b, matrix))
+
+
+def ciede2000(lab1, lab2):
+    """Différence perçue CIEDE2000 entre deux couleurs L*a*b*, avec kL = kC = kH = 1.
+
+    Plus fidèle à la perception que CIE76, surtout pour les bleus et les couleurs peu saturées, mais sur une
+    autre échelle : un ΔE2000 est en général plus petit que le ΔE76 de la même paire. Implémentation suivant
+    Sharma, Wu et Dalal (2005), « The CIEDE2000 color-difference formula: implementation notes,
+    supplementary test data, and mathematical observations », Color Research & Application 30(1), p. 21-30.
+    Vérifiée avec leurs 34 paires de test (scripts/themes/tests/).
+    """
+    L1, a1, b1 = lab1
+    L2, a2, b2 = lab2
+    c_mean = (math.hypot(a1, b1) + math.hypot(a2, b2)) / 2
+    g = 0.5 * (1 - math.sqrt(c_mean ** 7 / (c_mean ** 7 + 25 ** 7)))
+    a1p, a2p = (1 + g) * a1, (1 + g) * a2
+    c1p, c2p = math.hypot(a1p, b1), math.hypot(a2p, b2)
+    h1p = 0 if a1p == 0 and b1 == 0 else math.degrees(math.atan2(b1, a1p)) % 360
+    h2p = 0 if a2p == 0 and b2 == 0 else math.degrees(math.atan2(b2, a2p)) % 360
+
+    delta_l = L2 - L1
+    delta_c = c2p - c1p
+    if c1p * c2p == 0:
+        delta_h = 0
+    else:
+        delta_h = h2p - h1p
+        if delta_h > 180:
+            delta_h -= 360
+        elif delta_h < -180:
+            delta_h += 360
+    delta_big_h = 2 * math.sqrt(c1p * c2p) * math.sin(math.radians(delta_h / 2))
+
+    l_mean = (L1 + L2) / 2
+    cp_mean = (c1p + c2p) / 2
+    if c1p * c2p == 0:
+        h_mean = h1p + h2p
+    elif abs(h1p - h2p) <= 180:
+        h_mean = (h1p + h2p) / 2
+    elif h1p + h2p < 360:
+        h_mean = (h1p + h2p + 360) / 2
+    else:
+        h_mean = (h1p + h2p - 360) / 2
+
+    t = (1 - 0.17 * math.cos(math.radians(h_mean - 30)) + 0.24 * math.cos(math.radians(2 * h_mean))
+         + 0.32 * math.cos(math.radians(3 * h_mean + 6)) - 0.20 * math.cos(math.radians(4 * h_mean - 63)))
+    delta_theta = 30 * math.exp(-((h_mean - 275) / 25) ** 2)
+    r_c = 2 * math.sqrt(cp_mean ** 7 / (cp_mean ** 7 + 25 ** 7))
+    s_l = 1 + 0.015 * (l_mean - 50) ** 2 / math.sqrt(20 + (l_mean - 50) ** 2)
+    s_c = 1 + 0.045 * cp_mean
+    s_h = 1 + 0.015 * cp_mean * t
+    r_t = -math.sin(math.radians(2 * delta_theta)) * r_c
+    dl, dc, dh = delta_l / s_l, delta_c / s_c, delta_big_h / s_h
+    return math.sqrt(dl ** 2 + dc ** 2 + dh ** 2 + r_t * dc * dh)
+
+
+def delta_e_2000(a, b, matrix=None):
+    """Différence perçue CIEDE2000 entre deux couleurs, éventuellement après simulation de daltonisme."""
+    return ciede2000(lab(a, matrix), lab(b, matrix))
 
 
 def min_delta_e(a, b):

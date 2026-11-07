@@ -63,6 +63,9 @@ jobs:
       - name: Generated themes match the palettes
         run: npm run themes:check
 
+      - name: Measuring tools match published reference data
+        run: npm run themes:test
+
       - name: Lint and tests
         run: xvfb-run -a npm test
 
