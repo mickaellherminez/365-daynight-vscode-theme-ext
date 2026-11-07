@@ -41,6 +41,8 @@ let nextMonthItem;
 
 // Clics sur les flèches pas encore appliqués : des clics rapides donnent un seul changement de thème
 let pendingMonthSteps = 0;
+// Dernière sauvegarde du mode system écrite par cette fenêtre (voir readSystemBackup)
+let ownSystemBackup;
 
 // Fréquence de vérification du mode automatique (1 minute)
 const AUTO_CHECK_INTERVAL_MS = 60 * 1000;
@@ -344,20 +346,43 @@ function onPreferredThemeChanged() {
 }
 
 /**
+ * Sauvegarde des réglages d'origine du mode system. VS Code garde toute la mémoire de l'extension dans un
+ * seul bloc, et une écriture en parallèle (la période du mode auto, le mois choisi) peut ramener ce bloc
+ * un instant à un état antérieur : une lecture renvoie alors une sauvegarde vide ou incomplète. Une
+ * sauvegarde valide lue dans VS Code passe en premier, car une autre fenêtre a pu l'écrire ; sinon,
+ * la dernière que cette fenêtre a écrite prend le relais.
+ * @returns {object | undefined}
+ */
+function readSystemBackup() {
+  const stored = globalState.get(SYSTEM_BACKUP_KEY);
+  return stored?.saved ? stored : ownSystemBackup ?? stored;
+}
+
+/**
+ * Écrit la sauvegarde, ou l'efface avec undefined, et en garde la copie de cette fenêtre
+ * @param {object | undefined} backup
+ */
+async function writeSystemBackup(backup) {
+  ownSystemBackup = backup;
+  await globalState.update(SYSTEM_BACKUP_KEY, backup);
+}
+
+/**
  * Écrit le mois dans les réglages préférés. Un réglage qui contient autre chose qu'un thème 365 de
  * la bonne variante est un choix de l'utilisateur : il reste, sauf s'il fait partie de ceux à remplacer.
  * Un mois qui n'a pas encore de thème pour un réglage lui laisse sa valeur d'origine, ou la lui rend :
  * le réglage attend alors le premier mois qui en a un, tant que l'utilisateur ne le change pas.
  * @param {number} month
  * @param {string[]} [replacedSettings] Réglages à écrire, quelle que soit leur valeur
+ * @param {object} [backup] Sauvegarde en cours, si l'appelant vient de l'écrire
+ * @returns {Promise<object | undefined>} La sauvegarde, à jour des réglages en attente
  */
-async function writeSystemThemes(month, replacedSettings = []) {
+async function writeSystemThemes(month, replacedSettings = [], backup = readSystemBackup()) {
   const config = vscode.workspace.getConfiguration();
-  const backup = globalState.get(SYSTEM_BACKUP_KEY);
   const waiting = new Set(backup?.waiting);
   for (const [setting, label] of Object.entries(getSystemThemeSettings(month))) {
     const current = config.inspect(setting)?.globalValue;
-    const original = backup?.saved[setting];
+    const original = backup?.saved?.[setting];
     const isWaiting = waiting.delete(setting) && current === original;
     if (label !== undefined) {
       if (current !== label && (isSystemThemeValue(setting, current) || replacedSettings.includes(setting) || isWaiting)) {
@@ -371,8 +396,12 @@ async function writeSystemThemes(month, replacedSettings = []) {
     }
   }
   if (backup && JSON.stringify([...waiting]) !== JSON.stringify(backup.waiting ?? [])) {
-    await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), waiting: [...waiting] });
+    // Complète la sauvegarde en main, sans la relire : VS Code garde toute la mémoire de l'extension
+    // dans un seul bloc, qu'une écriture en parallèle peut ramener un instant à un état antérieur
+    backup = { ...backup, waiting: [...waiting] };
+    await writeSystemBackup(backup);
   }
+  return backup;
 }
 
 /**
@@ -380,6 +409,10 @@ async function writeSystemThemes(month, replacedSettings = []) {
  * @param {{ settings?: string[] } | undefined} backup
  */
 function getUnsavedSystemSettings(backup) {
+  // Une sauvegarde sans valeurs d'origine est inutilisable : tout est à sauvegarder de nouveau
+  if (backup && !backup.saved) {
+    return SYSTEM_SETTINGS;
+  }
   const saved = backup?.settings ?? LEGACY_SYSTEM_SETTINGS;
   return SYSTEM_SETTINGS.filter((setting) => !saved.includes(setting));
 }
@@ -409,7 +442,11 @@ async function applySystemMonth(month, replacedSettings) {
  */
 async function setUpSystemMode(month) {
   const config = vscode.workspace.getConfiguration();
-  let backup = globalState.get(SYSTEM_BACKUP_KEY);
+  let backup = readSystemBackup();
+  // Sans valeurs d'origine, la sauvegarde est inutilisable : la mise en place recommence entièrement
+  if (backup && !backup.saved) {
+    backup = undefined;
+  }
   // Une sauvegarde d'une version précédente ne contient pas les réglages gérés depuis : ils sont
   // sauvegardés à leur tour, puis remplacés comme au premier passage
   const unsaved = backup ? getUnsavedSystemSettings(backup) : SYSTEM_SETTINGS;
@@ -422,19 +459,19 @@ async function setUpSystemMode(month) {
       }
     }
     backup = { saved, settings: SYSTEM_SETTINGS, complete: backup?.complete ?? false };
-    await globalState.update(SYSTEM_BACKUP_KEY, backup);
+    await writeSystemBackup(backup);
   }
 
   try {
     if (backup.complete) {
-      await writeSystemThemes(month, unsaved);
+      await writeSystemThemes(month, unsaved, backup);
     } else {
-      await writeSystemThemes(month, PREFERRED_SETTINGS);
+      // L'écriture des thèmes a pu noter des réglages en attente : sa sauvegarde est la plus récente
+      backup = await writeSystemThemes(month, PREFERRED_SETTINGS, backup);
       if (config.inspect(DETECT_COLOR_SCHEME_SETTING)?.globalValue !== true) {
         await config.update(DETECT_COLOR_SCHEME_SETTING, true, vscode.ConfigurationTarget.Global);
       }
-      // Relue : l'écriture des thèmes a pu noter des réglages en attente
-      await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), complete: true });
+      await writeSystemBackup({ ...backup, complete: true });
     }
   } catch (error) {
     return { ok: false, message: `Failed to change theme: ${error.message}` };
@@ -449,7 +486,7 @@ async function setUpSystemMode(month) {
  * @returns {Promise<boolean>} true si plus rien n'est à restaurer
  */
 async function leaveSystemMode() {
-  const backup = globalState.get(SYSTEM_BACKUP_KEY);
+  const backup = readSystemBackup();
   if (!backup) {
     return true;
   }
@@ -459,8 +496,8 @@ async function leaveSystemMode() {
     for (const setting of SYSTEM_SETTINGS) {
       const current = config.inspect(setting)?.globalValue;
       const isOurs = setting === DETECT_COLOR_SCHEME_SETTING ? current === true : isSystemThemeValue(setting, current);
-      if (isOurs && current !== backup.saved[setting]) {
-        await config.update(setting, backup.saved[setting], vscode.ConfigurationTarget.Global);
+      if (isOurs && current !== backup.saved?.[setting]) {
+        await config.update(setting, backup.saved?.[setting], vscode.ConfigurationTarget.Global);
       }
     }
   } catch (error) {
@@ -472,7 +509,7 @@ async function leaveSystemMode() {
   }
 
   restoreFailureReported = false;
-  await globalState.update(SYSTEM_BACKUP_KEY, undefined);
+  await writeSystemBackup(undefined);
   syncThemeState();
   return true;
 }
@@ -739,7 +776,7 @@ function checkSystemMode(now) {
   const period = getAutoPeriod('System', now);
 
   return enqueueThemeChange(async () => {
-    const backup = globalState.get(SYSTEM_BACKUP_KEY);
+    const backup = readSystemBackup();
     const needsSaving = !backup || getUnsavedSystemSettings(backup).length > 0;
     if (backup?.complete && !needsSaving && period === globalState.get(LAST_AUTO_PERIOD_KEY)) {
       return;

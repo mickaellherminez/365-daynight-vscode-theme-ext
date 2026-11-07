@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ### Fixed
 - In a High Contrast theme, the status bar tooltip had no way back to the normal themes: it now shows **Light** and **Dark** links, so that leaving high contrast no longer requires a command
+- In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, and leaving the mode could sometimes keep VS Code following the system: a read of the backup of the original settings could come back empty or incomplete. The extension now keeps its own copy of that backup, and rebuilds a damaged one from the current settings
 
 ## [0.12.0] - 2026-11-06
 
