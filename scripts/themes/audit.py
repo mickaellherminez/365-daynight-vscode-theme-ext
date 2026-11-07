@@ -14,7 +14,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from colorlib import CVD, VIEWS, contrast, delta_e, over  # noqa: E402
+from colorlib import ACHROMATOPSIA, CVD, VIEWS, contrast, delta_e, delta_e_2000, over  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -28,6 +28,19 @@ TOKEN_PROBES = {
 
 # Catégories qui doivent rester distinguables entre elles, y compris pour les daltoniens
 DISTINCT_TOKENS = ('mot-clé', 'fonction', 'chaîne', 'nombre', 'classe', 'commentaire', 'variable')
+
+# WCAG 2.2, critère 1.4.1 (utilisation de la couleur) : ces styles portent un sens, l'information ne doit pas
+# passer par la couleur seule. (catégorie, scope TextMate représentatif, style attendu)
+REQUIRED_STYLES = (
+    ('commentaire', 'comment', 'italic'),
+    ('code invalide', 'invalid', 'underline'),
+    ('code obsolète', 'invalid.deprecated', 'strikethrough'),
+    ('lien', 'markup.underline.link', 'underline'),
+    ('titre Markdown', 'markup.heading', 'bold'),
+    ('gras Markdown', 'markup.bold', 'bold'),
+    ('italique Markdown', 'markup.italic', 'italic'),
+)
+STYLE_NAMES = {'italic': 'italique', 'bold': 'gras', 'underline': 'souligné', 'strikethrough': 'barré'}
 DISTINCT_ALERTS = (('erreur', 'avertissement'), ('erreur', 'info'), ('ajout', 'suppression'),
                    ('ajout', 'modification'), ('modification', 'suppression'))
 ALERT_KEYS = {
@@ -98,6 +111,33 @@ def token_colors(theme):
                 found[label] = color
     found.setdefault('variable', theme.get('colors', {}).get('editor.foreground'))
     return {k: v for k, v in found.items() if v}
+
+
+def token_style(theme, scope):
+    """Style de police d'un scope TextMate (la dernière règle qui en définit un l'emporte), ou chaîne vide."""
+    style = ''
+    for rule in theme.get('tokenColors', []):
+        scopes = rule.get('scope', [])
+        if isinstance(scopes, str):
+            scopes = scopes.split(',')
+        settings = rule.get('settings', {})
+        if scope in {s.strip() for s in scopes} and 'fontStyle' in settings:
+            style = settings['fontStyle'] or ''
+    return style
+
+
+def style_checks(theme):
+    """Contrôles du critère WCAG 1.4.1 : (libellé, None, style attendu, statut)."""
+    rows = []
+    for label, scope, style in REQUIRED_STYLES:
+        present = style in token_style(theme, scope).split()
+        rows.append((f'Style (WCAG 1.4.1) : {label} en {STYLE_NAMES[style]}', None, style, 'OK' if present else 'ÉCHEC'))
+    # TypeScript et d'autres langages signalent le code obsolète par un jeton sémantique
+    deprecated = theme.get('semanticTokenColors', {}).get('*.deprecated')
+    present = isinstance(deprecated, dict) and (deprecated.get('strikethrough') is True
+                                                or 'strikethrough' in (deprecated.get('fontStyle') or '').split())
+    rows.append(('Style (WCAG 1.4.1) : jeton sémantique obsolète en barré', None, 'strikethrough', 'OK' if present else 'ÉCHEC'))
+    return rows
 
 
 def semantic_colors(theme):
@@ -343,6 +383,8 @@ def checks(theme, hc):
         chk('Sémantique : ' + key, color, bg, text)
         if sel:
             chk('Sémantique : ' + key + ' sélectionné', g('editor.selectionForeground') if hc else color, sel, 7 if hc else 3)
+
+    rows += style_checks(theme)
     return rows
 
 
@@ -364,6 +406,18 @@ def distinctness(theme):
     return result
 
 
+def information(theme):
+    """Mesures à titre d'information, qui ne font jamais échouer l'audit, sur les jetons principaux :
+    CIEDE2000 pour chaque vision, et l'achromatopsie (seul l'écart de clarté reste)."""
+    tokens = {k: v for k, v in token_colors(theme).items() if k in DISTINCT_TOKENS}
+    pairs = list(itertools.combinations(tokens, 2))
+    result = {}
+    for view, matrix in VIEWS.items():
+        result['ΔE2000 ' + view] = sorted((delta_e_2000(tokens[a], tokens[b], matrix), a, b) for a, b in pairs)
+    result['achromatopsie'] = sorted((delta_e(tokens[a], tokens[b], ACHROMATOPSIA), a, b) for a, b in pairs)
+    return result
+
+
 def report(theme, hc, verbose=False):
     """Affiche le rapport d'un thème et renvoie le nombre de contrôles en échec."""
     rows = checks(theme, hc)
@@ -371,12 +425,21 @@ def report(theme, hc, verbose=False):
     print(f"== {theme.get('name')} : {len(rows) - len(bad)}/{len(rows)} contrôles OK")
     for label, ratio, minimum, status in (rows if verbose else bad):
         value = '%.2f' % ratio if ratio else '-'
-        print(f'   {status:8} {label:72} {value:>6} (min {minimum})')
+        expected = f'(attendu : {STYLE_NAMES[minimum]})' if minimum in STYLE_NAMES else f'(min {minimum})'
+        print(f'   {status:8} {label:72} {value:>6} {expected}')
     for view, (pairs, apairs) in distinctness(theme).items():
         line = ', '.join(f'{a}/{b} {d:.0f}' for d, a, b in pairs + apairs)
         flag = '' if all(d >= MIN_DELTA_E for d, _, _ in pairs + apairs) else '   <-- confusion possible'
         print(f'   ΔE {view:7} : {line}{flag}')
         bad += [p for p in pairs + apairs if p[0] < MIN_DELTA_E]
+    for name, pairs in information(theme).items():
+        line = ', '.join(f'{a}/{b} {d:.0f}' for d, a, b in pairs[:3])
+        # Le seuil de 10 est sur l'échelle CIE76 : il ne s'applique pas à CIEDE2000. En achromatopsie,
+        # l'écart CIE76 entre deux gris est leur écart de clarté, sur la même échelle.
+        if name == 'achromatopsie':
+            below = sum(1 for d, _, _ in pairs if d < MIN_DELTA_E)
+            line += f' ; {below}/{len(pairs)} paires sous {MIN_DELTA_E}'
+        print(f'   info {name:18} : {line}')
     return len(bad)
 
 

@@ -361,6 +361,7 @@
     "themes:audit": "python3 scripts/themes/audit.py",
     "themes:build": "python3 scripts/themes/build.py",
     "themes:check": "python3 scripts/themes/build.py --check",
+    "themes:test": "python3 -m unittest discover -s scripts/themes/tests",
     "themes:variety": "python3 scripts/themes/variety.py"
   },
   "devDependencies": {

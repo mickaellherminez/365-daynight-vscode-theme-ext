@@ -11,7 +11,9 @@ Contrôles bloquants (vision normale) :
 - au plus 3 mois dans la même famille de teinte, séparément pour le fond et pour l'accent.
 
 La barre d'état est mesurée à titre d'information. Les mêmes mesures, simulées pour les trois formes de
-daltonisme, sont aussi affichées à titre d'information : elles ne font jamais échouer le test.
+daltonisme, sont aussi affichées à titre d'information : elles ne font jamais échouer le test. La colonne
+ΔE2000 donne la moyenne avec CIEDE2000, plus fidèle à la perception mais sur une autre échelle : les seuils
+restent ceux de CIE76.
 
 Usage :
     python3 scripts/themes/variety.py      # résumé par déclinaison, 5 paires en échec au plus par mesure
@@ -28,7 +30,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from audit import load_theme, token_colors  # noqa: E402
-from colorlib import CVD, delta_e, lab  # noqa: E402
+from colorlib import CVD, delta_e, delta_e_2000, lab  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -64,9 +66,14 @@ def hue_family(color):
     return FAMILIES[int(((hue + 22.5) % 360) // 45)]
 
 
-def syntax_delta(a, b, matrix=None):
-    """Moyenne des ΔE entre les couleurs de syntaxe de deux mois, rôle par rôle."""
-    return sum(delta_e(a[role], b[role], matrix) for role in SYNTAX_ROLES) / len(SYNTAX_ROLES)
+def surface_delta(a, b, matrix=None, metric=delta_e):
+    """Écart entre les couleurs d'une surface de deux mois (CIE76 par défaut, ou CIEDE2000)."""
+    return metric(a, b, matrix)
+
+
+def syntax_delta(a, b, matrix=None, metric=delta_e):
+    """Moyenne des écarts entre les couleurs de syntaxe de deux mois, rôle par rôle."""
+    return sum(metric(a[role], b[role], matrix) for role in SYNTAX_ROLES) / len(SYNTAX_ROLES)
 
 
 def load_variants():
@@ -88,7 +95,7 @@ def measures(ui, months):
         missing = [key for _, key in SURFACES if not theme.get('colors', {}).get(key)]
         if missing:
             sys.exit(f'{theme.get("name")} : couleur(s) introuvable(s) : {", ".join(missing)}')
-    result = [(name, {m: t['colors'][key] for m, t in months.items()}, delta_e, thresholds[key]) for name, key in SURFACES]
+    result = [(name, {m: t['colors'][key] for m, t in months.items()}, surface_delta, thresholds[key]) for name, key in SURFACES]
     syntax = {}
     for month, theme in months.items():
         tokens = token_colors(theme)
@@ -100,9 +107,10 @@ def measures(ui, months):
     return result
 
 
-def pair_distances(values, distance, matrix=None):
+def pair_distances(values, distance, matrix=None, metric=delta_e):
     """[(ΔE, mois a, mois b)] pour chaque paire de mois, du plus proche au plus éloigné."""
-    return sorted((distance(values[a], values[b], matrix), a, b) for a, b in itertools.combinations(sorted(values), 2))
+    return sorted((distance(values[a], values[b], matrix, metric), a, b)
+                  for a, b in itertools.combinations(sorted(values), 2))
 
 
 def report(ui, months, verbose=False):
@@ -113,18 +121,20 @@ def report(ui, months, verbose=False):
     failures = 0
     rows = measures(ui, months)
     if pairs:
-        print(f'   {"Mesure":20} {"ΔE moyen":>9} {"sous le seuil":>14} {"seuil":>6}   paire la plus proche')
+        print(f'   {"Mesure":20} {"ΔE moyen":>9} {"ΔE2000":>7} {"sous le seuil":>14} {"seuil":>6}   paire la plus proche')
         for name, values, distance, minimum in rows:
             distances = pair_distances(values, distance)
             mean = sum(d for d, _, _ in distances) / pairs
+            # CIEDE2000, à titre d'information : les seuils restent ceux de CIE76
+            mean_2000 = sum(d for d, _, _ in pair_distances(values, distance, metric=delta_e_2000)) / pairs
             closest = '%02d/%02d %.1f' % (distances[0][1], distances[0][2], distances[0][0])
             if minimum is None:
-                print(f'   {name:20} {mean:9.1f} {"info":>14} {"-":>6}   {closest}')
+                print(f'   {name:20} {mean:9.1f} {mean_2000:7.1f} {"info":>14} {"-":>6}   {closest}')
                 continue
             below = [p for p in distances if p[0] < minimum]
             failures += len(below)
             status = 'OK' if not below else 'ÉCHEC'
-            print(f'   {name:20} {mean:9.1f} {f"{len(below)}/{pairs}":>14} {minimum:>6}   {closest}   {status}')
+            print(f'   {name:20} {mean:9.1f} {mean_2000:7.1f} {f"{len(below)}/{pairs}":>14} {minimum:>6}   {closest}   {status}')
             shown = below if verbose else below[:MAX_LISTED]
             if shown:
                 listed = ', '.join('%02d/%02d %.1f' % (a, b, d) for d, a, b in shown)
