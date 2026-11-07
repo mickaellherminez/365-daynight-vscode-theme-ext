@@ -8,7 +8,7 @@
 
 *Lire cette page en : [English](../README.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-![Thèmes d'octobre clair, sombre et contraste élevé dans VS Code : explorateur, onglets, coloration syntaxique, sélection de texte et barre d'état](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![Thèmes d'octobre clair, sombre, contraste élevé et contraste élevé clair dans VS Code : explorateur, onglets, coloration syntaxique, sélection de texte et barre d'état](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## Pourquoi vous allez l'aimer
 
@@ -47,7 +47,7 @@ Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DR
 
 ## Les 12 mois
 
-![Aperçu des 36 thèmes : une version claire, sombre et à contraste élevé pour chaque mois, de janvier à décembre](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![Aperçu des 48 thèmes : une version claire, sombre, à contraste élevé et à contraste élevé claire pour chaque mois, de janvier à décembre](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | Mois | Ambiance | Clair | Sombre | Contraste élevé | Contraste élevé clair |
 | --- | --- | --- | --- | --- | --- |

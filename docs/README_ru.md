@@ -8,7 +8,7 @@
 
 *Читать на: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-![Октябрьские темы — светлая, тёмная и высококонтрастная — в VS Code: проводник, вкладки, подсветка синтаксиса, выделение текста и строка состояния](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![Октябрьские темы — светлая, тёмная, высококонтрастная и светлая высококонтрастная — в VS Code: проводник, вкладки, подсветка синтаксиса, выделение текста и строка состояния](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## Почему вам понравится
 
@@ -47,7 +47,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ## 12 месяцев
 
-![Предпросмотр 36 тем: светлая, тёмная и высококонтрастная версия для каждого месяца с января по декабрь](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![Предпросмотр 48 тем: светлая, тёмная, высококонтрастная и светлая высококонтрастная версия для каждого месяца с января по декабрь](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | Месяц | Настроение | Светлая | Тёмная | Высокий контраст | Светлый высокий контраст |
 | --- | --- | --- | --- | --- | --- |

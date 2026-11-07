@@ -8,7 +8,7 @@
 
 *यह पेज इन भाषाओं में पढ़ें: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [العربية](README_ar.md)*
 
-![VS Code में अक्टूबर की लाइट, डार्क और हाई कॉन्ट्रास्ट थीम: एक्सप्लोरर, टैब, सिंटैक्स हाइलाइटिंग, टेक्स्ट चयन और स्टेटस बार](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![VS Code में अक्टूबर की लाइट, डार्क, हाई कॉन्ट्रास्ट और लाइट हाई कॉन्ट्रास्ट थीम: एक्सप्लोरर, टैब, सिंटैक्स हाइलाइटिंग, टेक्स्ट चयन और स्टेटस बार](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## आपको यह क्यों पसंद आएगा
 
@@ -47,7 +47,7 @@ Visual Studio Code 1.96 या नया संस्करण ज़रूर�
 
 ## 12 महीने
 
-![36 थीम का पूर्वावलोकन: जनवरी से दिसंबर तक हर महीने का लाइट, डार्क और हाई कॉन्ट्रास्ट संस्करण](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![48 थीम का पूर्वावलोकन: जनवरी से दिसंबर तक हर महीने का लाइट, डार्क, हाई कॉन्ट्रास्ट और लाइट हाई कॉन्ट्रास्ट संस्करण](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | महीना | माहौल | लाइट | डार्क | हाई कॉन्ट्रास्ट | लाइट हाई कॉन्ट्रास्ट |
 | --- | --- | --- | --- | --- | --- |

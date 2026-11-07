@@ -8,7 +8,7 @@
 
 *Diese Seite lesen auf: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-![Oktober-Themes hell, dunkel und kontrastreich in VS Code: Explorer, Tabs, Syntaxhervorhebung, Textauswahl und Statusleiste](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![Oktober-Themes hell, dunkel, kontrastreich und hell kontrastreich in VS Code: Explorer, Tabs, Syntaxhervorhebung, Textauswahl und Statusleiste](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## Warum es dir gefallen wird
 
@@ -47,7 +47,7 @@ Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DR
 
 ## Die 12 Monate
 
-![Vorschau der 36 Themes: eine helle, dunkle und kontrastreiche Version für jeden Monat von Januar bis Dezember](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![Vorschau der 48 Themes: eine helle, dunkle, kontrastreiche und hell kontrastreiche Version für jeden Monat von Januar bis Dezember](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | Monat | Stimmung | Hell | Dunkel | Kontrastreich | Hell kontrastreich |
 | --- | --- | --- | --- | --- | --- |

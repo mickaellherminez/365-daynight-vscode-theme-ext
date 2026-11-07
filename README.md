@@ -9,7 +9,7 @@
 
 *Read this page in: [Français](docs/README_fr.md) · [Español](docs/README_es.md) · [Deutsch](docs/README_de.md) · [Português](docs/README_pt.md) · [Русский](docs/README_ru.md) · [中文](docs/README_zh.md) · [日本語](docs/README_ja.md) · [हिंदी](docs/README_hi.md) · [العربية](docs/README_ar.md)*
 
-![October Light, Dark and High Contrast themes in VS Code: explorer, tabs, syntax highlighting, text selection and status bar](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![October Light, Dark, High Contrast and High Contrast Light themes in VS Code: explorer, tabs, syntax highlighting, text selection and status bar](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## Why you'll like it
 
@@ -48,7 +48,7 @@ To try another month, click the arrows around it (`‹ 10 DRK ›`). The number 
 
 ## The 12 months
 
-![Preview of the 36 themes: a Light, Dark and High Contrast version for each month from January to December](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![Preview of the 48 themes: a Light, Dark, High Contrast and High Contrast Light version for each month from January to December](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | Month | Mood | Light | Dark | High Contrast | High Contrast Light |
 | --- | --- | --- | --- | --- | --- |
