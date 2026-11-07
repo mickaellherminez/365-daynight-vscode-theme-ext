@@ -227,6 +227,9 @@ Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mod
 **What are the High Contrast themes for?**
 They are designed for low vision, bright environments or long coding sessions. They use maximum contrast (AAA), visible borders and a strong focus outline. Each month has two: High Contrast, on a dark background, and High Contrast Light, on a light background for bright environments.
 
+**How do I try a new version before everyone else?**
+When a pre-release exists, open the extension page in the Extensions view and click **Switch to Pre-Release Version**. VS Code then installs the pre-release and its updates. To go back to the release version, click **Switch to Release Version** on the same page. Feedback on a pre-release is welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+
 ## Roadmap
 
 Ideas and suggestions are welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).

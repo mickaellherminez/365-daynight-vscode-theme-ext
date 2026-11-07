@@ -3,7 +3,9 @@
 # - Manually from the Actions tab ("Run workflow"), which publishes the
 #   version currently in package.json on the selected branch.
 #   With "dry_run", it only builds and verifies the package and checks the
-#   Open VSX token.
+#   Open VSX token. With "pre_release", the package is marked as a pre-release:
+#   both registries offer it only to users who switch to pre-release versions.
+#   A pushed tag always publishes a release version.
 # If one registry fails, use "Re-run failed jobs": it publishes the same package
 # to that registry only. --skip-duplicate also keeps a full re-run from failing
 # on a registry that already has this version.
@@ -28,6 +30,10 @@ on:
     inputs:
       dry_run:
         description: Build and verify the package without publishing
+        type: boolean
+        default: false
+      pre_release:
+        description: Publish as a pre-release (users opt in from the Extensions view)
         type: boolean
         default: false
 
@@ -73,9 +79,11 @@ jobs:
         run: xvfb-run -a npm test
 
       - name: Build the package
-        run: npm run package -- --githubBranch main --out extension.vsix
+        run: npm run package -- --githubBranch main --out extension.vsix ${{ inputs.pre_release && '--pre-release' || '' }}
 
       - name: Verify the package
+        env:
+          PRE_RELEASE: ${{ inputs.pre_release && 'true' || 'false' }}
         run: |
           unzip -q extension.vsix -d "$RUNNER_TEMP/vsix"
           node scripts/verify-package.cjs "$RUNNER_TEMP/vsix"

@@ -241,6 +241,9 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 **ما فائدة السمات عالية التباين؟**
 صُممت لضعف البصر، والبيئات شديدة الإضاءة، وجلسات البرمجة الطويلة، وتقدّم أقصى تباين (AAA) وحدودًا مرئية وإطار تركيز واضحًا. لكل شهر نسختان: نسخة داكنة، ونسخة فاتحة، High Contrast Light، للبيئات شديدة الإضاءة.
 
+**كيف أجرّب نسخة جديدة قبل الجميع؟**
+عند توفر نسخة تجريبية، افتح صفحة الإضافة في عرض الإضافات وانقر على **Switch to Pre-Release Version** (التبديل إلى النسخة التجريبية). يثبّت VS Code عندها النسخة التجريبية وتحديثاتها. للعودة إلى النسخة العادية، انقر على **Switch to Release Version** في الصفحة نفسها. ملاحظاتك على النسخة التجريبية مرحّب بها في [قضايا GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+
 ## خارطة الطريق
 
 الأفكار والاقتراحات مرحَّب بها في [بلاغات GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).

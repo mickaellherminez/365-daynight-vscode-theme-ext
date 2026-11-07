@@ -227,6 +227,9 @@ Visual Studio Code 1.96 以降が必要です。
 **ハイコントラストテーマは何のためにありますか？**
 ロービジョンの方、とても明るい環境、長時間のコーディング向けです。最大限のコントラスト（AAA）、見やすい枠線、はっきりしたフォーカスの輪郭を備えています。どの月にも、暗い版と、明るい環境向けの明るい版（High Contrast Light）の 2 つがあります。
 
+**新しいバージョンをいち早く試すには？**
+プレリリース版がある場合は、拡張機能ビューで拡張機能のページを開き、**Switch to Pre-Release Version**（プレリリース版に切り替え）をクリックします。VS Code がプレリリース版とその更新をインストールします。通常のバージョンに戻すには、同じページで **Switch to Release Version** をクリックします。プレリリース版へのフィードバックは [GitHub の Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) で歓迎しています。
+
 ## ロードマップ
 
 アイデアやご要望は [GitHub の issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) でお待ちしています。

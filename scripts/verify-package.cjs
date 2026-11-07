@@ -2,6 +2,8 @@
 
 // Vérifie un paquet .vsix décompressé avant sa publication.
 // Usage : node scripts/verify-package.cjs <dossier décompressé>
+// PRE_RELEASE=true : le paquet doit être marqué comme préversion (vsce package --pre-release).
+// Sinon, il ne doit pas l'être.
 
 const fs = require('fs');
 const path = require('path');
@@ -63,6 +65,19 @@ checkScript(manifest.main);
 
 if (manifest.icon && !exists(manifest.icon)) {
   problems.push(`Missing icon: ${manifest.icon}`);
+}
+
+// Les deux registres lisent ce marqueur dans extension.vsixmanifest pour classer la version
+const vsixManifestPath = path.join(root, 'extension.vsixmanifest');
+const wantsPreRelease = process.env.PRE_RELEASE === 'true';
+if (!fs.existsSync(vsixManifestPath)) {
+  problems.push('Missing extension.vsixmanifest');
+} else {
+  const vsixManifest = fs.readFileSync(vsixManifestPath, 'utf8');
+  const isPreRelease = /Id="Microsoft\.VisualStudio\.Code\.PreRelease"\s+Value="true"/.test(vsixManifest);
+  if (isPreRelease !== wantsPreRelease) {
+    problems.push(wantsPreRelease ? 'The package is not marked as a pre-release' : 'The package is marked as a pre-release');
+  }
 }
 
 const themes = manifest.contributes.themes;
