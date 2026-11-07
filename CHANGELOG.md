@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
 
 ### Fixed
+- In a crowded status bar, the 365 button could lose its arrow and its label, leaving only `›`. It now sits at the far right of the status bar, just before the notifications bell, so that the items of other extensions are hidden first
 - In a High Contrast theme, the status bar tooltip had no way back to the normal themes: it now shows **Light** and **Dark** links, so that leaving high contrast no longer requires a command
 - In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, and leaving the mode could sometimes keep VS Code following the system: a read of the backup of the original settings could come back empty or incomplete. The extension now keeps its own copy of that backup, and rebuilds a damaged one from the current settings
 

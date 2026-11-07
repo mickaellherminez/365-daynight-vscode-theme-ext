@@ -45,14 +45,25 @@ suite('Extension behavior', () => {
 			assert.strictEqual(next.text, '$(chevron-right)');
 		});
 
-		test('no VS Code item can slip between the three items', () => {
+		test('no other item can slip between the three items', () => {
 			load({ theme: MARCH_DARK });
 
-			// VS Code place ses propres éléments de 100,1 à 100,5 : les nôtres doivent rester du même côté
+			// Trois valeurs non entières, à moins de 0,1 l'une de l'autre : aucune priorité courante ne tombe entre elles
 			for (const item of [fake.itemFor(PREVIOUS), fake.statusBarItem, fake.itemFor(NEXT)]) {
-				assert.ok(item.priority > 99 && item.priority < 100, `${item.id}: ${item.priority}`);
+				assert.ok(!Number.isInteger(item.priority), `${item.id}: ${item.priority}`);
 			}
 			assert.ok(fake.itemFor(PREVIOUS).priority - fake.itemFor(NEXT).priority < 0.1);
+		});
+
+		test('the three items sit at the far right, so that a full status bar hides them last', () => {
+			load({ theme: MARCH_DARK });
+
+			// VS Code masque d'abord les éléments de droite les plus à gauche, c'est-à-dire de priorité haute.
+			// Ses propres éléments vont de 100,1 à 100,5, ceux des extensions sont le plus souvent entre -1000 et 1000
+			for (const item of [fake.itemFor(PREVIOUS), fake.statusBarItem, fake.itemFor(NEXT)]) {
+				assert.strictEqual(item.alignment, 2, `${item.id} : StatusBarAlignment.Right`);
+				assert.ok(item.priority < -1000, `${item.id}: ${item.priority}`);
+			}
 		});
 
 		test('the month always has two digits and the round icon is gone', () => {
