@@ -257,14 +257,31 @@ suite('Extension behavior', () => {
 			assert.ok(!fake.statusBarItem.tooltip.value.includes(HIGH_CONTRAST_LINK));
 		});
 
-		test('the tooltip links only run the expected commands', () => {
+		test('the tooltip links only run the expected commands', async () => {
+			const commands = ['extension.currentMonth', 'extension.setLightTheme', 'extension.setDarkTheme',
+				'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme'];
+			const linked = () => [...fake.statusBarItem.tooltip.value.matchAll(/\(command:([^)]+)\)/g)].map((match) => match[1]);
 			load({ theme: '365 10-October Dark', now: NOVEMBER });
+			assert.deepStrictEqual(linked(), ['extension.currentMonth', 'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme']);
+			assert.deepStrictEqual(fake.statusBarItem.tooltip.isTrusted, { enabledCommands: commands });
 
-			const { value, isTrusted } = fake.statusBarItem.tooltip;
-			const linked = [...value.matchAll(/\(command:([^)]+)\)/g)].map((match) => match[1]);
-			const commands = ['extension.currentMonth', 'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme'];
-			assert.deepStrictEqual(linked, commands);
-			assert.deepStrictEqual(isTrusted, { enabledCommands: commands });
+			await fake.run('extension.setHighContrastTheme');
+			assert.deepStrictEqual(linked(), ['extension.currentMonth', 'extension.setLightTheme', 'extension.setDarkTheme']);
+			assert.ok(linked().every((command) => commands.includes(command)));
+		});
+
+		test('in High Contrast, the tooltip links lead back to Light and Dark', async () => {
+			load({ theme: '365 11-November High Contrast', now: NOVEMBER });
+			const tooltip = fake.statusBarItem.tooltip.value;
+			assert.ok(tooltip.includes('[Light](command:extension.setLightTheme)'));
+			assert.ok(tooltip.includes('[Dark](command:extension.setDarkTheme)'));
+
+			// Le lien applique la variante du mois affiché, comme la commande
+			await fake.commands.get('extension.setDarkTheme')();
+			await fake.settle();
+			assert.strictEqual(fake.theme(), '365 11-November Dark');
+			assert.ok(!fake.statusBarItem.tooltip.value.includes('(command:extension.setLightTheme)'));
+			assert.ok(fake.statusBarItem.tooltip.value.includes(HIGH_CONTRAST_LINK));
 		});
 
 		test('the tooltip follows the High Contrast setting', async () => {
@@ -1443,6 +1460,15 @@ suite('Extension behavior', () => {
 				assert.strictEqual(fake.activeTheme(), '365 11-November Dark');
 			});
 
+			test('with the system in high contrast, the tooltip offers no way out of it', async () => {
+				await start({ systemHighContrast: true });
+
+				assert.strictEqual(fake.activeTheme(), '365 11-November High Contrast');
+				const tooltip = fake.statusBarItem.tooltip.value;
+				assert.ok(!tooltip.includes('(command:extension.setLightTheme)'));
+				assert.ok(!tooltip.includes('(command:extension.setDarkTheme)'));
+			});
+
 			test('the tooltip and the screen reader label say so too', async () => {
 				await start();
 
@@ -1912,11 +1938,14 @@ suite('Extension behavior', () => {
 				assert.ok(!fake.statusBarItem.tooltip.value.includes(HCL_LINK));
 			});
 
-			test('in High Contrast Light, the tooltip offers no High Contrast link', () => {
+			test('in High Contrast Light, the tooltip offers Light and Dark instead of High Contrast', () => {
 				load({ theme: OCTOBER_HCL, now: OCTOBER });
 
-				assert.ok(!fake.statusBarItem.tooltip.value.includes('(command:extension.setHighContrastTheme)'));
-				assert.ok(!fake.statusBarItem.tooltip.value.includes(HCL_LINK));
+				const tooltip = fake.statusBarItem.tooltip.value;
+				assert.ok(!tooltip.includes('(command:extension.setHighContrastTheme)'));
+				assert.ok(!tooltip.includes(HCL_LINK));
+				assert.ok(tooltip.includes('(command:extension.setLightTheme)'));
+				assert.ok(tooltip.includes('(command:extension.setDarkTheme)'));
 			});
 		});
 

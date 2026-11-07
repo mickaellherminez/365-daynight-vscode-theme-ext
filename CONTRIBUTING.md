@@ -81,6 +81,7 @@ The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists fo
 | Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. A month without High Contrast Light goes to Light |
 | `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant: Light, Dark, High Contrast, High Contrast Light |
 | Reaching High Contrast | With the `365: Apply High Contrast theme` or `365: Apply High Contrast Light theme` command, or a link in the tooltip. In a month without High Contrast Light, its command applies High Contrast and says so |
+| Leaving High Contrast | With the `365: Apply Light theme` or `365: Apply Dark theme` command, or the **Light** and **Dark** links that the tooltip shows in a High Contrast theme instead of the High Contrast links. In `system` mode, the tooltip has neither: the system decides |
 | A month without High Contrast Light | The arrows and automatic mode apply High Contrast instead, to stay in high contrast |
 | `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
 | Commands that apply a variant | Keep the displayed month |
