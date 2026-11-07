@@ -51,17 +51,17 @@ Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DR
 
 | Mois | Clair | Sombre | Contraste élevé |
 | --- | --- | --- | --- |
-| Janvier | Blanc neige et bleu d'hiver | Nuit bleu marine éclairée d'or | Noir et bleu vif |
+| Janvier | Givre et bleu glacier | Bleu d'hiver profond et bleu glace | Noir et bleu glace |
 | Février | Blanc et vert, touche de rouge Saint-Valentin | Ardoise nordique et givre | Bleu marine et or |
 | Mars | Crème et vert printemps | Nuit indigo | Sarcelle sombre et orange-rouge |
-| Avril | Crème et orange de Pâques | Ardoise bleutée et or | Bleu profond et or |
+| Avril | Ciel de giboulées et rose fleur de cerisier | Ardoise de pluie et rose fleur de cerisier | Noir et rose fleur de cerisier |
 | Mai | Blanc lumineux et orange | Nuit océane relevée d'orange | Bleu marine et bleu ciel |
 | Juin | Bleu ciel et encre indigo | Nuit bleue éclairée d'orange | Noir et corail |
 | Juillet | Plein soleil : crème, brun et orange | Nuit d'été inspirée de Solarized | Bleu marine, orange et or |
 | Août | Crème chaud et encre indigo | Nuit d'ardoise étoilée de jaune | Noir et vert néon |
 | Septembre | Ciel de rentrée et encre marine | Ardoise et sarcelle | Noir et orange vif |
 | Octobre | Crème d'automne, orange brûlé et ambre | Brun profond et braise | Noir chaud et ambre |
-| Novembre | Brume, ardoise et bleu acier | Ardoise profonde, orange et or | Noir et or |
+| Novembre | Taupe brumeux et vert mousse | Gris sous-bois et vert mousse | Noir et vert mousse |
 | Décembre | Givre et bleu sarcelle | Coin du feu : ardoise et braise | Nuit d'hiver et cyan givré |
 
 ## Bascule automatique jour / nuit

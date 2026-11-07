@@ -51,17 +51,17 @@ Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). 
 
 | Mes | Claro | Oscuro | Alto contraste |
 | --- | --- | --- | --- |
-| Enero | Blanco nieve y azul invernal | Noche azul marino iluminada de oro | Negro y azul vivo |
+| Enero | Escarcha y azul glaciar | Azul invernal profundo y azul hielo | Negro y azul hielo |
 | Febrero | Blanco y verde, con un toque rojo de San Valentín | Pizarra nórdica y escarcha | Azul marino y oro |
 | Marzo | Crema y verde primavera | Noche índigo | Verde azulado oscuro y rojo anaranjado |
-| Abril | Crema y naranja de Pascua | Pizarra azulada y oro | Azul profundo y oro |
+| Abril | Cielo de chubascos y rosa flor de cerezo | Pizarra lluviosa y rosa flor de cerezo | Negro y rosa flor de cerezo |
 | Mayo | Blanco luminoso y naranja | Noche oceánica con naranja | Azul marino y azul cielo |
 | Junio | Azul cielo y tinta índigo | Noche azul iluminada de naranja | Negro y coral |
 | Julio | Pleno sol: crema, marrón y naranja | Noche de verano inspirada en Solarized | Azul marino, naranja y oro |
 | Agosto | Crema cálido y tinta índigo | Noche pizarra con amarillo | Negro y verde neón |
 | Septiembre | Cielo de vuelta al cole y tinta marina | Pizarra y verde azulado | Negro y naranja vivo |
 | Octubre | Crema otoñal, naranja tostado y ámbar | Marrón oscuro y brasas | Negro cálido y ámbar |
-| Noviembre | Bruma, pizarra y azul acero | Pizarra profunda, naranja y oro | Negro y oro |
+| Noviembre | Topo brumoso y verde musgo | Gris de sotobosque y verde musgo | Negro y verde musgo |
 | Diciembre | Escarcha y verde azulado | Junto a la chimenea: pizarra y brasas | Noche de invierno y cian helado |
 
 ## Cambio automático entre día y noche

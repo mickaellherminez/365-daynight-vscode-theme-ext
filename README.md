@@ -52,17 +52,17 @@ To try another month, click the arrows around it (`‹ 10 DRK ›`). The number 
 
 | Month | Light | Dark | High Contrast |
 | --- | --- | --- | --- |
-| January | Snow white and winter blue | Navy night lit with gold | Black and bright blue |
+| January | Frost and glacier blue | Deep winter blue and icy blue | Black and ice blue |
 | February | White and green, with a Valentine's red touch | Nordic slate and frost | Navy and gold |
 | March | Cream and spring green | Indigo night | Dark teal and red-orange |
-| April | Cream and Easter orange | Bluish slate and gold | Deep blue and gold |
+| April | Rainy sky and cherry blossom pink | Rainy slate and cherry blossom pink | Black and cherry blossom pink |
 | May | Bright white and orange | Ocean night with orange | Navy and sky blue |
 | June | Sky blue and indigo ink | Blue night lit with orange | Black and coral |
 | July | Full sun: cream, brown and orange | Solarized-inspired summer night | Navy, orange and gold |
 | August | Warm cream and indigo ink | Slate night with yellow | Black and neon green |
 | September | Back-to-school sky and navy ink | Slate and teal | Black and bright orange |
 | October | Autumn cream, burnt orange and amber | Dark brown and ember | Warm black and amber |
-| November | Misty slate and steel blue | Deep slate with orange and gold | Black and gold |
+| November | Misty taupe and moss green | Undergrowth gray and moss green | Black and moss green |
 | December | Frost and teal | Fireside slate and ember | Winter night and icy cyan |
 
 ## Automatic day and night switching

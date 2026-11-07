@@ -51,17 +51,17 @@ Para experimentar outro mês, clique nas setas ao redor dele (`‹ 10 DRK ›`).
 
 | Mês | Claro | Escuro | Alto contraste |
 | --- | --- | --- | --- |
-| Janeiro | Branco neve e azul de inverno | Noite azul-marinho iluminada de dourado | Preto e azul vivo |
+| Janeiro | Geada e azul-glaciar | Azul de inverno profundo e azul-gelo | Preto e azul-gelo |
 | Fevereiro | Branco e verde, com um toque vermelho de Dia dos Namorados | Ardósia nórdica e geada | Azul-marinho e dourado |
 | Março | Creme e verde primavera | Noite índigo | Verde-azulado escuro e vermelho-alaranjado |
-| Abril | Creme e laranja de Páscoa | Ardósia azulada e dourado | Azul profundo e dourado |
+| Abril | Céu de aguaceiros e rosa flor de cerejeira | Ardósia chuvosa e rosa flor de cerejeira | Preto e rosa flor de cerejeira |
 | Maio | Branco luminoso e laranja | Noite oceânica com laranja | Azul-marinho e azul-celeste |
 | Junho | Azul-celeste e tinta índigo | Noite azul iluminada de laranja | Preto e coral |
 | Julho | Sol pleno: creme, marrom e laranja | Noite de verão inspirada no Solarized | Azul-marinho, laranja e dourado |
 | Agosto | Creme quente e tinta índigo | Noite de ardósia com amarelo | Preto e verde neon |
 | Setembro | Céu de volta às aulas e tinta marinha | Ardósia e verde-azulado | Preto e laranja vivo |
 | Outubro | Creme outonal, laranja queimado e âmbar | Marrom escuro e brasa | Preto quente e âmbar |
-| Novembro | Névoa, ardósia e azul-aço | Ardósia profunda, laranja e dourado | Preto e dourado |
+| Novembro | Taupe enevoado e verde-musgo | Cinza de sub-bosque e verde-musgo | Preto e verde-musgo |
 | Dezembro | Geada e verde-azulado | Ao pé da lareira: ardósia e brasa | Noite de inverno e ciano gelado |
 
 ## Troca automática entre dia e noite

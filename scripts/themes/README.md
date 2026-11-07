@@ -10,7 +10,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `build.py` | Génère les thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite. Avec `--check`, vérifie que `themes/` correspond aux palettes (`npm run themes:check`) |
 | `variety.py` | Mesure la variété entre les mois de chaque déclinaison (`npm run themes:variety`) |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
-| `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless |
+| `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `hero.png` montre les variantes d'un mois dans une fenêtre complète, `year.png` les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme et de l'achromatopsie, ΔE CIE76 et CIEDE2000 |
 | `tests/` | Tests des outils de mesure contre des données publiées (`npm run themes:test`), et de l'audit et du test de variété |
 | `token-rules.json` | Règles de coloration syntaxique communes à tous les mois (scopes → rôle de couleur) |
