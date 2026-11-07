@@ -166,6 +166,26 @@ suite('Extension Test Suite', () => {
 		const preferredLight = 'workbench.preferredLightColorTheme';
 		const preferredDark = 'workbench.preferredDarkColorTheme';
 
+		// Chronologie des réglages et des thèmes, affichée si le test échoue : il a échoué par
+		// intermittence dans la CI, et seul l'ordre des événements peut dire pourquoi
+		const start = Date.now();
+		const timeline = [];
+		const note = (event) => {
+			const state = getThemeState();
+			timeline.push(`${String(Date.now() - start).padStart(5)} ms  ${event}  | dark=${userValue(preferredDark)} light=${userValue(preferredLight)} kind=${vscode.window.activeColorTheme.kind} state=${state.type}/${state.month}`);
+		};
+		const watched = [preferredLight, preferredDark, 'workbench.preferredHighContrastColorTheme',
+			'workbench.preferredHighContrastLightColorTheme', 'window.autoDetectColorScheme', 'workbench.colorTheme',
+			'365DayNight.mode', '365DayNight.enable'];
+		const listeners = [
+			vscode.workspace.onDidChangeConfiguration((event) => {
+				const changed = watched.filter((key) => event.affectsConfiguration(key));
+				if (changed.length > 0) {
+					note(`config ${changed.join(', ')}`);
+				}
+			}),
+			vscode.window.onDidChangeActiveColorTheme((theme) => note(`theme kind ${theme.kind}`))
+		];
 		await setThemeAndWait('Monokai', vscode.ColorThemeKind.Dark);
 		await config().update(preferredDark, 'Default Dark Modern', vscode.ConfigurationTarget.Global);
 		await config().update('365DayNight.mode', 'system', vscode.ConfigurationTarget.Global);
@@ -181,14 +201,25 @@ suite('Extension Test Suite', () => {
 			assert.strictEqual(userValue('workbench.colorTheme'), 'Monokai');
 
 			// Le système choisit la variante : le bouton central ne change rien
+			note('> toggle');
 			await vscode.commands.executeCommand('extension.toggleTheme');
 			assert.strictEqual(getThemeState().month, month);
 
+			const nextDark = getThemeLabelForMonth(ThemeType.DARK, getAdjacentMonth(month, 1));
+			note('> next month');
 			await vscode.commands.executeCommand('extension.nextMonth');
-			assert.strictEqual(userValue(preferredDark), getThemeLabelForMonth(ThemeType.DARK, getAdjacentMonth(month, 1)));
+			note('> next month done');
+			await waitFor(() => userValue(preferredDark) === nextDark, 'the next month in the dark preference');
 			await waitFor(() => getThemeState().month === getAdjacentMonth(month, 1), 'the next month to be active');
+			// Rien ne doit ramener l'ancien mois juste après
+			await new Promise((resolve) => setTimeout(resolve, 500));
+			assert.strictEqual(userValue(preferredDark), nextDark);
 			await vscode.commands.executeCommand('extension.currentMonth');
+		} catch (error) {
+			error.message += `\nTimeline:\n${timeline.join('\n')}`;
+			throw error;
 		} finally {
+			listeners.forEach((listener) => listener.dispose());
 			await config().update('365DayNight.enable', undefined, vscode.ConfigurationTarget.Global);
 			await config().update('365DayNight.mode', undefined, vscode.ConfigurationTarget.Global);
 		}
