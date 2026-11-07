@@ -50,6 +50,10 @@ const AUTO_CHECK_INTERVAL_MS = 60 * 1000;
 // Délai laissé à VS Code pour activer un thème demandé, avant de relire le thème réellement actif
 const THEME_ACTIVATION_TIMEOUT_MS = 2000;
 
+// Priorité de base des trois éléments du bouton dans la barre d'état : très basse, pour qu'ils soient
+// placés tout à droite et masqués en dernier quand la barre manque de place (voir activate)
+const STATUS_BAR_PRIORITY = -10000;
+
 // État du thème actif : son type et, pour un thème 365, son mois
 /** @type {{ type: string, month: number | undefined }} */
 let themeState = { type: ThemeType.LIGHT, month: undefined };
@@ -810,12 +814,13 @@ function activate(context) {
   globalState.setKeysForSync([SYSTEM_BACKUP_KEY, AUTO_MODE_OFFER_KEY]);
 
   // Créer les trois éléments du bouton, ‹ 10 DRK ›, et lire le thème actif au démarrage.
-  // À droite de la barre d'état, la priorité la plus haute est la plus à gauche. Ces valeurs très
-  // proches, sous celles de VS Code (100,1 à 100,5), gardent les trois éléments côte à côte :
-  // sans place, VS Code masque d'abord les éléments les plus à gauche.
-  previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', 99.12, 'extension.previousMonth', '$(chevron-left)');
-  statusBarItem = createStatusBarControl('theme', 'Light and Dark', 99.11, 'extension.toggleTheme', '');
-  nextMonthItem = createStatusBarControl('nextMonth', 'Next month', 99.1, 'extension.nextMonth', '$(chevron-right)');
+  // À droite de la barre d'état, la priorité la plus haute est la plus à gauche. Quand la place manque,
+  // VS Code masque d'abord les éléments de droite les plus à gauche : une priorité très basse place le
+  // bouton tout à droite, juste avant la cloche des notifications, pour qu'il disparaisse en dernier.
+  // Les trois valeurs, très proches, gardent les éléments côte à côte.
+  previousMonthItem = createStatusBarControl('previousMonth', 'Previous month', STATUS_BAR_PRIORITY + 0.12, 'extension.previousMonth', '$(chevron-left)');
+  statusBarItem = createStatusBarControl('theme', 'Light and Dark', STATUS_BAR_PRIORITY + 0.11, 'extension.toggleTheme', '');
+  nextMonthItem = createStatusBarControl('nextMonth', 'Next month', STATUS_BAR_PRIORITY + 0.1, 'extension.nextMonth', '$(chevron-right)');
   syncThemeState();
   statusBarItem.show();
   maybeOfferAutoMode();
