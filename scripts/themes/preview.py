@@ -130,7 +130,7 @@ def window_html(month, variant, variant_file, label):
     </div>
   </div>
   <div class=status style="background:{c['statusBar.background']};color:{c['statusBar.foreground']};border-top:1px solid {c['statusBar.border']}">
-    <span>⑂ main</span><span>⚠ 0 ✕ 1</span><span class=right>◐ {STATUS[variant]}</span>
+    <span>⑂ main</span><span>⚠ 0 ✕ 1</span><span class=right style="color:{c['365DayNight.statusBarButton']}">‹ {month:02d} {STATUS[variant]} ›</span>
   </div>
 </div>"""
 
@@ -199,7 +199,7 @@ def year():
             strips.append(f"<div class=variant style=\"border-top:4px solid {c['activityBarBadge.background']}\">"
                           f"<div class=snippet style=\"background:{c['editor.background']}\">{code_html(theme, palette, compact=True)}</div>"
                           f"<div class=mini style=\"background:{c['statusBar.background']};color:{c['statusBar.foreground']}\">"
-                          f"⑂ main<span style=\"color:{c['365DayNight.statusBarButton']}\">◐ {m:02d} {STATUS[v]}</span></div></div>")
+                          f"⑂ main<span style=\"color:{c['365DayNight.statusBarButton']}\">‹ {m:02d} {STATUS[v]} ›</span></div></div>")
         tiles.append(f'<div class=tile><h3>{MONTHS[m - 1]}</h3><div class=strip>{"".join(strips)}</div></div>')
     shoot(f'<div class=grid style="grid-template-columns:repeat(4,440px)">{"".join(tiles)}</div>', 'year.png', 1876, 760)
 

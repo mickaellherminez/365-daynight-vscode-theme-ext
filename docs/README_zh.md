@@ -8,7 +8,7 @@
 
 *其他语言：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-![VS Code 中十月的浅色、深色和高对比度主题：资源管理器、标签页、语法高亮、文本选择和状态栏](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![VS Code 中十月的浅色、深色、高对比度和浅色高对比度主题：资源管理器、标签页、语法高亮、文本选择和状态栏](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## 你会喜欢它的理由
 
@@ -47,7 +47,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ## 12 个月
 
-![36 款主题预览：一月到十二月每个月的浅色、深色和高对比度版本](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![48 款主题预览：一月到十二月每个月的浅色、深色、高对比度和浅色高对比度版本](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | 月份 | 氛围 | 浅色 | 深色 | 高对比度 | 浅色高对比度 |
 | --- | --- | --- | --- | --- | --- |

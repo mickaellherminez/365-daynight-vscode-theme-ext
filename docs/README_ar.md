@@ -10,7 +10,7 @@
 
 *اقرأ هذه الصفحة بـ: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md)*
 
-![سمات أكتوبر الفاتحة والداكنة وعالية التباين في VS Code: المستكشف وعلامات التبويب وتلوين الشيفرة وتحديد النص وشريط الحالة](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![سمات أكتوبر الفاتحة والداكنة وعالية التباين والفاتحة عالية التباين في VS Code: المستكشف وعلامات التبويب وتلوين الشيفرة وتحديد النص وشريط الحالة](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## لماذا ستحبها
 
@@ -49,7 +49,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ## الأشهر الاثنا عشر
 
-![معاينة السمات الـ 36: نسخة فاتحة وداكنة وعالية التباين لكل شهر من يناير إلى ديسمبر](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![معاينة السمات الـ 48: نسخة فاتحة وداكنة وعالية التباين وفاتحة عالية التباين لكل شهر من يناير إلى ديسمبر](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | الشهر | الأجواء | فاتحة | داكنة | عالية التباين | فاتحة عالية التباين |
 | --- | --- | --- | --- | --- | --- |

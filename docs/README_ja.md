@@ -8,7 +8,7 @@
 
 *他の言語で読む：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-![VS Code の 10 月のライト・ダーク・ハイコントラストテーマ：エクスプローラー、タブ、シンタックスハイライト、テキスト選択、ステータスバー](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![VS Code の 10 月のライト・ダーク・ハイコントラスト・明るいハイコントラストテーマ：エクスプローラー、タブ、シンタックスハイライト、テキスト選択、ステータスバー](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
 
 ## おすすめの理由
 
@@ -47,7 +47,7 @@ Visual Studio Code 1.96 以降が必要です。
 
 ## 12 か月
 
-![36 種類のテーマのプレビュー：1 月から 12 月まで各月のライト・ダーク・ハイコントラスト版](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
+![48 種類のテーマのプレビュー：1 月から 12 月まで各月のライト・ダーク・ハイコントラスト・明るいハイコントラスト版](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
 | 月 | 雰囲気 | ライト | ダーク | ハイコントラスト | 明るいハイコントラスト |
 | --- | --- | --- | --- | --- | --- |
