@@ -1,0 +1,186 @@
+{
+  "_doc": "Surface publique de la version 0.12.0, tirée du tag Git 0.12.0 (package.json). Ne pas modifier : les utilisateurs existants en dépendent.",
+  "themes": [
+    {
+      "label": "365 01-January Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 01-January High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 01-January Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 02-February High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 02-February Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 02-February Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 03-March High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 03-March Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 03-March Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 04-April High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 04-April Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 04-April Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 05-May High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 05-May Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 05-May Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 06-June High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 06-June Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 06-June Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 07-July High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 07-July Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 07-July Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 08-August High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 08-August Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 08-August Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 09-September Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 09-September Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 09-September High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 10-October Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 10-October Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 10-October High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 11-November Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 11-November Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 11-November High Contrast",
+      "uiTheme": "hc-black"
+    },
+    {
+      "label": "365 12-December Light",
+      "uiTheme": "vs"
+    },
+    {
+      "label": "365 12-December Dark",
+      "uiTheme": "vs-dark"
+    },
+    {
+      "label": "365 12-December High Contrast",
+      "uiTheme": "hc-black"
+    }
+  ],
+  "commands": [
+    "extension.toggleTheme",
+    "extension.setLightTheme",
+    "extension.setDarkTheme",
+    "extension.setHighContrastTheme",
+    "extension.nextMonth",
+    "extension.previousMonth",
+    "extension.currentMonth"
+  ],
+  "settings": {
+    "365DayNight.enable": {
+      "type": "boolean",
+      "default": false
+    },
+    "365DayNight.mode": {
+      "type": "string",
+      "default": "auto",
+      "enum": [
+        "auto",
+        "day",
+        "night",
+        "system"
+      ]
+    },
+    "365DayNight.dayStart": {
+      "type": "string",
+      "default": "07:00"
+    },
+    "365DayNight.nightStart": {
+      "type": "string",
+      "default": "19:00"
+    },
+    "365DayNight.toggleIncludesHighContrast": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
