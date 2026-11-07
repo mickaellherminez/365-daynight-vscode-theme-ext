@@ -49,8 +49,9 @@ The [CI workflow](.github/workflows/ci.yml) runs these checks on every branch pu
 
 | Check | Command | What it verifies |
 | --- | --- | --- |
-| Theme audit | `npm run themes:audit` | Contrast and color blind distinction in every theme, including semantic token colors, and the font styles that carry meaning (WCAG 1.4.1). A missing color role or style counts as a failure |
+| Theme audit | `npm run themes:audit` | Contrast and color blind distinction (ΔE of at least 12 for the three simulated types) in every theme, including semantic token colors, and the font styles that carry meaning (WCAG 1.4.1). A missing color role or style counts as a failure |
 | Generated themes | `npm run themes:check` | Each file in `themes/` is exactly what the generator produces from its palette: no hand edit, no palette change without `--write`, no missing or extra file |
+| Variety | `npm run themes:variety` | Two months of the same variant do not look alike: background, frame, accent and syntax. See below |
 | Measuring tools | `npm run themes:test` | The color calculations match published reference data, and the audit and the variety test fail when they should. See below |
 | Lint and tests | `npm test` | The lint, the unit tests, then the tests inside VS Code |
 
@@ -138,7 +139,7 @@ The audit checks each theme on its own. `npm run themes:variety` compares every 
 
 At most three months of a variant can share a hue family, counted separately for the editor background and the accent. The families are eight 45° sectors of the CIELAB hue angle, plus a `neutre` (neutral) family for nearly gray colors (chroma below 4).
 
-Only normal vision decides the result. The same measures are shown for protanopia, deuteranopia and tritanopia, for information only. The command exits with code 1 when a check fails. Before the redesign, the themes were too similar from month to month and failed it. The draft of the twelve months passes every pair, but CI does not run it yet: it will once the palettes are final. See [scripts/themes/README.md](scripts/themes/README.md#mesurer-la-variété-entre-les-mois) for the hue angles of each family and how to read the report.
+Only normal vision decides the result. The same measures are shown for protanopia, deuteranopia and tritanopia, for information only. The command exits with code 1 when a check fails. Before the redesign, the themes were too similar from month to month and failed it. The redesigned twelve months pass every pair, and CI and the Publish workflow run it like the audit. See [scripts/themes/README.md](scripts/themes/README.md#mesurer-la-variété-entre-les-mois) for the hue angles of each family and how to read the report.
 
 ## Packaging
 
@@ -151,7 +152,7 @@ npm run package   # creates 365-daynight-vscode-theme-ext-<version>.vsix
 Pushing a version tag that matches `package.json` (for example `git tag 0.11.2 && git push origin 0.11.2`) runs the [Publish workflow](.github/workflows/publish.yml):
 
 1. A pause until a repository admin approves the run in the protected `release` environment: open the run in the Actions tab, then **Review deployments** > **Approve and deploy**. Without approval, nothing is built or published.
-2. Theme audit, generated themes check, lint and tests.
+2. Theme audit, generated themes check, variety test, measuring tools, lint and tests.
 3. Build and verification of one `.vsix` package.
 4. Publication of that same package to the Marketplace, with Trusted Publishing (OIDC, no token), and to Open VSX, with the `OVSX_PAT` repository secret.
 
