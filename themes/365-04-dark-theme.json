@@ -78,7 +78,7 @@
     "editor.hoverHighlightBackground": "#2E4B6A44",
     "editor.inactiveSelectionBackground": "#324254",
     "editor.lineHighlightBackground": "#273B40",
-    "editor.lineHighlightBorder": "#00000000",
+    "editor.lineHighlightBorder": "#17171700",
     "editor.linkedEditingBackground": "#F094BB22",
     "editor.rangeHighlightBackground": "#F094BB1A",
     "editor.rangeHighlightBorder": "#00000000",
@@ -919,5 +919,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Prototype de l'étape 25, palette sombre (giboulées et fleur de cerisier) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal repris d'octobre. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette sombre (giboulées) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
 }

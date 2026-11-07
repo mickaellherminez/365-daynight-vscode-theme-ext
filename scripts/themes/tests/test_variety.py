@@ -15,10 +15,10 @@ SCOPES = ('comment', 'keyword', 'entity.name.function', 'string', 'constant.nume
 
 
 def theme(background, accent, syntax):
-    """Thème minimal : fond, barre d'état, accent et les 6 couleurs de syntaxe comparées"""
+    """Thème minimal : fond, cadre, barre d'état, accent et les 6 couleurs de syntaxe comparées"""
     return {
         'name': 'test',
-        'colors': {'editor.background': background, 'statusBar.background': background,
+        'colors': {'editor.background': background, 'sideBar.background': background, 'statusBar.background': background,
                    'activityBarBadge.background': accent, 'editor.foreground': '#000000'},
         'tokenColors': [{'scope': scope, 'settings': {'foreground': color}} for scope, color in zip(SCOPES, syntax)],
     }
@@ -42,7 +42,7 @@ class VarietyTest(unittest.TestCase):
         random.seed(4)
         cls.backgrounds = pick(12, lambda: lch_to_hex(random.uniform(5, 25), random.uniform(5, 15), random.uniform(0, 360)), 9)
         cls.accents = pick(12, lambda: lch_to_hex(random.uniform(40, 85), random.uniform(30, 70), random.uniform(0, 360)), 26)
-        cls.syntax = [[lch_to_hex(60, 30, (i * 30 + k * 60) % 360) for k in range(6)] for i in range(12)]
+        cls.syntax = [[lch_to_hex(70, 38, (i * 30 + k * 60) % 360) for k in range(6)] for i in range(12)]
 
     def months(self, backgrounds=None, accents=None):
         backgrounds = backgrounds or self.backgrounds
@@ -68,6 +68,14 @@ class VarietyTest(unittest.TestCase):
         backgrounds[1] = backgrounds[0]
         code, output = self.run_variety(self.months(backgrounds=backgrounds))
         self.assertEqual(code, 1)
+        self.assertIn('01/02 0.0', output)
+
+    def test_two_months_with_the_same_frame_fail(self):
+        months = self.months()
+        months[2]['colors']['sideBar.background'] = months[1]['colors']['sideBar.background']
+        code, output = self.run_variety(months)
+        self.assertEqual(code, 1)
+        self.assertIn('Cadre', output)
         self.assertIn('01/02 0.0', output)
 
     def test_four_gray_backgrounds_fail_the_family_limit(self):

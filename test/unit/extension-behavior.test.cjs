@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { loadExtension } = require('../helpers/fake-vscode.cjs');
 const { ThemeType, getThemeLabel } = require('../../theme-logic');
+const { onlyOctober, allMonths } = require('../helpers/high-contrast-light.cjs');
 
 const TOGGLE = 'extension.toggleTheme';
 const LIGHT = getThemeLabel(ThemeType.LIGHT);
@@ -18,6 +19,11 @@ suite('Extension behavior', () => {
 	};
 
 	teardown(() => fake.dispose());
+
+	// Ces tests ont été écrits quand seul octobre avait un thème High Contrast Light : ils gardent cette
+	// situation pour vérifier le repli vers High Contrast. La suite « High Contrast Light in every month » vérifie les 12 mois.
+	suiteSetup(onlyOctober);
+	suiteTeardown(allMonths);
 
 	suite('Month controls', () => {
 		const NEXT = 'extension.nextMonth';
@@ -2276,6 +2282,50 @@ suite('Extension behavior', () => {
 			fake.deliverThemeEvent();
 
 			assert.deepStrictEqual(fake.getThemeState(), { type: ThemeType.LIGHT, month: undefined });
+		});
+	});
+
+	suite('High Contrast Light in every month', () => {
+		const OCTOBER = new Date(2026, 9, 10, 12, 0);
+		const NOVEMBER = new Date(2026, 10, 10, 12, 0);
+
+		suiteSetup(allMonths);
+		suiteTeardown(onlyOctober);
+
+		test('the command applies the High Contrast Light theme of any month', async () => {
+			load({ theme: '365 11-November Dark', now: NOVEMBER });
+
+			await fake.run('extension.setHighContrastLightTheme');
+
+			assert.strictEqual(fake.theme(), '365 11-November High Contrast Light');
+			assert.deepStrictEqual(fake.infoMessages, []);
+		});
+
+		test('the tooltip offers High Contrast Light in any month', () => {
+			load({ theme: '365 11-November Dark', now: NOVEMBER });
+
+			assert.ok(fake.statusBarItem.tooltip.value.includes('(command:extension.setHighContrastLightTheme)'));
+		});
+
+		test('the arrows keep High Contrast Light from one month to the next', async () => {
+			load({ theme: '365 10-October High Contrast Light', now: OCTOBER });
+
+			await fake.run('extension.nextMonth');
+
+			assert.strictEqual(fake.theme(), '365 11-November High Contrast Light');
+			assert.strictEqual(fake.statusBarItem.text, '11 HCL');
+		});
+
+		test('with High Contrast in the cycle, the click goes through the four variants in any month', async () => {
+			load({ theme: '365 11-November Light', now: NOVEMBER, settings: { '365DayNight.toggleIncludesHighContrast': true } });
+
+			const seen = [];
+			for (let i = 0; i < 4; i++) {
+				await fake.run(TOGGLE);
+				seen.push(fake.statusBarItem.text);
+			}
+
+			assert.deepStrictEqual(seen, ['11 DRK', '11 HCT', '11 HCL', '11 LGT']);
 		});
 	});
 });

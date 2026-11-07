@@ -73,7 +73,7 @@ The audit also shows two measures for information only, which never fail it: CIE
 
 ## Status bar button rules
 
-The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists for the months listed in `HIGH_CONTRAST_LIGHT_MONTHS` (`theme-logic.js`), October for now: a unit test checks that this list matches the themes in `package.json`.
+The button has three items: `‹ 10 DRK ›`. High Contrast Light exists for the months listed in `HIGH_CONTRAST_LIGHT_MONTHS` (`theme-logic.js`), all twelve today: a unit test checks that this list matches the themes in `package.json`. The rules for a month without High Contrast Light below are kept, and tested by simulating that only October has it (`test/helpers/high-contrast-light.cjs`).
 
 | Situation | Behavior |
 | --- | --- |
@@ -82,7 +82,7 @@ The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists fo
 | `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant: Light, Dark, High Contrast, High Contrast Light |
 | Reaching High Contrast | With the `365: Apply High Contrast theme` or `365: Apply High Contrast Light theme` command, or a link in the tooltip. In a month without High Contrast Light, its command applies High Contrast and says so |
 | Leaving High Contrast | With the `365: Apply Light theme` or `365: Apply Dark theme` command, or the **Light** and **Dark** links that the tooltip shows in a High Contrast theme instead of the High Contrast links. In `system` mode, the tooltip has neither: the system decides |
-| A month without High Contrast Light | The arrows and automatic mode apply High Contrast instead, to stay in high contrast |
+| A month without High Contrast Light (none today) | The arrows and automatic mode apply High Contrast instead, to stay in high contrast |
 | `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
 | Commands that apply a variant | Keep the displayed month |
 | `365: Back to the current month` | Applies the real month and keeps the variant |
@@ -111,7 +111,9 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 4. Regenerate the README previews: `python3 scripts/themes/preview.py`. To look at them without changing `assets/`, add `--out <folder>`.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
-To give a month its High Contrast Light theme, add an `hcLight` variant to its palette, declare `365 MM-Month High Contrast Light` with `"uiTheme": "hc-light"` in `package.json`, then add the month to `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`.
+Every month has a High Contrast Light theme: an `hcLight` variant in its palette, `365 MM-Month High Contrast Light` declared with `"uiTheme": "hc-light"` in `package.json`, and the month listed in `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`. The three must stay in sync, or the unit tests fail.
+
+To draft the four palettes of a month from its mood, use `python3 scripts/themes/draft.py MM --write`, then build the themes as above. The mood, the starting colors and the syntax hue ranges of each month are in `scripts/themes/direction.json`. See [scripts/themes/README.md](scripts/themes/README.md#ébaucher-un-mois-à-partir-de-son-ambiance).
 
 `npm run themes:audit` checks all the themes, and `npm run themes:check` confirms that every theme file matches its palette. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles, the audit rules and the audit's limits.
 
@@ -127,13 +129,14 @@ The audit checks each theme on its own. `npm run themes:variety` compares every 
 | Measure | Color | Minimum for each pair of months |
 | --- | --- | --- |
 | Editor background | `editor.background` | ΔE 8, or 4 in the High Contrast variants |
+| Frame | `sideBar.background` (sidebar) | ΔE 7, or 4 in the High Contrast variants |
 | Accent | `activityBarBadge.background` | ΔE 25 |
-| Syntax | Keyword, function, string, number, class and comment | Average ΔE of the six roles: 10 |
+| Syntax | Keyword, function, string, number, class and comment | Average ΔE of the six roles: 18 |
 | Status bar | `statusBar.background` | None, for information only |
 
 At most three months of a variant can share a hue family, counted separately for the editor background and the accent. The families are eight 45° sectors of the CIELAB hue angle, plus a `neutre` (neutral) family for nearly gray colors (chroma below 4).
 
-Only normal vision decides the result. The same measures are shown for protanopia, deuteranopia and tritanopia, for information only. The command exits with code 1 when a check fails. The current themes are too similar from month to month and fail it, so CI does not run it yet: it will once all twelve months are redesigned. See [scripts/themes/README.md](scripts/themes/README.md#mesurer-la-variété-entre-les-mois) for the hue angles of each family and how to read the report.
+Only normal vision decides the result. The same measures are shown for protanopia, deuteranopia and tritanopia, for information only. The command exits with code 1 when a check fails. Before the redesign, the themes were too similar from month to month and failed it. The draft of the twelve months passes every pair, but CI does not run it yet: it will once the palettes are final. See [scripts/themes/README.md](scripts/themes/README.md#mesurer-la-variété-entre-les-mois) for the hue angles of each family and how to read the report.
 
 ## Packaging
 

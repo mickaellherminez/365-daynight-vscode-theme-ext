@@ -1,7 +1,7 @@
 # Outils de génération et d'audit des thèmes
 
-Ces scripts Python (3.8+, sans dépendance) génèrent les variantes Light, Dark, High Contrast et, pour les mois
-qui l'ont, High Contrast Light d'un mois à partir d'une palette, et vérifient leur accessibilité : contrastes WCAG
+Ces scripts Python (3.8+, sans dépendance) génèrent les variantes Light, Dark, High Contrast et High Contrast
+Light d'un mois à partir d'une palette, et vérifient leur accessibilité : contrastes WCAG
 et distinction des couleurs pour les personnes daltoniennes.
 
 | Fichier | Rôle |
@@ -9,6 +9,9 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `audit.py` | Audite un ou plusieurs thèmes existants (`npm run themes:audit`) |
 | `build.py` | Génère les thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite. Avec `--check`, vérifie que `themes/` correspond aux palettes (`npm run themes:check`) |
 | `variety.py` | Mesure la variété entre les mois de chaque déclinaison (`npm run themes:variety`) |
+| `draft.py` | Ébauche les 4 palettes d'un mois à partir de son ambiance (`direction.json`) et du modèle `draft-template.json` |
+| `direction.json` | Ambiance de chaque mois : fonds et accents de départ, plages de teinte des couleurs de syntaxe |
+| `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
 | `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `hero.png` montre les variantes d'un mois dans une fenêtre complète, `year.png` les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme et de l'achromatopsie, ΔE CIE76 et CIEDE2000 |
@@ -109,8 +112,8 @@ python3 scripts/themes/variety.py -v      # liste toutes les paires en échec
 
 L'audit vérifie chaque thème seul. Le test de variété compare les mois entre eux : deux mois d'une même
 déclinaison (Light, Dark, High Contrast, High Contrast Light) doivent se distinguer à l'œil. Il compare chaque paire
-de mois, soit 66 paires pour 12 mois. Une déclinaison qui n'a qu'un mois, comme High Contrast Light pour l'instant,
-n'a aucune paire : seules ses familles de teinte sont comptées.
+de mois, soit 66 paires pour 12 mois. Une déclinaison qui n'aurait qu'un mois n'a aucune paire : seules ses
+familles de teinte sont comptées.
 
 L'écart entre deux couleurs est le ΔE de `colorlib.py` (CIE76) : 0 pour deux couleurs identiques, environ 2 pour un
 écart à peine visible, plus de 25 pour deux couleurs nettement différentes.
@@ -118,12 +121,15 @@ L'écart entre deux couleurs est le ΔE de `colorlib.py` (CIE76) : 0 pour deux c
 | Mesure | Couleur comparée | Seuil par paire de mois |
 |---|---|---|
 | Fond de l'éditeur | `editor.background` | ΔE ≥ 8, ou ≥ 4 en High Contrast et High Contrast Light |
+| Cadre | `sideBar.background` (barre latérale) | ΔE ≥ 7, ou ≥ 4 en High Contrast et High Contrast Light |
 | Barre d'état | `statusBar.background` | aucun, affichée à titre d'information |
 | Accent | `activityBarBadge.background` | ΔE ≥ 25 |
-| Syntaxe | mot-clé, fonction, chaîne, nombre, classe, commentaire | moyenne des 6 ΔE, rôle par rôle, ≥ 10 |
+| Syntaxe | mot-clé, fonction, chaîne, nombre, classe, commentaire | moyenne des 6 ΔE, rôle par rôle, ≥ 18 |
 
 Le seuil du fond est plus bas en contraste élevé : ces fonds sont presque noirs ou presque blancs, et leur teinte
-ne peut pas beaucoup varier sans perdre du contraste.
+ne peut pas beaucoup varier sans perdre du contraste. Le cadre est mesuré pour que toute la fenêtre change d'un mois
+à l'autre, pas seulement l'éditeur. Son seuil est de 7 et non 8 : en Dark, le cadre est plus foncé que l'éditeur et
+les écarts s'y resserrent.
 
 **Familles de teinte.** Au plus 3 mois d'une même déclinaison peuvent partager une famille, compté séparément pour le
 fond de l'éditeur et pour l'accent. Les familles découpent l'angle de teinte CIELAB en 8 secteurs de 45°, nommés
@@ -153,10 +159,11 @@ de mois puis les mois concernés.
 paires sous le seuil). Elles sont affichées à titre d'information et ne font jamais échouer le test : la distinction
 pour les daltoniens est garantie à l'intérieur de chaque thème par l'audit, pas entre deux mois.
 
-Le script renvoie le code 1 si un seuil ou une famille échoue en vision normale. Les thèmes actuels se ressemblent
-trop d'un mois à l'autre et le font échouer : la commande n'est donc pas encore lancée par la CI. Elle le sera quand
-les 12 mois auront été redessinés. Les seuils sont des valeurs de départ, à ajuster pendant cette refonte (constantes
-en tête de `variety.py`).
+Le script renvoie le code 1 si un seuil ou une famille échoue en vision normale. Avant la refonte, les thèmes se
+ressemblaient trop d'un mois à l'autre (325 problèmes) ; l'ébauche des 12 mois passe toutes les paires. La commande
+n'est pas encore lancée par la CI : elle le sera avec les palettes définitives. Les seuils ont été fixés d'après
+l'ébauche (constantes en tête de `variety.py`) : le seuil de syntaxe est passé de 10 à 18, les paires les plus
+proches de l'ébauche étant à 18,5.
 
 ## Ce que l'audit ne vérifie pas
 
@@ -182,9 +189,8 @@ L'audit garantit les contrôles listés ci-dessus, rien de plus. En particulier 
   approximation, affichée à titre d'information.
 - **Styles** : l'audit vérifie qu'un style est déclaré pour un scope représentatif de chaque catégorie, pas qu'une
   police l'affiche. Une police sans italique, par exemple, le remplace par un italique simulé ou l'ignore.
-- **Thèmes à contraste élevé clairs** : seul octobre en a un pour l'instant. L'audit lui applique les règles du
-  contraste élevé. L'héritage des couleurs non définies qu'il suit a été vérifié pour ce type de thème dans VS Code
-  1.145, comme pour les autres.
+- **Thèmes à contraste élevé clairs** : l'audit leur applique les règles du contraste élevé. L'héritage des
+  couleurs non définies qu'il suit a été vérifié pour ce type de thème dans VS Code 1.145, comme pour les autres.
 - **Personnes réelles** : aucun calcul ne remplace des essais avec des personnes concernées.
 
 ## Générer les thèmes d'un mois
@@ -194,13 +200,43 @@ python3 scripts/themes/build.py 10           # aperçu de l'audit, aucun fichier
 python3 scripts/themes/build.py 10 --write   # écrit themes/365-10-{light,dark,hc-dark,hc-light}-theme.json
 ```
 
-La variante `hcLight` est facultative : seul un mois dont la palette la contient a un fichier `hc-light`. Il faut
-alors aussi déclarer le thème dans `package.json` (`"uiTheme": "hc-light"`) et ajouter le mois à
-`HIGH_CONTRAST_LIGHT_MONTHS` dans `theme-logic.js`, sinon les tests unitaires échouent.
+Les 12 mois ont une variante `hcLight`, mais elle reste facultative : seul un mois dont la palette la contient a un
+fichier `hc-light`. Un mois avec cette variante doit aussi déclarer le thème dans `package.json`
+(`"uiTheme": "hc-light"`) et figurer dans `HIGH_CONTRAST_LIGHT_MONTHS` dans `theme-logic.js`, sinon les tests
+unitaires échouent. Un mois qui ne l'a pas passe en High Contrast.
 
 Les fichiers de thème générés ne doivent pas être modifiés à la main : modifier la palette puis relancer `build.py`.
 
-## Créer la palette d'un autre mois
+## Ébaucher un mois à partir de son ambiance
+
+```sh
+python3 scripts/themes/draft.py 01            # affiche les couleurs de syntaxe choisies, aucun fichier modifié
+python3 scripts/themes/draft.py 01 --write    # écrit palettes/01.json
+python3 scripts/themes/draft.py all --write   # les 12 mois (environ 1 minute par mois)
+python3 scripts/themes/build.py 01 --write    # puis générer les thèmes
+```
+
+`draft.py` produit les 4 palettes d'un mois à partir de deux fichiers :
+
+- `direction.json` donne l'ambiance du mois (nom, description), le fond et l'accent de départ de chaque déclinaison
+  (hexadécimal, ou `[L, C, H]` en CIE LCh) et, pour chaque rôle de syntaxe, une plage
+  `[teinte min, teinte max, chroma min, chroma max]` ;
+- `draft-template.json` donne la structure : les 4 palettes d'octobre d'avant la refonte.
+
+Les surfaces prennent la teinte du fond du mois, l'accent et les barres celle de l'accent. En contraste élevé, le
+cadre (barre latérale, barre d'activité, barre de titre, onglets inactifs), noir ou blanc pur dans le modèle, prend
+aussi la teinte du fond : un peu plus foncé que l'éditeur, en sombre comme en clair. Les alertes, la sélection et le
+terminal restent ceux du modèle, puis sont ajustés au nouveau fond jusqu'à passer l'audit.
+
+La syntaxe est cherchée dans les plages du mois : contraste WCAG sur toutes les surfaces du code, clartés étagées pour
+l'achromatopsie, et un ΔE d'au moins 12 visé entre les couleurs de code pour les 3 daltonismes simulés. Le script fait
+jusqu'à 4 tirages pour l'atteindre et garde le meilleur ; il signale sur la sortie d'erreur un tirage sous 12, ou une
+plage trop étroite qu'il a dû élargir. Pour éviter que deux mois se ressemblent, garder des plages de syntaxe qui ne se
+chevauchent pas entre mois voisins de teinte, puis lancer `npm run themes:variety`.
+
+Une ébauche est un point de départ : l'ajuster ensuite à la main dans `palettes/<mois>.json`, puis `build.py`.
+
+## Créer la palette d'un autre mois à la main
 
 1. Copier `palettes/10.json` vers `palettes/<mois>.json` (ex. `11.json`).
 2. Choisir les fonds et le texte de chaque variante (`bg`, `bgAlt`, `bgDeep`, `fg`...), puis l'accent du mois.

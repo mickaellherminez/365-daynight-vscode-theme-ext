@@ -21,6 +21,8 @@ const mochaGlobals = {
   suite: 'readonly',
   test: 'readonly',
   teardown: 'readonly',
+  suiteSetup: 'readonly',
+  suiteTeardown: 'readonly',
   describe: 'readonly',
   it: 'readonly',
   before: 'readonly',

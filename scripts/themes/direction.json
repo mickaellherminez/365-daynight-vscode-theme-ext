@@ -1,0 +1,353 @@
+{
+  "_doc": "Ambiance de chaque mois pour draft.py. Light et Dark : fond et accent en hexadécimal. High Contrast : fond et accent en CIE LCh [L, C, H]. syntax : rôle -> [teinte min, teinte max, chroma min, chroma max] en CIE LCh. regexHue : teinte des expressions régulières.",
+  "months": {
+    "01": {
+      "name": "Janvier",
+      "mood": "givre",
+      "description": "Janvier : givre. Bleu glacier le jour, nuit d'hiver bleu profond, syntaxe froide (bleus, sarcelles, lilas) avec une seule touche chaude.",
+      "light": {
+        "bg": "#D5EAFF",
+        "accent": "#046495"
+      },
+      "dark": {
+        "bg": "#0D2635",
+        "accent": "#73B8E9"
+      },
+      "hc": {
+        "bg": [5, 8, 255],
+        "accent": [76, 45, 250]
+      },
+      "hcLight": {
+        "bg": [95.1, 11.6, 262.6],
+        "accent": [29.2, 43.5, 270.7]
+      },
+      "syntax": {
+        "keyword": [245, 272, 25, 70],
+        "function": [195, 228, 20, 60],
+        "string": [160, 188, 20, 60],
+        "number": [55, 78, 30, 80],
+        "klass": [308, 330, 25, 70]
+      },
+      "regexHue": 340
+    },
+    "02": {
+      "name": "Février",
+      "mood": "brume lavande",
+      "description": "Février : brume lavande. Lavande pâle le jour, nuit d'hiver gris-violet, syntaxe froide (violets, sarcelles, verts d'eau) avec une seule touche chaude.",
+      "light": {
+        "bg": "#F7F1FE",
+        "accent": "#6C4A91"
+      },
+      "dark": {
+        "bg": "#292634",
+        "accent": "#CDB0E9"
+      },
+      "hc": {
+        "bg": [4.6, 8.7, 304.7],
+        "accent": [87.5, 35.6, 299.6]
+      },
+      "hcLight": {
+        "bg": [95.4, 10.5, 307.0],
+        "accent": [21.3, 41.4, 316.0]
+      },
+      "syntax": {
+        "keyword": [276, 304, 25, 70],
+        "function": [36, 64, 20, 60],
+        "string": [101, 129, 20, 65],
+        "number": [146, 174, 30, 80],
+        "klass": [211, 239, 25, 70]
+      },
+      "regexHue": 350
+    },
+    "03": {
+      "name": "Mars",
+      "mood": "jeunes pousses",
+      "description": "Mars : jeunes pousses. Vert tendre le jour, nuit olive, accent vert bourgeon, syntaxe printanière (verts, roses, jaunes).",
+      "light": {
+        "bg": "#F4FBDE",
+        "accent": "#3F7820"
+      },
+      "dark": {
+        "bg": "#282A19",
+        "accent": "#98CB59"
+      },
+      "hc": {
+        "bg": [3.7, 6.3, 107.8],
+        "accent": [74.6, 69.1, 138.8]
+      },
+      "hcLight": {
+        "bg": [95.5, 7.6, 116.0],
+        "accent": [18.7, 30.0, 142.0]
+      },
+      "syntax": {
+        "keyword": [66, 94, 25, 70],
+        "function": [286, 314, 20, 60],
+        "string": [211, 239, 20, 65],
+        "number": [-9, 19, 30, 80],
+        "klass": [131, 159, 25, 70]
+      },
+      "regexHue": 185
+    },
+    "04": {
+      "name": "Avril",
+      "mood": "giboulées",
+      "description": "Avril : giboulées. Ciel de pluie gris-bleu, accent rose fleur de cerisier, syntaxe printanière (verts, roses, bleu ciel).",
+      "light": {
+        "bg": "#CAF6FF",
+        "accent": "#AB3964"
+      },
+      "dark": {
+        "bg": "#203135",
+        "accent": "#F094BB"
+      },
+      "hc": {
+        "bg": [6, 7, 212],
+        "accent": [76, 50, 355]
+      },
+      "hcLight": {
+        "bg": [95.8, 11.6, 215.5],
+        "accent": [32.3, 46.3, 352.9]
+      },
+      "syntax": {
+        "keyword": [345, 378, 30, 75],
+        "function": [225, 258, 20, 65],
+        "string": [125, 152, 25, 70],
+        "number": [85, 108, 30, 80],
+        "klass": [288, 318, 25, 70]
+      },
+      "regexHue": 30
+    },
+    "05": {
+      "name": "Mai",
+      "mood": "prairie fleurie",
+      "description": "Mai : prairie fleurie. Vert prairie le jour, nuit vert profond, accent jaune bouton-d'or, syntaxe fleurie (roses, verts, orangés, bleus).",
+      "light": {
+        "bg": "#E2F5E6",
+        "accent": "#7A6E00"
+      },
+      "dark": {
+        "bg": "#122518",
+        "accent": "#E9DA3C"
+      },
+      "hc": {
+        "bg": [5.5, 6.6, 149.9],
+        "accent": [86.5, 36.0, 85.9]
+      },
+      "hcLight": {
+        "bg": [95.9, 9.6, 148.7],
+        "accent": [18.1, 31.4, 82.2]
+      },
+      "syntax": {
+        "keyword": [311, 339, 25, 70],
+        "function": [136, 164, 20, 60],
+        "string": [36, 64, 20, 65],
+        "number": [226, 254, 30, 80],
+        "klass": [181, 209, 25, 70]
+      },
+      "regexHue": 100
+    },
+    "06": {
+      "name": "Juin",
+      "mood": "longues journées",
+      "description": "Juin : longues journées. Ciel clair le jour, nuit bleu pétrole, accent bleu d'été, syntaxe chaude et vive (rouges, orangés, jaunes) avec des bleus.",
+      "light": {
+        "bg": "#E5F7FE",
+        "accent": "#035BBE"
+      },
+      "dark": {
+        "bg": "#0A3846",
+        "accent": "#7397F9"
+      },
+      "hc": {
+        "bg": [3.2, 3.2, 232.2],
+        "accent": [72.5, 64.4, 295.0]
+      },
+      "hcLight": {
+        "bg": [97.7, 11.1, 224.0],
+        "accent": [32.2, 65.3, 292.8]
+      },
+      "syntax": {
+        "keyword": [-4, 24, 25, 70],
+        "function": [301, 329, 20, 60],
+        "string": [246, 274, 20, 65],
+        "number": [41, 69, 30, 80],
+        "klass": [91, 119, 25, 70]
+      },
+      "regexHue": 182
+    },
+    "07": {
+      "name": "Juillet",
+      "mood": "lagon",
+      "description": "Juillet : lagon. Eau turquoise le jour, nuit de lagon profond, accent corail, syntaxe chaude et saturée.",
+      "light": {
+        "bg": "#CFFAF2",
+        "accent": "#B64C44"
+      },
+      "dark": {
+        "bg": "#052A28",
+        "accent": "#FF7E72"
+      },
+      "hc": {
+        "bg": [8.5, 9, 180],
+        "accent": [86.7, 63.0, 35.1]
+      },
+      "hcLight": {
+        "bg": [96.1, 9.9, 178.5],
+        "accent": [33.1, 72.3, 39.3]
+      },
+      "syntax": {
+        "keyword": [196, 224, 25, 70],
+        "function": [91, 119, 20, 60],
+        "string": [341, 369, 20, 65],
+        "number": [261, 289, 30, 80],
+        "klass": [31, 59, 25, 70]
+      },
+      "regexHue": 158
+    },
+    "08": {
+      "name": "Août",
+      "mood": "sable chaud",
+      "description": "Août : sable chaud. Sable doré le jour, nuit brune, accent ambre, syntaxe chaude (orangés, ors, rouges) avec des verts et des violets.",
+      "light": {
+        "bg": "#FEEFD4",
+        "accent": "#97622F"
+      },
+      "dark": {
+        "bg": "#3A2C19",
+        "accent": "#E4AD45"
+      },
+      "hc": {
+        "bg": [6.9, 8.6, 73.5],
+        "accent": [73.6, 66.4, 68.9]
+      },
+      "hcLight": {
+        "bg": [99.4, 7.3, 87.7],
+        "accent": [34.7, 48.6, 66.9]
+      },
+      "syntax": {
+        "keyword": [136, 164, 25, 70],
+        "function": [331, 359, 20, 60],
+        "string": [281, 309, 20, 65],
+        "number": [16, 44, 30, 80],
+        "klass": [61, 89, 25, 70]
+      },
+      "regexHue": 222
+    },
+    "09": {
+      "name": "Septembre",
+      "mood": "vendanges",
+      "description": "Septembre : vendanges. Rose pâle le jour, nuit lie-de-vin, accent prune, syntaxe des vendanges (rouille, ocre, prune) avec des bleus.",
+      "light": {
+        "bg": "#FFE3EF",
+        "accent": "#8E248F"
+      },
+      "dark": {
+        "bg": "#321E27",
+        "accent": "#B274CF"
+      },
+      "hc": {
+        "bg": [3.5, 6.2, 346.2],
+        "accent": [78.1, 64.2, 324.4]
+      },
+      "hcLight": {
+        "bg": [95.4, 10.6, 350.0],
+        "accent": [23.1, 73.2, 319.3]
+      },
+      "syntax": {
+        "keyword": [231, 259, 25, 70],
+        "function": [56, 84, 20, 60],
+        "string": [11, 39, 20, 65],
+        "number": [96, 124, 30, 80],
+        "klass": [326, 354, 25, 70]
+      },
+      "regexHue": 135
+    },
+    "10": {
+      "name": "Octobre",
+      "mood": "feuilles rousses",
+      "description": "Octobre : feuilles rousses. Pêche le jour, nuit brun chaud, accent roux, syntaxe terreuse (rouille, ocre, prune) avec des bleus.",
+      "light": {
+        "bg": "#FFE7DC",
+        "accent": "#A94500"
+      },
+      "dark": {
+        "bg": "#2C1B11",
+        "accent": "#D99365"
+      },
+      "hc": {
+        "bg": [3.2, 7.0, 56.0],
+        "accent": [73.2, 56.7, 43.7]
+      },
+      "hcLight": {
+        "bg": [95.6, 5.2, 55.7],
+        "accent": [18.5, 47.2, 39.2]
+      },
+      "syntax": {
+        "keyword": [166, 194, 25, 70],
+        "function": [261, 289, 20, 60],
+        "string": [306, 334, 20, 65],
+        "number": [76, 104, 30, 80],
+        "klass": [-4, 24, 25, 70]
+      },
+      "regexHue": 228
+    },
+    "11": {
+      "name": "Novembre",
+      "mood": "brume et sous-bois",
+      "description": "Novembre : brume et sous-bois. Gris taupe neutre, accent vert mousse, syntaxe terreuse (rouille, ocre, prune).",
+      "light": {
+        "bg": "#EDEAE7",
+        "accent": "#555E2D"
+      },
+      "dark": {
+        "bg": "#2E2C29",
+        "accent": "#96A158"
+      },
+      "hc": {
+        "bg": [5, 1.5, 70],
+        "accent": [76, 50, 118]
+      },
+      "hcLight": {
+        "bg": [96.3, 8.9, 80.3],
+        "accent": [33.0, 60.9, 109.5]
+      },
+      "syntax": {
+        "keyword": [35, 58, 30, 70],
+        "function": [105, 132, 20, 60],
+        "string": [70, 92, 25, 70],
+        "number": [330, 362, 25, 65],
+        "klass": [235, 266, 20, 60]
+      },
+      "regexHue": 315
+    },
+    "12": {
+      "name": "Décembre",
+      "mood": "nuit polaire",
+      "description": "Décembre : nuit polaire. Lavande glacée le jour, nuit bleu nuit, accent cyan d'aurore, syntaxe froide (bleus, cyans, violets) avec une seule touche chaude.",
+      "light": {
+        "bg": "#E5E3FF",
+        "accent": "#016E77"
+      },
+      "dark": {
+        "bg": "#13182C",
+        "accent": "#86E0E6"
+      },
+      "hc": {
+        "bg": [6.9, 4.8, 289.0],
+        "accent": [74.8, 35.9, 198.4]
+      },
+      "hcLight": {
+        "bg": [97.8, 6.3, 299.1],
+        "accent": [33.7, 58.4, 200.4]
+      },
+      "syntax": {
+        "keyword": [101, 129, 25, 70],
+        "function": [6, 34, 20, 60],
+        "string": [186, 214, 20, 65],
+        "number": [301, 329, 30, 80],
+        "klass": [256, 284, 25, 70]
+      },
+      "regexHue": 68
+    }
+  }
+}

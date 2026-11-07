@@ -7,14 +7,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Added
-- A first High Contrast Light theme, `365 10-October High Contrast Light`, as a trial before the other months: dark text on a light background, at least 7:1 (AAA). The status bar button shows `HCL` for it
-- `365: Apply High Contrast Light theme` command, and a High Contrast Light link in the status bar tooltip for a month that has this theme. A month without it gets its High Contrast theme, and a message says so
-- In `system` mode, `workbench.preferredHighContrastLightColorTheme` now gets the High Contrast Light theme of the month, when the month has one. In the other months, it keeps or gets back your value
+- A High Contrast Light theme for every month, such as `365 01-January High Contrast Light`: dark text on a light background, at least 7:1 (AAA), for bright environments. The extension now has 48 themes. The status bar button shows `HCL` for them
+- `365: Apply High Contrast Light theme` command, and a High Contrast Light link in the status bar tooltip
+- In `system` mode, `workbench.preferredHighContrastLightColorTheme` now gets the High Contrast Light theme of the month
 
 ### Changed
-- January, April and November get a new look, the first of the monthly redesign: frost and glacier blue in January, rainy sky and cherry blossom pink in April, misty taupe and moss green in November. Their syntax colors follow the season and differ much more from one month to the next, with more varied lightness for people who see no color. In their Light themes, the status bar is darker, so that the month button reaches 7:1
-- In a High Contrast theme, the status bar button now switches between High Contrast and High Contrast Light, so that a click never leaves high contrast. A month without High Contrast Light still goes to Light. With `365DayNight.toggleIncludesHighContrast`, the button goes through the four variants
-- The month arrows and automatic mode keep High Contrast Light, and use High Contrast in a month that does not have it yet
+- All twelve months get a new look, each with its own seasonal mood: frost in January, lavender mist in February, young shoots in March, April showers, a flowering meadow in May, long days in June, a lagoon in July, warm sand in August, the grape harvest in September, autumn leaves in October, mist and undergrowth in November, a polar night in December. Backgrounds, accents and syntax colors differ much more from one month to the next, with more varied lightness for people who see no color. Syntax colors stay distinct for the three simulated kinds of color blindness. In the Light themes, the status bar is darker, so that the month button reaches 7:1
+- In the High Contrast themes, the sidebar, activity bar, title bar and inactive tabs take the color of the month instead of plain black (or plain gray in High Contrast Light), so that the whole window changes with the month, not just the editor. Text there keeps a contrast of 17:1 or more
+- In a High Contrast theme, the status bar button now switches between High Contrast and High Contrast Light, so that a click never leaves high contrast. With `365DayNight.toggleIncludesHighContrast`, the button goes through the four variants
+- The month arrows and automatic mode keep High Contrast Light
 - December Dark: the selected file in the explorer is a little darker, so that a deleted file stays readable when selected
 - A theme change that fails is also written to the log, which stays after the error notification closes: **Help > Toggle Developer Tools > Console**, lines starting with `365DayNight:`
 - The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too

@@ -18,9 +18,9 @@ const VARIANT_LABELS = {
   [ThemeType.HIGH_CONTRAST_LIGHT]: 'HCL'
 };
 
-// Mois qui ont déjà un thème High Contrast Light : octobre sert d'essai avant les autres mois.
+// Mois qui ont un thème High Contrast Light : tous aujourd'hui. Un mois absent de la liste passe en High Contrast.
 // Doit correspondre aux thèmes déclarés dans package.json (vérifié par les tests).
-const HIGH_CONTRAST_LIGHT_MONTHS = [10];
+const HIGH_CONTRAST_LIGHT_MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -97,7 +97,7 @@ function isHighContrastType(themeType) {
 }
 
 /**
- * Indique si un mois a un thème de ce type. Seul High Contrast Light manque encore à certains mois.
+ * Indique si un mois a un thème de ce type. Seul High Contrast Light peut manquer à un mois.
  * @param {string} themeType
  * @param {number} month Mois, de 1 à 12
  */
@@ -107,7 +107,7 @@ function hasThemeType(themeType, month) {
 
 /**
  * Type de thème à appliquer pour un mois : High Contrast Light devient High Contrast pour un mois
- * qui ne l'a pas encore, pour rester en contraste élevé
+ * qui ne l'a pas, pour rester en contraste élevé
  * @param {string} themeType
  * @param {number} month Mois, de 1 à 12
  */
@@ -420,6 +420,7 @@ function isSystemThemeValue(setting, value) {
 
 module.exports = {
   ThemeType,
+  HIGH_CONTRAST_LIGHT_MONTHS,
   SYSTEM_DECIDES_HINT,
   MONTH_NAMES,
   ColorThemeKind,
