@@ -39,6 +39,10 @@ npm test            # lint, unit tests, then downloads the latest stable VS Code
 
 If you run the tests from VS Code's integrated terminal, use `env -u ELECTRON_RUN_AS_NODE npm test`: that terminal sets `ELECTRON_RUN_AS_NODE`, which prevents the test instance of VS Code from starting.
 
+When the `system` mode test fails, its error message ends with a timeline of the setting and theme changes it saw, with the time in milliseconds, the dark and light preferences, the theme kind and the button state. This test waits for the new month in the settings instead of reading them right after the arrow command, because setting changes can reach the extension asynchronously.
+
+The extension writes each failed theme change to its log, not only as a notification. Open it with **Help > Toggle Developer Tools > Console**, or look for lines starting with `365DayNight:` in the test output.
+
 ### Continuous integration
 
 The [CI workflow](.github/workflows/ci.yml) runs these checks on every branch push and pull request. If one fails, the workflow fails.

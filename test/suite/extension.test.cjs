@@ -214,7 +214,6 @@ suite('Extension Test Suite', () => {
 			// Rien ne doit ramener l'ancien mois juste après
 			await new Promise((resolve) => setTimeout(resolve, 500));
 			assert.strictEqual(userValue(preferredDark), nextDark);
-			console.log(`System mode timeline:\n${timeline.join('\n')}`);
 			await vscode.commands.executeCommand('extension.currentMonth');
 		} catch (error) {
 			error.message += `\nTimeline:\n${timeline.join('\n')}`;
