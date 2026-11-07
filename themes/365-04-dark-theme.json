@@ -97,11 +97,11 @@
     "editor.wordHighlightTextBackground": "#445C6280",
     "editor.wordHighlightTextBorder": "#84AAB3",
     "editorBracketHighlight.foreground1": "#FE8892",
-    "editorBracketHighlight.foreground2": "#66D4FA",
-    "editorBracketHighlight.foreground3": "#C397FD",
+    "editorBracketHighlight.foreground2": "#73D3F6",
+    "editorBracketHighlight.foreground3": "#D48FFE",
     "editorBracketHighlight.foreground4": "#FE8892",
-    "editorBracketHighlight.foreground5": "#66D4FA",
-    "editorBracketHighlight.foreground6": "#C397FD",
+    "editorBracketHighlight.foreground5": "#73D3F6",
+    "editorBracketHighlight.foreground6": "#D48FFE",
     "editorBracketHighlight.unexpectedBracket.foreground": "#F07A8A",
     "editorBracketMatch.background": "#2E4B6A44",
     "editorBracketMatch.border": "#F094BB",
@@ -194,7 +194,7 @@
     "gitDecoration.renamedResourceForeground": "#5CA0E8",
     "gitDecoration.stageDeletedResourceForeground": "#F07A8A",
     "gitDecoration.stageModifiedResourceForeground": "#5CA0E8",
-    "gitDecoration.submoduleResourceForeground": "#C397FD",
+    "gitDecoration.submoduleResourceForeground": "#D48FFE",
     "gitDecoration.untrackedResourceForeground": "#3FE0D0",
     "icon.foreground": "#A8CAD3",
     "input.background": "#304145",
@@ -322,10 +322,10 @@
     "quickInputTitle.background": "#1C2A2D",
     "sash.hoverBorder": "#5CA0E8",
     "scmGraph.foreground1": "#FE8892",
-    "scmGraph.foreground2": "#66D4FA",
-    "scmGraph.foreground3": "#95FD8F",
-    "scmGraph.foreground4": "#ECC243",
-    "scmGraph.foreground5": "#C397FD",
+    "scmGraph.foreground2": "#73D3F6",
+    "scmGraph.foreground3": "#70DE6E",
+    "scmGraph.foreground4": "#D4CB1C",
+    "scmGraph.foreground5": "#D48FFE",
     "scmGraph.historyItemBaseRefColor": "#D9B84A",
     "scmGraph.historyItemHoverAdditionsForeground": "#3FE0D0",
     "scmGraph.historyItemHoverDeletionsForeground": "#FC8594",
@@ -379,28 +379,28 @@
     "statusBarItem.prominentHoverBackground": "#85415F",
     "statusBarItem.remoteBackground": "#A15074",
     "statusBarItem.remoteForeground": "#FFFFFF",
-    "symbolIcon.booleanForeground": "#ECC243",
-    "symbolIcon.classForeground": "#C397FD",
-    "symbolIcon.constantForeground": "#ECC243",
-    "symbolIcon.constructorForeground": "#66D4FA",
-    "symbolIcon.enumeratorForeground": "#C397FD",
-    "symbolIcon.enumeratorMemberForeground": "#ECC243",
-    "symbolIcon.eventForeground": "#C397FD",
+    "symbolIcon.booleanForeground": "#D4CB1C",
+    "symbolIcon.classForeground": "#D48FFE",
+    "symbolIcon.constantForeground": "#D4CB1C",
+    "symbolIcon.constructorForeground": "#73D3F6",
+    "symbolIcon.enumeratorForeground": "#D48FFE",
+    "symbolIcon.enumeratorMemberForeground": "#D4CB1C",
+    "symbolIcon.eventForeground": "#D48FFE",
     "symbolIcon.fieldForeground": "#ACD4DD",
-    "symbolIcon.functionForeground": "#66D4FA",
-    "symbolIcon.interfaceForeground": "#C397FD",
+    "symbolIcon.functionForeground": "#73D3F6",
+    "symbolIcon.interfaceForeground": "#D48FFE",
     "symbolIcon.keywordForeground": "#FE8892",
-    "symbolIcon.methodForeground": "#66D4FA",
+    "symbolIcon.methodForeground": "#73D3F6",
     "symbolIcon.moduleForeground": "#ACD4DD",
     "symbolIcon.namespaceForeground": "#ACD4DD",
-    "symbolIcon.nullForeground": "#ECC243",
-    "symbolIcon.numberForeground": "#ECC243",
+    "symbolIcon.nullForeground": "#D4CB1C",
+    "symbolIcon.numberForeground": "#D4CB1C",
     "symbolIcon.operatorForeground": "#FE8892",
     "symbolIcon.packageForeground": "#ACD4DD",
     "symbolIcon.propertyForeground": "#ACD4DD",
-    "symbolIcon.stringForeground": "#95FD8F",
-    "symbolIcon.structForeground": "#C397FD",
-    "symbolIcon.typeParameterForeground": "#C397FD",
+    "symbolIcon.stringForeground": "#70DE6E",
+    "symbolIcon.structForeground": "#D48FFE",
+    "symbolIcon.typeParameterForeground": "#D48FFE",
     "symbolIcon.variableForeground": "#D3E8ED",
     "tab.activeBackground": "#203135",
     "tab.activeBorder": "#203135",
@@ -470,7 +470,7 @@
     "textCodeBlock.background": "#304145",
     "textLink.activeForeground": "#F094BB",
     "textLink.foreground": "#5CB8E0",
-    "textPreformat.foreground": "#95FD8F",
+    "textPreformat.foreground": "#70DE6E",
     "textSeparator.foreground": "#445C62",
     "titleBar.activeBackground": "#1C2629",
     "titleBar.activeForeground": "#D3E8ED",
@@ -519,7 +519,7 @@
         "string.quoted.double"
       ],
       "settings": {
-        "foreground": "#95FD8F"
+        "foreground": "#70DE6E"
       }
     },
     {
@@ -543,7 +543,7 @@
         "variable.function"
       ],
       "settings": {
-        "foreground": "#66D4FA"
+        "foreground": "#73D3F6"
       }
     },
     {
@@ -556,7 +556,7 @@
         "support.class"
       ],
       "settings": {
-        "foreground": "#C397FD"
+        "foreground": "#D48FFE"
       }
     },
     {
@@ -566,7 +566,7 @@
         "meta.method.declaration"
       ],
       "settings": {
-        "foreground": "#66D4FA"
+        "foreground": "#73D3F6"
       }
     },
     {
@@ -578,7 +578,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#ECC243"
+        "foreground": "#D4CB1C"
       }
     },
     {
@@ -591,7 +591,7 @@
         "constant.numeric.octal"
       ],
       "settings": {
-        "foreground": "#ECC243"
+        "foreground": "#D4CB1C"
       }
     },
     {
@@ -634,7 +634,7 @@
         "entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#ECC243",
+        "foreground": "#D4CB1C",
         "fontStyle": "italic"
       }
     },
@@ -647,7 +647,7 @@
         "support.variable"
       ],
       "settings": {
-        "foreground": "#C397FD"
+        "foreground": "#D48FFE"
       }
     },
     {
@@ -690,7 +690,7 @@
         "string.other.link"
       ],
       "settings": {
-        "foreground": "#66D4FA",
+        "foreground": "#73D3F6",
         "fontStyle": "underline"
       }
     },
@@ -701,7 +701,7 @@
         "markup.inline.raw"
       ],
       "settings": {
-        "foreground": "#95FD8F"
+        "foreground": "#70DE6E"
       }
     },
     {
@@ -813,7 +813,7 @@
         "meta.diff.header"
       ],
       "settings": {
-        "foreground": "#C397FD",
+        "foreground": "#D48FFE",
         "fontStyle": "bold"
       }
     },
@@ -848,14 +848,14 @@
       "name": "JSON Keys",
       "scope": "support.type.property-name.json",
       "settings": {
-        "foreground": "#66D4FA"
+        "foreground": "#73D3F6"
       }
     },
     {
       "name": "YAML Keys",
       "scope": "entity.name.tag.yaml",
       "settings": {
-        "foreground": "#66D4FA"
+        "foreground": "#73D3F6"
       }
     },
     {
@@ -883,33 +883,33 @@
         "entity.other.inherited-class"
       ],
       "settings": {
-        "foreground": "#C397FD",
+        "foreground": "#D48FFE",
         "fontStyle": "italic"
       }
     }
   ],
   "semanticTokenColors": {
-    "variable.readonly": "#ECC243",
+    "variable.readonly": "#D4CB1C",
     "parameter": {
       "foreground": "#D3E8ED",
       "fontStyle": "italic"
     },
-    "function": "#66D4FA",
-    "method": "#66D4FA",
-    "class": "#C397FD",
-    "enum": "#C397FD",
+    "function": "#73D3F6",
+    "method": "#73D3F6",
+    "class": "#D48FFE",
+    "enum": "#D48FFE",
     "interface": {
-      "foreground": "#C397FD",
+      "foreground": "#D48FFE",
       "fontStyle": "italic"
     },
     "namespace": "#ACD4DD",
     "typeParameter": {
-      "foreground": "#C397FD",
+      "foreground": "#D48FFE",
       "fontStyle": "italic"
     },
-    "enumMember": "#ECC243",
+    "enumMember": "#D4CB1C",
     "property": "#ACD4DD",
-    "variable.defaultLibrary": "#C397FD",
+    "variable.defaultLibrary": "#D48FFE",
     "keyword": "#FE8892",
     "*.deprecated": {
       "strikethrough": true
@@ -919,5 +919,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette sombre (giboulées et fleur de cerisier) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal repris d'octobre. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Prototype de l'étape 25, palette sombre (giboulées et fleur de cerisier) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal repris d'octobre. Vérifié par script (contraste WCAG + simulation Machado 2009)."
 }
