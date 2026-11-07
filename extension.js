@@ -544,6 +544,8 @@ function getNotActivatedMessage(label) {
  */
 function reportThemeChange(result) {
   if (!result.ok) {
+    // Aussi dans le journal : une notification se ferme, le journal reste (et apparaît dans la CI)
+    console.error(`365DayNight: ${result.message}`);
     vscode.window.showErrorMessage(result.message);
     return;
   }
@@ -754,6 +756,7 @@ function checkSystemMode(now) {
       lastAutoFailurePeriod = undefined;
     } else if (lastAutoFailurePeriod !== period) {
       lastAutoFailurePeriod = period;
+      console.error(`365DayNight: ${result.message}`);
       vscode.window.showErrorMessage(result.message);
     }
   });

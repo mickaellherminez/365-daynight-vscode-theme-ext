@@ -144,6 +144,8 @@ suite('Extension behavior', () => {
 
 			assert.strictEqual(fake.statusBarItem.text, '03 DRK');
 			assert.strictEqual(fake.errorMessages.length, 1);
+			// Aussi dans le journal, qui reste après la notification
+			assert.deepStrictEqual(fake.loggedErrors, [`365DayNight: ${fake.errorMessages[0]}`]);
 		});
 
 		test('a dark theme picked after a 365 dark theme hides the arrows and the number', async () => {

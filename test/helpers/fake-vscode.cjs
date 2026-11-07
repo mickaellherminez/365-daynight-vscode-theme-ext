@@ -311,6 +311,11 @@ function loadExtension(options = {}) {
     }
   };
 
+  // Les erreurs que l'extension écrit dans le journal sont gardées pour les tests, sans polluer leur sortie
+  const realConsoleError = console.error;
+  fake.loggedErrors = [];
+  console.error = (...args) => fake.loggedErrors.push(args.join(' '));
+
   const realLoad = Module._load;
   Module._load = function (request, ...rest) {
     return request === 'vscode' ? vscode : realLoad.call(this, request, ...rest);
@@ -393,6 +398,7 @@ function loadExtension(options = {}) {
     /** Rétablit l'environnement d'origine */
     dispose() {
       Module._load = realLoad;
+      console.error = realConsoleError;
       Object.assign(global, realTimers);
       global.Date = RealDate;
       delete require.cache[EXTENSION_PATH];
