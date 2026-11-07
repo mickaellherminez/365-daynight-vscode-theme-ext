@@ -1469,6 +1469,21 @@ suite('Extension behavior', () => {
 				assertMonthSettings('12-December');
 			});
 
+			test('a stale read when leaving still restores the original settings', async () => {
+				const globalState = new StaleMemory([['autoModeOffered', true]], 0);
+				await start({ globalState, settings: { [PREFERRED_DARK]: 'Default Dark Modern' } });
+				assert.strictEqual(fake.userValue(DETECT), true);
+
+				fake.globalState.staleReads = 5;
+				await fake.setSetting('365DayNight.enable', false);
+
+				assert.deepStrictEqual(fake.errorMessages, []);
+				assert.strictEqual(fake.userValue(DETECT), undefined);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), 'Default Dark Modern');
+				assert.strictEqual(fake.userValue(PREFERRED_LIGHT), undefined);
+				assert.strictEqual(Map.prototype.get.call(fake.globalState, BACKUP), undefined);
+			});
+
 			test('a backup without original values is saved again instead of breaking the arrows', async () => {
 				const globalState = new Map([['autoModeOffered', true],
 					[BACKUP, { settings: [DETECT, PREFERRED_LIGHT, PREFERRED_DARK, PREFERRED_HC, PREFERRED_HCL], complete: true }]]);

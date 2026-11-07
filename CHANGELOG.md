@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
 
 ### Fixed
-- In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, with an error in the log: the backup of the original settings could lose its values. It now stays complete, and a damaged backup is rebuilt from the current settings
+- In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, and leaving the mode could sometimes keep VS Code following the system: a read of the backup of the original settings could come back empty or incomplete. The extension now keeps its own copy of that backup, and rebuilds a damaged one from the current settings
 
 ## [0.12.0] - 2026-11-06
 
