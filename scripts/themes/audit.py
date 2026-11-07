@@ -83,7 +83,7 @@ INHERITED = {
     'agentsChatInput.placeholderForeground': 'input.placeholderForeground',
     'agentsBadge.background': 'activityBarBadge.background', 'agentsBadge.foreground': 'activityBarBadge.foreground',
 }
-MIN_DELTA_E = 10
+MIN_DELTA_E = 12
 MIN_BUTTON_DELTA_E = 15
 
 
@@ -434,7 +434,7 @@ def report(theme, hc, verbose=False):
         bad += [p for p in pairs + apairs if p[0] < MIN_DELTA_E]
     for name, pairs in information(theme).items():
         line = ', '.join(f'{a}/{b} {d:.0f}' for d, a, b in pairs[:3])
-        # Le seuil de 10 est sur l'échelle CIE76 : il ne s'applique pas à CIEDE2000. En achromatopsie,
+        # Le seuil de 12 est sur l'échelle CIE76 : il ne s'applique pas à CIEDE2000. En achromatopsie,
         # l'écart CIE76 entre deux gris est leur écart de clarté, sur la même échelle.
         if name == 'achromatopsie':
             below = sum(1 for d, _, _ in pairs if d < MIN_DELTA_E)

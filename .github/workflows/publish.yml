@@ -63,6 +63,9 @@ jobs:
       - name: Generated themes match the palettes
         run: npm run themes:check
 
+      - name: Months look different from one another
+        run: npm run themes:variety
+
       - name: Measuring tools match published reference data
         run: npm run themes:test
 

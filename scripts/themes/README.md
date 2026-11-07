@@ -11,7 +11,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `variety.py` | Mesure la variété entre les mois de chaque déclinaison (`npm run themes:variety`) |
 | `draft.py` | Ébauche les 4 palettes d'un mois à partir de son ambiance (`direction.json`) et du modèle `draft-template.json` |
 | `direction.json` | Ambiance de chaque mois : fonds et accents de départ, plages de teinte des couleurs de syntaxe |
-| `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte |
+| `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte, avec l'ajout Git du High Contrast Light retouché pour le seuil de 12 |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
 | `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `hero.png` montre les variantes d'un mois dans une fenêtre complète, `year.png` les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme et de l'achromatopsie, ΔE CIE76 et CIEDE2000 |
@@ -49,7 +49,8 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
   et les alertes (erreur, avertissement, ajout, suppression, test réussi ou échoué, lignes du graphe Git) sont simulés en protanopie, deutéranopie et
   tritanopie ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)).
-  Une différence perçue (ΔE) inférieure à 10 est signalée comme confusion possible.
+  Une différence perçue (ΔE) inférieure à 12 est signalée comme confusion possible et fait échouer l'audit. Le seuil
+  était de 10 jusqu'à l'ébauche des 12 mois, qui a montré qu'une marge de 12 était tenable dans les 48 thèmes.
 - **Pas seulement la couleur** ([WCAG 2.2, critère 1.4.1](https://www.w3.org/TR/WCAG22/#use-of-color)) : les styles
   qui portent un sens doivent être présents. Commentaires en italique, code invalide souligné, code obsolète barré
   (règle TextMate et jeton sémantique `*.deprecated`), liens soulignés, titres et gras Markdown en gras, italique
@@ -60,10 +61,10 @@ Après les contrôles, le rapport affiche deux mesures **à titre d'information*
 - **CIEDE2000** (lignes `info ΔE2000`) : les trois paires de jetons principaux les plus proches, pour chaque vision,
   avec la formule CIEDE2000. Elle est plus fidèle à la perception que CIE76, surtout pour les bleus et les couleurs
   peu saturées, mais sur une autre échelle : un ΔE2000 est en général plus petit que le ΔE CIE76 de la même paire.
-  Le seuil de 10 reste donc appliqué en CIE76, tant que les seuils n'ont pas été recalibrés pour CIEDE2000.
+  Le seuil de 12 reste donc appliqué en CIE76, tant que les seuils n'ont pas été recalibrés pour CIEDE2000.
 - **Achromatopsie** (ligne `info achromatopsie`), c'est-à-dire la vision sans couleur : chaque couleur devient le gris
   de même luminance, et seul l'écart de clarté reste. La ligne donne les trois paires de jetons principaux les plus
-  proches et le nombre de paires sous 10, sur 21. C'est la mesure qui varie le plus d'un thème à l'autre : deux
+  proches et le nombre de paires sous 12, sur 21. C'est la mesure qui varie le plus d'un thème à l'autre : deux
   jetons de même clarté ne se distinguent alors que par leur style.
 
 Une clé manquante compte comme un échec : VS Code la remplacerait par sa couleur par défaut, sans rapport avec le thème.
@@ -160,8 +161,8 @@ paires sous le seuil). Elles sont affichées à titre d'information et ne font j
 pour les daltoniens est garantie à l'intérieur de chaque thème par l'audit, pas entre deux mois.
 
 Le script renvoie le code 1 si un seuil ou une famille échoue en vision normale. Avant la refonte, les thèmes se
-ressemblaient trop d'un mois à l'autre (325 problèmes) ; l'ébauche des 12 mois passe toutes les paires. La commande
-n'est pas encore lancée par la CI : elle le sera avec les palettes définitives. Les seuils ont été fixés d'après
+ressemblaient trop d'un mois à l'autre (325 problèmes) ; les 12 mois redessinés passent toutes les paires. La CI et
+la publication lancent la commande, comme l'audit. Les seuils ont été fixés d'après
 l'ébauche (constantes en tête de `variety.py`) : le seuil de syntaxe est passé de 10 à 18, les paires les plus
 proches de l'ébauche étant à 18,5.
 
@@ -181,7 +182,7 @@ L'audit garantit les contrôles listés ci-dessus, rien de plus. En particulier 
 - **Norme** : les ratios sont ceux de WCAG 2.x. Le futur modèle APCA (WCAG 3) n'est pas appliqué.
 - **Daltonisme** : la simulation de Machado et al. (2009) porte sur les dichromaties complètes (protanopie,
   deutéranopie, tritanopie). Les formes partielles, plus fréquentes, sont moins sévères mais pas simulées à part.
-  Le seuil ΔE de 10 (CIE76) est une règle pratique, pas une norme.
+  Le seuil ΔE de 12 (CIE76) est une règle pratique, pas une norme.
 - **CIEDE2000** : il est seulement affiché. Les seuils restent en CIE76, une formule plus simple et moins fidèle,
   tant qu'ils n'ont pas été recalibrés.
 - **Achromatopsie** : la simulation utilise la luminance de la vision de jour. Les personnes achromates voient avec
@@ -234,7 +235,10 @@ jusqu'à 4 tirages pour l'atteindre et garde le meilleur ; il signale sur la sor
 plage trop étroite qu'il a dû élargir. Pour éviter que deux mois se ressemblent, garder des plages de syntaxe qui ne se
 chevauchent pas entre mois voisins de teinte, puis lancer `npm run themes:variety`.
 
-Une ébauche est un point de départ : l'ajuster ensuite à la main dans `palettes/<mois>.json`, puis `build.py`.
+Une ébauche est un point de départ : l'ajuster ensuite à la main dans `palettes/<mois>.json`, puis `build.py`. Les
+palettes actuelles ont été retouchées après l'ébauche : les couleurs de code de janvier (Light et High Contrast Light),
+mai (Light et High Contrast Light) et octobre (High Contrast Light), pour atteindre le seuil de 12 en daltonisme.
+Relancer `draft.py --write` sur ces mois effacerait ces retouches.
 
 ## Créer la palette d'un autre mois à la main
 
@@ -250,7 +254,7 @@ Une ébauche est un point de départ : l'ajuster ensuite à la main dans `palett
    ```
 
    Sur fond clair, le minimum de 7:1 impose des couleurs foncées et proches en clarté : jouer aussi sur la clarté
-   et la saturation pour garder un ΔE d'au moins 10 entre les rôles.
+   et la saturation pour garder un ΔE d'au moins 12 entre les rôles.
 
    Les propositions maximisent la distinction, pas l'esthétique : les ajuster à la main en gardant les
    écarts de clarté entre rôles, c'est ce qui compte le plus pour les daltoniens.
