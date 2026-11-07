@@ -102,7 +102,17 @@ The three items sit at the far right of the status bar, just before the notifica
 
 The three items share the `365DayNight.statusBarButton` color, so that they read as one control. Each theme derives it from its accent color, and the audit checks that it stays readable on the status bar. While debugging, the items use the normal status bar color, because the bar has another background. Other themes also get the normal color.
 
-The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 original themes and the public command IDs must not change.
+The button shows `LGT`, `DRK`, `HCT` (High Contrast Dark) or `HCL` (High Contrast Light). High Contrast Light themes are named `365 01-January High Contrast Light`. The labels of the 36 original themes and the public command IDs must not change: VS Code remembers the selected theme by its label, keyboard shortcuts by the command ID, and settings by their name. `test/unit/compatibility.test.cjs` checks them against `test/fixtures/public-api-0.12.0.json`, taken from the `0.12.0` tag: the 36 labels with their variant, the commands, and the settings with their type, default and values. Do not edit that file.
+
+To test an update from the published version without touching your own VS Code, use an isolated profile (`code` is the VS Code command line, `Visual Studio Code.app/Contents/Resources/app/bin/code` on macOS). Run these commands from a terminal outside VS Code: in VS Code's integrated terminal, `code` talks to the open window and the last command does nothing. Keep the profile path short: on macOS, VS Code creates a socket in it, and a path longer than 103 characters makes it quit silently (`listen EINVAL` in its log).
+
+```sh
+code --user-data-dir /tmp/365-data --extensions-dir /tmp/365-ext --install-extension mickaellherminez.365-daynight-vscode-theme-ext@0.12.0
+# choose a 365 theme and a few settings in /tmp/365-data/User/settings.json, then:
+npx vsce package --no-update-package-json --no-git-tag-version 0.13.0 --out /tmp/365-next.vsix
+code --user-data-dir /tmp/365-data --extensions-dir /tmp/365-ext --install-extension /tmp/365-next.vsix
+code --user-data-dir /tmp/365-data --extensions-dir /tmp/365-ext   # the same theme must still be active
+```
 
 ## Changing a theme
 

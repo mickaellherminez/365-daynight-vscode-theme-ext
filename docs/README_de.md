@@ -64,6 +64,18 @@ Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DR
 | November | Nebel und Unterholz | Nebliges Taupe und Moosgrün | Unterholzgrau und Moosgrün | Warmes Schwarz und Moosgrün | Creme und dunkles Moos |
 | Dezember | Polarnacht | Eisiges Lavendel und Polarlicht-Petrol | Mitternachtsblau und Polarlicht-Cyan | Blauschwarz und Polarlicht-Cyan | Lavendelweiß und dunkles Petrol |
 
+## Neuer Look und der Weg zurück
+
+Version 0.13.0 gestaltet alle Themes neu: Jeder Monat hat jetzt seine eigene Stimmung der Jahreszeit, und jeder Monat erhält ein helles kontrastreiches Theme (High Contrast Light). Dein ausgewähltes Theme, deine Einstellungen und deine Tastenkürzel bleiben erhalten: Die Namen der Themes und die Befehle haben sich nicht geändert, nur die Farben.
+
+Dir gefällt der alte Look besser? Kehre zu Version 0.12.0 zurück:
+
+1. Öffne die Erweiterungsansicht (`Ctrl+Shift+X`, auf dem Mac `Cmd+Shift+X`) und suche **365 Day & Night Themes**.
+2. Klicke sie an, um ihre Seite zu öffnen, klicke auf den Pfeil neben **Uninstall** (deinstallieren), wähle **Install Specific Version...** (bestimmte Version installieren) und dann **0.12.0**.
+3. Lade VS Code neu, wenn du dazu aufgefordert wirst.
+
+VS Code deaktiviert dann **Auto Update** (automatische Aktualisierung) für diese Erweiterung, die bei 0.12.0 bleibt. Um den neuen Look zurückzubekommen, aktiviere **Auto Update** wieder oder wähle im selben Menü die neueste Version. Version 0.12.0 hat kein helles kontrastreiches Theme: Nutzt du eines, wähle nach dem Zurückkehren ein anderes Theme.
+
 ## Automatischer Tag-/Nachtwechsel
 
 Soll dein Editor der Uhrzeit folgen? Aktiviere den Automatikmodus:

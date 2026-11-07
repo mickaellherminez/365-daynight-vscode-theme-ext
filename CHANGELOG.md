@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+**New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](README.md#new-look-and-how-to-go-back).
+
 ### Added
 - A High Contrast Light theme for every month, such as `365 01-January High Contrast Light`: dark text on a light background, at least 7:1 (AAA), for bright environments. The extension now has 48 themes. The status bar button shows `HCL` for them
 - `365: Apply High Contrast Light theme` command, and a High Contrast Light link in the status bar tooltip

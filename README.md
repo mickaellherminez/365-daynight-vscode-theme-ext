@@ -65,6 +65,18 @@ To try another month, click the arrows around it (`‹ 10 DRK ›`). The number 
 | November | Mist and undergrowth | Misty taupe and moss green | Undergrowth gray and moss green | Warm black and moss green | Cream and dark moss |
 | December | Polar night | Icy lavender and aurora teal | Midnight blue and aurora cyan | Blue-black and aurora cyan | Lavender white and dark teal |
 
+## New look, and how to go back
+
+Version 0.13.0 redesigns every theme: each month now has its own seasonal mood, and every month gets a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept: the theme names and the commands have not changed, only the colors.
+
+Prefer the previous look? Go back to version 0.12.0:
+
+1. Open the Extensions view (`Ctrl+Shift+X`, or `Cmd+Shift+X` on Mac) and find **365 Day & Night Themes**.
+2. Click it to open its page, click the arrow next to **Uninstall**, choose **Install Specific Version...**, then pick **0.12.0**.
+3. Reload VS Code if it asks you to.
+
+VS Code then unchecks **Auto Update** for this extension, so it stays on 0.12.0. To get the new look back, check **Auto Update** again, or pick the latest version in the same menu. Version 0.12.0 has no High Contrast Light theme: if you use one, choose another theme after going back.
+
 ## Automatic day and night switching
 
 Want your editor to follow the clock? Turn on the automatic mode:

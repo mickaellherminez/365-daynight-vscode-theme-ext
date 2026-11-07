@@ -64,6 +64,18 @@ Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). 
 | Noviembre | Bruma y sotobosque | Gris topo brumoso y verde musgo | Gris sotobosque y verde musgo | Negro cálido y verde musgo | Crema y musgo oscuro |
 | Diciembre | Noche polar | Lavanda helado y verde azulado de aurora | Azul medianoche y cian de aurora | Negro azulado y cian de aurora | Blanco lavanda y verde azulado oscuro |
 
+## Nuevo estilo, y cómo volver atrás
+
+La versión 0.13.0 rediseña todos los temas: cada mes tiene ahora su propio ambiente de estación, y cada mes recibe un tema de alto contraste claro (High Contrast Light). Se conservan tu tema, tus ajustes y tus atajos de teclado: los nombres de los temas y los comandos no han cambiado, solo los colores.
+
+¿Prefieres el estilo anterior? Vuelve a la versión 0.12.0:
+
+1. Abre la vista de Extensiones (`Ctrl+Shift+X`, o `Cmd+Shift+X` en Mac) y busca **365 Day & Night Themes**.
+2. Haz clic en ella para abrir su página, haz clic en la flecha junto a **Uninstall** (desinstalar), elige **Install Specific Version...** (instalar una versión concreta) y luego **0.12.0**.
+3. Recarga VS Code si te lo pide.
+
+VS Code desmarca entonces **Auto Update** (actualización automática) para esta extensión, que se queda en 0.12.0. Para recuperar el nuevo estilo, vuelve a marcar **Auto Update** o elige la última versión en el mismo menú. La versión 0.12.0 no tiene tema de alto contraste claro: si usas uno, elige otro tema después de volver atrás.
+
 ## Cambio automático entre día y noche
 
 ¿Quieres que tu editor siga la hora? Activa el modo automático:
