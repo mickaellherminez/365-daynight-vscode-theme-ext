@@ -906,6 +906,10 @@ function updateMonthArrow(item, name, steps) {
   item.show();
 }
 
+// Commandes que l'infobulle du bouton central peut lancer
+const TOOLTIP_COMMANDS = ['extension.currentMonth', 'extension.setLightTheme', 'extension.setDarkTheme',
+  'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme'];
+
 /**
  * Infobulle du bouton central : le thème, l'effet d'un clic et les liens utiles
  * @param {string} name
@@ -917,8 +921,12 @@ function createThemeTooltip(name, hint, followingSystem) {
   if (themeState.month !== undefined && themeState.month !== getCurrentMonth()) {
     links.push('[Back to the current month](command:extension.currentMonth)');
   }
-  // En contraste élevé, le clic mène déjà à l'autre variante à contraste élevé
-  if (!isHighContrastType(themeState.type) && !followingSystem) {
+  if (followingSystem) {
+    // En mode system, le système choisit la variante : aucun lien n'en change
+  } else if (isHighContrastType(themeState.type)) {
+    // Le clic reste en contraste élevé : la sortie vers Light ou Dark passe par ces liens
+    links.push('[Light](command:extension.setLightTheme)', '[Dark](command:extension.setDarkTheme)');
+  } else {
     links.push('[High Contrast](command:extension.setHighContrastTheme)');
     if (hasThemeType(ThemeType.HIGH_CONTRAST_LIGHT, getDisplayedMonth())) {
       links.push('[High Contrast Light](command:extension.setHighContrastLightTheme)');
@@ -927,7 +935,7 @@ function createThemeTooltip(name, hint, followingSystem) {
 
   const tooltip = new vscode.MarkdownString([`**${name}**`, hint, links.join(' · ')].filter(Boolean).join('\n\n'));
   // Seules ces commandes peuvent être lancées depuis l'infobulle
-  tooltip.isTrusted = { enabledCommands: ['extension.currentMonth', 'extension.setHighContrastTheme', 'extension.setHighContrastLightTheme'] };
+  tooltip.isTrusted = { enabledCommands: TOOLTIP_COMMANDS };
   return tooltip;
 }
 
