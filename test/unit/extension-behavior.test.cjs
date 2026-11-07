@@ -1427,6 +1427,75 @@ suite('Extension behavior', () => {
 			});
 		});
 
+		suite('The backup of the original settings', () => {
+			const BACKUP = 'systemModeBackup';
+
+			/**
+			 * Mémoire de l'extension qui renvoie un instant une valeur périmée, comme VS Code quand une
+			 * écriture en parallèle ramène tout le bloc de la mémoire à un état antérieur
+			 */
+			class StaleMemory extends Map {
+				constructor(entries, staleReads) {
+					super(entries);
+					this.staleReads = 0;
+					this.pending = staleReads;
+				}
+
+				set(key, value) {
+					if (key === BACKUP && !super.has(key)) {
+						this.staleReads = this.pending;
+					}
+					return super.set(key, value);
+				}
+
+				get(key) {
+					if (key === BACKUP && this.staleReads > 0) {
+						this.staleReads--;
+						return undefined;
+					}
+					return super.get(key);
+				}
+			}
+
+			test('a stale read of the memory during the setup keeps the original values', async () => {
+				const globalState = new StaleMemory([['autoModeOffered', true]], 3);
+				await start({ globalState });
+
+				const stored = Map.prototype.get.call(fake.globalState, BACKUP);
+				assert.ok(stored.saved, JSON.stringify(stored));
+				await fake.run(NEXT);
+
+				assert.deepStrictEqual(fake.errorMessages, []);
+				assertMonthSettings('12-December');
+			});
+
+			test('a backup without original values is saved again instead of breaking the arrows', async () => {
+				const globalState = new Map([['autoModeOffered', true],
+					[BACKUP, { settings: [DETECT, PREFERRED_LIGHT, PREFERRED_DARK, PREFERRED_HC, PREFERRED_HCL], complete: true }]]);
+				await start({ globalState, settings: { [PREFERRED_DARK]: '365 11-November Dark' } });
+
+				await fake.run(NEXT);
+
+				assert.deepStrictEqual(fake.errorMessages, []);
+				assertMonthSettings('12-December');
+				assert.ok(fake.globalState.get(BACKUP).saved);
+			});
+
+			test('leaving with a backup without original values removes the monthly themes', async () => {
+				const globalState = new Map([['autoModeOffered', true],
+					[BACKUP, { settings: [DETECT, PREFERRED_LIGHT, PREFERRED_DARK, PREFERRED_HC, PREFERRED_HCL], complete: true }]]);
+				load({ theme: 'Monokai', systemDark: true, now: NOVEMBER, globalState,
+					settings: { [DETECT]: true, [PREFERRED_DARK]: '365 11-November Dark', '365DayNight.mode': 'system' } });
+				await fake.settle();
+
+				await fake.setSetting('365DayNight.enable', false);
+
+				assert.deepStrictEqual(fake.errorMessages, []);
+				assert.strictEqual(fake.userValue(PREFERRED_DARK), undefined);
+				assert.strictEqual(fake.globalState.get(BACKUP), undefined);
+			});
+		});
+
 		suite('The button', () => {
 			const HIGH_CONTRAST_LINK = '(command:extension.setHighContrastTheme)';
 

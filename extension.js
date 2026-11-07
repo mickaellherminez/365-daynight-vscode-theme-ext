@@ -350,14 +350,15 @@ function onPreferredThemeChanged() {
  * le réglage attend alors le premier mois qui en a un, tant que l'utilisateur ne le change pas.
  * @param {number} month
  * @param {string[]} [replacedSettings] Réglages à écrire, quelle que soit leur valeur
+ * @param {object} [backup] Sauvegarde en cours, si l'appelant vient de l'écrire
+ * @returns {Promise<object | undefined>} La sauvegarde, à jour des réglages en attente
  */
-async function writeSystemThemes(month, replacedSettings = []) {
+async function writeSystemThemes(month, replacedSettings = [], backup = globalState.get(SYSTEM_BACKUP_KEY)) {
   const config = vscode.workspace.getConfiguration();
-  const backup = globalState.get(SYSTEM_BACKUP_KEY);
   const waiting = new Set(backup?.waiting);
   for (const [setting, label] of Object.entries(getSystemThemeSettings(month))) {
     const current = config.inspect(setting)?.globalValue;
-    const original = backup?.saved[setting];
+    const original = backup?.saved?.[setting];
     const isWaiting = waiting.delete(setting) && current === original;
     if (label !== undefined) {
       if (current !== label && (isSystemThemeValue(setting, current) || replacedSettings.includes(setting) || isWaiting)) {
@@ -371,8 +372,12 @@ async function writeSystemThemes(month, replacedSettings = []) {
     }
   }
   if (backup && JSON.stringify([...waiting]) !== JSON.stringify(backup.waiting ?? [])) {
-    await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), waiting: [...waiting] });
+    // Complète la sauvegarde en main, sans la relire : VS Code garde toute la mémoire de l'extension
+    // dans un seul bloc, qu'une écriture en parallèle peut ramener un instant à un état antérieur
+    backup = { ...backup, waiting: [...waiting] };
+    await globalState.update(SYSTEM_BACKUP_KEY, backup);
   }
+  return backup;
 }
 
 /**
@@ -380,6 +385,10 @@ async function writeSystemThemes(month, replacedSettings = []) {
  * @param {{ settings?: string[] } | undefined} backup
  */
 function getUnsavedSystemSettings(backup) {
+  // Une sauvegarde sans valeurs d'origine est inutilisable : tout est à sauvegarder de nouveau
+  if (backup && !backup.saved) {
+    return SYSTEM_SETTINGS;
+  }
   const saved = backup?.settings ?? LEGACY_SYSTEM_SETTINGS;
   return SYSTEM_SETTINGS.filter((setting) => !saved.includes(setting));
 }
@@ -410,6 +419,10 @@ async function applySystemMonth(month, replacedSettings) {
 async function setUpSystemMode(month) {
   const config = vscode.workspace.getConfiguration();
   let backup = globalState.get(SYSTEM_BACKUP_KEY);
+  // Sans valeurs d'origine, la sauvegarde est inutilisable : la mise en place recommence entièrement
+  if (backup && !backup.saved) {
+    backup = undefined;
+  }
   // Une sauvegarde d'une version précédente ne contient pas les réglages gérés depuis : ils sont
   // sauvegardés à leur tour, puis remplacés comme au premier passage
   const unsaved = backup ? getUnsavedSystemSettings(backup) : SYSTEM_SETTINGS;
@@ -427,14 +440,14 @@ async function setUpSystemMode(month) {
 
   try {
     if (backup.complete) {
-      await writeSystemThemes(month, unsaved);
+      await writeSystemThemes(month, unsaved, backup);
     } else {
-      await writeSystemThemes(month, PREFERRED_SETTINGS);
+      // L'écriture des thèmes a pu noter des réglages en attente : sa sauvegarde est la plus récente
+      backup = await writeSystemThemes(month, PREFERRED_SETTINGS, backup);
       if (config.inspect(DETECT_COLOR_SCHEME_SETTING)?.globalValue !== true) {
         await config.update(DETECT_COLOR_SCHEME_SETTING, true, vscode.ConfigurationTarget.Global);
       }
-      // Relue : l'écriture des thèmes a pu noter des réglages en attente
-      await globalState.update(SYSTEM_BACKUP_KEY, { ...globalState.get(SYSTEM_BACKUP_KEY), complete: true });
+      await globalState.update(SYSTEM_BACKUP_KEY, { ...backup, complete: true });
     }
   } catch (error) {
     return { ok: false, message: `Failed to change theme: ${error.message}` };
@@ -459,8 +472,8 @@ async function leaveSystemMode() {
     for (const setting of SYSTEM_SETTINGS) {
       const current = config.inspect(setting)?.globalValue;
       const isOurs = setting === DETECT_COLOR_SCHEME_SETTING ? current === true : isSystemThemeValue(setting, current);
-      if (isOurs && current !== backup.saved[setting]) {
-        await config.update(setting, backup.saved[setting], vscode.ConfigurationTarget.Global);
+      if (isOurs && current !== backup.saved?.[setting]) {
+        await config.update(setting, backup.saved?.[setting], vscode.ConfigurationTarget.Global);
       }
     }
   } catch (error) {
