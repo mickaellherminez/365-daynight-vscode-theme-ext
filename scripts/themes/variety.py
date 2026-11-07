@@ -6,6 +6,8 @@ plus les deux couleurs diffèrent.
 
 Contrôles bloquants (vision normale) :
 - fond de l'éditeur : ΔE d'au moins 8 entre deux mois, 4 dans les déclinaisons à contraste élevé ;
+- cadre (barre latérale) : ΔE d'au moins 7, 4 dans les déclinaisons à contraste élevé, pour que toute la
+  fenêtre change d'un mois à l'autre et pas seulement l'éditeur ;
 - accent (pastille de la barre d'activité) : ΔE d'au moins 25 ;
 - syntaxe : moyenne des ΔE de 6 rôles (mot-clé, fonction, chaîne, nombre, classe, commentaire) d'au moins 10 ;
 - au plus 3 mois dans la même famille de teinte, séparément pour le fond et pour l'accent.
@@ -38,11 +40,15 @@ VARIANTS = {'vs': 'Light', 'vs-dark': 'Dark', 'hc-black': 'High Contrast', 'hc-l
 HIGH_CONTRAST = ('hc-black', 'hc-light')
 SYNTAX_ROLES = ('mot-clé', 'fonction', 'chaîne', 'nombre', 'classe', 'commentaire')
 
-# Seuils de départ, à ajuster avec l'ébauche des 12 mois
+# Seuils retenus après l'ébauche des 12 mois dans les 4 variantes. Paires les plus proches de l'ébauche :
+# fond 8,5 (4,6 en contraste élevé), accent 27,0, syntaxe 20,5 (5,8 en moyenne avant la refonte)
 MIN_BACKGROUND = 8
 MIN_BACKGROUND_HC = 4
+# Cadre plus foncé que l'éditeur en Dark : les écarts s'y resserrent (7,4 au plus près, 4,1 en contraste élevé)
+MIN_FRAME = 7
+MIN_FRAME_HC = 4
 MIN_ACCENT = 25
-MIN_SYNTAX = 10
+MIN_SYNTAX = 18
 MAX_PER_FAMILY = 3
 
 # Familles de teinte : 8 secteurs de 45° de l'angle de teinte CIELAB, nommés d'après leur centre.
@@ -52,8 +58,8 @@ NEUTRAL = 'neutre'
 NEUTRAL_CHROMA = 4
 
 # Surfaces comparées : (nom affiché, clé de couleur). Leurs seuils sont fixés dans measures()
-SURFACES = (('Fond de l\'éditeur', 'editor.background'), ('Barre d\'état', 'statusBar.background'),
-            ('Accent', 'activityBarBadge.background'))
+SURFACES = (('Fond de l\'éditeur', 'editor.background'), ('Cadre', 'sideBar.background'),
+            ('Barre d\'état', 'statusBar.background'), ('Accent', 'activityBarBadge.background'))
 MAX_LISTED = 5
 
 
@@ -90,7 +96,9 @@ def load_variants():
 def measures(ui, months):
     """Mesures comparées entre mois : (nom, {mois: valeur}, fonction de distance, seuil ou None)."""
     background = MIN_BACKGROUND_HC if ui in HIGH_CONTRAST else MIN_BACKGROUND
-    thresholds = {'editor.background': background, 'statusBar.background': None, 'activityBarBadge.background': MIN_ACCENT}
+    frame = MIN_FRAME_HC if ui in HIGH_CONTRAST else MIN_FRAME
+    thresholds = {'editor.background': background, 'sideBar.background': frame, 'statusBar.background': None,
+                  'activityBarBadge.background': MIN_ACCENT}
     for theme in months.values():
         missing = [key for _, key in SURFACES if not theme.get('colors', {}).get(key)]
         if missing:
@@ -143,7 +151,7 @@ def report(ui, months, verbose=False):
     else:
         print('   Un seul mois dans cette déclinaison : aucune paire à comparer')
 
-    for name, key in (SURFACES[0], SURFACES[2]):
+    for name, key in (SURFACES[0], SURFACES[3]):
         families = {}
         for month, theme in sorted(months.items()):
             families.setdefault(hue_family(theme['colors'][key]), []).append(month)

@@ -139,7 +139,7 @@
     "editorLightBulbAutoFix.foreground": "#1F5FA8",
     "editorLineNumber.activeForeground": "#063037",
     "editorLineNumber.foreground": "#3B6068",
-    "editorLink.activeForeground": "#0B6E9E",
+    "editorLink.activeForeground": "#00618E",
     "editorMarkerNavigation.background": "#DDF9FF",
     "editorMarkerNavigationError.background": "#A3122A",
     "editorMarkerNavigationInfo.background": "#1F5FA8",
@@ -277,7 +277,7 @@
     "notificationCenter.border": "#8EC8D4",
     "notificationCenterHeader.background": "#B4EFFA",
     "notificationCenterHeader.foreground": "#063037",
-    "notificationLink.foreground": "#0B6E9E",
+    "notificationLink.foreground": "#00618E",
     "notificationToast.border": "#8EC8D4",
     "notifications.background": "#DDF9FF",
     "notifications.border": "#8EC8D4",
@@ -469,7 +469,7 @@
     "textBlockQuote.border": "#547A82",
     "textCodeBlock.background": "#DDF9FF",
     "textLink.activeForeground": "#AB3964",
-    "textLink.foreground": "#0B6E9E",
+    "textLink.foreground": "#00618E",
     "textPreformat.foreground": "#10500D",
     "textSeparator.foreground": "#8EC8D4",
     "titleBar.activeBackground": "#A8E2EE",
@@ -919,5 +919,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Prototype de l'étape 25, palette claire (giboulées et fleur de cerisier) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal repris d'octobre. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette claire (giboulées) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
 }

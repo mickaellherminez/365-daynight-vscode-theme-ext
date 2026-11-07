@@ -1,5 +1,6 @@
 const assert = require('assert');
 const { contributes } = require('../../package.json');
+const { ALL_MONTHS, onlyOctober, allMonths } = require('../helpers/high-contrast-light.cjs');
 const {
 	ThemeType,
 	MONTH_NAMES,
@@ -32,6 +33,11 @@ const {
 } = require('../../theme-logic');
 
 suite('Theme logic', () => {
+	// Ces tests ont été écrits quand seul octobre avait un thème High Contrast Light : ils gardent cette
+	// situation pour vérifier le repli vers High Contrast. La suite « package.json » vérifie les 12 mois.
+	suiteSetup(onlyOctober);
+	suiteTeardown(allMonths);
+
 	suite('getThemeTypeFromKind', () => {
 		test('maps each kind of theme to a theme type', () => {
 			assert.strictEqual(getThemeTypeFromKind(ColorThemeKind.LIGHT), ThemeType.LIGHT);
@@ -66,9 +72,14 @@ suite('Theme logic', () => {
 
 	suite('getThemeMonth', () => {
 		test('reads the month of every contributed theme', () => {
-			for (const { label } of contributes.themes) {
-				const expected = Number(label.slice(4, 6));
-				assert.strictEqual(getThemeMonth(label), expected, label);
+			allMonths();
+			try {
+				for (const { label } of contributes.themes) {
+					const expected = Number(label.slice(4, 6));
+					assert.strictEqual(getThemeMonth(label), expected, label);
+				}
+			} finally {
+				onlyOctober();
 			}
 		});
 
@@ -479,6 +490,13 @@ suite('Theme logic', () => {
 	});
 
 	suite('package.json', () => {
+		suiteSetup(allMonths);
+		suiteTeardown(onlyOctober);
+
+		test('every month has a High Contrast Light theme', () => {
+			assert.deepStrictEqual(ALL_MONTHS, MONTH_NAMES.map((_, month) => month + 1));
+		});
+
 		test('contributes exactly the computed theme names', () => {
 			const computed = MONTH_NAMES.flatMap((_, month) =>
 				Object.values(ThemeType)

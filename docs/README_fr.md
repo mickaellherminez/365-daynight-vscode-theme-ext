@@ -1,6 +1,6 @@
 # 365 Day & Night Themes – Thèmes VS Code accessibles pour chaque mois
 
-**36 thèmes de couleurs pour Visual Studio Code : un thème clair, un thème sombre et un thème à contraste élevé pour chaque mois de l'année.** Passez du jour à la nuit en un clic, ou laissez l'extension le faire pour vous. Chaque thème est testé pour la lisibilité (contraste WCAG) et pour le daltonisme.
+**48 thèmes de couleurs pour Visual Studio Code : un thème clair, un thème sombre, un thème à contraste élevé et un thème à contraste élevé clair pour chaque mois de l'année.** Passez du jour à la nuit en un clic, ou laissez l'extension le faire pour vous. Chaque thème est testé pour la lisibilité (contraste WCAG) et pour le daltonisme.
 
 [![Version sur le Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![Installations](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
@@ -12,8 +12,8 @@
 
 ## Pourquoi vous allez l'aimer
 
-- 🗓️ **Un nouveau style chaque mois.** Neige et bleu d'hiver en janvier, vert printanier en mars, plein soleil en juillet, couleurs d'automne en octobre, ambiance coin du feu en décembre : votre éditeur suit les saisons.
-- ☀️🌙 **Jour et nuit, toujours assortis.** Chaque mois propose un thème clair pour la journée, un thème sombre pour le soir et un thème à contraste élevé quand vous avez besoin d'une lisibilité maximale. Octobre a aussi un thème à contraste élevé clair (High Contrast Light), un premier essai avant les autres mois.
+- 🗓️ **Un nouveau style chaque mois.** Givre en janvier, jeunes pousses en mars, lagon en juillet, feuilles rousses en octobre, nuit polaire en décembre : toute la fenêtre suit les saisons, pas seulement l'éditeur.
+- ☀️🌙 **Jour et nuit, toujours assortis.** Chaque mois propose un thème clair pour la journée, un thème sombre pour le soir et deux thèmes à contraste élevé, sombre et clair (High Contrast Light), quand vous avez besoin d'une lisibilité maximale.
 - 🔁 **Bascule en un clic.** Un bouton dans la barre d'état passe du thème clair au sombre, et inversement. Le contraste élevé est accessible par une commande.
 - ⏰ **Mode automatique (optionnel).** L'extension peut appliquer seule le thème du mois en cours : clair le jour, sombre la nuit.
 - 👁️ **Reposant pour les yeux, lisible par tous.** Tout le texte respecte les niveaux de contraste WCAG, et les couleurs de syntaxe restent distinctes pour les personnes daltoniennes.
@@ -41,28 +41,28 @@ Nécessite Visual Studio Code 1.96 ou plus récent.
 
 La première fois que vous utilisez un thème 365, une notification propose la bascule automatique : **Follow the clock** (suivre l'heure : clair le jour, sombre la nuit), **Follow my system** (suivre le mode clair ou sombre de votre système) ou **No thanks** (non merci). Rien ne change sans votre choix, et la question n'est posée qu'une fois. Après un choix, un message confirme ce qui est activé, avec un bouton **Open Settings** pour changer les heures ou désactiver. Pour changer d'avis plus tard, voyez la section sur la bascule automatique ci-dessous.
 
-Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK`, `HCT` ou `HCL`) permet de passer de la version claire à la version sombre du mois en cours. Pour le contraste élevé, lancez `365: Apply High Contrast theme` depuis la palette de commandes. Dans un thème à contraste élevé, le bouton passe du contraste élevé sombre (`HCT`) au contraste élevé clair (`HCL`), et inversement : un clic ne quitte jamais le contraste élevé. Un mois sans contraste élevé clair revient au thème clair : seul octobre l'a pour l'instant. Pour quitter le contraste élevé, lancez `365: Apply Light theme` ou `365: Apply Dark theme`. Vous pouvez aussi survoler le bouton et cliquer sur son lien **Light** ou **Dark**.
+Le **bouton de la barre d'état** (en bas à droite : `LGT`, `DRK`, `HCT` ou `HCL`) permet de passer de la version claire à la version sombre du mois en cours. Pour le contraste élevé, lancez `365: Apply High Contrast theme` depuis la palette de commandes. Dans un thème à contraste élevé, le bouton passe du contraste élevé sombre (`HCT`) au contraste élevé clair (`HCL`), et inversement : un clic ne quitte jamais le contraste élevé. Pour quitter le contraste élevé, lancez `365: Apply Light theme` ou `365: Apply Dark theme`. Vous pouvez aussi survoler le bouton et cliquer sur son lien **Light** ou **Dark**.
 
-Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DRK ›`). Le chiffre est le mois, de `01` à `12`, et les flèches gardent la variante : clair, sombre, contraste élevé ou contraste élevé clair. Le contraste élevé clair devient le contraste élevé sombre dans un mois qui ne l'a pas encore. Décembre est suivi de janvier. Pour revenir, lancez `365: Back to the current month` depuis la palette de commandes. Les flèches et le chiffre n'apparaissent qu'avec un thème 365. Survolez le bouton pour voir le nom complet du thème, avec des liens vers le contraste élevé, vers le contraste élevé clair quand le mois l'a, et vers le mois en cours. Dans un thème à contraste élevé, l'infobulle propose à la place des liens vers Light et Dark.
+Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DRK ›`). Le chiffre est le mois, de `01` à `12`, et les flèches gardent la variante : clair, sombre, contraste élevé ou contraste élevé clair. Décembre est suivi de janvier. Pour revenir, lancez `365: Back to the current month` depuis la palette de commandes. Les flèches et le chiffre n'apparaissent qu'avec un thème 365. Survolez le bouton pour voir le nom complet du thème, avec des liens vers le contraste élevé, vers le contraste élevé clair et vers le mois en cours. Dans un thème à contraste élevé, l'infobulle propose à la place des liens vers Light et Dark.
 
 ## Les 12 mois
 
 ![Aperçu des 36 thèmes : une version claire, sombre et à contraste élevé pour chaque mois, de janvier à décembre](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
-| Mois | Clair | Sombre | Contraste élevé |
-| --- | --- | --- | --- |
-| Janvier | Givre et bleu glacier | Bleu d'hiver profond et bleu glace | Noir et bleu glace |
-| Février | Blanc et vert, touche de rouge Saint-Valentin | Ardoise nordique et givre | Bleu marine et or |
-| Mars | Crème et vert printemps | Nuit indigo | Sarcelle sombre et orange-rouge |
-| Avril | Ciel de giboulées et rose fleur de cerisier | Ardoise de pluie et rose fleur de cerisier | Noir et rose fleur de cerisier |
-| Mai | Blanc lumineux et orange | Nuit océane relevée d'orange | Bleu marine et bleu ciel |
-| Juin | Bleu ciel et encre indigo | Nuit bleue éclairée d'orange | Noir et corail |
-| Juillet | Plein soleil : crème, brun et orange | Nuit d'été inspirée de Solarized | Bleu marine, orange et or |
-| Août | Crème chaud et encre indigo | Nuit d'ardoise étoilée de jaune | Noir et vert néon |
-| Septembre | Ciel de rentrée et encre marine | Ardoise et sarcelle | Noir et orange vif |
-| Octobre | Crème d'automne, orange brûlé et ambre | Brun profond et braise | Noir chaud et ambre |
-| Novembre | Taupe brumeux et vert mousse | Gris sous-bois et vert mousse | Noir et vert mousse |
-| Décembre | Givre et bleu sarcelle | Coin du feu : ardoise et braise | Nuit d'hiver et cyan givré |
+| Mois | Ambiance | Clair | Sombre | Contraste élevé | Contraste élevé clair |
+| --- | --- | --- | --- | --- | --- |
+| Janvier | Givre | Bleu glacier et bleu profond | Bleu d'hiver profond et bleu glace | Noir bleuté et bleu glace | Blanc glacé et bleu marine |
+| Février | Brume lavande | Lavande pâle et violet | Nuit gris-violet et lilas | Noir violacé et lilas pâle | Blanc lavande et prune |
+| Mars | Jeunes pousses | Vert tendre et vert bourgeon | Nuit olive et vert bourgeon | Noir olive et vert vif | Vert pâle et vert forêt |
+| Avril | Giboulées | Ciel de pluie et rose cerisier | Ardoise de pluie et rose cerisier | Noir bleuté et rose cerisier | Ciel pâle et rose profond |
+| Mai | Prairie fleurie | Vert prairie et or olive | Nuit vert profond et jaune bouton-d'or | Noir verdâtre et or pâle | Vert pâle et bronze foncé |
+| Juin | Longues journées | Ciel clair et bleu d'été | Nuit bleu pétrole et pervenche | Noir et pervenche | Blanc ciel et bleu roi |
+| Juillet | Lagon | Eau turquoise et corail | Lagon profond et corail | Noir sarcelle et corail pâle | Turquoise pâle et rouge corail |
+| Août | Sable chaud | Sable doré et caramel | Nuit brune et ambre | Noir brun et ambre | Blanc chaud et ambre foncé |
+| Septembre | Vendanges | Rose pâle et prune | Nuit lie-de-vin et prune | Noir lie-de-vin et orchidée | Rose pâle et prune profonde |
+| Octobre | Feuilles rousses | Pêche et roux | Nuit brun chaud et roux | Noir brun et saumon | Blanc pêche et roux profond |
+| Novembre | Brume et sous-bois | Taupe brumeux et vert mousse | Gris sous-bois et vert mousse | Noir chaud et vert mousse | Crème et mousse sombre |
+| Décembre | Nuit polaire | Lavande glacée et sarcelle d'aurore | Bleu nuit et cyan d'aurore | Noir bleuté et cyan d'aurore | Blanc lavande et sarcelle foncé |
 
 ## Bascule automatique jour / nuit
 
@@ -94,7 +94,7 @@ Bon à savoir :
 - **C'est vous qui décidez.** Le mode automatique est désactivé par défaut : l'extension ne change jamais votre thème sans votre accord. La première fois que vous utilisez un thème 365, une notification vous demande une seule fois si vous le voulez.
 - **Votre choix est respecté.** Si vous choisissez un thème à la main, il reste en place jusqu'au prochain changement de période (passage jour/nuit ou nouveau mois).
 - **Votre mois reste aussi.** Si vous choisissez un autre mois, avec les flèches ou le sélecteur de thèmes, le mode automatique continue d'alterner clair et sombre sur ce mois jusqu'au début du prochain mois réel, même après un redémarrage. Pour revenir plus tôt, lancez `365: Back to the current month`.
-- **Le contraste élevé reste en contraste élevé.** Si vous utilisez un thème à contraste élevé, sombre ou clair, le mode automatique met seulement à jour le mois, jamais la variante. Dans un mois sans contraste élevé clair, le contraste élevé sombre est utilisé.
+- **Le contraste élevé reste en contraste élevé.** Si vous utilisez un thème à contraste élevé, sombre ou clair, le mode automatique met seulement à jour le mois, jamais la variante.
 
 ### Choisir vos heures
 
@@ -140,7 +140,7 @@ Ou ajoutez ceci à votre `settings.json` :
 | L'apparence claire | Thème clair du mois |
 | L'apparence sombre | Thème sombre du mois |
 | Le contraste élevé, avec une apparence sombre | Thème à contraste élevé du mois |
-| Le contraste élevé, avec une apparence claire | Le thème à contraste élevé clair du mois. Les autres mois gardent votre réglage, par défaut le thème High Contrast Light de VS Code, en attendant d'avoir cette variante |
+| Le contraste élevé, avec une apparence claire | Le thème à contraste élevé clair du mois |
 
 Le bouton dans ce mode :
 - **Flèches.** `‹` et `›` changent le mois de toutes les variantes. Ce mois reste jusqu'au début du prochain mois réel, même après un redémarrage. Pour revenir plus tôt, lancez `365: Back to the current month`.
@@ -148,7 +148,7 @@ Le bouton dans ce mode :
 - **Sélecteur de thèmes.** Choisir un thème 365 applique son mois à toutes les variantes. Choisir le thème d'un autre éditeur remplace seulement la variante en cours : il reste les mois suivants, et le bouton n'affiche alors ni flèches ni mois. Cliquez sur le bouton central pour retrouver le thème 365.
 
 
-- **Ce que le mode change.** Il active `window.autoDetectColorScheme` et écrit les thèmes du mois dans `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme`, `workbench.preferredHighContrastColorTheme` et `workbench.preferredHighContrastLightColorTheme`. Ce dernier n'est écrit que pour un mois qui a un thème à contraste élevé clair, et retrouve votre valeur les autres mois. `workbench.colorTheme` ne change pas.
+- **Ce que le mode change.** Il active `window.autoDetectColorScheme` et écrit les thèmes du mois dans `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme`, `workbench.preferredHighContrastColorTheme` et `workbench.preferredHighContrastLightColorTheme`. `workbench.colorTheme` ne change pas.
 - **Pour revenir en arrière.** Décochez **365DayNight: Enable** ou choisissez un autre mode. Vos réglages d'origine reviennent, et ceux qui n'existaient pas sont de nouveau retirés. Un réglage que vous avez changé entre-temps garde votre valeur.
 - **Avant de désinstaller ou de désactiver l'extension.** Quittez d'abord ce mode, car une extension ne peut plus rien restaurer ensuite. En cas d'oubli, retirez les cinq réglages ci-dessus de votre `settings.json`.
 - **Contraste élevé.** VS Code donne la priorité au contraste élevé de votre système. Pour l'ignorer, désactivez `window.autoDetectHighContrast` : le mode ne change jamais ce réglage.
@@ -178,7 +178,7 @@ Ouvrez la palette de commandes (`Ctrl+Shift+P` ou `Cmd+Shift+P`) et tapez **365*
 | `365: Apply Light theme` | Applique le thème clair du mois affiché |
 | `365: Apply Dark theme` | Applique le thème sombre du mois affiché |
 | `365: Apply High Contrast theme` | Applique le thème à contraste élevé du mois affiché |
-| `365: Apply High Contrast Light theme` | Applique le thème à contraste élevé clair du mois affiché. Un mois qui ne l'a pas encore reçoit son thème à contraste élevé sombre, et un message le signale |
+| `365: Apply High Contrast Light theme` | Applique le thème à contraste élevé clair du mois affiché |
 | `365: Next month` | Applique le thème du mois suivant, dans la même variante |
 | `365: Previous month` | Applique le thème du mois précédent, dans la même variante |
 | `365: Back to the current month` | Applique le thème du mois réel, dans la même variante |
@@ -193,7 +193,7 @@ L'extension ne définit aucun raccourci clavier par défaut. Pour attribuer les 
 | `365DayNight.mode` | `auto` | `auto` (selon l'heure), `day` (toujours clair), `night` (toujours sombre) ou `system` (suit votre système) |
 | `365DayNight.dayStart` | `"07:00"` | Heure de début du thème clair en mode `auto`, au format HH:MM |
 | `365DayNight.nightStart` | `"19:00"` | Heure de début du thème sombre en mode `auto`, au format HH:MM |
-| `365DayNight.toggleIncludesHighContrast` | `false` | Le bouton de la barre d'état passe par toutes les variantes : clair, sombre, contraste élevé, puis contraste élevé clair quand le mois l'a |
+| `365DayNight.toggleIncludesHighContrast` | `false` | Le bouton de la barre d'état passe par toutes les variantes : clair, sombre, contraste élevé, puis contraste élevé clair |
 
 ## Questions fréquentes
 
@@ -213,7 +213,7 @@ Non. Le mode automatique est désactivé par défaut. Sans lui, le thème ne cha
 Bien sûr. Choisissez-le dans le sélecteur de thèmes (`Ctrl+K Ctrl+T`) et laissez le mode automatique désactivé.
 
 **À quoi servent les thèmes à contraste élevé ?**
-Ils sont pensés pour la basse vision, les environnements très lumineux ou les longues sessions de code. Ils offrent un contraste maximal (AAA), des bordures visibles et un contour de focus très marqué. Chaque mois a une version sombre. La version claire, High Contrast Light, existe pour octobre pour l'instant, et les autres mois suivront.
+Ils sont pensés pour la basse vision, les environnements très lumineux ou les longues sessions de code. Ils offrent un contraste maximal (AAA), des bordures visibles et un contour de focus très marqué. Chaque mois en a deux : une version sombre, et une version claire, High Contrast Light, pour les environnements lumineux.
 
 ## Feuille de route
 
