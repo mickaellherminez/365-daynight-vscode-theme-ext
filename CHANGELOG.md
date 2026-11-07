@@ -19,6 +19,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - A theme change that fails is also written to the log, which stays after the error notification closes: **Help > Toggle Developer Tools > Console**, lines starting with `365DayNight:`
 - The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
 
+### Fixed
+- In a High Contrast theme, the status bar tooltip had no way back to the normal themes: it now shows **Light** and **Dark** links, so that leaving high contrast no longer requires a command
+- In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, and leaving the mode could sometimes keep VS Code following the system: a read of the backup of the original settings could come back empty or incomplete. The extension now keeps its own copy of that backup, and rebuilds a damaged one from the current settings
+
 ## [0.12.0] - 2026-11-06
 
 ### Added

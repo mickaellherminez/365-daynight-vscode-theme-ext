@@ -81,6 +81,7 @@ The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists fo
 | Click on a High Contrast theme | Switches between High Contrast Dark and High Contrast Light, so that nobody leaves High Contrast by mistake. A month without High Contrast Light goes to Light |
 | `365DayNight.toggleIncludesHighContrast` on | The click cycles through every variant: Light, Dark, High Contrast, High Contrast Light |
 | Reaching High Contrast | With the `365: Apply High Contrast theme` or `365: Apply High Contrast Light theme` command, or a link in the tooltip. In a month without High Contrast Light, its command applies High Contrast and says so |
+| Leaving High Contrast | With the `365: Apply Light theme` or `365: Apply Dark theme` command, or the **Light** and **Dark** links that the tooltip shows in a High Contrast theme instead of the High Contrast links. In `system` mode, the tooltip has neither: the system decides |
 | A month without High Contrast Light | The arrows and automatic mode apply High Contrast instead, to stay in high contrast |
 | `‹` and `›` | Change the month and keep the variant. December is followed by January. Fast clicks are grouped into one theme change |
 | Commands that apply a variant | Keep the displayed month |
@@ -92,6 +93,7 @@ The button has three items: `‹ 10 DRK ›`. High Contrast Light only exists fo
 | `system` mode, theme from another publisher | Picked in the theme picker, it stays in the preference in use, month after month: no arrows and no month number. The first click brings back the 365 theme |
 | `system` mode, leaving it | The settings get their original values back, and absent settings are removed again. A setting that no longer holds a 365 theme of the right variant is a choice of the user: it is kept |
 | `system` mode, several windows | Only the focused window saves the original settings and treats a change of the active preference as a choice of month |
+| `system` mode, the backup of the original settings | VS Code keeps the whole `globalState` of an extension in one block, which a concurrent write can briefly bring back to an older state: a read may then return no backup, or one without its original values. Each window keeps the last backup it wrote, and uses it when the stored one is missing or incomplete; a valid stored backup comes first, since another window may have written it. A backup without original values is otherwise treated as absent, and the setup starts again |
 | `system` mode, 365 High Contrast theme picked in the theme picker | VS Code stores it in the preference of the current system mode, light or dark, whatever its variant. The button reads it there and shows its month, unless the high contrast preference itself holds a 365 theme of the active kind |
 | `system` mode, High Contrast Light | `workbench.preferredHighContrastLightColorTheme` gets the theme of the month when it exists. Otherwise it keeps or gets back its original value, and waits for the next month that has the theme, unless the user changes it. A setup made by 0.12.0, which did not save this setting, saves it before writing it |
 
