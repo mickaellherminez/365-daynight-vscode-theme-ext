@@ -87,11 +87,31 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 2. Check accessibility: `npm run themes:build -- MM` (nothing is written).
 3. When the audit reports 0 problems, write the files: `npm run themes:build -- MM --write`.
 4. Regenerate the README previews: `python3 scripts/themes/preview.py`. To look at them without changing `assets/`, add `--out <folder>`.
-
-To give a month its High Contrast Light theme, add an `hcLight` variant to its palette, declare `365 MM-Month High Contrast Light` with `"uiTheme": "hc-light"` in `package.json`, then add the month to `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
+To give a month its High Contrast Light theme, add an `hcLight` variant to its palette, declare `365 MM-Month High Contrast Light` with `"uiTheme": "hc-light"` in `package.json`, then add the month to `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`.
+
 `npm run themes:audit` checks all the themes, and `npm run themes:check` confirms that every theme file matches its palette. See [scripts/themes/README.md](scripts/themes/README.md) for the palette roles, the audit rules and the audit's limits.
+
+### Variety between months
+
+```sh
+npm run themes:variety        # summary for each variant
+python3 scripts/themes/variety.py -v   # every failing pair
+```
+
+The audit checks each theme on its own. `npm run themes:variety` compares every pair of months within each variant, to make sure that two months do not look alike:
+
+| Measure | Color | Minimum for each pair of months |
+| --- | --- | --- |
+| Editor background | `editor.background` | ΔE 8, or 4 in the High Contrast variants |
+| Accent | `activityBarBadge.background` | ΔE 25 |
+| Syntax | Keyword, function, string, number, class and comment | Average ΔE of the six roles: 10 |
+| Status bar | `statusBar.background` | None, for information only |
+
+At most three months of a variant can share a hue family, counted separately for the editor background and the accent. The families are eight 45° sectors of the CIELAB hue angle, plus a `neutre` (neutral) family for nearly gray colors (chroma below 4).
+
+Only normal vision decides the result. The same measures are shown for protanopia, deuteranopia and tritanopia, for information only. The command exits with code 1 when a check fails. The current themes are too similar from month to month and fail it, so CI does not run it yet: it will once all twelve months are redesigned. See [scripts/themes/README.md](scripts/themes/README.md#mesurer-la-variété-entre-les-mois) for the hue angles of each family and how to read the report.
 
 ## Packaging
 
