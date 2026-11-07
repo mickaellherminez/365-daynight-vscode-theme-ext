@@ -51,17 +51,17 @@ Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DR
 
 | Monat | Hell | Dunkel | Kontrastreich |
 | --- | --- | --- | --- |
-| Januar | Schneeweiß und Winterblau | Marineblaue Nacht mit Gold | Schwarz und kräftiges Blau |
+| Januar | Raureif und Gletscherblau | Tiefes Winterblau und Eisblau | Schwarz und Eisblau |
 | Februar | Weiß und Grün mit einem Hauch Valentinsrot | Nordischer Schiefer und Raureif | Marineblau und Gold |
 | März | Creme und Frühlingsgrün | Indigo-Nacht | Dunkles Petrol und Rotorange |
-| April | Creme und Osterorange | Bläulicher Schiefer und Gold | Tiefblau und Gold |
+| April | Regenhimmel und Kirschblütenrosa | Regenschiefer und Kirschblütenrosa | Schwarz und Kirschblütenrosa |
 | Mai | Helles Weiß und Orange | Ozeannacht mit Orange | Marineblau und Himmelblau |
 | Juni | Himmelblau und Indigotinte | Blaue Nacht mit Orange | Schwarz und Koralle |
 | Juli | Volle Sonne: Creme, Braun und Orange | Von Solarized inspirierte Sommernacht | Marineblau, Orange und Gold |
 | August | Warmes Creme und Indigotinte | Schiefernacht mit Gelb | Schwarz und Neongrün |
 | September | Himmel zum Schulbeginn und Marinetinte | Schiefer und Petrol | Schwarz und kräftiges Orange |
 | Oktober | Herbstcreme, gebranntes Orange und Bernstein | Dunkelbraun und Glut | Warmes Schwarz und Bernstein |
-| November | Nebel, Schiefer und Stahlblau | Tiefer Schiefer, Orange und Gold | Schwarz und Gold |
+| November | Nebliges Taupe und Moosgrün | Unterholzgrau und Moosgrün | Schwarz und Moosgrün |
 | Dezember | Raureif und Petrol | Am Kamin: Schiefer und Glut | Winternacht und eisiges Cyan |
 
 ## Automatischer Tag-/Nachtwechsel

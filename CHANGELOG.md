@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 - In `system` mode, `workbench.preferredHighContrastLightColorTheme` now gets the High Contrast Light theme of the month, when the month has one. In the other months, it keeps or gets back your value
 
 ### Changed
+- January, April and November get a new look, the first of the monthly redesign: frost and glacier blue in January, rainy sky and cherry blossom pink in April, misty taupe and moss green in November. Their syntax colors follow the season and differ much more from one month to the next, with more varied lightness for people who see no color. In their Light themes, the status bar is darker, so that the month button reaches 7:1
 - In a High Contrast theme, the status bar button now switches between High Contrast and High Contrast Light, so that a click never leaves high contrast. A month without High Contrast Light still goes to Light. With `365DayNight.toggleIncludesHighContrast`, the button goes through the four variants
 - The month arrows and automatic mode keep High Contrast Light, and use High Contrast in a month that does not have it yet
 - December Dark: the selected file in the explorer is a little darker, so that a deleted file stays readable when selected

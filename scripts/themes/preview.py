@@ -156,7 +156,9 @@ body { background: #F4F1EC; font: 13px/1.5 Menlo, Monaco, monospace; padding: 24
 .status .right { margin-left: auto; }
 .tile { border-radius: 10px; overflow: hidden; box-shadow: 0 6px 18px #0002; background: #fff; }
 .tile h3 { font: 600 14px -apple-system, Helvetica, sans-serif; padding: 8px 12px; color: #222; background: #fff; }
-.strip { display: flex; } .strip > div { flex: 1; padding: 6px 0 6px 10px; font-size: 9px; overflow: hidden; white-space: pre; }
+.strip { display: flex; } .variant { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.snippet { flex: 1; padding: 6px 0 6px 10px; font-size: 9px; overflow: hidden; white-space: pre; }
+.mini { display: flex; justify-content: space-between; padding: 2px 6px 2px 10px; font: 9px -apple-system, Helvetica, sans-serif; white-space: nowrap; }
 .strip .row { height: 15px; line-height: 15px; }
 """
 
@@ -191,9 +193,15 @@ def year():
         for v, f, _ in variants(range(1, 13)):
             theme = load(m, f)
             palette = palettes(m)[v]
-            strips.append(f"<div style=\"background:{theme['colors']['editor.background']}\">{code_html(theme, palette, compact=True)}</div>")
+            c = theme['colors']
+            # Le code, sous une bande de l'accent, au-dessus d'une barre d'état avec le bouton de l'extension :
+            # ce sont les trois éléments qui distinguent les mois
+            strips.append(f"<div class=variant style=\"border-top:4px solid {c['activityBarBadge.background']}\">"
+                          f"<div class=snippet style=\"background:{c['editor.background']}\">{code_html(theme, palette, compact=True)}</div>"
+                          f"<div class=mini style=\"background:{c['statusBar.background']};color:{c['statusBar.foreground']}\">"
+                          f"⑂ main<span style=\"color:{c['365DayNight.statusBarButton']}\">◐ {m:02d} {STATUS[v]}</span></div></div>")
         tiles.append(f'<div class=tile><h3>{MONTHS[m - 1]}</h3><div class=strip>{"".join(strips)}</div></div>')
-    shoot(f'<div class=grid style="grid-template-columns:repeat(4,440px)">{"".join(tiles)}</div>', 'year.png', 1876, 694)
+    shoot(f'<div class=grid style="grid-template-columns:repeat(4,440px)">{"".join(tiles)}</div>', 'year.png', 1876, 760)
 
 
 if __name__ == '__main__':
