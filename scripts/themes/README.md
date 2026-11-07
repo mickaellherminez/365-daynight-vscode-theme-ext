@@ -8,6 +8,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 |---|---|
 | `audit.py` | Audite un ou plusieurs thèmes existants (`npm run themes:audit`) |
 | `build.py` | Génère les thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite. Avec `--check`, vérifie que `themes/` correspond aux palettes (`npm run themes:check`) |
+| `variety.py` | Mesure la variété entre les mois de chaque déclinaison (`npm run themes:variety`) |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
 | `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme |
@@ -61,6 +62,63 @@ Le générateur recalcule tous les thèmes en mémoire et les compare aux fichie
 modifié à la main, une palette changée sans `--write`, un fichier manquant ou un fichier en trop font échouer la
 vérification, lancée aussi par la CI et avant chaque publication. Pour corriger, modifier la palette puis relancer
 `build.py <mois> --write`.
+
+## Mesurer la variété entre les mois
+
+```sh
+npm run themes:variety                    # résumé par déclinaison
+python3 scripts/themes/variety.py -v      # liste toutes les paires en échec
+```
+
+L'audit vérifie chaque thème seul. Le test de variété compare les mois entre eux : deux mois d'une même
+déclinaison (Light, Dark, High Contrast, High Contrast Light) doivent se distinguer à l'œil. Il compare chaque paire
+de mois, soit 66 paires pour 12 mois. Une déclinaison qui n'a qu'un mois, comme High Contrast Light pour l'instant,
+n'a aucune paire : seules ses familles de teinte sont comptées.
+
+L'écart entre deux couleurs est le ΔE de `colorlib.py` (CIE76) : 0 pour deux couleurs identiques, environ 2 pour un
+écart à peine visible, plus de 25 pour deux couleurs nettement différentes.
+
+| Mesure | Couleur comparée | Seuil par paire de mois |
+|---|---|---|
+| Fond de l'éditeur | `editor.background` | ΔE ≥ 8, ou ≥ 4 en High Contrast et High Contrast Light |
+| Barre d'état | `statusBar.background` | aucun, affichée à titre d'information |
+| Accent | `activityBarBadge.background` | ΔE ≥ 25 |
+| Syntaxe | mot-clé, fonction, chaîne, nombre, classe, commentaire | moyenne des 6 ΔE, rôle par rôle, ≥ 10 |
+
+Le seuil du fond est plus bas en contraste élevé : ces fonds sont presque noirs ou presque blancs, et leur teinte
+ne peut pas beaucoup varier sans perdre du contraste.
+
+**Familles de teinte.** Au plus 3 mois d'une même déclinaison peuvent partager une famille, compté séparément pour le
+fond de l'éditeur et pour l'accent. Les familles découpent l'angle de teinte CIELAB en 8 secteurs de 45°, nommés
+d'après leur centre :
+
+| Famille | Angle de teinte |
+|---|---|
+| rose | 337,5° à 22,5° |
+| rouge-orangé | 22,5° à 67,5° |
+| jaune | 67,5° à 112,5° |
+| vert | 112,5° à 157,5° |
+| vert-bleu | 157,5° à 202,5° |
+| cyan | 202,5° à 247,5° |
+| bleu | 247,5° à 292,5° |
+| violet | 292,5° à 337,5° |
+
+Une couleur presque neutre, de chroma inférieure à 4 (un blanc, un noir ou un gris à peine teinté), forme la famille
+`neutre` : sa teinte ne se voit pas. Elle compte aussi pour la limite de 3 mois.
+
+**Lire le rapport.** Pour chaque déclinaison et chaque mesure, le rapport donne le ΔE moyen des paires, le nombre
+de paires sous le seuil, puis la paire la plus proche (`01/12 1.0` : janvier et décembre, ΔE de 1,0). En dessous, il
+liste les 5 paires les plus proches parmi celles en échec ; `-v` les liste toutes. Les familles affichent leur nombre
+de mois puis les mois concernés.
+
+**Daltonisme.** Les mêmes mesures sont recalculées en protanopie, deutéranopie et tritanopie (moyenne et nombre de
+paires sous le seuil). Elles sont affichées à titre d'information et ne font jamais échouer le test : la distinction
+pour les daltoniens est garantie à l'intérieur de chaque thème par l'audit, pas entre deux mois.
+
+Le script renvoie le code 1 si un seuil ou une famille échoue en vision normale. Les thèmes actuels se ressemblent
+trop d'un mois à l'autre et le font échouer : la commande n'est donc pas encore lancée par la CI. Elle le sera quand
+les 12 mois auront été redessinés. Les seuils sont des valeurs de départ, à ajuster pendant cette refonte (constantes
+en tête de `variety.py`).
 
 ## Ce que l'audit ne vérifie pas
 
