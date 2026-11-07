@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-11-08 - Pre-release
+
 **New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](README.md#new-look-and-how-to-go-back).
 
 ### Added

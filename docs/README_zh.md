@@ -227,6 +227,9 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 **高对比度主题有什么用？**
 它们专为低视力、强光环境或长时间编码而设计，提供最高对比度（AAA）、可见边框和醒目的焦点轮廓。每个月都有两款：深色版本，以及适合明亮环境的浅色版本 High Contrast Light。
 
+**如何抢先试用新版本？**
+当有预发布版本时，在扩展视图中打开扩展页面，点击 **Switch to Pre-Release Version**（切换到预发布版本）。VS Code 随后会安装预发布版本及其更新。要回到正式版本，请在同一页面点击 **Switch to Release Version**。欢迎在 [GitHub Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中反馈预发布版本的问题。
+
 ## 路线图
 
 欢迎在 [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中提出想法和建议。

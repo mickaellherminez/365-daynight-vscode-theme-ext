@@ -227,6 +227,9 @@ Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automa
 **Wofür sind die kontrastreichen Themes?**
 Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung. Jeder Monat hat zwei: eine dunkle Version und eine helle, High Contrast Light, für helle Umgebungen.
 
+**Wie kann ich eine neue Version vor allen anderen ausprobieren?**
+Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiterungsansicht und klicke auf **Switch to Pre-Release Version** (zur Vorabversion wechseln). VS Code installiert dann die Vorabversion und ihre Updates. Um zur normalen Version zurückzukehren, klicke auf derselben Seite auf **Switch to Release Version**. Rückmeldungen zu einer Vorabversion sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen.
+
 ## Roadmap
 
 Ideen und Vorschläge sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen.

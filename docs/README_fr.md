@@ -227,6 +227,9 @@ Bien sûr. Choisissez-le dans le sélecteur de thèmes (`Ctrl+K Ctrl+T`) et lais
 **À quoi servent les thèmes à contraste élevé ?**
 Ils sont pensés pour la basse vision, les environnements très lumineux ou les longues sessions de code. Ils offrent un contraste maximal (AAA), des bordures visibles et un contour de focus très marqué. Chaque mois en a deux : une version sombre, et une version claire, High Contrast Light, pour les environnements lumineux.
 
+**Comment essayer une nouvelle version avant tout le monde ?**
+Quand une préversion existe, ouvrez la page de l'extension dans la vue Extensions et cliquez sur **Switch to Pre-Release Version** (passer à la préversion). VS Code installe alors la préversion et ses mises à jour. Pour revenir à la version normale, cliquez sur **Switch to Release Version** sur la même page. Vos retours sur une préversion sont les bienvenus dans les [tickets GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+
 ## Feuille de route
 
 Idées et suggestions sont les bienvenues dans les [tickets GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).

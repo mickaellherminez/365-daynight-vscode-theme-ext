@@ -174,11 +174,19 @@ The workflow can also be started manually from the Actions tab, which also asks 
 gh workflow run publish.yml --ref <branch> -f dry_run=true
 ```
 
+To publish a **pre-release**, set the version in `package.json` and the CHANGELOG, merge into `main`, then start the workflow manually on `main` with the `pre_release` option. It needs the same approval:
+
+```sh
+gh workflow run publish.yml --ref main -f pre_release=true
+```
+
+The package is built with `vsce package --pre-release`, which marks it in `extension.vsixmanifest`. Both registries read that mark: only users who click **Switch to Pre-Release Version** on the extension page get it. `scripts/verify-package.cjs` checks that the mark matches the option. Do not push a tag for a pre-release: a pushed tag always publishes a release version. The Marketplace never reuses a version number, so the next release must have a higher one (for example 1.0.0 after 0.13.0).
+
 If one registry fails, open the workflow run and choose **Re-run failed jobs**: this publishes the same package to that registry only. A full re-run is also safe, because `--skip-duplicate` skips a registry that already has this version.
 
 ## Pull requests
 
 - Create a branch from `main` (for example `feat/...` or `fix/...`).
 - Keep commits focused and use the existing prefixes: `ADDED:`, `CHANGED:`, `FIXED:`, `REMOVED:`, `DOCS:`.
-- Make sure `npm run lint`, `npm test`, `npm run themes:audit`, `npm run themes:check` and `npm run themes:test` pass.
+- Make sure `npm run lint`, `npm test`, `npm run themes:audit`, `npm run themes:check`, `npm run themes:variety` and `npm run themes:test` pass.
 - Add a line to the `[Unreleased]` section of the [CHANGELOG](CHANGELOG.md) for user-facing changes.
