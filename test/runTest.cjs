@@ -46,7 +46,7 @@ async function main() {
 		const testOptions = {
 			extensionDevelopmentPath,
 			extensionTestsPath,
-			version: 'stable',
+			version: process.env.VSCODE_TEST_VERSION || 'stable',
 			launchArgs: [
 				'--no-sandbox',
 				'--disable-gpu',
