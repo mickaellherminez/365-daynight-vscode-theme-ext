@@ -189,7 +189,7 @@ Once both registries have the package, the workflow creates the [GitHub release]
 
 ## Dependencies and security
 
-[Dependabot](.github/dependabot.yml) opens a weekly pull request for the development tools and the GitHub Actions. Merge it when the CI passes. `@types/vscode` is left out, because it must stay on the minimum VS Code version declared in `package.json`.
+[Dependabot](.github/dependabot.yml) opens a weekly pull request for the development tools and the GitHub Actions. Merge it when the CI passes. `@types/vscode` is left out, because it must stay on the minimum VS Code version declared in `package.json`. Major updates of `@types/node` and `typescript` are ignored too: the first follows the Node.js version used in CI, and nothing in the project runs the TypeScript compiler.
 
 [CodeQL](.github/workflows/codeql.yml) analyzes the JavaScript and the Python scripts on `main`, on pull requests and every week. Results appear in the **Security** tab.
 
