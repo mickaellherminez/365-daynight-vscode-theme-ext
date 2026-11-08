@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Changed
+- The extension is now named "365 Day & Night – Monthly Accessible Themes", to make clear that it is a collection of monthly themes. Its identifier, theme names, commands and settings do not change, so your installation and your choices stay as they are
+
 ## [0.13.1] - 2026-11-08 - Pre-release
 
 ### Fixed
