@@ -48,7 +48,7 @@ The extension writes each failed theme change to its log, not only as a notifica
 
 The [CI workflow](.github/workflows/ci.yml) runs these checks on every branch push and pull request. If one fails, the workflow fails.
 
-The integration tests run twice: on the latest VS Code and on the minimum version declared in `engines.vscode` in `package.json`. To run them on a given version, set `VSCODE_TEST_VERSION`, for example `VSCODE_TEST_VERSION=1.96.0 npm test`.
+The integration tests run twice: on the latest VS Code and on the minimum version declared in `engines.vscode` in `package.json`. To run them on a given version, set `VSCODE_TEST_VERSION`, for example `VSCODE_TEST_VERSION=1.96.0 npm test`. An older VS Code embeds a Node.js that Mocha 12 cannot run on: first run `npm install --no-save mocha@11`, as the CI does, and `npm ci` afterwards to go back.
 
 | Check | Command | What it verifies |
 | --- | --- | --- |

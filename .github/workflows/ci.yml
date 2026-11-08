@@ -54,6 +54,9 @@ jobs:
 
       - run: npm ci
 
+      # Mocha 12 needs a newer Node.js than the one inside older VS Code versions.
+      - run: npm install --no-save mocha@11
+
       - name: Integration tests on the minimum VS Code version
         run: |
           export VSCODE_TEST_VERSION=$(node -p "require('./package.json').engines.vscode.replace(/^[^0-9]*/, '')")
