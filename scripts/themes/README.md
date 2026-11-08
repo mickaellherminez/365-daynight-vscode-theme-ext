@@ -46,6 +46,9 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
   vérifiées à 3:1, le texte à 4.5:1 (7:1 en High Contrast), et la syntaxe reste lisible sur le fond des cellules de notebook.
 - **Bouton de l'extension** : `365DayNight.statusBarButton` est lisible sur la barre d'état (≥ 4.5:1, ≥ 7:1 en High Contrast)
   et se distingue du texte normal de la barre (ΔE ≥ 15). `build.py` la calcule depuis `accent`, en éclaircissant au minimum.
+- **Fonds par défaut en contraste élevé** : VS Code donne à certaines couleurs non définies un fond prévu pour un autre
+  texte (par exemple un bleu nuit pour le code en ligne en High Contrast Light). L'audit vérifie le texte du thème sur le
+  fond défini par le thème ou, à défaut, sur celui de VS Code 1.145. Ces valeurs sont dans `checks()`, dans `audit.py`.
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
   et les alertes (erreur, avertissement, ajout, suppression, test réussi ou échoué, lignes du graphe Git) sont simulés en protanopie, deutéranopie et
   tritanopie ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)).

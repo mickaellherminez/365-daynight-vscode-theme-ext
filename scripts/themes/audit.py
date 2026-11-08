@@ -384,6 +384,18 @@ def checks(theme, hc):
         if sel:
             chk('Sémantique : ' + key + ' sélectionné', g('editor.selectionForeground') if hc else color, sel, 7 if hc else 3)
 
+    if hc:
+        # Fonds par défaut de VS Code (1.145) en contraste élevé, prévus pour un autre texte : un thème qui ne les
+        # définit pas affiche par exemple le code en ligne en texte foncé sur du bleu nuit
+        light = theme.get('type') == 'light'
+        pairs = [('terminal.foreground', None, 'terminalStickyScrollHover.background', '#0F4A85' if light else '#E48B39')]
+        if light:
+            pairs += [('textPreformat.foreground', None, 'textPreformat.background', '#09345F'),
+                      ('debugView.exceptionLabelForeground', g('foreground'), 'debugView.exceptionLabelBackground', '#A31515'),
+                      ('statusBarItem.warningForeground', '#FFFFFF', 'statusBarItem.warningBackground', '#895503')]
+        for fg, fg_default, back, back_default in pairs:
+            chk(f'{fg} / {back}', g(fg, fg_default), g(back, back_default), text)
+
     rows += style_checks(theme)
     return rows
 
