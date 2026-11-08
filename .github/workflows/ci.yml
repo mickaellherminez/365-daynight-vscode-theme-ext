@@ -40,3 +40,25 @@ jobs:
       # `npm test` runs the lint first (pretest)
       - name: Lint and tests
         run: xvfb-run -a npm test
+
+  # Keeps the promise made by engines.vscode in package.json.
+  minimum-vscode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Mocha 12 needs a newer Node.js than the one inside older VS Code versions.
+      - run: npm install --no-save mocha@11
+
+      - name: Integration tests on the minimum VS Code version
+        run: |
+          export VSCODE_TEST_VERSION=$(node -p "require('./package.json').engines.vscode.replace(/^[^0-9]*/, '')")
+          echo "VS Code $VSCODE_TEST_VERSION"
+          xvfb-run -a node test/runTest.cjs
