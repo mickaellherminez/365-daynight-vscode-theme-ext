@@ -1,0 +1,54 @@
+name: Theme readability feedback
+description: A color is hard to read, two things look the same, or two months look too similar.
+title: "[Theme] "
+body:
+  - type: input
+    id: theme
+    attributes:
+      label: Theme name
+      description: Hover over the status bar button to see it.
+      placeholder: 365 04-April Dark
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where is the problem?
+      options:
+        - Code colors
+        - Git changes
+        - Errors and warnings
+        - Selection or search results
+        - Terminal
+        - Sidebar, tabs or status bar
+        - Chat, notifications or menus
+        - Two months look too similar
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is hard to read or confusing?
+      description: For example, which two kinds of code look the same.
+    validations:
+      required: true
+  - type: dropdown
+    id: vision
+    attributes:
+      label: Color vision
+      description: Optional, only if you want to share it. It helps a lot to interpret the feedback.
+      options:
+        - Prefer not to say
+        - Typical color vision
+        - Protanopia or protanomaly
+        - Deuteranopia or deuteranomaly
+        - Tritanopia or tritanomaly
+        - Achromatopsia
+        - Low vision
+        - Other
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional, but very useful. You can paste an image here.

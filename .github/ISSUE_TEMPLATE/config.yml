@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/security/policy
+    about: Please do not open a public issue for a security problem.

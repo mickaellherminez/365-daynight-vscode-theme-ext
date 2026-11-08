@@ -37,3 +37,4 @@ yarn-error.log
 .mailmap
 assets/screenshots/**
 CONTRIBUTING.md
+SECURITY.md
