@@ -1,0 +1,23 @@
+# Weekly updates of the development tools and of the GitHub Actions.
+# Minor and patch updates are grouped, to keep the number of pull requests low.
+# @types/vscode stays on the minimum VS Code version declared in package.json.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "@types/vscode"
+    groups:
+      development-tools:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

@@ -187,6 +187,12 @@ If one registry fails, open the workflow run and choose **Re-run failed jobs**: 
 
 Once both registries have the package, the workflow creates the [GitHub release](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases) of this version, with the `.vsix` and its notes, taken from the CHANGELOG by `scripts/release-notes.cjs`. A pre-release is marked as such on GitHub. A manual run also creates the tag there; this tag starts no other run, because GitHub ignores tags created with the workflow's token. The workflow checks for these notes before building, so a missing section stops it before anything is published. Re-running after a release exists only replaces the `.vsix` of that release. A dry run creates no release.
 
+## Dependencies and security
+
+[Dependabot](.github/dependabot.yml) opens a weekly pull request for the development tools and the GitHub Actions. Merge it when the CI passes. `@types/vscode` is left out, because it must stay on the minimum VS Code version declared in `package.json`.
+
+[CodeQL](.github/workflows/codeql.yml) analyzes the JavaScript and the Python scripts on `main`, on pull requests and every week. Results appear in the **Security** tab.
+
 ## Pull requests
 
 - Create a branch from `main` (for example `feat/...` or `fix/...`).
