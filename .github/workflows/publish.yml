@@ -19,6 +19,9 @@
 # nothing and uses the unprotected "dry-run" environment, from any branch.
 # The publishing jobs themselves use no environment, so the Marketplace
 # Trusted Publishing policy (no environment) still matches.
+# Once both registries have the package, a GitHub release is created with the
+# .vsix and the notes of this version from the CHANGELOG. It creates the tag of
+# a manual run; a tag created with the workflow's token starts no other run.
 
 name: Publish
 
@@ -77,6 +80,9 @@ jobs:
 
       - name: Lint and tests
         run: xvfb-run -a npm test
+
+      - name: Check the release notes
+        run: node scripts/release-notes.cjs "$(node -p "require('./package.json').version")" > /dev/null
 
       - name: Build the package
         run: npm run package -- --githubBranch main --out extension.vsix ${{ inputs.pre_release && '--pre-release' || '' }}
@@ -139,3 +145,31 @@ jobs:
       - name: Publish to Open VSX
         if: ${{ !inputs.dry_run }}
         run: npx --yes ovsx@1.3.0 publish extension.vsix --skip-duplicate
+
+  github-release:
+    needs: [marketplace, open-vsx]
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PRERELEASE_FLAG: ${{ inputs.pre_release && '--prerelease' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: vsix
+
+      - name: Create the GitHub release
+        run: |
+          version=$(node -p "require('./package.json').version")
+          asset="365-daynight-vscode-theme-ext-$version.vsix"
+          mv extension.vsix "$asset"
+          if gh release view "$version" > /dev/null 2>&1; then
+            gh release upload "$version" "$asset" --clobber
+          else
+            node scripts/release-notes.cjs "$version" > "$RUNNER_TEMP/notes.md"
+            gh release create "$version" "$asset" --target "$GITHUB_SHA" --title "$version" --notes-file "$RUNNER_TEMP/notes.md" $PRERELEASE_FLAG
+          fi
