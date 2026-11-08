@@ -1,6 +1,8 @@
 # Weekly updates of the development tools and of the GitHub Actions.
 # Minor and patch updates are grouped, to keep the number of pull requests low.
 # @types/vscode stays on the minimum VS Code version declared in package.json.
+# @types/node follows the Node.js major version used in CI, and nothing here
+# runs the TypeScript compiler: major updates of these two are not wanted.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -10,6 +12,10 @@ updates:
     open-pull-requests-limit: 5
     ignore:
       - dependency-name: "@types/vscode"
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     groups:
       development-tools:
         update-types: [minor, patch]
