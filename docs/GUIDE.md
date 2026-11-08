@@ -1,0 +1,199 @@
+# Complete guide
+
+Everything about 365 Day & Night, including every way to reach each feature. For a quick overview, see the [README](../README.md).
+
+- [Installation](#installation)
+- [Getting started](#getting-started)
+- [The 12 months](#the-12-months)
+- [New look, and how to go back](#new-look-and-how-to-go-back)
+- [Automatic day and night switching](#automatic-day-and-night-switching)
+- [Accessibility](#accessibility)
+- [Commands](#commands)
+- [Settings](#settings)
+
+## Installation
+
+**From VS Code:** open the Extensions view (`Ctrl+Shift+X`, or `Cmd+Shift+X` on Mac), search for **365 Day & Night**, then click **Install**.
+
+**From the Marketplace:** [install 365 Day & Night](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext).
+
+**In VSCodium and other editors using Open VSX:** [install it from Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext).
+
+**From the command line:**
+
+```sh
+code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
+```
+
+Requires Visual Studio Code 1.96 or later.
+
+## Getting started
+
+1. Open the theme picker: `Ctrl+K` then `Ctrl+T` (`Cmd+K` then `Cmd+T` on Mac).
+2. Type **365** to see all the themes, for example `365 10-October Dark`.
+3. Pick one. That's it!
+
+The first time you use a 365 theme, a notification offers automatic switching: **Follow the clock** (Light by day, Dark at night), **Follow my system** (the light and dark mode of your system) or **No thanks**. Nothing changes unless you choose, and the question is asked only once. After a choice, a message confirms what is on, with an **Open Settings** button to change the hours or turn it off. To change your mind later, see the automatic switching section below.
+
+Use the **status bar button** (bottom right: `LGT`, `DRK`, `HCT` or `HCL`) to switch between the Light and Dark versions of the current month. For High Contrast, run `365: Apply High Contrast theme` from the Command Palette. In a High Contrast theme, the button switches between High Contrast (`HCT`) and High Contrast Light (`HCL`), so that a click never leaves high contrast. To leave high contrast, run `365: Apply Light theme` or `365: Apply Dark theme`. You can also hover over the button and click its **Light** or **Dark** link.
+
+To try another month, click the arrows around it (`‹ 10 DRK ›`). The number is the month, from `01` to `12`, and the arrows keep the variant: Light, Dark, High Contrast or High Contrast Light. December is followed by January. To come back, run `365: Back to the current month` from the Command Palette. The arrows and the number only appear with a 365 theme. Hover over the button to see the full theme name, with links to High Contrast, to High Contrast Light and to the current month. In a high contrast theme, the tooltip links to Light and Dark instead.
+
+## The 12 months
+
+| Month | Mood | Light | Dark | High Contrast | High Contrast Light |
+| --- | --- | --- | --- | --- | --- |
+| January | Frost | Glacier blue and deep blue | Deep winter blue and icy blue | Blue-black and ice blue | Ice white and navy |
+| February | Lavender mist | Pale lavender and violet | Gray-violet night and lilac | Violet-black and pale lilac | Lavender white and plum |
+| March | Young shoots | Tender green and bud green | Olive night and bud green | Olive-black and bright green | Pale green and forest green |
+| April | April showers | Rainy sky and cherry blossom pink | Rainy slate and cherry blossom pink | Blue-black and cherry blossom pink | Pale sky and deep pink |
+| May | Flowering meadow | Meadow green and olive gold | Deep green night and buttercup yellow | Green-black and pale gold | Pale green and dark bronze |
+| June | Long days | Clear sky and summer blue | Petrol blue night and periwinkle | Black and periwinkle | Sky white and royal blue |
+| July | Lagoon | Turquoise water and coral | Deep lagoon and coral | Teal-black and pale coral | Pale turquoise and red coral |
+| August | Warm sand | Golden sand and caramel | Brown night and amber | Brown-black and amber | Warm white and dark amber |
+| September | Grape harvest | Pale pink and plum | Wine-red night and plum | Wine-black and orchid | Pale pink and deep plum |
+| October | Autumn leaves | Peach and russet | Warm brown night and russet | Brown-black and salmon | Peach white and deep russet |
+| November | Mist and undergrowth | Misty taupe and moss green | Undergrowth gray and moss green | Warm black and moss green | Cream and dark moss |
+| December | Polar night | Icy lavender and aurora teal | Midnight blue and aurora cyan | Blue-black and aurora cyan | Lavender white and dark teal |
+
+## New look, and how to go back
+
+Version 0.13.0 redesigns every theme: each month now has its own seasonal mood, and every month gets a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept: the theme names and the commands have not changed, only the colors.
+
+Prefer the previous look? Go back to version 0.12.0:
+
+1. Open the Extensions view (`Ctrl+Shift+X`, or `Cmd+Shift+X` on Mac) and find **365 Day & Night**.
+2. Click it to open its page, click the arrow next to **Uninstall**, choose **Install Specific Version...**, then pick **0.12.0**.
+3. Reload VS Code if it asks you to.
+
+VS Code then unchecks **Auto Update** for this extension, so it stays on 0.12.0. To get the new look back, check **Auto Update** again, or pick the latest version in the same menu. Version 0.12.0 has no High Contrast Light theme: if you use one, choose another theme after going back.
+
+## Automatic day and night switching
+
+Want your editor to follow the clock? Turn on the automatic mode:
+
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Check **365DayNight: Enable**.
+
+Or add this to your `settings.json`:
+
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "auto"
+}
+```
+
+| Mode | What it does |
+| --- | --- |
+| `auto` | Light theme from 7:00 to 19:00 by default, Dark theme the rest of the time. You can change these hours (see below) |
+| `day` | Always the Light theme of the current month |
+| `night` | Always the Dark theme of the current month |
+| `system` | Follows the light, dark and high contrast appearance of your system (see below) |
+
+The extension also moves to the next month's theme on the first day of each month.
+
+Good to know:
+- **It's opt-in.** Automatic mode is off by default, so the extension never changes your theme unless you ask it to. The first time you use a 365 theme, a notification asks you once whether you want it.
+- **Your choice wins.** If you pick a theme by hand, it stays until the next change of period (day to night, or a new month).
+- **Your month stays too.** If you pick another month, with the arrows or the theme picker, automatic mode keeps alternating Light and Dark on that month until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
+- **High Contrast stays High Contrast.** If you use a High Contrast or High Contrast Light theme, automatic mode only updates the month, never the variant.
+
+### Choose your hours
+
+By default, the Light theme starts at 7:00 and the Dark theme at 19:00. To change these hours:
+
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Set **365DayNight: Day Start** and **365DayNight: Night Start**, in the HH:MM format on a 24-hour clock.
+
+Or add this to your `settings.json`:
+
+```json
+{
+  "365DayNight.dayStart": "08:30",
+  "365DayNight.nightStart": "20:00"
+}
+```
+
+- **Applied quickly.** A new time applies about 2 seconds after you stop typing, even if you picked a theme by hand. Then the theme changes at the minute you chose.
+- **Past midnight.** If the day starts after the night, for example `"20:00"` and `"06:00"`, the Light theme runs past midnight. Handy if you work at night.
+- **Invalid values.** A time that cannot be read, such as `"25:00"` or `"7h"`, is replaced by its default value, and a warning tells you once. Two identical times give 7:00 and 19:00.
+- **Only in `auto` mode.** The `day`, `night` and `system` modes ignore these hours.
+- **Back to 7:00 and 19:00.** In the settings, click the gear icon next to each time and choose **Reset Setting**, or remove both lines from your `settings.json`.
+
+### Follow your system
+
+Prefer to follow the appearance of your system rather than the clock? Use the `system` mode:
+
+1. Open the settings (`Ctrl+,` or `Cmd+,`) and search for **365DayNight**.
+2. Check **365DayNight: Enable**.
+3. Set **365DayNight: Mode** to `system`.
+
+Or add this to your `settings.json`:
+
+```json
+{
+  "365DayNight.enable": true,
+  "365DayNight.mode": "system"
+}
+```
+
+| Your system uses | Theme applied |
+| --- | --- |
+| Light appearance | Light theme of the month |
+| Dark appearance | Dark theme of the month |
+| High contrast, with a dark appearance | High Contrast theme of the month |
+| High contrast, with a light appearance | High Contrast Light theme of the month |
+
+Using the button in this mode:
+- **Arrows.** `‹` and `›` change the month of all the variants. That month stays until the next real month begins, even after a restart. To come back sooner, run `365: Back to the current month`.
+- **Center button.** Your system decides between Light and Dark, so a click only explains this. The `365: Apply Light theme`, `365: Apply Dark theme`, `365: Apply High Contrast theme` and `365: Apply High Contrast Light theme` commands say the same and change nothing.
+- **Theme picker.** Picking a 365 theme applies its month to all the variants. Picking a theme from another publisher replaces only the variant in use: it stays during the following months, and the button shows no arrows and no month with it. Click the center button to get the 365 theme back.
+
+Good to know:
+- **What it changes.** The mode turns on `window.autoDetectColorScheme` and writes the themes of the month in `workbench.preferredLightColorTheme`, `workbench.preferredDarkColorTheme`, `workbench.preferredHighContrastColorTheme` and `workbench.preferredHighContrastLightColorTheme`. `workbench.colorTheme` does not change.
+- **How to go back.** Uncheck **365DayNight: Enable**, or choose another mode. Your original settings come back, and settings that did not exist are removed again. A setting you changed in the meantime keeps your value.
+- **Before uninstalling or disabling the extension.** Leave this mode first, because an extension can no longer restore anything afterwards. If you forgot, remove the five settings above from your `settings.json`.
+- **High contrast.** VS Code gives priority to the high contrast of your system. To ignore it, turn off `window.autoDetectHighContrast`: the mode never changes this setting.
+- **Turning the detection off.** If you turn off `window.autoDetectColorScheme` yourself, the extension leaves it off and the button works as usual. A theme setting in a workspace still wins in that workspace.
+- **Operating systems.** According to the VS Code documentation, the light and dark appearance is detected on Windows and macOS.
+
+## Accessibility
+
+Every theme passes an automated accessibility audit of more than 250 checks:
+
+- **Readable text:** editor text and syntax colors reach a contrast ratio of at least **4.5:1 (WCAG AA)** in Light and Dark themes, and **7:1 (WCAG AAA)** in High Contrast themes.
+- **Color blind friendly:** syntax colors (keywords, functions, strings, numbers, classes, comments) and alerts (errors, warnings, Git changes) are simulated for **protanopia, deuteranopia and tritanopia** to make sure they stay distinct.
+- **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
+- **Visible selection everywhere:** text selection is clearly visible in the editor, the terminal and the debug console, and never confused with search results.
+- **High Contrast themes:** selected text turns black on light blue (white on dark blue in High Contrast Light), and all panels have visible borders and a strong keyboard focus outline.
+- **Screen readers:** each part of the status bar button has its own spoken label, such as "Next month: November".
+
+Found something hard to read? Please [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Accessibility feedback is always welcome.
+
+## Commands
+
+Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and type **365**:
+
+| Command | Action |
+| --- | --- |
+| `365: Toggle between Light and Dark themes` | Switches between Light and Dark (same as the status bar button) |
+| `365: Apply Light theme` | Applies the Light theme of the displayed month |
+| `365: Apply Dark theme` | Applies the Dark theme of the displayed month |
+| `365: Apply High Contrast theme` | Applies the High Contrast theme of the displayed month |
+| `365: Apply High Contrast Light theme` | Applies the High Contrast Light theme of the displayed month |
+| `365: Next month` | Applies the next month's theme, in the same variant |
+| `365: Previous month` | Applies the previous month's theme, in the same variant |
+| `365: Back to the current month` | Applies the theme of the real current month, in the same variant |
+
+The extension defines no keyboard shortcut by default. To assign your own, open the shortcuts list (`Ctrl+K Ctrl+S`, or `Cmd+K Cmd+S` on Mac), type **365**, double-click a command and press your keys.
+
+## Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `365DayNight.enable` | `false` | Automatically apply the theme of the current month |
+| `365DayNight.mode` | `auto` | `auto` (by time of day), `day` (always Light), `night` (always Dark) or `system` (follows your system) |
+| `365DayNight.dayStart` | `"07:00"` | Time when the Light theme starts in `auto` mode, in the HH:MM format |
+| `365DayNight.nightStart` | `"19:00"` | Time when the Dark theme starts in `auto` mode, in the HH:MM format |
+| `365DayNight.toggleIncludesHighContrast` | `false` | The status bar button goes through all the variants: Light, Dark, High Contrast, then High Contrast Light |
