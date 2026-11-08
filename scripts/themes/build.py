@@ -64,6 +64,14 @@ def ui(p, hc):
     if hc:
         c['contrastBorder'] = p['contrastBorder']
         c['contrastActiveBorder'] = p['contrastActiveBorder']
+        # Sans valeur du thème, VS Code met ici des fonds qui ne vont pas avec le texte des thèmes (audit.py les contrôle)
+        c['terminalStickyScrollHover.background'] = p['bgHover']
+        if p['type'] == 'light':
+            c.update({
+                'textPreformat.background': p['bgWidget'],
+                'debugView.exceptionLabelBackground': p['error'], 'debugView.exceptionLabelForeground': '#FFFFFF',
+                'statusBarItem.warningBackground': p['warning'], 'statusBarItem.warningForeground': '#FFFFFF',
+            })
     # Barre d'activité
     c.update({
         'activityBar.background': p['bgDeep'], 'activityBar.foreground': p['fg'], 'activityBar.inactiveForeground': p['fgFaint'],

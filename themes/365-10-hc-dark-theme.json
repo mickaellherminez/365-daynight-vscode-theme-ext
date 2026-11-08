@@ -463,6 +463,7 @@
     "terminalCursor.background": "#170800",
     "terminalCursor.foreground": "#FF9979",
     "terminalOverviewRuler.cursorForeground": "#FF9979",
+    "terminalStickyScrollHover.background": "#2E201B",
     "testing.iconErrored": "#FF8A94",
     "testing.iconFailed": "#FF8A94",
     "testing.iconPassed": "#4FF5E0",
