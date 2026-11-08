@@ -2,8 +2,12 @@
 
 **Visual Studio Code 用の 48 種類のカラーテーマ：1 年の各月に、ライト・ダーク・ハイコントラスト・明るいハイコントラストの 4 種類を用意しています。** ワンクリックで昼と夜を切り替えることも、拡張機能に自動で任せることもできます。すべてのテーマは読みやすさ（WCAG コントラスト）と色覚多様性への対応をテスト済みです。
 
-[![Marketplace のバージョン](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![インストール数](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Marketplace のバージョン](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![インストール数](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![ダウンロード数](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![評価](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Open VSX のダウンロード数](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![CI の状態](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT ライセンス](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *他の言語で読む：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ Visual Studio Code 1.96 以降が必要です。
 ロービジョンの方、とても明るい環境、長時間のコーディング向けです。最大限のコントラスト（AAA）、見やすい枠線、はっきりしたフォーカスの輪郭を備えています。どの月にも、暗い版と、明るい環境向けの明るい版（High Contrast Light）の 2 つがあります。
 
 **新しいバージョンをいち早く試すには？**
-プレリリース版がある場合は、拡張機能ビューで拡張機能のページを開き、**Switch to Pre-Release Version**（プレリリース版に切り替え）をクリックします。VS Code がプレリリース版とその更新をインストールします。通常のバージョンに戻すには、同じページで **Switch to Release Version** をクリックします。プレリリース版へのフィードバックは [GitHub の Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) で歓迎しています。
+プレリリース版がある場合は、拡張機能ビューで拡張機能のページを開き、**Switch to Pre-Release Version**（プレリリース版に切り替え）をクリックします。VS Code がプレリリース版とその更新をインストールします。通常のバージョンに戻すには、同じページで **Switch to Release Version** をクリックします。プレリリース版へのフィードバックは [GitHub の Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) で歓迎しています。[テスター募集](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)も行っており、確認項目の短いリストを用意しています。
 
 ## ロードマップ
 
