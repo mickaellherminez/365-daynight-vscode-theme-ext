@@ -2,8 +2,12 @@
 
 **48 Farbthemes für Visual Studio Code: ein helles, ein dunkles, ein kontrastreiches und ein hell kontrastreiches Theme für jeden Monat des Jahres.** Wechsle mit einem Klick zwischen Tag und Nacht oder lass die Erweiterung das für dich erledigen. Jedes Theme ist auf Lesbarkeit (WCAG-Kontrast) und Farbenblindheit getestet.
 
-[![Version im Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![Installationen](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Version im Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Installationen](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Downloads](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Bewertung](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Downloads auf Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![CI-Status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Lizenz MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *Diese Seite lesen auf: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automa
 Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung. Jeder Monat hat zwei: eine dunkle Version und eine helle, High Contrast Light, für helle Umgebungen.
 
 **Wie kann ich eine neue Version vor allen anderen ausprobieren?**
-Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiterungsansicht und klicke auf **Switch to Pre-Release Version** (zur Vorabversion wechseln). VS Code installiert dann die Vorabversion und ihre Updates. Um zur normalen Version zurückzukehren, klicke auf derselben Seite auf **Switch to Release Version**. Rückmeldungen zu einer Vorabversion sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen.
+Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiterungsansicht und klicke auf **Switch to Pre-Release Version** (zur Vorabversion wechseln). VS Code installiert dann die Vorabversion und ihre Updates. Um zur normalen Version zurückzukehren, klicke auf derselben Seite auf **Switch to Release Version**. Rückmeldungen zu einer Vorabversion sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen. Ein [Aufruf an Testende](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) ist offen, mit einer kurzen Liste von Punkten zum Prüfen.
 
 ## Roadmap
 

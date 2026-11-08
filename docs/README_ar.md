@@ -4,8 +4,12 @@
 
 **48 سمة ألوان لـ Visual Studio Code: سمة فاتحة وسمة داكنة وسمة عالية التباين وسمة فاتحة عالية التباين لكل شهر من أشهر السنة.** بدّل بين النهار والليل بنقرة واحدة، أو اترك الإضافة تفعل ذلك نيابةً عنك. كل سمة مختبرة من حيث سهولة القراءة (تباين WCAG) ومن حيث عمى الألوان.
 
-[![الإصدار في Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![عدد التثبيتات](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![الإصدار في Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![عدد التثبيتات](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![عدد التنزيلات](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![التقييم](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![عدد التنزيلات على Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![حالة CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![رخصة MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *اقرأ هذه الصفحة بـ: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md)*
@@ -242,7 +246,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 صُممت لضعف البصر، والبيئات شديدة الإضاءة، وجلسات البرمجة الطويلة، وتقدّم أقصى تباين (AAA) وحدودًا مرئية وإطار تركيز واضحًا. لكل شهر نسختان: نسخة داكنة، ونسخة فاتحة، High Contrast Light، للبيئات شديدة الإضاءة.
 
 **كيف أجرّب نسخة جديدة قبل الجميع؟**
-عند توفر نسخة تجريبية، افتح صفحة الإضافة في عرض الإضافات وانقر على **Switch to Pre-Release Version** (التبديل إلى النسخة التجريبية). يثبّت VS Code عندها النسخة التجريبية وتحديثاتها. للعودة إلى النسخة العادية، انقر على **Switch to Release Version** في الصفحة نفسها. ملاحظاتك على النسخة التجريبية مرحّب بها في [قضايا GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+عند توفر نسخة تجريبية، افتح صفحة الإضافة في عرض الإضافات وانقر على **Switch to Pre-Release Version** (التبديل إلى النسخة التجريبية). يثبّت VS Code عندها النسخة التجريبية وتحديثاتها. للعودة إلى النسخة العادية، انقر على **Switch to Release Version** في الصفحة نفسها. ملاحظاتك على النسخة التجريبية مرحّب بها في [قضايا GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). هناك [دعوة مفتوحة للمختبرين](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) مع قائمة قصيرة بما يجب التحقق منه.
 
 ## خارطة الطريق
 

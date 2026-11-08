@@ -2,8 +2,12 @@
 
 **48 temas de cores para o Visual Studio Code: um tema claro, um escuro, um de alto contraste e um de alto contraste claro para cada mês do ano.** Alterne entre dia e noite com um clique ou deixe a extensão fazer isso por você. Cada tema é testado quanto à legibilidade (contraste WCAG) e ao daltonismo.
 
-[![Versão no Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![Instalações](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Versão no Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Instalações](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Downloads](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Avaliação](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Downloads no Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![Status da CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Licença MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *Ler esta página em: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ Claro. Escolha-o no seletor de temas (`Ctrl+K Ctrl+T`) e deixe o modo automátic
 Eles foram pensados para baixa visão, ambientes muito claros ou longas sessões de programação, com contraste máximo (AAA), bordas visíveis e um contorno de foco bem marcado. Cada mês tem duas: uma versão escura e uma clara, High Contrast Light, para ambientes muito claros.
 
 **Como experimentar uma nova versão antes de todo mundo?**
-Quando houver uma versão prévia, abra a página da extensão na visualização de Extensões e clique em **Switch to Pre-Release Version** (mudar para a versão prévia). O VS Code instala então a versão prévia e suas atualizações. Para voltar à versão normal, clique em **Switch to Release Version** na mesma página. Comentários sobre uma versão prévia são bem-vindos nas [issues do GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+Quando houver uma versão prévia, abra a página da extensão na visualização de Extensões e clique em **Switch to Pre-Release Version** (mudar para a versão prévia). O VS Code instala então a versão prévia e suas atualizações. Para voltar à versão normal, clique em **Switch to Release Version** na mesma página. Comentários sobre uma versão prévia são bem-vindos nas [issues do GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Há uma [chamada para testadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) aberta, com uma lista curta de pontos a verificar.
 
 ## Roteiro
 

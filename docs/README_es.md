@@ -2,8 +2,12 @@
 
 **48 temas de color para Visual Studio Code: un tema claro, uno oscuro, uno de alto contraste y uno de alto contraste claro para cada mes del año.** Cambia entre el día y la noche con un clic, o deja que la extensión lo haga por ti. Cada tema está probado en legibilidad (contraste WCAG) y en daltonismo.
 
-[![Versión en el Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![Instalaciones](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Versión en el Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Instalaciones](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Descargas](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Valoración](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Descargas en Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![Estado de la CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Licencia MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *Leer esta página en: [English](../README.md) · [Français](README_fr.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ Por supuesto. Elígelo en el selector de temas (`Ctrl+K Ctrl+T`) y deja el modo 
 Están pensados para baja visión, entornos muy luminosos o largas sesiones de programación. Ofrecen el máximo contraste (AAA), bordes visibles y un contorno de foco muy marcado. Cada mes tiene dos: una versión oscura y una clara, High Contrast Light, para entornos luminosos.
 
 **¿Cómo pruebo una nueva versión antes que nadie?**
-Cuando exista una versión preliminar, abre la página de la extensión en la vista de Extensiones y haz clic en **Switch to Pre-Release Version** (cambiar a la versión preliminar). VS Code instala entonces la versión preliminar y sus actualizaciones. Para volver a la versión normal, haz clic en **Switch to Release Version** en la misma página. Tus comentarios sobre una versión preliminar son bienvenidos en los [issues de GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+Cuando exista una versión preliminar, abre la página de la extensión en la vista de Extensiones y haz clic en **Switch to Pre-Release Version** (cambiar a la versión preliminar). VS Code instala entonces la versión preliminar y sus actualizaciones. Para volver a la versión normal, haz clic en **Switch to Release Version** en la misma página. Tus comentarios sobre una versión preliminar son bienvenidos en los [issues de GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Hay una [convocatoria de probadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) abierta, con una lista breve de puntos que comprobar.
 
 ## Hoja de ruta
 

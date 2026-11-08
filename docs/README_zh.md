@@ -2,8 +2,12 @@
 
 **为 Visual Studio Code 打造的 48 款配色主题：一年中每个月都有浅色、深色、高对比度和浅色高对比度四款主题。** 一键切换白天与夜晚，或交给扩展自动完成。每款主题都经过可读性（WCAG 对比度）和色盲友好性测试。
 
-[![Marketplace 版本](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![安装量](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Marketplace 版本](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![安装量](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![下载量](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![评分](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Open VSX 下载量](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![CI 状态](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT 许可证](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *其他语言：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 它们专为低视力、强光环境或长时间编码而设计，提供最高对比度（AAA）、可见边框和醒目的焦点轮廓。每个月都有两款：深色版本，以及适合明亮环境的浅色版本 High Contrast Light。
 
 **如何抢先试用新版本？**
-当有预发布版本时，在扩展视图中打开扩展页面，点击 **Switch to Pre-Release Version**（切换到预发布版本）。VS Code 随后会安装预发布版本及其更新。要回到正式版本，请在同一页面点击 **Switch to Release Version**。欢迎在 [GitHub Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中反馈预发布版本的问题。
+当有预发布版本时，在扩展视图中打开扩展页面，点击 **Switch to Pre-Release Version**（切换到预发布版本）。VS Code 随后会安装预发布版本及其更新。要回到正式版本，请在同一页面点击 **Switch to Release Version**。欢迎在 [GitHub Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中反馈预发布版本的问题。我们正在[招募测试者](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)，并提供了一份简短的检查清单。
 
 ## 路线图
 

@@ -2,8 +2,12 @@
 
 **Visual Studio Code के लिए 48 कलर थीम: साल के हर महीने के लिए एक लाइट, एक डार्क, एक हाई कॉन्ट्रास्ट और एक लाइट हाई कॉन्ट्रास्ट थीम।** एक क्लिक में दिन और रात के बीच बदलें, या यह काम एक्सटेंशन पर छोड़ दें। हर थीम को पढ़ने में आसानी (WCAG कॉन्ट्रास्ट) और रंग-अंधता (कलर ब्लाइंडनेस) के लिए जाँचा गया है।
 
-[![Marketplace संस्करण](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![इंस्टॉल](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Marketplace संस्करण](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![इंस्टॉल](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![डाउनलोड](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![रेटिंग](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Open VSX पर डाउनलोड](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![CI की स्थिति](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT लाइसेंस](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *यह पेज इन भाषाओं में पढ़ें: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ Visual Studio Code 1.96 या नया संस्करण ज़रूर�
 ये कम दृष्टि, बहुत रोशनी वाले माहौल या लंबे कोडिंग सत्रों के लिए बनाई गई हैं। इनमें अधिकतम कॉन्ट्रास्ट (AAA), दिखने वाले बॉर्डर और फ़ोकस की साफ़ रूपरेखा है। हर महीने के दो संस्करण हैं: एक डार्क, और तेज़ रोशनी वाले माहौल के लिए एक लाइट, High Contrast Light।
 
 **नया संस्करण सबसे पहले कैसे आज़माएँ?**
-जब कोई प्री-रिलीज़ संस्करण उपलब्ध हो, तो एक्सटेंशन व्यू में एक्सटेंशन का पेज खोलें और **Switch to Pre-Release Version** (प्री-रिलीज़ संस्करण पर जाएँ) पर क्लिक करें। इसके बाद VS Code प्री-रिलीज़ संस्करण और उसके अपडेट इंस्टॉल करता है। सामान्य संस्करण पर लौटने के लिए उसी पेज पर **Switch to Release Version** पर क्लिक करें। प्री-रिलीज़ पर आपकी प्रतिक्रिया का [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) में स्वागत है।
+जब कोई प्री-रिलीज़ संस्करण उपलब्ध हो, तो एक्सटेंशन व्यू में एक्सटेंशन का पेज खोलें और **Switch to Pre-Release Version** (प्री-रिलीज़ संस्करण पर जाएँ) पर क्लिक करें। इसके बाद VS Code प्री-रिलीज़ संस्करण और उसके अपडेट इंस्टॉल करता है। सामान्य संस्करण पर लौटने के लिए उसी पेज पर **Switch to Release Version** पर क्लिक करें। प्री-रिलीज़ पर आपकी प्रतिक्रिया का [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) में स्वागत है। [टेस्टरों के लिए एक आमंत्रण](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) खुला है, जिसमें जाँचने योग्य बातों की एक छोटी सूची है।
 
 ## आगे की योजना
 

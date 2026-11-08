@@ -2,8 +2,12 @@
 
 **48 цветовых тем для Visual Studio Code: светлая, тёмная, высококонтрастная и светлая высококонтрастная тема для каждого месяца года.** Переключайтесь между днём и ночью одним щелчком или доверьте это расширению. Каждая тема проверена на читаемость (контраст WCAG) и на дальтонизм.
 
-[![Версия в Marketplace](https://img.shields.io/visual-studio-marketplace/v/mickaellherminez.365-daynight-vscode-theme-ext?label=Marketplace)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
-[![Установки](https://img.shields.io/visual-studio-marketplace/i/mickaellherminez.365-daynight-vscode-theme-ext)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Версия в Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Установки](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Загрузки](https://vsmarketplacebadges.dev/downloads-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
+[![Рейтинг](https://vsmarketplacebadges.dev/rating-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)
+[![Загрузки в Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
+[![Статус CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Лицензия MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
 *Читать на: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
@@ -228,7 +232,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 Они созданы для слабого зрения, очень яркого освещения или долгих сеансов программирования: максимальный контраст (AAA), видимые границы и чёткая рамка фокуса. У каждого месяца их две: тёмная версия и светлая, High Contrast Light, для яркого освещения.
 
 **Как попробовать новую версию раньше всех?**
-Когда есть предварительная версия, откройте страницу расширения в представлении «Расширения» и нажмите **Switch to Pre-Release Version** (перейти на предварительную версию). VS Code установит предварительную версию и её обновления. Чтобы вернуться к обычной версии, нажмите **Switch to Release Version** на той же странице. Отзывы о предварительной версии приветствуются в [issues на GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues).
+Когда есть предварительная версия, откройте страницу расширения в представлении «Расширения» и нажмите **Switch to Pre-Release Version** (перейти на предварительную версию). VS Code установит предварительную версию и её обновления. Чтобы вернуться к обычной версии, нажмите **Switch to Release Version** на той же странице. Отзывы о предварительной версии приветствуются в [issues на GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Открыт [набор тестировщиков](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) с коротким списком того, что стоит проверить.
 
 ## Планы
 
