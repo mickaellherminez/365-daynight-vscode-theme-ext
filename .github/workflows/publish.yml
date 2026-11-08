@@ -48,9 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.dry_run && 'dry-run' || 'release' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
@@ -95,7 +95,7 @@ jobs:
           node scripts/verify-package.cjs "$RUNNER_TEMP/vsix"
           sha256sum extension.vsix
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: vsix
           path: extension.vsix
@@ -109,16 +109,16 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
 
       - run: npm ci
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: vsix
 
@@ -131,11 +131,11 @@ jobs:
     env:
       OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: vsix
 
@@ -156,9 +156,9 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       PRERELEASE_FLAG: ${{ inputs.pre_release && '--prerelease' || '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: vsix
 
