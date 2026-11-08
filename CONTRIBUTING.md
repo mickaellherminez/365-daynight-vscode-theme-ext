@@ -2,8 +2,9 @@
 
 Thanks for your interest! Bug reports, accessibility feedback and pull requests are welcome.
 
-- **Report a bug or a hard-to-read color:** [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Please mention the theme name (for example `365 10-October Dark`), what is hard to read, and a screenshot if possible.
-- **Suggest a feature:** open an issue describing your use case.
+- **Report a bug or a hard-to-read color:** [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose) with the matching form. Please mention the theme name (for example `365 10-October Dark`), what is hard to read, and a screenshot if possible.
+- **Suggest a feature:** [open an issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose) describing your use case.
+- **Report a security problem:** follow the [security policy](SECURITY.md), and do not open a public issue.
 
 ## Project structure
 

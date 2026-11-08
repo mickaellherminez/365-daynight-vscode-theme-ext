@@ -1,0 +1,51 @@
+name: Bug report
+description: Something does not work, such as a command, the status bar button or the automatic mode.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run "365: ..." from the Command Palette
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      description: Shown on the extension page in the Extensions view.
+      placeholder: 0.13.1
+    validations:
+      required: true
+  - type: input
+    id: editor-version
+    attributes:
+      label: Editor and version
+      description: In VS Code, open Help > About (Code > About Visual Studio Code on Mac).
+      placeholder: VS Code 1.96.0, VSCodium 1.96.0...
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or logs
+      description: Optional. You can paste images here.
