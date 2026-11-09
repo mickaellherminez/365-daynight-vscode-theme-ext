@@ -60,7 +60,18 @@
             "atLeast7": 69.3,
             "textChecks": 150
           },
-          "name": "365 01-January Dark"
+          "name": "365 01-January Dark",
+          "scores": {
+            "achromatopsia": 33,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 69,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -110,7 +121,18 @@
             "atLeast7": 68.0,
             "textChecks": 150
           },
-          "name": "365 02-February Dark"
+          "name": "365 02-February Dark",
+          "scores": {
+            "achromatopsia": 33,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 68,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -160,7 +182,18 @@
             "atLeast7": 70.0,
             "textChecks": 150
           },
-          "name": "365 03-March Dark"
+          "name": "365 03-March Dark",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 70,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -210,7 +243,18 @@
             "atLeast7": 65.3,
             "textChecks": 150
           },
-          "name": "365 04-April Dark"
+          "name": "365 04-April Dark",
+          "scores": {
+            "achromatopsia": 14,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 65,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -260,7 +304,18 @@
             "atLeast7": 76.0,
             "textChecks": 150
           },
-          "name": "365 05-May Dark"
+          "name": "365 05-May Dark",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 76,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -310,7 +365,18 @@
             "atLeast7": 62.0,
             "textChecks": 150
           },
-          "name": "365 06-June Dark"
+          "name": "365 06-June Dark",
+          "scores": {
+            "achromatopsia": 19,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 62,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -360,7 +426,18 @@
             "atLeast7": 74.7,
             "textChecks": 150
           },
-          "name": "365 07-July Dark"
+          "name": "365 07-July Dark",
+          "scores": {
+            "achromatopsia": 48,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 75,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -410,7 +487,18 @@
             "atLeast7": 66.7,
             "textChecks": 150
           },
-          "name": "365 08-August Dark"
+          "name": "365 08-August Dark",
+          "scores": {
+            "achromatopsia": 14,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 67,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -460,7 +548,18 @@
             "atLeast7": 69.3,
             "textChecks": 150
           },
-          "name": "365 09-September Dark"
+          "name": "365 09-September Dark",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 69,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -510,7 +609,18 @@
             "atLeast7": 76.0,
             "textChecks": 150
           },
-          "name": "365 10-October Dark"
+          "name": "365 10-October Dark",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 76,
+            "protanomaly": 95,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -560,7 +670,18 @@
             "atLeast7": 63.3,
             "textChecks": 150
           },
-          "name": "365 11-November Dark"
+          "name": "365 11-November Dark",
+          "scores": {
+            "achromatopsia": 14,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 63,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -610,7 +731,18 @@
             "atLeast7": 75.3,
             "textChecks": 150
           },
-          "name": "365 12-December Dark"
+          "name": "365 12-December Dark",
+          "scores": {
+            "achromatopsia": 67,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 75,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         }
       ],
       "variety": [
@@ -718,7 +850,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 01-January High Contrast"
+          "name": "365 01-January High Contrast",
+          "scores": {
+            "achromatopsia": 57,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -768,7 +911,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 02-February High Contrast"
+          "name": "365 02-February High Contrast",
+          "scores": {
+            "achromatopsia": 62,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -818,7 +972,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 03-March High Contrast"
+          "name": "365 03-March High Contrast",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -868,7 +1033,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 04-April High Contrast"
+          "name": "365 04-April High Contrast",
+          "scores": {
+            "achromatopsia": 57,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -918,7 +1094,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 05-May High Contrast"
+          "name": "365 05-May High Contrast",
+          "scores": {
+            "achromatopsia": 48,
+            "deuteranomaly": 95,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -968,7 +1155,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 06-June High Contrast"
+          "name": "365 06-June High Contrast",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 95,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1018,7 +1216,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 07-July High Contrast"
+          "name": "365 07-July High Contrast",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1068,7 +1277,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 08-August High Contrast"
+          "name": "365 08-August High Contrast",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1118,7 +1338,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 09-September High Contrast"
+          "name": "365 09-September High Contrast",
+          "scores": {
+            "achromatopsia": 62,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1168,7 +1399,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 10-October High Contrast"
+          "name": "365 10-October High Contrast",
+          "scores": {
+            "achromatopsia": 48,
+            "deuteranomaly": 95,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1218,7 +1460,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 11-November High Contrast"
+          "name": "365 11-November High Contrast",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1268,7 +1521,18 @@
             "atLeast7": 97.8,
             "textChecks": 179
           },
-          "name": "365 12-December High Contrast"
+          "name": "365 12-December High Contrast",
+          "scores": {
+            "achromatopsia": 29,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         }
       ],
       "variety": [
@@ -1376,7 +1640,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 01-January High Contrast Light"
+          "name": "365 01-January High Contrast Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1426,7 +1701,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 02-February High Contrast Light"
+          "name": "365 02-February High Contrast Light",
+          "scores": {
+            "achromatopsia": 62,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1476,7 +1762,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 03-March High Contrast Light"
+          "name": "365 03-March High Contrast Light",
+          "scores": {
+            "achromatopsia": 57,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1526,7 +1823,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 04-April High Contrast Light"
+          "name": "365 04-April High Contrast Light",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1576,7 +1884,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 05-May High Contrast Light"
+          "name": "365 05-May High Contrast Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1626,7 +1945,18 @@
             "atLeast7": 97.8,
             "textChecks": 182
           },
-          "name": "365 06-June High Contrast Light"
+          "name": "365 06-June High Contrast Light",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1676,7 +2006,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 07-July High Contrast Light"
+          "name": "365 07-July High Contrast Light",
+          "scores": {
+            "achromatopsia": 62,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1726,7 +2067,18 @@
             "atLeast7": 97.8,
             "textChecks": 182
           },
-          "name": "365 08-August High Contrast Light"
+          "name": "365 08-August High Contrast Light",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1776,7 +2128,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 09-September High Contrast Light"
+          "name": "365 09-September High Contrast Light",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1826,7 +2189,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 10-October High Contrast Light"
+          "name": "365 10-October High Contrast Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1876,7 +2250,18 @@
             "atLeast7": 96.7,
             "textChecks": 182
           },
-          "name": "365 11-November High Contrast Light"
+          "name": "365 11-November High Contrast Light",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 97,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -1926,7 +2311,18 @@
             "atLeast7": 97.8,
             "textChecks": 182
           },
-          "name": "365 12-December High Contrast Light"
+          "name": "365 12-December High Contrast Light",
+          "scores": {
+            "achromatopsia": 33,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 98,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         }
       ],
       "variety": [
@@ -2034,7 +2430,18 @@
             "atLeast7": 58.8,
             "textChecks": 148
           },
-          "name": "365 01-January Light"
+          "name": "365 01-January Light",
+          "scores": {
+            "achromatopsia": 24,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 59,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2084,7 +2491,18 @@
             "atLeast7": 60.1,
             "textChecks": 148
           },
-          "name": "365 02-February Light"
+          "name": "365 02-February Light",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 60,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2134,7 +2552,18 @@
             "atLeast7": 62.8,
             "textChecks": 148
           },
-          "name": "365 03-March Light"
+          "name": "365 03-March Light",
+          "scores": {
+            "achromatopsia": 57,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 63,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2184,7 +2613,18 @@
             "atLeast7": 59.5,
             "textChecks": 148
           },
-          "name": "365 04-April Light"
+          "name": "365 04-April Light",
+          "scores": {
+            "achromatopsia": 62,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 59,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2234,7 +2674,18 @@
             "atLeast7": 60.8,
             "textChecks": 148
           },
-          "name": "365 05-May Light"
+          "name": "365 05-May Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 61,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2284,7 +2735,18 @@
             "atLeast7": 59.5,
             "textChecks": 148
           },
-          "name": "365 06-June Light"
+          "name": "365 06-June Light",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 59,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2334,7 +2796,18 @@
             "atLeast7": 56.1,
             "textChecks": 148
           },
-          "name": "365 07-July Light"
+          "name": "365 07-July Light",
+          "scores": {
+            "achromatopsia": 52,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 56,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2384,7 +2857,18 @@
             "atLeast7": 57.4,
             "textChecks": 148
           },
-          "name": "365 08-August Light"
+          "name": "365 08-August Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 57,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2434,7 +2918,18 @@
             "atLeast7": 60.1,
             "textChecks": 148
           },
-          "name": "365 09-September Light"
+          "name": "365 09-September Light",
+          "scores": {
+            "achromatopsia": 29,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 60,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2484,7 +2979,18 @@
             "atLeast7": 56.1,
             "textChecks": 148
           },
-          "name": "365 10-October Light"
+          "name": "365 10-October Light",
+          "scores": {
+            "achromatopsia": 38,
+            "deuteranomaly": 95,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 56,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2534,7 +3040,18 @@
             "atLeast7": 58.8,
             "textChecks": 148
           },
-          "name": "365 11-November Light"
+          "name": "365 11-November Light",
+          "scores": {
+            "achromatopsia": 43,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 59,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         },
         {
           "achromatopsia": {
@@ -2584,7 +3101,18 @@
             "atLeast7": 49.3,
             "textChecks": 148
           },
-          "name": "365 12-December Light"
+          "name": "365 12-December Light",
+          "scores": {
+            "achromatopsia": 14,
+            "deuteranomaly": 100,
+            "deuteranopia": 100,
+            "lowVision20/40": 100,
+            "lowVision20/80": 49,
+            "protanomaly": 100,
+            "protanopia": 100,
+            "tritanomaly": 100,
+            "tritanopia": 100
+          }
         }
       ],
       "variety": [

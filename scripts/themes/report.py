@@ -6,6 +6,7 @@ Usage :
 
 Le rapport ne contient aucune date, pour ne changer que si les résultats changent.
 """
+import itertools
 import json
 import os
 import re
@@ -29,10 +30,37 @@ ROLE_NAMES = {
 MEASURE_NAMES = {'Fond de l\'éditeur': 'Editor background', 'Cadre': 'Window frame',
                  'Barre d\'état': 'Status bar', 'Accent': 'Accent', 'Syntaxe (6 rôles)': 'Syntax (6 roles)'}
 TEXT_MINIMUMS = (4.5, 7)
+SEVERITIES = tuple(f'0.{i}' for i in range(1, 10))
+PARTIAL_NAMES = {'protan': 'protanomaly', 'deutan': 'deuteranomaly', 'tritan': 'tritanomaly'}
+MACHADO = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tests', 'data', 'machado2009-cvd.json')
 
 
 def month_of(theme):
     return int(re.match(r'365 (\d{2})-', theme['name']).group(1))
+
+
+def percent(part, whole):
+    return round(100 * part / whole)
+
+
+def vision_scores(theme, text):
+    """Score sur 100 par situation de vision : part des paires de jetons principaux restées distinctes,
+    ou part des textes au-dessus d'un seuil de contraste."""
+    tokens = {k: v for k, v in audit.token_colors(theme).items() if k in audit.DISTINCT_TOKENS}
+    pairs = list(itertools.combinations(tokens.values(), 2))
+
+    def distinct(matrix):
+        return percent(sum(audit.delta_e(a, b, matrix) >= audit.MIN_DELTA_E for a, b in pairs), len(pairs))
+
+    with open(MACHADO, encoding='utf-8') as handle:
+        table = json.load(handle)
+    scores = {VIEW_NAMES[view]: distinct(matrix) for view, matrix in audit.CVD.items()}
+    for view, name in PARTIAL_NAMES.items():
+        scores[name] = min(distinct(table[severity][view]) for severity in SEVERITIES)
+    scores['achromatopsia'] = distinct(audit.ACHROMATOPSIA)
+    scores['lowVision20/40'] = percent(sum(r[1] >= 4.5 for r in text), len(text))
+    scores['lowVision20/80'] = percent(sum(r[1] >= 7 for r in text), len(text))
+    return scores
 
 
 def theme_result(theme, hc):
@@ -57,6 +85,7 @@ def theme_result(theme, hc):
         },
         'colorVision': vision,
         'achromatopsia': {'pairsBelowThreshold': sum(d < audit.MIN_DELTA_E for d, _, _ in grays), 'pairs': len(grays)},
+        'scores': vision_scores(theme, text),
     }
 
 
@@ -101,7 +130,7 @@ LIMITS = """## Limits of this audit
 These results are measurements and simulations. Here is what they do not show.
 
 - **No testing with real users yet.** Color blindness and low vision are simulated or calculated. No calculation replaces testing with the people concerned, and [feedback is welcome](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
-- **Complete color blindness only.** Protanopia, deuteranopia and tritanopia are simulated at full severity. Partial forms, which are more common, are not simulated.
+- **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit.
 - **Achromatopsia is information only.** Without color, many syntax colors are close in lightness, as the table shows. They then differ only by style where the theme sets one, for comments, deprecated and invalid code for example.
 - **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE 12 on the CIE76 scale) and the variety thresholds are practical rules chosen for this project, not standards.
 - **WCAG 2 contrast only.** APCA, the contrast model drafted for WCAG 3, is not applied.
@@ -129,6 +158,14 @@ def to_markdown(data):
         '- **≥ 4.5:1 and ≥ 7:1:** share of the text checks above each level. The W3C links these levels to a visual acuity of about 20/40 and 20/80 ([WCAG, Understanding 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)).',
         f"- **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE, CIE76) between syntax colors or between alerts, after simulation ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)). The audit fails under {data['thresholds']['colorDistinctionDeltaE']}.",
         '- **Achromatopsia:** pairs of main syntax colors closer than the threshold in lightness alone. For information, it never fails the audit.', '',
+        '## How the scores are calculated', '',
+        'Each theme gets a score out of 100 for each vision situation. A score helps to choose a theme, and it is calculated, not observed with real users.', '',
+        '| Score | Formula | Reference |', '| --- | --- | --- |',
+        f"| Protanopia, Deuteranopia, Tritanopia | Share of the 21 pairs of main syntax colors with a ΔE of at least {data['thresholds']['colorDistinctionDeltaE']}, after simulation at full severity | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |",
+        '| Partial forms (protanomaly, deuteranomaly, tritanomaly) | Same calculation for severities 0.1 to 0.9, keeping the lowest result | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |',
+        f"| Achromatopsia | Share of the same pairs with a ΔE of at least {data['thresholds']['colorDistinctionDeltaE']} once each color becomes a gray of the same luminance | Relative luminance of sRGB |",
+        '| Low vision 20/40 | Share of the text checks at 4.5:1 or more | [WCAG 2.2, 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) |',
+        '| Low vision 20/80 | Share of the text checks at 7:1 or more | [WCAG 2.2, 1.4.6](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html) |', '',
     ]
     for label, variant in data['variants'].items():
         lines += [f'## {label}', '',
@@ -145,6 +182,14 @@ def to_markdown(data):
                 f" | {fmt(vision['normal']['deltaE'])} | {fmt(vision['protanopia']['deltaE'])}"
                 f" | {fmt(vision['deuteranopia']['deltaE'])} | {fmt(vision['tritanopia']['deltaE'])}"
                 f" | {gray['pairsBelowThreshold']}/{gray['pairs']} |")
+        lines += ['', 'Scores out of 100:', '',
+                  '| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |',
+                  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
+        for theme in variant['themes']:
+            score = theme['scores']
+            names = ('protanopia', 'deuteranopia', 'tritanopia', 'protanomaly', 'deuteranomaly', 'tritanomaly',
+                     'achromatopsia', 'lowVision20/40', 'lowVision20/80')
+            lines.append(f"| {MONTHS[month_of(theme) - 1]} | " + ' | '.join(str(score[n]) for n in names) + ' |')
         lines += ['', 'Difference between months:', '',
                   '| Measure | Minimum ΔE | Closest months | ΔE | Pairs below the minimum |', '| --- | --- | --- | --- | --- |']
         for row in variant['variety']:

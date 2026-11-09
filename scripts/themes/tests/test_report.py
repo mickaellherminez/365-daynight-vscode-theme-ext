@@ -23,6 +23,24 @@ class ReportTest(unittest.TestCase):
         for limit in ('No testing with real users', 'Partial forms', 'APCA', 'project rules'):
             self.assertIn(limit, self.markdown)
 
+    def test_each_theme_has_all_the_scores(self):
+        names = {'protanopia', 'deuteranopia', 'tritanopia', 'protanomaly', 'deuteranomaly', 'tritanomaly',
+                 'achromatopsia', 'lowVision20/40', 'lowVision20/80'}
+        for variant in self.data['variants'].values():
+            for theme in variant['themes']:
+                self.assertEqual(set(theme['scores']), names, theme['name'])
+                for name, score in theme['scores'].items():
+                    self.assertTrue(0 <= score <= 100, (theme['name'], name, score))
+
+    def test_a_theme_with_only_two_grays_scores_zero_when_they_look_the_same(self):
+        rules = [{'scope': scope, 'settings': {'foreground': '#808080'}} for scope in report.audit.TOKEN_PROBES.values()]
+        text = [('text', 3.0, 4.5, 'OK'), ('text', 8.0, 7, 'OK')]
+        scores = report.vision_scores({'tokenColors': rules, 'colors': {}}, text)
+        self.assertEqual(scores['protanopia'], 0)
+        self.assertEqual(scores['achromatopsia'], 0)
+        self.assertEqual(scores['lowVision20/40'], 50)
+        self.assertEqual(scores['lowVision20/80'], 50)
+
     def test_report_is_stable(self):
         self.assertEqual(self.markdown, report.to_markdown(report.collect()))
 
