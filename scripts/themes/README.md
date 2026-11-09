@@ -108,6 +108,18 @@ modifié à la main, une palette changée sans `--write`, un fichier manquant ou
 vérification, lancée aussi par la CI et avant chaque publication. Pour corriger, modifier la palette puis relancer
 `build.py <mois> --write`.
 
+## Publier le rapport d'audit
+
+```sh
+npm run themes:report        # écrit docs/AUDIT.md et docs/audit-report.json
+npm run themes:report-check  # échoue si ces fichiers ne correspondent plus aux thèmes
+```
+
+Le rapport reprend les résultats de l'audit et du test de variété, et calcule un score sur 100 par situation de vision :
+daltonismes complets, formes partielles (sévérités 0,1 à 0,9 de Machado et al., le résultat le plus bas), achromatopsie,
+basse vision. Ces scores sont informatifs : seuls les daltonismes complets peuvent faire échouer l'audit. Les formules
+et les limites sont dans le rapport. Après tout changement de thème, relancer `npm run themes:report` et commiter le résultat.
+
 ## Mesurer la variété entre les mois
 
 ```sh

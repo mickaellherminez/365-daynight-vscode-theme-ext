@@ -15,6 +15,18 @@ The same results are available as [JSON](audit-report.json).
 - **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE, CIE76) between syntax colors or between alerts, after simulation ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)). The audit fails under 12.
 - **Achromatopsia:** pairs of main syntax colors closer than the threshold in lightness alone. For information, it never fails the audit.
 
+## How the scores are calculated
+
+Each theme gets a score out of 100 for each vision situation. A score helps to choose a theme, and it is calculated, not observed with real users.
+
+| Score | Formula | Reference |
+| --- | --- | --- |
+| Protanopia, Deuteranopia, Tritanopia | Share of the 21 pairs of main syntax colors with a ΔE of at least 12, after simulation at full severity | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |
+| Partial forms (protanomaly, deuteranomaly, tritanomaly) | Same calculation for severities 0.1 to 0.9, keeping the lowest result | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |
+| Achromatopsia | Share of the same pairs with a ΔE of at least 12 once each color becomes a gray of the same luminance | Relative luminance of sRGB |
+| Low vision 20/40 | Share of the text checks at 4.5:1 or more | [WCAG 2.2, 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) |
+| Low vision 20/80 | Share of the text checks at 7:1 or more | [WCAG 2.2, 1.4.6](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html) |
+
 ## Light
 
 | Month | Checks | Editor text | Lowest text | ≥ 4.5:1 | ≥ 7:1 | Normal | Protanopia | Deuteranopia | Tritanopia | Achromatopsia |
@@ -31,6 +43,23 @@ The same results are available as [JSON](audit-report.json).
 | October | 273/273 | 11.92:1 | 4.70:1 | 100.0% | 56.1% | 26.7 | 13.2 | 12.5 | 12.2 | 13/21 |
 | November | 273/273 | 11.74:1 | 4.69:1 | 100.0% | 58.8% | 23.7 | 13.5 | 12.2 | 12.2 | 12/21 |
 | December | 273/273 | 11.29:1 | 4.59:1 | 100.0% | 49.3% | 22.1 | 13.4 | 12.3 | 12.2 | 18/21 |
+
+Scores out of 100:
+
+| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| January | 100 | 100 | 100 | 100 | 100 | 100 | 24 | 100 | 59 |
+| February | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 60 |
+| March | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 63 |
+| April | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 59 |
+| May | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 61 |
+| June | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 59 |
+| July | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 56 |
+| August | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 57 |
+| September | 100 | 100 | 100 | 100 | 100 | 100 | 29 | 100 | 60 |
+| October | 100 | 100 | 100 | 100 | 95 | 100 | 38 | 100 | 56 |
+| November | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 59 |
+| December | 100 | 100 | 100 | 100 | 100 | 100 | 14 | 100 | 49 |
 
 Difference between months:
 
@@ -58,6 +87,23 @@ Difference between months:
 | November | 274/274 | 10.96:1 | 4.52:1 | 100.0% | 63.3% | 21.7 | 14.5 | 13.4 | 16.2 | 18/21 |
 | December | 274/274 | 13.81:1 | 4.68:1 | 100.0% | 75.3% | 27.7 | 12.4 | 13.8 | 19.9 | 7/21 |
 
+Scores out of 100:
+
+| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| January | 100 | 100 | 100 | 100 | 100 | 100 | 33 | 100 | 69 |
+| February | 100 | 100 | 100 | 100 | 100 | 100 | 33 | 100 | 68 |
+| March | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 70 |
+| April | 100 | 100 | 100 | 100 | 100 | 100 | 14 | 100 | 65 |
+| May | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 76 |
+| June | 100 | 100 | 100 | 100 | 100 | 100 | 19 | 100 | 62 |
+| July | 100 | 100 | 100 | 100 | 100 | 100 | 48 | 100 | 75 |
+| August | 100 | 100 | 100 | 100 | 100 | 100 | 14 | 100 | 67 |
+| September | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 69 |
+| October | 100 | 100 | 100 | 95 | 100 | 100 | 38 | 100 | 76 |
+| November | 100 | 100 | 100 | 100 | 100 | 100 | 14 | 100 | 63 |
+| December | 100 | 100 | 100 | 100 | 100 | 100 | 67 | 100 | 75 |
+
 Difference between months:
 
 | Measure | Minimum ΔE | Closest months | ΔE | Pairs below the minimum |
@@ -83,6 +129,23 @@ Difference between months:
 | October | 275/275 | 17.88:1 | 4.94:1 | 100.0% | 97.8% | 16.2 | 14.3 | 12.1 | 16.0 | 11/21 |
 | November | 275/275 | 17.39:1 | 4.94:1 | 100.0% | 97.8% | 17.0 | 16.2 | 12.4 | 13.3 | 13/21 |
 | December | 275/275 | 16.65:1 | 4.94:1 | 100.0% | 97.8% | 23.6 | 12.5 | 12.4 | 15.1 | 15/21 |
+
+Scores out of 100:
+
+| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| January | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 98 |
+| February | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 98 |
+| March | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
+| April | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 98 |
+| May | 100 | 100 | 100 | 100 | 95 | 100 | 48 | 100 | 98 |
+| June | 100 | 100 | 100 | 100 | 95 | 100 | 52 | 100 | 98 |
+| July | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
+| August | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 98 |
+| September | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 98 |
+| October | 100 | 100 | 100 | 100 | 95 | 100 | 48 | 100 | 98 |
+| November | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 98 |
+| December | 100 | 100 | 100 | 100 | 100 | 100 | 29 | 100 | 98 |
 
 Difference between months:
 
@@ -110,6 +173,23 @@ Difference between months:
 | November | 279/279 | 17.25:1 | 4.78:1 | 100.0% | 96.7% | 26.3 | 13.3 | 12.5 | 12.5 | 10/21 |
 | December | 279/279 | 17.86:1 | 4.94:1 | 100.0% | 97.8% | 19.6 | 12.8 | 12.5 | 13.0 | 14/21 |
 
+Scores out of 100:
+
+| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| January | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
+| February | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 97 |
+| March | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 97 |
+| April | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 97 |
+| May | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
+| June | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 98 |
+| July | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 97 |
+| August | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
+| September | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 97 |
+| October | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
+| November | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 97 |
+| December | 100 | 100 | 100 | 100 | 100 | 100 | 33 | 100 | 98 |
+
 Difference between months:
 
 | Measure | Minimum ΔE | Closest months | ΔE | Pairs below the minimum |
@@ -124,7 +204,7 @@ Difference between months:
 These results are measurements and simulations. Here is what they do not show.
 
 - **No testing with real users yet.** Color blindness and low vision are simulated or calculated. No calculation replaces testing with the people concerned, and [feedback is welcome](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
-- **Complete color blindness only.** Protanopia, deuteranopia and tritanopia are simulated at full severity. Partial forms, which are more common, are not simulated.
+- **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit.
 - **Achromatopsia is information only.** Without color, many syntax colors are close in lightness, as the table shows. They then differ only by style where the theme sets one, for comments, deprecated and invalid code for example.
 - **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE 12 on the CIE76 scale) and the variety thresholds are practical rules chosen for this project, not standards.
 - **WCAG 2 contrast only.** APCA, the contrast model drafted for WCAG 3, is not applied.
