@@ -18,7 +18,7 @@ Or install it from the [Marketplace](https://marketplace.visualstudio.com/items?
 
 *Read this page in: [Français](docs/README_fr.md) · [Español](docs/README_es.md) · [Deutsch](docs/README_de.md) · [Português](docs/README_pt.md) · [Русский](docs/README_ru.md) · [中文](docs/README_zh.md) · [日本語](docs/README_ja.md) · [हिंदी](docs/README_hi.md) · [العربية](docs/README_ar.md)*
 
-![October Light, Dark, High Contrast and High Contrast Light themes in VS Code: explorer, tabs, syntax highlighting, text selection and status bar](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
+![Demo in VS Code: the arrows of the status bar button change the month from October to December, a click on the button switches from Light to Dark, and a link in its tooltip applies High Contrast](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)
 
 ## Why choose it
 
@@ -69,6 +69,16 @@ On Mac, use `Cmd` instead of `Ctrl`.
 | **Leave high contrast** | Run `365: Apply Light theme` or `365: Apply Dark theme` |
 | **Turn on automatic mode** | Open the settings (`Ctrl+,`), search for **365DayNight** and check **Enable** |
 | **Add a keyboard shortcut** | Press `Ctrl+K` then `Ctrl+S`, type **365**, double-click a command and press your keys. None is set by default |
+
+### Automatic mode
+
+The first time you use a 365 theme, the extension asks once whether you want automatic switching. Nothing changes unless you choose.
+
+![Demo in VS Code: after picking November Light in the theme picker, a notification offers to follow the clock, to follow the system or to do nothing, and clicking Follow the clock confirms that automatic switching is on](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-first-use.gif)
+
+You can then choose your hours. A new time applies about 2 seconds after you stop typing.
+
+![Demo in VS Code: in the settings, 365 Day Night: Enable is checked, then changing Night Start to a past time switches the theme to Dark, and setting it back to 19:00 switches to Light](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-auto.gif)
 
 **➡️ The [complete guide](docs/GUIDE.md) details everything:** [automatic mode and its hours](docs/GUIDE.md#automatic-day-and-night-switching), [following your system](docs/GUIDE.md#follow-your-system), [all the commands](docs/GUIDE.md#commands) and [all the settings](docs/GUIDE.md#settings).
 
