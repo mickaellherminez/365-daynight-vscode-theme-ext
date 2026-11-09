@@ -10,7 +10,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-from colorlib import ACHROMATOPSIA, CVD, ciede2000, contrast, delta_e, delta_e_2000, lab  # noqa: E402
+from colorlib import ACHROMATOPSIA, CVD, simulate, ciede2000, contrast, delta_e, delta_e_2000, lab  # noqa: E402
 
 DATA = os.path.join(HERE, 'data')
 
@@ -104,6 +104,19 @@ class ColorVisionDeficiencyTest(unittest.TestCase):
         self.assertLess(delta_e(red, green, CVD['protan']), 15)
         self.assertLess(delta_e(red, green, CVD['deutan']), 15)
         self.assertGreater(delta_e(red, green, CVD['tritan']), 30)
+
+
+class SimulateTest(unittest.TestCase):
+    def test_grays_are_unchanged(self):
+        for matrix in CVD.values():
+            self.assertEqual(simulate('#808080', matrix), '#808080')
+
+    def test_matches_the_color_used_for_the_distances(self):
+        for matrix in list(CVD.values()) + [ACHROMATOPSIA]:
+            for color in ('#C0392B', '#2ECC71', '#2980B9'):
+                expected, seen = lab(color, matrix), lab(simulate(color, matrix))
+                for a, b in zip(expected, seen):
+                    self.assertAlmostEqual(a, b, delta=0.6)
 
 
 class AchromatopsiaTest(unittest.TestCase):

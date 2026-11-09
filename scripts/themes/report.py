@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import audit  # noqa: E402
 import variety  # noqa: E402
+from colorlib import simulate  # noqa: E402
 
 ROOT = audit.ROOT
 OUTPUTS = {'markdown': os.path.join('docs', 'AUDIT.md'), 'json': os.path.join('docs', 'audit-report.json')}
@@ -26,6 +27,8 @@ ROLE_NAMES = {
     'commentaire': 'comment', 'variable': 'variable', 'erreur': 'error', 'avertissement': 'warning', 'info': 'info',
     'ajout': 'added', 'modification': 'modified', 'suppression': 'deleted', 'test réussi': 'test passed',
     'test échoué': 'test failed', **{f'graphe {i}': f'Git graph {i}' for i in range(1, 6)},
+    'opérateur': 'operator', 'ponctuation': 'punctuation', 'balise': 'tag', 'attribut': 'attribute', 'regex': 'regex',
+    'clé JSON': 'JSON key', 'invalide': 'invalid',
 }
 MEASURE_NAMES = {'Fond de l\'éditeur': 'Editor background', 'Cadre': 'Window frame',
                  'Barre d\'état': 'Status bar', 'Accent': 'Accent', 'Syntaxe (6 rôles)': 'Syntax (6 roles)'}
@@ -33,6 +36,8 @@ TEXT_MINIMUMS = (4.5, 7)
 SEVERITIES = tuple(f'0.{i}' for i in range(1, 10))
 PARTIAL_NAMES = {'protan': 'protanomaly', 'deutan': 'deuteranomaly', 'tritan': 'tritanomaly'}
 MACHADO = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tests', 'data', 'machado2009-cvd.json')
+BASELINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'themes-0.12.0.json')
+SIMULATIONS = {**{VIEW_NAMES[view]: matrix for view, matrix in audit.CVD.items()}, 'achromatopsia': audit.ACHROMATOPSIA}
 
 
 def month_of(theme):
@@ -63,6 +68,39 @@ def vision_scores(theme, text):
     return scores
 
 
+def preview_colors(theme):
+    """Couleurs du code, telles quelles et pour chaque simulation, et leur contraste sur le fond de l'éditeur."""
+    background = theme['colors']['editor.background']
+    tokens = {ROLE_NAMES[k]: audit.over(v, background) for k, v in audit.token_colors(theme).items()}
+    return {
+        'colors': {'background': background, 'tokens': tokens},
+        'syntaxContrast': {name: round(audit.contrast(color, background), 2) for name, color in tokens.items()},
+        'simulated': {view: {'background': simulate(background, matrix),
+                             'tokens': {name: simulate(color, matrix) for name, color in tokens.items()}}
+                      for view, matrix in SIMULATIONS.items()},
+    }
+
+
+def grid(values, distance):
+    """Matrice des écarts entre les mois, de janvier à décembre."""
+    months = sorted(values)
+    return [[round(distance(values[a], values[b]), 1) for b in months] for a in months]
+
+
+def month_grids(ui, months):
+    """Écarts entre les mois pour la version actuelle, et pour la 0.12.0 si cette déclinaison existait."""
+    tokens = {m: audit.token_colors(t) for m, t in months.items()}
+    backgrounds = {m: t['colors']['editor.background'] for m, t in months.items()}
+    with open(BASELINE, encoding='utf-8') as handle:
+        previous = json.load(handle)['variants'].get(ui)
+    before = None
+    if previous:
+        before = {'background': grid({m: v['background'] for m, v in previous.items()}, variety.surface_delta),
+                  'syntax': grid({m: v['syntax'] for m, v in previous.items()}, variety.syntax_delta)}
+    return {'current': {'background': grid(backgrounds, variety.surface_delta),
+                        'syntax': grid(tokens, variety.syntax_delta)}, 'before': before}
+
+
 def theme_result(theme, hc):
     """Résultats d'un thème : contrôles, contraste, basse vision, distinction des couleurs."""
     rows = audit.checks(theme, hc)
@@ -88,6 +126,7 @@ def theme_result(theme, hc):
         'ciede2000': {VIEW_NAMES[view]: round(information['ΔE2000 ' + view][0][0], 1) for view in VIEW_NAMES},
         'achromatopsia': {'pairsBelowThreshold': sum(d < audit.MIN_DELTA_E for d, _, _ in grays), 'pairs': len(grays)},
         'scores': vision_scores(theme, text),
+        **preview_colors(theme),
     }
 
 
@@ -117,7 +156,7 @@ def collect():
     for ui, months in variety.load_variants().items():
         label = variety.VARIANTS[ui]
         rows = [themes[months[m]['name']] for m in sorted(months)]
-        variants[label] = {'themes': rows, 'variety': variety_result(ui, months)}
+        variants[label] = {'themes': rows, 'variety': variety_result(ui, months), 'grids': month_grids(ui, months)}
     return {
         'themeCount': len(themes),
         'checks': {'passed': sum(t['checks']['passed'] for t in themes.values()),
