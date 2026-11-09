@@ -23,7 +23,7 @@ body:
     attributes:
       label: Extension version
       description: Shown on the extension page in the Extensions view.
-      placeholder: 0.13.1
+      placeholder: 1.0.0
     validations:
       required: true
   - type: input

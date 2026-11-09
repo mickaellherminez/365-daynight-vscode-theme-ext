@@ -58,7 +58,7 @@ Para probar otro mes, haz clic en las flechas que lo rodean (`‹ 10 DRK ›`). 
 
 ## Nuevo estilo, y cómo volver atrás
 
-La versión 0.13.0 rediseña todos los temas: cada mes tiene ahora su propio ambiente de estación, y cada mes recibe un tema de alto contraste claro (High Contrast Light). Se conservan tu tema, tus ajustes y tus atajos de teclado: los nombres de los temas y los comandos no han cambiado, solo los colores.
+La versión 1.0.0 rediseña todos los temas: cada mes tiene ahora su propio ambiente de estación, y cada mes recibe un tema de alto contraste claro (High Contrast Light). Se conservan tu tema, tus ajustes y tus atajos de teclado: los nombres de los temas y los comandos no han cambiado, solo los colores.
 
 ¿Prefieres el estilo anterior? Vuelve a la versión 0.12.0:
 

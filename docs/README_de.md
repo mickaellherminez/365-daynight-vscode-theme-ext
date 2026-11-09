@@ -91,9 +91,9 @@ Danach kannst du deine Uhrzeiten wählen. Eine neue Uhrzeit gilt etwa 2 Sekunden
 
 Etwas ist schwer zu lesen? [Sag uns Bescheid](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). [Mehr Details](GUIDE_de.md#barrierefreiheit-zuerst) und [der vollständige Audit-Bericht](AUDIT.md).
 
-## Neuer Look in 0.13
+## Neuer Look in 1.0
 
-In Version 0.13.0 wurde jedes Theme neu gestaltet, und dein gewähltes Theme, deine Einstellungen und Tastenkombinationen bleiben erhalten. Lieber der vorherige Look? [So kommst du zurück](GUIDE_de.md#neuer-look-und-der-weg-zurück).
+In Version 1.0.0 wurde jedes Theme neu gestaltet, und dein gewähltes Theme, deine Einstellungen und Tastenkombinationen bleiben erhalten. Lieber der vorherige Look? [So kommst du zurück](GUIDE_de.md#neuer-look-und-der-weg-zurück).
 
 ## Häufige Fragen
 

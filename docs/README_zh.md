@@ -91,9 +91,9 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 有难以阅读的地方？[告诉我们](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose)。查看[更多详情](GUIDE_zh.md#无障碍优先)和[完整审核报告](AUDIT.md)。
 
-## 0.13 的全新外观
+## 1.0 的全新外观
 
-0.13.0 版本重新设计了所有主题，你选择的主题、设置和快捷键都会保留。更喜欢以前的外观？[查看如何回退](GUIDE_zh.md#全新外观以及如何回退)。
+1.0.0 版本重新设计了所有主题，你选择的主题、设置和快捷键都会保留。更喜欢以前的外观？[查看如何回退](GUIDE_zh.md#全新外观以及如何回退)。
 
 ## 常见问题
 

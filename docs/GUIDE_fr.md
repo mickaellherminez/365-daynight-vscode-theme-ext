@@ -58,7 +58,7 @@ Pour essayer un autre mois, cliquez sur les flèches qui l'entourent (`‹ 10 DR
 
 ## Nouveau style, et comment revenir en arrière
 
-La version 0.13.0 redessine tous les thèmes : chaque mois a désormais sa propre ambiance de saison, et chaque mois reçoit un thème à contraste élevé clair (High Contrast Light). Votre thème, vos réglages et vos raccourcis clavier sont conservés : les noms des thèmes et les commandes n'ont pas changé, seules les couleurs.
+La version 1.0.0 redessine tous les thèmes : chaque mois a désormais sa propre ambiance de saison, et chaque mois reçoit un thème à contraste élevé clair (High Contrast Light). Votre thème, vos réglages et vos raccourcis clavier sont conservés : les noms des thèmes et les commandes n'ont pas changé, seules les couleurs.
 
 Vous préférez l'ancien style ? Revenez à la version 0.12.0 :
 

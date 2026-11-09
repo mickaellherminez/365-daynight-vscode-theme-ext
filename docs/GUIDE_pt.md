@@ -58,7 +58,7 @@ Para experimentar outro mês, clique nas setas ao redor dele (`‹ 10 DRK ›`).
 
 ## Novo visual, e como voltar atrás
 
-A versão 0.13.0 redesenha todos os temas: cada mês agora tem seu próprio clima de estação, e cada mês ganha um tema de alto contraste claro (High Contrast Light). Seu tema, suas configurações e seus atalhos de teclado são mantidos: os nomes dos temas e os comandos não mudaram, apenas as cores.
+A versão 1.0.0 redesenha todos os temas: cada mês agora tem seu próprio clima de estação, e cada mês ganha um tema de alto contraste claro (High Contrast Light). Seu tema, suas configurações e seus atalhos de teclado são mantidos: os nomes dos temas e os comandos não mudaram, apenas as cores.
 
 Prefere o visual anterior? Volte para a versão 0.12.0:
 

@@ -6,8 +6,38 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-09
+
+**New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme, for 48 themes in all. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](docs/GUIDE.md#new-look-and-how-to-go-back).
+
+This section gathers everything since version 0.12.0, including the pre-releases below.
+
 ### Added
+- A High Contrast Light theme for every month, such as `365 01-January High Contrast Light`: dark text on a light background, at least 7:1 (AAA), for bright environments. The extension now has 48 themes. The status bar button shows `HCL` for them
+- `365: Apply High Contrast Light theme` command, and a High Contrast Light link in the status bar tooltip
+- In `system` mode, `workbench.preferredHighContrastLightColorTheme` now gets the High Contrast Light theme of the month
 - Public accessibility audit report, with the results of each theme and the limits of the audit
+
+### Changed
+- All twelve months get a new look, each with its own seasonal mood: frost in January, lavender mist in February, young shoots in March, April showers, a flowering meadow in May, long days in June, a lagoon in July, warm sand in August, the grape harvest in September, autumn leaves in October, mist and undergrowth in November, a polar night in December. Backgrounds, accents and syntax colors differ much more from one month to the next, with more varied lightness for people who see no color. Syntax colors stay distinct for the three simulated kinds of color blindness. In the Light themes, the status bar is darker, so that the month button reaches 7:1
+- Code colors, alerts and Git graph lines now stay apart by a color difference of at least 12 (ΔE, up from 10) for the three simulated kinds of color blindness, in every theme. In the High Contrast Light themes, Git additions are an olive green, which no longer gets close to the blue of modifications with tritanopia
+- In the High Contrast themes, the sidebar, activity bar, title bar and inactive tabs take the color of the month instead of plain black (or plain gray in High Contrast Light), so that the whole window changes with the month, not just the editor. Text there keeps a contrast of 17:1 or more
+- In a High Contrast theme, the status bar button now switches between High Contrast and High Contrast Light, so that a click never leaves high contrast. With `365DayNight.toggleIncludesHighContrast`, the button goes through the four variants
+- The month arrows and automatic mode keep High Contrast Light
+- December Dark: the selected file in the explorer is a little darker, so that a deleted file stays readable when selected
+- A theme change that fails is also written to the log, which stays after the error notification closes: **Help > Toggle Developer Tools > Console**, lines starting with `365DayNight:`
+- The chat, test results, symbol icons, Git graph, merge editor and multi-diff now use the month's palette instead of VS Code's fixed colors, which were sometimes hard to read, such as the yellow lines of the Git graph on Light themes. Each theme now defines more than 480 colors, and the accessibility audit checks these surfaces too
+- The extension is now named "365 Day & Night – Monthly Accessible Themes", to make clear that it is a collection of monthly themes. Its identifier, theme names, commands and settings do not change, so your installation and your choices stay as they are
+- Shorter README, with a new complete guide that details every feature
+- The README badges work again, and now show installs, downloads and the CI status
+
+### Fixed
+- In a crowded status bar, the 365 button could lose its arrow and its label, leaving only `›`. It now sits at the far right of the status bar, just before the notifications bell, so that the items of other extensions are hidden first
+- In a High Contrast theme, the status bar tooltip had no way back to the normal themes: it now shows **Light** and **Dark** links, so that leaving high contrast no longer requires a command
+- In `system` mode, a month arrow could sometimes do nothing right after the mode was turned on, and leaving the mode could sometimes keep VS Code following the system: a read of the backup of the original settings could come back empty or incomplete. The extension now keeps its own copy of that backup, and rebuilds a damaged one from the current settings
+- High Contrast Light themes: inline code was unreadable, with dark text on a navy background, for example in chat panels. It now has a light background in the color of the month
+- High Contrast Light themes: the exception label of the debugger and the warning item of the status bar now reach 7:1
+- High Contrast and High Contrast Light themes: the text of the terminal sticky scroll stays readable on hover
 
 ## [0.13.2] - 2026-11-09 - Pre-release
 
@@ -25,7 +55,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [0.13.0] - 2026-11-08 - Pre-release
 
-**New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](README.md#new-look-and-how-to-go-back).
+**New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](docs/GUIDE.md#new-look-and-how-to-go-back).
 
 ### Added
 - A High Contrast Light theme for every month, such as `365 01-January High Contrast Light`: dark text on a light background, at least 7:1 (AAA), for bright environments. The extension now has 48 themes. The status bar button shows `HCL` for them

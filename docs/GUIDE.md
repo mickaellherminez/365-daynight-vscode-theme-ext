@@ -58,7 +58,7 @@ To try another month, click the arrows around it (`‹ 10 DRK ›`). The number 
 
 ## New look, and how to go back
 
-Version 0.13.0 redesigns every theme: each month now has its own seasonal mood, and every month gets a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept: the theme names and the commands have not changed, only the colors.
+Version 1.0.0 redesigns every theme: each month now has its own seasonal mood, and every month gets a High Contrast Light theme. Your selected theme, your settings and your keyboard shortcuts are kept: the theme names and the commands have not changed, only the colors.
 
 Prefer the previous look? Go back to version 0.12.0:
 
