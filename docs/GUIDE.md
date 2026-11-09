@@ -160,7 +160,7 @@ Good to know:
 
 ## Accessibility
 
-Every theme passes an automated accessibility audit of more than 250 checks:
+Every theme passes an automated accessibility audit of more than 250 checks. The [audit report](AUDIT.md) gives the results of each theme and the limits of the audit:
 
 - **Readable text:** editor text and syntax colors reach a contrast ratio of at least **4.5:1 (WCAG AA)** in Light and Dark themes, and **7:1 (WCAG AAA)** in High Contrast themes.
 - **Color blind friendly:** syntax colors (keywords, functions, strings, numbers, classes, comments) and alerts (errors, warnings, Git changes) are simulated for **protanopia, deuteranopia and tritanopia** to make sure they stay distinct.

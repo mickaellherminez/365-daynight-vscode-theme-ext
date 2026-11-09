@@ -56,6 +56,7 @@ The integration tests run twice: on the latest VS Code and on the minimum versio
 | Generated themes | `npm run themes:check` | Each file in `themes/` is exactly what the generator produces from its palette: no hand edit, no palette change without `--write`, no missing or extra file |
 | Variety | `npm run themes:variety` | Two months of the same variant do not look alike: background, frame, accent and syntax. See below |
 | Measuring tools | `npm run themes:test` | The color calculations match published reference data, and the audit and the variety test fail when they should. See below |
+| Audit report | `npm run themes:report-check` | [docs/AUDIT.md](docs/AUDIT.md) and its JSON match the themes. After changing a theme, run `npm run themes:report` and commit the result |
 | Lint and tests | `npm test` | The lint, the unit tests, then the tests inside VS Code |
 
 The Publish workflow runs the same checks before building the package. See [scripts/themes/README.md](scripts/themes/README.md) for what the audit covers and its limits.
@@ -201,5 +202,5 @@ A manual run, pre-release or dry run, creates no GitHub release: it has no tag, 
 
 - Create a branch from `main` (for example `feat/...` or `fix/...`).
 - Keep commits focused and use the existing prefixes: `ADDED:`, `CHANGED:`, `FIXED:`, `REMOVED:`, `DOCS:`.
-- Make sure `npm run lint`, `npm test`, `npm run themes:audit`, `npm run themes:check`, `npm run themes:variety` and `npm run themes:test` pass.
+- Make sure `npm run lint`, `npm test`, `npm run themes:audit`, `npm run themes:check`, `npm run themes:variety`, `npm run themes:test` and `npm run themes:report-check` pass.
 - Add a line to the `[Unreleased]` section of the [CHANGELOG](CHANGELOG.md) for user-facing changes.

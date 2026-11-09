@@ -9,6 +9,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `audit.py` | Audite un ou plusieurs thèmes existants (`npm run themes:audit`) |
 | `build.py` | Génère les thèmes d'un mois depuis `palettes/<mois>.json`, puis les audite. Avec `--check`, vérifie que `themes/` correspond aux palettes (`npm run themes:check`) |
 | `variety.py` | Mesure la variété entre les mois de chaque déclinaison (`npm run themes:variety`) |
+| `report.py` | Génère le rapport public `docs/AUDIT.md` et `docs/audit-report.json` (`npm run themes:report`). `npm run themes:report-check` échoue s'ils ne sont plus à jour, dans la CI et avant chaque publication |
 | `draft.py` | Ébauche les 4 palettes d'un mois à partir de son ambiance (`direction.json`) et du modèle `draft-template.json` |
 | `direction.json` | Ambiance de chaque mois : fonds et accents de départ, plages de teinte des couleurs de syntaxe |
 | `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte, avec l'ajout Git du High Contrast Light retouché pour le seuil de 12 |

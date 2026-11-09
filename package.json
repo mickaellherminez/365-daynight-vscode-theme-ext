@@ -417,7 +417,9 @@
     "themes:build": "python3 scripts/themes/build.py",
     "themes:check": "python3 scripts/themes/build.py --check",
     "themes:test": "python3 -m unittest discover -s scripts/themes/tests",
-    "themes:variety": "python3 scripts/themes/variety.py"
+    "themes:variety": "python3 scripts/themes/variety.py",
+    "themes:report": "python3 scripts/themes/report.py",
+    "themes:report-check": "python3 scripts/themes/report.py --check"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
