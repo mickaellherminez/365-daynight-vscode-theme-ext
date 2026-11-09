@@ -46,6 +46,35 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(scores['lowVision20/40'], 50)
         self.assertEqual(scores['lowVision20/80'], 50)
 
+    def test_previews_cover_every_simulation(self):
+        for variant in self.data['variants'].values():
+            for theme in variant['themes']:
+                self.assertEqual(set(theme['simulated']), {'protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia'})
+                self.assertEqual(len(theme['colors']['tokens']), 14, theme['name'])
+                self.assertEqual(set(theme['syntaxContrast']), set(theme['colors']['tokens']))
+
+    def test_achromatopsia_preview_is_gray(self):
+        theme = self.data['variants']['Dark']['themes'][0]
+        for color in theme['simulated']['achromatopsia']['tokens'].values():
+            self.assertEqual(color[1:3], color[3:5])
+            self.assertEqual(color[3:5], color[5:7])
+
+    def test_month_grids_are_symmetric(self):
+        for label, variant in self.data['variants'].items():
+            for kind in ('background', 'syntax'):
+                matrix = variant['grids']['current'][kind]
+                self.assertEqual(len(matrix), 12)
+                for i in range(12):
+                    self.assertEqual(matrix[i][i], 0, label)
+                    for j in range(12):
+                        self.assertEqual(matrix[i][j], matrix[j][i], label)
+
+    def test_before_grid_exists_only_for_the_variants_of_0_12_0(self):
+        grids = {label: variant['grids']['before'] for label, variant in self.data['variants'].items()}
+        self.assertIsNone(grids['High Contrast Light'])
+        for label in ('Light', 'Dark', 'High Contrast'):
+            self.assertEqual(len(grids[label]['syntax']), 12)
+
     def test_report_is_stable(self):
         self.assertEqual(self.markdown, report.to_markdown(report.collect()))
 

@@ -120,6 +120,10 @@ daltonismes complets, formes partielles (sévérités 0,1 à 0,9 de Machado et a
 basse vision. Ces scores sont informatifs : seuls les daltonismes complets peuvent faire échouer l'audit. Les formules
 et les limites sont dans le rapport. Après tout changement de thème, relancer `npm run themes:report` et commiter le résultat.
 
+`docs/audit-report.json` contient aussi ce que lira la landing page : le contraste de chaque couleur de syntaxe, ces
+couleurs vues à travers chaque simulation, et les grilles 12 × 12 des écarts entre les mois. Les grilles « avant » viennent
+de `data/themes-0.12.0.json`, copie figée des couleurs de la version 0.12.0, pour ne pas dépendre de l'historique Git en CI.
+
 ## Mesurer la variété entre les mois
 
 ```sh

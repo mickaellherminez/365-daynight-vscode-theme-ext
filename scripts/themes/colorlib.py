@@ -51,6 +51,18 @@ VIEWS = {'normal': None, **CVD}
 ACHROMATOPSIA = [[0.2126, 0.7152, 0.0722]] * 3
 
 
+def _gamma(v):
+    return 12.92 * v if v <= 0.0031308 else 1.055 * v ** (1 / 2.4) - 0.055
+
+
+def simulate(color, matrix):
+    """Couleur telle qu'elle est vue après simulation : '#RRGGBB' -> '#RRGGBB'."""
+    (r, g, b), _ = parse(color)
+    v = [_linear(r), _linear(g), _linear(b)]
+    linear = [max(0, min(1, sum(matrix[i][j] * v[j] for j in range(3)))) for i in range(3)]
+    return '#%02X%02X%02X' % tuple(round(_gamma(x) * 255) for x in linear)
+
+
 def lab(color, matrix=None):
     """Couleur -> CIE L*a*b* (D65), éventuellement après simulation de daltonisme."""
     (r, g, b), _ = parse(color)

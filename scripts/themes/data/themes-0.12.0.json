@@ -1,0 +1,407 @@
+{
+ "source": "Themes of the git tag 0.12.0, kept to compare the months before and after the redesign",
+ "variants": {
+  "hc-black": {
+   "01": {
+    "background": "#000000",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#BAC6D4",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "02": {
+    "background": "#0D1B2A",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B09CFF",
+     "commentaire": "#BCC8D6",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "03": {
+    "background": "#08181F",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B09CFF",
+     "commentaire": "#B8CCD4",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "04": {
+    "background": "#071D2E",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B4A0FF",
+     "commentaire": "#BCD0DE",
+     "fonction": "#7AD0FF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "05": {
+    "background": "#0F1A2C",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B09CFF",
+     "commentaire": "#BCC8D6",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "06": {
+    "background": "#000000",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#C9C0BA",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "07": {
+    "background": "#001B2E",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B09CFF",
+     "commentaire": "#B8C8D6",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "08": {
+    "background": "#000000",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#BFC9BF",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "09": {
+    "background": "#000000",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#C9C0BA",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "10": {
+    "background": "#0D0A07",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#BDB2A6",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#E8D44D"
+    }
+   },
+   "11": {
+    "background": "#05070A",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#A890FF",
+     "commentaire": "#BAC6D0",
+     "fonction": "#6CCBFF",
+     "mot-clé": "#FFA866",
+     "nombre": "#FFE04D"
+    }
+   },
+   "12": {
+    "background": "#0E0E22",
+    "syntax": {
+     "chaîne": "#8CF2A8",
+     "classe": "#B9A6FF",
+     "commentaire": "#B8C4D6",
+     "fonction": "#6CD4FF",
+     "mot-clé": "#FFAE70",
+     "nombre": "#FFE45C"
+    }
+   }
+  },
+  "vs": {
+   "01": {
+    "background": "#FAFCFF",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#8A2C6E",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "02": {
+    "background": "#FCFDFC",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#4B2C8C",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "03": {
+    "background": "#FEFBEA",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#4B2C8C",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "04": {
+    "background": "#FFF9EC",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#4B2C8C",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "05": {
+    "background": "#FFFDFB",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#8A2C6E",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "06": {
+    "background": "#EAF5FE",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#8A2C6E",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "07": {
+    "background": "#FFFDE7",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#4B2C8C",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "08": {
+    "background": "#FFF8E1",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#8A2C6E",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "09": {
+    "background": "#EEF6FD",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#8A2C6E",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "10": {
+    "background": "#FAF4EE",
+    "syntax": {
+     "chaîne": "#1E6B36",
+     "classe": "#4B2C8C",
+     "commentaire": "#6B6158",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A8500F",
+     "nombre": "#6E3C00"
+    }
+   },
+   "11": {
+    "background": "#F0F4F7",
+    "syntax": {
+     "chaîne": "#1E6B3E",
+     "classe": "#45287F",
+     "commentaire": "#5E6B75",
+     "fonction": "#0B6E9E",
+     "mot-clé": "#A64A16",
+     "nombre": "#5E3A00"
+    }
+   },
+   "12": {
+    "background": "#FAFCFD",
+    "syntax": {
+     "chaîne": "#185A2C",
+     "classe": "#45287F",
+     "commentaire": "#5F6E78",
+     "fonction": "#006AA0",
+     "mot-clé": "#B8434F",
+     "nombre": "#6E4800"
+    }
+   }
+  },
+  "vs-dark": {
+   "01": {
+    "background": "#0D1B2A",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A8A29E",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#F5CB5C"
+    }
+   },
+   "02": {
+    "background": "#242933",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A3A9B6",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "03": {
+    "background": "#1B1F30",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#9EA2B8",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "04": {
+    "background": "#1E2230",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A4A0A8",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "05": {
+    "background": "#1B2B34",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A3A9B4",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "06": {
+    "background": "#0F1A2B",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#9BA6B4",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "07": {
+    "background": "#002B36",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#93A8AC",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "08": {
+    "background": "#0F172A",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A8A29E",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#FACC15"
+    }
+   },
+   "09": {
+    "background": "#1A202C",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#9AA5B4",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#ECC94B"
+    }
+   },
+   "10": {
+    "background": "#2B1B0F",
+    "syntax": {
+     "chaîne": "#7EE89C",
+     "classe": "#A7A0FF",
+     "commentaire": "#A8A098",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F0A35E",
+     "nombre": "#D9C238"
+    }
+   },
+   "11": {
+    "background": "#1C2833",
+    "syntax": {
+     "chaîne": "#7FDB9C",
+     "classe": "#A7A0FF",
+     "commentaire": "#9AA7B2",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#F2A65A",
+     "nombre": "#F1CF55"
+    }
+   },
+   "12": {
+    "background": "#263238",
+    "syntax": {
+     "chaîne": "#8FD99A",
+     "classe": "#A7A0FF",
+     "commentaire": "#A3B1B8",
+     "fonction": "#5CB8E0",
+     "mot-clé": "#FF9E6E",
+     "nombre": "#FFD866"
+    }
+   }
+  }
+ }
+}
