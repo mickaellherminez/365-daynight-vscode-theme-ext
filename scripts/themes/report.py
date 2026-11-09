@@ -73,7 +73,8 @@ def theme_result(theme, hc):
     for view, (pairs, alert_pairs) in audit.distinctness(theme).items():
         delta, first, second = min(pairs + alert_pairs)
         vision[VIEW_NAMES[view]] = {'deltaE': round(delta, 1), 'closest': [ROLE_NAMES[first], ROLE_NAMES[second]]}
-    grays = audit.information(theme)['achromatopsie']
+    information = audit.information(theme)
+    grays = information['achromatopsie']
     return {
         'name': theme['name'],
         'checks': {'passed': sum(r[3] == 'OK' for r in rows), 'total': len(rows)},
@@ -84,6 +85,7 @@ def theme_result(theme, hc):
             'atLeast7': round(100 * sum(r[1] >= 7 for r in text) / len(text), 1),
         },
         'colorVision': vision,
+        'ciede2000': {VIEW_NAMES[view]: round(information['ΔE2000 ' + view][0][0], 1) for view in VIEW_NAMES},
         'achromatopsia': {'pairsBelowThreshold': sum(d < audit.MIN_DELTA_E for d, _, _ in grays), 'pairs': len(grays)},
         'scores': vision_scores(theme, text),
     }
@@ -133,6 +135,7 @@ These results are measurements and simulations. Here is what they do not show.
 - **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit.
 - **Achromatopsia is information only.** Without color, many syntax colors are close in lightness, as the table shows. They then differ only by style where the theme sets one, for comments, deprecated and invalid code for example.
 - **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE 12 on the CIE76 scale) and the variety thresholds are practical rules chosen for this project, not standards.
+- **CIE76 is a simple measure.** The thresholds apply to CIE76. CIEDE2000 is closer to perception, especially for blues and low saturation colors, so it is shown next to it for information. It uses another scale, and the thresholds are not calibrated for it.
 - **WCAG 2 contrast only.** APCA, the contrast model drafted for WCAG 3, is not applied.
 - **Colors, not rendering.** The audit reads the theme files. It checks the color pairs listed in its code, with one TextMate scope per token category. It does not look at a rendered window, antialiasing or your display.
 - **Not every VS Code color.** A theme defines about 485 of the roughly 970 colors documented by VS Code. The others use the defaults of VS Code, and only those of the recent surfaces are audited, as they are in VS Code 1.145. A future version may change them.
@@ -182,6 +185,12 @@ def to_markdown(data):
                 f" | {fmt(vision['normal']['deltaE'])} | {fmt(vision['protanopia']['deltaE'])}"
                 f" | {fmt(vision['deuteranopia']['deltaE'])} | {fmt(vision['tritanopia']['deltaE'])}"
                 f" | {gray['pairsBelowThreshold']}/{gray['pairs']} |")
+        lines += ['', 'Smallest difference between main syntax colors with CIEDE2000, for information:', '',
+                  '| Month | Normal | Protanopia | Deuteranopia | Tritanopia |', '| --- | --- | --- | --- | --- |']
+        for theme in variant['themes']:
+            value = theme['ciede2000']
+            lines.append(f"| {MONTHS[month_of(theme) - 1]} | {fmt(value['normal'])} | {fmt(value['protanopia'])}"
+                         f" | {fmt(value['deuteranopia'])} | {fmt(value['tritanopia'])} |")
         lines += ['', 'Scores out of 100:', '',
                   '| Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |',
                   '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
