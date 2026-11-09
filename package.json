@@ -2,7 +2,7 @@
   "name": "365-daynight-vscode-theme-ext",
   "displayName": "365 Day & Night – Monthly Accessible Themes",
   "description": "Accessible light, dark and high contrast themes for every month of the year, 48 in all. Switch between day and night in one click or automatically. WCAG AA/AAA contrast, checked for color blindness.",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "publisher": "mickaellherminez",
   "type": "commonjs",
   "icon": "assets/logo-web.png",
