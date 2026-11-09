@@ -91,9 +91,9 @@ You can then choose your hours. A new time applies about 2 seconds after you sto
 
 Something hard to read? [Tell us about it](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). [More details](docs/GUIDE.md#accessibility) and [the full audit report](docs/AUDIT.md).
 
-## New look in 0.13
+## New look in 1.0
 
-Every theme was redesigned in version 0.13.0, and your selected theme, settings and shortcuts are kept. Prefer the previous look? [Here is how to go back](docs/GUIDE.md#new-look-and-how-to-go-back).
+Every theme was redesigned in version 1.0.0, and your selected theme, settings and shortcuts are kept. Prefer the previous look? [Here is how to go back](docs/GUIDE.md#new-look-and-how-to-go-back).
 
 ## FAQ
 

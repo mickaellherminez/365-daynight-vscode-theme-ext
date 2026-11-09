@@ -91,9 +91,9 @@ Después puedes elegir tus horas. Una hora nueva se aplica unos 2 segundos despu
 
 ¿Algo difícil de leer? [Cuéntanoslo](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). [Más detalles](GUIDE_es.md#la-accesibilidad-primero) y [el informe de auditoría completo](AUDIT.md).
 
-## Nuevo estilo en 0.13
+## Nuevo estilo en 1.0
 
-Todos los temas se rediseñaron en la versión 0.13.0, y se conservan tu tema, tu configuración y tus atajos. ¿Prefieres el estilo anterior? [Así puedes volver atrás](GUIDE_es.md#nuevo-estilo-y-cómo-volver-atrás).
+Todos los temas se rediseñaron en la versión 1.0.0, y se conservan tu tema, tu configuración y tus atajos. ¿Prefieres el estilo anterior? [Así puedes volver atrás](GUIDE_es.md#nuevo-estilo-y-cómo-volver-atrás).
 
 ## Preguntas frecuentes
 

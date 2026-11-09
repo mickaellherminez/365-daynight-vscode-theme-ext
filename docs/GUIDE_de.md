@@ -58,7 +58,7 @@ Um einen anderen Monat auszuprobieren, klicke auf die Pfeile daneben (`‹ 10 DR
 
 ## Neuer Look und der Weg zurück
 
-Version 0.13.0 gestaltet alle Themes neu: Jeder Monat hat jetzt seine eigene Stimmung der Jahreszeit, und jeder Monat erhält ein helles kontrastreiches Theme (High Contrast Light). Dein ausgewähltes Theme, deine Einstellungen und deine Tastenkürzel bleiben erhalten: Die Namen der Themes und die Befehle haben sich nicht geändert, nur die Farben.
+Version 1.0.0 gestaltet alle Themes neu: Jeder Monat hat jetzt seine eigene Stimmung der Jahreszeit, und jeder Monat erhält ein helles kontrastreiches Theme (High Contrast Light). Dein ausgewähltes Theme, deine Einstellungen und deine Tastenkürzel bleiben erhalten: Die Namen der Themes und die Befehle haben sich nicht geändert, nur die Farben.
 
 Dir gefällt der alte Look besser? Kehre zu Version 0.12.0 zurück:
 
