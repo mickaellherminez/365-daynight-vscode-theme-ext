@@ -1,6 +1,6 @@
-# 365 Day & Night Themes – 毎月使えるアクセシブルな VS Code テーマ
+# 365 Day & Night – Monthly Accessible Themes
 
-**Visual Studio Code 用の 48 種類のカラーテーマ：1 年の各月に、ライト・ダーク・ハイコントラスト・明るいハイコントラストの 4 種類を用意しています。** ワンクリックで昼と夜を切り替えることも、拡張機能に自動で任せることもできます。すべてのテーマは読みやすさ（WCAG コントラスト）と色覚多様性への対応をテスト済みです。
+**VS Code に毎月新しい雰囲気を。ワンクリックでも自動でも昼と夜を切り替えられる、48 のアクセシブルなテーマです。**
 
 [![Marketplace のバージョン](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![インストール数](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
@@ -10,206 +10,90 @@
 [![CI の状態](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT ライセンス](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
 
-*他の言語で読む：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
-
-![VS Code の 10 月のライト・ダーク・ハイコントラスト・明るいハイコントラストテーマ：エクスプローラー、タブ、シンタックスハイライト、テキスト選択、ステータスバー](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/hero.png)
-
-## おすすめの理由
-
-- 🗓️ **毎月、新しい雰囲気に。** 1 月は霜、3 月は若芽、7 月はラグーン、10 月は紅葉、12 月は極夜。エディターだけでなく、ウィンドウ全体が季節とともに移り変わります。
-- ☀️🌙 **昼も夜もぴったり。** 各月に、昼用のライトテーマ、夜用のダークテーマ、最大限の読みやすさが必要なときの 2 つのハイコントラストテーマ（暗い版と、明るい版の High Contrast Light）があります。
-- 🔁 **ワンクリックで切り替え。** ステータスバーのボタンで、ライトとダークを切り替えられます。ハイコントラストはコマンドから使えます。
-- ⏰ **自動モード（任意）。** 拡張機能が当月のテーマを自動で適用します。昼はライト、夜はダークです。
-- 👁️ **目にやさしく、誰にでも読みやすい。** すべてのテキストが WCAG のコントラスト基準を満たし、シンタックスの色は色覚に特性のある方にも区別しやすくなっています。
-- 🖥️ **細部まで丁寧にデザイン。** エディター、サイドバー、タブ、ターミナル、デバッグコンソール、通知、ステータスバーまで、すべてデザイン済みで、各テーマに 480 色以上を定義しています。チャット、テスト結果、シンボルアイコン、Git グラフ、マージエディター、マルチ差分も、その月のパレットに合わせています。
-
-## インストール
-
-**VS Code から：** 拡張機能ビューを開き（`Ctrl+Shift+X`、Mac では `Cmd+Shift+X`）、**365 Day & Night Themes** を検索して**インストール**をクリックします。
-
-**Marketplace から：** [365 Day & Night Themes をインストール](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)。
-
-**コマンドラインから：**
-
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 ```
 
-Visual Studio Code 1.96 以降が必要です。
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) または [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext) からもインストールできます。VS Code 1.96 以降が必要です。
 
-## はじめかた
+*他の言語で読む：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
-1. テーマの選択画面を開きます：`Ctrl+K` を押してから `Ctrl+T`（Mac では `Cmd+K` を押してから `Cmd+T`）。
-2. **365** と入力するとすべてのテーマが表示されます。例：`365 10-October Dark`。
-3. 1 つ選べば完了です！
+![VS Code でのデモ：ステータスバーのボタンの矢印で月を 10 月から 12 月に変え、ボタンをクリックして Light から Dark に切り替え、ツールチップのリンクで High Contrast を適用します](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)
 
-365 テーマを初めて使うと、自動切り替えを提案する通知が表示されます：**Follow the clock**（時刻に従う：昼はライト、夜はダーク）、**Follow my system**（システムのライト／ダークモードに従う）、**No thanks**（いいえ）。選ばない限り何も変わらず、この質問は一度だけです。選択すると、何がオンになったかを確認するメッセージが表示され、**Open Settings** ボタンから時刻の変更やオフへの切り替えができます。あとで考えを変えるには、下の自動切り替えのセクションをご覧ください。
+## 選ばれる理由
 
-**ステータスバーのボタン**（右下：`LGT`、`DRK`、`HCT`、`HCL`）で、当月のライト版とダーク版を切り替えられます。ハイコントラストを使うには、コマンドパレットで `365: Apply High Contrast theme` を実行します。ハイコントラストテーマの使用中は、ボタンで暗いハイコントラスト（`HCT`）と明るいハイコントラスト（`HCL`）を切り替えます。クリックでハイコントラストから抜けることはありません。ハイコントラストをやめるには、`365: Apply Light theme` または `365: Apply Dark theme` を実行します。 ボタンにカーソルを合わせて、**Light** または **Dark** のリンクをクリックすることもできます。
+### 🗓️ 毎月、新しい雰囲気に
 
-別の月を試すには、その両側の矢印をクリックします（`‹ 10 DRK ›`）。数字は `01` から `12` までの月を表し、矢印を使っても種類（ライト、ダーク、ハイコントラスト、明るいハイコントラスト）は変わりません。12 月の次は 1 月です。元に戻すには、コマンドパレットで `365: Back to the current month` を実行します。矢印と数字は 365 テーマの使用中にのみ表示されます。 ボタンにカーソルを合わせると、テーマの正式名と、ハイコントラスト、明るいハイコントラスト、当月へのリンクが表示されます。 ハイコントラストテーマの使用中は、代わりに Light と Dark へのリンクが表示されます。
+1 月は霜、3 月は若芽、7 月はラグーン、10 月は紅葉、12 月は極夜。 エディター、サイドバー、タブ、ターミナル、ステータスバー、チャット、Git グラフ、マージエディターまで、ウィンドウ全体が季節とともに変わります。
+
+**根拠：** 12 か月それぞれに Light、Dark、High Contrast、High Contrast Light の 4 テーマがあり、各テーマに 480 色以上を定義しています。[すべて見る](#12-か月)。
+
+### 👁️ 読みやすさを保つ設計
+
+テキストのコントラストは、Light と Dark のテーマで 4.5:1 以上（WCAG AA）、High Contrast のテーマで 7:1 以上（WCAG AAA）です。構文の色、エラー、Git の変更は色覚多様性があっても区別でき、コメント、非推奨のコード、無効なコードは斜体、取り消し線、下線でも区別されます。
+
+**根拠：** 各テーマは公開のたびに 250 項目以上の自動監査に合格する必要があり、[詳しいレポート](AUDIT.md)で各テーマの結果と監査の限界を確認できます。色覚はシミュレーションで確認しているため、実際の利用者の声を歓迎します。[テスター募集に参加する](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
+
+### 🌗 昼も夜も、意識せずに
+
+ステータスバーのボタンをクリックすると Light と Dark を切り替えられます。指定した時刻や、システムの外観に合わせて自動で切り替えることもできます。
+
+**根拠：** 自動モードは初期状態でオフなので、希望しない限りテーマは変わりません。選んだ月や手動での選択も尊重されます。
 
 ## 12 か月
 
 ![48 種類のテーマのプレビュー：1 月から 12 月まで各月のライト・ダーク・ハイコントラスト・明るいハイコントラスト版](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/year.png)
 
-| 月 | 雰囲気 | ライト | ダーク | ハイコントラスト | 明るいハイコントラスト |
-| --- | --- | --- | --- | --- | --- |
-| 1 月 | 霜 | 氷河の青と深い青 | 深い冬の青と氷の青 | 青みの黒と氷の青 | 氷の白と紺 |
-| 2 月 | ラベンダーの霞 | 淡いラベンダーと紫 | 灰紫の夜とライラック | 紫みの黒と淡いライラック | ラベンダーの白とプラム |
-| 3 月 | 若芽 | 柔らかな緑と新芽の緑 | オリーブの夜と新芽の緑 | オリーブの黒と鮮やかな緑 | 淡い緑と森の緑 |
-| 4 月 | 春の通り雨 | 雨空と桜色 | 雨のスレートと桜色 | 青みの黒と桜色 | 淡い空色と濃いピンク |
-| 5 月 | 花咲く草原 | 草原の緑とオリーブの金 | 深緑の夜とキンポウゲの黄 | 緑みの黒と淡い金 | 淡い緑と濃いブロンズ |
-| 6 月 | 長い日 | 晴れた空と夏の青 | ペトロールブルーの夜とペリウィンクル | 黒とペリウィンクル | 空の白とロイヤルブルー |
-| 7 月 | ラグーン | ターコイズの水とコーラル | 深いラグーンとコーラル | 青緑みの黒と淡いコーラル | 淡いターコイズと赤いコーラル |
-| 8 月 | 温かな砂 | 金色の砂とキャラメル | 茶色の夜と琥珀色 | 茶色みの黒と琥珀色 | 温かな白と濃い琥珀色 |
-| 9 月 | ぶどうの収穫 | 淡いピンクとプラム | ワインレッドの夜とプラム | ワイン色の黒とオーキッド | 淡いピンクと濃いプラム |
-| 10 月 | 紅葉 | ピーチと赤褐色 | 温かな茶色の夜と赤褐色 | 茶色みの黒とサーモン | ピーチの白と濃い赤褐色 |
-| 11 月 | 霧と下草 | 霧のトープとモスグリーン | 下草の灰色とモスグリーン | 温かな黒とモスグリーン | クリームと濃いモス |
-| 12 月 | 極夜 | 氷のラベンダーとオーロラのティール | ミッドナイトブルーとオーロラのシアン | 青みの黒とオーロラのシアン | ラベンダーの白と濃いティール |
+| 月 | 雰囲気 | 月 | 雰囲気 |
+| --- | --- | --- | --- |
+| 1 月 | 霜 | 7 月 | ラグーン |
+| 2 月 | ラベンダーの霞 | 8 月 | 温かな砂 |
+| 3 月 | 若芽 | 9 月 | ぶどうの収穫 |
+| 4 月 | 春の通り雨 | 10 月 | 紅葉 |
+| 5 月 | 花咲く草原 | 11 月 | 霧と下草 |
+| 6 月 | 長い日 | 12 月 | 極夜 |
 
-## 新しいデザインと、元に戻す方法
+各テーマの色は[完全ガイド](GUIDE_ja.md#12-か月)に記載しています。
 
-バージョン 0.13.0 ですべてのテーマを作り直しました。各月にそれぞれの季節の雰囲気があり、すべての月に明るいハイコントラストテーマ（High Contrast Light）が加わります。選択中のテーマ、設定、キーボードショートカットはそのまま引き継がれます。テーマ名とコマンドは変わらず、変わるのは色だけです。
+## 使いかた
 
-以前のデザインのほうが好みですか？ バージョン 0.12.0 に戻せます。
+Mac では `Ctrl` の代わりに `Cmd` を使います。
 
-1. 拡張機能ビュー（`Ctrl+Shift+X`、Mac では `Cmd+Shift+X`）を開き、**365 Day & Night Themes** を探します。
-2. クリックして拡張機能のページを開き、**Uninstall**（アンインストール）の横の矢印をクリックして **Install Specific Version...**（特定のバージョンをインストール）を選び、**0.12.0** を選択します。
-3. 再読み込みを求められたら VS Code を再読み込みします。
-
-その後、VS Code はこの拡張機能の **Auto Update**（自動更新）のチェックを外し、0.12.0 のままにします。新しいデザインに戻すには、**Auto Update** に再びチェックを入れるか、同じメニューで最新バージョンを選びます。バージョン 0.12.0 には明るいハイコントラストテーマがありません。使っている場合は、元に戻したあとで別のテーマを選んでください。
-
-## 昼と夜の自動切り替え
-
-エディターを時刻に合わせたいですか？自動モードを有効にしましょう：
-
-1. 設定を開き（`Ctrl+,` または `Cmd+,`）、**365DayNight** を検索します。
-2. **365DayNight: Enable** にチェックを入れます。
-
-または `settings.json` に次を追加します：
-
-```json
-{
-  "365DayNight.enable": true,
-  "365DayNight.mode": "auto"
-}
-```
-
-| モード | 動作 |
+| 目的 | 操作 |
 | --- | --- |
-| `auto` | 既定では 7:00〜19:00 はライトテーマ、それ以外はダークテーマ。時刻は変更できます（下記参照） |
-| `day` | 常に当月のライトテーマ |
-| `night` | 常に当月のダークテーマ |
-| `system` | システムのライト、ダーク、ハイコントラストの外観に従います（下記参照） |
+| **テーマを選ぶ** | `Ctrl+K` に続けて `Ctrl+T` を押し、**365** と入力します |
+| **Light と Dark を切り替える** | 右下のステータスバーで `LGT` または `DRK` をクリックします |
+| **月を変える** | 月の両側の矢印をクリックします：`‹ 10 DRK ›` |
+| **今月に戻る** | コマンドパレット（`Ctrl+Shift+P`）から `365: Back to the current month` を実行します |
+| **ハイコントラストを使う** | `365: Apply High Contrast theme` または `365: Apply High Contrast Light theme` を実行します |
+| **ハイコントラストをやめる** | `365: Apply Light theme` または `365: Apply Dark theme` を実行します |
+| **自動モードをオンにする** | 設定（`Ctrl+,`）を開き、**365DayNight** を検索して **Enable** をオンにします |
+| **キーボードショートカットを追加する** | `Ctrl+K` に続けて `Ctrl+S` を押し、**365** と入力してコマンドをダブルクリックし、キーを押します。初期状態では設定されていません |
 
-毎月 1 日には、新しい月のテーマへ自動で切り替わります。
+### 自動モード
 
-知っておきたいこと：
+365 テーマを初めて使うと、自動切り替えを使うかどうかを一度だけ確認します。選ばない限り何も変わりません。
 
-- **決めるのはあなたです。** 自動モードは初期状態でオフです。あなたの許可なくテーマが変わることはありません。 365 テーマを初めて使うと、使うかどうかを通知で一度だけ尋ねます。
-- **手動の選択を尊重します。** 手動でテーマを選んだ場合は、次の期間の切り替わり（昼から夜、または新しい月）までそのまま維持されます。
-- **選んだ月も維持されます。** 矢印またはテーマ選択で別の月を選ぶと、自動モードは次の実際の月が始まるまで、再起動後も、その月のライトとダークを切り替え続けます。早めに戻すには `365: Back to the current month` を実行します。
-- **ハイコントラストはハイコントラストのまま。** 暗いまたは明るいハイコントラストテーマを使っている場合、自動モードは月だけを更新し、種類は変えません。
+![VS Code でのデモ：テーマの選択画面で November Light を選ぶと、時刻に従う、システムに従う、何もしないを選ぶ通知が表示され、Follow the clock をクリックすると自動切り替えがオンになったと表示されます](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-first-use.gif)
 
-### 時刻を選ぶ
+そのあと時刻を選べます。新しい時刻は、入力を終えてから約 2 秒後に適用されます。
 
-既定では、ライトテーマは 7:00、ダークテーマは 19:00 に始まります。時刻を変更するには：
+![VS Code でのデモ：設定で 365 Day Night: Enable をオンにし、Night Start を過去の時刻にすると Dark になり、19:00 に戻すと Light になります](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-auto.gif)
 
-1. 設定を開き（`Ctrl+,` または `Cmd+,`）、**365DayNight** を検索します。
-2. **365DayNight: Day Start** と **365DayNight: Night Start** を 24 時間制の HH:MM 形式で設定します。
+**➡️ [完全ガイド](GUIDE_ja.md)ですべて説明しています：** [自動モードと時刻](GUIDE_ja.md#昼と夜の自動切り替え)、[システムに従う](GUIDE_ja.md#システムに従う)、[すべてのコマンド](GUIDE_ja.md#コマンド)、[すべての設定](GUIDE_ja.md#設定)。
 
-または `settings.json` に次を追加します：
+## アクセシビリティ
 
-```json
-{
-  "365DayNight.dayStart": "08:30",
-  "365DayNight.nightStart": "20:00"
-}
-```
+- **読みやすいテキスト：** Light と Dark のテーマは WCAG AA、High Contrast のテーマは AAA です。
+- **色覚：** 構文の色と警告を 1 型・2 型・3 型色覚でシミュレーションしています。
+- **色だけに頼らない：** コメント、パラメーター、属性は*斜体*、非推奨のコードは~~取り消し線~~、無効なコードは下線で示します。
+- **キーボードとスクリーンリーダー：** High Contrast のテーマにははっきりしたフォーカスの輪郭があり、ステータスバーのボタンの各部分には読み上げ用のラベルがあります。
 
-- **すばやく適用。** 新しい時刻は入力を終えてから約 2 秒後に適用されます。手動でテーマを選んでいた場合も同じです。その後は、指定した分にテーマが切り替わります。
-- **深夜をまたぐ。** 昼の開始が夜の開始より遅い場合（例：`"20:00"` と `"06:00"`）、ライトテーマは深夜をまたいで続きます。夜に作業する方に便利です。
-- **無効な値。** `"25:00"` や `"7h"` のように読み取れない時刻は既定値に置き換えられ、警告が一度だけ表示されます。2 つの時刻が同じ場合は 7:00 と 19:00 になります。
-- **`auto` モードのみ。** `day`、`night`、`system` モードはこれらの時刻を無視します。
-- **7:00 と 19:00 に戻す。** 設定で各時刻の横にある歯車アイコンをクリックして **Reset Setting** を選ぶか、`settings.json` から 2 行とも削除します。
+読みにくい箇所がありましたか？[お知らせください](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose)。[詳細](GUIDE_ja.md#アクセシビリティを最優先に)と[監査レポート全文](AUDIT.md)もご覧ください。
 
-### システムに従う
+## 0.13 の新しいデザイン
 
-時刻ではなくシステムの外観に従いたい場合は、`system` モードを使います：
-
-1. 設定を開き（`Ctrl+,` または `Cmd+,`）、**365DayNight** を検索します。
-2. **365DayNight: Enable** にチェックを入れます。
-3. **365DayNight: Mode** を `system` に設定します。
-
-または `settings.json` に次を追加します：
-
-```json
-{
-  "365DayNight.enable": true,
-  "365DayNight.mode": "system"
-}
-```
-
-| システムの状態 | 適用されるテーマ |
-| --- | --- |
-| ライトの外観 | 当月のライトテーマ |
-| ダークの外観 | 当月のダークテーマ |
-| ハイコントラスト（ダークの外観） | 当月のハイコントラストテーマ |
-| ハイコントラスト（ライトの外観） | その月の明るいハイコントラストテーマ |
-
-このモードでのボタン：
-- **矢印。** `‹` と `›` はすべての種類の月を変更します。その月は、再起動後も、次の実際の月が始まるまで維持されます。早めに戻すには `365: Back to the current month` を実行します。
-- **中央のボタン。** ライトとダークはシステムが決めるため、クリックしてもその説明が表示されるだけです。`365: Apply Light theme`、`365: Apply Dark theme`、`365: Apply High Contrast theme`、`365: Apply High Contrast Light theme` の各コマンドも同じ説明を表示し、何も変更しません。
-- **テーマの選択。** 365 テーマを選ぶと、その月がすべての種類に適用されます。他の作者のテーマを選ぶと、使用中の種類だけが置き換わります。そのテーマは翌月以降も残り、ボタンには矢印も月も表示されません。365 テーマに戻すには中央のボタンをクリックします。
-
-
-- **変更される設定。** このモードは `window.autoDetectColorScheme` をオンにし、当月のテーマを `workbench.preferredLightColorTheme`、`workbench.preferredDarkColorTheme`、`workbench.preferredHighContrastColorTheme`、`workbench.preferredHighContrastLightColorTheme` に書き込みます。`workbench.colorTheme` は変更されません。
-- **元に戻す方法。** **365DayNight: Enable** をオフにするか、別のモードを選びます。元の設定が戻り、もともとなかった設定は再び削除されます。その間に変更した設定は、変更後の値のまま残ります。
-- **拡張機能をアンインストールまたは無効化する前に。** 先にこのモードを終了してください。その後は拡張機能が何も復元できなくなります。忘れた場合は、上記の 5 つの設定を `settings.json` から削除してください。
-- **ハイコントラスト。** VS Code はシステムのハイコントラストを優先します。無視するには `window.autoDetectHighContrast` をオフにします。このモードがこの設定を変更することはありません。
-- **検出をオフにする。** `window.autoDetectColorScheme` を自分でオフにすると、拡張機能はオフのままにし、ボタンは通常どおり動作します。ワークスペースのテーマ設定は、そのワークスペースでは引き続き優先されます。
-- **オペレーティングシステム。** VS Code のドキュメントによると、ライトまたはダークの外観は Windows と macOS で検出されます。
-
-## アクセシビリティを最優先に
-
-すべてのテーマは、250 項目を超える自動アクセシビリティ監査に合格しています：
-
-- **読みやすい文字：** エディターの文字とシンタックスの色は、ライトとダークで **4.5:1（WCAG AA）** 以上、ハイコントラストで **7:1（WCAG AAA）** 以上のコントラストを確保しています。
-- **色覚多様性に配慮：** シンタックスの色（キーワード、関数、文字列、数値、クラス、コメント）と通知（エラー、警告、Git の変更）を **1 型・2 型・3 型色覚** でシミュレーションし、区別できることを確認しています。
-- **色だけに頼らない：** コメント、パラメーター、属性は*斜体*、非推奨のコードは~~取り消し線~~、無効なコードには下線を付けています。
-- **どこでも見える選択範囲：** エディター、ターミナル、デバッグコンソールで選択範囲がはっきり見え、検索結果と混同することはありません。
-- **ハイコントラストテーマ：** 選択した文字は水色の背景に黒で表示され（明るいハイコントラストでは紺色の背景に白）、すべてのパネルに見やすい枠線とはっきりしたキーボードフォーカスの輪郭があります。
-- **スクリーンリーダー：** ステータスバーのボタンの各部分には、「Next month: November」のような読み上げ用のラベルがあります。
-
-読みにくい色がありましたら、[issue を作成](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)してください。アクセシビリティに関するご意見はいつでも歓迎です。
-
-## コマンド
-
-コマンドパレット（`Ctrl+Shift+P` または `Cmd+Shift+P`）を開き、**365** と入力します：
-
-| コマンド | 動作 |
-| --- | --- |
-| `365: Toggle between Light and Dark themes` | ライトとダークを切り替え（ステータスバーのボタンと同じ） |
-| `365: Apply Light theme` | 表示中の月のライトテーマを適用 |
-| `365: Apply Dark theme` | 表示中の月のダークテーマを適用 |
-| `365: Apply High Contrast theme` | 表示中の月のハイコントラストテーマを適用 |
-| `365: Apply High Contrast Light theme` | 表示中の月の明るいハイコントラストテーマを適用 |
-| `365: Next month` | 次の月のテーマを同じ種類で適用 |
-| `365: Previous month` | 前の月のテーマを同じ種類で適用 |
-| `365: Back to the current month` | 実際の当月のテーマを同じ種類で適用 |
-
-この拡張機能には、既定のキーボードショートカットはありません。自分で割り当てるには、ショートカット一覧を開き（`Ctrl+K Ctrl+S`、Mac では `Cmd+K Cmd+S`）、**365** と入力してコマンドをダブルクリックし、使いたいキーを押します。
-
-## 設定
-
-| 設定 | 既定値 | 説明 |
-| --- | --- | --- |
-| `365DayNight.enable` | `false` | 当月のテーマを自動で適用 |
-| `365DayNight.mode` | `auto` | `auto`（時刻に応じて）、`day`（常にライト）、`night`（常にダーク）、`system`（システムに従う） |
-| `365DayNight.dayStart` | `"07:00"` | `auto` モードでライトテーマが始まる時刻（HH:MM 形式） |
-| `365DayNight.nightStart` | `"19:00"` | `auto` モードでダークテーマが始まる時刻（HH:MM 形式） |
-| `365DayNight.toggleIncludesHighContrast` | `false` | ステータスバーのボタンですべての種類を順に切り替える：ライト、ダーク、ハイコントラスト、明るいハイコントラスト |
+バージョン 0.13.0 ですべてのテーマを作り直しました。選択中のテーマ、設定、ショートカットはそのまま保持されます。以前のデザインがよい場合は、[元に戻す方法](GUIDE_ja.md#新しいデザインと元に戻す方法)をご覧ください。
 
 ## よくある質問
 
@@ -220,7 +104,7 @@ Visual Studio Code 1.96 以降が必要です。
 はい。`"365DayNight.enable": true` と `"365DayNight.mode": "system"` を設定します。ライトとダークはシステムが決め、拡張機能はテーマを当月に保ちます。
 
 **色覚多様性に配慮した VS Code テーマはありますか？**
-はい。すべてのテーマを 1 型・2 型・3 型色覚のシミュレーションでテストし、斜体・下線・取り消し線も使って、情報が色だけに依存しないようにしています。
+はい。すべてのテーマを 1 型・2 型・3 型色覚のシミュレーションでテストしており、コメント、非推奨のコード、無効なコードは斜体、取り消し線、下線でも区別されます。
 
 **拡張機能が勝手にテーマを変えることはありますか？**
 いいえ。自動モードは初期状態でオフです。オフのままなら、テーマを選んだときかステータスバーのボタンを押したときにだけ変わります。 365 テーマを初めて使うと通知で提案されますが、選ばない限り何も変わりません。
@@ -234,18 +118,10 @@ Visual Studio Code 1.96 以降が必要です。
 **新しいバージョンをいち早く試すには？**
 プレリリース版がある場合は、拡張機能ビューで拡張機能のページを開き、**Switch to Pre-Release Version**（プレリリース版に切り替え）をクリックします。VS Code がプレリリース版とその更新をインストールします。通常のバージョンに戻すには、同じページで **Switch to Release Version** をクリックします。プレリリース版へのフィードバックは [GitHub の Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) で歓迎しています。[テスター募集](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)も行っており、確認項目の短いリストを用意しています。
 
-## ロードマップ
+## テーマを気に入っていただけましたか？
 
-アイデアやご要望は [GitHub の issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) でお待ちしています。
+⭐ [Marketplace でのレビュー](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)が、ほかの開発者に見つけてもらう助けになります。
 
-## フィードバックと貢献
-
-- ⭐ テーマを気に入っていただけましたか？[Marketplace でのレビュー](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)が、ほかの開発者に見つけてもらう助けになります。
-- 🐞 バグ、読みにくい色、アイデアなどは [issue を作成](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues)してください。
-- 🛠️ 開発に参加したい方は [CONTRIBUTING.md](../CONTRIBUTING.md)（英語）をご覧ください。
-
-リリースノートは [CHANGELOG](../CHANGELOG.md) にあります。
-
-## ライセンス
+バグ、読みにくい色、アイデアがあれば [Issue を作成](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose)してください。貢献したい方は [CONTRIBUTING.md](../CONTRIBUTING.md) をご覧ください。リリースノートは [CHANGELOG](../CHANGELOG.md) にあります。
 
 [MIT](../LICENSE) © Mickaël Lherminez
