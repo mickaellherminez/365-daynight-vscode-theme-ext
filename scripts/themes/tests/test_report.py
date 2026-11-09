@@ -20,8 +20,13 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(sum(len(v['themes']) for v in self.data['variants'].values()), 48)
 
     def test_limits_are_published(self):
-        for limit in ('No testing with real users', 'Partial forms', 'APCA', 'project rules'):
+        for limit in ('No testing with real users', 'Partial forms', 'APCA', 'project rules', 'CIE76 is a simple measure'):
             self.assertIn(limit, self.markdown)
+
+    def test_ciede2000_is_reported_for_each_vision(self):
+        for variant in self.data['variants'].values():
+            for theme in variant['themes']:
+                self.assertEqual(set(theme['ciede2000']), {'normal', 'protanopia', 'deuteranopia', 'tritanopia'})
 
     def test_each_theme_has_all_the_scores(self):
         names = {'protanopia', 'deuteranopia', 'tritanopia', 'protanomaly', 'deuteranomaly', 'tritanomaly',

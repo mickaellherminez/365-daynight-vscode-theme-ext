@@ -44,6 +44,23 @@ Each theme gets a score out of 100 for each vision situation. A score helps to c
 | November | 273/273 | 11.74:1 | 4.69:1 | 100.0% | 58.8% | 23.7 | 13.5 | 12.2 | 12.2 | 12/21 |
 | December | 273/273 | 11.29:1 | 4.59:1 | 100.0% | 49.3% | 22.1 | 13.4 | 12.3 | 12.2 | 18/21 |
 
+Smallest difference between main syntax colors with CIEDE2000, for information:
+
+| Month | Normal | Protanopia | Deuteranopia | Tritanopia |
+| --- | --- | --- | --- | --- |
+| January | 13.6 | 10.5 | 7.1 | 8.9 |
+| February | 12.8 | 6.0 | 7.9 | 12.2 |
+| March | 16.7 | 8.6 | 7.4 | 11.3 |
+| April | 17.2 | 9.2 | 9.7 | 9.5 |
+| May | 10.8 | 10.2 | 8.4 | 8.1 |
+| June | 12.9 | 7.8 | 6.5 | 8.9 |
+| July | 12.8 | 5.9 | 9.4 | 11.8 |
+| August | 18.7 | 7.7 | 4.8 | 10.8 |
+| September | 17.8 | 8.0 | 6.5 | 7.9 |
+| October | 17.4 | 11.1 | 8.7 | 9.9 |
+| November | 16.8 | 8.2 | 4.7 | 9.9 |
+| December | 16.8 | 10.3 | 7.4 | 9.7 |
+
 Scores out of 100:
 
 | Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
@@ -86,6 +103,23 @@ Difference between months:
 | October | 274/274 | 13.01:1 | 4.68:1 | 100.0% | 76.0% | 27.7 | 12.2 | 13.4 | 13.1 | 13/21 |
 | November | 274/274 | 10.96:1 | 4.52:1 | 100.0% | 63.3% | 21.7 | 14.5 | 13.4 | 16.2 | 18/21 |
 | December | 274/274 | 13.81:1 | 4.68:1 | 100.0% | 75.3% | 27.7 | 12.4 | 13.8 | 19.9 | 7/21 |
+
+Smallest difference between main syntax colors with CIEDE2000, for information:
+
+| Month | Normal | Protanopia | Deuteranopia | Tritanopia |
+| --- | --- | --- | --- | --- |
+| January | 15.8 | 10.8 | 8.4 | 9.0 |
+| February | 16.6 | 6.6 | 6.3 | 8.0 |
+| March | 16.0 | 4.8 | 6.6 | 9.5 |
+| April | 14.0 | 6.9 | 7.3 | 7.8 |
+| May | 19.1 | 5.2 | 11.7 | 7.7 |
+| June | 11.7 | 10.4 | 6.7 | 5.5 |
+| July | 17.7 | 7.8 | 4.6 | 10.5 |
+| August | 15.4 | 10.7 | 8.2 | 6.8 |
+| September | 15.0 | 6.0 | 5.5 | 7.6 |
+| October | 15.6 | 6.3 | 9.4 | 8.5 |
+| November | 15.1 | 6.1 | 6.3 | 11.0 |
+| December | 19.2 | 9.9 | 8.4 | 10.2 |
 
 Scores out of 100:
 
@@ -130,6 +164,23 @@ Difference between months:
 | November | 275/275 | 17.39:1 | 4.94:1 | 100.0% | 97.8% | 17.0 | 16.2 | 12.4 | 13.3 | 13/21 |
 | December | 275/275 | 16.65:1 | 4.94:1 | 100.0% | 97.8% | 23.6 | 12.5 | 12.4 | 15.1 | 15/21 |
 
+Smallest difference between main syntax colors with CIEDE2000, for information:
+
+| Month | Normal | Protanopia | Deuteranopia | Tritanopia |
+| --- | --- | --- | --- | --- |
+| January | 18.6 | 6.2 | 8.2 | 5.9 |
+| February | 10.2 | 6.2 | 7.3 | 6.2 |
+| March | 11.2 | 10.3 | 9.2 | 11.2 |
+| April | 10.6 | 7.2 | 5.3 | 9.7 |
+| May | 10.5 | 9.0 | 6.3 | 7.4 |
+| June | 11.4 | 11.0 | 9.0 | 6.9 |
+| July | 17.9 | 8.7 | 7.8 | 10.6 |
+| August | 16.0 | 9.6 | 7.3 | 9.6 |
+| September | 10.7 | 6.0 | 10.5 | 9.9 |
+| October | 10.4 | 10.3 | 7.6 | 10.2 |
+| November | 11.0 | 4.4 | 6.0 | 6.9 |
+| December | 14.5 | 8.0 | 7.3 | 8.3 |
+
 Scores out of 100:
 
 | Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
@@ -173,6 +224,23 @@ Difference between months:
 | November | 279/279 | 17.25:1 | 4.78:1 | 100.0% | 96.7% | 26.3 | 13.3 | 12.5 | 12.5 | 10/21 |
 | December | 279/279 | 17.86:1 | 4.94:1 | 100.0% | 97.8% | 19.6 | 12.8 | 12.5 | 13.0 | 14/21 |
 
+Smallest difference between main syntax colors with CIEDE2000, for information:
+
+| Month | Normal | Protanopia | Deuteranopia | Tritanopia |
+| --- | --- | --- | --- | --- |
+| January | 15.0 | 5.8 | 4.7 | 8.9 |
+| February | 13.0 | 6.3 | 9.3 | 10.7 |
+| March | 17.5 | 7.5 | 10.2 | 10.2 |
+| April | 12.7 | 7.9 | 8.8 | 8.8 |
+| May | 12.4 | 7.9 | 8.1 | 8.7 |
+| June | 15.0 | 6.7 | 4.8 | 7.9 |
+| July | 12.1 | 7.6 | 9.4 | 9.9 |
+| August | 12.2 | 6.3 | 7.3 | 12.2 |
+| September | 18.3 | 7.1 | 6.8 | 8.9 |
+| October | 12.5 | 6.1 | 4.6 | 8.9 |
+| November | 17.2 | 5.8 | 8.3 | 9.1 |
+| December | 13.4 | 6.1 | 5.8 | 10.0 |
+
 Scores out of 100:
 
 | Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
@@ -207,6 +275,7 @@ These results are measurements and simulations. Here is what they do not show.
 - **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit.
 - **Achromatopsia is information only.** Without color, many syntax colors are close in lightness, as the table shows. They then differ only by style where the theme sets one, for comments, deprecated and invalid code for example.
 - **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE 12 on the CIE76 scale) and the variety thresholds are practical rules chosen for this project, not standards.
+- **CIE76 is a simple measure.** The thresholds apply to CIE76. CIEDE2000 is closer to perception, especially for blues and low saturation colors, so it is shown next to it for information. It uses another scale, and the thresholds are not calibrated for it.
 - **WCAG 2 contrast only.** APCA, the contrast model drafted for WCAG 3, is not applied.
 - **Colors, not rendering.** The audit reads the theme files. It checks the color pairs listed in its code, with one TextMate scope per token category. It does not look at a rendered window, antialiasing or your display.
 - **Not every VS Code color.** A theme defines about 485 of the roughly 970 colors documented by VS Code. The others use the defaults of VS Code, and only those of the recent surfaces are audited, as they are in VS Code 1.145. A future version may change them.

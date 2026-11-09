@@ -21,6 +21,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 8.4,
+            "normal": 15.8,
+            "protanopia": 10.8,
+            "tritanopia": 9.0
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -81,6 +87,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 6.3,
+            "normal": 16.6,
+            "protanopia": 6.6,
+            "tritanopia": 8.0
           },
           "colorVision": {
             "deuteranopia": {
@@ -143,6 +155,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 6.6,
+            "normal": 16.0,
+            "protanopia": 4.8,
+            "tritanopia": 9.5
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -203,6 +221,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 7.3,
+            "normal": 14.0,
+            "protanopia": 6.9,
+            "tritanopia": 7.8
           },
           "colorVision": {
             "deuteranopia": {
@@ -265,6 +289,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 11.7,
+            "normal": 19.1,
+            "protanopia": 5.2,
+            "tritanopia": 7.7
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -325,6 +355,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 6.7,
+            "normal": 11.7,
+            "protanopia": 10.4,
+            "tritanopia": 5.5
           },
           "colorVision": {
             "deuteranopia": {
@@ -387,6 +423,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 4.6,
+            "normal": 17.7,
+            "protanopia": 7.8,
+            "tritanopia": 10.5
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -447,6 +489,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 8.2,
+            "normal": 15.4,
+            "protanopia": 10.7,
+            "tritanopia": 6.8
           },
           "colorVision": {
             "deuteranopia": {
@@ -509,6 +557,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 5.5,
+            "normal": 15.0,
+            "protanopia": 6.0,
+            "tritanopia": 7.6
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -569,6 +623,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 9.4,
+            "normal": 15.6,
+            "protanopia": 6.3,
+            "tritanopia": 8.5
           },
           "colorVision": {
             "deuteranopia": {
@@ -631,6 +691,12 @@
             "passed": 274,
             "total": 274
           },
+          "ciede2000": {
+            "deuteranopia": 6.3,
+            "normal": 15.1,
+            "protanopia": 6.1,
+            "tritanopia": 11.0
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -691,6 +757,12 @@
           "checks": {
             "passed": 274,
             "total": 274
+          },
+          "ciede2000": {
+            "deuteranopia": 8.4,
+            "normal": 19.2,
+            "protanopia": 9.9,
+            "tritanopia": 10.2
           },
           "colorVision": {
             "deuteranopia": {
@@ -811,6 +883,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 8.2,
+            "normal": 18.6,
+            "protanopia": 6.2,
+            "tritanopia": 5.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -871,6 +949,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 7.3,
+            "normal": 10.2,
+            "protanopia": 6.2,
+            "tritanopia": 6.2
           },
           "colorVision": {
             "deuteranopia": {
@@ -933,6 +1017,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 9.2,
+            "normal": 11.2,
+            "protanopia": 10.3,
+            "tritanopia": 11.2
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -993,6 +1083,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 5.3,
+            "normal": 10.6,
+            "protanopia": 7.2,
+            "tritanopia": 9.7
           },
           "colorVision": {
             "deuteranopia": {
@@ -1055,6 +1151,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 6.3,
+            "normal": 10.5,
+            "protanopia": 9.0,
+            "tritanopia": 7.4
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1115,6 +1217,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 9.0,
+            "normal": 11.4,
+            "protanopia": 11.0,
+            "tritanopia": 6.9
           },
           "colorVision": {
             "deuteranopia": {
@@ -1177,6 +1285,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 7.8,
+            "normal": 17.9,
+            "protanopia": 8.7,
+            "tritanopia": 10.6
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1237,6 +1351,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 7.3,
+            "normal": 16.0,
+            "protanopia": 9.6,
+            "tritanopia": 9.6
           },
           "colorVision": {
             "deuteranopia": {
@@ -1299,6 +1419,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 10.5,
+            "normal": 10.7,
+            "protanopia": 6.0,
+            "tritanopia": 9.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1359,6 +1485,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 7.6,
+            "normal": 10.4,
+            "protanopia": 10.3,
+            "tritanopia": 10.2
           },
           "colorVision": {
             "deuteranopia": {
@@ -1421,6 +1553,12 @@
             "passed": 275,
             "total": 275
           },
+          "ciede2000": {
+            "deuteranopia": 6.0,
+            "normal": 11.0,
+            "protanopia": 4.4,
+            "tritanopia": 6.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1481,6 +1619,12 @@
           "checks": {
             "passed": 275,
             "total": 275
+          },
+          "ciede2000": {
+            "deuteranopia": 7.3,
+            "normal": 14.5,
+            "protanopia": 8.0,
+            "tritanopia": 8.3
           },
           "colorVision": {
             "deuteranopia": {
@@ -1601,6 +1745,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 4.7,
+            "normal": 15.0,
+            "protanopia": 5.8,
+            "tritanopia": 8.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1661,6 +1811,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 9.3,
+            "normal": 13.0,
+            "protanopia": 6.3,
+            "tritanopia": 10.7
           },
           "colorVision": {
             "deuteranopia": {
@@ -1723,6 +1879,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 10.2,
+            "normal": 17.5,
+            "protanopia": 7.5,
+            "tritanopia": 10.2
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1783,6 +1945,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 8.8,
+            "normal": 12.7,
+            "protanopia": 7.9,
+            "tritanopia": 8.8
           },
           "colorVision": {
             "deuteranopia": {
@@ -1845,6 +2013,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 8.1,
+            "normal": 12.4,
+            "protanopia": 7.9,
+            "tritanopia": 8.7
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -1905,6 +2079,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 4.8,
+            "normal": 15.0,
+            "protanopia": 6.7,
+            "tritanopia": 7.9
           },
           "colorVision": {
             "deuteranopia": {
@@ -1967,6 +2147,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 9.4,
+            "normal": 12.1,
+            "protanopia": 7.6,
+            "tritanopia": 9.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2027,6 +2213,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 7.3,
+            "normal": 12.2,
+            "protanopia": 6.3,
+            "tritanopia": 12.2
           },
           "colorVision": {
             "deuteranopia": {
@@ -2089,6 +2281,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 6.8,
+            "normal": 18.3,
+            "protanopia": 7.1,
+            "tritanopia": 8.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2149,6 +2347,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 4.6,
+            "normal": 12.5,
+            "protanopia": 6.1,
+            "tritanopia": 8.9
           },
           "colorVision": {
             "deuteranopia": {
@@ -2211,6 +2415,12 @@
             "passed": 279,
             "total": 279
           },
+          "ciede2000": {
+            "deuteranopia": 8.3,
+            "normal": 17.2,
+            "protanopia": 5.8,
+            "tritanopia": 9.1
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2271,6 +2481,12 @@
           "checks": {
             "passed": 279,
             "total": 279
+          },
+          "ciede2000": {
+            "deuteranopia": 5.8,
+            "normal": 13.4,
+            "protanopia": 6.1,
+            "tritanopia": 10.0
           },
           "colorVision": {
             "deuteranopia": {
@@ -2391,6 +2607,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 7.1,
+            "normal": 13.6,
+            "protanopia": 10.5,
+            "tritanopia": 8.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2451,6 +2673,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 7.9,
+            "normal": 12.8,
+            "protanopia": 6.0,
+            "tritanopia": 12.2
           },
           "colorVision": {
             "deuteranopia": {
@@ -2513,6 +2741,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 7.4,
+            "normal": 16.7,
+            "protanopia": 8.6,
+            "tritanopia": 11.3
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2573,6 +2807,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 9.7,
+            "normal": 17.2,
+            "protanopia": 9.2,
+            "tritanopia": 9.5
           },
           "colorVision": {
             "deuteranopia": {
@@ -2635,6 +2875,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 8.4,
+            "normal": 10.8,
+            "protanopia": 10.2,
+            "tritanopia": 8.1
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2695,6 +2941,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 6.5,
+            "normal": 12.9,
+            "protanopia": 7.8,
+            "tritanopia": 8.9
           },
           "colorVision": {
             "deuteranopia": {
@@ -2757,6 +3009,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 9.4,
+            "normal": 12.8,
+            "protanopia": 5.9,
+            "tritanopia": 11.8
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2817,6 +3075,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 4.8,
+            "normal": 18.7,
+            "protanopia": 7.7,
+            "tritanopia": 10.8
           },
           "colorVision": {
             "deuteranopia": {
@@ -2879,6 +3143,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 6.5,
+            "normal": 17.8,
+            "protanopia": 8.0,
+            "tritanopia": 7.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -2939,6 +3209,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 8.7,
+            "normal": 17.4,
+            "protanopia": 11.1,
+            "tritanopia": 9.9
           },
           "colorVision": {
             "deuteranopia": {
@@ -3001,6 +3277,12 @@
             "passed": 273,
             "total": 273
           },
+          "ciede2000": {
+            "deuteranopia": 4.7,
+            "normal": 16.8,
+            "protanopia": 8.2,
+            "tritanopia": 9.9
+          },
           "colorVision": {
             "deuteranopia": {
               "closest": [
@@ -3061,6 +3343,12 @@
           "checks": {
             "passed": 273,
             "total": 273
+          },
+          "ciede2000": {
+            "deuteranopia": 7.4,
+            "normal": 16.8,
+            "protanopia": 10.3,
+            "tritanopia": 9.7
           },
           "colorVision": {
             "deuteranopia": {
