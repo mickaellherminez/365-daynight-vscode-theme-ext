@@ -1,0 +1,2646 @@
+{
+  "checks": {
+    "passed": 13212,
+    "total": 13212
+  },
+  "themeCount": 48,
+  "thresholds": {
+    "colorDistinctionDeltaE": 12,
+    "textContrast": 4.5,
+    "textContrastHighContrast": 7
+  },
+  "variants": {
+    "Dark": {
+      "themes": [
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 14
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 15.9
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.5
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 16.9
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 14.3
+            }
+          },
+          "contrast": {
+            "editorText": 12.3,
+            "lowestText": 4.68
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 69.3,
+            "textChecks": 150
+          },
+          "name": "365 01-January Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 14
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 13.7
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 23.7
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 12.0
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 15.0
+            }
+          },
+          "contrast": {
+            "editorText": 11.62,
+            "lowestText": 4.52
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 68.0,
+            "textChecks": 150
+          },
+          "name": "365 02-February Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "number"
+              ],
+              "deltaE": 13.2
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 22.9
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 13.5
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 15.8
+            }
+          },
+          "contrast": {
+            "editorText": 11.59,
+            "lowestText": 4.51
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 70.0,
+            "textChecks": 150
+          },
+          "name": "365 03-March Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 18
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 16.1
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 20.7
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 12.7
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 13.6
+            }
+          },
+          "contrast": {
+            "editorText": 10.65,
+            "lowestText": 4.53
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 65.3,
+            "textChecks": 150
+          },
+          "name": "365 04-April Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "class"
+              ],
+              "deltaE": 15.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.9
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 4"
+              ],
+              "deltaE": 13.1
+            },
+            "tritanopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 14.1
+            }
+          },
+          "contrast": {
+            "editorText": 12.71,
+            "lowestText": 4.68
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 76.0,
+            "textChecks": 150
+          },
+          "name": "365 05-May Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 17
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 15.2
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.7
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 14.8
+            },
+            "tritanopia": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 12.3
+            }
+          },
+          "contrast": {
+            "editorText": 9.91,
+            "lowestText": 4.52
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 62.0,
+            "textChecks": 150
+          },
+          "name": "365 06-June Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 11
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 13.8
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 24.9
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 18.5
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 15.0
+            }
+          },
+          "contrast": {
+            "editorText": 12.12,
+            "lowestText": 4.61
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 74.7,
+            "textChecks": 150
+          },
+          "name": "365 07-July Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 18
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 14.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 21.8
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 14.4
+            },
+            "tritanopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 14.8
+            }
+          },
+          "contrast": {
+            "editorText": 10.68,
+            "lowestText": 4.53
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 66.7,
+            "textChecks": 150
+          },
+          "name": "365 08-August Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 16.3
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 25.9
+            },
+            "protanopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 22.6
+            },
+            "tritanopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 13.7
+            }
+          },
+          "contrast": {
+            "editorText": 12.28,
+            "lowestText": 4.61
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 69.3,
+            "textChecks": 150
+          },
+          "name": "365 09-September Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 13.4
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 27.7
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.2
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "class"
+              ],
+              "deltaE": 13.1
+            }
+          },
+          "contrast": {
+            "editorText": 13.01,
+            "lowestText": 4.68
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 76.0,
+            "textChecks": 150
+          },
+          "name": "365 10-October Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 18
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 2"
+              ],
+              "deltaE": 13.4
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 21.7
+            },
+            "protanopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 14.5
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 16.2
+            }
+          },
+          "contrast": {
+            "editorText": 10.96,
+            "lowestText": 4.52
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 63.3,
+            "textChecks": 150
+          },
+          "name": "365 11-November Dark"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 7
+          },
+          "checks": {
+            "passed": 274,
+            "total": 274
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 13.8
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 27.7
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "string"
+              ],
+              "deltaE": 12.4
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 19.9
+            }
+          },
+          "contrast": {
+            "editorText": 13.81,
+            "lowestText": 4.68
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 75.3,
+            "textChecks": 150
+          },
+          "name": "365 12-December Dark"
+        }
+      ],
+      "variety": [
+        {
+          "closest": {
+            "deltaE": 9.1,
+            "months": [
+              "April",
+              "July"
+            ]
+          },
+          "measure": "Editor background",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 8
+        },
+        {
+          "closest": {
+            "deltaE": 7.4,
+            "months": [
+              "March",
+              "November"
+            ]
+          },
+          "measure": "Window frame",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 7
+        },
+        {
+          "closest": {
+            "deltaE": 27.0,
+            "months": [
+              "February",
+              "April"
+            ]
+          },
+          "measure": "Accent",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 25
+        },
+        {
+          "closest": {
+            "deltaE": 27.2,
+            "months": [
+              "January",
+              "April"
+            ]
+          },
+          "measure": "Syntax (6 roles)",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 18
+        }
+      ]
+    },
+    "High Contrast": {
+      "themes": [
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 9
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 12.1
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 27.6
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.2
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 13.5
+            }
+          },
+          "contrast": {
+            "editorText": 17.35,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 01-January High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 8
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 13.3
+            },
+            "normal": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 23.4
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 16.0
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 12.6
+            }
+          },
+          "contrast": {
+            "editorText": 17.5,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 02-February High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "number"
+              ],
+              "deltaE": 14.8
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.6
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.6
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.5
+            }
+          },
+          "contrast": {
+            "editorText": 17.8,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 03-March High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 9
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 14.4
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.5
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.1
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 14.5
+            }
+          },
+          "contrast": {
+            "editorText": 16.97,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 04-April High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 11
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 12.2
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.5
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 4"
+              ],
+              "deltaE": 16.0
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "keyword"
+              ],
+              "deltaE": 14.1
+            }
+          },
+          "contrast": {
+            "editorText": 17.14,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 05-May High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 12.0
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.7
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.3
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "class"
+              ],
+              "deltaE": 12.8
+            }
+          },
+          "contrast": {
+            "editorText": 17.97,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 06-June High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 12.9
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.9
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 12.2
+            },
+            "tritanopia": {
+              "closest": [
+                "variable",
+                "function"
+              ],
+              "deltaE": 15.5
+            }
+          },
+          "contrast": {
+            "editorText": 16.69,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 07-July High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 4"
+              ],
+              "deltaE": 12.8
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.8
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 21.3
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 16.64,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 08-August High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 8
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.5
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.7
+            },
+            "tritanopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 14.8
+            }
+          },
+          "contrast": {
+            "editorText": 17.83,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 09-September High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 11
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.1
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.2
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 14.3
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 16.0
+            }
+          },
+          "contrast": {
+            "editorText": 17.88,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 10-October High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 2"
+              ],
+              "deltaE": 12.4
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 17.0
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 16.2
+            },
+            "tritanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 4"
+              ],
+              "deltaE": 13.3
+            }
+          },
+          "contrast": {
+            "editorText": 17.39,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 11-November High Contrast"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 15
+          },
+          "checks": {
+            "passed": 275,
+            "total": 275
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 12.4
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 23.6
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "string"
+              ],
+              "deltaE": 12.5
+            },
+            "tritanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 15.1
+            }
+          },
+          "contrast": {
+            "editorText": 16.65,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 179
+          },
+          "name": "365 12-December High Contrast"
+        }
+      ],
+      "variety": [
+        {
+          "closest": {
+            "deltaE": 4.9,
+            "months": [
+              "June",
+              "November"
+            ]
+          },
+          "measure": "Editor background",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 4
+        },
+        {
+          "closest": {
+            "deltaE": 4.1,
+            "months": [
+              "April",
+              "June"
+            ]
+          },
+          "measure": "Window frame",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 4
+        },
+        {
+          "closest": {
+            "deltaE": 28.3,
+            "months": [
+              "June",
+              "September"
+            ]
+          },
+          "measure": "Accent",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 25
+        },
+        {
+          "closest": {
+            "deltaE": 31.6,
+            "months": [
+              "January",
+              "April"
+            ]
+          },
+          "measure": "Syntax (6 roles)",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 18
+        }
+      ]
+    },
+    "High Contrast Light": {
+      "themes": [
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 21.6
+            },
+            "protanopia": {
+              "closest": [
+                "added",
+                "deleted"
+              ],
+              "deltaE": 13.3
+            },
+            "tritanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 2"
+              ],
+              "deltaE": 12.4
+            }
+          },
+          "contrast": {
+            "editorText": 16.66,
+            "lowestText": 4.62
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 01-January High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 8
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 20.0
+            },
+            "protanopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 12.5
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "class"
+              ],
+              "deltaE": 12.9
+            }
+          },
+          "contrast": {
+            "editorText": 16.75,
+            "lowestText": 4.62
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 02-February High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 9
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 25.7
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.6
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 13.0
+            }
+          },
+          "contrast": {
+            "editorText": 16.8,
+            "lowestText": 4.71
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 03-March High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 21.1
+            },
+            "protanopia": {
+              "closest": [
+                "added",
+                "deleted"
+              ],
+              "deltaE": 13.3
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 13.0
+            }
+          },
+          "contrast": {
+            "editorText": 16.98,
+            "lowestText": 4.71
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 04-April High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "class"
+              ],
+              "deltaE": 19.3
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "class"
+              ],
+              "deltaE": 12.5
+            },
+            "tritanopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 12.3
+            }
+          },
+          "contrast": {
+            "editorText": 17.0,
+            "lowestText": 4.71
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 05-May High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "string"
+              ],
+              "deltaE": 23.0
+            },
+            "protanopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 12.1
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 13.0
+            }
+          },
+          "contrast": {
+            "editorText": 17.78,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 182
+          },
+          "name": "365 06-June High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 8
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 12.2
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 16.9
+            },
+            "protanopia": {
+              "closest": [
+                "added",
+                "deleted"
+              ],
+              "deltaE": 13.3
+            },
+            "tritanopia": {
+              "closest": [
+                "variable",
+                "function"
+              ],
+              "deltaE": 12.9
+            }
+          },
+          "contrast": {
+            "editorText": 17.16,
+            "lowestText": 4.78
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 07-July High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 18.6
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 4"
+              ],
+              "deltaE": 12.3
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 13.0
+            }
+          },
+          "contrast": {
+            "editorText": 18.52,
+            "lowestText": 5.17
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 182
+          },
+          "name": "365 08-August High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 12.1
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.7
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "string"
+              ],
+              "deltaE": 12.1
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 12.8
+            }
+          },
+          "contrast": {
+            "editorText": 16.73,
+            "lowestText": 4.62
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 09-September High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 12.3
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 18.5
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 13.0
+            },
+            "tritanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 12.9
+            }
+          },
+          "contrast": {
+            "editorText": 16.85,
+            "lowestText": 4.71
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 10-October High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.3
+            },
+            "protanopia": {
+              "closest": [
+                "added",
+                "deleted"
+              ],
+              "deltaE": 13.3
+            },
+            "tritanopia": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 12.5
+            }
+          },
+          "contrast": {
+            "editorText": 17.25,
+            "lowestText": 4.78
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 96.7,
+            "textChecks": 182
+          },
+          "name": "365 11-November High Contrast Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 14
+          },
+          "checks": {
+            "passed": 279,
+            "total": 279
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 19.6
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 12.8
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 13.0
+            }
+          },
+          "contrast": {
+            "editorText": 17.86,
+            "lowestText": 4.94
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 97.8,
+            "textChecks": 182
+          },
+          "name": "365 12-December High Contrast Light"
+        }
+      ],
+      "variety": [
+        {
+          "closest": {
+            "deltaE": 4.6,
+            "months": [
+              "October",
+              "November"
+            ]
+          },
+          "measure": "Editor background",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 4
+        },
+        {
+          "closest": {
+            "deltaE": 5.7,
+            "months": [
+              "October",
+              "November"
+            ]
+          },
+          "measure": "Window frame",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 4
+        },
+        {
+          "closest": {
+            "deltaE": 28.1,
+            "months": [
+              "May",
+              "November"
+            ]
+          },
+          "measure": "Accent",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 25
+        },
+        {
+          "closest": {
+            "deltaE": 19.3,
+            "months": [
+              "January",
+              "April"
+            ]
+          },
+          "measure": "Syntax (6 roles)",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 18
+        }
+      ]
+    },
+    "Light": {
+      "themes": [
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 16
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 12.6
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "function"
+              ],
+              "deltaE": 21.6
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "function"
+              ],
+              "deltaE": 13.5
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 11.39,
+            "lowestText": 4.59
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 58.8,
+            "textChecks": 148
+          },
+          "name": "365 01-January Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "error",
+                "warning"
+              ],
+              "deltaE": 14.3
+            },
+            "normal": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 22.9
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 12.3
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.71,
+            "lowestText": 4.78
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 60.1,
+            "textChecks": 148
+          },
+          "name": "365 02-February Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 9
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 13.8
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 26.4
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 13.0
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 13.18,
+            "lowestText": 4.98
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 62.8,
+            "textChecks": 148
+          },
+          "name": "365 03-March Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 8
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 13.6
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 27.6
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 14.0
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.21,
+            "lowestText": 4.74
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 59.5,
+            "textChecks": 148
+          },
+          "name": "365 04-April Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 13.3
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 14.7
+            },
+            "protanopia": {
+              "closest": [
+                "variable",
+                "class"
+              ],
+              "deltaE": 13.1
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.36,
+            "lowestText": 4.72
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 60.8,
+            "textChecks": 148
+          },
+          "name": "365 05-May Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 12.6
+            },
+            "normal": {
+              "closest": [
+                "variable",
+                "string"
+              ],
+              "deltaE": 21.5
+            },
+            "protanopia": {
+              "closest": [
+                "added",
+                "deleted"
+              ],
+              "deltaE": 15.4
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.76,
+            "lowestText": 4.8
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 59.5,
+            "textChecks": 148
+          },
+          "name": "365 06-June Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 10
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "keyword"
+              ],
+              "deltaE": 12.7
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "keyword"
+              ],
+              "deltaE": 19.6
+            },
+            "protanopia": {
+              "closest": [
+                "function",
+                "class"
+              ],
+              "deltaE": 12.8
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.45,
+            "lowestText": 4.71
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 56.1,
+            "textChecks": 148
+          },
+          "name": "365 07-July Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "class",
+                "number"
+              ],
+              "deltaE": 13.9
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.5
+            },
+            "protanopia": {
+              "closest": [
+                "Git graph 1",
+                "Git graph 5"
+              ],
+              "deltaE": 13.9
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 12.47,
+            "lowestText": 4.7
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 57.4,
+            "textChecks": 148
+          },
+          "name": "365 08-August Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 15
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "number"
+              ],
+              "deltaE": 13.1
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 23.5
+            },
+            "protanopia": {
+              "closest": [
+                "function",
+                "number"
+              ],
+              "deltaE": 12.2
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 11.71,
+            "lowestText": 4.69
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 60.1,
+            "textChecks": 148
+          },
+          "name": "365 09-September Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 13
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "variable",
+                "keyword"
+              ],
+              "deltaE": 12.5
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 26.7
+            },
+            "protanopia": {
+              "closest": [
+                "comment",
+                "class"
+              ],
+              "deltaE": 13.2
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 11.92,
+            "lowestText": 4.7
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 56.1,
+            "textChecks": 148
+          },
+          "name": "365 10-October Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 12
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "string",
+                "keyword"
+              ],
+              "deltaE": 12.2
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 23.7
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 13.5
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 11.74,
+            "lowestText": 4.69
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 58.8,
+            "textChecks": 148
+          },
+          "name": "365 11-November Light"
+        },
+        {
+          "achromatopsia": {
+            "pairs": 21,
+            "pairsBelowThreshold": 18
+          },
+          "checks": {
+            "passed": 273,
+            "total": 273
+          },
+          "colorVision": {
+            "deuteranopia": {
+              "closest": [
+                "comment",
+                "string"
+              ],
+              "deltaE": 12.3
+            },
+            "normal": {
+              "closest": [
+                "comment",
+                "variable"
+              ],
+              "deltaE": 22.1
+            },
+            "protanopia": {
+              "closest": [
+                "string",
+                "function"
+              ],
+              "deltaE": 13.4
+            },
+            "tritanopia": {
+              "closest": [
+                "added",
+                "modified"
+              ],
+              "deltaE": 12.2
+            }
+          },
+          "contrast": {
+            "editorText": 11.29,
+            "lowestText": 4.59
+          },
+          "lowVision": {
+            "atLeast4.5": 100.0,
+            "atLeast7": 49.3,
+            "textChecks": 148
+          },
+          "name": "365 12-December Light"
+        }
+      ],
+      "variety": [
+        {
+          "closest": {
+            "deltaE": 8.5,
+            "months": [
+              "January",
+              "June"
+            ]
+          },
+          "measure": "Editor background",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 8
+        },
+        {
+          "closest": {
+            "deltaE": 10.5,
+            "months": [
+              "January",
+              "June"
+            ]
+          },
+          "measure": "Window frame",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 7
+        },
+        {
+          "closest": {
+            "deltaE": 27.0,
+            "months": [
+              "May",
+              "August"
+            ]
+          },
+          "measure": "Accent",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 25
+        },
+        {
+          "closest": {
+            "deltaE": 23.0,
+            "months": [
+              "March",
+              "June"
+            ]
+          },
+          "measure": "Syntax (6 roles)",
+          "pairs": 66,
+          "pairsBelowThreshold": 0,
+          "threshold": 18
+        }
+      ]
+    }
+  }
+}

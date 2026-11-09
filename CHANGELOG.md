@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Added
+- Public accessibility audit report, with the results of each theme and the limits of the audit
+
 ## [0.13.2] - 2026-11-09 - Pre-release
 
 ### Changed

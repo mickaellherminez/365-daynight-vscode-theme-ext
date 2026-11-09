@@ -76,6 +76,9 @@ jobs:
       - name: Months look different from one another
         run: npm run themes:variety
 
+      - name: Audit report is up to date
+        run: npm run themes:report-check
+
       - name: Measuring tools match published reference data
         run: npm run themes:test
 

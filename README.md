@@ -32,7 +32,7 @@ Frost in January, young shoots in March, a lagoon in July, autumn leaves in Octo
 
 Text reaches a contrast of at least 4.5:1 (WCAG AA) in Light and Dark themes, and 7:1 (WCAG AAA) in High Contrast themes. Syntax colors, errors and Git changes stay distinct with color blindness, and comments, deprecated and invalid code also differ by italics, strikethrough or underline.
 
-**The proof:** every theme must pass an automated audit of more than 250 checks before each release. Color blindness is checked with simulations, so feedback from real eyes is very welcome: [join the call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+**The proof:** every theme must pass an automated audit of more than 250 checks before each release, and [the full report](docs/AUDIT.md) gives the results of each theme and the limits of the audit. Color blindness is checked with simulations, so feedback from real eyes is very welcome: [join the call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
 ### 🌗 Day and night, without thinking about it
 
@@ -79,7 +79,7 @@ On Mac, use `Cmd` instead of `Ctrl`.
 - **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
 - **Keyboard and screen readers:** High Contrast themes have a strong focus outline, and each part of the status bar button has its own spoken label.
 
-Something hard to read? [Tell us about it](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). [More details](docs/GUIDE.md#accessibility).
+Something hard to read? [Tell us about it](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). [More details](docs/GUIDE.md#accessibility) and [the full audit report](docs/AUDIT.md).
 
 ## New look in 0.13
 
