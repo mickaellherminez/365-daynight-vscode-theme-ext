@@ -187,7 +187,9 @@ The package is built with `vsce package --pre-release`, which marks it in `exten
 
 If one registry fails, open the workflow run and choose **Re-run failed jobs**: this publishes the same package to that registry only. A full re-run is also safe, because `--skip-duplicate` skips a registry that already has this version.
 
-Once both registries have the package, the workflow creates the [GitHub release](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases) of this version, with the `.vsix` and its notes, taken from the CHANGELOG by `scripts/release-notes.cjs`. A pre-release is marked as such on GitHub. A manual run also creates the tag there; this tag starts no other run, because GitHub ignores tags created with the workflow's token. The workflow checks for these notes before building, so a missing section stops it before anything is published. Re-running after a release exists only replaces the `.vsix` of that release. A dry run creates no release.
+After a tag publication, once both registries have the package, the workflow creates the [GitHub release](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases) of this version, with the `.vsix` and its notes, taken from the CHANGELOG by `scripts/release-notes.cjs`. The workflow checks for these notes before building, so a missing section stops it before anything is published. Re-running after a release exists only replaces the `.vsix` of that release.
+
+A manual run, pre-release or dry run, creates no GitHub release: it has no tag, and the **Version tags** ruleset of the repository lets only administrators create one. An administrator's tag would also start a release publication, so a tag for a pre-release needs the Publish workflow disabled while it is created.
 
 ## Dependencies and security
 

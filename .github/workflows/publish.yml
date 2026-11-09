@@ -19,9 +19,10 @@
 # nothing and uses the unprotected "dry-run" environment, from any branch.
 # The publishing jobs themselves use no environment, so the Marketplace
 # Trusted Publishing policy (no environment) still matches.
-# Once both registries have the package, a GitHub release is created with the
-# .vsix and the notes of this version from the CHANGELOG. It creates the tag of
-# a manual run; a tag created with the workflow's token starts no other run.
+# After a tag publication, once both registries have the package, a GitHub
+# release is created with the .vsix and the notes of this version from the
+# CHANGELOG. A manual run creates none: it has no tag, and the "Version tags"
+# ruleset lets only administrators create one.
 
 name: Publish
 
@@ -148,13 +149,12 @@ jobs:
 
   github-release:
     needs: [marketplace, open-vsx]
-    if: ${{ !inputs.dry_run }}
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-latest
     permissions:
       contents: write
     env:
       GH_TOKEN: ${{ github.token }}
-      PRERELEASE_FLAG: ${{ inputs.pre_release && '--prerelease' || '' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -171,5 +171,5 @@ jobs:
             gh release upload "$version" "$asset" --clobber
           else
             node scripts/release-notes.cjs "$version" > "$RUNNER_TEMP/notes.md"
-            gh release create "$version" "$asset" --target "$GITHUB_SHA" --title "$version" --notes-file "$RUNNER_TEMP/notes.md" $PRERELEASE_FLAG
+            gh release create "$version" "$asset" --verify-tag --title "$version" --notes-file "$RUNNER_TEMP/notes.md"
           fi
