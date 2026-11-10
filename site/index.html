@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" style="{{INITIAL_CSS}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>365 Day &amp; Night – Monthly Accessible Themes for VS Code</title>
+<meta name="description" content="48 accessible VS Code themes, a new look every month, with every contrast and color vision result published.">
+<meta property="og:title" content="365 Day &amp; Night — Readable. Measured.">
+<meta property="og:description" content="12 months. 48 accessible VS Code themes. Explore every palette and the measurements behind it.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="media/brand/og-image.png">
+<link rel="icon" href="media/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="media/brand/favicon.ico">
+<link rel="apple-touch-icon" href="media/brand/apple-touch-icon.png">
+<link rel="preload" href="media/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="media/fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="matrices.css">
+<script id="theme-data" type="application/json">{{THEME_DATA}}</script>
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById('theme-data').textContent);
+  var mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  var month = new Date().getMonth();
+  var palette = data.months[month][mode];
+  var root = document.documentElement;
+  ['bg', 'text', 'accent', 'muted', 'panel', 'panelText', 'line', 'rule', 'onAccent', 'link', 'shadow'].forEach(function (key) {
+    root.style.setProperty('--' + key, palette[key]);
+  });
+  root.dataset.month = month;
+  root.dataset.mode = mode;
+  root.style.colorScheme = mode;
+})();
+</script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top wrap">
+  <div class="identity">
+    <button class="logo-button enhanced" type="button" data-open-picker aria-label="Choose month and theme" aria-haspopup="dialog" aria-controls="theme-dialog">
+      <img src="media/brand/mark-small.svg" width="52" height="52" alt="">
+    </button>
+    <a class="brand" href="#main">365 Day &amp; Night</a>
+  </div>
+  <nav aria-label="Main navigation">
+    <a href="{{AUDIT_URL}}">Audit report</a>
+    <a href="{{REPO_URL}}">GitHub</a>
+    <button class="theme-chip enhanced" type="button" data-open-picker aria-haspopup="dialog" aria-controls="theme-dialog">
+      <span class="theme-dot" aria-hidden="true"></span>
+      <span data-selection>Month and theme</span>
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>VS Code themes <span aria-hidden="true">·</span> <span data-month-name>Every month</span></p>
+      <h1 id="hero-title">A new look every month. <span>Readable. Measured.</span></h1>
+      <p class="lead">{{THEMES}} accessible color themes for VS Code that switch between day and night in one click or on their own. Every contrast and color vision result is published.</p>
+      <div class="actions">
+        <a class="button" href="{{MARKETPLACE_URL}}">Install from the Marketplace</a>
+        <a class="button ghost" href="{{OPENVSX_URL}}">Open VSX</a>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>themes</dt><dd>{{THEMES}}</dd></div>
+        <div><dt>checks passed</dt><dd>{{CHECKS_PASSED}}</dd></div>
+        <div><dt>lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd></div>
+      </dl>
+    </div>
+    <div class="control-panel enhanced">
+      <div class="panel-heading eyebrow"><span>Fig. 01 · The logo is the control</span><span>Pick a month, then a theme</span></div>
+      <div class="picker-body">
+        <div id="hero-picker" class="picker"></div>
+        <div class="mode-options" role="group" aria-label="Theme variant"></div>
+      </div>
+      <div class="palette-readout">
+        <div class="palette-current">
+          <div id="current-swatches" class="current-swatches" aria-hidden="true"></div>
+          <div><p class="current-month" data-month-name></p><p class="current-mode" data-mode-label></p></div>
+        </div>
+        <dl class="contrast-stats">
+          <div><dt>Text</dt><dd id="text-contrast"></dd></div>
+          <div><dt>Accent</dt><dd id="accent-contrast"></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="editor-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">01</span><div>
+      <h2 id="editor-title">Read it in your editor.</h2>
+      <p class="enhanced">The same file in <span data-month-name></span>, with <span id="compare-day-label">Light</span> above and <span id="compare-night-label">Dark</span> below. Drag the handle up or down to move the divider, or click the logo to change theme.</p>
+    </div></div>
+    <div class="comparison enhanced" id="comparison" style="--split:54%">
+      <div class="editor-layer" id="compare-day" aria-hidden="true"></div>
+      <div class="editor-layer night-layer" id="compare-night" aria-hidden="true"></div>
+      <div class="compare-divider" aria-hidden="true"></div>
+      <button id="compare-handle" class="compare-handle" type="button" role="slider" aria-label="Compare Light and Dark. Use arrow keys to move the divider." aria-valuemin="6" aria-valuemax="94" aria-valuenow="54" aria-orientation="vertical"><span aria-hidden="true">↕</span></button>
+    </div>
+    <p class="sr" id="compare-status"></p>
+    <figure class="demo">
+      <video src="media/demo-months.mp4" poster="media/demo-poster.jpg" controls muted loop playsinline preload="metadata" width="1200" height="720" aria-describedby="demo-text"></video>
+      <figcaption id="demo-text"><span class="eyebrow">In VS Code</span> The status bar arrows change the month from October to December, a click on the button switches from Light to Dark, and a link in its tooltip applies High Contrast.</figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap enhanced" aria-labelledby="year-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div>
+      <h2 id="year-title">365 days, 12 palettes.</h2>
+      <p>Light on top, Dark below, the month’s button color in between. Each month uses its exact extension colors. Click a month name to apply it. The marker is today.</p>
+    </div></div>
+    <div class="year-scroll" role="region" aria-label="The twelve monthly palettes" tabindex="0">
+      <div class="year-calendar">
+        <button class="today-marker eyebrow" id="today-marker" type="button" title="Back to the current month"></button>
+        <div class="year-strip" id="year-strip" aria-hidden="true"></div>
+        <div class="month-options" id="month-options" role="group" aria-label="Choose a month"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap enhanced" aria-labelledby="variants-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">03</span><div>
+      <h2 id="variants-title">Four themes, one month.</h2>
+      <p>Light, Dark and both High Contrast themes are generated from the <span data-month-name></span> palette. Text and accent contrast are measured for each. The outlined one is active.</p>
+    </div></div>
+    <div class="variant-grid" id="variant-grid" role="group" aria-label="Preview and choose a theme variant"></div>
+  </section>
+
+  <section class="section wrap" id="numbers" aria-labelledby="numbers-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">04</span><div><h2 id="numbers-title">The numbers</h2></div></div>
+    <dl class="figures">
+      <div><dt>Themes</dt><dd>{{THEMES}}</dd><p>12 months, each in Light, Dark, High Contrast and High Contrast Light.</p></div>
+      <div><dt>Checks passed</dt><dd>{{CHECKS_PASSED}}</dd><p>Out of {{CHECKS_TOTAL}}, between {{CHECKS_MIN}} and {{CHECKS_MAX}} per theme.</p></div>
+      <div><dt>Lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd><p>The minimum is 4.5:1, the WCAG AA level for normal text.</p></div>
+    </dl>
+    <div class="audit-scale">
+      <p class="eyebrow">Where the lowest pair sits</p>
+      <div class="scale-scroll" role="img" aria-label="Lowest text contrast {{LOWEST_TEXT}} to 1. WCAG AA starts at 4.5 to 1 and AAA at 7 to 1, on a scale from 1 to 21.">
+        <div class="scale" data-lowest="{{LOWEST_TEXT}}">
+          <span class="lowest-label">Lowest: {{LOWEST_TEXT}}:1</span>
+          <div class="scale-track"></div><div class="scale-ticks"></div>
+          <span class="scale-mark aa"></span><span class="scale-mark aaa"></span><span class="scale-lowest"></span>
+          <span class="scale-label start">1:1</span><span class="scale-label aa">AA · 4.5</span><span class="scale-label aaa">AAA · 7</span><span class="scale-label end">21:1</span>
+        </div>
+      </div>
+      <p>The audit runs on every push and must pass before each release: a regression stops the release. <a href="{{AUDIT_URL}}">Read the full audit report</a>.</p>
+    </div>
+    <div class="measurements enhanced" id="measurements">
+      <div class="measurement-heading">
+        <div><p class="eyebrow">Explore the measurements</p><h3>One theme. Every color.</h3></div>
+        <fieldset class="measurement-controls">
+          <legend class="sr">Choose a theme for the graphs</legend>
+          <label for="chart-month">Month<select id="chart-month"></select></label>
+          <label for="chart-variant">Variant<select id="chart-variant"></select></label>
+        </fieldset>
+      </div>
+      <section class="measurement-block" aria-labelledby="syntax-title">
+        <div class="chart-heading"><h3 id="syntax-title">Every syntax color, measured.</h3><p>Each bar is the text contrast against the editor background, using the exact colors of <span data-selection></span>. The markers show the 4.5:1 and 7:1 text contrast thresholds.</p></div>
+        <div class="chart-summary" id="syntax-summary"></div>
+        <div id="syntax-chart"></div>
+        <p class="chart-note">Contrast = (lighter relative luminance + 0.05) / (darker relative luminance + 0.05). Measurements apply to these text colors on the editor background; they do not certify the whole interface. <a href="{{AUDIT_URL}}">Method and limits</a> · <a href="audit-report.json" download>Download the audit data</a>.</p>
+      </section>
+      <section class="measurement-block" aria-labelledby="monthly-title">
+        <div class="chart-heading"><h3 id="monthly-title">How different are the months?</h3><p>Compare the 12 monthly palettes before and after the redesign. A larger ΔE means a greater color difference. The same scale is used in both grids. Select a measure to explore the background or the syntax colors.</p></div>
+        <div id="monthly-matrices"></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="method-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">05</span><div><h2 id="method-title">How it is built</h2></div></div>
+    <ol class="method">
+      <li><span class="method-number" aria-hidden="true">1</span><h3>One palette per month</h3><p>Each month starts from a seasonal mood: frost in January, a lagoon in July, autumn leaves in October.</p><div id="method-swatches" class="method-swatches enhanced" aria-hidden="true"></div></li>
+      <li><span class="method-number" aria-hidden="true">2</span><h3>Generated themes</h3><p>A script builds the four themes of a month from its palette. CI compares the published files with the generator, byte for byte.</p><div id="method-variants" class="method-variants enhanced" aria-hidden="true"></div></li>
+      <li><span class="method-number" aria-hidden="true">3</span><h3>Automatic audit</h3><p>Contrast, simulated color vision, font styles and the difference between months are measured for every theme.</p><ul class="audit-checks"><li>Contrast</li><li>Simulated color vision</li><li>Font styles</li><li>Difference between months</li></ul></li>
+      <li class="coming"><div class="method-progress"><span class="method-number" aria-hidden="true">4</span><span class="badge">Coming</span></div><h3>Testing with real people</h3><p>Simulations do not replace real eyes. This step has not been done yet: <a href="{{TESTERS_URL}}">you can help</a>.</p></li>
+    </ol>
+  </section>
+  <noscript><p class="wrap no-script">The interactive previews need JavaScript. You can still watch the VS Code demonstration, read the audit and install all 48 themes.</p></noscript>
+</main>
+
+<footer class="wrap"><p>Free and open source, <a href="{{LICENSE_URL}}">MIT license</a>. By <a href="https://github.com/mickaellherminez">Mickaël Lherminez</a>.</p></footer>
+<p id="selection-status" class="sr" role="status" aria-live="polite" aria-atomic="true"></p>
+<dialog id="theme-dialog" aria-labelledby="dialog-title">
+  <div class="dialog-heading"><h2 class="eyebrow" id="dialog-title">Month and theme</h2><button class="close-button" id="close-picker" type="button">Close</button></div>
+  <div id="dialog-picker" class="picker"></div>
+  <div class="mode-options" role="group" aria-label="Theme variant"></div>
+  <p class="dialog-selection" data-selection></p>
+</dialog>
+</body>
+</html>
