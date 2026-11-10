@@ -134,13 +134,13 @@
   <section class="section wrap" id="numbers" aria-labelledby="numbers-title">
     <div class="section-heading"><span class="section-number" aria-hidden="true">04</span><div><h2 id="numbers-title">The numbers</h2></div></div>
     <dl class="figures">
-      <div><dt>Themes</dt><dd>{{THEMES}}</dd><p>12 months, each in Light, Dark, High Contrast and High Contrast Light.</p></div>
-      <div><dt>Checks passed</dt><dd>{{CHECKS_PASSED}}</dd><p>Out of {{CHECKS_TOTAL}}, between {{CHECKS_MIN}} and {{CHECKS_MAX}} per theme.</p></div>
-      <div><dt>Lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd><p>The minimum is 4.5:1, the WCAG AA level for normal text.</p></div>
+      <div><dt>Themes</dt><dd>{{THEMES}}</dd><dd class="figure-note">12 months, each in Light, Dark, High Contrast and High Contrast Light.</dd></div>
+      <div><dt>Checks passed</dt><dd>{{CHECKS_PASSED}}</dd><dd class="figure-note">Out of {{CHECKS_TOTAL}}, between {{CHECKS_MIN}} and {{CHECKS_MAX}} per theme.</dd></div>
+      <div><dt>Lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd><dd class="figure-note">The minimum is 4.5:1, the WCAG AA level for normal text.</dd></div>
     </dl>
     <div class="audit-scale">
       <p class="eyebrow">Where the lowest pair sits</p>
-      <div class="scale-scroll" role="img" aria-label="Lowest text contrast {{LOWEST_TEXT}} to 1. WCAG AA starts at 4.5 to 1 and AAA at 7 to 1, on a scale from 1 to 21.">
+      <div class="scale-scroll" tabindex="0" role="img" aria-label="Lowest text contrast {{LOWEST_TEXT}} to 1. WCAG AA starts at 4.5 to 1 and AAA at 7 to 1, on a scale from 1 to 21.">
         <div class="scale" data-lowest="{{LOWEST_TEXT}}">
           <span class="lowest-label">Lowest: {{LOWEST_TEXT}}:1</span>
           <div class="scale-track"></div><div class="scale-ticks"></div>
@@ -166,7 +166,7 @@
         <p class="chart-note">Contrast = (lighter relative luminance + 0.05) / (darker relative luminance + 0.05). Measurements apply to these text colors on the editor background; they do not certify the whole interface. <a href="{{AUDIT_URL}}">Method and limits</a> · <a href="audit-report.json" download>Download the audit data</a>.</p>
       </section>
       <section class="measurement-block" aria-labelledby="vision-title">
-        <div class="chart-heading"><h3 id="vision-title">Seen through each vision.</h3><p>The code of <span data-selection></span> as simulated for each type of color blindness, and a score out of 100 for each vision situation. These are calculations, not observations: <a href="{{TESTERS_URL}}">testing with real people</a> is still to come.</p></div>
+        <div class="chart-heading"><h3 id="vision-title">Seen through each vision.</h3><p>The code of <span data-selection></span> as simulated for each type of color blindness, and a score out of 100 for each vision situation. About 8% of men and 0.4% of women of European descent have a red-green color deficiency [6]. These are calculations, not observations: <a href="{{TESTERS_URL}}">testing with real people</a> is still to come.</p></div>
         <div id="vision-panel"></div>
       </section>
       <section class="measurement-block" aria-labelledby="monthly-title">
@@ -183,6 +183,38 @@
       <li><span class="method-number" aria-hidden="true">2</span><h3>Generated themes</h3><p>A script builds the four themes of a month from its palette. CI compares the published files with the generator, byte for byte.</p><div id="method-variants" class="method-variants enhanced" aria-hidden="true"></div></li>
       <li><span class="method-number" aria-hidden="true">3</span><h3>Automatic audit</h3><p>Contrast, simulated color vision, font styles and the difference between months are measured for every theme.</p><ul class="audit-checks"><li>Contrast</li><li>Simulated color vision</li><li>Font styles</li><li>Difference between months</li></ul></li>
       <li class="coming"><div class="method-progress"><span class="method-number" aria-hidden="true">4</span><span class="badge">Coming</span></div><h3>Testing with real people</h3><p>Simulations do not replace real eyes. This step has not been done yet: <a href="{{TESTERS_URL}}">you can help</a>.</p></li>
+    </ol>
+  </section>
+
+  <section class="section wrap" aria-labelledby="limits-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">06</span><div><h2 id="limits-title">What these numbers do not show</h2><p>The same limits as in the audit report, generated from it.</p></div></div>
+    <ul class="limits">
+{{LIMITS}}
+    </ul>
+  </section>
+
+  <section class="section wrap" aria-labelledby="verify-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">07</span><div><h2 id="verify-title">Check it yourself</h2><p>Every number on this page comes from the repository. With Node.js and Python 3, run:</p></div></div>
+    <pre class="commands" tabindex="0" aria-label="Commands to check the numbers yourself"><code>git clone {{REPO_URL}}.git
+cd 365-daynight-vscode-theme-ext
+npm ci
+npm run themes:audit         # contrast and color vision checks of the 48 themes
+npm run themes:variety       # difference between the months
+npm run themes:test          # the measuring tools against published reference data
+npm run themes:report-check  # the audit report matches the themes
+npm run site:build           # this page, from the same report</code></pre>
+    <p class="chart-note">The same commands run on every push and before each release. <a href="{{REPO_URL}}/blob/main/scripts/themes/README.md">How the tools work</a> · <a href="{{AUDIT_URL}}">Full audit report</a> · <a href="audit-report.json">Audit data (JSON)</a></p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="references-title">
+    <div class="section-heading"><span class="section-number" aria-hidden="true">08</span><div><h2 id="references-title">References</h2></div></div>
+    <ol class="references">
+      <li>Machado, G. M., Oliveira, M. M., &amp; Fernandes, L. A. F. (2009). A physiologically-based model for simulation of color vision deficiency. <cite>IEEE Transactions on Visualization and Computer Graphics</cite>, 15(6), 1291–1298. <a href="https://doi.org/10.1109/TVCG.2009.113">doi:10.1109/TVCG.2009.113</a>. Used for the color blindness simulations and the figure of about 200 million people.</li>
+      <li>W3C (2024). <cite>Web Content Accessibility Guidelines (WCAG) 2.2</cite>, W3C Recommendation, 12 December 2024. <a href="https://www.w3.org/TR/WCAG22/">w3.org/TR/WCAG22</a>. Contrast ratio, the 4.5:1 and 7:1 levels, and the use of color.</li>
+      <li>W3C. <cite>Understanding Success Criterion 1.4.3: Contrast (Minimum)</cite>. <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">w3.org/WAI/WCAG22/Understanding/contrast-minimum</a>. Links 4.5:1 to a visual acuity of about 20/40, and 7:1 to about 20/80.</li>
+      <li>CIE (2004). <cite>Colorimetry</cite>, CIE 15:2004, 3rd edition. CIELAB and the CIE76 color difference used for the thresholds.</li>
+      <li>Sharma, G., Wu, W., &amp; Dalal, E. N. (2005). The CIEDE2000 color-difference formula: Implementation notes, supplementary test data, and mathematical observations. <cite>Color Research &amp; Application</cite>, 30(1), 21–30. <a href="https://doi.org/10.1002/col.20070">doi:10.1002/col.20070</a>. CIEDE2000, and the test data that check the tools.</li>
+      <li>Birch, J. (2012). Worldwide prevalence of red-green color deficiency. <cite>Journal of the Optical Society of America A</cite>, 29(3), 313. <a href="https://doi.org/10.1364/JOSAA.29.000313">doi:10.1364/JOSAA.29.000313</a>. About 8% of men and 0.4% of women of European descent.</li>
     </ol>
   </section>
   <noscript><p class="wrap no-script">The interactive previews need JavaScript. You can still watch the VS Code demonstration, read the audit and install all 48 themes.</p></noscript>
