@@ -200,3 +200,30 @@ suite('Landing page vision scores', () => {
 		assert.ok(fs.existsSync(path.join(__dirname, '../../site/vision.js')));
 	});
 });
+
+suite('Landing page limits and references', () => {
+	const { limitsHtml } = require('../../scripts/site/build.cjs');
+	const audit = fs.readFileSync(path.join(__dirname, '../../docs/AUDIT.md'), 'utf8');
+
+	test('the limits on the page come from the audit report', () => {
+		const html = limitsHtml(audit);
+		assert.match(html, /No testing with real users yet/);
+		assert.strictEqual((html.match(/<li>/g) || []).length, (audit.split('## Limits of this audit')[1].match(/^- /gm) || []).length);
+	});
+
+	test('the limits are escaped and keep their links', () => {
+		assert.strictEqual(limitsHtml('## Limits of this audit\n' + '- **A** <b> [x](https://e.com)\n'.repeat(5)).split('\n')[0],
+			'      <li><strong>A</strong> &lt;b&gt; <a href="https://e.com">x</a></li>');
+	});
+
+	test('a report without limits stops the build', () => {
+		assert.throws(() => limitsHtml('# Nothing'), /no limits section/);
+	});
+
+	test('every reference with a DOI links to doi.org', () => {
+		const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+		for (const doi of ['10.1109/TVCG.2009.113', '10.1002/col.20070', '10.1364/JOSAA.29.000313']) {
+			assert.ok(html.includes(`https://doi.org/${doi}`), doi);
+		}
+	});
+});

@@ -142,6 +142,7 @@ function pageValues(report) {
 	const lowest = Math.min(...themes.map((theme) => theme.contrast.lowestText));
 	const data = themeData(report);
 	return {
+		LIMITS: limitsHtml(fs.readFileSync(path.join(ROOT, 'docs', 'AUDIT.md'), 'utf8')),
 		THEMES: String(report.themeCount),
 		CHECKS_PASSED: report.checks.passed.toLocaleString('en-US'),
 		CHECKS_TOTAL: report.checks.total.toLocaleString('en-US'),
@@ -165,6 +166,18 @@ function pageValues(report) {
 }
 
 /** Remplace les {{MARQUES}} ; une marque sans valeur est une erreur */
+/** Limites du rapport d'audit, converties en éléments de liste HTML */
+function limitsHtml(markdown) {
+	const section = markdown.split('## Limits of this audit')[1];
+	if (!section) throw new Error('The audit report has no limits section');
+	const escape = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	const items = section.split('\n').filter((line) => line.startsWith('- ')).map((line) => escape(line.slice(2))
+		.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+		.replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>'));
+	if (items.length < 5) throw new Error('The limits section of the audit report looks incomplete');
+	return items.map((item) => `      <li>${item}</li>`).join('\n');
+}
+
 function render(template, values) {
 	return template.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
 		if (!(key in values)) {
@@ -201,4 +214,4 @@ if (require.main === module) {
 	console.log(`Built: ${build(path.resolve(process.argv[2] || path.join(ROOT, 'site-dist')))}`);
 }
 
-module.exports = { SCORES, SIMULATED_VIEWS, pagePalette, pageValues, render, themeData, validateOutput, build, syntaxTokens };
+module.exports = { limitsHtml, SCORES, SIMULATED_VIEWS, pagePalette, pageValues, render, themeData, validateOutput, build, syntaxTokens };
