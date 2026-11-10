@@ -1,0 +1,91 @@
+# Builds, checks and deploys the landing page (site/) to o2switch.
+# - On every push to main that touches the page or its data, and manually.
+# - The build job runs the unit tests, rebuilds the page and checks it in Chrome
+#   under the production Content-Security-Policy (accessibility, errors, overflow).
+# - The deploy job only runs when the repository variable SITE_DEPLOY is
+#   "enabled". It uses the protected "site" environment: every deployment waits
+#   for an approval, and the FTPS account is stored there as environment
+#   secrets (SITE_FTP_HOST, SITE_FTP_PORT, SITE_FTP_USERNAME, SITE_FTP_PASSWORD).
+#   That account only reaches the folder of the page.
+# Actions are pinned to a commit, so a changed tag cannot run other code.
+
+name: Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - 'scripts/site/**'
+      - 'docs/audit-report.json'
+      - 'docs/AUDIT.md'
+      - 'themes/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Audit report is up to date
+        run: npm run themes:report-check
+
+      - name: Build the page
+        run: npm run site:build
+
+      - name: Check the page in Chrome under the production CSP
+        run: npm run site:check
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site
+          path: site-dist/
+          include-hidden-files: true # keeps .htaccess
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    if: vars.SITE_DEPLOY == 'enabled' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: site
+      url: https://365daynight.mickaellherminez.net
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site
+          path: site-dist/
+
+      - name: Upload via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@110f9186c050f71550953127052e77650219c287 # v4.4.0
+        with:
+          server: ${{ secrets.SITE_FTP_HOST }}
+          port: ${{ secrets.SITE_FTP_PORT }}
+          username: ${{ secrets.SITE_FTP_USERNAME }}
+          password: ${{ secrets.SITE_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./site-dist/
+          server-dir: /

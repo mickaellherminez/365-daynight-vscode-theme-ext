@@ -133,7 +133,7 @@ const variantCards = modes.map(({ key, label }) => {
   const preview = element('div', 'variant-preview');
   preview.setAttribute('aria-hidden', 'true');
   const caption = element('span');
-  caption.append(element('span', 'variant-name', label), element('span', 'variant-stat'));
+  caption.append(element('span', 'variant-name', label), element('span', 'variant-stat'), element('span', 'sr variant-action'));
   button.append(preview, caption);
   button.addEventListener('click', () => choose({ mode: key }));
   document.getElementById('variant-grid').append(button);
@@ -209,7 +209,8 @@ function update(announce = false) {
     const key = button.dataset.mode;
     const p = month[key];
     button.setAttribute('aria-pressed', String(key === mode));
-    button.setAttribute('aria-label', `Apply ${month.name} ${modes.find((item) => item.key === key).label}`);
+    // Le nom accessible reprend le texte affiché, complété pour les lecteurs d'écran (WCAG 2.5.3)
+    button.querySelector('.variant-action').textContent = `. Apply ${month.name} ${modes.find((item) => item.key === key).label}`;
     button.querySelector('.variant-preview').replaceChildren(editorWindow(p, '', true));
     button.querySelector('.variant-stat').textContent = `Text ${ratio(p.contrast.text)} · Accent ${ratio(p.contrast.accent)}`;
   });
@@ -261,7 +262,8 @@ function drawYear(now) {
     const button = element('button', '', month.short);
     button.type = 'button';
     button.style.flex = `${lengths[index]} 1 0`;
-    button.setAttribute('aria-label', `Apply ${month.name}`);
+    // Le nom accessible commence par le texte affiché (WCAG 2.5.3)
+    button.setAttribute('aria-label', `${month.short}: apply ${month.name}`);
     button.addEventListener('click', () => choose({ month: index }));
     options.append(button);
     for (let day = 0; day < lengths[index]; day++) {
@@ -285,7 +287,7 @@ function updateToday(now) {
   const marker = document.getElementById('today-marker');
   marker.style.setProperty('--today', position);
   marker.textContent = `Today · ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' }).format(now)}`;
-  marker.setAttribute('aria-label', `Back to the current month, ${months[now.getMonth()].name}`);
+  marker.setAttribute('aria-label', `${marker.textContent}: back to the current month, ${months[now.getMonth()].name}`);
   let line = document.querySelector('.today-line');
   if (!line) {
     line = element('span', 'today-line');

@@ -1,0 +1,23 @@
+# En-têtes de sécurité de la landing page (Apache, o2switch).
+# La CSP est aussi utilisée par npm run site:check, qui vérifie que la page fonctionne avec elle.
+
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; media-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+
+<FilesMatch "\.(woff2|png|jpg|svg|ico|mp4)$">
+  Header set Cache-Control "public, max-age=604800"
+</FilesMatch>

@@ -31,3 +31,10 @@ Les graphiques du lot C sont intégrés sous les chiffres d’audit :
 La sélection du mois et de la variante synchronise la page, les aperçus et les deux graphiques. Les valeurs du rapport sont arrondies à deux décimales pour le contraste et une pour les matrices ; les moyennes affichées dans les grilles sont calculées sur ces valeurs exportées. Les seuils de variété sont des règles du projet, distinctes des seuils WCAG.
 
 Les scores par situation de vision et les aperçus simulés appartiennent au lot D et restent à intégrer. Les contrôles de navigateur ont couvert les 48 combinaisons, les couleurs réellement affichées, les valeurs des graphiques, le clavier et les largeurs de 320 à 1440 px.
+
+## Sécurité et mise en ligne
+
+- Aucun script en ligne : la palette initiale est appliquée par `boot.js`, ce qui permet une CSP stricte (`script-src 'self'`).
+- `.htaccess` impose HTTPS et les en-têtes de sécurité. `npm run site:check` teste la page sous la même CSP, avec axe-core.
+- Ce README n'est pas copié dans `site-dist/`.
+- Mise en ligne : workflow `.github/workflows/site.yml`, environnement GitHub `site` avec validation obligatoire, compte FTPS limité au dossier de la page. Voir `CONTRIBUTING.md`.

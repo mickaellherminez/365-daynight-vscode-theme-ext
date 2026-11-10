@@ -203,7 +203,8 @@ function build(out) {
 	out = validateOutput(out);
 	const report = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'audit-report.json'), 'utf8'));
 	fs.rmSync(out, { recursive: true, force: true });
-	fs.cpSync(path.join(ROOT, 'site'), out, { recursive: true });
+	// Le README du dossier est une documentation interne : il ne doit pas être publié.
+	fs.cpSync(path.join(ROOT, 'site'), out, { recursive: true, filter: (source) => path.relative(path.join(ROOT, 'site'), source) !== 'README.md' });
 	fs.copyFileSync(path.join(ROOT, 'docs', 'audit-report.json'), path.join(out, 'audit-report.json'));
 	const page = path.join(out, 'index.html');
 	fs.writeFileSync(page, render(fs.readFileSync(page, 'utf8'), pageValues(report)));

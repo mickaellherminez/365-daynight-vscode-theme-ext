@@ -192,6 +192,22 @@ After a tag publication, once both registries have the package, the workflow cre
 
 A manual run, pre-release or dry run, creates no GitHub release: it has no tag, and the **Version tags** ruleset of the repository lets only administrators create one. An administrator's tag would also start a release publication, so a tag for a pre-release needs the Publish workflow disabled while it is created.
 
+## Landing page
+
+The page of `365daynight.mickaellherminez.net` lives in `site/`. Its numbers come from `docs/audit-report.json`, so it changes with the themes.
+
+```sh
+npm run site:build    # builds site-dist/
+npm run site:check    # checks it in Chrome under the production Content-Security-Policy
+npm run site:preview  # serves it at http://127.0.0.1:4173
+```
+
+`site:check` runs axe-core at 360, 820 and 1280 pixels, in light and dark and in both High Contrast variants, and fails on any accessibility violation, script error, missing file or horizontal overflow. Set `CHROME_PATH` if Chrome is not in its usual place.
+
+`site/.htaccess` holds the security headers of the hosting: HTTPS only, a Content-Security-Policy that allows no script from elsewhere and no inline script, and no directory listing. `site:check` reads the same policy, so the page is tested with it.
+
+The [Site workflow](.github/workflows/site.yml) builds and checks the page on every push to `main` that changes it. When the repository variable `SITE_DEPLOY` is `enabled`, it then deploys over FTPS from the protected `site` environment: **each deployment waits for an approval** (**Review deployments** > **Approve and deploy**). The FTPS account is stored as secrets of that environment and only reaches the folder of the page. Nobody else's pull request can use them.
+
 ## Dependencies and security
 
 [Dependabot](.github/dependabot.yml) opens a weekly pull request for the development tools and the GitHub Actions. Merge it when the CI passes. `@types/vscode` is left out, because it must stay on the minimum VS Code version declared in `package.json`. Major updates of `@types/node` and `typescript` are ignored too: the first follows the Node.js version used in CI, and nothing in the project runs the TypeScript compiler.
