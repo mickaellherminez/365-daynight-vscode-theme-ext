@@ -217,7 +217,8 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
       cell.classList.toggle('is-pair', (row === first && column === second) || (row === second && column === first));
     }
     apply.disabled = first === currentMonth;
-    apply.setAttribute('aria-label', `Apply ${months[first].name} to the website`);
+    apply.textContent = `Apply ${months[first].name}`;
+    apply.title = `Apply ${months[first].name} to the website`;
   }
 
   function render() {

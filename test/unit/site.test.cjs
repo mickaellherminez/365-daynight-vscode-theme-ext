@@ -227,3 +227,67 @@ suite('Landing page limits and references', () => {
 		}
 	});
 });
+
+suite('Landing page security', () => {
+	const htaccess = fs.readFileSync(path.join(__dirname, '../../site/.htaccess'), 'utf8');
+	const { productionCsp } = require('../../scripts/site/check.cjs');
+
+	test('the production CSP allows only scripts from the page itself', () => {
+		const csp = productionCsp();
+		assert.match(csp, /default-src 'none'/);
+		assert.match(csp, /script-src 'self'(;|$)/);
+		assert.doesNotMatch(csp, /unsafe-eval/);
+		assert.doesNotMatch(csp.match(/script-src[^;]*/)[0], /unsafe-inline/);
+		assert.match(csp, /frame-ancestors 'none'/);
+	});
+
+	test('the hosting forces HTTPS and sends the security headers', () => {
+		for (const rule of ['Strict-Transport-Security', 'X-Content-Type-Options', 'X-Frame-Options', 'Referrer-Policy', 'Options -Indexes', 'R=301']) {
+			assert.ok(htaccess.includes(rule), rule);
+		}
+	});
+
+	test('the page has no inline script', () => {
+		const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+		const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*application\/json)[^>]*>/g)];
+		assert.deepStrictEqual(inline.map((match) => match[0]), []);
+	});
+
+	test('the build publishes neither the internal README nor source maps', function () {
+		this.timeout(20000);
+		const out = fs.mkdtempSync(path.join(os.tmpdir(), 'site-sec-'));
+		try {
+			build(path.join(out, 'dist'));
+			const files = fs.readdirSync(path.join(out, 'dist'), { recursive: true }).map(String);
+			assert.ok(!files.includes('README.md'));
+			assert.ok(files.includes('.htaccess'));
+			assert.ok(!files.some((file) => file.endsWith('.map')));
+		} finally {
+			fs.rmSync(out, { recursive: true, force: true });
+		}
+	});
+});
+
+suite('Landing page social preview', () => {
+	const SITE = 'https://365daynight.mickaellherminez.net/';
+
+	test('the og:image of the page is an absolute address on the site', () => {
+		const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+		const image = html.match(/<meta property="og:image" content="([^"]+)">/);
+		assert.ok(image, 'og:image is missing');
+		assert.ok(image[1].startsWith(SITE), image[1]);
+	});
+
+	test('the build always publishes the og:image file it points to', function () {
+		this.timeout(20000);
+		const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+		const file = html.match(/<meta property="og:image" content="([^"]+)">/)[1].slice(SITE.length);
+		const out = fs.mkdtempSync(path.join(os.tmpdir(), 'site-og-'));
+		try {
+			build(path.join(out, 'dist'));
+			assert.ok(fs.existsSync(path.join(out, 'dist', file)), `missing in the build: ${file}`);
+		} finally {
+			fs.rmSync(out, { recursive: true, force: true });
+		}
+	});
+});

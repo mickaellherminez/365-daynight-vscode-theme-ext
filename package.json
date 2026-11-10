@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "publisher": "mickaellherminez",
   "type": "commonjs",
-  "icon": "assets/logo-web.png",
+  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -402,7 +402,7 @@
     ]
   },
   "galleryBanner": {
-    "color": "#1E1E1E",
+    "color": "#16121D",
     "theme": "dark"
   },
   "scripts": {
@@ -411,6 +411,7 @@
     "test": "node ./test/runTest.cjs",
     "test:unit": "mocha --ui tdd \"test/unit/**/*.test.cjs\"",
     "site:build": "node scripts/site/build.cjs",
+    "site:check": "node scripts/site/check.cjs",
     "site:preview": "python3 -m http.server 4173 --bind 127.0.0.1 --directory site-dist",
     "package": "vsce package",
     "vscode:prepublish": "npm run lint",
@@ -430,9 +431,11 @@
     "@types/vscode": "1.96.0",
     "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^4.1.0",
+    "axe-core": "4.14.0",
     "eslint": "^10.14.0",
     "glob": "^14.0.3",
     "mocha": "^12.0.3",
+    "playwright-core": "1.65.0",
     "typescript": "^5.9.3"
   },
   "overrides": {

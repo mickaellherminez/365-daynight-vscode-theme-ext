@@ -9,7 +9,7 @@
 <meta property="og:title" content="365 Day &amp; Night — Readable. Measured.">
 <meta property="og:description" content="12 months. 48 accessible VS Code themes. Explore every palette and the measurements behind it.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="media/brand/og-image.png">
+<meta property="og:image" content="https://365daynight.mickaellherminez.net/media/brand/og-image.png">
 <link rel="icon" href="media/brand/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="media/brand/favicon.ico">
 <link rel="apple-touch-icon" href="media/brand/apple-touch-icon.png">
@@ -19,21 +19,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="matrices.css">
 <script id="theme-data" type="application/json">{{THEME_DATA}}</script>
-<script>
-(function () {
-  var data = JSON.parse(document.getElementById('theme-data').textContent);
-  var mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  var month = new Date().getMonth();
-  var palette = data.months[month][mode];
-  var root = document.documentElement;
-  ['bg', 'text', 'accent', 'muted', 'panel', 'panelText', 'line', 'rule', 'onAccent', 'link', 'shadow'].forEach(function (key) {
-    root.style.setProperty('--' + key, palette[key]);
-  });
-  root.dataset.month = month;
-  root.dataset.mode = mode;
-  root.style.colorScheme = mode;
-})();
-</script>
+<script src="boot.js"></script>
 <script type="module" src="app.js"></script>
 </head>
 <body>

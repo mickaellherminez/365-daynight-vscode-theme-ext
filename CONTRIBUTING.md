@@ -125,7 +125,7 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 1. Edit the month's palette in `scripts/themes/palettes/MM.json`.
 2. Check accessibility: `npm run themes:build -- MM` (nothing is written).
 3. When the audit reports 0 problems, write the files: `npm run themes:build -- MM --write`.
-4. Regenerate the README previews: `python3 scripts/themes/preview.py`. To look at them without changing `assets/`, add `--out <folder>`.
+4. Regenerate the gallery of the 12 months: `python3 scripts/themes/preview.py`. To look at it without changing `assets/`, add `--out <folder>`. The other README images are demos filmed in VS Code.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
 Every month has a High Contrast Light theme: an `hcLight` variant in its palette, `365 MM-Month High Contrast Light` declared with `"uiTheme": "hc-light"` in `package.json`, and the month listed in `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`. The three must stay in sync, or the unit tests fail.
@@ -191,6 +191,22 @@ If one registry fails, open the workflow run and choose **Re-run failed jobs**: 
 After a tag publication, once both registries have the package, the workflow creates the [GitHub release](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/releases) of this version, with the `.vsix` and its notes, taken from the CHANGELOG by `scripts/release-notes.cjs`. The workflow checks for these notes before building, so a missing section stops it before anything is published. Re-running after a release exists only replaces the `.vsix` of that release.
 
 A manual run, pre-release or dry run, creates no GitHub release: it has no tag, and the **Version tags** ruleset of the repository lets only administrators create one. An administrator's tag would also start a release publication, so a tag for a pre-release needs the Publish workflow disabled while it is created.
+
+## Landing page
+
+The page of `365daynight.mickaellherminez.net` lives in `site/`. Its numbers come from `docs/audit-report.json`, so it changes with the themes.
+
+```sh
+npm run site:build    # builds site-dist/
+npm run site:check    # checks it in Chrome under the production Content-Security-Policy
+npm run site:preview  # serves it at http://127.0.0.1:4173
+```
+
+`site:check` runs axe-core at 360, 820 and 1280 pixels, in light and dark and in both High Contrast variants, and fails on any accessibility violation, script error, missing file or horizontal overflow. Set `CHROME_PATH` if Chrome is not in its usual place.
+
+`site/.htaccess` holds the security headers of the hosting: HTTPS only, a Content-Security-Policy that allows no script from elsewhere and no inline script, and no directory listing. `site:check` reads the same policy, so the page is tested with it.
+
+The [Site workflow](.github/workflows/site.yml) builds and checks the page on every push to `main` that changes it. When the repository variable `SITE_DEPLOY` is `enabled`, it then deploys over FTPS from the protected `site` environment: **each deployment waits for an approval** (**Review deployments** > **Approve and deploy**). The FTPS account is stored as secrets of that environment and only reaches the folder of the page. Nobody else's pull request can use them.
 
 ## Dependencies and security
 
