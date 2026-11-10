@@ -5,6 +5,8 @@ Options -Indexes
 DirectoryIndex index.html
 
 RewriteEngine On
+# Les vérifications du certificat (Let's Encrypt) passent en HTTP : on ne les redirige pas.
+RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
