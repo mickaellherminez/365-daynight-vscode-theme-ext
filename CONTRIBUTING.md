@@ -125,7 +125,7 @@ Theme files are **generated**: do not edit `themes/*.json` by hand.
 1. Edit the month's palette in `scripts/themes/palettes/MM.json`.
 2. Check accessibility: `npm run themes:build -- MM` (nothing is written).
 3. When the audit reports 0 problems, write the files: `npm run themes:build -- MM --write`.
-4. Regenerate the README previews: `python3 scripts/themes/preview.py`. To look at them without changing `assets/`, add `--out <folder>`.
+4. Regenerate the gallery of the 12 months: `python3 scripts/themes/preview.py`. To look at it without changing `assets/`, add `--out <folder>`. The other README images are demos filmed in VS Code.
 5. Test the result with `F5`, including text selection in the terminal and the debug console.
 
 Every month has a High Contrast Light theme: an `hcLight` variant in its palette, `365 MM-Month High Contrast Light` declared with `"uiTheme": "hc-light"` in `package.json`, and the month listed in `HIGH_CONTRAST_LIGHT_MONTHS` in `theme-logic.js`. The three must stay in sync, or the unit tests fail.

@@ -1,15 +1,13 @@
 """Génère les images d'aperçu des thèmes pour les README (assets/screenshots/).
 
-Chaque aperçu dessine une fenêtre VS Code simplifiée (barre de titre, explorateur, onglets, code,
-sélection, résultat de recherche, erreur, barre d'état) avec les couleurs réelles des thèmes,
-puis la capture avec Google Chrome en mode headless.
+year.png dessine les 12 mois avec les couleurs réelles des thèmes (code, bande de l'accent, barre d'état
+avec le bouton de l'extension), puis la capture avec Google Chrome en mode headless. Les autres images des
+README sont des démos filmées dans VS Code.
 
 Usage :
-    python3 scripts/themes/preview.py                 # hero.png (octobre) + year.png (les 12 mois)
-    python3 scripts/themes/preview.py --month 5       # hero.png pour un autre mois
-    python3 scripts/themes/preview.py --out /tmp/x    # écrit les images dans un autre dossier
+    python3 scripts/themes/preview.py                 # year.png
+    python3 scripts/themes/preview.py --out /tmp/x    # écrit l'image dans un autre dossier
 
-hero.png montre toutes les variantes du mois, High Contrast Light comprise si le mois l'a.
 year.png ne montre que les variantes présentes dans les 12 palettes, pour que les mois restent comparables.
 """
 import html
@@ -89,52 +87,6 @@ def code_html(theme, palette, compact=False):
     return ''.join(rows)
 
 
-def window_html(month, variant, variant_file, label):
-    theme = load(month, variant_file)
-    palette = palettes(month)[variant]
-    c = theme['colors']
-    border = c.get('contrastBorder', c.get('sideBar.border'))
-    files = [('extension.js', c['gitDecoration.modifiedResourceForeground'], 'M'),
-             ('package.json', c['sideBar.foreground'], ''),
-             ('theme-clock.ts', c['list.activeSelectionForeground'], 'U'),
-             ('README.md', c['gitDecoration.addedResourceForeground'], 'A')]
-    items = []
-    for i, (name, color, mark) in enumerate(files):
-        selected = i == 2
-        bg = c['list.activeSelectionBackground'] if selected else 'transparent'
-        outline = f"outline:1px solid {c['list.focusOutline']};outline-offset:-1px;" if selected else ''
-        markc = c['gitDecoration.untrackedResourceForeground'] if mark == 'U' else color
-        items.append(f'<div class=file style="background:{bg};{outline}color:{color}">{name}'
-                     f'<span style="color:{markc}">{mark}</span></div>')
-    return f"""
-<div class=win style="background:{c['editor.background']};border:1px solid {border}">
-  <div class=title style="background:{c['titleBar.activeBackground']};color:{c['titleBar.activeForeground']};border-bottom:1px solid {c['titleBar.border']}">
-    <span class=dots><i></i><i></i><i></i></span>365 {month:02d}-{MONTHS[month - 1]} {label}
-  </div>
-  <div class=body>
-    <div class=activity style="background:{c['activityBar.background']};border-right:1px solid {c['activityBar.border']}">
-      <div class=act style="border-left:2px solid {c['activityBar.activeBorder']};color:{c['activityBar.foreground']}">▣</div>
-      <div class=act style="color:{c['activityBar.inactiveForeground']}">⌕</div>
-      <div class=act style="color:{c['activityBar.inactiveForeground']}">⑂</div>
-    </div>
-    <div class=side style="background:{c['sideBar.background']};border-right:1px solid {c['sideBar.border']}">
-      <div class=head style="color:{c['sideBarSectionHeader.foreground']};background:{c['sideBarSectionHeader.background']}">EXPLORER</div>
-      {''.join(items)}
-    </div>
-    <div class=main>
-      <div class=tabs style="background:{c['editorGroupHeader.tabsBackground']};border-bottom:1px solid {c['editorGroupHeader.tabsBorder']}">
-        <div class=tab style="background:{c['tab.activeBackground']};color:{c['tab.activeForeground']};border-top:2px solid {c['tab.activeBorderTop']}">theme-clock.ts</div>
-        <div class=tab style="background:{c['tab.inactiveBackground']};color:{c['tab.inactiveForeground']}">extension.js</div>
-      </div>
-      <div class=code style="color:{c['editor.foreground']}">{code_html(theme, palette)}</div>
-    </div>
-  </div>
-  <div class=status style="background:{c['statusBar.background']};color:{c['statusBar.foreground']};border-top:1px solid {c['statusBar.border']}">
-    <span>⑂ main</span><span>⚠ 0 ✕ 1</span><span class=right style="color:{c['365DayNight.statusBarButton']}">‹ {month:02d} {STATUS[variant]} ›</span>
-  </div>
-</div>"""
-
-
 CSS = """
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: #F4F1EC; font: 13px/1.5 Menlo, Monaco, monospace; padding: 24px; }
@@ -176,16 +128,6 @@ def shoot(body, name, width, height):
     print('   écrit :', os.path.relpath(out, ROOT))
 
 
-def hero(month):
-    shown = variants([month])
-    cards = ''.join(window_html(month, v, f, label) for v, f, label in shown)
-    # Trois variantes sur une ligne, quatre sur deux lignes
-    columns = 3 if len(shown) == 3 else 2
-    rows = -(-len(shown) // columns)
-    shoot(f'<div class=grid style="grid-template-columns:repeat({columns},600px)">{cards}</div>', 'hero.png',
-          52 + columns * 600 + (columns - 1) * 22, 48 + rows * 332 + (rows - 1) * 22)
-
-
 def year():
     tiles = []
     for m in range(1, 13):
@@ -207,6 +149,4 @@ def year():
 if __name__ == '__main__':
     if '--out' in sys.argv:
         OUT = os.path.abspath(sys.argv[sys.argv.index('--out') + 1])
-    month = int(sys.argv[sys.argv.index('--month') + 1]) if '--month' in sys.argv else 10
-    hero(month)
     year()

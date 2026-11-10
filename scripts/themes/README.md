@@ -14,7 +14,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `direction.json` | Ambiance de chaque mois : fonds et accents de départ, plages de teinte des couleurs de syntaxe |
 | `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte, avec l'ajout Git du High Contrast Light retouché pour le seuil de 12 |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
-| `preview.py` | Génère les images d'aperçu des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `hero.png` montre les variantes d'un mois dans une fenêtre complète, `year.png` les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
+| `preview.py` | Génère l'image `year.png` des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `year.png` montre les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme et de l'achromatopsie, ΔE CIE76 et CIEDE2000 |
 | `tests/` | Tests des outils de mesure contre des données publiées (`npm run themes:test`), et de l'audit et du test de variété |
 | `token-rules.json` | Règles de coloration syntaxique communes à tous les mois (scopes → rôle de couleur) |

@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Changed
+- New extension icon, from the new brand of 365 Day & Night, and a matching dark banner on the Marketplace page
+
 ## [1.0.0] - 2026-11-09
 
 **New look.** Every theme is redesigned: each month gets its own seasonal mood, and a High Contrast Light theme, for 48 themes in all. Your selected theme, your settings and your keyboard shortcuts are kept, because the theme names and the commands have not changed. To go back to the previous look, install version 0.12.0 from the Extensions view: see [New look, and how to go back](docs/GUIDE.md#new-look-and-how-to-go-back).
