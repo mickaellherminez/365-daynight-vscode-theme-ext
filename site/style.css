@@ -269,3 +269,18 @@ dialog::backdrop { background: var(--shadow); }
 @media (forced-colors: active) {
   .contrast-threshold, .contrast-fill { forced-color-adjust: none; }
 }
+.vision-views { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.vision-view { min-height: 44px; padding: 8px 14px; border: 1px solid var(--rule); border-radius: 3px; background: transparent; color: var(--text); font: 500 14px/1.2 var(--sans); cursor: pointer; }
+.vision-view[aria-pressed=true] { box-shadow: inset 0 0 0 2px var(--text); }
+.vision-code { margin: 0; padding: 18px 20px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; font: 400 13px/1.7 var(--mono); }
+.vision-line { display: block; min-height: 1.7em; white-space: pre; }
+.score-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14px; }
+.score-table th { text-align: left; font-weight: 500; }
+.score-table th, .score-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.score-table thead th { color: var(--muted); font-size: 12px; }
+.score-table th:first-child { padding-left: 0; width: 22%; }
+.score-value { width: 22%; }
+.score-number { display: block; font: 500 18px/1.2 var(--mono); }
+.score-track { display: block; height: 6px; margin-top: 6px; background: var(--rule); }
+.score-fill { display: block; height: 100%; background: var(--accent); }
+.score-formula, .score-ref { color: var(--muted); }

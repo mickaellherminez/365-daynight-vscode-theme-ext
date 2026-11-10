@@ -58,6 +58,10 @@ function contrast(first, second) {
 }
 
 /** Resolve the same representative TextMate scopes as the audit; the last rule wins. */
+const SIMULATED_VIEWS = ['protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia'];
+const SCORES = ['protanopia', 'deuteranopia', 'tritanopia', 'protanomaly', 'deuteranomaly', 'tritanomaly',
+	'achromatopsia', 'lowVision20/40', 'lowVision20/80'];
+
 function syntaxTokens(theme) {
 	const tokens = {};
 	const styles = {};
@@ -88,6 +92,12 @@ function themeData(report) {
 			const palette = pagePalette(published);
 			const { tokens, styles } = syntaxTokens(published);
 			if (measured.colors.background !== palette.bg) throw new Error(`Stale audit background: ${measured.name}`);
+			for (const view of SIMULATED_VIEWS) {
+				if (!measured.simulated?.[view]?.background) throw new Error(`Missing simulated colors: ${measured.name}, ${view}`);
+			}
+			for (const score of SCORES) {
+				if (typeof measured.scores?.[score] !== 'number') throw new Error(`Missing vision score: ${measured.name}, ${score}`);
+			}
 			for (const [role, color] of Object.entries(tokens)) {
 				if (measured.colors.tokens[role] !== color) throw new Error(`Stale audit syntax color: ${measured.name}, ${role}`);
 				const value = Number(contrast(color, palette.bg).toFixed(2));
@@ -100,6 +110,8 @@ function themeData(report) {
 				tokenStyles: styles,
 				semanticTokens: published.semanticTokenColors,
 				syntaxContrast: measured.syntaxContrast,
+				scores: measured.scores,
+				simulated: measured.simulated,
 				contrast: { text: Number(contrast(palette.text, palette.bg).toFixed(2)), accent: Number(contrast(palette.accent, palette.bg).toFixed(2)) },
 				ui: {
 					titleBg: c['titleBar.activeBackground'], titleText: c['titleBar.activeForeground'],
@@ -189,4 +201,4 @@ if (require.main === module) {
 	console.log(`Built: ${build(path.resolve(process.argv[2] || path.join(ROOT, 'site-dist')))}`);
 }
 
-module.exports = { pagePalette, pageValues, render, themeData, validateOutput, build, syntaxTokens };
+module.exports = { SCORES, SIMULATED_VIEWS, pagePalette, pageValues, render, themeData, validateOutput, build, syntaxTokens };
