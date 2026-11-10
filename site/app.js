@@ -1,6 +1,7 @@
 import { createPicker } from './picker.js';
 import { createContrastChart } from './contrast-chart.js';
 import { createMatrices } from './matrices.js';
+import { createVisionPanel } from './vision.js';
 
 const root = document.documentElement;
 const { months, comparisons, thresholds } = JSON.parse(document.getElementById('theme-data').textContent);
@@ -154,6 +155,7 @@ modes.forEach(({ key, label }) => {
 chartMonth.addEventListener('change', () => choose({ month: Number(chartMonth.value) }));
 chartVariant.addEventListener('change', () => choose({ mode: chartVariant.value }));
 const contrastChart = createContrastChart(document.getElementById('syntax-chart'), document.getElementById('syntax-summary'), thresholds);
+const visionPanel = createVisionPanel(document.getElementById('vision-panel'), code, thresholds);
 const matrices = createMatrices(document.getElementById('monthly-matrices'), months, comparisons, thresholds,
   (month) => choose({ month }));
 
@@ -175,6 +177,7 @@ function update(announce = false) {
   chartMonth.value = String(monthIndex);
   chartVariant.value = mode;
   contrastChart.update(palette);
+  visionPanel.update(palette);
   matrices.update(monthIndex, mode);
   const label = modes.find((item) => item.key === mode).label;
   document.querySelectorAll('[data-month-name]').forEach((node) => { node.textContent = month.name; });

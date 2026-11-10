@@ -170,3 +170,33 @@ suite('Landing page', () => {
 		}
 	});
 });
+
+suite('Landing page vision scores', () => {
+	const { SCORES, SIMULATED_VIEWS } = require('../../scripts/site/build.cjs');
+	const data = themeData(report);
+
+	test('every month and variant carries the 9 scores and the 4 simulations of the audit report', () => {
+		for (const month of data.months) {
+			for (const key of ['light', 'dark', 'hcLight', 'hcDark']) {
+				const theme = month[key];
+				assert.deepStrictEqual(Object.keys(theme.scores).sort(), [...SCORES].sort(), theme.name);
+				for (const view of SIMULATED_VIEWS) {
+					assert.ok(theme.simulated[view].background, `${theme.name} ${view}`);
+					assert.strictEqual(Object.keys(theme.simulated[view].tokens).length, 14, `${theme.name} ${view}`);
+				}
+			}
+		}
+	});
+
+	test('the page scores are the audit report scores', () => {
+		const dark = data.months[9].dark;
+		const measured = report.variants.Dark.themes.find((theme) => theme.name === dark.name);
+		assert.deepStrictEqual(dark.scores, measured.scores);
+	});
+
+	test('the vision panel is on the page, with its module', () => {
+		const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+		assert.match(html, /id="vision-panel"/);
+		assert.ok(fs.existsSync(path.join(__dirname, '../../site/vision.js')));
+	});
+});

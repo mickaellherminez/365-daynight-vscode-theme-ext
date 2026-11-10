@@ -165,6 +165,10 @@
         <div id="syntax-chart"></div>
         <p class="chart-note">Contrast = (lighter relative luminance + 0.05) / (darker relative luminance + 0.05). Measurements apply to these text colors on the editor background; they do not certify the whole interface. <a href="{{AUDIT_URL}}">Method and limits</a> · <a href="audit-report.json" download>Download the audit data</a>.</p>
       </section>
+      <section class="measurement-block" aria-labelledby="vision-title">
+        <div class="chart-heading"><h3 id="vision-title">Seen through each vision.</h3><p>The code of <span data-selection></span> as simulated for each type of color blindness, and a score out of 100 for each vision situation. These are calculations, not observations: <a href="{{TESTERS_URL}}">testing with real people</a> is still to come.</p></div>
+        <div id="vision-panel"></div>
+      </section>
       <section class="measurement-block" aria-labelledby="monthly-title">
         <div class="chart-heading"><h3 id="monthly-title">How different are the months?</h3><p>Compare the 12 monthly palettes before and after the redesign. A larger ΔE means a greater color difference. The same scale is used in both grids. Select a measure to explore the background or the syntax colors.</p></div>
         <div id="monthly-matrices"></div>
