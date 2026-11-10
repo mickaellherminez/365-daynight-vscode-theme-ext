@@ -37,7 +37,8 @@ module.exports = [
       '.vscode-test/**',
       'node_modules/**',
       'out/**',
-      'dist/**'
+      'dist/**',
+      'site-dist/**'
     ]
   },
   js.configs.recommended,
@@ -53,6 +54,13 @@ module.exports = [
       'no-unused-vars': 'warn',
       'no-undef': 'warn',
       'no-console': 'off'
+    }
+  },
+  {
+    files: ['site/**/*.js'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: { document: 'readonly', window: 'readonly' }
     }
   },
   {

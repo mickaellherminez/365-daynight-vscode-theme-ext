@@ -14,3 +14,8 @@ vsix-archive/
 notes.md
 .DS_Store
 __pycache__/
+site-dist/
+
+# Références de direction artistique et pack source de marque (locaux)
+/365 Day & Night — Direction artistique – Accueil v2 — tablette 820.html
+/365-day-night-brand/
