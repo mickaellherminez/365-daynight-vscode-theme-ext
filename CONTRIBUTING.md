@@ -15,6 +15,7 @@ Thanks for your interest! Bug reports, accessibility feedback and pull requests 
 | `theme-logic.js` | Theme selection logic, without any VS Code dependency |
 | `themes/` | The generated color themes (`365-MM-light`, `365-MM-dark`, `365-MM-hc-dark`, and `365-MM-hc-light` for the months that have it) |
 | `scripts/themes/` | Theme generator, accessibility audit and preview images ([documentation](scripts/themes/README.md)) |
+| `scripts/stats/` | Daily install and download statistics, written to the `stats` branch (see [Download statistics](#download-statistics)) |
 | `test/` | Unit tests (`test/unit`) and integration tests run inside VS Code (`test/suite`) |
 | `docs/` | Translated README files |
 
@@ -207,6 +208,41 @@ npm run site:preview  # serves it at http://127.0.0.1:4173
 `site/.htaccess` holds the security headers of the hosting: HTTPS only, a Content-Security-Policy that allows no script from elsewhere and no inline script, and no directory listing. `site:check` reads the same policy, so the page is tested with it.
 
 The [Site workflow](.github/workflows/site.yml) builds and checks the page on every push to `main` that changes it. When the repository variable `SITE_DEPLOY` is `enabled`, it then deploys over FTPS from the protected `site` environment: **each deployment waits for an approval** (**Review deployments** > **Approve and deploy**). The FTPS account is stored as secrets of that environment and only reaches the folder of the page. Nobody else's pull request can use them.
+
+## Download statistics
+
+The [Stats workflow](.github/workflows/stats.yml) records every day the install and download totals of the extension in the `stats` branch. That branch only holds data, shares no history with `main` and is written only by the workflow. It is created on the first run.
+
+| File in `stats` | Content |
+| --- | --- |
+| `downloads.csv` | One line per day (UTC): `date,marketplace_install,marketplace_update,marketplace_download,openvsx_download,status` |
+| `README.md` | What each column and status means. It is copied from `scripts/stats/branch-readme.md` on each run, so edit that file instead |
+
+**Sources.** Both are public and need no token: the Marketplace gallery API (`install`, `updateCount` and `downloadCount`, recorded as they are, since `downloadCount` is not the sum of the other two) and the Open VSX API (`downloadCount`). They only give the current totals, so a day that is not recorded is lost.
+
+**Schedule and retries.** The workflow runs at 00:17, 06:17, 12:17 and 18:17 UTC.
+
+- A run first reads `downloads.csv`. When the line of the day is complete, it stops without calling the APIs or committing.
+- Otherwise it only asks the registries that are still missing. When one answers and the other does not, the line is written with the `partial` status and empty cells, and the next run only asks the missing registry.
+- From 18:00 UTC on, a value that is still missing is copied from the previous day, and the status says which one: `carried:marketplace`, `carried:openvsx`, or `carried` for both. The series has no gap, and the data stay honest.
+- A day without any run (GitHub dropped every schedule) is copied too, with the `carried` status, on the next run. So is a day left `partial`.
+- Totals equal to the previous day are a measured day, with the `ok` status.
+- A counter going down is kept, with a notice in the log: the Marketplace sometimes corrects its numbers.
+- The very first line is only written once both registries have answered, since there is no previous day to copy.
+
+**Failures and emails.** The runs of 00:17, 06:17 and 12:17 never fail because of a registry: they only add a warning to the log. A run fails only when it had to copy a value, or when it found nothing at all from 18:00 on. GitHub then sends a single email. The values are still committed before the run fails.
+
+**Security.** No secret: the job's `GITHUB_TOKEN` gets `contents: write`, for this job only, and the workflow never runs in forks. Actions are pinned to a commit. The job stops after 5 minutes, and two runs never overlap.
+
+**By hand:**
+
+- Run it now: **Actions** > **Stats** > **Run workflow**, on `main`, or `gh workflow run stats.yml`. A run after 18:00 UTC can turn a `carried` line of the day back into a measured one.
+- Test the script locally, without touching the branch: `node scripts/stats/collect.cjs <empty folder>`. It writes `downloads.csv` and `README.md` there, from the live APIs. `npm run test:unit` covers it with fake answers.
+- Read the data: open the `stats` branch on GitHub, or `git fetch origin stats && git show origin/stats:downloads.csv`.
+- Pause it: **Actions** > **Stats** > **...** > **Disable workflow** (**Enable workflow** to start again). The days in between are then copied with the `carried` status on the next run, so check the line count before pausing for long. GitHub also disables scheduled workflows after 60 days without activity in the repository.
+- Delete the data: delete the `stats` branch on GitHub (**Branches** > the bin icon), after removing its protection rule. The next run starts a new branch with no history.
+
+**Branch protection.** A ruleset on `stats` should block deletion and force pushes, like the one on `main`, without blocking normal pushes: the workflow only adds commits.
 
 ## Dependencies and security
 
