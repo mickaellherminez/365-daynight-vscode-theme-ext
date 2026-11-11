@@ -16,6 +16,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 या इसे [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) या [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext) से इंस्टॉल करें। VS Code 1.96 या उसके बाद का संस्करण आवश्यक है।
 
+[वेबसाइट](https://365daynight.mickaellherminez.net) पर हर महीने और हर वैरिएंट का पूर्वावलोकन करें, और ऑडिट को चार्ट के रूप में पढ़ें (अंग्रेज़ी में)।
+
 *यह पेज इन भाषाओं में पढ़ें: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [العربية](README_ar.md)*
 
 ![VS Code में डेमो: स्टेटस बार बटन के तीर महीने को अक्टूबर से दिसंबर तक बदलते हैं, बटन पर क्लिक Light से Dark में बदलता है, और टूलटिप का लिंक High Contrast लागू करता है](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)

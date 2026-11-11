@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Added
+- A link to [the website](https://365daynight.mickaellherminez.net) in the README, to preview every month and variant and read the audit as charts
+
 ### Changed
 - New extension icon, from the new brand of 365 Day & Night, with a transparent background, on a light banner on the Marketplace page
 

@@ -16,6 +16,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) または [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext) からもインストールできます。VS Code 1.96 以降が必要です。
 
+[ウェブサイト](https://365daynight.mickaellherminez.net)で各月と各バリアントをプレビューし、監査結果をグラフで確認できます（英語）。
+
 *他の言語で読む：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
 ![VS Code でのデモ：ステータスバーのボタンの矢印で月を 10 月から 12 月に変え、ボタンをクリックして Light から Dark に切り替え、ツールチップのリンクで High Contrast を適用します](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)
