@@ -20,6 +20,7 @@ const nodeGlobals = {
 const mochaGlobals = {
   suite: 'readonly',
   test: 'readonly',
+  setup: 'readonly',
   teardown: 'readonly',
   suiteSetup: 'readonly',
   suiteTeardown: 'readonly',

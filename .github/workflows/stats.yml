@@ -1,0 +1,77 @@
+# Records the daily install and download totals of the extension on the
+# Visual Studio Marketplace and Open VSX, in the "stats" branch.
+# - Runs at 00:17, 06:17, 12:17 and 18:17 UTC, and manually. A run stops at
+#   once when the line of the day is complete, so the later runs are retries.
+#   Not on the hour: scheduled runs are often delayed or dropped at 00:00.
+# - Only reads public APIs, so it needs no secret. Its token can only write
+#   the repository contents, and the data never goes to main.
+# - Fails only when a value had to be copied from the previous day (from the
+#   18:17 run on), so a real gap sends a single email.
+# - Creates the "stats" branch on its first run.
+# See "Download statistics" in CONTRIBUTING.md.
+# Actions are pinned to a commit, so a changed tag cannot run other code.
+
+name: Stats
+
+on:
+  schedule:
+    - cron: '17 0,6,12,18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    # Forks do not collect the statistics of this extension.
+    if: github.repository == 'mickaellherminez/365-daynight-vscode-theme-ext'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      # The script runs from main, then the working tree switches to the stats branch.
+      - name: Open the stats branch
+        run: |
+          cp -R scripts/stats "$RUNNER_TEMP/stats-script"
+          if git ls-remote --exit-code --heads origin stats > /dev/null; then
+            git fetch --depth=1 origin stats
+            git switch --detach FETCH_HEAD
+          else
+            echo "The stats branch does not exist yet: it is created."
+            git switch --orphan stats
+          fi
+
+      # An exit code of 1 means that the values were written but one was copied:
+      # the commit still happens, and the last step fails.
+      - name: Collect
+        id: collect
+        run: node "$RUNNER_TEMP/stats-script/collect.cjs" . || echo "failed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898173+github-actions[bot]@users.noreply.github.com' \
+              commit --quiet --message "CHANGED: Download statistics of $(date -u +%F)"
+          git push origin HEAD:refs/heads/stats
+
+      - name: Report a missing value
+        if: steps.collect.outputs.failed == 'true'
+        run: |
+          echo "::error::A value could not be read today. See the Collect step."
+          exit 1
