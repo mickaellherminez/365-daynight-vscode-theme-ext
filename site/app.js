@@ -241,6 +241,7 @@ function update(announce = false) {
   if (announce) document.getElementById('selection-status').textContent = `${month.name}, ${label}. Text contrast ${ratio(palette.contrast.text)}. Accent contrast ${ratio(palette.contrast.accent)}.`;
 }
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 function choose(selection) {
   if (Number.isInteger(selection.month) && selection.month >= 0 && selection.month < months.length) {
     monthIndex = selection.month;
@@ -250,7 +251,10 @@ function choose(selection) {
     mode = selection.mode;
     manualMode = true;
   }
-  update(true);
+  // Cross-fade the page into the new palette where the browser supports it and motion is welcome.
+  // A quick new choice skips the running fade; that rejection is expected, so it is silenced.
+  if (document.startViewTransition && !reducedMotion.matches) document.startViewTransition(() => update(true)).ready.catch(() => {});
+  else update(true);
 }
 
 // Each day keeps the exact colors of its month; no interpolated palettes.
