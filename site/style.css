@@ -209,9 +209,10 @@ dialog::backdrop { background: var(--shadow); }
   /* Tooltips name the icons for mouse and keyboard users; a tap follows the link instead.
      The alternative text "" keeps them out of the accessible name, which the hidden text already gives. */
   .nav-link, .theme-chip { position: relative; }
-  .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: 100%; right: 0; z-index: 1; display: none; padding: 4px 8px; border-top: 6px solid transparent; background: var(--text) padding-box; color: var(--bg); border-radius: 4px; font: 500 13px/1.4 var(--sans); white-space: nowrap; content: attr(data-tooltip) / ""; }
-  .nav-link:focus-visible::after, .theme-chip:focus-visible::after { display: block; }
-  :root.tooltips-off .nav-link::after, :root.tooltips-off .theme-chip::after { display: none !important; }
+  /* Hidden tooltips keep their box but use visibility, so they can fade and slide in without being hoverable. */
+  .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: calc(100% + 6px); right: 0; z-index: 1; padding: 5px 10px; background: var(--text); color: var(--bg); border-radius: 8px; box-shadow: 0 4px 12px rgb(0 0 0 / .18); font: 500 13px/1.4 var(--sans); white-space: nowrap; pointer-events: none; content: attr(data-tooltip) / ""; visibility: hidden; opacity: 0; transform: translateY(-4px) scale(.96); transform-origin: top right; transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s; }
+  .nav-link:focus-visible::after, .theme-chip:focus-visible::after { visibility: visible; opacity: 1; transform: none; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
+  :root.tooltips-off .nav-link::after, :root.tooltips-off .theme-chip::after { visibility: hidden !important; opacity: 0 !important; transition: none !important; }
   .hero { padding-top: 20px; }
   .hero-copy { max-width: none; }
   .button { flex: 1 1 100%; }
@@ -227,7 +228,9 @@ dialog::backdrop { background: var(--shadow); }
   .section-heading p { font-size: 16px; }
 }
 @media (max-width: 720px) and (hover: hover) and (pointer: fine) {
-  .nav-link:hover::after, .theme-chip:hover::after { display: block; }
+  .nav-link:hover::after, .theme-chip:hover::after { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
+  /* An invisible bridge over the 6 px gap keeps the hover while the pointer moves onto the tooltip (WCAG 1.4.13). */
+  .nav-link:hover::before, .theme-chip:hover::before { position: absolute; top: 100%; right: 0; left: 0; height: 6px; content: ""; }
 }
 @media (max-width: 420px) {
   .palette-readout { gap: 20px; }
