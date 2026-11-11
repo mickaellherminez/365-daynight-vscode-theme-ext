@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Changed
-- New extension icon, from the new brand of 365 Day & Night, and a matching dark banner on the Marketplace page
+- New extension icon, from the new brand of 365 Day & Night, with a transparent background, on a light banner on the Marketplace page
 
 ## [1.0.0] - 2026-11-09
 
