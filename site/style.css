@@ -60,9 +60,7 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .pk .dz { fill: currentColor; fill-opacity: 0; stroke: none; cursor: pointer; transition: fill-opacity .12s ease; }
 .pk .dec { opacity: 0; transition: opacity .15s ease; }
 .pk .dec .mk { transition: transform .18s ease; transform-box: fill-box; transform-origin: center; transform: scale(.7); }
-.pk .dh:focus-visible { stroke-opacity: .16; }
-.pk .dz:focus-visible { fill-opacity: .16; }
-.pk [role=button]:focus-visible { outline: 3px solid var(--line); outline-offset: 3px; }
+.pk [role=button]:focus, .pk [role=button]:focus-visible { outline: none; }
 .pk .dh:active { stroke-opacity: .24; }
 .pk .dz:active { fill-opacity: .24; }
 .pk .mo:hover .dec, .pk .mo:focus-within .dec, .pk .zo:hover .dec, .pk .zo:focus-within .dec { opacity: .62; }
@@ -177,9 +175,10 @@ dialog::backdrop { background: var(--shadow); }
 .close-button { min-height: 40px; padding: 0 14px; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg); color: var(--text); font-size: 14px; font-weight: 600; }
 .dialog-selection { margin: 12px 0 0; text-align: center; font: 500 14px/1.5 var(--mono); }
 :root[data-mode^=hc] { --rule: var(--line); }
-:root[data-mode^=hc] .control-panel { border: 3px solid var(--accent); }
-:root[data-mode^=hc] .section-number { color: var(--onAccent); background: var(--accent); align-self: flex-start; padding: 4px 8px; width: auto; margin-right: 14px; font-weight: 700; }
-:root[data-mode^=hc] .theme-chip { border-width: 2px; }
+/* High contrast thickens edges with shadows, never with borders, so no box changes size between modes. */
+:root[data-mode^=hc] .control-panel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+:root[data-mode^=hc] .section-number { color: var(--onAccent); background: var(--accent); align-self: flex-start; padding: 3px 0; text-align: center; border-radius: 2px; font-weight: 700; }
+:root[data-mode^=hc] .theme-chip { box-shadow: inset 0 0 0 1px var(--rule); }
 :root[data-mode^=hc] .mode-button[aria-pressed=true] { box-shadow: inset 0 0 0 3px var(--text); }
 @media (max-width: 720px) {
   .top { gap: 12px; }

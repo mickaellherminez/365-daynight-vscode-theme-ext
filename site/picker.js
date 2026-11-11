@@ -346,6 +346,35 @@ const WIDE_LABELS = `<g pointer-events="none">
 </g>`;
 
 const MODES = ['light', 'dark', 'hcLight', 'hcDark'];
+
+// Keyboard focus rings follow each shape instead of the browser's rectangular outline.
+// They appear only after keyboard input, never after a click or a tap.
+const MONTH_PATHS = [...ARTWORK.matchAll(/data-picker-month="\d+" d="([^"]+)"/g)].map((match) => match[1]);
+const ZONE_PATHS = [...ARTWORK.matchAll(/data-picker-mode="(\w+)" d="([^"]+)"/g)].map((match) => ({ mode: match[1], d: match[2] }));
+const MONTH_RINGS = MONTH_PATHS.map((d, i) => `<g data-ring="month-${i}" visibility="hidden" pointer-events="none" fill="none" stroke-linejoin="round">
+<path d="${d}" stroke="{{c.ink}}" stroke-width="86"></path>
+<path d="${d}" stroke="{{c.panel}}" stroke-width="74"></path>
+</g>`).join('\n');
+function zoneRings(key) {
+  // A band drawn 10 to 15 units inside each zone, clear of the disc's own edges.
+  return ZONE_PATHS.map(({ mode, d }, i) => `<mask id="pk-${key}-${mode}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="552" height="552">
+<path d="${d}" fill="#fff" fill-rule="evenodd"></path>
+<path d="${d}" fill="none" stroke="#000" stroke-width="20" stroke-linejoin="round"></path>
+</mask>
+<path data-ring="mode-${mode}" visibility="hidden" pointer-events="none" d="${d}" fill="none" stroke="{{z${i}.fg}}" stroke-width="30" stroke-linejoin="round" mask="url(#pk-${key}-${mode})"></path>`).join('\n');
+}
+function artwork(key) {
+  return ARTWORK.replace('</g>\n', `</g>\n${MONTH_RINGS}\n`) + zoneRings(key);
+}
+
+let keyboardInput = false;
+let pickerCount = 0;
+if (typeof document !== 'undefined') {
+  document.addEventListener('keydown', (event) => {
+    if (!event.metaKey && !event.ctrlKey && !event.altKey) keyboardInput = true;
+  }, true);
+  document.addEventListener('pointerdown', () => { keyboardInput = false; }, true);
+}
 function luminance(hex) {
   let color = hex.replace('#', '');
   if (color.length === 3) color = color.split('').map((c) => c + c).join('');
@@ -368,8 +397,9 @@ export function createPicker(container, months, onChange) {
   if (months.length !== 12) throw new Error('The logo picker requires twelve months.');
   const label = 'Logo: twelve months around a disc of four themes. Choose a month on the ring, a theme on the disc.';
   container.innerHTML = `
-    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group" aria-label="${label}">${ARTWORK}${WIDE_LABELS}</svg>
-    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group" aria-label="${label}">${ARTWORK}</svg>`;
+    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`w${pickerCount}`)}${WIDE_LABELS}</svg>
+    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`c${pickerCount}`)}</svg>`;
+  pickerCount += 1;
 
   const bindings = [];
   for (const node of container.querySelectorAll('*')) {
@@ -387,8 +417,16 @@ export function createPicker(container, months, onChange) {
         onChange({ mode: control.getAttribute('data-picker-mode') });
       }
     };
+    const ringKey = control.hasAttribute('data-picker-month')
+      ? `month-${control.getAttribute('data-picker-month')}`
+      : `mode-${control.getAttribute('data-picker-mode')}`;
+    const ring = control.ownerSVGElement.querySelector(`[data-ring="${ringKey}"]`);
+    const showRing = (visible) => ring.setAttribute('visibility', visible ? 'visible' : 'hidden');
+    control.addEventListener('focus', () => showRing(keyboardInput));
+    control.addEventListener('blur', () => showRing(false));
     control.addEventListener('click', choose);
     control.addEventListener('keydown', (event) => {
+      showRing(true);
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         choose();
