@@ -402,8 +402,8 @@
     ]
   },
   "galleryBanner": {
-    "color": "#16121D",
-    "theme": "dark"
+    "color": "#FBF4EA",
+    "theme": "light"
   },
   "scripts": {
     "lint": "eslint --config eslint.config.cjs .",
