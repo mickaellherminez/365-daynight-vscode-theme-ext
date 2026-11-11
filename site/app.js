@@ -11,6 +11,8 @@ const modes = [
   { key: 'hcLight', label: 'High Contrast Light' },
   { key: 'hcDark', label: 'High Contrast' },
 ];
+// The header chip uses the short month name; the dialog and the measurements keep the full one.
+const chipLabel = (month, label) => `${month.short} · ${label}`;
 const systemAppearance = window.matchMedia('(prefers-color-scheme: dark)');
 let monthIndex = Number(root.dataset.month);
 let mode = root.dataset.mode;
@@ -183,6 +185,8 @@ function update(announce = false) {
   document.querySelectorAll('[data-month-name]').forEach((node) => { node.textContent = month.name; });
   document.querySelectorAll('[data-mode-label]').forEach((node) => { node.textContent = label; });
   document.querySelectorAll('[data-selection]').forEach((node) => { node.textContent = `${month.name} · ${label}`; });
+  document.querySelectorAll('[data-chip-label]').forEach((node) => { node.textContent = chipLabel(month, label); });
+  document.querySelectorAll('.theme-chip[data-tooltip]').forEach((node) => { node.dataset.tooltip = `${month.name} · ${label}`; });
   pickers.forEach((picker) => picker.update(monthIndex, mode));
   modeButtons.forEach((button) => {
     const p = month[button.dataset.mode];
@@ -380,13 +384,13 @@ root.classList.add('js');
 // The header chip keeps the width of its longest label, so a longer theme name
 // never pushes it to a new line and moves the page when the theme changes.
 function reserveSelectionWidth() {
-  for (const node of document.querySelectorAll('.theme-chip [data-selection]')) {
+  for (const node of document.querySelectorAll('[data-chip-label]')) {
     const current = node.textContent;
     node.style.minWidth = '0px';
     let widest = 0;
     for (const month of months) {
       for (const item of modes) {
-        node.textContent = `${month.name} · ${item.label}`;
+        node.textContent = chipLabel(month, item.label);
         widest = Math.max(widest, node.getBoundingClientRect().width);
       }
     }
@@ -412,9 +416,31 @@ function reserveComparisonHeight() {
   parts.forEach((node, i) => { node.textContent = current[i]; });
   sentence.style.minHeight = `${Math.ceil(tallest)}px`;
 }
+// Anchors and keyboard focus stop below the sticky header, never under it.
+const siteHeader = document.querySelector('.site-header');
+function measureHeader() {
+  root.style.setProperty('--header-height', `${Math.ceil(siteHeader.getBoundingClientRect().height)}px`);
+}
 function reserveTextSpace() {
   reserveSelectionWidth();
   reserveComparisonHeight();
+  measureHeader();
+}
+let scrollFrame = 0;
+window.addEventListener('scroll', () => {
+  if (scrollFrame) return;
+  scrollFrame = window.requestAnimationFrame(() => {
+    scrollFrame = 0;
+    siteHeader.classList.toggle('scrolled', window.scrollY > 0);
+  });
+}, { passive: true });
+siteHeader.classList.toggle('scrolled', window.scrollY > 0);
+// Escape hides an open tooltip until the pointer or the focus moves again (WCAG 1.4.13).
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') root.classList.add('tooltips-off');
+});
+for (const type of ['pointermove', 'focusin']) {
+  document.addEventListener(type, () => root.classList.remove('tooltips-off'), { passive: true });
 }
 reserveTextSpace();
 if (document.fonts) document.fonts.ready.then(reserveTextSpace);

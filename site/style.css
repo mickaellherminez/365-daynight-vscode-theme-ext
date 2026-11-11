@@ -19,6 +19,14 @@ button { color: inherit; }
 .sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .skip { position: fixed; z-index: 100; left: 20px; top: 12px; transform: translateY(-150%); padding: 10px 16px; border: 2px solid var(--line); border-radius: 6px; background: var(--bg); }
 .skip:focus { transform: translateY(0); }
+/* The header stays in view so a theme change shows on the section being read.
+   On short screens (landscape phones, strong zoom) it scrolls away to leave room for content. */
+.site-header { position: relative; z-index: 50; background: var(--bg); transition: box-shadow .15s ease; }
+.site-header.scrolled { box-shadow: 0 1px 0 var(--rule); }
+@media (min-height: 500px) {
+  .site-header { position: sticky; top: 0; }
+  html { scroll-padding-top: calc(var(--header-height, 0px) + 8px); }
+}
 .top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 20px; }
 .identity { display: flex; align-items: center; gap: 10px; }
 .logo-button { width: 52px; height: 52px; flex: none; border: 0; padding: 0; background: transparent; border-radius: 50%; }
@@ -26,6 +34,12 @@ button { color: inherit; }
 .brand { color: var(--text); text-decoration: none; font-size: 16px; font-weight: 600; }
 nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 nav > a { font-weight: 500; }
+.nav-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; }
+.nav-link .nav-text { text-decoration: underline; text-underline-offset: 4px; }
+.nav-link:hover .nav-text { text-decoration-thickness: 2px; }
+/* Icons take the accent of the current theme: at least 4.5:1 on the background in all 48 palettes. */
+.nav-icon { flex: none; color: var(--accent); }
+.chip-label { white-space: nowrap; text-align: left; }
 .theme-chip { min-height: 48px; padding: 0 16px 0 10px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--rule); border-radius: 999px; background: transparent; font-size: 15px; font-weight: 600; }
 .theme-dot { display: inline-block; flex: none; width: 26px; height: 26px; border: 1px solid var(--text); border-radius: 50%; background: var(--bg); position: relative; }
 .js .theme-chip { display: flex !important; }
@@ -181,9 +195,23 @@ dialog::backdrop { background: var(--shadow); }
 :root[data-mode^=hc] .theme-chip { box-shadow: inset 0 0 0 1px var(--rule); }
 :root[data-mode^=hc] .mode-button[aria-pressed=true] { box-shadow: inset 0 0 0 3px var(--text); }
 @media (max-width: 720px) {
-  .top { gap: 12px; }
-  nav { gap: 16px; width: 100%; }
-  .theme-chip { margin-left: auto; font-size: 13px; }
+  /* One row on phones: logo and name on the left, icon links and the theme disc on the right. */
+  .top { flex-wrap: nowrap; gap: 8px; padding-block: 12px; }
+  .identity { min-width: 0; gap: 8px; }
+  .logo-button { width: 40px; height: 40px; }
+  .brand { line-height: 1.25; }
+  nav { flex: none; flex-wrap: nowrap; gap: 4px; }
+  .nav-link { justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
+  .nav-icon { width: 22px; height: 22px; }
+  .nav-link .nav-text, .theme-chip .chip-label { position: absolute; width: 1px; height: 1px; min-width: 0 !important; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .theme-chip { width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; }
+  .chip-chevron { display: none; }
+  /* Tooltips name the icons for mouse and keyboard users; a tap follows the link instead.
+     The alternative text "" keeps them out of the accessible name, which the hidden text already gives. */
+  .nav-link, .theme-chip { position: relative; }
+  .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: 100%; right: 0; z-index: 1; display: none; padding: 4px 8px; border-top: 6px solid transparent; background: var(--text) padding-box; color: var(--bg); border-radius: 4px; font: 500 13px/1.4 var(--sans); white-space: nowrap; content: attr(data-tooltip) / ""; }
+  .nav-link:focus-visible::after, .theme-chip:focus-visible::after { display: block; }
+  :root.tooltips-off .nav-link::after, :root.tooltips-off .theme-chip::after { display: none !important; }
   .hero { padding-top: 20px; }
   .hero-copy { max-width: none; }
   .button { flex: 1 1 100%; }
@@ -198,11 +226,10 @@ dialog::backdrop { background: var(--shadow); }
   .section-number { width: 24px; }
   .section-heading p { font-size: 16px; }
 }
+@media (max-width: 720px) and (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after, .theme-chip:hover::after { display: block; }
+}
 @media (max-width: 420px) {
-  nav { gap: 12px; }
-  nav > a { font-size: 14px; }
-  .theme-chip { padding-right: 10px; gap: 6px; }
-  .theme-chip .theme-dot { width: 20px; height: 20px; }
   .palette-readout { gap: 20px; }
   .current-swatches span { width: 14px; }
   .hero-stats { justify-content: space-between; gap: 16px; }
