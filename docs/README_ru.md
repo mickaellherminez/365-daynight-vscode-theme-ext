@@ -16,6 +16,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 Или установите из [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) или [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext). Требуется VS Code 1.96 или новее.
 
+Посмотрите каждый месяц и каждый вариант, а также аудит в виде графиков на [сайте](https://365daynight.mickaellherminez.net) (на английском).
+
 *Читать на: [English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
 ![Демонстрация в VS Code: стрелки кнопки в строке состояния меняют месяц с октября на декабрь, нажатие кнопки переключает Light на Dark, а ссылка во всплывающей подсказке применяет High Contrast](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)

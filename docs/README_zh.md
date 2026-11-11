@@ -16,6 +16,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 也可以从 [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) 或 [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext) 安装。需要 VS Code 1.96 或更高版本。
 
+在[网站](https://365daynight.mickaellherminez.net)上预览每个月份和每种变体，并以图表形式查看审核结果（英文）。
+
 *其他语言：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
 ![VS Code 中的演示：状态栏按钮的箭头将月份从十月切换到十二月，点击按钮从 Light 切换到 Dark，工具提示中的链接应用 High Contrast](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/main/assets/screenshots/demo-months.gif)
