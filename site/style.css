@@ -192,7 +192,7 @@ dialog::backdrop { background: var(--shadow); }
   .pk-wide { display: none !important; }
   .pk-compact { display: block !important; }
   .mode-options { display: grid; }
-  .palette-readout { padding-inline: 16px; }
+  .palette-readout { padding-inline: 16px; flex-direction: column; align-items: flex-start; }
   .contrast-stats { gap: 20px; }
   .section-heading { gap: 16px; }
   .section-number { width: 24px; }

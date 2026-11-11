@@ -376,3 +376,50 @@ refreshDate();
 setSplit(split);
 // Only reveal interactive sections after every control is initialized.
 root.classList.add('js');
+
+// The header chip keeps the width of its longest label, so a longer theme name
+// never pushes it to a new line and moves the page when the theme changes.
+function reserveSelectionWidth() {
+  for (const node of document.querySelectorAll('.theme-chip [data-selection]')) {
+    const current = node.textContent;
+    node.style.minWidth = '0px';
+    let widest = 0;
+    for (const month of months) {
+      for (const item of modes) {
+        node.textContent = `${month.name} · ${item.label}`;
+        widest = Math.max(widest, node.getBoundingClientRect().width);
+      }
+    }
+    node.textContent = current;
+    node.style.minWidth = `${Math.ceil(widest)}px`;
+  }
+}
+// The comparison sentence names the month and both themes: it keeps the height of its longest version.
+function reserveComparisonHeight() {
+  const sentence = document.getElementById('compare-day-label').closest('p');
+  const parts = [...sentence.querySelectorAll('[data-month-name], #compare-day-label, #compare-night-label')];
+  const current = parts.map((node) => node.textContent);
+  sentence.style.minHeight = '0px';
+  let tallest = 0;
+  for (const month of months) {
+    for (const [day, night] of [['Light', 'Dark'], ['High Contrast Light', 'High Contrast']]) {
+      for (const node of parts) {
+        node.textContent = node.id === 'compare-day-label' ? day : node.id === 'compare-night-label' ? night : month.name;
+      }
+      tallest = Math.max(tallest, sentence.getBoundingClientRect().height);
+    }
+  }
+  parts.forEach((node, i) => { node.textContent = current[i]; });
+  sentence.style.minHeight = `${Math.ceil(tallest)}px`;
+}
+function reserveTextSpace() {
+  reserveSelectionWidth();
+  reserveComparisonHeight();
+}
+reserveTextSpace();
+if (document.fonts) document.fonts.ready.then(reserveTextSpace);
+let resizeFrame = 0;
+window.addEventListener('resize', () => {
+  window.cancelAnimationFrame(resizeFrame);
+  resizeFrame = window.requestAnimationFrame(reserveTextSpace);
+});
