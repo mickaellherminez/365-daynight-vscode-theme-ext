@@ -291,3 +291,23 @@ suite('Landing page social preview', () => {
 		}
 	});
 });
+
+suite('Landing page header', () => {
+	const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+	const nav = html.match(/<nav aria-label="Main navigation">([\s\S]*?)<\/nav>/)[1];
+
+	test('icon links keep their text, hidden visually on phones only', () => {
+		const links = [...nav.matchAll(/<a class="nav-link"[^>]*>([\s\S]*?)<\/a>/g)].map((match) => match[1]);
+		assert.strictEqual(links.length, 2);
+		for (const link of links) {
+			assert.match(link, /<svg[^>]*aria-hidden="true"/);
+			assert.match(link, /<span class="nav-text">\S[^<]*<\/span>/);
+		}
+	});
+
+	test('the theme chip names its action after the visible label', () => {
+		const chip = nav.match(/<button class="theme-chip[\s\S]*?<\/button>/)[0];
+		assert.match(chip, /data-chip-label[^>]*>[^<]+<\/span><span class="sr">, choose month and theme<\/span>/);
+		assert.doesNotMatch(chip, /aria-label=/, 'an aria-label would hide the visible label from the accessible name');
+	});
+});
