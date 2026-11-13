@@ -151,33 +151,38 @@ const markup = (text) => [...text.matchAll(/<\/?[a-z][^>]*>/gi)].map((match) => 
 /** {{placeholders}} of a text, sorted. */
 const placeholders = (text) => [...text.matchAll(/\{\{\w+\}\}/g)].map((match) => match[0]).sort();
 
+/** A translated text: filled in, with the links, elements and placeholders of English. */
+function compareText(value, base, key, problems) {
+	if (typeof value !== 'string' || !value.trim()) { problems.push(`${key}: missing text`); return; }
+	if (markup(value).join() !== markup(base).join()) problems.push(`${key}: the HTML differs from English`);
+	if (placeholders(value).join() !== placeholders(base).join()) problems.push(`${key}: the {{placeholders}} differ from English`);
+}
+
+/** Compare a translated value with English, key by key, at any depth. */
+function compareTree(value, base, key, problems) {
+	if (typeof base === 'string') { compareText(value, base, key, problems); return; }
+	if (Array.isArray(base)) {
+		if (!Array.isArray(value) || value.length !== base.length) { problems.push(`${key}: expected ${base.length} entries`); return; }
+		base.forEach((item, index) => compareTree(value[index], item, `${key}[${index}]`, problems));
+		return;
+	}
+	if (value == null || typeof value !== 'object') { problems.push(`${key}: missing`); return; }
+	const path = (name) => (key ? `${key}.${name}` : name);
+	for (const name of Object.keys(base)) compareTree(value[name], base[name], path(name), problems);
+	for (const name of Object.keys(value).filter((item) => !(item in base))) problems.push(`${path(name)}: not in English`);
+}
+
 /**
  * A translation has exactly the keys of English, every text is filled in, and keeps the same
  * links, elements and {{placeholders}}. Only the words change.
  */
 function validateLocale(locale, reference = loadLocale('en'), where = locale.meta?.code || '?') {
 	const problems = [];
-	const walk = (value, base, key) => {
-		if (typeof base === 'string') {
-			if (typeof value !== 'string' || !value.trim()) problems.push(`${key}: missing text`);
-			else {
-				if (markup(value).join() !== markup(base).join()) problems.push(`${key}: the HTML differs from English`);
-				if (placeholders(value).join() !== placeholders(base).join()) problems.push(`${key}: the {{placeholders}} differ from English`);
-			}
-			return;
-		}
-		if (Array.isArray(base)) {
-			if (!Array.isArray(value) || value.length !== base.length) { problems.push(`${key}: expected ${base.length} entries`); return; }
-			base.forEach((item, index) => walk(value[index], item, `${key}[${index}]`));
-			return;
-		}
-		if (value == null || typeof value !== 'object') { problems.push(`${key}: missing`); return; }
-		for (const name of Object.keys(base)) walk(value[name], base[name], key ? `${key}.${name}` : name);
-		for (const name of Object.keys(value)) if (!(name in base)) problems.push(`${key ? `${key}.` : ''}${name}: not in English`);
-	};
-	walk({ months: locale.months, page: locale.page, js: locale.js }, { months: reference.months, page: reference.page, js: reference.js }, '');
-	for (const field of ['code', 'name', 'dir', 'ogLocale']) if (!locale.meta?.[field]) problems.push(`meta.${field}: missing`);
-	if (!['ltr', 'rtl'].includes(locale.meta?.dir)) problems.push('meta.dir: must be ltr or rtl');
+	const parts = (source) => ({ months: source.months, page: source.page, js: source.js });
+	compareTree(parts(locale), parts(reference), '', problems);
+	const meta = locale.meta || {};
+	for (const field of ['code', 'name', 'dir', 'ogLocale'].filter((name) => !meta[name])) problems.push(`meta.${field}: missing`);
+	if (!['ltr', 'rtl'].includes(meta.dir)) problems.push('meta.dir: must be ltr or rtl');
 	if (problems.length) throw new Error(`Translation ${where}:\n  ${problems.join('\n  ')}`);
 	return locale;
 }

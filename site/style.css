@@ -203,12 +203,11 @@ dialog[open]::backdrop { opacity: 1; }
 /* Tablets and phones: the header links are icons named by a tooltip, so the header keeps one line in every language. */
 @media (max-width: 1023px) {
   nav { gap: 4px; }
-  .nav-link { justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
-  .nav-icon { width: 22px; height: 22px; }
-  .nav-link .nav-text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* Tooltips name the icons for mouse and keyboard users; a tap follows the link instead.
      The alternative text "" keeps them out of the accessible name, which the hidden text already gives. */
-  .nav-link { position: relative; }
+  .nav-link { position: relative; justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
+  .nav-icon { width: 22px; height: 22px; }
+  .nav-link .nav-text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   /* Hidden tooltips keep their box but use visibility, so they can fade and slide in without being hoverable. */
   .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 1; padding: 5px 10px; background: var(--text); color: var(--bg); border-radius: 8px; box-shadow: 0 4px 12px rgb(0 0 0 / .18); font: 500 13px/1.4 var(--sans); white-space: nowrap; pointer-events: none; content: attr(data-tooltip) / ""; visibility: hidden; opacity: 0; transform: translateY(-4px) scale(.96); transform-origin: top right; transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s; }
   .nav-link:focus-visible::after, .theme-chip:focus-visible::after { visibility: visible; opacity: 1; transform: none; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
@@ -231,9 +230,8 @@ dialog[open]::backdrop { opacity: 1; }
   .brand { line-height: 1.25; }
   nav { flex: none; flex-wrap: nowrap; gap: 4px; }
   .theme-chip .chip-label { position: absolute; width: 1px; height: 1px; min-width: 0 !important; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .theme-chip { width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; }
+  .theme-chip { position: relative; width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; }
   .chip-chevron { display: none; }
-  .theme-chip { position: relative; }
   .hero { padding-top: 20px; }
   .hero-copy { max-width: none; }
   .button { flex: 1 1 100%; }

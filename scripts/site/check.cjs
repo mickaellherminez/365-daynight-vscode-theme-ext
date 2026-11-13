@@ -48,6 +48,69 @@ function serve(dir, csp) {
 	return new Promise((resolve) => server.listen(0, '127.0.0.1', () => resolve(server)));
 }
 
+/** Report the console errors, script errors and failed requests of a page. */
+function watchErrors(page, where, problems) {
+	page.on('console', (message) => { if (message.type() === 'error') problems.push(`${where}: console error: ${message.text()}`); });
+	page.on('pageerror', (error) => problems.push(`${where}: script error: ${error.message}`));
+	page.on('response', (response) => { if (response.status() >= 400) problems.push(`${where}: ${response.status()} ${response.url()}`); });
+}
+
+/** Language and direction of the page, and a header on one line. */
+async function checkLanguage(page, code, where, problems) {
+	const { dir } = loadLocale(code).meta;
+	const html = await page.evaluate(() => [document.documentElement.lang, document.documentElement.dir]);
+	if (html.join() !== [code, dir].join()) problems.push(`${where}: <html> has lang="${html[0]}" dir="${html[1]}"`);
+	const header = await page.evaluate(() => document.querySelector('.site-header').getBoundingClientRect().height);
+	if (header > 100) problems.push(`${where}: the header wraps (${Math.round(header)}px high)`);
+}
+
+/** The language menu opens, lists every language, fits the screen and closes with Escape. */
+async function checkLanguageMenu(page, where, problems) {
+	await page.click('.language-toggle');
+	const listed = await page.$$eval('.language-list a', (links) => links.map((link) => link.hreflang));
+	if (listed.join() !== LANGUAGES.join()) problems.push(`${where}: the language menu lists ${listed.join(', ')}`);
+	const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+	if (overflow > 0) problems.push(`${where}: the open language menu is ${overflow}px wider than the screen`);
+	await page.keyboard.press('Escape');
+	if (await page.$eval('[data-language-menu]', (menu) => menu.open)) problems.push(`${where}: Escape does not close the language menu`);
+}
+
+/** axe-core in each theme variant to test (null: the variant shown first). */
+async function checkAccessibility(page, axe, variants, where, problems) {
+	for (const variant of variants) {
+		if (variant) {
+			await page.selectOption('#chart-variant', variant);
+			await page.waitForTimeout(200);
+		}
+		await page.evaluate(axe);
+		const violations = await page.evaluate(async () => (await window.axe.run(document, {
+			runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] },
+		})).violations.map((v) => `${v.id} (${v.nodes.length})`));
+		violations.forEach((v) => problems.push(`${where} ${variant || 'default'}: axe ${v}`));
+	}
+}
+
+/** No horizontal scrolling and no video that plays on its own. */
+async function checkLayout(page, where, problems) {
+	const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+	if (overflow > 0) problems.push(`${where}: page is ${overflow}px wider than the screen`);
+	if (await page.evaluate(() => document.querySelector('video').autoplay)) problems.push(`${where}: the video plays on its own`);
+}
+
+/** One page of one language, at one size and color scheme. */
+async function checkView(browser, axe, url, code, [width, scheme], problems) {
+	const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme });
+	const page = await context.newPage();
+	const where = `${code} ${width}px ${scheme}`;
+	watchErrors(page, where, problems);
+	await page.goto(url, { waitUntil: 'networkidle' });
+	await checkLanguage(page, code, where, problems);
+	await checkLanguageMenu(page, where, problems);
+	await checkAccessibility(page, axe, code === 'en' ? VARIANTS : [null], where, problems);
+	await checkLayout(page, where, problems);
+	await context.close();
+}
+
 async function check(dir) {
 	const server = await serve(dir, productionCsp());
 	const base = `http://127.0.0.1:${server.address().port}/`;
@@ -56,44 +119,9 @@ async function check(dir) {
 	const problems = [];
 	try {
 		for (const code of LANGUAGES) {
-		const url = base + languagePath(code);
-		const meta = loadLocale(code).meta;
-		for (const [width, scheme] of code === 'en' ? VIEWS : TRANSLATION_VIEWS) {
-			const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme });
-			const page = await context.newPage();
-			const where = `${code} ${width}px ${scheme}`;
-			page.on('console', (message) => { if (message.type() === 'error') problems.push(`${where}: console error: ${message.text()}`); });
-			page.on('pageerror', (error) => problems.push(`${where}: script error: ${error.message}`));
-			page.on('response', (response) => { if (response.status() >= 400) problems.push(`${where}: ${response.status()} ${response.url()}`); });
-			await page.goto(url, { waitUntil: 'networkidle' });
-			const html = await page.evaluate(() => [document.documentElement.lang, document.documentElement.dir]);
-			if (html.join() !== [code, meta.dir].join()) problems.push(`${where}: <html> has lang="${html[0]}" dir="${html[1]}"`);
-			const header = await page.evaluate(() => document.querySelector('.site-header').getBoundingClientRect().height);
-			if (header > 100) problems.push(`${where}: the header wraps (${Math.round(header)}px high)`);
-			// The language menu opens, lists every language and closes with Escape.
-			await page.click('.language-toggle');
-			const listed = await page.$$eval('.language-list a', (links) => links.map((link) => link.hreflang));
-			if (listed.join() !== LANGUAGES.join()) problems.push(`${where}: the language menu lists ${listed.join(', ')}`);
-			const overflowMenu = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-			if (overflowMenu > 0) problems.push(`${where}: the open language menu is ${overflowMenu}px wider than the screen`);
-			await page.keyboard.press('Escape');
-			if (await page.$eval('[data-language-menu]', (menu) => menu.open)) problems.push(`${where}: Escape does not close the language menu`);
-			for (const variant of code === 'en' ? VARIANTS : [null]) {
-				if (variant) {
-					await page.selectOption('#chart-variant', variant);
-					await page.waitForTimeout(200);
-				}
-				await page.evaluate(axe);
-				const violations = await page.evaluate(async () => (await window.axe.run(document, {
-					runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] },
-				})).violations.map((v) => `${v.id} (${v.nodes.length})`));
-				violations.forEach((v) => problems.push(`${where} ${variant || 'default'}: axe ${v}`));
+			for (const view of code === 'en' ? VIEWS : TRANSLATION_VIEWS) {
+				await checkView(browser, axe, base + languagePath(code), code, view, problems);
 			}
-			const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-			if (overflow > 0) problems.push(`${where}: page is ${overflow}px wider than the screen`);
-			if (await page.evaluate(() => document.querySelector('video').autoplay)) problems.push(`${where}: the video plays on its own`);
-			await context.close();
-		}
 		}
 	} finally {
 		await browser.close();
