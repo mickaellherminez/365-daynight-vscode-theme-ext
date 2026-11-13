@@ -212,6 +212,8 @@ function translate(template, page) {
 	});
 }
 
+/** A technical expression (ratio, code) that reads left to right in every language, Arabic included. */
+const isolate = (text) => `<bdi dir="ltr">${text}</bdi>`;
 const escapeHtml = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 /** JSON placed in a <script> element: "<" is escaped so no text can close the element. */
 const scriptJson = (value) => JSON.stringify(value).replace(/</g, '\\u003c');
@@ -278,9 +280,9 @@ function pageValues(report, locale = loadLocale('en'), locales = [locale]) {
 		CHECKS_MAX: format(Math.max(...totals)),
 		LOWEST_TEXT: lowest.toFixed(2),
 		LOWEST_TEXT_NUMBER: format(lowest, 2),
-		LOWEST_TEXT_RATIO: `${format(lowest, 2)}:1`,
+		LOWEST_TEXT_RATIO: isolate(`${format(lowest, 2)}:1`),
 		AA_LEVEL: format(report.thresholds.textContrast, 1),
-		AA_RATIO: `${format(report.thresholds.textContrast, 1)}:1`,
+		AA_RATIO: isolate(`${format(report.thresholds.textContrast, 1)}:1`),
 		THEME_DATA: JSON.stringify(data),
 		INITIAL_CSS: Object.entries(pagePalette(publishedTheme(report.variants.Light.themes[10])))
 			.map(([key, value]) => `--${key}:${value}`).join(';'),

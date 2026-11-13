@@ -1,5 +1,5 @@
 // Code seen through each simulated vision, and the vision scores of the audit report.
-import { t, num, ratio, inSentence } from './i18n.js';
+import { t, tNodes, ltr, num, ratio, inSentence } from './i18n.js';
 
 const VIEWS = ['normal', 'protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia'].map((key) => ({ key, label: t(`vision.views.${key}`) }));
 const MACHADO = ['Machado et al., 2009', 'https://doi.org/10.1109/TVCG.2009.113'];
@@ -68,8 +68,10 @@ export function createVisionPanel(container, code, thresholds) {
     const fill = element('span', 'score-fill');
     track.append(fill);
     value.append(number, track);
-    const formula = element('td', 'score-formula', t(`vision.scores.${score.key}.formula`, {
-      d: num(thresholds.colorDistinctionDeltaE), aa: ratio(thresholds.textContrast, 1), aaa: ratio(thresholds.textContrastHighContrast, 0),
+    const formula = element('td', 'score-formula');
+    formula.append(tNodes(`vision.scores.${score.key}.formula`, {
+      distance: ltr(`ΔE ${num(thresholds.colorDistinctionDeltaE)}`),
+      aa: ltr(ratio(thresholds.textContrast, 1)), aaa: ltr(ratio(thresholds.textContrastHighContrast, 0)),
     }));
     const reference = element('td', 'score-ref');
     const link = element('a', '', score.ref[0]);
@@ -107,15 +109,15 @@ export function createVisionPanel(container, code, thresholds) {
     }));
     const label = VIEWS.find((item) => item.key === view).label;
     const score = view === 'normal' ? null : palette.scores[view];
-    status.textContent = score == null
-      ? t('vision.normal', { theme: palette.name })
-      : t('vision.simulated', { theme: palette.name, vision: inSentence(label), score: num(score) });
+    status.replaceChildren(score == null
+      ? tNodes('vision.normal', { theme: ltr(palette.name) })
+      : tNodes('vision.simulated', { theme: ltr(palette.name), vision: inSentence(label), score: num(score) }));
   }
 
   return {
     update(palette) {
       current = palette;
-      caption.textContent = t('vision.caption', { theme: palette.name });
+      caption.replaceChildren(tNodes('vision.caption', { theme: ltr(palette.name) }));
       for (const { score, number, fill } of rows) {
         const value = palette.scores[score.key];
         number.textContent = num(value);

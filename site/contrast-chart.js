@@ -1,5 +1,5 @@
 // Accessible, dependency-free chart. The table is both the graphic and its data.
-import { t, num, ratio as formatRatio } from './i18n.js';
+import { t, tNodes, ltr, isolate, num, ratio as formatRatio } from './i18n.js';
 
 const ROLES = ['keyword', 'function', 'string', 'number', 'class', 'comment', 'variable', 'operator',
   'punctuation', 'tag', 'attribute', 'regex', 'JSON key', 'invalid'];
@@ -36,7 +36,7 @@ export function createContrastChart(container, summary, thresholds) {
     const colorContent = element('span', 'contrast-color-value');
     const swatch = element('span', 'contrast-swatch');
     swatch.setAttribute('aria-hidden', 'true');
-    const hex = element('code');
+    const hex = element('span');
     colorContent.append(swatch, hex);
     color.append(colorContent);
     const graphic = element('td', 'contrast-graphic');
@@ -81,7 +81,7 @@ export function createContrastChart(container, summary, thresholds) {
   container.append(region, scrollHint);
   return {
     update(palette) {
-      caption.textContent = t('contrast.caption', { theme: palette.name, background: palette.bg });
+      caption.replaceChildren(tNodes('contrast.caption', { theme: ltr(palette.name), background: ltr(palette.bg, { code: true }) }));
       let aaCount = 0, aaaCount = 0;
       for (const row of rows) {
         const ratio = palette.syntaxContrast[row.role];
@@ -90,19 +90,19 @@ export function createContrastChart(container, summary, thresholds) {
         const aaa = ratio >= thresholds.textContrastHighContrast;
         aaCount += Number(aa);
         aaaCount += Number(aaa);
-        row.hex.textContent = color.toUpperCase();
+        row.hex.replaceChildren(isolate(ltr(color.toUpperCase(), { code: true })));
         row.swatch.style.backgroundColor = color;
         row.fill.style.backgroundColor = color;
         row.fill.style.width = position(ratio);
-        row.value.textContent = formatRatio(ratio, 2);
+        row.value.replaceChildren(isolate(formatRatio(ratio, 2)));
         row.level.textContent = t(aaa ? 'contrast.both' : aa ? 'contrast.aa' : 'contrast.below');
         row.row.dataset.ratio = String(ratio);
         row.row.dataset.color = color;
       }
-      summary.textContent = t('contrast.summary', {
-        aa: num(aaCount), aaa: num(aaaCount), total: num(rows.length), background: palette.bg.toUpperCase(),
-        aaRatio: formatRatio(thresholds.textContrast, 1), aaaRatio: formatRatio(thresholds.textContrastHighContrast, 0),
-      });
+      summary.replaceChildren(tNodes('contrast.summary', {
+        aa: num(aaCount), aaa: num(aaaCount), total: num(rows.length), background: ltr(palette.bg.toUpperCase(), { code: true }),
+        aaRatio: ltr(formatRatio(thresholds.textContrast, 1)), aaaRatio: ltr(formatRatio(thresholds.textContrastHighContrast, 0)),
+      }));
       table.style.backgroundColor = palette.bg;
     },
   };

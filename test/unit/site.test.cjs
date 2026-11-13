@@ -420,3 +420,42 @@ suite('Landing page translations', () => {
 		}
 	});
 });
+
+suite('Landing page left-to-right expressions', () => {
+	const root = path.join(__dirname, '../..');
+	const template = fs.readFileSync(path.join(root, 'site', 'index.html'), 'utf8');
+	const locales = loadLocales();
+
+	test('ratios placed by the build read left to right in every language', () => {
+		for (const locale of locales) {
+			const html = renderPage(template, report, locale, locales);
+			const value = Math.min(...Object.values(report.variants).flatMap((variant) => variant.themes).map((theme) => theme.contrast.lowestText));
+			const lowest = `${value.toLocaleString(locale.meta.numberLocale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1`;
+			assert.ok(html.includes(`<dd><bdi dir="ltr">${lowest}</bdi></dd>`), locale.meta.code);
+			// Once the isolated ratios are removed, the ratio no longer appears anywhere in the page.
+			const outside = html.split(`<bdi dir="ltr">${lowest}</bdi>`).join('');
+			assert.ok(!outside.includes(lowest), `${locale.meta.code}: a ratio outside <bdi>`);
+		}
+	});
+
+	test('no translation keeps a ΔE unit outside the value it measures', () => {
+		// The unit is part of the isolated value, so "12 ΔE" never splits in a right-to-left sentence.
+		// Exceptions: "distance" is isolated as a whole, and "cell" texts are tooltips (title attribute).
+		const skipped = new Set(['matrices.distance', 'matrices.cell', 'matrices.cellBelow']);
+		const walk = (node, key) => (typeof node === 'string' ? [[key, node]]
+			: Object.entries(node).flatMap(([name, child]) => walk(child, key ? `${key}.${name}` : name)));
+		for (const locale of locales) {
+			for (const [key, text] of walk(locale.js, '').filter(([name]) => !skipped.has(name))) {
+				assert.doesNotMatch(text, /ΔE \{\{|\}\} ΔE|\{\{\w+\}\}\/\{\{/, `${locale.meta.code}: ${key}`);
+			}
+		}
+	});
+
+	test('the page scripts isolate color codes, ratios and ΔE values with the shared helper', () => {
+		const source = (file) => fs.readFileSync(path.join(root, 'site', file), 'utf8');
+		assert.match(source('i18n.js'), /createElement\('bdi'\)[\s\S]*dir = 'ltr'/);
+		assert.match(source('contrast-chart.js'), /isolate\(ltr\(color\.toUpperCase\(\), \{ code: true \}\)\)/);
+		assert.match(source('matrices.js'), /isolate\(`\$\{label\} ΔE`\)/);
+		for (const file of ['app.js', 'contrast-chart.js', 'matrices.js', 'vision.js']) assert.match(source(file), /tNodes\(/, file);
+	});
+});

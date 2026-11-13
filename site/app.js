@@ -2,7 +2,7 @@ import { createPicker } from './picker.js';
 import { createContrastChart } from './contrast-chart.js';
 import { createMatrices } from './matrices.js';
 import { createVisionPanel } from './vision.js';
-import { t, ratio as formatRatio, monthNames, shortDate } from './i18n.js';
+import { t, tNodes, ltr, isolate, ratio as formatRatio, monthNames, shortDate } from './i18n.js';
 
 const root = document.documentElement;
 const { months, comparisons, thresholds } = JSON.parse(document.getElementById('theme-data').textContent);
@@ -198,8 +198,8 @@ function update(announce = false) {
     button.style.setProperty('--disc-text', p.text);
     button.style.setProperty('--disc-accent', p.accent);
   });
-  document.getElementById('text-contrast').textContent = ratio(palette.contrast.text);
-  document.getElementById('accent-contrast').textContent = ratio(palette.contrast.accent);
+  document.getElementById('text-contrast').replaceChildren(isolate(ratio(palette.contrast.text)));
+  document.getElementById('accent-contrast').replaceChildren(isolate(ratio(palette.contrast.accent)));
   document.getElementById('current-swatches').replaceChildren(...[month.light.bg, month.light.accent, month.dark.bg, month.dark.accent].map(swatch));
   const highContrast = mode.startsWith('hc');
   const dayKey = highContrast ? 'hcLight' : 'light';
@@ -219,7 +219,7 @@ function update(announce = false) {
     // Le nom accessible reprend le texte affiché, complété pour les lecteurs d'écran (WCAG 2.5.3)
     button.querySelector('.variant-action').textContent = t('app.applyVariant', { month: month.name, variant: modes.find((item) => item.key === key).label });
     button.querySelector('.variant-preview').replaceChildren(editorWindow(p, '', true));
-    button.querySelector('.variant-stat').textContent = t('app.variantStat', { text: ratio(p.contrast.text), accent: ratio(p.contrast.accent) });
+    button.querySelector('.variant-stat').replaceChildren(tNodes('app.variantStat', { text: ltr(ratio(p.contrast.text)), accent: ltr(ratio(p.contrast.accent)) }));
   });
   document.querySelectorAll('#month-options button').forEach((button, index) => {
     button.setAttribute('aria-pressed', String(index === monthIndex));
