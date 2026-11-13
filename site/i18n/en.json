@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "code": "en",
+    "name": "English",
+    "dir": "ltr",
+    "numberLocale": "en-US",
+    "dateLocale": "en-GB",
+    "ogLocale": "en_US",
+    "lowercaseInSentence": true
+  },
+  "months": [
+    { "name": "January", "short": "Jan" },
+    { "name": "February", "short": "Feb" },
+    { "name": "March", "short": "Mar" },
+    { "name": "April", "short": "Apr" },
+    { "name": "May", "short": "May" },
+    { "name": "June", "short": "Jun" },
+    { "name": "July", "short": "Jul" },
+    { "name": "August", "short": "Aug" },
+    { "name": "September", "short": "Sep" },
+    { "name": "October", "short": "Oct" },
+    { "name": "November", "short": "Nov" },
+    { "name": "December", "short": "Dec" }
+  ],
+  "page": {
+    "head": {
+      "title": "365 Day &amp; Night – Monthly Accessible Themes for VS Code",
+      "description": "48 accessible VS Code themes, a new look every month, with every contrast and color vision result published.",
+      "ogTitle": "365 Day &amp; Night — Readable. Measured.",
+      "ogDescription": "12 months. 48 accessible VS Code themes. Explore every palette and the measurements behind it."
+    },
+    "skip": "Skip to content",
+    "header": {
+      "nav": "Main navigation",
+      "logo": "Choose month and theme",
+      "audit": "Audit report",
+      "chip": "Month and theme",
+      "chipAction": ", choose month and theme",
+      "language": "Language",
+      "languageAction": ", language: {{name}}, choose another language",
+      "languages": "Languages"
+    },
+    "hero": {
+      "eyebrow": "VS Code themes",
+      "everyMonth": "Every month",
+      "title": "A new look every month.",
+      "titleAccent": "Readable. Measured.",
+      "lead": "{{THEMES}} accessible color themes for VS Code that switch between day and night in one click or on their own. Every contrast and color vision result is published.",
+      "install": "Install from the Marketplace",
+      "statThemes": "themes",
+      "statChecks": "checks passed",
+      "statLowest": "lowest text contrast"
+    },
+    "panel": {
+      "figure": "Fig. 01 · The logo is the control",
+      "hint": "Pick a month, then a theme",
+      "variants": "Theme variant",
+      "text": "Text",
+      "accent": "Accent"
+    },
+    "editor": {
+      "title": "Read it in your editor.",
+      "intro": "The same file in <span data-month-name></span>, with <span id=\"compare-day-label\">Light</span> above and <span id=\"compare-night-label\">Dark</span> below. Drag the handle up or down to move the divider, or click the logo to change theme.",
+      "handle": "Compare Light and Dark. Use arrow keys to move the divider.",
+      "videoLabel": "In VS Code",
+      "video": "The status bar arrows change the month from October to December, a click on the button switches from Light to Dark, and a link in its tooltip applies High Contrast."
+    },
+    "year": {
+      "title": "365 days, 12 palettes.",
+      "intro": "Light on top, Dark below, the month’s button color in between. Each month uses its exact extension colors. Click a month name to apply it. The marker is today.",
+      "region": "The twelve monthly palettes",
+      "today": "Back to the current month",
+      "months": "Choose a month"
+    },
+    "variants": {
+      "title": "Four themes, one month.",
+      "intro": "Light, Dark and both High Contrast themes are generated from the <span data-month-name></span> palette. Text and accent contrast are measured for each. The outlined one is active.",
+      "group": "Preview and choose a theme variant"
+    },
+    "numbers": {
+      "title": "The numbers",
+      "themes": "Themes",
+      "themesNote": "12 months, each in Light, Dark, High Contrast and High Contrast Light.",
+      "checks": "Checks passed",
+      "checksNote": "Out of {{CHECKS_TOTAL}}, between {{CHECKS_MIN}} and {{CHECKS_MAX}} per theme.",
+      "lowest": "Lowest text contrast",
+      "lowestNote": "The minimum is {{AA_RATIO}}, the WCAG AA level for normal text.",
+      "scaleTitle": "Where the lowest pair sits",
+      "scaleLabel": "Lowest text contrast {{LOWEST_TEXT_NUMBER}} to 1. WCAG AA starts at {{AA_LEVEL}} to 1 and AAA at 7 to 1, on a scale from 1 to 21.",
+      "scaleLowest": "Lowest: {{LOWEST_TEXT_RATIO}}",
+      "audit": "The audit runs on every push and must pass before each release: a regression stops the release. <a href=\"{{AUDIT_URL}}\">Read the full audit report</a>."
+    },
+    "measures": {
+      "eyebrow": "Explore the measurements",
+      "title": "One theme. Every color.",
+      "legend": "Choose a theme for the graphs",
+      "month": "Month",
+      "variant": "Variant",
+      "syntaxTitle": "Every syntax color, measured.",
+      "syntaxIntro": "Each bar is the text contrast against the editor background, using the exact colors of <span data-selection></span>. The markers show the {{AA_RATIO}} and 7:1 text contrast thresholds.",
+      "syntaxNote": "Contrast = (lighter relative luminance + 0.05) / (darker relative luminance + 0.05). Measurements apply to these text colors on the editor background; they do not certify the whole interface. <a href=\"{{AUDIT_URL}}\">Method and limits</a> · <a href=\"{{ROOT}}audit-report.json\" download>Download the audit data</a>.",
+      "visionTitle": "Seen through each vision.",
+      "visionIntro": "The code of <span data-selection></span> as simulated for each type of color blindness, and a score out of 100 for each vision situation. About 8% of men and 0.4% of women of European descent have a red-green color deficiency [6]. These are calculations, not observations: <a href=\"{{TESTERS_URL}}\">testing with real people</a> is still to come.",
+      "monthlyTitle": "How different are the months?",
+      "monthlyIntro": "Compare the 12 monthly palettes before and after the redesign. A larger ΔE means a greater color difference. The same scale is used in both grids. Select a measure to explore the background or the syntax colors."
+    },
+    "method": {
+      "title": "How it is built",
+      "paletteTitle": "One palette per month",
+      "palette": "Each month starts from a seasonal mood: frost in January, a lagoon in July, autumn leaves in October.",
+      "generatedTitle": "Generated themes",
+      "generated": "A script builds the four themes of a month from its palette. CI compares the published files with the generator, byte for byte.",
+      "auditTitle": "Automatic audit",
+      "audit": "Contrast, simulated color vision, font styles and the difference between months are measured for every theme.",
+      "checkContrast": "Contrast",
+      "checkVision": "Simulated color vision",
+      "checkFonts": "Font styles",
+      "checkMonths": "Difference between months",
+      "coming": "Coming",
+      "peopleTitle": "Testing with real people",
+      "people": "Simulations do not replace real eyes. This step has not been done yet: <a href=\"{{TESTERS_URL}}\">you can help</a>."
+    },
+    "limits": {
+      "title": "What these numbers do not show",
+      "intro": "The same limits as in the audit report, generated from it."
+    },
+    "verify": {
+      "title": "Check it yourself",
+      "intro": "Every number on this page comes from the repository. With Node.js and Python 3, run:",
+      "commandsLabel": "Commands to check the numbers yourself",
+      "audit": "contrast and color vision checks of the 48 themes",
+      "variety": "difference between the months",
+      "test": "the measuring tools against published reference data",
+      "report": "the audit report matches the themes",
+      "site": "this page, from the same report",
+      "note": "The same commands run on every push and before each release. <a href=\"{{REPO_URL}}/blob/main/scripts/themes/README.md\">How the tools work</a> · <a href=\"{{AUDIT_URL}}\">Full audit report</a> · <a href=\"{{ROOT}}audit-report.json\">Audit data (JSON)</a>"
+    },
+    "references": {
+      "title": "References",
+      "machado": "Used for the color blindness simulations and the figure of about 200 million people.",
+      "wcag": "Contrast ratio, the 4.5:1 and 7:1 levels, and the use of color.",
+      "understanding": "Links 4.5:1 to a visual acuity of about 20/40, and 7:1 to about 20/80.",
+      "cie": "CIELAB and the CIE76 color difference used for the thresholds.",
+      "sharma": "CIEDE2000, and the test data that check the tools.",
+      "birch": "About 8% of men and 0.4% of women of European descent."
+    },
+    "noscript": "The interactive previews need JavaScript. You can still watch the VS Code demonstration, read the audit and install all 48 themes.",
+    "footer": {
+      "license": "Free and open source, <a href=\"{{LICENSE_URL}}\">MIT license</a>. By <a href=\"https://github.com/mickaellherminez\">Mickaël Lherminez</a>."
+    },
+    "dialog": {
+      "close": "Close"
+    }
+  },
+  "limits": null,
+  "js": {
+    "app": {
+      "compareLabel": "Compare {{day}} and {{night}}. Use arrow keys to move the divider.",
+      "compareValue": "{{day}} above, {{night}} below. Divider at {{percent}} percent.",
+      "applyVariant": ". Apply {{month}} {{variant}}",
+      "variantStat": "Text {{text}} · Accent {{accent}}",
+      "status": "{{month}}, {{variant}}. Text contrast {{text}}. Accent contrast {{accent}}.",
+      "monthButton": "{{short}}: apply {{month}}",
+      "today": "Today · {{date}}",
+      "todayLabel": "{{today}}: back to the current month, {{month}}"
+    },
+    "picker": {
+      "label": "Logo: twelve months around a disc of four themes. Choose a month on the ring, a theme on the disc.",
+      "month": "Palette {{month}}",
+      "theme": "Theme {{variant}}",
+      "outerLeft": "Outer left",
+      "coreLeft": "Core left",
+      "outerRight": "Outer right",
+      "coreRight": "Core right"
+    },
+    "contrast": {
+      "roles": {
+        "keyword": "Keyword",
+        "function": "Function",
+        "string": "String",
+        "number": "Number",
+        "class": "Class / type",
+        "comment": "Comment",
+        "variable": "Variable",
+        "operator": "Operator",
+        "punctuation": "Punctuation",
+        "tag": "Tag",
+        "attribute": "Attribute",
+        "regex": "Regular expression",
+        "JSON key": "JSON key",
+        "invalid": "Invalid code"
+      },
+      "region": "Syntax text contrast. Scroll horizontally to see all columns on a small screen.",
+      "role": "Syntax role",
+      "color": "Exact color",
+      "scale": "Contrast on a 1:1–21:1 scale",
+      "level": "Ratio / level",
+      "axis": "Text contrast",
+      "scrollHint": "On a small screen, scroll the chart horizontally to see every value.",
+      "caption": "{{theme}}: exact syntax colors and text contrast against {{background}}.",
+      "both": "AA + AAA",
+      "aa": "AA",
+      "below": "Below AA",
+      "summary": "{{aa}} of {{total}} syntax colors meet {{aaRatio}} (AA). {{aaa}} of {{total}} meet {{aaaRatio}} (AAA). Editor background: {{background}}."
+    },
+    "vision": {
+      "views": {
+        "normal": "Normal vision",
+        "protanopia": "Protanopia",
+        "deuteranopia": "Deuteranopia",
+        "tritanopia": "Tritanopia",
+        "achromatopsia": "Achromatopsia"
+      },
+      "scores": {
+        "protanopia": { "label": "Protanopia", "formula": "Share of the 21 pairs of main syntax colors that stay at least ΔE {{d}} apart, simulated at full severity." },
+        "deuteranopia": { "label": "Deuteranopia", "formula": "Same calculation, for deuteranopia." },
+        "tritanopia": { "label": "Tritanopia", "formula": "Same calculation, for tritanopia." },
+        "protanomaly": { "label": "Protanomaly (partial)", "formula": "Same calculation for severities 0.1 to 0.9, keeping the lowest result." },
+        "deuteranomaly": { "label": "Deuteranomaly (partial)", "formula": "Same, for partial deuteranopia." },
+        "tritanomaly": { "label": "Tritanomaly (partial)", "formula": "Same, for partial tritanopia." },
+        "achromatopsia": { "label": "Achromatopsia", "formula": "Share of the same pairs that stay at least ΔE {{d}} apart in lightness alone." },
+        "lowVision20/40": { "label": "Low vision 20/40", "formula": "Share of the text checks at {{aa}} or more." },
+        "lowVision20/80": { "label": "Low vision 20/80", "formula": "Share of the text checks at {{aaa}} or more." }
+      },
+      "luminanceRef": "Relative luminance of sRGB",
+      "group": "Choose a simulated vision",
+      "region": "Vision scores. Scroll horizontally to see all columns on a small screen.",
+      "situation": "Vision situation",
+      "score": "Score out of 100",
+      "formula": "Formula",
+      "reference": "Reference",
+      "note": "Scores help to choose a theme for your vision. A score of 100 means that every pair or text check passes the rule, not that the theme suits everyone.",
+      "normal": "{{theme}}, as designed.",
+      "simulated": "{{theme}}, simulated for {{vision}}: score {{score}} out of 100.",
+      "caption": "{{theme}}: vision scores out of 100, with their formula and reference."
+    },
+    "matrices": {
+      "background": "Editor background",
+      "syntax": "Syntax · six roles",
+      "compare": "Compare",
+      "measure": "Monthly difference measurement",
+      "legend": "Shared color-distance scale",
+      "before": "Before · 0.12.0",
+      "now": "Now · 1.0.0",
+      "beforeRegion": "Before the redesign",
+      "afterRegion": "After the redesign",
+      "region": "{{label}}: monthly color-distance table. Scroll horizontally if needed.",
+      "firstMonth": "First month",
+      "secondMonth": "Second month",
+      "selectLabel": "{{label}} in monthly comparison",
+      "applyFirst": "Apply first month",
+      "readPair": "Read one pair",
+      "methodTitle": "How these distances are measured",
+      "method1": "CIE76 distance in CIELAB: ΔE = √((ΔL*)² + (Δa*)² + (Δb*)²). Editor background compares editor.background directly. Syntax is the arithmetic mean of the six distances for keyword, function, string, number, class and comment, comparing each role with the same role in the other month.",
+      "method2": "The diagonal compares a month with itself. Each table contains 66 unique pairs; the other half repeats them. Values are rounded to one decimal in the audit export. The shaded ranges and the minimum distance are project rules for variety, not WCAG requirements or a guarantee of what every person will perceive.",
+      "sourceLink": "Measurements and limits",
+      "scriptLink": "Variety calculation",
+      "dataLink": "Download the audit JSON",
+      "summary": "Mean {{mean}} ΔE · {{below}}/{{total}} pairs below {{minimum}}",
+      "caption": "{{era}}, {{variant}}, {{measure}}. Monthly differences in ΔE CIE76.",
+      "corner": "Month",
+      "same": "Same month",
+      "cell": "{{first}} / {{second}}: {{value}} ΔE CIE76",
+      "cellBelow": "{{first}} / {{second}}: {{value}} ΔE CIE76, below the project threshold of {{minimum}}",
+      "belowShort": ", below the project threshold",
+      "pairSame": "{{names}}: the same month, ΔE {{zero}}.",
+      "pair": "{{names}} · {{variant}} · {{measure}}. Before: {{before}}. Now: {{now}}.",
+      "noEarlier": "no earlier variant",
+      "distance": "{{value}} ΔE",
+      "apply": "Apply {{month}}",
+      "applyTitle": "Apply {{month}} to the website",
+      "variantLine": "{{variant}} · normal vision",
+      "context": "Project minimum: {{minimum}} ΔE CIE76. Hatched cells fall below it. The outlined row and column are {{month}}.",
+      "afterEra": "After the redesign, version 1.0.0",
+      "beforeEra": "Before the redesign, version 0.12.0",
+      "noEarlierTitle": "No earlier variant",
+      "noBaseline": "High Contrast Light was not available in 0.12.0, so there is no earlier palette to compare."
+    }
+  }
+}

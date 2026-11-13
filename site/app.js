@@ -2,9 +2,12 @@ import { createPicker } from './picker.js';
 import { createContrastChart } from './contrast-chart.js';
 import { createMatrices } from './matrices.js';
 import { createVisionPanel } from './vision.js';
+import { t, ratio as formatRatio, monthNames, shortDate } from './i18n.js';
 
 const root = document.documentElement;
 const { months, comparisons, thresholds } = JSON.parse(document.getElementById('theme-data').textContent);
+// Month names come from the page language; theme names stay those of VS Code.
+months.forEach((month, index) => Object.assign(month, monthNames[index]));
 const modes = [
   { key: 'light', label: 'Light' },
   { key: 'dark', label: 'Dark' },
@@ -52,7 +55,7 @@ const miniCode = [
   [['      ? ', 'punctuation'], ["'Light'", 'string'], [' : ', 'punctuation'], ["'Dark'", 'string'], [';', 'punctuation']],
   [['  }', 'punctuation']], [['}', 'punctuation']],
 ];
-const ratio = (value) => `${(Math.floor(value * 10) / 10).toFixed(1)}:1`;
+const ratio = (value) => formatRatio(Math.floor(value * 10) / 10, 1);
 const element = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -207,16 +210,16 @@ function update(announce = false) {
   document.getElementById('compare-night').replaceChildren(editorWindow(month[nightKey], nightLabel));
   document.getElementById('compare-day-label').textContent = dayLabel;
   document.getElementById('compare-night-label').textContent = nightLabel;
-  document.getElementById('compare-handle').setAttribute('aria-label', `Compare ${dayLabel} and ${nightLabel}. Use arrow keys to move the divider.`);
-  document.getElementById('compare-handle').setAttribute('aria-valuetext', `${dayLabel} above, ${nightLabel} below. Divider at ${Math.round(split)} percent.`);
+  document.getElementById('compare-handle').setAttribute('aria-label', t('app.compareLabel', { day: dayLabel, night: nightLabel }));
+  document.getElementById('compare-handle').setAttribute('aria-valuetext', t('app.compareValue', { day: dayLabel, night: nightLabel, percent: Math.round(split) }));
   variantCards.forEach((button) => {
     const key = button.dataset.mode;
     const p = month[key];
     button.setAttribute('aria-pressed', String(key === mode));
     // Le nom accessible reprend le texte affiché, complété pour les lecteurs d'écran (WCAG 2.5.3)
-    button.querySelector('.variant-action').textContent = `. Apply ${month.name} ${modes.find((item) => item.key === key).label}`;
+    button.querySelector('.variant-action').textContent = t('app.applyVariant', { month: month.name, variant: modes.find((item) => item.key === key).label });
     button.querySelector('.variant-preview').replaceChildren(editorWindow(p, '', true));
-    button.querySelector('.variant-stat').textContent = `Text ${ratio(p.contrast.text)} · Accent ${ratio(p.contrast.accent)}`;
+    button.querySelector('.variant-stat').textContent = t('app.variantStat', { text: ratio(p.contrast.text), accent: ratio(p.contrast.accent) });
   });
   document.querySelectorAll('#month-options button').forEach((button, index) => {
     button.setAttribute('aria-pressed', String(index === monthIndex));
@@ -238,7 +241,7 @@ function update(announce = false) {
     item.append(preview, element('p', '', name));
     return item;
   }));
-  if (announce) document.getElementById('selection-status').textContent = `${month.name}, ${label}. Text contrast ${ratio(palette.contrast.text)}. Accent contrast ${ratio(palette.contrast.accent)}.`;
+  if (announce) document.getElementById('selection-status').textContent = t('app.status', { month: month.name, variant: label, text: ratio(palette.contrast.text), accent: ratio(palette.contrast.accent) });
 }
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -271,7 +274,7 @@ function drawYear(now) {
     button.type = 'button';
     button.style.flex = `${lengths[index]} 1 0`;
     // Le nom accessible commence par le texte affiché (WCAG 2.5.3)
-    button.setAttribute('aria-label', `${month.short}: apply ${month.name}`);
+    button.setAttribute('aria-label', t('app.monthButton', { short: month.short, month: month.name }));
     button.addEventListener('click', () => choose({ month: index }));
     options.append(button);
     for (let day = 0; day < lengths[index]; day++) {
@@ -294,8 +297,8 @@ function updateToday(now) {
   const position = `${(today + .5) / daysInYear * 100}%`;
   const marker = document.getElementById('today-marker');
   marker.style.setProperty('--today', position);
-  marker.textContent = `Today · ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' }).format(now)}`;
-  marker.setAttribute('aria-label', `${marker.textContent}: back to the current month, ${months[now.getMonth()].name}`);
+  marker.textContent = t('app.today', { date: shortDate(now) });
+  marker.setAttribute('aria-label', t('app.todayLabel', { today: marker.textContent, month: months[now.getMonth()].name }));
   let line = document.querySelector('.today-line');
   if (!line) {
     line = element('span', 'today-line');
@@ -315,6 +318,23 @@ document.querySelectorAll('[data-open-picker]').forEach((button) => {
   button.addEventListener('click', () => dialog.showModal());
 });
 document.getElementById('close-picker').addEventListener('click', () => dialog.close());
+
+// The language menu is a native <details>: it opens without JavaScript. Here it also closes
+// with Escape (focus back on its button), after a click outside, or when focus leaves it.
+for (const menu of document.querySelectorAll('[data-language-menu]')) {
+  const toggle = menu.querySelector('summary');
+  menu.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !menu.open) return;
+    menu.open = false;
+    toggle.focus();
+  });
+  menu.addEventListener('focusout', (event) => {
+    if (menu.open && event.relatedTarget && !menu.contains(event.relatedTarget)) menu.open = false;
+  });
+  document.addEventListener('click', (event) => {
+    if (menu.open && !menu.contains(event.target)) menu.open = false;
+  });
+}
 dialog.addEventListener('click', (event) => {
   if (event.target !== dialog) return;
   const box = dialog.getBoundingClientRect();
@@ -329,7 +349,7 @@ function setSplit(value) {
   handle.setAttribute('aria-valuenow', String(Math.round(split)));
   const day = document.getElementById('compare-day-label').textContent;
   const night = document.getElementById('compare-night-label').textContent;
-  const status = `${day} above, ${night} below. Divider at ${Math.round(split)} percent.`;
+  const status = t('app.compareValue', { day, night, percent: Math.round(split) });
   handle.setAttribute('aria-valuetext', status);
   document.getElementById('compare-status').textContent = status;
 }

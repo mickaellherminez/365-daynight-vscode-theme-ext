@@ -1,51 +1,57 @@
 <!doctype html>
-<html lang="en" style="{{INITIAL_CSS}}">
+<html lang="{{LANG}}" dir="{{DIR}}" style="{{INITIAL_CSS}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>365 Day &amp; Night – Monthly Accessible Themes for VS Code</title>
-<meta name="description" content="48 accessible VS Code themes, a new look every month, with every contrast and color vision result published.">
-<meta property="og:title" content="365 Day &amp; Night — Readable. Measured.">
-<meta property="og:description" content="12 months. 48 accessible VS Code themes. Explore every palette and the measurements behind it.">
+<title>{{t:head.title}}</title>
+<meta name="description" content="{{t:head.description}}">
+<link rel="canonical" href="{{CANONICAL_URL}}">
+{{ALTERNATES}}
+<meta property="og:title" content="{{t:head.ogTitle}}">
+<meta property="og:description" content="{{t:head.ogDescription}}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta property="og:url" content="{{CANONICAL_URL}}">
 <meta property="og:image" content="https://365daynight.mickaellherminez.net/media/brand/og-image.png">
-<link rel="icon" href="media/brand/favicon.svg?v=2" type="image/svg+xml">
-<link rel="alternate icon" href="media/brand/favicon.ico?v=2">
-<link rel="apple-touch-icon" href="media/brand/apple-touch-icon.png?v=2">
-<link rel="preload" href="media/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="media/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="media/fonts/fonts.css">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="matrices.css">
+<link rel="icon" href="{{ROOT}}media/brand/favicon.svg?v=2" type="image/svg+xml">
+<link rel="alternate icon" href="{{ROOT}}media/brand/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="{{ROOT}}media/brand/apple-touch-icon.png?v=2">
+<link rel="preload" href="{{ROOT}}media/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ROOT}}media/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ROOT}}media/fonts/fonts.css">
+<link rel="stylesheet" href="{{ROOT}}style.css">
+<link rel="stylesheet" href="{{ROOT}}matrices.css">
 <script id="theme-data" type="application/json">{{THEME_DATA}}</script>
-<script src="boot.js"></script>
-<script type="module" src="app.js"></script>
+<script id="i18n" type="application/json">{{LOCALE_DATA}}</script>
+<script src="{{ROOT}}boot.js"></script>
+<script type="module" src="{{ROOT}}app.js"></script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">{{t:skip}}</a>
 <header class="site-header">
 <div class="top wrap">
   <div class="identity">
-    <button class="logo-button enhanced" type="button" data-open-picker aria-label="Choose month and theme" aria-haspopup="dialog" aria-controls="theme-dialog">
-      <img src="media/brand/mark-small.svg" width="52" height="52" alt="">
+    <button class="logo-button enhanced" type="button" data-open-picker aria-label="{{t:header.logo}}" aria-haspopup="dialog" aria-controls="theme-dialog">
+      <img src="{{ROOT}}media/brand/mark-small.svg" width="52" height="52" alt="">
     </button>
-    <a class="brand" href="#main">365 Day &amp; Night</a>
+    <a class="brand" href="#main" dir="ltr">365 Day &amp; Night</a>
   </div>
-  <nav aria-label="Main navigation">
-    <a class="nav-link" href="{{AUDIT_URL}}" data-tooltip="Audit report">
+  <nav aria-label="{{t:header.nav}}">
+    <a class="nav-link" href="{{AUDIT_URL}}" data-tooltip="{{t:header.audit}}">
       <svg class="nav-icon" width="18" height="18" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.75 1.75h5.5l3 3v9.5h-8.5z M9 1.75v3.25h3.25 M5.75 9.25l1.5 1.5 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span class="nav-text">Audit report</span>
+      <span class="nav-text">{{t:header.audit}}</span>
     </a>
     <a class="nav-link" href="{{REPO_URL}}" data-tooltip="GitHub">
       <svg class="nav-icon" width="18" height="18" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
       <span class="nav-text">GitHub</span>
     </a>
-    <button class="theme-chip enhanced" type="button" data-tooltip="Month and theme" data-open-picker aria-haspopup="dialog" aria-controls="theme-dialog">
+    <button class="theme-chip enhanced" type="button" data-tooltip="{{t:header.chip}}" data-open-picker aria-haspopup="dialog" aria-controls="theme-dialog">
       <span class="theme-dot" aria-hidden="true"></span>
-      <span class="chip-label" data-chip-label>Month and theme</span><span class="sr">, choose month and theme</span>
+      <span class="chip-label" data-chip-label>{{t:header.chip}}</span><span class="sr">{{t:header.chipAction}}</span>
       <svg class="chip-chevron" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
+{{LANGUAGE_MENU}}
   </nav>
 </div>
 </header>
@@ -53,24 +59,24 @@
 <main id="main">
   <section class="hero wrap" aria-labelledby="hero-title">
     <div class="hero-copy">
-      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>VS Code themes <span aria-hidden="true">·</span> <span data-month-name>Every month</span></p>
-      <h1 id="hero-title">A new look every month. <span>Readable. Measured.</span></h1>
-      <p class="lead">{{THEMES}} accessible color themes for VS Code that switch between day and night in one click or on their own. Every contrast and color vision result is published.</p>
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>{{t:hero.eyebrow}} <span aria-hidden="true">·</span> <span data-month-name>{{t:hero.everyMonth}}</span></p>
+      <h1 id="hero-title">{{t:hero.title}} <span>{{t:hero.titleAccent}}</span></h1>
+      <p class="lead">{{t:hero.lead}}</p>
       <div class="actions">
-        <a class="button" href="{{MARKETPLACE_URL}}">Install from the Marketplace</a>
+        <a class="button" href="{{MARKETPLACE_URL}}">{{t:hero.install}}</a>
         <a class="button ghost" href="{{OPENVSX_URL}}">Open VSX</a>
       </div>
       <dl class="hero-stats">
-        <div><dt>themes</dt><dd>{{THEMES}}</dd></div>
-        <div><dt>checks passed</dt><dd>{{CHECKS_PASSED}}</dd></div>
-        <div><dt>lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd></div>
+        <div><dt>{{t:hero.statThemes}}</dt><dd>{{THEMES}}</dd></div>
+        <div><dt>{{t:hero.statChecks}}</dt><dd>{{CHECKS_PASSED}}</dd></div>
+        <div><dt>{{t:hero.statLowest}}</dt><dd>{{LOWEST_TEXT_RATIO}}</dd></div>
       </dl>
     </div>
     <div class="control-panel enhanced">
-      <div class="panel-heading eyebrow"><span>Fig. 01 · The logo is the control</span><span>Pick a month, then a theme</span></div>
+      <div class="panel-heading eyebrow"><span>{{t:panel.figure}}</span><span>{{t:panel.hint}}</span></div>
       <div class="picker-body">
         <div id="hero-picker" class="picker"></div>
-        <div class="mode-options" role="group" aria-label="Theme variant"></div>
+        <div class="mode-options" role="group" aria-label="{{t:panel.variants}}"></div>
       </div>
       <div class="palette-readout">
         <div class="palette-current">
@@ -78,8 +84,8 @@
           <div><p class="current-month" data-month-name></p><p class="current-mode" data-mode-label></p></div>
         </div>
         <dl class="contrast-stats">
-          <div><dt>Text</dt><dd id="text-contrast"></dd></div>
-          <div><dt>Accent</dt><dd id="accent-contrast"></dd></div>
+          <div><dt>{{t:panel.text}}</dt><dd id="text-contrast"></dd></div>
+          <div><dt>{{t:panel.accent}}</dt><dd id="accent-contrast"></dd></div>
         </dl>
       </div>
     </div>
@@ -87,139 +93,141 @@
 
   <section class="section wrap" aria-labelledby="editor-title">
     <div class="section-heading"><span class="section-number" aria-hidden="true">01</span><div>
-      <h2 id="editor-title">Read it in your editor.</h2>
-      <p class="enhanced">The same file in <span data-month-name></span>, with <span id="compare-day-label">Light</span> above and <span id="compare-night-label">Dark</span> below. Drag the handle up or down to move the divider, or click the logo to change theme.</p>
+      <h2 id="editor-title">{{t:editor.title}}</h2>
+      <p class="enhanced">{{t:editor.intro}}</p>
     </div></div>
     <div class="comparison enhanced" id="comparison" style="--split:54%">
       <div class="editor-layer" id="compare-day" aria-hidden="true"></div>
       <div class="editor-layer night-layer" id="compare-night" aria-hidden="true"></div>
       <div class="compare-divider" aria-hidden="true"></div>
-      <button id="compare-handle" class="compare-handle" type="button" role="slider" aria-label="Compare Light and Dark. Use arrow keys to move the divider." aria-valuemin="6" aria-valuemax="94" aria-valuenow="54" aria-orientation="vertical"><span aria-hidden="true">↕</span></button>
+      <button id="compare-handle" class="compare-handle" type="button" role="slider" aria-label="{{t:editor.handle}}" aria-valuemin="6" aria-valuemax="94" aria-valuenow="54" aria-orientation="vertical"><span aria-hidden="true">↕</span></button>
     </div>
     <p class="sr" id="compare-status"></p>
     <figure class="demo">
-      <video src="media/demo-months.mp4" poster="media/demo-poster.jpg" controls muted loop playsinline preload="metadata" width="1200" height="720" aria-describedby="demo-text"></video>
-      <figcaption id="demo-text"><span class="eyebrow">In VS Code</span> The status bar arrows change the month from October to December, a click on the button switches from Light to Dark, and a link in its tooltip applies High Contrast.</figcaption>
+      <video src="{{ROOT}}media/demo-months.mp4" poster="{{ROOT}}media/demo-poster.jpg" controls muted loop playsinline preload="metadata" width="1200" height="720" aria-describedby="demo-text"></video>
+      <figcaption id="demo-text"><span class="eyebrow">{{t:editor.videoLabel}}</span> {{t:editor.video}}</figcaption>
     </figure>
   </section>
 
   <section class="section wrap enhanced" aria-labelledby="year-title">
     <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div>
-      <h2 id="year-title">365 days, 12 palettes.</h2>
-      <p>Light on top, Dark below, the month’s button color in between. Each month uses its exact extension colors. Click a month name to apply it. The marker is today.</p>
+      <h2 id="year-title">{{t:year.title}}</h2>
+      <p>{{t:year.intro}}</p>
     </div></div>
-    <div class="year-scroll" role="region" aria-label="The twelve monthly palettes" tabindex="0">
+    <div class="year-scroll" role="region" aria-label="{{t:year.region}}" tabindex="0">
       <div class="year-calendar">
-        <button class="today-marker eyebrow" id="today-marker" type="button" title="Back to the current month"></button>
+        <button class="today-marker eyebrow" id="today-marker" type="button" title="{{t:year.today}}"></button>
         <div class="year-strip" id="year-strip" aria-hidden="true"></div>
-        <div class="month-options" id="month-options" role="group" aria-label="Choose a month"></div>
+        <div class="month-options" id="month-options" role="group" aria-label="{{t:year.months}}"></div>
       </div>
     </div>
   </section>
 
   <section class="section wrap enhanced" aria-labelledby="variants-title">
     <div class="section-heading"><span class="section-number" aria-hidden="true">03</span><div>
-      <h2 id="variants-title">Four themes, one month.</h2>
-      <p>Light, Dark and both High Contrast themes are generated from the <span data-month-name></span> palette. Text and accent contrast are measured for each. The outlined one is active.</p>
+      <h2 id="variants-title">{{t:variants.title}}</h2>
+      <p>{{t:variants.intro}}</p>
     </div></div>
-    <div class="variant-grid" id="variant-grid" role="group" aria-label="Preview and choose a theme variant"></div>
+    <div class="variant-grid" id="variant-grid" role="group" aria-label="{{t:variants.group}}"></div>
   </section>
 
   <section class="section wrap" id="numbers" aria-labelledby="numbers-title">
-    <div class="section-heading"><span class="section-number" aria-hidden="true">04</span><div><h2 id="numbers-title">The numbers</h2></div></div>
+    <div class="section-heading"><span class="section-number" aria-hidden="true">04</span><div><h2 id="numbers-title">{{t:numbers.title}}</h2></div></div>
     <dl class="figures">
-      <div><dt>Themes</dt><dd>{{THEMES}}</dd><dd class="figure-note">12 months, each in Light, Dark, High Contrast and High Contrast Light.</dd></div>
-      <div><dt>Checks passed</dt><dd>{{CHECKS_PASSED}}</dd><dd class="figure-note">Out of {{CHECKS_TOTAL}}, between {{CHECKS_MIN}} and {{CHECKS_MAX}} per theme.</dd></div>
-      <div><dt>Lowest text contrast</dt><dd>{{LOWEST_TEXT}}:1</dd><dd class="figure-note">The minimum is 4.5:1, the WCAG AA level for normal text.</dd></div>
+      <div><dt>{{t:numbers.themes}}</dt><dd>{{THEMES}}</dd><dd class="figure-note">{{t:numbers.themesNote}}</dd></div>
+      <div><dt>{{t:numbers.checks}}</dt><dd>{{CHECKS_PASSED}}</dd><dd class="figure-note">{{t:numbers.checksNote}}</dd></div>
+      <div><dt>{{t:numbers.lowest}}</dt><dd>{{LOWEST_TEXT_RATIO}}</dd><dd class="figure-note">{{t:numbers.lowestNote}}</dd></div>
     </dl>
     <div class="audit-scale">
-      <p class="eyebrow">Where the lowest pair sits</p>
-      <div class="scale-scroll" tabindex="0" role="img" aria-label="Lowest text contrast {{LOWEST_TEXT}} to 1. WCAG AA starts at 4.5 to 1 and AAA at 7 to 1, on a scale from 1 to 21.">
+      <p class="eyebrow">{{t:numbers.scaleTitle}}</p>
+      <div class="scale-scroll" tabindex="0" role="img" aria-label="{{t:numbers.scaleLabel}}">
         <div class="scale" data-lowest="{{LOWEST_TEXT}}">
-          <span class="lowest-label">Lowest: {{LOWEST_TEXT}}:1</span>
+          <span class="lowest-label">{{t:numbers.scaleLowest}}</span>
           <div class="scale-track"></div><div class="scale-ticks"></div>
           <span class="scale-mark aa"></span><span class="scale-mark aaa"></span><span class="scale-lowest"></span>
-          <span class="scale-label start">1:1</span><span class="scale-label aa">AA · 4.5</span><span class="scale-label aaa">AAA · 7</span><span class="scale-label end">21:1</span>
+          <span class="scale-label start">1:1</span><span class="scale-label aa">AA · {{AA_LEVEL}}</span><span class="scale-label aaa">AAA · 7</span><span class="scale-label end">21:1</span>
         </div>
       </div>
-      <p>The audit runs on every push and must pass before each release: a regression stops the release. <a href="{{AUDIT_URL}}">Read the full audit report</a>.</p>
+      <p>{{t:numbers.audit}}</p>
     </div>
     <div class="measurements enhanced" id="measurements">
       <div class="measurement-heading">
-        <div><p class="eyebrow">Explore the measurements</p><h3>One theme. Every color.</h3></div>
+        <div><p class="eyebrow">{{t:measures.eyebrow}}</p><h3>{{t:measures.title}}</h3></div>
         <fieldset class="measurement-controls">
-          <legend class="sr">Choose a theme for the graphs</legend>
-          <label for="chart-month">Month<select id="chart-month"></select></label>
-          <label for="chart-variant">Variant<select id="chart-variant"></select></label>
+          <legend class="sr">{{t:measures.legend}}</legend>
+          <label for="chart-month">{{t:measures.month}}<select id="chart-month"></select></label>
+          <label for="chart-variant">{{t:measures.variant}}<select id="chart-variant"></select></label>
         </fieldset>
       </div>
       <section class="measurement-block" aria-labelledby="syntax-title">
-        <div class="chart-heading"><h3 id="syntax-title">Every syntax color, measured.</h3><p>Each bar is the text contrast against the editor background, using the exact colors of <span data-selection></span>. The markers show the 4.5:1 and 7:1 text contrast thresholds.</p></div>
+        <div class="chart-heading"><h3 id="syntax-title">{{t:measures.syntaxTitle}}</h3><p>{{t:measures.syntaxIntro}}</p></div>
         <div class="chart-summary" id="syntax-summary"></div>
         <div id="syntax-chart"></div>
-        <p class="chart-note">Contrast = (lighter relative luminance + 0.05) / (darker relative luminance + 0.05). Measurements apply to these text colors on the editor background; they do not certify the whole interface. <a href="{{AUDIT_URL}}">Method and limits</a> · <a href="audit-report.json" download>Download the audit data</a>.</p>
+        <p class="chart-note">{{t:measures.syntaxNote}}</p>
       </section>
       <section class="measurement-block" aria-labelledby="vision-title">
-        <div class="chart-heading"><h3 id="vision-title">Seen through each vision.</h3><p>The code of <span data-selection></span> as simulated for each type of color blindness, and a score out of 100 for each vision situation. About 8% of men and 0.4% of women of European descent have a red-green color deficiency [6]. These are calculations, not observations: <a href="{{TESTERS_URL}}">testing with real people</a> is still to come.</p></div>
+        <div class="chart-heading"><h3 id="vision-title">{{t:measures.visionTitle}}</h3><p>{{t:measures.visionIntro}}</p></div>
         <div id="vision-panel"></div>
       </section>
       <section class="measurement-block" aria-labelledby="monthly-title">
-        <div class="chart-heading"><h3 id="monthly-title">How different are the months?</h3><p>Compare the 12 monthly palettes before and after the redesign. A larger ΔE means a greater color difference. The same scale is used in both grids. Select a measure to explore the background or the syntax colors.</p></div>
+        <div class="chart-heading"><h3 id="monthly-title">{{t:measures.monthlyTitle}}</h3><p>{{t:measures.monthlyIntro}}</p></div>
         <div id="monthly-matrices"></div>
       </section>
     </div>
   </section>
 
   <section class="section wrap" aria-labelledby="method-title">
-    <div class="section-heading"><span class="section-number" aria-hidden="true">05</span><div><h2 id="method-title">How it is built</h2></div></div>
+    <div class="section-heading"><span class="section-number" aria-hidden="true">05</span><div><h2 id="method-title">{{t:method.title}}</h2></div></div>
     <ol class="method">
-      <li><span class="method-number" aria-hidden="true">1</span><h3>One palette per month</h3><p>Each month starts from a seasonal mood: frost in January, a lagoon in July, autumn leaves in October.</p><div id="method-swatches" class="method-swatches enhanced" aria-hidden="true"></div></li>
-      <li><span class="method-number" aria-hidden="true">2</span><h3>Generated themes</h3><p>A script builds the four themes of a month from its palette. CI compares the published files with the generator, byte for byte.</p><div id="method-variants" class="method-variants enhanced" aria-hidden="true"></div></li>
-      <li><span class="method-number" aria-hidden="true">3</span><h3>Automatic audit</h3><p>Contrast, simulated color vision, font styles and the difference between months are measured for every theme.</p><ul class="audit-checks"><li>Contrast</li><li>Simulated color vision</li><li>Font styles</li><li>Difference between months</li></ul></li>
-      <li class="coming"><div class="method-progress"><span class="method-number" aria-hidden="true">4</span><span class="badge">Coming</span></div><h3>Testing with real people</h3><p>Simulations do not replace real eyes. This step has not been done yet: <a href="{{TESTERS_URL}}">you can help</a>.</p></li>
+      <li><span class="method-number" aria-hidden="true">1</span><h3>{{t:method.paletteTitle}}</h3><p>{{t:method.palette}}</p><div id="method-swatches" class="method-swatches enhanced" aria-hidden="true"></div></li>
+      <li><span class="method-number" aria-hidden="true">2</span><h3>{{t:method.generatedTitle}}</h3><p>{{t:method.generated}}</p><div id="method-variants" class="method-variants enhanced" aria-hidden="true"></div></li>
+      <li><span class="method-number" aria-hidden="true">3</span><h3>{{t:method.auditTitle}}</h3><p>{{t:method.audit}}</p><ul class="audit-checks"><li>{{t:method.checkContrast}}</li><li>{{t:method.checkVision}}</li><li>{{t:method.checkFonts}}</li><li>{{t:method.checkMonths}}</li></ul></li>
+      <li class="coming"><div class="method-progress"><span class="method-number" aria-hidden="true">4</span><span class="badge">{{t:method.coming}}</span></div><h3>{{t:method.peopleTitle}}</h3><p>{{t:method.people}}</p></li>
     </ol>
   </section>
 
   <section class="section wrap" aria-labelledby="limits-title">
-    <div class="section-heading"><span class="section-number" aria-hidden="true">06</span><div><h2 id="limits-title">What these numbers do not show</h2><p>The same limits as in the audit report, generated from it.</p></div></div>
+    <div class="section-heading"><span class="section-number" aria-hidden="true">06</span><div><h2 id="limits-title">{{t:limits.title}}</h2><p>{{t:limits.intro}}</p></div></div>
     <ul class="limits">
 {{LIMITS}}
     </ul>
   </section>
 
   <section class="section wrap" aria-labelledby="verify-title">
-    <div class="section-heading"><span class="section-number" aria-hidden="true">07</span><div><h2 id="verify-title">Check it yourself</h2><p>Every number on this page comes from the repository. With Node.js and Python 3, run:</p></div></div>
-    <pre class="commands" tabindex="0" aria-label="Commands to check the numbers yourself"><code>git clone {{REPO_URL}}.git
+    <div class="section-heading"><span class="section-number" aria-hidden="true">07</span><div><h2 id="verify-title">{{t:verify.title}}</h2><p>{{t:verify.intro}}</p></div></div>
+    <pre class="commands" tabindex="0" aria-label="{{t:verify.commandsLabel}}"><code>git clone {{REPO_URL}}.git
 cd 365-daynight-vscode-theme-ext
 npm ci
-npm run themes:audit         # contrast and color vision checks of the 48 themes
-npm run themes:variety       # difference between the months
-npm run themes:test          # the measuring tools against published reference data
-npm run themes:report-check  # the audit report matches the themes
-npm run site:build           # this page, from the same report</code></pre>
-    <p class="chart-note">The same commands run on every push and before each release. <a href="{{REPO_URL}}/blob/main/scripts/themes/README.md">How the tools work</a> · <a href="{{AUDIT_URL}}">Full audit report</a> · <a href="audit-report.json">Audit data (JSON)</a></p>
+npm run themes:audit         # {{t:verify.audit}}
+npm run themes:variety       # {{t:verify.variety}}
+npm run themes:test          # {{t:verify.test}}
+npm run themes:report-check  # {{t:verify.report}}
+npm run site:build           # {{t:verify.site}}</code></pre>
+    <p class="chart-note">{{t:verify.note}}</p>
   </section>
 
   <section class="section wrap" aria-labelledby="references-title">
-    <div class="section-heading"><span class="section-number" aria-hidden="true">08</span><div><h2 id="references-title">References</h2></div></div>
+    <div class="section-heading"><span class="section-number" aria-hidden="true">08</span><div><h2 id="references-title">{{t:references.title}}</h2></div></div>
     <ol class="references">
-      <li>Machado, G. M., Oliveira, M. M., &amp; Fernandes, L. A. F. (2009). A physiologically-based model for simulation of color vision deficiency. <cite>IEEE Transactions on Visualization and Computer Graphics</cite>, 15(6), 1291–1298. <a href="https://doi.org/10.1109/TVCG.2009.113">doi:10.1109/TVCG.2009.113</a>. Used for the color blindness simulations and the figure of about 200 million people.</li>
-      <li>W3C (2024). <cite>Web Content Accessibility Guidelines (WCAG) 2.2</cite>, W3C Recommendation, 12 December 2024. <a href="https://www.w3.org/TR/WCAG22/">w3.org/TR/WCAG22</a>. Contrast ratio, the 4.5:1 and 7:1 levels, and the use of color.</li>
-      <li>W3C. <cite>Understanding Success Criterion 1.4.3: Contrast (Minimum)</cite>. <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">w3.org/WAI/WCAG22/Understanding/contrast-minimum</a>. Links 4.5:1 to a visual acuity of about 20/40, and 7:1 to about 20/80.</li>
-      <li>CIE (2004). <cite>Colorimetry</cite>, CIE 15:2004, 3rd edition. CIELAB and the CIE76 color difference used for the thresholds.</li>
-      <li>Sharma, G., Wu, W., &amp; Dalal, E. N. (2005). The CIEDE2000 color-difference formula: Implementation notes, supplementary test data, and mathematical observations. <cite>Color Research &amp; Application</cite>, 30(1), 21–30. <a href="https://doi.org/10.1002/col.20070">doi:10.1002/col.20070</a>. CIEDE2000, and the test data that check the tools.</li>
-      <li>Birch, J. (2012). Worldwide prevalence of red-green color deficiency. <cite>Journal of the Optical Society of America A</cite>, 29(3), 313. <a href="https://doi.org/10.1364/JOSAA.29.000313">doi:10.1364/JOSAA.29.000313</a>. About 8% of men and 0.4% of women of European descent.</li>
+      <li>Machado, G. M., Oliveira, M. M., &amp; Fernandes, L. A. F. (2009). A physiologically-based model for simulation of color vision deficiency. <cite>IEEE Transactions on Visualization and Computer Graphics</cite>, 15(6), 1291–1298. <a href="https://doi.org/10.1109/TVCG.2009.113">doi:10.1109/TVCG.2009.113</a>. {{t:references.machado}}</li>
+      <li>W3C (2024). <cite>Web Content Accessibility Guidelines (WCAG) 2.2</cite>, W3C Recommendation, 12 December 2024. <a href="https://www.w3.org/TR/WCAG22/">w3.org/TR/WCAG22</a>. {{t:references.wcag}}</li>
+      <li>W3C. <cite>Understanding Success Criterion 1.4.3: Contrast (Minimum)</cite>. <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">w3.org/WAI/WCAG22/Understanding/contrast-minimum</a>. {{t:references.understanding}}</li>
+      <li>CIE (2004). <cite>Colorimetry</cite>, CIE 15:2004, 3rd edition. {{t:references.cie}}</li>
+      <li>Sharma, G., Wu, W., &amp; Dalal, E. N. (2005). The CIEDE2000 color-difference formula: Implementation notes, supplementary test data, and mathematical observations. <cite>Color Research &amp; Application</cite>, 30(1), 21–30. <a href="https://doi.org/10.1002/col.20070">doi:10.1002/col.20070</a>. {{t:references.sharma}}</li>
+      <li>Birch, J. (2012). Worldwide prevalence of red-green color deficiency. <cite>Journal of the Optical Society of America A</cite>, 29(3), 313. <a href="https://doi.org/10.1364/JOSAA.29.000313">doi:10.1364/JOSAA.29.000313</a>. {{t:references.birch}}</li>
     </ol>
   </section>
-  <noscript><p class="wrap no-script">The interactive previews need JavaScript. You can still watch the VS Code demonstration, read the audit and install all 48 themes.</p></noscript>
+  <noscript><p class="wrap no-script">{{t:noscript}}</p></noscript>
 </main>
 
-<footer class="wrap"><p>Free and open source, <a href="{{LICENSE_URL}}">MIT license</a>. By <a href="https://github.com/mickaellherminez">Mickaël Lherminez</a>.</p></footer>
+<footer class="wrap"><p>{{t:footer.license}}</p>
+{{LANGUAGE_LIST}}
+</footer>
 <p id="selection-status" class="sr" role="status" aria-live="polite" aria-atomic="true"></p>
 <dialog id="theme-dialog" aria-labelledby="dialog-title">
-  <div class="dialog-heading"><h2 class="eyebrow" id="dialog-title">Month and theme</h2><button class="close-button" id="close-picker" type="button">Close</button></div>
+  <div class="dialog-heading"><h2 class="eyebrow" id="dialog-title">{{t:header.chip}}</h2><button class="close-button" id="close-picker" type="button">{{t:dialog.close}}</button></div>
   <div id="dialog-picker" class="picker"></div>
-  <div class="mode-options" role="group" aria-label="Theme variant"></div>
+  <div class="mode-options" role="group" aria-label="{{t:panel.variants}}"></div>
   <p class="dialog-selection" data-selection></p>
 </dialog>
 </body>

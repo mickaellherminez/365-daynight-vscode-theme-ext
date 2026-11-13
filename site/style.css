@@ -17,7 +17,7 @@ button { color: inherit; }
 .js .enhanced { display: revert !important; }
 .wrap { width: 100%; max-width: 1296px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 48px); }
 .sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-.skip { position: fixed; z-index: 100; left: 20px; top: 12px; transform: translateY(-150%); padding: 10px 16px; border: 2px solid var(--line); border-radius: 6px; background: var(--bg); }
+.skip { position: fixed; z-index: 100; inset-inline-start: 20px; top: 12px; transform: translateY(-150%); padding: 10px 16px; border: 2px solid var(--line); border-radius: 6px; background: var(--bg); }
 .skip:focus { transform: translateY(0); }
 /* The header stays in view so a theme change shows on the section being read.
    On short screens (landscape phones, strong zoom) it scrolls away to leave room for content. */
@@ -39,7 +39,7 @@ nav > a { font-weight: 500; }
 .nav-link:hover .nav-text { text-decoration-thickness: 2px; }
 /* Icons take the accent of the current theme: at least 4.5:1 on the background in all 48 palettes. */
 .nav-icon { flex: none; color: var(--accent); }
-.chip-label { white-space: nowrap; text-align: left; }
+.chip-label { white-space: nowrap; text-align: start; }
 .theme-chip { min-height: 48px; padding: 0 16px 0 10px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--rule); border-radius: 999px; background: transparent; font-size: 15px; font-weight: 600; }
 .theme-dot { display: inline-block; flex: none; width: 26px; height: 26px; border: 1px solid var(--text); border-radius: 50%; background: var(--bg); position: relative; }
 .js .theme-chip { display: flex !important; }
@@ -82,7 +82,7 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .pk .mo:hover .dec .mk, .pk .mo:focus-within .dec .mk, .pk .zo:hover .dec .mk, .pk .zo:focus-within .dec .mk { transform: scale(.95); }
 .pk .mo:active .dec .mk, .pk .zo:active .dec .mk { transform: scale(1.25); }
 .mode-options { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-.mode-button { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 8px; border: 1px solid var(--rule); border-radius: 12px; color: var(--text); background: var(--bg); text-align: left; font-size: 14px; line-height: 1.2; font-weight: 600; }
+.mode-button { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 8px; border: 1px solid var(--rule); border-radius: 12px; color: var(--text); background: var(--bg); text-align: start; font-size: 14px; line-height: 1.2; font-weight: 600; }
 .mode-button[aria-pressed=true] { box-shadow: inset 0 0 0 2px var(--text); }
 .mode-disc { position: relative; width: 30px; height: 30px; flex: none; border-radius: 50%; border: 1px solid var(--disc-text); background: var(--disc-bg); }
 .mode-disc::after { content: ''; position: absolute; inset: 0; margin: auto; width: 8px; height: 8px; border-radius: 50%; background: var(--disc-accent); }
@@ -131,7 +131,7 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .today-marker { --today: 50%; position: absolute; top: 14px; left: clamp(74px, var(--today), calc(100% - 74px)); transform: translateX(-50%); min-height: 32px; padding: 6px 12px; border: 0; border-radius: 3px; background: var(--text); color: var(--bg); white-space: nowrap; z-index: 1; }
 .today-line { position: absolute; top: 46px; height: 130px; border-left: 1px solid var(--text); pointer-events: none; }
 .variant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px 24px; }
-.variant-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 0; border: 0; background: transparent; text-align: left; }
+.variant-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 0; border: 0; background: transparent; text-align: start; }
 .variant-preview { width: 100%; height: 262px; overflow: hidden; border: 1px solid var(--rule); border-radius: 6px; }
 .variant-card[aria-pressed=true] .variant-preview { outline: 2px solid var(--text); outline-offset: 3px; }
 .variant-preview .editor-titlebar { height: 28px; justify-content: flex-start; padding-inline: 12px; font-size: 11px; }
@@ -178,7 +178,7 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .method-variants .mini span { display: block; height: 4px; border-radius: 2px; }
 .method-variants p { margin-top: 8px; color: var(--muted); font-size: 13px; line-height: 1.3; }
 .audit-checks { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 8px 0 0; padding: 0; font: 400 14px/1.5 var(--mono); }
-.audit-checks li::before { content: '✓'; color: var(--accent); margin-right: 10px; }
+.audit-checks li::before { content: '✓'; color: var(--accent); margin-inline-end: 10px; }
 footer { padding-block: clamp(64px, 8vw, 112px) 56px; }
 footer p { margin: 0; padding-top: 28px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 15px; }
 .no-script { margin-top: 48px; }
@@ -200,6 +200,29 @@ dialog[open]::backdrop { opacity: 1; }
 :root[data-mode^=hc] .section-number { color: var(--onAccent); background: var(--accent); align-self: flex-start; padding: 3px 0; text-align: center; border-radius: 2px; font-weight: 700; }
 :root[data-mode^=hc] .theme-chip { box-shadow: inset 0 0 0 1px var(--rule); }
 :root[data-mode^=hc] .mode-button[aria-pressed=true] { box-shadow: inset 0 0 0 3px var(--text); }
+/* Tablets and phones: the header links are icons named by a tooltip, so the header keeps one line in every language. */
+@media (max-width: 1023px) {
+  nav { gap: 4px; }
+  .nav-link { justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
+  .nav-icon { width: 22px; height: 22px; }
+  .nav-link .nav-text { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  /* Tooltips name the icons for mouse and keyboard users; a tap follows the link instead.
+     The alternative text "" keeps them out of the accessible name, which the hidden text already gives. */
+  .nav-link { position: relative; }
+  /* Hidden tooltips keep their box but use visibility, so they can fade and slide in without being hoverable. */
+  .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 1; padding: 5px 10px; background: var(--text); color: var(--bg); border-radius: 8px; box-shadow: 0 4px 12px rgb(0 0 0 / .18); font: 500 13px/1.4 var(--sans); white-space: nowrap; pointer-events: none; content: attr(data-tooltip) / ""; visibility: hidden; opacity: 0; transform: translateY(-4px) scale(.96); transform-origin: top right; transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s; }
+  .nav-link:focus-visible::after, .theme-chip:focus-visible::after { visibility: visible; opacity: 1; transform: none; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
+  :root.tooltips-off .nav-link::after, :root.tooltips-off .theme-chip::after { visibility: hidden !important; opacity: 0 !important; transition: none !important; }
+}
+@media (max-width: 1023px) and (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after, .theme-chip:hover::after { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
+  /* An invisible bridge over the 6 px gap keeps the hover while the pointer moves onto the tooltip (WCAG 1.4.13). */
+  .nav-link:hover::before, .theme-chip:hover::before { position: absolute; top: 100%; inset-inline: 0; height: 6px; content: ""; }
+}
+/* The theme chip keeps its label on tablets; only phones reduce it to a disc with a tooltip. */
+@media (min-width: 721px) {
+  .theme-chip[data-tooltip]::after, .theme-chip[data-tooltip]::before { content: none !important; }
+}
 @media (max-width: 720px) {
   /* One row on phones: logo and name on the left, icon links and the theme disc on the right. */
   .top { flex-wrap: nowrap; gap: 8px; padding-block: 12px; }
@@ -207,18 +230,10 @@ dialog[open]::backdrop { opacity: 1; }
   .logo-button { width: 40px; height: 40px; }
   .brand { line-height: 1.25; }
   nav { flex: none; flex-wrap: nowrap; gap: 4px; }
-  .nav-link { justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
-  .nav-icon { width: 22px; height: 22px; }
-  .nav-link .nav-text, .theme-chip .chip-label { position: absolute; width: 1px; height: 1px; min-width: 0 !important; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .theme-chip .chip-label { position: absolute; width: 1px; height: 1px; min-width: 0 !important; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .theme-chip { width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; }
   .chip-chevron { display: none; }
-  /* Tooltips name the icons for mouse and keyboard users; a tap follows the link instead.
-     The alternative text "" keeps them out of the accessible name, which the hidden text already gives. */
-  .nav-link, .theme-chip { position: relative; }
-  /* Hidden tooltips keep their box but use visibility, so they can fade and slide in without being hoverable. */
-  .nav-link[data-tooltip]::after, .theme-chip[data-tooltip]::after { position: absolute; top: calc(100% + 6px); right: 0; z-index: 1; padding: 5px 10px; background: var(--text); color: var(--bg); border-radius: 8px; box-shadow: 0 4px 12px rgb(0 0 0 / .18); font: 500 13px/1.4 var(--sans); white-space: nowrap; pointer-events: none; content: attr(data-tooltip) / ""; visibility: hidden; opacity: 0; transform: translateY(-4px) scale(.96); transform-origin: top right; transition: opacity .1s ease-in, transform .1s ease-in, visibility 0s linear .1s; }
-  .nav-link:focus-visible::after, .theme-chip:focus-visible::after { visibility: visible; opacity: 1; transform: none; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
-  :root.tooltips-off .nav-link::after, :root.tooltips-off .theme-chip::after { visibility: hidden !important; opacity: 0 !important; transition: none !important; }
+  .theme-chip { position: relative; }
   .hero { padding-top: 20px; }
   .hero-copy { max-width: none; }
   .button { flex: 1 1 100%; }
@@ -232,11 +247,6 @@ dialog[open]::backdrop { opacity: 1; }
   .section-heading { gap: 16px; }
   .section-number { width: 24px; }
   .section-heading p { font-size: 16px; }
-}
-@media (max-width: 720px) and (hover: hover) and (pointer: fine) {
-  .nav-link:hover::after, .theme-chip:hover::after { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .16s ease-out, transform .16s ease-out, visibility 0s; }
-  /* An invisible bridge over the 6 px gap keeps the hover while the pointer moves onto the tooltip (WCAG 1.4.13). */
-  .nav-link:hover::before, .theme-chip:hover::before { position: absolute; top: 100%; right: 0; left: 0; height: 6px; content: ""; }
 }
 @media (max-width: 420px) {
   .palette-readout { gap: 20px; }
@@ -271,14 +281,14 @@ dialog[open]::backdrop { opacity: 1; }
 .chart-note { max-width: 860px; margin-top: 20px; }
 .contrast-scroll { position: relative; overflow-x: auto; border-block: 1px solid var(--rule); }
 .contrast-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14px; }
-.contrast-table th { text-align: left; font-weight: 500; }
+.contrast-table th { text-align: start; font-weight: 500; }
 .contrast-table th, .contrast-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); }
 .contrast-table thead th { color: var(--muted); padding-block: 14px; font-size: 12px; }
 .contrast-table thead th:nth-child(1) { width: 20%; }
 .contrast-table thead th:nth-child(2) { width: 17%; }
 .contrast-table thead th:nth-child(4) { width: 100px; }
-.contrast-table th:first-child, .contrast-table td:first-child { padding-left: 0; }
-.contrast-table th:last-child, .contrast-table td:last-child { padding-right: 0; }
+.contrast-table th:first-child, .contrast-table td:first-child { padding-inline-start: 0; }
+.contrast-table th:last-child, .contrast-table td:last-child { padding-inline-end: 0; }
 .contrast-color-value { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
 .contrast-swatch { display: inline-block; width: 20px; height: 20px; flex: none; border: 1px solid var(--rule); border-radius: 3px; }
 .contrast-color code { font: 400 12px/1.4 var(--mono); }
@@ -310,19 +320,95 @@ dialog[open]::backdrop { opacity: 1; }
 .vision-code { margin: 0; padding: 18px 20px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; font: 400 13px/1.7 var(--mono); }
 .vision-line { display: block; min-height: 1.7em; white-space: pre; }
 .score-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 14px; }
-.score-table th { text-align: left; font-weight: 500; }
+.score-table th { text-align: start; font-weight: 500; }
 .score-table th, .score-table td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .score-table thead th { color: var(--muted); font-size: 12px; }
-.score-table th:first-child { padding-left: 0; width: 22%; }
+.score-table th:first-child { padding-inline-start: 0; width: 22%; }
 .score-value { width: 22%; }
 .score-number { display: block; font: 500 18px/1.2 var(--mono); }
 .score-track { display: block; height: 6px; margin-top: 6px; background: var(--rule); }
 .score-fill { display: block; height: 100%; background: var(--accent); transition: width .35s ease-out; }
 .score-formula, .score-ref { color: var(--muted); }
-.limits, .references { max-width: 820px; margin: 0; padding-left: 20px; }
+.limits, .references { max-width: 820px; margin: 0; padding-inline-start: 20px; }
 .limits li, .references li { margin-bottom: 14px; line-height: 1.6; }
 .references li { color: var(--muted); font-size: 15px; }
 .references cite { font-style: italic; }
 .commands { margin: 0 0 16px; padding: 18px 20px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; font: 400 13px/1.7 var(--mono); }
 .editor-window { overflow: hidden; }
 .references a, .limits a { overflow-wrap: anywhere; }
+
+/* Language menu: a compact disclosure in the header (globe and language code), with the
+   ten languages in two columns. Each language is a link to its own page, so it works without JavaScript. */
+.language-menu { position: relative; }
+.language-toggle { list-style: none; cursor: pointer; padding-inline: 4px; border-radius: 999px; user-select: none; }
+.language-toggle::-webkit-details-marker { display: none; }
+.language-toggle .nav-text { font-weight: 600; text-decoration: none; letter-spacing: .04em; }
+.language-toggle .chip-chevron { transition: transform .16s ease-out; }
+.language-menu[open] .language-toggle .chip-chevron { transform: rotate(180deg); }
+.language-list { position: absolute; top: calc(100% + 8px); inset-inline-end: 0; z-index: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px;
+  width: max-content; min-width: 280px; max-width: calc(100vw - 32px); margin: 0; padding: 8px; list-style: none;
+  border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); box-shadow: 0 12px 32px var(--shadow); }
+.language-list a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 8px 12px; border-radius: 8px; color: var(--text); text-decoration: none; font-size: 15px; }
+.language-list a:hover { background: var(--bg); }
+.language-list a[aria-current=page] { box-shadow: inset 0 0 0 2px var(--text); font-weight: 600; }
+.language-code { color: var(--muted); font: 400 11px/1 var(--mono); letter-spacing: .06em; }
+:root[data-mode^=hc] .language-list { box-shadow: 0 0 0 2px var(--accent), 0 12px 32px var(--shadow); }
+@media (prefers-reduced-motion: no-preference) {
+  .language-menu[open] .language-list { animation: language-in .16s ease-out; }
+  @keyframes language-in { from { opacity: 0; transform: translateY(-4px); } }
+}
+.footer-languages { display: block; }
+.footer-languages ul { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 20px 0 0; padding: 0; list-style: none; font-size: 15px; }
+.footer-languages a { display: inline-block; padding-block: 10px; }
+.footer-languages a[aria-current=page] { color: var(--text); font-weight: 600; text-decoration: none; }
+@media (max-width: 1023px) {
+  .language-toggle { width: 44px; height: 44px; justify-content: center; padding: 0; border-radius: 50%; }
+  .language-toggle .chip-chevron { display: none; }
+  .language-menu[open] .language-toggle::after { visibility: hidden !important; }
+}
+/* Phones: the list spans the screen under the header, with the same two columns. */
+@media (max-width: 720px) {
+  .language-list { position: fixed; top: calc(var(--header-height, 64px) + 4px); inset-inline: 16px; width: auto; min-width: 0; max-width: none; }
+}
+@media (max-width: 720px) and (max-height: 499px) {
+  .language-list { position: absolute; top: calc(100% + 8px); inset-inline: auto 0; width: min(300px, calc(100vw - 32px)); }
+}
+@media (forced-colors: active) { .language-list a[aria-current=page] { outline: 2px solid Highlight; } }
+
+/* Right-to-left (Arabic): the page mirrors, but code, scales and the year keep their left-to-right axis. */
+[dir=rtl] .editor-window, [dir=rtl] .vision-code, [dir=rtl] .commands, [dir=rtl] .scale, [dir=rtl] .year-calendar,
+[dir=rtl] .contrast-track, [dir=rtl] .contrast-axis-inner, [dir=rtl] .pk { direction: ltr; }
+[dir=rtl] .contrast-fill { border-radius: 0 3px 3px 0; }
+/* Arabic and Devanagari letters join: no letter spacing, and taller lines for their marks.
+   JetBrains Mono has no Arabic, Devanagari, Chinese or Japanese letters: they fall back to the
+   system font of the script, while Latin letters and digits keep the brand font.
+   Each script names its proportional system fonts first, so the browser never picks a monospace one. */
+:root:lang(ar) { --script: 'SF Arabic', 'Geeza Pro', 'Noto Sans Arabic', 'Segoe UI', Tahoma; }
+:root:lang(hi) { --script: 'Kohinoor Devanagari', 'Noto Sans Devanagari', 'Nirmala UI', 'Mangal'; }
+:root:lang(zh) { --script: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', 'Microsoft YaHei'; }
+:root:lang(ja) { --script: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans CJK JP', 'Yu Gothic', 'Meiryo'; }
+:root:is(:lang(ar), :lang(hi), :lang(zh), :lang(ja)) {
+  --mono: 'JetBrains Mono', var(--script), system-ui, sans-serif;
+  --sans: 'Inter', var(--script), system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+:lang(ar) *, :lang(hi) * { letter-spacing: normal !important; }
+:root:is(:lang(ar), :lang(hi), :lang(zh), :lang(ja)) .pk text { font-family: var(--mono); }
+:root:is(:lang(ar), :lang(hi)) h1 { line-height: 1.3; }
+:root:is(:lang(ar), :lang(hi)) :is(h2, h3) { line-height: 1.45; }
+:root:is(:lang(zh), :lang(ja)) h1 { line-height: 1.2; }
+/* Japanese and Chinese have no spaces: break headings between phrases, not inside a word, where the browser can. */
+:root:is(:lang(zh), :lang(ja)) :is(h1, h2, h3, .lead) { word-break: auto-phrase; }
+:root:is(:lang(zh), :lang(ja)) .eyebrow { letter-spacing: .02em; }
+[dir=rtl] .nav-link[data-tooltip]::after, [dir=rtl] .theme-chip[data-tooltip]::after { transform-origin: top left; }
+/* Narrowest phones (320 px): four header buttons and the name still fit on one row.
+   40 px buttons stay well above the 24 px minimum target size of WCAG 2.2 (2.5.8). */
+@media (max-width: 359px) {
+  .top { gap: 6px; }
+  .logo-button { width: 36px; height: 36px; }
+  .brand { font-size: 15px; }
+  nav { gap: 0; }
+  .nav-link, .language-toggle, .theme-chip { width: 40px; height: 40px; min-height: 40px; }
+}
+/* Month names are lowercase inside French, Spanish, Portuguese and Russian sentences;
+   shown on their own (header chip, palette name, dialog), they start with a capital. */
+.chip-label::first-letter, .current-month::first-letter, .dialog-selection::first-letter { text-transform: uppercase; }

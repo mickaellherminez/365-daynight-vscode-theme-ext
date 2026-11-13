@@ -1,12 +1,14 @@
 // Monthly distances are exported by scripts/themes/report.py from the same
 // measurements used by themes:variety. No color distances are estimated here.
+import { t, num } from './i18n.js';
+
 const VARIANTS = {
   light: 'Light', dark: 'Dark',
   hcLight: 'High Contrast Light', hcDark: 'High Contrast',
 };
 const MEASURES = {
-  background: { label: 'Editor background', report: 'Editor background' },
-  syntax: { label: 'Syntax · six roles', report: 'Syntax (6 roles)' },
+  background: { label: t('matrices.background'), report: 'Editor background' },
+  syntax: { label: t('matrices.syntax'), report: 'Syntax (6 roles)' },
 };
 const REPO = 'https://github.com/mickaellherminez/365-daynight-vscode-theme-ext';
 
@@ -26,7 +28,7 @@ function monthLabel(month) {
 }
 
 function number(value) {
-  return value.toFixed(1);
+  return num(value, 1);
 }
 
 function band(value, threshold) {
@@ -62,9 +64,9 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
   container.classList.add('matrices');
   const controls = make('div', 'matrix-controls');
   const measureLabel = make('label', 'matrix-field');
-  measureLabel.append(make('span', '', 'Compare'));
+  measureLabel.append(make('span', '', t('matrices.compare')));
   const measureSelect = make('select', 'matrix-select');
-  measureSelect.setAttribute('aria-label', 'Monthly difference measurement');
+  measureSelect.setAttribute('aria-label', t('matrices.measure'));
   for (const [key, descriptor] of Object.entries(MEASURES)) {
     const option = make('option', '', descriptor.label);
     option.value = key;
@@ -75,21 +77,21 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
   controls.append(measureLabel, variant);
 
   const legend = make('div', 'matrix-legend');
-  legend.setAttribute('aria-label', 'Shared color-distance scale');
+  legend.setAttribute('aria-label', t('matrices.legend'));
   const context = make('p', 'matrix-context');
   const panels = make('div', 'matrix-panels');
   const beforePanel = make('section', 'matrix-panel');
   const currentPanel = make('section', 'matrix-panel');
-  const beforeTitle = make('h4', 'matrix-panel-title', 'Before · 0.12.0');
-  const currentTitle = make('h4', 'matrix-panel-title', 'Now · 1.0.0');
+  const beforeTitle = make('h4', 'matrix-panel-title', t('matrices.before'));
+  const currentTitle = make('h4', 'matrix-panel-title', t('matrices.now'));
   const beforeStats = make('p', 'matrix-summary');
   const currentStats = make('p', 'matrix-summary');
   const beforeScroll = make('div', 'matrix-scroll');
   const currentScroll = make('div', 'matrix-scroll');
-  for (const [scroll, label] of [[beforeScroll, 'Before the redesign'], [currentScroll, 'After the redesign']]) {
+  for (const [scroll, label] of [[beforeScroll, t('matrices.beforeRegion')], [currentScroll, t('matrices.afterRegion')]]) {
     scroll.tabIndex = 0;
     scroll.setAttribute('role', 'region');
-    scroll.setAttribute('aria-label', `${label}: monthly color-distance table. Scroll horizontally if needed.`);
+    scroll.setAttribute('aria-label', t('matrices.region', { label }));
   }
   beforePanel.append(beforeTitle, beforeStats, beforeScroll);
   currentPanel.append(currentTitle, currentStats, currentScroll);
@@ -97,11 +99,11 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
 
   const explorer = make('div', 'matrix-explorer');
   const pairControls = make('div', 'matrix-pair-controls');
-  const pairSelects = ['First month', 'Second month'].map((label, index) => {
+  const pairSelects = [t('matrices.firstMonth'), t('matrices.secondMonth')].map((label, index) => {
     const field = make('label', 'matrix-field');
     field.append(make('span', '', label));
     const select = make('select', 'matrix-select');
-    select.setAttribute('aria-label', `${label} in monthly comparison`);
+    select.setAttribute('aria-label', t('matrices.selectLabel', { label }));
     months.forEach((month, monthIndex) => {
       const option = make('option', '', month.name);
       option.value = String(monthIndex);
@@ -112,7 +114,7 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
     pairControls.append(field);
     return select;
   });
-  const apply = make('button', 'matrix-apply', 'Apply first month');
+  const apply = make('button', 'matrix-apply', t('matrices.applyFirst'));
   apply.type = 'button';
   apply.addEventListener('click', () => onSelectMonth(Number(pairSelects[0].value)));
   pairControls.append(apply);
@@ -120,19 +122,20 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
   pairResult.setAttribute('role', 'status');
   pairResult.setAttribute('aria-live', 'polite');
   pairResult.setAttribute('aria-atomic', 'true');
-  explorer.append(make('p', 'eyebrow', 'Read one pair'), pairControls, pairResult);
+  explorer.append(make('p', 'eyebrow', t('matrices.readPair')), pairControls, pairResult);
 
   const method = make('details', 'matrix-method');
-  method.append(make('summary', '', 'How these distances are measured'));
-  method.append(make('p', '', 'CIE76 distance in CIELAB: ΔE = √((ΔL*)² + (Δa*)² + (Δb*)²). Editor background compares editor.background directly. Syntax is the arithmetic mean of the six distances for keyword, function, string, number, class and comment, comparing each role with the same role in the other month.'));
-  method.append(make('p', '', 'The diagonal compares a month with itself. Each table contains 66 unique pairs; the other half repeats them. Values are rounded to one decimal in the audit export. The shaded ranges and the minimum distance are project rules for variety, not WCAG requirements or a guarantee of what every person will perceive.'));
+  method.append(make('summary', '', t('matrices.methodTitle')));
+  method.append(make('p', '', t('matrices.method1')));
+  method.append(make('p', '', t('matrices.method2')));
   const links = make('p', 'matrix-source-links');
-  const source = make('a', '', 'Measurements and limits');
+  const source = make('a', '', t('matrices.sourceLink'));
   source.href = `${REPO}/blob/main/docs/AUDIT.md`;
-  const script = make('a', '', 'Variety calculation');
+  const script = make('a', '', t('matrices.scriptLink'));
   script.href = `${REPO}/blob/main/scripts/themes/variety.py`;
-  const data = make('a', '', 'Download the audit JSON');
-  data.href = 'audit-report.json';
+  const data = make('a', '', t('matrices.dataLink'));
+  // Next to the scripts at the site root, also from the page of a translation (/fr/, /de/…).
+  data.href = new URL('audit-report.json', import.meta.url).href;
   links.append(source, document.createTextNode(' · '), script, document.createTextNode(' · '), data);
   method.append(links);
   container.append(controls, context, legend, panels, explorer, method);
@@ -147,7 +150,7 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
     const pairs = pairsOf(grid);
     const below = pairs.filter((value) => value < minimum).length;
     const average = pairs.reduce((sum, value) => sum + value, 0) / pairs.length;
-    return `Mean ${number(average)} ΔE · ${below}/${pairs.length} pairs below ${minimum}`;
+    return t('matrices.summary', { mean: number(average), below: num(below), total: num(pairs.length), minimum: num(minimum) });
   }
 
   function drawTable(grid, era, minimum) {
@@ -155,11 +158,11 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
       throw new Error(`Invalid monthly matrix: ${currentMode} ${era} ${measure}`);
     }
     const table = make('table', 'matrix-table');
-    const caption = make('caption', 'sr', `${era}, ${VARIANTS[currentMode]}, ${MEASURES[measure].label}. Monthly differences in ΔE CIE76.`);
+    const caption = make('caption', 'sr', t('matrices.caption', { era, variant: VARIANTS[currentMode], measure: MEASURES[measure].label }));
     table.append(caption);
     const head = make('thead');
     const header = make('tr');
-    const corner = make('th', 'matrix-corner', 'Month');
+    const corner = make('th', 'matrix-corner', t('matrices.corner'));
     corner.scope = 'col';
     header.append(corner);
     months.forEach((month, index) => {
@@ -185,13 +188,13 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
           cell.className = 'matrix-diagonal';
           const dash = make('span', '', '—');
           dash.setAttribute('aria-hidden', 'true');
-          cell.append(dash, make('span', 'sr', 'Same month'));
+          cell.append(dash, make('span', 'sr', t('matrices.same')));
         } else {
           cell.className = `matrix-cell matrix-band-${band(value, minimum)}`;
           cell.textContent = number(value);
           cell.dataset.value = String(value);
-          cell.title = `${months[row].name} / ${months[column].name}: ${number(value)} ΔE CIE76${value < minimum ? `, below the project threshold of ${minimum}` : ''}`;
-          if (value < minimum) cell.append(make('span', 'sr', ', below the project threshold'));
+          cell.title = t(value < minimum ? 'matrices.cellBelow' : 'matrices.cell', { first: months[row].name, second: months[column].name, value: number(value), minimum: num(minimum) });
+          if (value < minimum) cell.append(make('span', 'sr', t('matrices.belowShort')));
         }
         if (row === currentMonth || column === currentMonth) cell.classList.add('is-current-month');
         line.append(cell);
@@ -210,21 +213,25 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
     const current = grids.current[measure][first][second];
     const names = `${months[first].name} / ${months[second].name}`;
     pairResult.textContent = first === second
-      ? `${names}: the same month, ΔE 0.0.`
-      : `${names} · ${VARIANTS[currentMode]} · ${MEASURES[measure].label}. Before: ${before == null ? 'no earlier variant' : `${number(before)} ΔE`}. Now: ${number(current)} ΔE.`;
+      ? t('matrices.pairSame', { names, zero: number(0) })
+      : t('matrices.pair', {
+        names, variant: VARIANTS[currentMode], measure: MEASURES[measure].label,
+        before: before == null ? t('matrices.noEarlier') : t('matrices.distance', { value: number(before) }),
+        now: t('matrices.distance', { value: number(current) }),
+      });
     for (const cell of panels.querySelectorAll('td[data-row]')) {
       const row = Number(cell.dataset.row), column = Number(cell.dataset.column);
       cell.classList.toggle('is-pair', (row === first && column === second) || (row === second && column === first));
     }
     apply.disabled = first === currentMonth;
-    apply.textContent = `Apply ${months[first].name}`;
-    apply.title = `Apply ${months[first].name} to the website`;
+    apply.textContent = t('matrices.apply', { month: months[first].name });
+    apply.title = t('matrices.applyTitle', { month: months[first].name });
   }
 
   function render() {
     const minimum = threshold();
     const comparison = comparisons[currentMode];
-    const ranges = [`< ${minimum}`, `${minimum}–< ${minimum * 2}`, `${minimum * 2}–< ${minimum * 4}`, `≥ ${minimum * 4}`];
+    const ranges = [`< ${num(minimum)}`, `${num(minimum)}–< ${num(minimum * 2)}`, `${num(minimum * 2)}–< ${num(minimum * 4)}`, `≥ ${num(minimum * 4)}`];
     legend.replaceChildren(...ranges.map((label, index) => {
       const item = make('span', 'matrix-legend-item');
       const tile = make('span', `matrix-legend-tile matrix-band-${index}`);
@@ -232,17 +239,17 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
       item.append(tile, make('span', '', `${label} ΔE`));
       return item;
     }));
-    variant.textContent = `${VARIANTS[currentMode]} · normal vision`;
-    context.textContent = `Project minimum: ${minimum} ΔE CIE76. Hatched cells fall below it. The outlined row and column are ${months[currentMonth].name}.`;
+    variant.textContent = t('matrices.variantLine', { variant: VARIANTS[currentMode] });
+    context.textContent = t('matrices.context', { minimum: num(minimum), month: months[currentMonth].name });
     currentStats.textContent = summary(comparison.grids.current[measure], minimum);
-    currentScroll.replaceChildren(drawTable(comparison.grids.current[measure], 'After the redesign, version 1.0.0', minimum));
+    currentScroll.replaceChildren(drawTable(comparison.grids.current[measure], t('matrices.afterEra'), minimum));
     if (comparison.grids.before) {
       beforeStats.textContent = summary(comparison.grids.before[measure], minimum);
-      beforeScroll.replaceChildren(drawTable(comparison.grids.before[measure], 'Before the redesign, version 0.12.0', minimum));
+      beforeScroll.replaceChildren(drawTable(comparison.grids.before[measure], t('matrices.beforeEra'), minimum));
       beforeScroll.tabIndex = 0;
     } else {
-      beforeStats.textContent = 'No earlier variant';
-      beforeScroll.replaceChildren(make('p', 'matrix-no-baseline', 'High Contrast Light was not available in 0.12.0, so there is no earlier palette to compare.'));
+      beforeStats.textContent = t('matrices.noEarlierTitle');
+      beforeScroll.replaceChildren(make('p', 'matrix-no-baseline', t('matrices.noBaseline')));
       beforeScroll.removeAttribute('tabindex');
     }
     updatePair();

@@ -2,7 +2,8 @@ const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const { pagePalette, pageValues, render, themeData, validateOutput, build, syntaxTokens } = require('../../scripts/site/build.cjs');
+const { pagePalette, pageValues, render, renderPage, themeData, validateOutput, build, syntaxTokens,
+	LANGUAGES, languagePath, loadLocale, loadLocales, localeLimits, validateLocale } = require('../../scripts/site/build.cjs');
 const report = require('../../docs/audit-report.json');
 const manifest = require('../../package.json');
 const variantLabels = { light: 'Light', dark: 'Dark', hcLight: 'High Contrast Light', hcDark: 'High Contrast' };
@@ -16,6 +17,8 @@ const luminance = (hex) => {
 		.map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
 	return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
+// The scripts' own texts keep their {{placeholders}} until the browser fills them in.
+const withoutScriptTexts = (html) => html.replace(/<script id="i18n" type="application\/json">[\s\S]*?<\/script>/, '');
 const contrast = (a, b) => {
 	const [high, low] = [luminance(a), luminance(b)].sort((x, y) => y - x);
 	return (high + 0.05) / (low + 0.05);
@@ -126,9 +129,12 @@ suite('Landing page', () => {
 		}
 	});
 
-	test('every placeholder of the page has a value', () => {
+	test('every placeholder of the page has a value, in every language', () => {
 		const template = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
-		assert.doesNotMatch(render(template, pageValues(report)), /\{\{/);
+		const locales = loadLocales();
+		for (const locale of locales) {
+			assert.doesNotMatch(withoutScriptTexts(renderPage(template, report, locale, locales)), /\{\{/, locale.meta.code);
+		}
 	});
 
 	test('an unknown placeholder is an error', () => {
@@ -156,15 +162,21 @@ suite('Landing page', () => {
 		try {
 			build(output);
 			const page = fs.readFileSync(path.join(output, 'index.html'), 'utf8');
-			assert.doesNotMatch(page, /\{\{/);
+			assert.doesNotMatch(withoutScriptTexts(page), /\{\{/);
 			assert.doesNotMatch(page, /365-day-night-brand|tablette 820\.html/);
 			assert.deepStrictEqual(JSON.parse(fs.readFileSync(path.join(output, 'audit-report.json'), 'utf8')), report);
 			assert.ok(fs.statSync(path.join(output, 'media', 'demo-months.mp4')).size > 0);
 			assert.ok(fs.statSync(path.join(output, 'media', 'demo-poster.jpg')).size > 0);
-			for (const [, url] of page.matchAll(/(?:src|href)="([^"]+)"/g)) {
-				if (/^(?:[a-z]+:|\/\/|#)/i.test(url)) continue;
-				assert.ok(fs.existsSync(path.join(output, url.split(/[?#]/)[0])), `Missing page asset: ${url}`);
+			for (const code of LANGUAGES) {
+				const dir = path.join(output, languagePath(code));
+				const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+				for (const [, url] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
+					if (/^(?:[a-z]+:|\/\/|#)/i.test(url)) continue;
+					const target = path.join(dir, url.split(/[?#]/)[0]);
+					assert.ok(fs.existsSync(target.endsWith(path.sep) ? path.join(target, 'index.html') : target), `${code}: missing page asset: ${url}`);
+				}
 			}
+			assert.ok(!fs.existsSync(path.join(output, 'i18n')), 'the translation files are already inside each page');
 		} finally {
 			fs.rmSync(output, { recursive: true, force: true });
 		}
@@ -293,7 +305,9 @@ suite('Landing page social preview', () => {
 });
 
 suite('Landing page header', () => {
-	const html = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+	const template = fs.readFileSync(path.join(__dirname, '../../site/index.html'), 'utf8');
+	const english = loadLocale('en');
+	const html = renderPage(template, report, english, [english]);
 	const nav = html.match(/<nav aria-label="Main navigation">([\s\S]*?)<\/nav>/)[1];
 
 	test('icon links keep their text, hidden visually on phones only', () => {
@@ -309,5 +323,100 @@ suite('Landing page header', () => {
 		const chip = nav.match(/<button class="theme-chip[\s\S]*?<\/button>/)[0];
 		assert.match(chip, /data-chip-label[^>]*>[^<]+<\/span><span class="sr">, choose month and theme<\/span>/);
 		assert.doesNotMatch(chip, /aria-label=/, 'an aria-label would hide the visible label from the accessible name');
+	});
+});
+
+suite('Landing page translations', () => {
+	const root = path.join(__dirname, '../..');
+	const template = fs.readFileSync(path.join(root, 'site', 'index.html'), 'utf8');
+	const audit = fs.readFileSync(path.join(root, 'docs', 'AUDIT.md'), 'utf8');
+	const locales = loadLocales();
+	const pages = Object.fromEntries(locales.map((locale) => [locale.meta.code, renderPage(template, report, locale, locales)]));
+
+	test('the site has the 10 languages of the README, English first', () => {
+		const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+		const linked = [...readme.matchAll(/\(docs\/README_(\w+)\.md\)/g)].map((match) => match[1]);
+		assert.deepStrictEqual(LANGUAGES, ['en', ...linked]);
+	});
+
+	test('every translation has every English text, with the same links, elements and placeholders', () => {
+		assert.strictEqual(locales.length, 10);
+		for (const locale of locales) assert.doesNotThrow(() => validateLocale(locale), locale.meta.code);
+	});
+
+	test('a translation that changes a link or drops a placeholder is refused', () => {
+		const changed = JSON.parse(JSON.stringify(loadLocale('fr')));
+		changed.page.numbers.audit = changed.page.numbers.audit.replace('{{AUDIT_URL}}', 'https://example.com');
+		assert.throws(() => validateLocale(changed), /numbers\.audit: the HTML differs/);
+		const missing = JSON.parse(JSON.stringify(loadLocale('de')));
+		missing.js.app.status = missing.js.app.status.replace('{{accent}}', '');
+		assert.throws(() => validateLocale(missing), /app\.status: the \{\{placeholders\}\} differ/);
+		const extra = JSON.parse(JSON.stringify(loadLocale('es')));
+		delete extra.js.matrices.apply;
+		assert.throws(() => validateLocale(extra), /matrices\.apply: missing text/);
+	});
+
+	test('every translation gives the limits of the audit report, with the same links', () => {
+		const count = (audit.split('## Limits of this audit')[1].match(/^- /gm) || []).length;
+		for (const locale of locales) assert.strictEqual(localeLimits(locale, audit).length, count, locale.meta.code);
+		const shorter = { ...loadLocale('ja'), limits: loadLocale('ja').limits.slice(1) };
+		assert.throws(() => localeLimits(shorter, audit), /limits must have/);
+	});
+
+	test('every text used by the page scripts exists in English', () => {
+		const english = loadLocale('en').js;
+		for (const file of fs.readdirSync(path.join(root, 'site')).filter((name) => name.endsWith('.js'))) {
+			const source = fs.readFileSync(path.join(root, 'site', file), 'utf8');
+			for (const [, key] of source.matchAll(/\bt\('([\w.]+)'/g)) {
+				const text = key.split('.').reduce((node, part) => node?.[part], english);
+				assert.strictEqual(typeof text, 'string', `${file}: ${key}`);
+			}
+		}
+	});
+
+	test('each page declares its language, direction, address and the other languages', () => {
+		for (const { meta } of locales) {
+			const html = pages[meta.code];
+			assert.match(html, new RegExp(`<html lang="${meta.code}" dir="${meta.dir}"`));
+			assert.ok(html.includes(`<link rel="canonical" href="https://365daynight.mickaellherminez.net/${languagePath(meta.code)}">`), meta.code);
+			for (const code of LANGUAGES) {
+				assert.ok(html.includes(`<link rel="alternate" hreflang="${code}" href="https://365daynight.mickaellherminez.net/${languagePath(code)}">`), `${meta.code} → ${code}`);
+			}
+			assert.ok(html.includes('hreflang="x-default" href="https://365daynight.mickaellherminez.net/"'));
+			assert.strictEqual((html.match(/aria-current="page"/g) || []).length, 2, `${meta.code}: current language in the menu and the footer`);
+			assert.match(html, new RegExp(`<a href="[^"]*" hreflang="${meta.code}" lang="${meta.code}" aria-current="page">`));
+		}
+		assert.match(pages.ar, /<html lang="ar" dir="rtl"/);
+	});
+
+	test('the language menu is a native disclosure whose button names the current language', () => {
+		for (const { meta } of locales) {
+			const menu = pages[meta.code].match(/<details class="language-menu"[\s\S]*?<\/details>/)[0];
+			assert.match(menu, /<summary class="nav-link language-toggle" data-tooltip="[^"]+">/);
+			assert.ok(menu.includes(`<span class="nav-text">${meta.code.toUpperCase()}</span><span class="sr">`), meta.code);
+			assert.ok(menu.includes(meta.name), meta.code);
+			assert.strictEqual((menu.match(/<li>/g) || []).length, LANGUAGES.length);
+		}
+	});
+
+	test('translated pages are translated, and their numbers follow the language', () => {
+		const heading = (html) => html.match(/<h1 id="hero-title">([\s\S]*?)<\/h1>/)[1];
+		for (const code of LANGUAGES.filter((item) => item !== 'en')) {
+			assert.notStrictEqual(heading(pages[code]), heading(pages.en), code);
+			assert.doesNotMatch(pages[code], /Skip to content|Read it in your editor|What these numbers do not show/, code);
+		}
+		const checks = (locale) => `<dd>${report.checks.passed.toLocaleString(locale)}</dd>`;
+		assert.ok(pages.fr.includes(checks('fr-FR')) && /\u202f/.test(checks('fr-FR')), 'French groups digits with a narrow space');
+		assert.ok(pages.de.includes(checks('de-DE')) && checks('de-DE').includes('.'), 'German groups digits with a dot');
+		assert.ok(pages.en.includes(checks('en-US')));
+		assert.ok(pages.ar.includes(checks('en-US')), 'Arabic uses Western digits, as in its README');
+	});
+
+	test('the page texts placed in a script element cannot close it', () => {
+		for (const code of LANGUAGES) {
+			const data = pages[code].match(/<script id="i18n" type="application\/json">([\s\S]*?)<\/script>/)[1];
+			assert.doesNotMatch(data, /</);
+			assert.strictEqual(JSON.parse(data).meta.code, code);
+		}
 	});
 });

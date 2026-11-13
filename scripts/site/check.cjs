@@ -16,6 +16,9 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '
 	'.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.mp4': 'video/mp4', '.txt': 'text/plain' };
 const VIEWS = [[360, 'light'], [820, 'dark'], [1280, 'light'], [1280, 'dark']];
 const VARIANTS = [null, 'hcDark', 'hcLight'];
+// English gets every size and variant; each translation is checked on a phone and a desktop.
+const TRANSLATION_VIEWS = [[360, 'light'], [1280, 'dark']];
+const { LANGUAGES, languagePath, loadLocale } = require('./build.cjs');
 
 /** La CSP de production, lue dans site/.htaccess pour ne pas la recopier */
 function productionCsp() {
@@ -47,20 +50,35 @@ function serve(dir, csp) {
 
 async function check(dir) {
 	const server = await serve(dir, productionCsp());
-	const url = `http://127.0.0.1:${server.address().port}/`;
+	const base = `http://127.0.0.1:${server.address().port}/`;
 	const axe = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 	const browser = await chromium.launch({ executablePath: chromePath() });
 	const problems = [];
 	try {
-		for (const [width, scheme] of VIEWS) {
+		for (const code of LANGUAGES) {
+		const url = base + languagePath(code);
+		const meta = loadLocale(code).meta;
+		for (const [width, scheme] of code === 'en' ? VIEWS : TRANSLATION_VIEWS) {
 			const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme });
 			const page = await context.newPage();
-			const where = `${width}px ${scheme}`;
+			const where = `${code} ${width}px ${scheme}`;
 			page.on('console', (message) => { if (message.type() === 'error') problems.push(`${where}: console error: ${message.text()}`); });
 			page.on('pageerror', (error) => problems.push(`${where}: script error: ${error.message}`));
 			page.on('response', (response) => { if (response.status() >= 400) problems.push(`${where}: ${response.status()} ${response.url()}`); });
 			await page.goto(url, { waitUntil: 'networkidle' });
-			for (const variant of VARIANTS) {
+			const html = await page.evaluate(() => [document.documentElement.lang, document.documentElement.dir]);
+			if (html.join() !== [code, meta.dir].join()) problems.push(`${where}: <html> has lang="${html[0]}" dir="${html[1]}"`);
+			const header = await page.evaluate(() => document.querySelector('.site-header').getBoundingClientRect().height);
+			if (header > 100) problems.push(`${where}: the header wraps (${Math.round(header)}px high)`);
+			// The language menu opens, lists every language and closes with Escape.
+			await page.click('.language-toggle');
+			const listed = await page.$$eval('.language-list a', (links) => links.map((link) => link.hreflang));
+			if (listed.join() !== LANGUAGES.join()) problems.push(`${where}: the language menu lists ${listed.join(', ')}`);
+			const overflowMenu = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+			if (overflowMenu > 0) problems.push(`${where}: the open language menu is ${overflowMenu}px wider than the screen`);
+			await page.keyboard.press('Escape');
+			if (await page.$eval('[data-language-menu]', (menu) => menu.open)) problems.push(`${where}: Escape does not close the language menu`);
+			for (const variant of code === 'en' ? VARIANTS : [null]) {
 				if (variant) {
 					await page.selectOption('#chart-variant', variant);
 					await page.waitForTimeout(200);
@@ -76,6 +94,7 @@ async function check(dir) {
 			if (await page.evaluate(() => document.querySelector('video').autoplay)) problems.push(`${where}: the video plays on its own`);
 			await context.close();
 		}
+		}
 	} finally {
 		await browser.close();
 		server.close();
@@ -86,7 +105,7 @@ async function check(dir) {
 if (require.main === module) {
 	check(path.resolve(process.argv[2] || path.join(ROOT, 'site-dist'))).then((problems) => {
 		problems.forEach((problem) => console.error(`::error::${problem}`));
-		console.log(`Site check: ${problems.length} problem(s) at ${VIEWS.length} sizes and ${VARIANTS.length} variants`);
+		console.log(`Site check: ${problems.length} problem(s) in ${LANGUAGES.length} languages, at ${VIEWS.length} sizes and ${VARIANTS.length} variants in English`);
 		process.exitCode = problems.length ? 1 : 0;
 	}, (error) => {
 		console.error(error);

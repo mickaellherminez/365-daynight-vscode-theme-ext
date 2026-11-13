@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "code": "ja",
+    "name": "日本語",
+    "dir": "ltr",
+    "numberLocale": "ja-JP",
+    "dateLocale": "ja-JP",
+    "ogLocale": "ja_JP",
+    "lowercaseInSentence": false
+  },
+  "months": [
+    { "name": "1月", "short": "1月" },
+    { "name": "2月", "short": "2月" },
+    { "name": "3月", "short": "3月" },
+    { "name": "4月", "short": "4月" },
+    { "name": "5月", "short": "5月" },
+    { "name": "6月", "short": "6月" },
+    { "name": "7月", "short": "7月" },
+    { "name": "8月", "short": "8月" },
+    { "name": "9月", "short": "9月" },
+    { "name": "10月", "short": "10月" },
+    { "name": "11月", "short": "11月" },
+    { "name": "12月", "short": "12月" }
+  ],
+  "page": {
+    "head": {
+      "title": "365 Day &amp; Night – 毎月変わる VS Code のアクセシブルなテーマ",
+      "description": "毎月新しい雰囲気になる、VS Code 用の 48 のアクセシブルなテーマ。コントラストと色覚のすべての結果を公開しています。",
+      "ogTitle": "365 Day &amp; Night — 読みやすく、測定済み。",
+      "ogDescription": "12 か月、48 の VS Code 用アクセシブルなテーマ。各パレットとその裏付けとなる測定結果をご覧ください。"
+    },
+    "skip": "本文へスキップ",
+    "header": {
+      "nav": "メインナビゲーション",
+      "logo": "月とテーマを選ぶ",
+      "audit": "監査レポート",
+      "chip": "月とテーマ",
+      "chipAction": "、月とテーマを選ぶ",
+      "language": "言語",
+      "languageAction": "、言語：{{name}}、別の言語を選ぶ",
+      "languages": "言語"
+    },
+    "hero": {
+      "eyebrow": "VS Code テーマ",
+      "everyMonth": "毎月",
+      "title": "毎月、新しい雰囲気に。",
+      "titleAccent": "読みやすく、測定済み。",
+      "lead": "ワンクリックでも自動でも昼と夜を切り替えられる、VS Code 用の {{THEMES}} のアクセシブルなカラーテーマ。コントラストと色覚のすべての結果を公開しています。",
+      "install": "Marketplace からインストール",
+      "statThemes": "テーマ",
+      "statChecks": "件のチェックに合格",
+      "statLowest": "テキストの最低コントラスト"
+    },
+    "panel": {
+      "figure": "図 01 · ロゴがコントロールです",
+      "hint": "月を選んでから、テーマを選びます",
+      "variants": "テーマのバリエーション",
+      "text": "テキスト",
+      "accent": "アクセント"
+    },
+    "editor": {
+      "title": "エディターで読んでみる。",
+      "intro": "<span data-month-name></span>の同じファイルを、上に <span id=\"compare-day-label\">Light</span>、下に <span id=\"compare-night-label\">Dark</span> で表示しています。ハンドルを上下にドラッグすると境界線が動き、ロゴをクリックするとテーマが変わります。",
+      "handle": "Light と Dark を比較します。矢印キーで境界線を動かせます。",
+      "videoLabel": "VS Code で",
+      "video": "ステータスバーの矢印で月を 10 月から 12 月に変え、ボタンをクリックして Light から Dark に切り替え、ツールチップのリンクで High Contrast を適用します。"
+    },
+    "year": {
+      "title": "365 日、12 のパレット。",
+      "intro": "上が Light、下が Dark、その間がその月のボタンの色です。各月は拡張機能の正確な色を使っています。月の名前をクリックすると適用されます。マーカーは今日を示します。",
+      "region": "12 か月のパレット",
+      "today": "今月に戻る",
+      "months": "月を選ぶ"
+    },
+    "variants": {
+      "title": "1 か月に、4 つのテーマ。",
+      "intro": "Light、Dark、2 つの High Contrast テーマは、<span data-month-name></span>のパレットから生成されます。それぞれテキストとアクセントのコントラストを測定しています。枠で囲まれたものが現在のテーマです。",
+      "group": "テーマのバリエーションをプレビューして選ぶ"
+    },
+    "numbers": {
+      "title": "数字で見る",
+      "themes": "テーマ",
+      "themesNote": "12 か月、それぞれに Light、Dark、High Contrast、High Contrast Light。",
+      "checks": "合格したチェック",
+      "checksNote": "全 {{CHECKS_TOTAL}} 件中。1 テーマあたり {{CHECKS_MIN}}〜{{CHECKS_MAX}} 件。",
+      "lowest": "テキストの最低コントラスト",
+      "lowestNote": "最低基準は {{AA_RATIO}}、通常のテキストに対する WCAG AA のレベルです。",
+      "scaleTitle": "最も低い組み合わせの位置",
+      "scaleLabel": "テキストの最低コントラストは {{LOWEST_TEXT_NUMBER}} 対 1。1 から 21 までの目盛りで、WCAG AA は {{AA_LEVEL}} 対 1、AAA は 7 対 1 から始まります。",
+      "scaleLowest": "最低値：{{LOWEST_TEXT_RATIO}}",
+      "audit": "監査はプッシュのたびに実行され、各リリースの前に合格する必要があります。後退があればリリースは止まります。<a href=\"{{AUDIT_URL}}\">監査レポートの全文を読む</a>（英語）。"
+    },
+    "measures": {
+      "eyebrow": "測定結果を見る",
+      "title": "1 つのテーマ、すべての色。",
+      "legend": "グラフのテーマを選ぶ",
+      "month": "月",
+      "variant": "バリエーション",
+      "syntaxTitle": "構文の色を、すべて測定。",
+      "syntaxIntro": "各バーは、<span data-selection></span> の正確な色を使った、エディター背景に対するテキストのコントラストです。マーカーは {{AA_RATIO}} と 7:1 のテキストコントラストの基準を示します。",
+      "syntaxNote": "コントラスト = (明るい方の相対輝度 + 0.05) / (暗い方の相対輝度 + 0.05)。この測定はエディター背景上のこれらのテキスト色に関するもので、インターフェース全体を保証するものではありません。<a href=\"{{AUDIT_URL}}\">方法と限界</a> · <a href=\"{{ROOT}}audit-report.json\" download>監査データをダウンロード</a>。",
+      "visionTitle": "それぞれの見え方で。",
+      "visionIntro": "<span data-selection></span> のコードを色覚の種類ごとにシミュレーションした見え方と、見え方の状況ごとの 100 点満点のスコアです。ヨーロッパ系の男性の約 8%、女性の約 0.4% が赤緑の色覚多様性をもっています [6]。これは計算であり、観察ではありません。<a href=\"{{TESTERS_URL}}\">実際の人による検証</a>はこれからです。",
+      "monthlyTitle": "月ごとにどれくらい違う？",
+      "monthlyIntro": "リニューアル前後の 12 か月のパレットを比較します。ΔE が大きいほど色の差が大きくなります。2 つのグリッドは同じ目盛りを使っています。測定項目を選んで、背景色または構文の色を確認してください。"
+    },
+    "method": {
+      "title": "つくり方",
+      "paletteTitle": "1 か月に 1 つのパレット",
+      "palette": "各月は季節の雰囲気から始まります。1 月は霜、7 月はラグーン、10 月は紅葉。",
+      "generatedTitle": "生成されるテーマ",
+      "generated": "スクリプトが、その月のパレットから 4 つのテーマを作ります。CI は公開ファイルとジェネレーターの出力を 1 バイトずつ比較します。",
+      "auditTitle": "自動監査",
+      "audit": "コントラスト、色覚のシミュレーション、フォントスタイル、月ごとの違いを、すべてのテーマで測定します。",
+      "checkContrast": "コントラスト",
+      "checkVision": "色覚のシミュレーション",
+      "checkFonts": "フォントスタイル",
+      "checkMonths": "月ごとの違い",
+      "coming": "予定",
+      "peopleTitle": "実際の人による検証",
+      "people": "シミュレーションは本物の目の代わりにはなりません。このステップはまだ行っていません。<a href=\"{{TESTERS_URL}}\">ご協力をお願いします</a>。"
+    },
+    "limits": {
+      "title": "この数字からわからないこと",
+      "intro": "監査レポートと同じ限界を、英語から翻訳しています。"
+    },
+    "verify": {
+      "title": "自分で確かめる",
+      "intro": "このページの数字はすべてリポジトリから来ています。Node.js と Python 3 で次を実行してください。",
+      "commandsLabel": "数字を自分で確かめるためのコマンド",
+      "audit": "48 テーマのコントラストと色覚のチェック",
+      "variety": "月ごとの違い",
+      "test": "公開された基準データで測定ツールを検証",
+      "report": "監査レポートがテーマと一致しているか",
+      "site": "同じレポートからこのページを生成",
+      "note": "同じコマンドがプッシュのたびと各リリースの前に実行されます。<a href=\"{{REPO_URL}}/blob/main/scripts/themes/README.md\">ツールのしくみ</a> · <a href=\"{{AUDIT_URL}}\">監査レポート全文</a> · <a href=\"{{ROOT}}audit-report.json\">監査データ（JSON）</a>"
+    },
+    "references": {
+      "title": "参考文献",
+      "machado": "色覚多様性のシミュレーションと、約 2 億人という数字に使用。",
+      "wcag": "コントラスト比、4.5:1 と 7:1 のレベル、色の使用。",
+      "understanding": "4.5:1 を視力約 20/40 に、7:1 を約 20/80 に対応づけています。",
+      "cie": "CIELAB と、基準に使う CIE76 色差。",
+      "sharma": "CIEDE2000 と、ツールを検証するテストデータ。",
+      "birch": "ヨーロッパ系の男性の約 8%、女性の約 0.4%。"
+    },
+    "noscript": "インタラクティブなプレビューには JavaScript が必要です。それでも VS Code のデモを見たり、監査を読んだり、48 のテーマをすべてインストールしたりできます。",
+    "footer": {
+      "license": "無料のオープンソース、<a href=\"{{LICENSE_URL}}\">MIT ライセンス</a>。作者：<a href=\"https://github.com/mickaellherminez\">Mickaël Lherminez</a>。"
+    },
+    "dialog": {
+      "close": "閉じる"
+    }
+  },
+  "limits": [
+    "**実際のユーザーによる検証はまだありません。** 色覚多様性とロービジョンは、シミュレーションまたは計算によるものです。どんな計算も当事者との検証の代わりにはなりません。[フィードバックを歓迎します](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。",
+    "**部分的な型は測定するだけで、必須条件ではありません。** 最も多い部分的な色覚多様性は、重症度 0.1〜0.9 のスコアに表れます。監査で不合格になりうるのは完全な型だけです。",
+    "**全色盲は参考情報です。** 表のとおり、色がないと多くの構文の色は明度が近くなります。その場合、テーマがスタイルを設定していれば、それだけで区別されます。たとえばコメント、非推奨のコード、無効なコードなどです。",
+    "**基準値はプロジェクトのルールです。** コントラストの最低値は WCAG が定めています。色の区別の基準（CIE76 の目盛りで ΔE 12）と多様性の基準は、このプロジェクトのために選んだ実用的なルールであり、規格ではありません。",
+    "**CIE76 はシンプルな指標です。** 基準値は CIE76 に適用されます。CIEDE2000 は、特に青や彩度の低い色で知覚により近いため、参考として並べて表示しています。目盛りが異なり、基準値はそれに合わせて調整されていません。",
+    "**WCAG 2 のコントラストのみ。** WCAG 3 向けに草案が作られているコントラストモデル APCA は適用していません。",
+    "**色を見ており、表示は見ていません。** 監査はテーマファイルを読み、コードに列挙された色の組み合わせを、トークンの種類ごとに 1 つの TextMate スコープでチェックします。実際に表示されたウィンドウ、アンチエイリアス、お使いのディスプレイは確認しません。",
+    "**VS Code のすべての色ではありません。** 1 つのテーマは、VS Code が文書化している約 970 色のうち約 485 色を定義しています。それ以外は VS Code の既定値を使い、監査するのは最近の UI 要素の既定値だけで、VS Code 1.145 時点のものです。今後のバージョンで変わる可能性があります。",
+    "**その他の症状はモデル化していません。** 信頼できるモデルを使っていないため、白内障、緑内障、黄斑変性のスコアはありません。"
+  ],
+  "js": {
+    "app": {
+      "compareLabel": "{{day}} と {{night}} を比較します。矢印キーで境界線を動かせます。",
+      "compareValue": "上が {{day}}、下が {{night}}。境界線は {{percent}}% の位置です。",
+      "applyVariant": "。{{month}}の {{variant}} を適用",
+      "variantStat": "テキスト {{text}} · アクセント {{accent}}",
+      "status": "{{month}}、{{variant}}。テキストのコントラスト {{text}}。アクセントのコントラスト {{accent}}。",
+      "monthButton": "{{short}}：{{month}}を適用",
+      "today": "今日 · {{date}}",
+      "todayLabel": "{{today}}：今月（{{month}}）に戻る"
+    },
+    "picker": {
+      "label": "ロゴ：4 つのテーマからなる円盤のまわりに 12 か月が並んでいます。リングで月を、円盤でテーマを選びます。",
+      "month": "{{month}}のパレット",
+      "theme": "テーマ {{variant}}",
+      "outerLeft": "外側・左",
+      "coreLeft": "中心・左",
+      "outerRight": "外側・右",
+      "coreRight": "中心・右"
+    },
+    "contrast": {
+      "roles": {
+        "keyword": "キーワード",
+        "function": "関数",
+        "string": "文字列",
+        "number": "数値",
+        "class": "クラス / 型",
+        "comment": "コメント",
+        "variable": "変数",
+        "operator": "演算子",
+        "punctuation": "句読点",
+        "tag": "タグ",
+        "attribute": "属性",
+        "regex": "正規表現",
+        "JSON key": "JSON キー",
+        "invalid": "無効なコード"
+      },
+      "region": "構文のテキストコントラスト。小さい画面では横にスクロールするとすべての列が見られます。",
+      "role": "構文の役割",
+      "color": "正確な色",
+      "scale": "1:1〜21:1 の目盛りでのコントラスト",
+      "level": "比 / レベル",
+      "axis": "テキストのコントラスト",
+      "scrollHint": "小さい画面では、グラフを横にスクロールするとすべての値が見られます。",
+      "caption": "{{theme}}：構文の正確な色と、{{background}} に対するテキストのコントラスト。",
+      "both": "AA + AAA",
+      "aa": "AA",
+      "below": "AA 未満",
+      "summary": "構文の色 {{total}} 色のうち {{aa}} 色が {{aaRatio}}（AA）を満たしています。{{total}} 色のうち {{aaa}} 色が {{aaaRatio}}（AAA）を満たしています。エディター背景：{{background}}。"
+    },
+    "vision": {
+      "views": {
+        "normal": "一般的な色覚",
+        "protanopia": "1 型 2 色覚",
+        "deuteranopia": "2 型 2 色覚",
+        "tritanopia": "3 型 2 色覚",
+        "achromatopsia": "全色盲"
+      },
+      "scores": {
+        "protanopia": { "label": "1 型 2 色覚", "formula": "主要な構文の色 21 組のうち、最大の重症度でシミュレーションしても ΔE {{d}} 以上離れている組の割合。" },
+        "deuteranopia": { "label": "2 型 2 色覚", "formula": "同じ計算を 2 型 2 色覚で行ったもの。" },
+        "tritanopia": { "label": "3 型 2 色覚", "formula": "同じ計算を 3 型 2 色覚で行ったもの。" },
+        "protanomaly": { "label": "1 型 3 色覚（部分的）", "formula": "同じ計算を重症度 0.1〜0.9 で行い、最も低い結果をとったもの。" },
+        "deuteranomaly": { "label": "2 型 3 色覚（部分的）", "formula": "同様に、部分的な 2 型色覚で計算したもの。" },
+        "tritanomaly": { "label": "3 型 3 色覚（部分的）", "formula": "同様に、部分的な 3 型色覚で計算したもの。" },
+        "achromatopsia": { "label": "全色盲", "formula": "同じ組のうち、明度だけで ΔE {{d}} 以上離れている組の割合。" },
+        "lowVision20/40": { "label": "ロービジョン 20/40", "formula": "テキストのチェックのうち {{aa}} 以上のものの割合。" },
+        "lowVision20/80": { "label": "ロービジョン 20/80", "formula": "テキストのチェックのうち {{aaa}} 以上のものの割合。" }
+      },
+      "luminanceRef": "sRGB の相対輝度",
+      "group": "シミュレーションする色覚を選ぶ",
+      "region": "見え方のスコア。小さい画面では横にスクロールするとすべての列が見られます。",
+      "situation": "見え方の状況",
+      "score": "スコア（100 点満点）",
+      "formula": "計算式",
+      "reference": "出典",
+      "note": "スコアは、自分の見え方に合うテーマを選ぶ手がかりになります。100 点は、すべての組やテキストのチェックがルールを満たしているという意味であり、そのテーマが誰にでも合うという意味ではありません。",
+      "normal": "{{theme}}、デザインどおりの表示。",
+      "simulated": "{{theme}}、{{vision}}のシミュレーション：スコア {{score}}（100 点満点）。",
+      "caption": "{{theme}}：見え方のスコア（100 点満点）と、その計算式および出典。"
+    },
+    "matrices": {
+      "background": "エディター背景",
+      "syntax": "構文 · 6 つの役割",
+      "compare": "比較",
+      "measure": "月ごとの違いの測定項目",
+      "legend": "共通の色差の目盛り",
+      "before": "以前 · 0.12.0",
+      "now": "現在 · 1.0.0",
+      "beforeRegion": "リニューアル前",
+      "afterRegion": "リニューアル後",
+      "region": "{{label}}：月ごとの色差の表。必要に応じて横にスクロールしてください。",
+      "firstMonth": "1 つ目の月",
+      "secondMonth": "2 つ目の月",
+      "selectLabel": "月の比較の{{label}}",
+      "applyFirst": "1 つ目の月を適用",
+      "readPair": "1 組を読む",
+      "methodTitle": "この色差の測り方",
+      "method1": "CIELAB における CIE76 距離：ΔE = √((ΔL*)² + (Δa*)² + (Δb*)²)。エディター背景は editor.background を直接比較します。構文は keyword、function、string、number、class、comment の 6 つの距離の算術平均で、各役割を別の月の同じ役割と比較します。",
+      "method2": "対角線は月をそれ自身と比較しています。各表には重複のない 66 組があり、残りの半分はその繰り返しです。値は監査のエクスポートで小数点以下 1 桁に丸めています。網かけの範囲と最小距離は多様性に関するプロジェクトのルールであり、WCAG の要件でも、すべての人の見え方を保証するものでもありません。",
+      "sourceLink": "測定と限界",
+      "scriptLink": "多様性の計算",
+      "dataLink": "監査の JSON をダウンロード",
+      "summary": "平均 {{mean}} ΔE · {{below}}/{{total}} 組が {{minimum}} 未満",
+      "caption": "{{era}}、{{variant}}、{{measure}}。ΔE CIE76 による月ごとの違い。",
+      "corner": "月",
+      "same": "同じ月",
+      "cell": "{{first}} / {{second}}：{{value}} ΔE CIE76",
+      "cellBelow": "{{first}} / {{second}}：{{value}} ΔE CIE76、プロジェクトの基準 {{minimum}} 未満",
+      "belowShort": "、プロジェクトの基準未満",
+      "pairSame": "{{names}}：同じ月、ΔE {{zero}}。",
+      "pair": "{{names}} · {{variant}} · {{measure}}。以前：{{before}}。現在：{{now}}。",
+      "noEarlier": "以前のバリエーションなし",
+      "distance": "{{value}} ΔE",
+      "apply": "{{month}}を適用",
+      "applyTitle": "{{month}}をサイトに適用",
+      "variantLine": "{{variant}} · 一般的な色覚",
+      "context": "プロジェクトの最小値：{{minimum}} ΔE CIE76。斜線のセルはそれを下回っています。枠で囲まれた行と列は{{month}}です。",
+      "afterEra": "リニューアル後、バージョン 1.0.0",
+      "beforeEra": "リニューアル前、バージョン 0.12.0",
+      "noEarlierTitle": "以前のバリエーションなし",
+      "noBaseline": "0.12.0 には High Contrast Light がなかったため、比較できる以前のパレットはありません。"
+    }
+  }
+}

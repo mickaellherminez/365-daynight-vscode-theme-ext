@@ -203,7 +203,33 @@ npm run site:check    # checks it in Chrome under the production Content-Securit
 npm run site:preview  # serves it at http://127.0.0.1:4173
 ```
 
-`site:check` runs axe-core at 360, 820 and 1280 pixels, in light and dark and in both High Contrast variants, and fails on any accessibility violation, script error, missing file or horizontal overflow. Set `CHROME_PATH` if Chrome is not in its usual place.
+`site:check` runs axe-core at 360, 820 and 1280 pixels, in light and dark and in both High Contrast variants, and fails on any accessibility violation, script error, missing file or horizontal overflow. It also checks each translated page at 360 and 1280 pixels: its language and direction, a header on one line, and a language menu that lists the 10 languages and closes with Escape. Set `CHROME_PATH` if Chrome is not in its usual place.
+
+### Translations of the landing page
+
+The page exists in the 10 languages of the README. English is at the root of the site, each other language in its own folder: `/fr/`, `/es/`, `/de/`, `/pt/`, `/ru/`, `/zh/`, `/ja/`, `/hi/` and `/ar/` (right to left). The build writes one static page per language, so each page is readable without JavaScript and by search engines, and links to the others with `hreflang`.
+
+Visitors change the language in three ways:
+
+- **The globe button of the header** (with the language code, such as `FR`, on a computer): it opens a list of the 10 languages, each written in its own language. `Escape`, a click outside or moving the focus out of it closes the list. With the keyboard: `Tab` to the button, `Enter` or `Space` to open it, `Tab` to a language, `Enter` to go to it.
+- **The list of languages at the bottom of the page**, after the footer.
+- **The address**: add or remove the language folder, for example `https://365daynight.mickaellherminez.net/de/`.
+
+To go back to English, choose **English** in either list or open the root address. The site does not redirect visitors based on their browser language and does not remember the choice: each page is only one link.
+
+The texts are in `site/i18n/`, one JSON file per language, with the same keys:
+
+| Part | Holds |
+| --- | --- |
+| `meta` | language code, native name, direction (`ltr` or `rtl`), number and date locales, `og:locale`, and whether condition names are lowercase inside a sentence |
+| `months` | full and short name of the 12 months |
+| `page` | the texts of `site/index.html`, placed by `{{t:key}}` at build time |
+| `limits` | the limits of `docs/AUDIT.md`, in its Markdown (English: `null`, read from the report) |
+| `js` | the texts written by the scripts of the page, read by `t('key', { name })` from `site/i18n.js` |
+
+Theme names (`Light`, `Dark`, `High Contrast`, `High Contrast Light`), commands, code and units stay in English, as in the translated READMEs. Numbers follow each language (`4,5:1` in French, `13.212` in German); Arabic uses Western digits, as in its README.
+
+The build refuses a translation that does not match English: a missing or extra key, an empty text, an HTML element or link that differs, or a `{{placeholder}}` that differs. Words may change order, not markup. When `docs/AUDIT.md` gains, loses or changes the link of a limit, the build also stops until every translation has the same limits. To change a text, change it in `en.json` and in the 9 other files, then run `npm run test:unit` and `npm run site:check`. To add a language, add its file, its code to `LANGUAGES` in `scripts/site/build.cjs` and its README translation.
 
 `site/.htaccess` holds the security headers of the hosting: HTTPS only, a Content-Security-Policy that allows no script from elsewhere and no inline script, and no directory listing. `site:check` reads the same policy, so the page is tested with it.
 

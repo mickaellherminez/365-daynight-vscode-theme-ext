@@ -1,11 +1,8 @@
 // Accessible, dependency-free chart. The table is both the graphic and its data.
-const LABELS = {
-  keyword: 'Keyword', function: 'Function', string: 'String', number: 'Number',
-  class: 'Class / type', comment: 'Comment', variable: 'Variable', operator: 'Operator',
-  punctuation: 'Punctuation', tag: 'Tag', attribute: 'Attribute', regex: 'Regular expression',
-  'JSON key': 'JSON key', invalid: 'Invalid code',
-};
-const ROLES = Object.keys(LABELS);
+import { t, num, ratio as formatRatio } from './i18n.js';
+
+const ROLES = ['keyword', 'function', 'string', 'number', 'class', 'comment', 'variable', 'operator',
+  'punctuation', 'tag', 'attribute', 'regex', 'JSON key', 'invalid'];
 const element = (tag, className, text) => {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -18,12 +15,12 @@ export function createContrastChart(container, summary, thresholds) {
   const region = element('div', 'contrast-scroll');
   region.tabIndex = 0;
   region.setAttribute('role', 'region');
-  region.setAttribute('aria-label', 'Syntax text contrast. Scroll horizontally to see all columns on a small screen.');
+  region.setAttribute('aria-label', t('contrast.region'));
   const table = element('table', 'contrast-table');
   const caption = element('caption', 'sr');
   const head = element('thead');
   const headRow = element('tr');
-  for (const label of ['Syntax role', 'Exact color', 'Contrast on a 1:1–21:1 scale', 'Ratio / level']) {
+  for (const label of [t('contrast.role'), t('contrast.color'), t('contrast.scale'), t('contrast.level')]) {
     const cell = element('th', '', label);
     cell.scope = 'col';
     headRow.append(cell);
@@ -33,7 +30,7 @@ export function createContrastChart(container, summary, thresholds) {
   const rows = ROLES.map(role => {
     const row = element('tr');
     row.dataset.token = role;
-    const label = element('th', '', LABELS[role]);
+    const label = element('th', '', t(`contrast.roles.${role}`));
     label.scope = 'row';
     const color = element('td', 'contrast-color');
     const colorContent = element('span', 'contrast-color-value');
@@ -62,14 +59,14 @@ export function createContrastChart(container, summary, thresholds) {
   });
   const foot = element('tfoot');
   const footRow = element('tr');
-  const note = element('td', 'contrast-axis-note', 'Text contrast');
+  const note = element('td', 'contrast-axis-note', t('contrast.axis'));
   note.colSpan = 2;
   const axis = element('td', 'contrast-axis');
   axis.setAttribute('aria-hidden', 'true');
   const axisContent = element('div', 'contrast-axis-inner');
   for (const [label, value, className] of [
-    ['1:1', 1, 'axis-start'], [`AA · ${thresholds.textContrast}`, thresholds.textContrast, ''],
-    [`AAA · ${thresholds.textContrastHighContrast}`, thresholds.textContrastHighContrast, ''], ['21:1', 21, 'axis-end'],
+    ['1:1', 1, 'axis-start'], [`AA · ${num(thresholds.textContrast, 1)}`, thresholds.textContrast, ''],
+    [`AAA · ${num(thresholds.textContrastHighContrast)}`, thresholds.textContrastHighContrast, ''], ['21:1', 21, 'axis-end'],
   ]) {
     const tick = element('span', className, label);
     tick.style.left = position(value);
@@ -80,11 +77,11 @@ export function createContrastChart(container, summary, thresholds) {
   foot.append(footRow);
   table.append(caption, head, body, foot);
   region.append(table);
-  const scrollHint = element('p', 'chart-scroll-hint', 'On a small screen, scroll the chart horizontally to see every value.');
+  const scrollHint = element('p', 'chart-scroll-hint', t('contrast.scrollHint'));
   container.append(region, scrollHint);
   return {
     update(palette) {
-      caption.textContent = `${palette.name}: exact syntax colors and text contrast against ${palette.bg}.`;
+      caption.textContent = t('contrast.caption', { theme: palette.name, background: palette.bg });
       let aaCount = 0, aaaCount = 0;
       for (const row of rows) {
         const ratio = palette.syntaxContrast[row.role];
@@ -97,12 +94,15 @@ export function createContrastChart(container, summary, thresholds) {
         row.swatch.style.backgroundColor = color;
         row.fill.style.backgroundColor = color;
         row.fill.style.width = position(ratio);
-        row.value.textContent = `${ratio.toFixed(2)}:1`;
-        row.level.textContent = aaa ? 'AA + AAA' : aa ? 'AA' : 'Below AA';
+        row.value.textContent = formatRatio(ratio, 2);
+        row.level.textContent = t(aaa ? 'contrast.both' : aa ? 'contrast.aa' : 'contrast.below');
         row.row.dataset.ratio = String(ratio);
         row.row.dataset.color = color;
       }
-      summary.textContent = `${aaCount} of ${rows.length} syntax colors meet ${thresholds.textContrast}:1 (AA). ${aaaCount} of ${rows.length} meet ${thresholds.textContrastHighContrast}:1 (AAA). Editor background: ${palette.bg.toUpperCase()}.`;
+      summary.textContent = t('contrast.summary', {
+        aa: num(aaCount), aaa: num(aaaCount), total: num(rows.length), background: palette.bg.toUpperCase(),
+        aaRatio: formatRatio(thresholds.textContrast, 1), aaaRatio: formatRatio(thresholds.textContrastHighContrast, 0),
+      });
       table.style.backgroundColor = palette.bg;
     },
   };
