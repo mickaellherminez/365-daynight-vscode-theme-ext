@@ -90,6 +90,29 @@ async function checkAccessibility(page, axe, variants, where, problems) {
 	}
 }
 
+/**
+ * Color codes, ratios and ΔE values read left to right in every language: each one sits in a
+ * <bdi dir="ltr">, also after a change of month, variant and measure.
+ */
+async function checkIsolation(page, where, problems) {
+	await page.selectOption('#chart-month', '6');
+	await page.selectOption('.matrix-select >> nth=0', 'syntax');
+	const loose = await page.evaluate(() => {
+		const isolated = (node) => node.closest('bdi[dir="ltr"]') && window.getComputedStyle(node.closest('bdi')).direction === 'ltr';
+		const found = [];
+		for (const node of document.querySelectorAll('.contrast-color code, .contrast-ratio, .matrix-legend-item > :last-child, #text-contrast, #accent-contrast')) {
+			if (!isolated(node.firstElementChild || node)) found.push(node.textContent);
+		}
+		for (const node of document.querySelectorAll('#syntax-summary, .matrix-summary, .matrix-pair-result, .matrix-context, .score-formula, .variant-stat')) {
+			const text = [...node.childNodes].filter((child) => child.nodeType === 3).map((child) => child.textContent).join(' ');
+			const match = text.match(/#[0-9A-F]{6}|\d+(?:[.,]\d+)?:1|\d\s?ΔE|ΔE\s?\d/);
+			if (match) found.push(match[0]);
+		}
+		return found;
+	});
+	loose.forEach((text) => problems.push(`${where}: "${text}" is not isolated left to right`));
+}
+
 /** No horizontal scrolling and no video that plays on its own. */
 async function checkLayout(page, where, problems) {
 	const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
@@ -108,6 +131,7 @@ async function checkView(browser, axe, url, code, [width, scheme], problems) {
 	await checkLanguageMenu(page, where, problems);
 	await checkAccessibility(page, axe, code === 'en' ? VARIANTS : [null], where, problems);
 	await checkLayout(page, where, problems);
+	await checkIsolation(page, where, problems);
 	await context.close();
 }
 

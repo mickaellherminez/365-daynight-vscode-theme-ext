@@ -1,6 +1,6 @@
 // Monthly distances are exported by scripts/themes/report.py from the same
 // measurements used by themes:variety. No color distances are estimated here.
-import { t, num } from './i18n.js';
+import { t, tNodes, ltr, isolate, num } from './i18n.js';
 
 const VARIANTS = {
   light: 'Light', dark: 'Dark',
@@ -150,7 +150,7 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
     const pairs = pairsOf(grid);
     const below = pairs.filter((value) => value < minimum).length;
     const average = pairs.reduce((sum, value) => sum + value, 0) / pairs.length;
-    return t('matrices.summary', { mean: number(average), below: num(below), total: num(pairs.length), minimum: num(minimum) });
+    return tNodes('matrices.summary', { mean: ltr(`${number(average)} ΔE`), pairs: ltr(`${num(below)}/${num(pairs.length)}`), minimum: num(minimum) });
   }
 
   function drawTable(grid, era, minimum) {
@@ -212,13 +212,14 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
     const before = grids.before ? grids.before[measure][first][second] : null;
     const current = grids.current[measure][first][second];
     const names = `${months[first].name} / ${months[second].name}`;
-    pairResult.textContent = first === second
-      ? t('matrices.pairSame', { names, zero: number(0) })
-      : t('matrices.pair', {
+    const distance = (value) => ltr(t('matrices.distance', { value: number(value) }));
+    pairResult.replaceChildren(first === second
+      ? tNodes('matrices.pairSame', { names, distance: ltr(`ΔE ${number(0)}`) })
+      : tNodes('matrices.pair', {
         names, variant: VARIANTS[currentMode], measure: MEASURES[measure].label,
-        before: before == null ? t('matrices.noEarlier') : t('matrices.distance', { value: number(before) }),
-        now: t('matrices.distance', { value: number(current) }),
-      });
+        before: before == null ? t('matrices.noEarlier') : distance(before),
+        now: distance(current),
+      }));
     for (const cell of panels.querySelectorAll('td[data-row]')) {
       const row = Number(cell.dataset.row), column = Number(cell.dataset.column);
       cell.classList.toggle('is-pair', (row === first && column === second) || (row === second && column === first));
@@ -236,15 +237,15 @@ export function createMatrices(container, months, comparisons, thresholds, onSel
       const item = make('span', 'matrix-legend-item');
       const tile = make('span', `matrix-legend-tile matrix-band-${index}`);
       tile.setAttribute('aria-hidden', 'true');
-      item.append(tile, make('span', '', `${label} ΔE`));
+      item.append(tile, isolate(`${label} ΔE`));
       return item;
     }));
     variant.textContent = t('matrices.variantLine', { variant: VARIANTS[currentMode] });
-    context.textContent = t('matrices.context', { minimum: num(minimum), month: months[currentMonth].name });
-    currentStats.textContent = summary(comparison.grids.current[measure], minimum);
+    context.replaceChildren(tNodes('matrices.context', { threshold: ltr(`${num(minimum)} ΔE CIE76`), month: months[currentMonth].name }));
+    currentStats.replaceChildren(summary(comparison.grids.current[measure], minimum));
     currentScroll.replaceChildren(drawTable(comparison.grids.current[measure], t('matrices.afterEra'), minimum));
     if (comparison.grids.before) {
-      beforeStats.textContent = summary(comparison.grids.before[measure], minimum);
+      beforeStats.replaceChildren(summary(comparison.grids.before[measure], minimum));
       beforeScroll.replaceChildren(drawTable(comparison.grids.before[measure], t('matrices.beforeEra'), minimum));
       beforeScroll.tabIndex = 0;
     } else {
