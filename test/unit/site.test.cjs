@@ -429,9 +429,12 @@ suite('Landing page left-to-right expressions', () => {
 	test('ratios placed by the build read left to right in every language', () => {
 		for (const locale of locales) {
 			const html = renderPage(template, report, locale, locales);
-			const lowest = `${report.variants.Light.themes.length && Math.min(...Object.values(report.variants).flatMap((v) => v.themes).map((t) => t.contrast.lowestText)).toLocaleString(locale.meta.numberLocale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1`;
+			const value = Math.min(...Object.values(report.variants).flatMap((variant) => variant.themes).map((theme) => theme.contrast.lowestText));
+			const lowest = `${value.toLocaleString(locale.meta.numberLocale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}:1`;
 			assert.ok(html.includes(`<dd><bdi dir="ltr">${lowest}</bdi></dd>`), locale.meta.code);
-			assert.doesNotMatch(html.replace(/<bdi dir="ltr">[^<]*<\/bdi>/g, ''), new RegExp(`(?<!\\d)${lowest.replace(/\./g, '\\.')}`), `${locale.meta.code}: a ratio outside <bdi>`);
+			// Once the isolated ratios are removed, the ratio no longer appears anywhere in the page.
+			const outside = html.split(`<bdi dir="ltr">${lowest}</bdi>`).join('');
+			assert.ok(!outside.includes(lowest), `${locale.meta.code}: a ratio outside <bdi>`);
 		}
 	});
 
