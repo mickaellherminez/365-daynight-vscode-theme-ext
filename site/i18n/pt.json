@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "code": "pt",
+    "name": "Português",
+    "dir": "ltr",
+    "numberLocale": "pt-BR",
+    "dateLocale": "pt-BR",
+    "ogLocale": "pt_BR",
+    "lowercaseInSentence": true
+  },
+  "months": [
+    { "name": "janeiro", "short": "jan." },
+    { "name": "fevereiro", "short": "fev." },
+    { "name": "março", "short": "mar." },
+    { "name": "abril", "short": "abr." },
+    { "name": "maio", "short": "mai." },
+    { "name": "junho", "short": "jun." },
+    { "name": "julho", "short": "jul." },
+    { "name": "agosto", "short": "ago." },
+    { "name": "setembro", "short": "set." },
+    { "name": "outubro", "short": "out." },
+    { "name": "novembro", "short": "nov." },
+    { "name": "dezembro", "short": "dez." }
+  ],
+  "page": {
+    "head": {
+      "title": "365 Day &amp; Night – Temas acessíveis mensais para o VS Code",
+      "description": "48 temas acessíveis para o VS Code, um visual novo a cada mês, com todos os resultados de contraste e de visão de cores publicados.",
+      "ogTitle": "365 Day &amp; Night — Legível. Medido.",
+      "ogDescription": "12 meses. 48 temas acessíveis para o VS Code. Explore cada paleta e as medições por trás dela."
+    },
+    "skip": "Pular para o conteúdo",
+    "header": {
+      "nav": "Navegação principal",
+      "logo": "Escolher mês e tema",
+      "audit": "Relatório de auditoria",
+      "chip": "Mês e tema",
+      "chipAction": ", escolher mês e tema",
+      "language": "Idioma",
+      "languageAction": ", idioma: {{name}}, escolher outro idioma",
+      "languages": "Idiomas"
+    },
+    "hero": {
+      "eyebrow": "Temas do VS Code",
+      "everyMonth": "Todo mês",
+      "title": "Um visual novo a cada mês.",
+      "titleAccent": "Legível. Medido.",
+      "lead": "{{THEMES}} temas de cores acessíveis para o VS Code que alternam entre dia e noite com um clique ou sozinhos. Todos os resultados de contraste e de visão de cores são publicados.",
+      "install": "Instalar pelo Marketplace",
+      "statThemes": "temas",
+      "statChecks": "verificações aprovadas",
+      "statLowest": "menor contraste de texto"
+    },
+    "panel": {
+      "figure": "Fig. 01 · O logo é o controle",
+      "hint": "Escolha um mês e depois um tema",
+      "variants": "Variante do tema",
+      "text": "Texto",
+      "accent": "Destaque"
+    },
+    "editor": {
+      "title": "Leia no seu editor.",
+      "intro": "O mesmo arquivo em <span data-month-name></span>, com <span id=\"compare-day-label\">Light</span> em cima e <span id=\"compare-night-label\">Dark</span> embaixo. Arraste a alça para cima ou para baixo para mover a divisória, ou clique no logo para trocar de tema.",
+      "handle": "Comparar Light e Dark. Use as setas para mover a divisória.",
+      "videoLabel": "No VS Code",
+      "video": "As setas da barra de status mudam o mês de outubro para dezembro, um clique no botão alterna de Light para Dark e um link na dica do botão aplica High Contrast."
+    },
+    "year": {
+      "title": "365 dias, 12 paletas.",
+      "intro": "Light em cima, Dark embaixo e, entre os dois, a cor dos botões do mês. Cada mês usa as cores exatas da extensão. Clique no nome de um mês para aplicá-lo. O marcador indica o dia de hoje.",
+      "region": "As doze paletas mensais",
+      "today": "Voltar ao mês atual",
+      "months": "Escolher um mês"
+    },
+    "variants": {
+      "title": "Quatro temas, um mês.",
+      "intro": "Light, Dark e os dois temas High Contrast são gerados a partir da paleta de <span data-month-name></span>. O contraste do texto e do destaque é medido em cada um. O que está contornado é o ativo.",
+      "group": "Pré-visualizar e escolher uma variante do tema"
+    },
+    "numbers": {
+      "title": "Os números",
+      "themes": "Temas",
+      "themesNote": "12 meses, cada um em Light, Dark, High Contrast e High Contrast Light.",
+      "checks": "Verificações aprovadas",
+      "checksNote": "De {{CHECKS_TOTAL}}, entre {{CHECKS_MIN}} e {{CHECKS_MAX}} por tema.",
+      "lowest": "Menor contraste de texto",
+      "lowestNote": "O mínimo é {{AA_RATIO}}, o nível WCAG AA para texto normal.",
+      "scaleTitle": "Onde fica o par mais baixo",
+      "scaleLabel": "Menor contraste de texto: {{LOWEST_TEXT_NUMBER}} para 1. O WCAG AA começa em {{AA_LEVEL}} para 1 e o AAA em 7 para 1, numa escala de 1 a 21.",
+      "scaleLowest": "Mínimo: {{LOWEST_TEXT_RATIO}}",
+      "audit": "A auditoria roda a cada push e precisa passar antes de cada versão: uma regressão interrompe a publicação. <a href=\"{{AUDIT_URL}}\">Leia o relatório de auditoria completo</a> (em inglês)."
+    },
+    "measures": {
+      "eyebrow": "Explore as medições",
+      "title": "Um tema. Todas as cores.",
+      "legend": "Escolher um tema para os gráficos",
+      "month": "Mês",
+      "variant": "Variante",
+      "syntaxTitle": "Cada cor de sintaxe, medida.",
+      "syntaxIntro": "Cada barra é o contraste do texto sobre o fundo do editor, com as cores exatas de <span data-selection></span>. As marcas mostram os limites de contraste de texto de {{AA_RATIO}} e 7:1.",
+      "syntaxNote": "Contraste = (luminância relativa mais clara + 0,05) / (luminância relativa mais escura + 0,05). As medições valem para essas cores de texto sobre o fundo do editor; elas não certificam toda a interface. <a href=\"{{AUDIT_URL}}\">Método e limites</a> · <a href=\"{{ROOT}}audit-report.json\" download>Baixar os dados da auditoria</a>.",
+      "visionTitle": "Visto por cada tipo de visão.",
+      "visionIntro": "O código de <span data-selection></span> como é simulado para cada tipo de daltonismo, e uma pontuação de 0 a 100 para cada situação de visão. Cerca de 8% dos homens e 0,4% das mulheres de ascendência europeia têm deficiência de visão vermelho-verde [6]. São cálculos, não observações: <a href=\"{{TESTERS_URL}}\">os testes com pessoas reais</a> ainda estão por vir.",
+      "monthlyTitle": "Quão diferentes são os meses?",
+      "monthlyIntro": "Compare as 12 paletas mensais antes e depois da reformulação. Um ΔE maior significa uma diferença de cor maior. As duas grades usam a mesma escala. Escolha uma medida para explorar o fundo ou as cores de sintaxe."
+    },
+    "method": {
+      "title": "Como é feito",
+      "paletteTitle": "Uma paleta por mês",
+      "palette": "Cada mês parte de um clima da estação: geada em janeiro, uma lagoa em julho, folhas de outono em outubro.",
+      "generatedTitle": "Temas gerados",
+      "generated": "Um script constrói os quatro temas de um mês a partir da sua paleta. A CI compara os arquivos publicados com o gerador, byte a byte.",
+      "auditTitle": "Auditoria automática",
+      "audit": "Contraste, visão de cores simulada, estilos de fonte e a diferença entre os meses são medidos em cada tema.",
+      "checkContrast": "Contraste",
+      "checkVision": "Visão de cores simulada",
+      "checkFonts": "Estilos de fonte",
+      "checkMonths": "Diferença entre os meses",
+      "coming": "Em breve",
+      "peopleTitle": "Testes com pessoas reais",
+      "people": "Simulações não substituem olhos de verdade. Esta etapa ainda não foi feita: <a href=\"{{TESTERS_URL}}\">você pode ajudar</a>."
+    },
+    "limits": {
+      "title": "O que estes números não mostram",
+      "intro": "Os mesmos limites do relatório de auditoria, traduzidos do inglês."
+    },
+    "verify": {
+      "title": "Confira você mesmo",
+      "intro": "Cada número desta página vem do repositório. Com Node.js e Python 3, execute:",
+      "commandsLabel": "Comandos para conferir os números você mesmo",
+      "audit": "verificações de contraste e visão de cores dos 48 temas",
+      "variety": "diferença entre os meses",
+      "test": "as ferramentas de medição contra dados de referência publicados",
+      "report": "o relatório de auditoria corresponde aos temas",
+      "site": "esta página, a partir do mesmo relatório",
+      "note": "Os mesmos comandos rodam a cada push e antes de cada versão. <a href=\"{{REPO_URL}}/blob/main/scripts/themes/README.md\">Como as ferramentas funcionam</a> · <a href=\"{{AUDIT_URL}}\">Relatório de auditoria completo</a> · <a href=\"{{ROOT}}audit-report.json\">Dados da auditoria (JSON)</a>"
+    },
+    "references": {
+      "title": "Referências",
+      "machado": "Usado nas simulações de daltonismo e no número de cerca de 200 milhões de pessoas.",
+      "wcag": "Razão de contraste, os níveis 4,5:1 e 7:1, e o uso da cor.",
+      "understanding": "Relaciona 4,5:1 a uma acuidade visual de cerca de 20/40, e 7:1 a cerca de 20/80.",
+      "cie": "CIELAB e a diferença de cor CIE76 usada nos limites.",
+      "sharma": "CIEDE2000, e os dados de teste que verificam as ferramentas.",
+      "birch": "Cerca de 8% dos homens e 0,4% das mulheres de ascendência europeia."
+    },
+    "noscript": "As pré-visualizações interativas precisam de JavaScript. Mesmo assim, você pode assistir à demonstração no VS Code, ler a auditoria e instalar os 48 temas.",
+    "footer": {
+      "license": "Livre e de código aberto, <a href=\"{{LICENSE_URL}}\">licença MIT</a>. Por <a href=\"https://github.com/mickaellherminez\">Mickaël Lherminez</a>."
+    },
+    "dialog": {
+      "close": "Fechar"
+    }
+  },
+  "limits": [
+    "**Ainda não há testes com usuários reais.** O daltonismo e a baixa visão são simulados ou calculados. Nenhum cálculo substitui testes com as pessoas envolvidas, e [comentários são bem-vindos](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).",
+    "**As formas parciais são medidas, não exigidas.** As formas parciais do daltonismo, que são as mais comuns, aparecem nas pontuações para severidades de 0,1 a 0,9. Só as formas completas podem reprovar a auditoria.",
+    "**A acromatopsia é apenas informativa.** Sem cor, muitas cores de sintaxe têm luminosidade parecida, como mostra a tabela. Elas então só se distinguem pelo estilo, quando o tema define um, por exemplo nos comentários e no código obsoleto ou inválido.",
+    "**Os limites são regras do projeto.** As WCAG definem os contrastes mínimos. O limite de distinção de cores (ΔE 12 na escala CIE76) e os limites de variedade são regras práticas escolhidas para este projeto, não normas.",
+    "**CIE76 é uma medida simples.** Os limites se aplicam ao CIE76. O CIEDE2000 é mais próximo da percepção, sobretudo nos azuis e nas cores pouco saturadas, por isso aparece ao lado, a título informativo. Ele usa outra escala, e os limites não estão calibrados para ele.",
+    "**Apenas contraste WCAG 2.** O APCA, o modelo de contraste em rascunho para as WCAG 3, não é aplicado.",
+    "**Cores, não renderização.** A auditoria lê os arquivos dos temas. Ela verifica os pares de cores listados no seu código, com um escopo TextMate por categoria de token. Não analisa uma janela renderizada, a suavização de fontes nem a sua tela.",
+    "**Nem todas as cores do VS Code.** Um tema define cerca de 485 das aproximadamente 970 cores documentadas pelo VS Code. As demais usam os padrões do VS Code, e só as das superfícies recentes são auditadas, como estão no VS Code 1.145. Uma versão futura pode alterá-las.",
+    "**Outras condições não são modeladas.** Não há pontuação para catarata, glaucoma ou degeneração macular, porque nenhum modelo confiável é usado aqui."
+  ],
+  "js": {
+    "app": {
+      "compareLabel": "Comparar {{day}} e {{night}}. Use as setas para mover a divisória.",
+      "compareValue": "{{day}} em cima, {{night}} embaixo. Divisória em {{percent}} por cento.",
+      "applyVariant": ". Aplicar {{variant}} de {{month}}",
+      "variantStat": "Texto {{text}} · Destaque {{accent}}",
+      "status": "{{month}}, {{variant}}. Contraste do texto {{text}}. Contraste do destaque {{accent}}.",
+      "monthButton": "{{short}}: aplicar {{month}}",
+      "today": "Hoje · {{date}}",
+      "todayLabel": "{{today}}: voltar ao mês atual, {{month}}"
+    },
+    "picker": {
+      "label": "Logo: doze meses ao redor de um disco de quatro temas. Escolha um mês no anel e um tema no disco.",
+      "month": "Paleta de {{month}}",
+      "theme": "Tema {{variant}}",
+      "outerLeft": "Externo esquerdo",
+      "coreLeft": "Centro esquerdo",
+      "outerRight": "Externo direito",
+      "coreRight": "Centro direito"
+    },
+    "contrast": {
+      "roles": {
+        "keyword": "Palavra-chave",
+        "function": "Função",
+        "string": "String",
+        "number": "Número",
+        "class": "Classe / tipo",
+        "comment": "Comentário",
+        "variable": "Variável",
+        "operator": "Operador",
+        "punctuation": "Pontuação",
+        "tag": "Tag",
+        "attribute": "Atributo",
+        "regex": "Expressão regular",
+        "JSON key": "Chave JSON",
+        "invalid": "Código inválido"
+      },
+      "region": "Contraste do texto da sintaxe. Numa tela pequena, role na horizontal para ver todas as colunas.",
+      "role": "Papel na sintaxe",
+      "color": "Cor exata",
+      "scale": "Contraste numa escala de 1:1 a 21:1",
+      "level": "Razão / nível",
+      "axis": "Contraste do texto",
+      "scrollHint": "Numa tela pequena, role o gráfico na horizontal para ver todos os valores.",
+      "caption": "{{theme}}: cores exatas da sintaxe e contraste do texto sobre {{background}}.",
+      "both": "AA + AAA",
+      "aa": "AA",
+      "below": "Abaixo de AA",
+      "summary": "{{aa}} de {{total}} cores de sintaxe atingem {{aaRatio}} (AA). {{aaa}} de {{total}} atingem {{aaaRatio}} (AAA). Fundo do editor: {{background}}."
+    },
+    "vision": {
+      "views": {
+        "normal": "Visão normal",
+        "protanopia": "Protanopia",
+        "deuteranopia": "Deuteranopia",
+        "tritanopia": "Tritanopia",
+        "achromatopsia": "Acromatopsia"
+      },
+      "scores": {
+        "protanopia": { "label": "Protanopia", "formula": "Proporção dos 21 pares das principais cores de sintaxe que ficam a pelo menos ΔE {{d}} de distância, simulados na severidade máxima." },
+        "deuteranopia": { "label": "Deuteranopia", "formula": "Mesmo cálculo, para a deuteranopia." },
+        "tritanopia": { "label": "Tritanopia", "formula": "Mesmo cálculo, para a tritanopia." },
+        "protanomaly": { "label": "Protanomalia (parcial)", "formula": "Mesmo cálculo para severidades de 0,1 a 0,9, mantendo o resultado mais baixo." },
+        "deuteranomaly": { "label": "Deuteranomalia (parcial)", "formula": "Igual, para a deuteranopia parcial." },
+        "tritanomaly": { "label": "Tritanomalia (parcial)", "formula": "Igual, para a tritanopia parcial." },
+        "achromatopsia": { "label": "Acromatopsia", "formula": "Proporção dos mesmos pares que ficam a pelo menos ΔE {{d}} de distância apenas pela luminosidade." },
+        "lowVision20/40": { "label": "Baixa visão 20/40", "formula": "Proporção das verificações de texto com {{aa}} ou mais." },
+        "lowVision20/80": { "label": "Baixa visão 20/80", "formula": "Proporção das verificações de texto com {{aaa}} ou mais." }
+      },
+      "luminanceRef": "Luminância relativa do sRGB",
+      "group": "Escolher uma visão simulada",
+      "region": "Pontuações de visão. Numa tela pequena, role na horizontal para ver todas as colunas.",
+      "situation": "Situação de visão",
+      "score": "Pontuação de 0 a 100",
+      "formula": "Fórmula",
+      "reference": "Referência",
+      "note": "As pontuações ajudam a escolher um tema para a sua visão. Uma pontuação de 100 significa que cada par ou verificação de texto cumpre a regra, não que o tema sirva para todo mundo.",
+      "normal": "{{theme}}, como foi projetado.",
+      "simulated": "{{theme}}, simulado para a {{vision}}: pontuação {{score}} de 100.",
+      "caption": "{{theme}}: pontuações de visão de 0 a 100, com fórmula e referência."
+    },
+    "matrices": {
+      "background": "Fundo do editor",
+      "syntax": "Sintaxe · seis papéis",
+      "compare": "Comparar",
+      "measure": "Medida da diferença entre os meses",
+      "legend": "Escala comum de distância de cor",
+      "before": "Antes · 0.12.0",
+      "now": "Agora · 1.0.0",
+      "beforeRegion": "Antes da reformulação",
+      "afterRegion": "Depois da reformulação",
+      "region": "{{label}}: tabela de distâncias de cor entre os meses. Role na horizontal se necessário.",
+      "firstMonth": "Primeiro mês",
+      "secondMonth": "Segundo mês",
+      "selectLabel": "{{label}} na comparação mensal",
+      "applyFirst": "Aplicar o primeiro mês",
+      "readPair": "Ler um par",
+      "methodTitle": "Como essas distâncias são medidas",
+      "method1": "Distância CIE76 em CIELAB: ΔE = √((ΔL*)² + (Δa*)² + (Δb*)²). O fundo do editor compara editor.background diretamente. A sintaxe é a média aritmética das seis distâncias de keyword, function, string, number, class e comment, comparando cada papel com o mesmo papel do outro mês.",
+      "method2": "A diagonal compara um mês com ele mesmo. Cada tabela contém 66 pares únicos; a outra metade os repete. Os valores são arredondados para uma casa decimal na exportação da auditoria. As faixas sombreadas e a distância mínima são regras de variedade do projeto, não requisitos das WCAG nem garantia do que cada pessoa vai perceber.",
+      "sourceLink": "Medições e limites",
+      "scriptLink": "Cálculo da variedade",
+      "dataLink": "Baixar o JSON da auditoria",
+      "summary": "Média {{mean}} ΔE · {{below}}/{{total}} pares abaixo de {{minimum}}",
+      "caption": "{{era}}, {{variant}}, {{measure}}. Diferenças entre os meses em ΔE CIE76.",
+      "corner": "Mês",
+      "same": "Mesmo mês",
+      "cell": "{{first}} / {{second}}: {{value}} ΔE CIE76",
+      "cellBelow": "{{first}} / {{second}}: {{value}} ΔE CIE76, abaixo do limite do projeto de {{minimum}}",
+      "belowShort": ", abaixo do limite do projeto",
+      "pairSame": "{{names}}: o mesmo mês, ΔE {{zero}}.",
+      "pair": "{{names}} · {{variant}} · {{measure}}. Antes: {{before}}. Agora: {{now}}.",
+      "noEarlier": "sem variante anterior",
+      "distance": "{{value}} ΔE",
+      "apply": "Aplicar {{month}}",
+      "applyTitle": "Aplicar {{month}} ao site",
+      "variantLine": "{{variant}} · visão normal",
+      "context": "Mínimo do projeto: {{minimum}} ΔE CIE76. As células hachuradas ficam abaixo dele. A linha e a coluna contornadas são de {{month}}.",
+      "afterEra": "Depois da reformulação, versão 1.0.0",
+      "beforeEra": "Antes da reformulação, versão 0.12.0",
+      "noEarlierTitle": "Sem variante anterior",
+      "noBaseline": "O High Contrast Light não existia na versão 0.12.0, então não há paleta anterior para comparar."
+    }
+  }
+}

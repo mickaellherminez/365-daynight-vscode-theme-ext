@@ -16,7 +16,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 也可以从 [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) 或 [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext) 安装。需要 VS Code 1.96 或更高版本。
 
-在[网站](https://365daynight.mickaellherminez.net)上预览每个月份和每种变体，并以图表形式查看审核结果（英文）。
+在[网站](https://365daynight.mickaellherminez.net/zh/)上预览每个月份和每种变体，并以图表形式查看审核结果。
 
 *其他语言：[English](../README.md) · [Français](README_fr.md) · [Español](README_es.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 

@@ -329,23 +329,26 @@ const WIDE_LABELS = `<g pointer-events="none">
 <text x="-24" y="170" text-anchor="end" font-size="32" font-weight="{{fd.w}}" font-family="{{fd.fam}}" letter-spacing="-.3" fill="{{c.ink}}">
 <tspan x="-24" dy="0">Light</tspan>
 </text>
-<text x="-24" y="202" text-anchor="end" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}">OUTER LEFT</text>
+<text x="-24" y="202" text-anchor="end" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}" data-zone-label="outerLeft"></text>
 <text x="-24" y="350" text-anchor="end" font-size="32" font-weight="{{fd.w}}" font-family="{{fd.fam}}" letter-spacing="-.3" fill="{{c.ink}}">
 <tspan x="-24" dy="0">High Contrast</tspan>
 <tspan x="-24" dy="34">Light</tspan>
 </text>
-<text x="-24" y="416" text-anchor="end" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}">CORE LEFT</text>
+<text x="-24" y="416" text-anchor="end" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}" data-zone-label="coreLeft"></text>
 <text x="536" y="170" text-anchor="start" font-size="32" font-weight="{{fd.w}}" font-family="{{fd.fam}}" letter-spacing="-.3" fill="{{c.ink}}">
 <tspan x="536" dy="0">Dark</tspan>
 </text>
-<text x="536" y="202" text-anchor="start" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}">OUTER RIGHT</text>
+<text x="536" y="202" text-anchor="start" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}" data-zone-label="outerRight"></text>
 <text x="536" y="350" text-anchor="start" font-size="32" font-weight="{{fd.w}}" font-family="{{fd.fam}}" letter-spacing="-.3" fill="{{c.ink}}">
 <tspan x="536" dy="0">High Contrast</tspan>
 </text>
-<text x="536" y="382" text-anchor="start" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}">CORE RIGHT</text>
+<text x="536" y="382" text-anchor="start" font-size="19" letter-spacing="2.2" font-family="JetBrains Mono, ui-monospace, monospace" fill="{{c.muted}}" data-zone-label="coreRight"></text>
 </g>`;
 
+import { t } from './i18n.js';
+
 const MODES = ['light', 'dark', 'hcLight', 'hcDark'];
+const MODE_NAMES = { light: 'Light', dark: 'Dark', hcLight: 'High Contrast Light', hcDark: 'High Contrast' };
 
 // Keyboard focus rings follow each shape instead of the browser's rectangular outline.
 // They appear only after keyboard input, never after a click or a tap.
@@ -395,11 +398,28 @@ function luminance(hex) {
  */
 export function createPicker(container, months, onChange) {
   if (months.length !== 12) throw new Error('The logo picker requires twelve months.');
-  const label = 'Logo: twelve months around a disc of four themes. Choose a month on the ring, a theme on the disc.';
+  const label = t('picker.label');
   container.innerHTML = `
-    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`w${pickerCount}`)}${WIDE_LABELS}</svg>
-    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`c${pickerCount}`)}</svg>`;
+    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group">${artwork(`w${pickerCount}`)}${WIDE_LABELS}</svg>
+    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group">${artwork(`c${pickerCount}`)}</svg>`;
   pickerCount += 1;
+  // Translated text is set as an attribute, never parsed as HTML.
+  for (const svg of container.querySelectorAll('svg.pk')) svg.setAttribute('aria-label', label);
+  // Names of the months and positions in the page language; theme names stay those of VS Code.
+  for (const control of container.querySelectorAll('[data-picker-month]')) {
+    const name = months[Number(control.getAttribute('data-picker-month'))].name;
+    control.setAttribute('aria-label', t('picker.month', { month: name }));
+    control.querySelector('title').textContent = name;
+  }
+  const POSITIONS = { light: 'outerLeft', dark: 'outerRight', hcLight: 'coreLeft', hcDark: 'coreRight' };
+  for (const control of container.querySelectorAll('[data-picker-mode]')) {
+    const key = control.getAttribute('data-picker-mode');
+    control.setAttribute('aria-label', t('picker.theme', { variant: MODE_NAMES[key] }));
+    control.querySelector('title').textContent = `${MODE_NAMES[key]} · ${t(`picker.${POSITIONS[key]}`)}`;
+  }
+  for (const text of container.querySelectorAll('[data-zone-label]')) {
+    text.textContent = t(`picker.${text.getAttribute('data-zone-label')}`).toLocaleUpperCase(document.documentElement.lang);
+  }
 
   const bindings = [];
   for (const node of container.querySelectorAll('*')) {

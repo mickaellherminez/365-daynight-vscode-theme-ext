@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "code": "zh",
+    "name": "中文",
+    "dir": "ltr",
+    "numberLocale": "zh-CN",
+    "dateLocale": "zh-CN",
+    "ogLocale": "zh_CN",
+    "lowercaseInSentence": false
+  },
+  "months": [
+    { "name": "一月", "short": "1月" },
+    { "name": "二月", "short": "2月" },
+    { "name": "三月", "short": "3月" },
+    { "name": "四月", "short": "4月" },
+    { "name": "五月", "short": "5月" },
+    { "name": "六月", "short": "6月" },
+    { "name": "七月", "short": "7月" },
+    { "name": "八月", "short": "8月" },
+    { "name": "九月", "short": "9月" },
+    { "name": "十月", "short": "10月" },
+    { "name": "十一月", "short": "11月" },
+    { "name": "十二月", "short": "12月" }
+  ],
+  "page": {
+    "head": {
+      "title": "365 Day &amp; Night – 每月更新的 VS Code 无障碍主题",
+      "description": "48 款 VS Code 无障碍主题，每月焕然一新，并公开全部对比度与色觉检测结果。",
+      "ogTitle": "365 Day &amp; Night — 清晰易读，有据可查。",
+      "ogDescription": "12 个月，48 款 VS Code 无障碍主题。探索每一套配色及其背后的测量数据。"
+    },
+    "skip": "跳到正文",
+    "header": {
+      "nav": "主导航",
+      "logo": "选择月份和主题",
+      "audit": "审计报告",
+      "chip": "月份和主题",
+      "chipAction": "，选择月份和主题",
+      "language": "语言",
+      "languageAction": "，语言：{{name}}，选择其他语言",
+      "languages": "语言"
+    },
+    "hero": {
+      "eyebrow": "VS Code 主题",
+      "everyMonth": "每个月",
+      "title": "每个月，焕然一新。",
+      "titleAccent": "清晰易读，有据可查。",
+      "lead": "{{THEMES}} 款 VS Code 无障碍配色主题，一键或自动在白天与夜晚之间切换。所有对比度和色觉检测结果均已公开。",
+      "install": "从 Marketplace 安装",
+      "statThemes": "款主题",
+      "statChecks": "项检查通过",
+      "statLowest": "最低文本对比度"
+    },
+    "panel": {
+      "figure": "图 01 · 标志就是控件",
+      "hint": "先选月份，再选主题",
+      "variants": "主题变体",
+      "text": "文本",
+      "accent": "强调色"
+    },
+    "editor": {
+      "title": "在你的编辑器中阅读。",
+      "intro": "同一个文件，月份为<span data-month-name></span>，上方是 <span id=\"compare-day-label\">Light</span>，下方是 <span id=\"compare-night-label\">Dark</span>。上下拖动手柄可移动分隔线，点击标志可切换主题。",
+      "handle": "比较 Light 和 Dark。使用方向键移动分隔线。",
+      "videoLabel": "在 VS Code 中",
+      "video": "状态栏的箭头将月份从十月切换到十二月，点击按钮从 Light 切换到 Dark，按钮工具提示中的链接应用 High Contrast。"
+    },
+    "year": {
+      "title": "365 天，12 套配色。",
+      "intro": "上方是 Light，下方是 Dark，中间是当月按钮的颜色。每个月都使用扩展中的精确颜色。点击月份名称即可应用。标记表示今天。",
+      "region": "十二个月的配色",
+      "today": "回到当前月份",
+      "months": "选择月份"
+    },
+    "variants": {
+      "title": "一个月，四款主题。",
+      "intro": "Light、Dark 和两款 High Contrast 主题都由<span data-month-name></span>的配色生成。每款主题都测量了文本和强调色的对比度。带边框的是当前主题。",
+      "group": "预览并选择主题变体"
+    },
+    "numbers": {
+      "title": "数据",
+      "themes": "主题",
+      "themesNote": "12 个月，每月都有 Light、Dark、High Contrast 和 High Contrast Light。",
+      "checks": "通过的检查",
+      "checksNote": "共 {{CHECKS_TOTAL}} 项，每款主题 {{CHECKS_MIN}} 到 {{CHECKS_MAX}} 项。",
+      "lowest": "最低文本对比度",
+      "lowestNote": "最低要求为 {{AA_RATIO}}，即 WCAG AA 对普通文本的要求。",
+      "scaleTitle": "最低的一对颜色在哪里",
+      "scaleLabel": "最低文本对比度为 {{LOWEST_TEXT_NUMBER}} 比 1。在 1 到 21 的刻度上，WCAG AA 从 {{AA_LEVEL}} 比 1 开始，AAA 从 7 比 1 开始。",
+      "scaleLowest": "最低：{{LOWEST_TEXT_RATIO}}",
+      "audit": "每次推送都会运行审计，每次发布前都必须通过：任何退步都会阻止发布。<a href=\"{{AUDIT_URL}}\">阅读完整审计报告</a>（英文）。"
+    },
+    "measures": {
+      "eyebrow": "探索测量数据",
+      "title": "一款主题，所有颜色。",
+      "legend": "为图表选择主题",
+      "month": "月份",
+      "variant": "变体",
+      "syntaxTitle": "每种语法颜色，都经过测量。",
+      "syntaxIntro": "每个条形表示文本与编辑器背景之间的对比度，使用 <span data-selection></span> 的精确颜色。标记显示 {{AA_RATIO}} 和 7:1 两个文本对比度阈值。",
+      "syntaxNote": "对比度 = (较亮颜色的相对亮度 + 0.05) / (较暗颜色的相对亮度 + 0.05)。这些测量只针对编辑器背景上的这些文本颜色，并不代表对整个界面的认证。<a href=\"{{AUDIT_URL}}\">方法与局限</a> · <a href=\"{{ROOT}}audit-report.json\" download>下载审计数据</a>。",
+      "visionTitle": "从每一种视觉看过去。",
+      "visionIntro": "<span data-selection></span> 的代码在每种色盲模拟下的样子，以及每种视觉情况的百分制得分。欧洲血统人群中约 8% 的男性和 0.4% 的女性有红绿色觉缺陷 [6]。这些是计算结果，不是观察结果：<a href=\"{{TESTERS_URL}}\">真人测试</a>尚未进行。",
+      "monthlyTitle": "各个月份有多不同？",
+      "monthlyIntro": "比较重新设计前后的 12 套月度配色。ΔE 越大，颜色差异越大。两个网格使用相同的刻度。选择一种测量方式，查看背景色或语法颜色。"
+    },
+    "method": {
+      "title": "如何构建",
+      "paletteTitle": "每月一套配色",
+      "palette": "每个月都从一种季节氛围出发：一月的霜，七月的泻湖，十月的秋叶。",
+      "generatedTitle": "自动生成的主题",
+      "generated": "脚本根据一个月的配色生成该月的四款主题。CI 会逐字节比较已发布的文件与生成器的输出。",
+      "auditTitle": "自动审计",
+      "audit": "每款主题都会测量对比度、模拟色觉、字体样式以及月份之间的差异。",
+      "checkContrast": "对比度",
+      "checkVision": "模拟色觉",
+      "checkFonts": "字体样式",
+      "checkMonths": "月份之间的差异",
+      "coming": "即将进行",
+      "peopleTitle": "真人测试",
+      "people": "模拟无法代替真实的眼睛。这一步尚未完成：<a href=\"{{TESTERS_URL}}\">欢迎你来帮忙</a>。"
+    },
+    "limits": {
+      "title": "这些数字没有体现什么",
+      "intro": "与审计报告中的局限相同，译自英文原文。"
+    },
+    "verify": {
+      "title": "亲自验证",
+      "intro": "本页的每个数字都来自代码仓库。安装 Node.js 和 Python 3 后运行：",
+      "commandsLabel": "亲自验证这些数字的命令",
+      "audit": "48 款主题的对比度和色觉检查",
+      "variety": "月份之间的差异",
+      "test": "用已发表的参考数据检验测量工具",
+      "report": "审计报告与主题一致",
+      "site": "根据同一份报告生成本页",
+      "note": "每次推送和每次发布前都会运行相同的命令。<a href=\"{{REPO_URL}}/blob/main/scripts/themes/README.md\">工具的工作原理</a> · <a href=\"{{AUDIT_URL}}\">完整审计报告</a> · <a href=\"{{ROOT}}audit-report.json\">审计数据（JSON）</a>"
+    },
+    "references": {
+      "title": "参考文献",
+      "machado": "用于色盲模拟，以及约 2 亿人这一数字。",
+      "wcag": "对比度、4.5:1 和 7:1 两个级别，以及颜色的使用。",
+      "understanding": "将 4.5:1 对应于约 20/40 的视力，将 7:1 对应于约 20/80。",
+      "cie": "CIELAB 以及阈值所用的 CIE76 色差。",
+      "sharma": "CIEDE2000，以及用于检验工具的测试数据。",
+      "birch": "欧洲血统人群中约 8% 的男性和 0.4% 的女性。"
+    },
+    "noscript": "交互式预览需要 JavaScript。你仍然可以观看 VS Code 演示、阅读审计报告并安装全部 48 款主题。",
+    "footer": {
+      "license": "免费开源，<a href=\"{{LICENSE_URL}}\">MIT 许可证</a>。作者：<a href=\"https://github.com/mickaellherminez\">Mickaël Lherminez</a>。"
+    },
+    "dialog": {
+      "close": "关闭"
+    }
+  },
+  "limits": [
+    "**尚未进行真实用户测试。** 色盲和低视力是通过模拟或计算得出的。任何计算都无法代替与相关人群一起进行的测试，[欢迎反馈](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。",
+    "**部分色盲只测量，不作为强制要求。** 最常见的部分色盲出现在严重程度 0.1 到 0.9 的得分中。只有完全色盲才可能导致审计失败。",
+    "**全色盲仅供参考。** 如表所示，没有颜色时，许多语法颜色的明度相近。这时它们只能靠样式区分（前提是主题设置了样式），例如注释、已弃用代码和无效代码。",
+    "**阈值是项目规则。** 对比度最低要求由 WCAG 规定。颜色区分阈值（CIE76 刻度上 ΔE 12）和差异度阈值是为本项目选定的实用规则，并非标准。",
+    "**CIE76 是一种简单的度量。** 阈值适用于 CIE76。CIEDE2000 更接近人的感知，尤其是对蓝色和低饱和度颜色，因此在旁边列出以供参考。它使用另一种刻度，阈值并未针对它校准。",
+    "**仅采用 WCAG 2 对比度。** 未采用 APCA（为 WCAG 3 起草的对比度模型）。",
+    "**检查的是颜色，而不是渲染效果。** 审计读取主题文件，按代码中列出的颜色对进行检查，每个标记类别对应一个 TextMate 作用域。它不检查实际渲染的窗口、抗锯齿效果或你的显示器。",
+    "**并非 VS Code 的所有颜色。** 一款主题定义了 VS Code 文档中约 970 种颜色里的约 485 种。其余颜色使用 VS Code 的默认值，只有较新界面部分的默认值会按 VS Code 1.145 中的样子接受审计。未来版本可能会更改它们。",
+    "**未对其他眼疾建模。** 没有白内障、青光眼或黄斑变性的得分，因为这里没有使用可靠的模型。"
+  ],
+  "js": {
+    "app": {
+      "compareLabel": "比较 {{day}} 和 {{night}}。使用方向键移动分隔线。",
+      "compareValue": "上方 {{day}}，下方 {{night}}。分隔线位于 {{percent}}%。",
+      "applyVariant": "。应用{{month}}的 {{variant}}",
+      "variantStat": "文本 {{text}} · 强调色 {{accent}}",
+      "status": "{{month}}，{{variant}}。文本对比度 {{text}}。强调色对比度 {{accent}}。",
+      "monthButton": "{{short}}：应用{{month}}",
+      "today": "今天 · {{date}}",
+      "todayLabel": "{{today}}：回到当前月份，{{month}}"
+    },
+    "picker": {
+      "label": "标志：十二个月环绕着一个由四款主题组成的圆盘。在外环上选择月份，在圆盘上选择主题。",
+      "month": "{{month}}配色",
+      "theme": "主题 {{variant}}",
+      "outerLeft": "外圈左侧",
+      "coreLeft": "中心左侧",
+      "outerRight": "外圈右侧",
+      "coreRight": "中心右侧"
+    },
+    "contrast": {
+      "roles": {
+        "keyword": "关键字",
+        "function": "函数",
+        "string": "字符串",
+        "number": "数字",
+        "class": "类 / 类型",
+        "comment": "注释",
+        "variable": "变量",
+        "operator": "运算符",
+        "punctuation": "标点",
+        "tag": "标签",
+        "attribute": "属性",
+        "regex": "正则表达式",
+        "JSON key": "JSON 键",
+        "invalid": "无效代码"
+      },
+      "region": "语法文本对比度。在小屏幕上可横向滚动查看所有列。",
+      "role": "语法角色",
+      "color": "精确颜色",
+      "scale": "1:1–21:1 刻度上的对比度",
+      "level": "比值 / 级别",
+      "axis": "文本对比度",
+      "scrollHint": "在小屏幕上，横向滚动图表即可查看所有数值。",
+      "caption": "{{theme}}：精确的语法颜色及其相对于 {{background}} 的文本对比度。",
+      "both": "AA + AAA",
+      "aa": "AA",
+      "below": "低于 AA",
+      "summary": "{{total}} 种语法颜色中有 {{aa}} 种达到 {{aaRatio}}（AA）。{{total}} 种中有 {{aaa}} 种达到 {{aaaRatio}}（AAA）。编辑器背景：{{background}}。"
+    },
+    "vision": {
+      "views": {
+        "normal": "正常视觉",
+        "protanopia": "红色盲",
+        "deuteranopia": "绿色盲",
+        "tritanopia": "蓝色盲",
+        "achromatopsia": "全色盲"
+      },
+      "scores": {
+        "protanopia": { "label": "红色盲", "formula": "在完全严重程度模拟下，21 对主要语法颜色中色差仍至少为 ΔE {{d}} 的比例。" },
+        "deuteranopia": { "label": "绿色盲", "formula": "同样的计算，针对绿色盲。" },
+        "tritanopia": { "label": "蓝色盲", "formula": "同样的计算，针对蓝色盲。" },
+        "protanomaly": { "label": "红色弱（部分）", "formula": "在严重程度 0.1 到 0.9 下进行同样的计算，取最低结果。" },
+        "deuteranomaly": { "label": "绿色弱（部分）", "formula": "同上，针对部分绿色盲。" },
+        "tritanomaly": { "label": "蓝色弱（部分）", "formula": "同上，针对部分蓝色盲。" },
+        "achromatopsia": { "label": "全色盲", "formula": "同样的颜色对中，仅凭明度仍相差至少 ΔE {{d}} 的比例。" },
+        "lowVision20/40": { "label": "低视力 20/40", "formula": "文本检查中对比度达到 {{aa}} 或以上的比例。" },
+        "lowVision20/80": { "label": "低视力 20/80", "formula": "文本检查中对比度达到 {{aaa}} 或以上的比例。" }
+      },
+      "luminanceRef": "sRGB 相对亮度",
+      "group": "选择模拟视觉",
+      "region": "视觉得分。在小屏幕上可横向滚动查看所有列。",
+      "situation": "视觉情况",
+      "score": "得分（满分 100）",
+      "formula": "公式",
+      "reference": "参考",
+      "note": "这些得分可帮助你选择适合自己视觉的主题。100 分表示每一对颜色或每项文本检查都符合规则，并不表示该主题适合所有人。",
+      "normal": "{{theme}}，原始设计效果。",
+      "simulated": "{{theme}}，{{vision}}模拟：得分 {{score}}（满分 100）。",
+      "caption": "{{theme}}：视觉得分（满分 100），附公式和参考。"
+    },
+    "matrices": {
+      "background": "编辑器背景",
+      "syntax": "语法 · 六种角色",
+      "compare": "比较",
+      "measure": "月份差异的测量方式",
+      "legend": "共用的色差刻度",
+      "before": "之前 · 0.12.0",
+      "now": "现在 · 1.0.0",
+      "beforeRegion": "重新设计之前",
+      "afterRegion": "重新设计之后",
+      "region": "{{label}}：月份色差表。必要时可横向滚动。",
+      "firstMonth": "第一个月",
+      "secondMonth": "第二个月",
+      "selectLabel": "月份比较中的{{label}}",
+      "applyFirst": "应用第一个月",
+      "readPair": "查看一对月份",
+      "methodTitle": "这些色差如何测量",
+      "method1": "CIELAB 中的 CIE76 距离：ΔE = √((ΔL*)² + (Δa*)² + (Δb*)²)。编辑器背景直接比较 editor.background。语法是 keyword、function、string、number、class 和 comment 六个距离的算术平均值，每个角色都与另一个月的同一角色比较。",
+      "method2": "对角线是一个月与自身的比较。每张表包含 66 对不重复的组合，另一半是重复的。审计导出中的数值保留一位小数。阴影区间和最小距离是本项目关于差异度的规则，不是 WCAG 的要求，也不能保证每个人的感知。",
+      "sourceLink": "测量与局限",
+      "scriptLink": "差异度计算",
+      "dataLink": "下载审计 JSON",
+      "summary": "平均 {{mean}} ΔE · {{below}}/{{total}} 对低于 {{minimum}}",
+      "caption": "{{era}}，{{variant}}，{{measure}}。以 ΔE CIE76 表示的月份差异。",
+      "corner": "月份",
+      "same": "同一月份",
+      "cell": "{{first}} / {{second}}：{{value}} ΔE CIE76",
+      "cellBelow": "{{first}} / {{second}}：{{value}} ΔE CIE76，低于项目阈值 {{minimum}}",
+      "belowShort": "，低于项目阈值",
+      "pairSame": "{{names}}：同一月份，ΔE {{zero}}。",
+      "pair": "{{names}} · {{variant}} · {{measure}}。之前：{{before}}。现在：{{now}}。",
+      "noEarlier": "没有更早的变体",
+      "distance": "{{value}} ΔE",
+      "apply": "应用{{month}}",
+      "applyTitle": "将{{month}}应用到网站",
+      "variantLine": "{{variant}} · 正常视觉",
+      "context": "项目最低值：{{minimum}} ΔE CIE76。带斜线的单元格低于该值。带边框的行和列是{{month}}。",
+      "afterEra": "重新设计之后，版本 1.0.0",
+      "beforeEra": "重新设计之前，版本 0.12.0",
+      "noEarlierTitle": "没有更早的变体",
+      "noBaseline": "0.12.0 版本中还没有 High Contrast Light，因此没有更早的配色可供比较。"
+    }
+  }
+}

@@ -61,7 +61,7 @@ module.exports = [
     files: ['site/**/*.js'],
     languageOptions: {
       sourceType: 'module',
-      globals: { document: 'readonly', window: 'readonly' }
+      globals: { document: 'readonly', window: 'readonly', URL: 'readonly' }
     }
   },
   {

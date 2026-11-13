@@ -16,7 +16,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 O instálala desde el [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext) o [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext). Requiere VS Code 1.96 o posterior.
 
-Previsualiza cada mes y cada variante, y consulta la auditoría en gráficos, en [el sitio web](https://365daynight.mickaellherminez.net) (en inglés).
+Previsualiza cada mes y cada variante, y consulta la auditoría en gráficos, en [el sitio web](https://365daynight.mickaellherminez.net/es/).
 
 *Leer esta página en: [English](../README.md) · [Français](README_fr.md) · [Deutsch](README_de.md) · [Português](README_pt.md) · [Русский](README_ru.md) · [中文](README_zh.md) · [日本語](README_ja.md) · [हिंदी](README_hi.md) · [العربية](README_ar.md)*
 
