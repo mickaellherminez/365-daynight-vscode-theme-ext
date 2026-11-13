@@ -400,9 +400,11 @@ export function createPicker(container, months, onChange) {
   if (months.length !== 12) throw new Error('The logo picker requires twelve months.');
   const label = t('picker.label');
   container.innerHTML = `
-    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`w${pickerCount}`)}${WIDE_LABELS}</svg>
-    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group" aria-label="${label}">${artwork(`c${pickerCount}`)}</svg>`;
+    <svg class="pk pk-wide" viewBox="-300 -12 1112 544" width="100%" style="display:block; height:auto; color:{{c.ink}}" role="group">${artwork(`w${pickerCount}`)}${WIDE_LABELS}</svg>
+    <svg class="pk pk-compact" viewBox="-12 -12 536 536" width="100%" style="height:auto; max-width:480px; margin:0 auto; color:{{c.ink}}" role="group">${artwork(`c${pickerCount}`)}</svg>`;
   pickerCount += 1;
+  // Translated text is set as an attribute, never parsed as HTML.
+  for (const svg of container.querySelectorAll('svg.pk')) svg.setAttribute('aria-label', label);
   // Names of the months and positions in the page language; theme names stay those of VS Code.
   for (const control of container.querySelectorAll('[data-picker-month]')) {
     const name = months[Number(control.getAttribute('data-picker-month'))].name;
