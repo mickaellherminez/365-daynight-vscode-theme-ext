@@ -1,6 +1,6 @@
 # 365 Day & Night – Monthly Accessible Themes
 
-**Новый облик VS Code каждый месяц: 48 цветовых тем с измеренным контрастом, которые переключаются между днём и ночью одним кликом или сами.**
+**Новый облик VS Code каждый месяц: 48 тем, созданных с упором на доступность и с измеренным контрастом, которые переключаются между днём и ночью одним кликом или сами.**
 
 [![Версия в Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![Установки](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
