@@ -107,7 +107,8 @@ export function setName(node, name) {
   if (before?.nodeType === Node.TEXT_NODE) {
     if (!fullForms.has(before)) fullForms.set(before, before.data);
     const text = elide(fullForms.get(before), name);
-    if (before.data !== text) before.data = text;
+    // A text node holds plain text: replaceData() changes its characters, never markup.
+    if (before.data !== text) before.replaceData(0, before.length, text);
   }
   node.textContent = name;
 }

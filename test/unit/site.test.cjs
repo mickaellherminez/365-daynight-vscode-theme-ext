@@ -506,6 +506,8 @@ suite('Landing page translated sentences', () => {
 	const vm = require('vm');
 	const source = fs.readFileSync(path.join(__dirname, '../../site/i18n.js'), 'utf8').replace(/^export /gm, '');
 	// site/i18n.js as the page runs it, with the data the build places in <script id="i18n">.
+	// A text node of the page, with the two members setName() uses.
+	const textNode = (data) => ({ nodeType: 3, data, get length() { return this.data.length; }, replaceData(offset, count, text) { this.data = this.data.slice(0, offset) + text + this.data.slice(offset + count); } });
 	const helpers = (code) => {
 		const locale = loadLocale(code);
 		const data = JSON.stringify({ meta: locale.meta, months: locale.months, js: locale.js });
@@ -536,13 +538,13 @@ suite('Landing page translated sentences', () => {
 
 	test('a month name written into the page elides the word before it, and gives it back for the next month', () => {
 		const fr = helpers('fr');
-		const before = { nodeType: 3, data: 'la palette de ' };
+		const before = textNode('la palette de ');
 		const node = { previousSibling: before, textContent: '' };
 		fr.setName(node, 'octobre');
 		assert.deepStrictEqual([before.data, node.textContent], ['la palette d’', 'octobre']);
 		fr.setName(node, 'mars');
 		assert.deepStrictEqual([before.data, node.textContent], ['la palette de ', 'mars']);
-		const sentence = { nodeType: 3, data: 'Le même fichier en ' };
+		const sentence = textNode('Le même fichier en ');
 		fr.setName({ previousSibling: sentence }, 'avril');
 		assert.strictEqual(sentence.data, 'Le même fichier en ');
 	});
