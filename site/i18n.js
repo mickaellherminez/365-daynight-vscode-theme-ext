@@ -10,6 +10,33 @@ export const lang = data.meta.code;
 const numberLocale = data.meta.numberLocale || lang;
 const formats = new Map();
 
+// Elision of the language, from meta.elision: a short word before a value that starts with a vowel,
+// as in French "de" + "avril" → "d’avril". Only the languages that give it are concerned. A word
+// before "h" keeps its full form, since French elides before some h and not others.
+const elisions = data.meta.elision || {};
+const VOWEL = /^[aeiouyàâäæéèêëîïôöœùûü]/i;
+const LAST_WORD = /(^|[\s(«“])(\p{L}+) $/u;
+
+/** The text placed before a value, with its last word elided when the language does so. */
+function elide(before, item) {
+  const word = before.match(LAST_WORD)?.[2];
+  const short = word && elisions[word.toLowerCase()];
+  if (!short || !VOWEL.test(String(item))) return before;
+  const cased = word[0] === word[0].toLowerCase() ? short : short[0].toUpperCase() + short.slice(1);
+  return before.slice(0, before.length - word.length - 1) + cased;
+}
+
+/** The parts of a translated text: plain strings, and the values given for its {{placeholders}}. */
+function parts(key, vars) {
+  const pieces = template(key).split(/(\{\{\w+\}\})/);
+  return pieces.map((part, index) => {
+    const name = part.match(/^\{\{(\w+)\}\}$/)?.[1];
+    if (name) return value(key, vars, name);
+    const next = pieces[index + 1]?.match(/^\{\{(\w+)\}\}$/)?.[1];
+    return next ? elide(part, value(key, vars, next)) : part;
+  });
+}
+
 function template(key) {
   const text = key.split('.').reduce((node, part) => (node == null ? node : node[part]), data.js);
   if (typeof text !== 'string') throw new Error(`Missing translation: ${key}`);
@@ -28,7 +55,7 @@ function value(key, vars, name) {
  * @param {Record<string, string | number | {text: string}>} [vars]
  */
 export function t(key, vars = {}) {
-  return template(key).replace(/\{\{(\w+)\}\}/g, (_, name) => String(value(key, vars, name)));
+  return parts(key, vars).map(String).join('');
 }
 
 /**
@@ -61,13 +88,28 @@ export function isolate(expression) {
  */
 export function tNodes(key, vars = {}) {
   const fragment = document.createDocumentFragment();
-  template(key).split(/(\{\{\w+\}\})/).forEach((part) => {
-    const name = part.match(/^\{\{(\w+)\}\}$/)?.[1];
-    const item = name ? value(key, vars, name) : part;
+  parts(key, vars).forEach((item) => {
     if (item && typeof item === 'object') fragment.append(isolate(item));
     else if (item !== '') fragment.append(document.createTextNode(String(item)));
   });
   return fragment;
+}
+
+const fullForms = new WeakMap();
+
+/**
+ * Write a name into an element of a translated text, such as <span data-month-name>, and elide
+ * the word just before it when the language does so: "la palette de <span>" + "avril" reads
+ * "la palette d’avril". The word comes back in full for the next name, "de mars".
+ */
+export function setName(node, name) {
+  const before = node.previousSibling;
+  if (before?.nodeType === Node.TEXT_NODE) {
+    if (!fullForms.has(before)) fullForms.set(before, before.data);
+    const text = elide(fullForms.get(before), name);
+    if (before.data !== text) before.data = text;
+  }
+  node.textContent = name;
 }
 
 /** A number in the page language, with exactly `digits` decimals (4.5 → "4,5" in French). */

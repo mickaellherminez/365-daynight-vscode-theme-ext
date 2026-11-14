@@ -221,7 +221,7 @@ The texts are in `site/i18n/`, one JSON file per language, with the same keys:
 
 | Part | Holds |
 | --- | --- |
-| `meta` | language code, native name, direction (`ltr` or `rtl`), number and date locales, `og:locale`, and whether condition names are lowercase inside a sentence |
+| `meta` | language code, native name, direction (`ltr` or `rtl`), number and date locales, `og:locale`, whether condition names are lowercase inside a sentence, and the optional `elision` of the language |
 | `months` | full and short name of the 12 months |
 | `page` | the texts of `site/index.html`, placed by `{{t:key}}` at build time |
 | `limits` | the limits of `docs/AUDIT.md`, in its Markdown (English: `null`, read from the report) |
@@ -230,6 +230,8 @@ The texts are in `site/i18n/`, one JSON file per language, with the same keys:
 Theme names (`Light`, `Dark`, `High Contrast`, `High Contrast Light`), commands, code and units stay in English, as in the translated READMEs. Numbers follow each language (`4,5:1` in French, `13.212` in German); Arabic uses Western digits, as in its README.
 
 Technical expressions always read left to right, also in Arabic: color codes (`#F7AD2F`), ratios (`4.51:1`), ΔE values and ranges (`18–< 36 ΔE`) and theme names (`365 07-July Dark`). The scripts pass them through `ltr()` and `tNodes()` of `site/i18n.js`, which put each whole expression, with its signs and unit, in a `<bdi dir="ltr">`; the build does the same for the ratios it places. So a translation keeps the unit inside the value: write `{{distance}}`, not `ΔE {{distance}}`. A unit test refuses a unit outside its value, and `site:check` fails when such an expression is not isolated after a change of month and measure.
+
+Some languages shorten a word before a vowel. French gives `"elision": { "de": "d’", "la": "l’", "le": "l’" }` in `meta`, so `Palette de {{month}}` reads `Palette d’avril` and `de mars`, and `simulation de la {{vision}}` reads `simulation de l’achromatopsie`. `t()` and `tNodes()` apply it before each value; `setName()` does the same for a name written into the page, such as `la palette de <span data-month-name>`, and gives the full word back for the next month. A word before `h` is never shortened. Write the full word in the text, never `d’{{month}}`; other languages leave `elision` out.
 
 The build refuses a translation that does not match English: a missing or extra key, an empty text, an HTML element or link that differs, or a `{{placeholder}}` that differs. Words may change order, not markup. When `docs/AUDIT.md` gains, loses or changes the link of a limit, the build also stops until every translation has the same limits. To change a text, change it in `en.json` and in the 9 other files, then run `npm run test:unit` and `npm run site:check`. To add a language, add its file, its code to `LANGUAGES` in `scripts/site/build.cjs` and its README translation.
 

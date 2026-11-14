@@ -99,7 +99,7 @@
       "syntaxTitle": "每种语法颜色，都经过测量。",
       "syntaxIntro": "每个条形表示文本与编辑器背景之间的对比度，使用 <span data-selection></span> 的精确颜色。标记显示 {{AA_RATIO}} 和 7:1 两个文本对比度阈值。",
       "syntaxNote": "对比度 = (较亮颜色的相对亮度 + 0.05) / (较暗颜色的相对亮度 + 0.05)。这些测量只针对编辑器背景上的这些文本颜色，并不代表对整个界面的认证。<a href=\"{{AUDIT_URL}}\">方法与局限</a> · <a href=\"{{ROOT}}audit-report.json\" download>下载审计数据</a>。",
-      "visionTitle": "从每一种视觉看过去。",
+      "visionTitle": "不同色觉下的显示效果。",
       "visionIntro": "<span data-selection></span> 的代码在每种色盲模拟下的样子，以及每种视觉情况的百分制得分。欧洲血统人群中约 8% 的男性和 0.4% 的女性有红绿色觉缺陷 [6]。这些是计算结果，不是观察结果：<a href=\"{{TESTERS_URL}}\">真人测试</a>尚未进行。",
       "monthlyTitle": "各个月份有多不同？",
       "monthlyIntro": "比较重新设计前后的 12 套月度配色。ΔE 越大，颜色差异越大。两个网格使用相同的刻度。选择一种测量方式，查看背景色或语法颜色。"

@@ -501,3 +501,49 @@ suite('Landing page code examples', () => {
 		for (const line of drawn('miniCode').split('\n')) assert.ok(line.length <= 29, line);
 	});
 });
+
+suite('Landing page translated sentences', () => {
+	const vm = require('vm');
+	const source = fs.readFileSync(path.join(__dirname, '../../site/i18n.js'), 'utf8').replace(/^export /gm, '');
+	// site/i18n.js as the page runs it, with the data the build places in <script id="i18n">.
+	const helpers = (code) => {
+		const locale = loadLocale(code);
+		const data = JSON.stringify({ meta: locale.meta, months: locale.months, js: locale.js });
+		const context = { document: { getElementById: () => ({ textContent: data }) }, Node: { TEXT_NODE: 3 }, Intl };
+		return { ...vm.runInNewContext(`${source}\n({ t, setName })`, context), months: locale.months.map((month) => month.name) };
+	};
+
+	test('French elides "de" before the twelve month names, and no other language changes', () => {
+		const fr = helpers('fr');
+		assert.deepStrictEqual(fr.months.map((month) => fr.t('picker.month', { month })), [
+			'Palette de janvier', 'Palette de février', 'Palette de mars', 'Palette d’avril', 'Palette de mai', 'Palette de juin',
+			'Palette de juillet', 'Palette d’août', 'Palette de septembre', 'Palette d’octobre', 'Palette de novembre', 'Palette de décembre',
+		]);
+		assert.strictEqual(fr.t('app.applyVariant', { variant: 'High Contrast Light', month: 'août' }), '. Appliquer High Contrast Light d’août');
+		for (const code of LANGUAGES.filter((item) => item !== 'fr')) {
+			assert.strictEqual(loadLocale(code).meta.elision, undefined, code);
+			const other = helpers(code);
+			assert.strictEqual(other.t('picker.month', { month: other.months[3] }), loadLocale(code).js.picker.month.replace('{{month}}', other.months[3]), code);
+		}
+	});
+
+	test('the French vision caption reads "simulation de l’achromatopsie" and keeps the theme and score', () => {
+		const fr = helpers('fr');
+		const caption = (vision) => fr.t('vision.simulated', { theme: '365 04-April Dark', vision, score: '42' });
+		assert.strictEqual(caption('achromatopsie'), '365 04-April Dark, simulation de l’achromatopsie : score de 42 sur 100.');
+		assert.strictEqual(caption('deutéranopie'), '365 04-April Dark, simulation de la deutéranopie : score de 42 sur 100.');
+	});
+
+	test('a month name written into the page elides the word before it, and gives it back for the next month', () => {
+		const fr = helpers('fr');
+		const before = { nodeType: 3, data: 'la palette de ' };
+		const node = { previousSibling: before, textContent: '' };
+		fr.setName(node, 'octobre');
+		assert.deepStrictEqual([before.data, node.textContent], ['la palette d’', 'octobre']);
+		fr.setName(node, 'mars');
+		assert.deepStrictEqual([before.data, node.textContent], ['la palette de ', 'mars']);
+		const sentence = { nodeType: 3, data: 'Le même fichier en ' };
+		fr.setName({ previousSibling: sentence }, 'avril');
+		assert.strictEqual(sentence.data, 'Le même fichier en ');
+	});
+});

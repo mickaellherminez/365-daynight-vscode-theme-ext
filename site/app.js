@@ -2,7 +2,7 @@ import { createPicker } from './picker.js';
 import { createContrastChart } from './contrast-chart.js';
 import { createMatrices } from './matrices.js';
 import { createVisionPanel } from './vision.js';
-import { t, tNodes, ltr, isolate, ratio as formatRatio, monthNames, shortDate } from './i18n.js';
+import { t, tNodes, ltr, isolate, ratio as formatRatio, monthNames, shortDate, setName } from './i18n.js';
 
 const root = document.documentElement;
 const { months, comparisons, thresholds } = JSON.parse(document.getElementById('theme-data').textContent);
@@ -190,9 +190,9 @@ function update(announce = false) {
   visionPanel.update(palette);
   matrices.update(monthIndex, mode);
   const label = modes.find((item) => item.key === mode).label;
-  document.querySelectorAll('[data-month-name]').forEach((node) => { node.textContent = month.name; });
+  document.querySelectorAll('[data-month-name]').forEach((node) => setName(node, month.name));
   document.querySelectorAll('[data-mode-label]').forEach((node) => { node.textContent = label; });
-  document.querySelectorAll('[data-selection]').forEach((node) => { node.textContent = `${month.name} · ${label}`; });
+  document.querySelectorAll('[data-selection]').forEach((node) => setName(node, `${month.name} · ${label}`));
   document.querySelectorAll('[data-chip-label]').forEach((node) => { node.textContent = chipLabel(month, label); });
   document.querySelectorAll('.theme-chip[data-tooltip]').forEach((node) => { node.dataset.tooltip = `${month.name} · ${label}`; });
   pickers.forEach((picker) => picker.update(monthIndex, mode));
@@ -437,12 +437,12 @@ function reserveComparisonHeight() {
   for (const month of months) {
     for (const [day, night] of [['Light', 'Dark'], ['High Contrast Light', 'High Contrast']]) {
       for (const node of parts) {
-        node.textContent = node.id === 'compare-day-label' ? day : node.id === 'compare-night-label' ? night : month.name;
+        setName(node, node.id === 'compare-day-label' ? day : node.id === 'compare-night-label' ? night : month.name);
       }
       tallest = Math.max(tallest, sentence.getBoundingClientRect().height);
     }
   }
-  parts.forEach((node, i) => { node.textContent = current[i]; });
+  parts.forEach((node, i) => setName(node, current[i]));
   sentence.style.minHeight = `${Math.ceil(tallest)}px`;
 }
 // Anchors and keyboard focus stop below the sticky header, never under it.

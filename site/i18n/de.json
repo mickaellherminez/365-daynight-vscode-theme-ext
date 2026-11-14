@@ -99,7 +99,7 @@
       "syntaxTitle": "Jede Syntaxfarbe, gemessen.",
       "syntaxIntro": "Jeder Balken zeigt den Textkontrast zum Editorhintergrund, mit den exakten Farben von <span data-selection></span>. Die Markierungen zeigen die Textkontrast-Schwellen {{AA_RATIO}} und 7:1.",
       "syntaxNote": "Kontrast = (hellere relative Leuchtdichte + 0,05) / (dunklere relative Leuchtdichte + 0,05). Die Messungen gelten für diese Textfarben auf dem Editorhintergrund; sie zertifizieren nicht die gesamte Oberfläche. <a href=\"{{AUDIT_URL}}\">Methode und Grenzen</a> · <a href=\"{{ROOT}}audit-report.json\" download>Prüfdaten herunterladen</a>.",
-      "visionTitle": "Mit jedem Sehen betrachtet.",
+      "visionTitle": "So wirken die Farben bei unterschiedlichen Sehbedingungen.",
       "visionIntro": "Der Code von <span data-selection></span>, simuliert für jede Art von Farbenblindheit, und eine Punktzahl von 100 für jede Sehsituation. Etwa 8 % der Männer und 0,4 % der Frauen europäischer Herkunft haben eine Rot-Grün-Sehschwäche [6]. Das sind Berechnungen, keine Beobachtungen: <a href=\"{{TESTERS_URL}}\">Tests mit echten Menschen</a> stehen noch aus.",
       "monthlyTitle": "Wie verschieden sind die Monate?",
       "monthlyIntro": "Vergleiche die 12 Monatspaletten vor und nach der Überarbeitung. Ein größeres ΔE bedeutet einen größeren Farbunterschied. Beide Raster verwenden dieselbe Skala. Wähle ein Maß, um den Hintergrund oder die Syntaxfarben zu erkunden."
