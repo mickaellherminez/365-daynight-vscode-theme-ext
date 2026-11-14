@@ -1,6 +1,6 @@
 # 365 Day & Night – Monthly Accessible Themes
 
-**Gib VS Code jeden Monat einen neuen Look: 48 barrierefreie Themes, die per Klick oder von selbst zwischen Tag und Nacht wechseln.**
+**Gib VS Code jeden Monat einen neuen Look: 48 Farbthemes mit gemessenem Kontrast, die per Klick oder von selbst zwischen Tag und Nacht wechseln.**
 
 [![Version im Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![Installationen](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
@@ -32,7 +32,7 @@ Raureif im Januar, junge Triebe im März, eine Lagune im Juli, Herbstlaub im Okt
 
 ### 👁️ Gemacht, um lesbar zu bleiben
 
-Text erreicht einen Kontrast von mindestens 4,5:1 (WCAG AA) in den Light- und Dark-Themes und 7:1 (WCAG AAA) in den High-Contrast-Themes. Syntaxfarben, Fehler und Git-Änderungen bleiben bei Farbenblindheit unterscheidbar, und Kommentare, veralteter und ungültiger Code unterscheiden sich auch durch Kursivschrift, Durchstreichung oder Unterstreichung.
+Text erreicht einen Kontrast von mindestens 4,5:1 (WCAG AA) in den Light- und Dark-Themes und 7:1 (WCAG AAA) für fast den gesamten Text der High-Contrast-Themes. Syntaxfarben, Fehler und Git-Änderungen bleiben in den Simulationen der Farbenblindheit unterscheidbar, und Kommentare, veralteter und ungültiger Code unterscheiden sich auch durch Kursivschrift, Durchstreichung oder Unterstreichung.
 
 **Der Beweis:** Jedes Theme muss vor jeder Veröffentlichung ein automatisches Audit mit mehr als 250 Prüfungen bestehen, und [der vollständige Bericht](AUDIT.md) nennt die Ergebnisse jedes Themes und die Grenzen des Audits. Farbenblindheit wird per Simulation geprüft, daher sind Rückmeldungen von echten Menschen sehr willkommen: [Mach beim Testaufruf mit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
@@ -86,7 +86,7 @@ Danach kannst du deine Uhrzeiten wählen. Eine neue Uhrzeit gilt etwa 2 Sekunden
 
 ## Barrierefreiheit
 
-- **Lesbarer Text:** WCAG AA in den Light- und Dark-Themes, AAA in den High-Contrast-Themes.
+- **Lesbarer Text:** WCAG AA in den Light- und Dark-Themes, AAA für fast den gesamten Text der High-Contrast-Themes.
 - **Farbenblindheit:** Syntaxfarben und Warnungen werden für Protanopie, Deuteranopie und Tritanopie simuliert.
 - **Nicht nur Farbe:** Kommentare, Parameter und Attribute sind *kursiv*, veralteter Code ist ~~durchgestrichen~~, ungültiger Code ist unterstrichen.
 - **Tastatur und Screenreader:** High-Contrast-Themes haben einen deutlichen Fokusrahmen, und jeder Teil der Statusleisten-Schaltfläche hat eine eigene gesprochene Bezeichnung.
@@ -115,7 +115,7 @@ Nein. Der Automatikmodus ist standardmäßig aus. Ohne ihn ändert sich das Them
 Natürlich. Wähle es in der Theme-Auswahl (`Ctrl+K Ctrl+T`) und lass den Automatikmodus aus.
 
 **Wofür sind die kontrastreichen Themes?**
-Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten maximalen Kontrast (AAA), sichtbare Rahmen und eine deutliche Fokusmarkierung. Jeder Monat hat zwei: eine dunkle Version und eine helle, High Contrast Light, für helle Umgebungen.
+Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzungen gedacht und bieten AAA-Kontrast (7:1) für fast den gesamten Text, sichtbare Rahmen und eine deutliche Fokusmarkierung. Jeder Monat hat zwei: eine dunkle Version und eine helle, High Contrast Light, für helle Umgebungen.
 
 **Wie kann ich eine neue Version vor allen anderen ausprobieren?**
 Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiterungsansicht und klicke auf **Switch to Pre-Release Version** (zur Vorabversion wechseln). VS Code installiert dann die Vorabversion und ihre Updates. Um zur normalen Version zurückzukehren, klicke auf derselben Seite auf **Switch to Release Version**. Rückmeldungen zu einer Vorabversion sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen. Ein [Aufruf an Testende](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) ist offen, mit einer kurzen Liste von Punkten zum Prüfen.
