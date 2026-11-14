@@ -1,6 +1,6 @@
 # 365 Day & Night – Monthly Accessible Themes
 
-**VS Code に毎月新しい雰囲気を。ワンクリックでも自動でも昼と夜を切り替えられる、コントラストを測定した 48 のカラーテーマです。**
+**VS Code に毎月新しい雰囲気を。ワンクリックでも自動でも昼と夜を切り替えられる、アクセシビリティを考えて設計し、コントラストを測定した 48 のテーマです。**
 
 [![Marketplace のバージョン](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![インストール数](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)

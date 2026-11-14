@@ -1,6 +1,6 @@
 # 365 Day & Night – Monthly Accessible Themes
 
-**VS Code को हर महीने नया रूप दें: मापे गए कंट्रास्ट वाली 48 रंग थीम, जो एक क्लिक में या अपने आप दिन और रात के बीच बदलती हैं।**
+**VS Code को हर महीने नया रूप दें: सुलभता को ध्यान में रखकर बनाई गई, मापे गए कंट्रास्ट वाली 48 थीम, जो एक क्लिक में या अपने आप दिन और रात के बीच बदलती हैं।**
 
 [![Marketplace संस्करण](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![इंस्टॉल](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)

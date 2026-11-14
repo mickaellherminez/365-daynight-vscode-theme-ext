@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 ## [Unreleased]
 
 ### Changed
-- More precise wording on the Marketplace page and in the README, in the 10 languages: themes with measured contrast instead of "accessible themes", 7:1 (WCAG AAA) for nearly all text in High Contrast themes, as the [audit report](docs/AUDIT.md) shows, and color blindness described as simulations
+- More precise wording on the Marketplace page and in the README, in the 10 languages: themes designed for accessibility, with measured contrast, instead of "accessible themes", 7:1 (WCAG AAA) for nearly all text in High Contrast themes, as the [audit report](docs/AUDIT.md) shows, and color blindness described as simulations
 
 ## [1.0.1] - 2026-11-11
 

@@ -2,7 +2,7 @@
 
 # 365 Day & Night – Monthly Accessible Themes
 
-**امنح VS Code مظهرًا جديدًا كل شهر: 48 سمة ألوان بتباين مُقاس، تتبدل بين النهار والليل بنقرة واحدة أو من تلقاء نفسها.**
+**امنح VS Code مظهرًا جديدًا كل شهر: 48 سمة مصممة لسهولة الوصول، بتباين مُقاس، تتبدل بين النهار والليل بنقرة واحدة أو من تلقاء نفسها.**
 
 [![الإصدار في Marketplace](https://vsmarketplacebadges.dev/version-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?subject=Marketplace&style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
 [![عدد التثبيتات](https://vsmarketplacebadges.dev/installs-short/mickaellherminez.365-daynight-vscode-theme-ext.svg?style=flat)](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext)
