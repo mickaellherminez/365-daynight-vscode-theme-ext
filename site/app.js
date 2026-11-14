@@ -43,17 +43,22 @@ const code = [
   [['  }', 'punctuation']],
   [['}', 'punctuation']],
 ];
+// The four small previews use the same day rule as the large example: 7 included, 19 excluded.
 const miniCode = [
-  [['// Day or night?', 'comment']], [],
-  [['const', 'keyword'], [' ', 'variable'], ['DAY', 'variable.readonly'], [' = ', 'operator'], ['7', 'number'], [';', 'punctuation']], [],
+  [['// Day or night?', 'comment']],
+  [['const', 'keyword'], [' ', 'variable'], ['DAY_START', 'variable.readonly'], [' = ', 'operator'], ['7', 'number'], [';', 'punctuation']],
+  [['const', 'keyword'], [' ', 'variable'], ['NIGHT_START', 'variable.readonly'], [' = ', 'operator'], ['19', 'number'], [';', 'punctuation']],
+  [],
   [['class', 'keyword'], [' ', 'variable'], ['Schedule', 'class'], [' {', 'punctuation']],
-  [['  ', 'variable'], ['isDay', 'function'], ['(h: ', 'variable'], ['number', 'class'], [') {', 'punctuation']],
-  [['    ', 'variable'], ['return', 'keyword'], [' h ', 'parameter'], ['>= ', 'operator'], ['DAY', 'variable.readonly'], [';', 'punctuation']],
+  [['  ', 'variable'], ['isDay', 'function'], ['(h: ', 'variable'], ['number', 'class'], ['): ', 'punctuation'], ['boolean', 'class'], [' {', 'punctuation']],
+  [['    ', 'variable'], ['return', 'keyword'], [' h ', 'parameter'], ['>= ', 'operator'], ['DAY_START', 'variable.readonly']],
+  [['      ', 'variable'], ['&& ', 'operator'], ['h ', 'parameter'], ['< ', 'operator'], ['NIGHT_START', 'variable.readonly'], [';', 'punctuation']],
   [['  }', 'punctuation']],
   [['  ', 'variable'], ['label', 'function'], ['(h: ', 'variable'], ['number', 'class'], [') {', 'punctuation']],
   [['    ', 'variable'], ['return', 'keyword'], [' this.', 'variable'], ['isDay', 'function'], ['(h)', 'punctuation']],
   [['      ? ', 'punctuation'], ["'Light'", 'string'], [' : ', 'punctuation'], ["'Dark'", 'string'], [';', 'punctuation']],
-  [['  }', 'punctuation']], [['}', 'punctuation']],
+  [['  }', 'punctuation']],
+  [['}', 'punctuation']],
 ];
 const ratio = (value) => formatRatio(Math.floor(value * 10) / 10, 1);
 const element = (tag, className, text) => {
