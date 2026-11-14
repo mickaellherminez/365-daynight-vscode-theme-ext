@@ -24,10 +24,10 @@
   ],
   "page": {
     "head": {
-      "title": "365 Day &amp; Night – Monatliche barrierefreie Themes für VS Code",
-      "description": "48 barrierefreie Themes für VS Code, jeden Monat ein neuer Look, mit allen veröffentlichten Ergebnissen zu Kontrast und Farbsehen.",
+      "title": "365 Day &amp; Night – Monatliche Themes für VS Code mit gemessenem Kontrast",
+      "description": "48 Farbthemes für VS Code, jeden Monat ein neuer Look, mit gemessenen Kontrasten und veröffentlichten Simulationen des Farbsehens.",
       "ogTitle": "365 Day &amp; Night — Lesbar. Gemessen.",
-      "ogDescription": "12 Monate. 48 barrierefreie Themes für VS Code. Entdecke jede Palette und die Messungen dahinter."
+      "ogDescription": "12 Monate. 48 Farbthemes für VS Code. Entdecke jede Palette und die Messungen dahinter."
     },
     "skip": "Zum Inhalt springen",
     "header": {
@@ -45,7 +45,7 @@
       "everyMonth": "Jeden Monat",
       "title": "Jeden Monat ein neuer Look.",
       "titleAccent": "Lesbar. Gemessen.",
-      "lead": "{{THEMES}} barrierefreie Farbthemes für VS Code, die per Klick oder von selbst zwischen Tag und Nacht wechseln. Alle Ergebnisse zu Kontrast und Farbsehen sind veröffentlicht.",
+      "lead": "{{THEMES}} Farbthemes für VS Code, mit gemessenen Kontrasten und veröffentlichten Simulationen des Farbsehens. Wechsle per Klick oder automatisch zwischen Tag und Nacht.",
       "install": "Aus dem Marketplace installieren",
       "statThemes": "Themes",
       "statChecks": "bestandene Prüfungen",
@@ -137,7 +137,7 @@
     },
     "references": {
       "title": "Quellen",
-      "machado": "Verwendet für die Simulationen der Farbenblindheit und für die Zahl von etwa 200 Millionen Menschen.",
+      "machado": "Verwendet für die Simulationen der Farbenblindheit.",
       "wcag": "Kontrastverhältnis, die Stufen 4,5:1 und 7:1 und die Verwendung von Farbe.",
       "understanding": "Verknüpft 4,5:1 mit einer Sehschärfe von etwa 20/40 und 7:1 mit etwa 20/80.",
       "cie": "CIELAB und der Farbabstand CIE76, der für die Schwellen verwendet wird.",
@@ -157,7 +157,7 @@
     "**Teilformen werden gemessen, nicht erzwungen.** Teilformen der Farbenblindheit, die häufigsten, erscheinen in den Punktzahlen für Schweregrade von 0,1 bis 0,9. Nur vollständige Formen können die Prüfung scheitern lassen.",
     "**Achromatopsie dient nur zur Information.** Ohne Farbe liegen viele Syntaxfarben in der Helligkeit nah beieinander, wie die Tabelle zeigt. Sie unterscheiden sich dann nur durch den Stil, wo das Theme einen festlegt, zum Beispiel bei Kommentaren sowie veraltetem und ungültigem Code.",
     "**Die Schwellen sind Projektregeln.** Die WCAG legen die Mindestkontraste fest. Die Schwelle für die Unterscheidung von Farben (ΔE 12 auf der CIE76-Skala) und die Schwellen für die Vielfalt sind praktische Regeln, die für dieses Projekt gewählt wurden, keine Normen.",
-    "**CIE76 ist ein einfaches Maß.** Die Schwellen gelten für CIE76. CIEDE2000 liegt näher an der Wahrnehmung, besonders bei Blautönen und wenig gesättigten Farben, und wird daher zur Information daneben angezeigt. Es verwendet eine andere Skala, und die Schwellen sind nicht darauf abgestimmt.",
+    "**CIE76 ist ein einfaches Maß.** Die Schwellen gelten für CIE76. CIEDE2000 liegt näher an der Wahrnehmung, besonders bei Blautönen und wenig gesättigten Farben, und steht daher zur Information zusätzlich im [Prüfbericht](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light), in einer Tabelle unter jeder Variante. Es verwendet eine andere Skala, und die Schwellen sind nicht darauf abgestimmt.",
     "**Nur Kontrast nach WCAG 2.** APCA, das für WCAG 3 entworfene Kontrastmodell, wird nicht angewendet.",
     "**Farben, keine Darstellung.** Die Prüfung liest die Theme-Dateien. Sie prüft die in ihrem Code aufgeführten Farbpaare, mit einem TextMate-Scope pro Token-Kategorie. Ein dargestelltes Fenster, die Kantenglättung oder dein Bildschirm werden nicht betrachtet.",
     "**Nicht jede Farbe von VS Code.** Ein Theme legt etwa 485 der rund 970 von VS Code dokumentierten Farben fest. Die übrigen nutzen die Standardwerte von VS Code, und nur die der neueren Oberflächen werden geprüft, so wie sie in VS Code 1.145 sind. Eine künftige Version kann sie ändern.",
