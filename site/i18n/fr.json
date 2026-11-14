@@ -25,10 +25,10 @@
   ],
   "page": {
     "head": {
-      "title": "365 Day &amp; Night – Thèmes accessibles mensuels pour VS Code",
-      "description": "48 thèmes accessibles pour VS Code, un nouveau style chaque mois, avec tous les résultats de contraste et de vision des couleurs publiés.",
+      "title": "365 Day &amp; Night – Thèmes mensuels pour VS Code, au contraste mesuré",
+      "description": "48 thèmes de couleurs pour VS Code, un nouveau style chaque mois, avec des contrastes mesurés et des simulations de vision des couleurs publiées.",
       "ogTitle": "365 Day &amp; Night — Lisible. Mesuré.",
-      "ogDescription": "12 mois. 48 thèmes accessibles pour VS Code. Explorez chaque palette et les mesures qui la justifient."
+      "ogDescription": "12 mois. 48 thèmes de couleurs pour VS Code. Explorez chaque palette et les mesures qui la justifient."
     },
     "skip": "Aller au contenu",
     "header": {
@@ -46,7 +46,7 @@
       "everyMonth": "Chaque mois",
       "title": "Un nouveau style chaque mois.",
       "titleAccent": "Lisible. Mesuré.",
-      "lead": "{{THEMES}} thèmes de couleurs accessibles pour VS Code, qui passent du jour à la nuit en un clic ou tout seuls. Tous les résultats de contraste et de vision des couleurs sont publiés.",
+      "lead": "{{THEMES}} thèmes de couleurs pour VS Code, avec des contrastes mesurés et des simulations de vision des couleurs publiées. Passez du jour à la nuit en un clic ou automatiquement.",
       "install": "Installer depuis le Marketplace",
       "statThemes": "thèmes",
       "statChecks": "contrôles réussis",
@@ -138,7 +138,7 @@
     },
     "references": {
       "title": "Références",
-      "machado": "Utilisé pour les simulations du daltonisme et pour le chiffre d’environ 200 millions de personnes.",
+      "machado": "Utilisé pour les simulations du daltonisme.",
       "wcag": "Ratio de contraste, niveaux 4,5:1 et 7:1, et utilisation de la couleur.",
       "understanding": "Relie 4,5:1 à une acuité visuelle d’environ 20/40, et 7:1 à environ 20/80.",
       "cie": "CIELAB et l’écart de couleur CIE76 utilisé pour les seuils.",
@@ -158,7 +158,7 @@
     "**Les formes partielles sont mesurées, pas imposées.** Les formes partielles du daltonisme, les plus fréquentes, apparaissent dans les scores pour des sévérités de 0,1 à 0,9. Seules les formes complètes peuvent faire échouer l’audit.",
     "**L’achromatopsie est donnée à titre d’information.** Sans couleur, beaucoup de couleurs de syntaxe ont une clarté proche, comme le montre le tableau. Elles ne se distinguent alors que par le style, là où le thème en définit un, par exemple pour les commentaires, le code obsolète et le code invalide.",
     "**Les seuils sont des règles du projet.** Les WCAG fixent les minimums de contraste. Le seuil de distinction des couleurs (ΔE 12 sur l’échelle CIE76) et les seuils de variété sont des règles pratiques choisies pour ce projet, pas des normes.",
-    "**CIE76 est une mesure simple.** Les seuils s’appliquent à CIE76. CIEDE2000 est plus proche de la perception, surtout pour les bleus et les couleurs peu saturées : il est donc affiché à côté, pour information. Il utilise une autre échelle, et les seuils ne sont pas calibrés pour lui.",
+    "**CIE76 est une mesure simple.** Les seuils s’appliquent à CIE76. CIEDE2000 est plus proche de la perception, surtout pour les bleus et les couleurs peu saturées : le [rapport d’audit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) le donne donc aussi, pour information, dans un tableau sous chaque variante. Il utilise une autre échelle, et les seuils ne sont pas calibrés pour lui.",
     "**Uniquement le contraste WCAG 2.** APCA, le modèle de contraste en projet pour WCAG 3, n’est pas appliqué.",
     "**Des couleurs, pas un rendu.** L’audit lit les fichiers des thèmes. Il vérifie les paires de couleurs listées dans son code, avec une portée TextMate par catégorie de jeton. Il n’examine ni une fenêtre affichée, ni l’anticrénelage, ni votre écran.",
     "**Pas toutes les couleurs de VS Code.** Un thème définit environ 485 des quelque 970 couleurs documentées par VS Code. Les autres utilisent les valeurs par défaut de VS Code, et seules celles des surfaces récentes sont auditées, telles qu’elles sont dans VS Code 1.145. Une version future peut les changer.",

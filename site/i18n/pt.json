@@ -24,10 +24,10 @@
   ],
   "page": {
     "head": {
-      "title": "365 Day &amp; Night – Temas acessíveis mensais para o VS Code",
-      "description": "48 temas acessíveis para o VS Code, um visual novo a cada mês, com todos os resultados de contraste e de visão de cores publicados.",
+      "title": "365 Day &amp; Night – Temas mensais para o VS Code com contraste medido",
+      "description": "48 temas de cores para o VS Code, um visual novo a cada mês, com contrastes medidos e simulações de visão de cores publicadas.",
       "ogTitle": "365 Day &amp; Night — Legível. Medido.",
-      "ogDescription": "12 meses. 48 temas acessíveis para o VS Code. Explore cada paleta e as medições por trás dela."
+      "ogDescription": "12 meses. 48 temas de cores para o VS Code. Explore cada paleta e as medições por trás dela."
     },
     "skip": "Pular para o conteúdo",
     "header": {
@@ -45,7 +45,7 @@
       "everyMonth": "Todo mês",
       "title": "Um visual novo a cada mês.",
       "titleAccent": "Legível. Medido.",
-      "lead": "{{THEMES}} temas de cores acessíveis para o VS Code que alternam entre dia e noite com um clique ou sozinhos. Todos os resultados de contraste e de visão de cores são publicados.",
+      "lead": "{{THEMES}} temas de cores para o VS Code, com contrastes medidos e simulações de visão de cores publicadas. Passe do dia para a noite com um clique ou automaticamente.",
       "install": "Instalar pelo Marketplace",
       "statThemes": "temas",
       "statChecks": "verificações aprovadas",
@@ -137,7 +137,7 @@
     },
     "references": {
       "title": "Referências",
-      "machado": "Usado nas simulações de daltonismo e no número de cerca de 200 milhões de pessoas.",
+      "machado": "Usado nas simulações de daltonismo.",
       "wcag": "Razão de contraste, os níveis 4,5:1 e 7:1, e o uso da cor.",
       "understanding": "Relaciona 4,5:1 a uma acuidade visual de cerca de 20/40, e 7:1 a cerca de 20/80.",
       "cie": "CIELAB e a diferença de cor CIE76 usada nos limites.",
@@ -157,7 +157,7 @@
     "**As formas parciais são medidas, não exigidas.** As formas parciais do daltonismo, que são as mais comuns, aparecem nas pontuações para severidades de 0,1 a 0,9. Só as formas completas podem reprovar a auditoria.",
     "**A acromatopsia é apenas informativa.** Sem cor, muitas cores de sintaxe têm luminosidade parecida, como mostra a tabela. Elas então só se distinguem pelo estilo, quando o tema define um, por exemplo nos comentários e no código obsoleto ou inválido.",
     "**Os limites são regras do projeto.** As WCAG definem os contrastes mínimos. O limite de distinção de cores (ΔE 12 na escala CIE76) e os limites de variedade são regras práticas escolhidas para este projeto, não normas.",
-    "**CIE76 é uma medida simples.** Os limites se aplicam ao CIE76. O CIEDE2000 é mais próximo da percepção, sobretudo nos azuis e nas cores pouco saturadas, por isso aparece ao lado, a título informativo. Ele usa outra escala, e os limites não estão calibrados para ele.",
+    "**CIE76 é uma medida simples.** Os limites se aplicam ao CIE76. O CIEDE2000 é mais próximo da percepção, sobretudo nos azuis e nas cores pouco saturadas, por isso o [relatório de auditoria](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) também o apresenta, a título informativo, em uma tabela sob cada variante. Ele usa outra escala, e os limites não estão calibrados para ele.",
     "**Apenas contraste WCAG 2.** O APCA, o modelo de contraste em rascunho para as WCAG 3, não é aplicado.",
     "**Cores, não renderização.** A auditoria lê os arquivos dos temas. Ela verifica os pares de cores listados no seu código, com um escopo TextMate por categoria de token. Não analisa uma janela renderizada, a suavização de fontes nem a sua tela.",
     "**Nem todas as cores do VS Code.** Um tema define cerca de 485 das aproximadamente 970 cores documentadas pelo VS Code. As demais usam os padrões do VS Code, e só as das superfícies recentes são auditadas, como estão no VS Code 1.145. Uma versão futura pode alterá-las.",

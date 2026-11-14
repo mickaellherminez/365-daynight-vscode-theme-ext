@@ -24,10 +24,10 @@
   ],
   "page": {
     "head": {
-      "title": "365 Day &amp; Night – Monthly Accessible Themes for VS Code",
-      "description": "48 accessible VS Code themes, a new look every month, with every contrast and color vision result published.",
+      "title": "365 Day &amp; Night – Monthly VS Code Themes with Measured Contrast",
+      "description": "48 color themes for VS Code, a new look every month, with measured contrast and published color vision simulations.",
       "ogTitle": "365 Day &amp; Night — Readable. Measured.",
-      "ogDescription": "12 months. 48 accessible VS Code themes. Explore every palette and the measurements behind it."
+      "ogDescription": "12 months. 48 color themes for VS Code. Explore every palette and the measurements behind it."
     },
     "skip": "Skip to content",
     "header": {
@@ -45,7 +45,7 @@
       "everyMonth": "Every month",
       "title": "A new look every month.",
       "titleAccent": "Readable. Measured.",
-      "lead": "{{THEMES}} accessible color themes for VS Code that switch between day and night in one click or on their own. Every contrast and color vision result is published.",
+      "lead": "{{THEMES}} color themes for VS Code, with measured contrast and published color vision simulations. Switch from day to night in one click or automatically.",
       "install": "Install from the Marketplace",
       "statThemes": "themes",
       "statChecks": "checks passed",
@@ -137,7 +137,7 @@
     },
     "references": {
       "title": "References",
-      "machado": "Used for the color blindness simulations and the figure of about 200 million people.",
+      "machado": "Used for the color blindness simulations.",
       "wcag": "Contrast ratio, the 4.5:1 and 7:1 levels, and the use of color.",
       "understanding": "Links 4.5:1 to a visual acuity of about 20/40, and 7:1 to about 20/80.",
       "cie": "CIELAB and the CIE76 color difference used for the thresholds.",
