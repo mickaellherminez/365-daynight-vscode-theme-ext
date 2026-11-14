@@ -4,7 +4,7 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.2] - 2026-11-14
 
 ### Changed
 - More precise wording on the Marketplace page and in the README, in the 10 languages: themes designed for accessibility, with measured contrast, instead of "accessible themes", 7:1 (WCAG AAA) for nearly all text in High Contrast themes, as the [audit report](docs/AUDIT.md) shows, and color blindness described as simulations
