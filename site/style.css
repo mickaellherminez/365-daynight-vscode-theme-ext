@@ -132,7 +132,8 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .today-line { position: absolute; top: 46px; height: 130px; border-left: 1px solid var(--text); pointer-events: none; }
 .variant-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 32px 24px; }
 .variant-card { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 0; border: 0; background: transparent; text-align: start; }
-.variant-preview { width: 100%; height: 262px; overflow: hidden; border: 1px solid var(--rule); border-radius: 6px; }
+/* The preview takes the height of its code, so no line is cut. */
+.variant-preview { width: 100%; overflow: hidden; border: 1px solid var(--rule); border-radius: 6px; }
 .variant-card[aria-pressed=true] .variant-preview { outline: 2px solid var(--text); outline-offset: 3px; }
 .variant-preview .editor-titlebar { height: 28px; justify-content: flex-start; padding-inline: 12px; font-size: 11px; }
 .variant-preview .editor-code { font-size: 11px; line-height: 18px; padding-block: 10px; }

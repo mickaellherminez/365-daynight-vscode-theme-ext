@@ -459,3 +459,45 @@ suite('Landing page left-to-right expressions', () => {
 		for (const file of ['app.js', 'contrast-chart.js', 'matrices.js', 'vision.js']) assert.match(source(file), /tNodes\(/, file);
 	});
 });
+
+suite('Landing page code examples', () => {
+	const vm = require('vm');
+	const source = fs.readFileSync(path.join(__dirname, '../../site/app.js'), 'utf8');
+	/** The code drawn on the page, as text, from its token array in app.js. */
+	const drawn = (name) => {
+		const literal = source.match(new RegExp(`const ${name} = (\\[[\\s\\S]*?\\n\\]);`))[1];
+		return vm.runInNewContext(literal).map((tokens) => tokens.map(([text]) => text).join('')).join('\n');
+	};
+	/** The same code run as JavaScript: TypeScript annotations removed, nothing else changed. */
+	const run = (code, className) => vm.runInNewContext(`${code
+		.replace(/^export /gm, '')
+		.replace(/private readonly /g, '')
+		.replace(/\)\s*:\s*\w+\s*\{/g, ') {')
+		.replace(/(\w+):\s*(?:number|string)/g, '$1')}; ${className}`);
+	const hours = { 6: 'Dark', 7: 'Light', 18: 'Light', 19: 'Dark', 23: 'Dark' };
+
+	test('the large example: day from 7 included to 19 excluded', () => {
+		const Schedule = run(drawn('code'), 'ThemeSchedule');
+		const schedule = new Schedule('test');
+		for (const [hour, expected] of Object.entries(hours)) {
+			assert.strictEqual(schedule.isDay({ getHours: () => Number(hour) }) ? 'Light' : 'Dark', expected, `${hour} h`);
+		}
+	});
+
+	test('the four small previews give the same result as the large example at every hour', () => {
+		const Schedule = run(drawn('miniCode'), 'Schedule');
+		const preview = new Schedule();
+		for (const [hour, expected] of Object.entries(hours)) assert.strictEqual(preview.label(Number(hour)), expected, `${hour} h`);
+		const Large = run(drawn('code'), 'ThemeSchedule');
+		const large = new Large('test');
+		for (let hour = 0; hour < 24; hour++) {
+			assert.strictEqual(preview.label(hour), large.isDay({ getHours: () => hour }) ? 'Light' : 'Dark', `${hour} h`);
+		}
+		assert.match(drawn('miniCode'), /const DAY_START = 7;\nconst NIGHT_START = 19;/);
+	});
+
+	test('no line of the small previews is wider than the narrowest card', () => {
+		// 29 characters fit the 240 px minimum width of a card at 11 px.
+		for (const line of drawn('miniCode').split('\n')) assert.ok(line.length <= 29, line);
+	});
+});
