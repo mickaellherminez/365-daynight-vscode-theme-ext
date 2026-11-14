@@ -99,7 +99,7 @@
       "syntaxTitle": "Cada color de sintaxis, medido.",
       "syntaxIntro": "Cada barra es el contraste del texto sobre el fondo del editor, con los colores exactos de <span data-selection></span>. Las marcas muestran los umbrales de contraste de texto de {{AA_RATIO}} y 7:1.",
       "syntaxNote": "Contraste = (luminancia relativa más clara + 0,05) / (luminancia relativa más oscura + 0,05). Las mediciones se aplican a estos colores de texto sobre el fondo del editor; no certifican toda la interfaz. <a href=\"{{AUDIT_URL}}\">Método y límites</a> · <a href=\"{{ROOT}}audit-report.json\" download>Descargar los datos de la auditoría</a>.",
-      "visionTitle": "Visto a través de cada visión.",
+      "visionTitle": "Así se ve con distintas condiciones de visión.",
       "visionIntro": "El código de <span data-selection></span> tal como se simula para cada tipo de daltonismo, y una puntuación sobre 100 para cada situación de visión. Alrededor del 8 % de los hombres y del 0,4 % de las mujeres de ascendencia europea tienen una deficiencia de visión rojo-verde [6]. Son cálculos, no observaciones: <a href=\"{{TESTERS_URL}}\">las pruebas con personas reales</a> aún están por hacer.",
       "monthlyTitle": "¿Cuánto se diferencian los meses?",
       "monthlyIntro": "Compara las 12 paletas mensuales antes y después del rediseño. Un ΔE mayor significa una mayor diferencia de color. Las dos cuadrículas usan la misma escala. Elige una medida para explorar el fondo o los colores de sintaxis."

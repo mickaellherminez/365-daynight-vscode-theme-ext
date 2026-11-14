@@ -6,7 +6,8 @@
     "numberLocale": "fr-FR",
     "dateLocale": "fr-FR",
     "ogLocale": "fr_FR",
-    "lowercaseInSentence": true
+    "lowercaseInSentence": true,
+    "elision": { "de": "d’", "la": "l’", "le": "l’" }
   },
   "months": [
     { "name": "janvier", "short": "janv." },
@@ -99,7 +100,7 @@
       "syntaxTitle": "Chaque couleur de syntaxe, mesurée.",
       "syntaxIntro": "Chaque barre montre le contraste du texte sur le fond de l’éditeur, avec les couleurs exactes de <span data-selection></span>. Les repères indiquent les seuils de contraste du texte de {{AA_RATIO}} et 7:1.",
       "syntaxNote": "Contraste = (luminance relative la plus claire + 0,05) / (luminance relative la plus sombre + 0,05). Ces mesures portent sur les couleurs de texte sur le fond de l’éditeur ; elles ne certifient pas toute l’interface. <a href=\"{{AUDIT_URL}}\">Méthode et limites</a> · <a href=\"{{ROOT}}audit-report.json\" download>Télécharger les données de l’audit</a>.",
-      "visionTitle": "Vu par chaque vision.",
+      "visionTitle": "Selon différents types de vision.",
       "visionIntro": "Le code de <span data-selection></span> tel que simulé pour chaque type de daltonisme, et un score sur 100 pour chaque situation de vision. Environ 8 % des hommes et 0,4 % des femmes d’origine européenne ont un déficit de vision rouge-vert [6]. Ce sont des calculs, pas des observations : <a href=\"{{TESTERS_URL}}\">les essais avec de vraies personnes</a> restent à faire.",
       "monthlyTitle": "Les mois sont-ils vraiment différents ?",
       "monthlyIntro": "Comparez les 12 palettes mensuelles avant et après la refonte. Plus le ΔE est grand, plus l’écart de couleur est grand. Les deux grilles utilisent la même échelle. Choisissez une mesure pour explorer le fond ou les couleurs de syntaxe."
@@ -241,7 +242,7 @@
       "reference": "Référence",
       "note": "Les scores aident à choisir un thème adapté à votre vision. Un score de 100 signifie que chaque paire ou contrôle de texte respecte la règle, pas que le thème convient à tout le monde.",
       "normal": "{{theme}}, tel qu’il a été conçu.",
-      "simulated": "{{theme}}, simulé pour la {{vision}} : score de {{score}} sur 100.",
+      "simulated": "{{theme}}, simulation de la {{vision}} : score de {{score}} sur 100.",
       "caption": "{{theme}} : scores de vision sur 100, avec leur formule et leur référence."
     },
     "matrices": {
