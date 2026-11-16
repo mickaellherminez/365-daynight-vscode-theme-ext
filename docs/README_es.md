@@ -32,7 +32,7 @@ Escarcha en enero, brotes tiernos en marzo, una laguna en julio, hojas otoñales
 
 ### 👁️ Pensada para seguir siendo legible
 
-El texto alcanza un contraste de al menos 4,5:1 (WCAG AA) en los temas Light y Dark, y de 7:1 (WCAG AAA) en casi todo el texto de los temas High Contrast. Los colores de sintaxis, los errores y los cambios de Git siguen siendo distinguibles en las simulaciones de daltonismo, y los comentarios y el código obsoleto o no válido también se diferencian con cursiva, tachado o subrayado.
+El texto alcanza un contraste de al menos 4,5:1 (WCAG AA) en los temas Light y Dark, y de 7:1 (WCAG AAA) en todo el texto de los temas High Contrast, salvo en las líneas seleccionadas de la consola de depuración (4,5:1). Los colores de sintaxis, los errores y los cambios de Git siguen siendo distinguibles en las simulaciones de daltonismo, y los comentarios y el código obsoleto o no válido también se diferencian con cursiva, tachado o subrayado.
 
 **La prueba:** cada tema debe superar una auditoría automática de más de 250 comprobaciones antes de cada publicación, y [el informe completo](AUDIT.md) da los resultados de cada tema y los límites de la auditoría. El daltonismo se comprueba con simulaciones, así que los comentarios de personas reales son muy bienvenidos: [únete a la convocatoria de probadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
@@ -86,7 +86,7 @@ Después puedes elegir tus horas. Una hora nueva se aplica unos 2 segundos despu
 
 ## Accesibilidad
 
-- **Texto legible:** WCAG AA en los temas Light y Dark, AAA en casi todo el texto de los temas High Contrast.
+- **Texto legible:** WCAG AA en los temas Light y Dark, AAA en todo el texto de los temas High Contrast, salvo en las líneas seleccionadas de la consola de depuración.
 - **Daltonismo:** los colores de sintaxis y las alertas se simulan para protanopía, deuteranopía y tritanopía.
 - **No solo color:** los comentarios, parámetros y atributos van en *cursiva*, el código obsoleto está ~~tachado~~ y el código no válido, subrayado.
 - **Teclado y lectores de pantalla:** los temas High Contrast tienen un contorno de foco marcado, y cada parte del botón de la barra de estado tiene su propia etiqueta hablada.
@@ -115,7 +115,7 @@ No. El modo automático está desactivado por defecto. Sin él, el tema solo cam
 Por supuesto. Elígelo en el selector de temas (`Ctrl+K Ctrl+T`) y deja el modo automático desactivado.
 
 **¿Para qué sirven los temas de alto contraste?**
-Están pensados para baja visión, entornos muy luminosos o largas sesiones de programación. Ofrecen un contraste AAA (7:1) en casi todo el texto, bordes visibles y un contorno de foco muy marcado. Cada mes tiene dos: una versión oscura y una clara, High Contrast Light, para entornos luminosos.
+Están pensados para baja visión, entornos muy luminosos o largas sesiones de programación. Ofrecen un contraste AAA (7:1) en todo el texto (4,5:1 en las líneas seleccionadas de la consola de depuración), bordes visibles y un contorno de foco muy marcado. Cada mes tiene dos: una versión oscura y una clara, High Contrast Light, para entornos luminosos.
 
 **¿Cómo pruebo una nueva versión antes que nadie?**
 Cuando exista una versión preliminar, abre la página de la extensión en la vista de Extensiones y haz clic en **Switch to Pre-Release Version** (cambiar a la versión preliminar). VS Code instala entonces la versión preliminar y sus actualizaciones. Para volver a la versión normal, haz clic en **Switch to Release Version** en la misma página. Tus comentarios sobre una versión preliminar son bienvenidos en los [issues de GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Hay una [convocatoria de probadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) abierta, con una lista breve de puntos que comprobar.

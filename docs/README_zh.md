@@ -32,7 +32,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ### 👁️ 始终清晰易读
 
-文本对比度在 Light 和 Dark 主题中至少为 4.5:1（WCAG AA），High Contrast 主题中几乎所有文本至少为 7:1（WCAG AAA）。在色觉障碍模拟中，语法颜色、错误和 Git 更改仍可区分，注释、已弃用代码和无效代码还会用斜体、删除线或下划线来区分。
+文本对比度在 Light 和 Dark 主题中至少为 4.5:1（WCAG AA），High Contrast 主题中所有文本至少为 7:1（WCAG AAA），调试控制台中选中的行除外（4.5:1）。在色觉障碍模拟中，语法颜色、错误和 Git 更改仍可区分，注释、已弃用代码和无效代码还会用斜体、删除线或下划线来区分。
 
 **依据：** 每款主题在每次发布前都必须通过 250 多项自动审核，[完整报告](AUDIT.md)列出了每款主题的结果和审核的局限。色觉障碍通过模拟进行检查，因此非常欢迎真实用户的反馈：[参加测试招募](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
 
@@ -86,7 +86,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ## 无障碍
 
-- **清晰的文本：** Light 和 Dark 主题达到 WCAG AA，High Contrast 主题中几乎所有文本达到 AAA。
+- **清晰的文本：** Light 和 Dark 主题达到 WCAG AA，High Contrast 主题中所有文本达到 AAA，调试控制台中选中的行除外。
 - **色觉障碍：** 针对红色盲、绿色盲和蓝色盲模拟语法颜色和警报。
 - **不只依赖颜色：** 注释、参数和属性使用*斜体*，已弃用代码使用~~删除线~~，无效代码使用下划线。
 - **键盘和屏幕阅读器：** High Contrast 主题具有醒目的焦点轮廓，状态栏按钮的每个部分都有自己的朗读标签。
@@ -115,7 +115,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 当然可以。在主题选择器（`Ctrl+K Ctrl+T`）中选择它，并保持自动模式关闭即可。
 
 **高对比度主题有什么用？**
-它们专为低视力、强光环境或长时间编码而设计，几乎所有文本达到 AAA 对比度（7:1），并提供可见边框和醒目的焦点轮廓。每个月都有两款：深色版本，以及适合明亮环境的浅色版本 High Contrast Light。
+它们专为低视力、强光环境或长时间编码而设计，所有文本达到 AAA 对比度（7:1；调试控制台中选中的行为 4.5:1），并提供可见边框和醒目的焦点轮廓。每个月都有两款：深色版本，以及适合明亮环境的浅色版本 High Contrast Light。
 
 **如何抢先试用新版本？**
 当有预发布版本时，在扩展视图中打开扩展页面，点击 **Switch to Pre-Release Version**（切换到预发布版本）。VS Code 随后会安装预发布版本及其更新。要回到正式版本，请在同一页面点击 **Switch to Release Version**。欢迎在 [GitHub Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中反馈预发布版本的问题。我们正在[招募测试者](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)，并提供了一份简短的检查清单。

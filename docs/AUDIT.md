@@ -10,7 +10,7 @@ The same results are available as [JSON](audit-report.json).
 
 - **Checks:** contrast, font style and required color checks passed by the theme.
 - **Editor text:** contrast of normal text on the editor background.
-- **Lowest text:** the lowest contrast among all the text checks. The minimum is 4.5:1, and 7:1 for most text in High Contrast themes.
+- **Lowest text:** the lowest contrast among all the text checks. The minimum is 4.5:1, and 7:1 in High Contrast themes, except for selected lines in the debug console, which keep their color on the selection (4.5:1).
 - **≥ 4.5:1 and ≥ 7:1:** share of the text checks above each level. The W3C links these levels to a visual acuity of about 20/40 and 20/80 ([WCAG, Understanding 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)).
 - **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE, CIE76) between syntax colors or between alerts, after simulation ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)). The audit fails under 12.
 - **Achromatopsia:** pairs of main syntax colors closer than the threshold in lightness alone. For information, it never fails the audit.
@@ -211,18 +211,18 @@ Difference between months:
 
 | Month | Checks | Editor text | Lowest text | ≥ 4.5:1 | ≥ 7:1 | Normal | Protanopia | Deuteranopia | Tritanopia | Achromatopsia |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| January | 279/279 | 16.66:1 | 4.62:1 | 100.0% | 96.7% | 21.6 | 13.3 | 12.5 | 12.4 | 13/21 |
-| February | 279/279 | 16.75:1 | 4.62:1 | 100.0% | 96.7% | 20.0 | 12.5 | 12.5 | 12.9 | 8/21 |
-| March | 279/279 | 16.80:1 | 4.71:1 | 100.0% | 96.7% | 25.7 | 12.6 | 12.5 | 13.0 | 9/21 |
-| April | 279/279 | 16.98:1 | 4.71:1 | 100.0% | 96.7% | 21.1 | 13.3 | 12.5 | 13.0 | 12/21 |
-| May | 279/279 | 17.00:1 | 4.71:1 | 100.0% | 96.7% | 19.3 | 12.5 | 12.5 | 12.3 | 13/21 |
-| June | 279/279 | 17.78:1 | 4.94:1 | 100.0% | 97.8% | 23.0 | 12.1 | 12.5 | 13.0 | 12/21 |
-| July | 279/279 | 17.16:1 | 4.78:1 | 100.0% | 96.7% | 16.9 | 13.3 | 12.2 | 12.9 | 8/21 |
-| August | 279/279 | 18.52:1 | 5.17:1 | 100.0% | 97.8% | 18.6 | 12.3 | 12.5 | 13.0 | 10/21 |
-| September | 279/279 | 16.73:1 | 4.62:1 | 100.0% | 96.7% | 26.7 | 12.1 | 12.1 | 12.8 | 10/21 |
-| October | 279/279 | 16.85:1 | 4.71:1 | 100.0% | 96.7% | 18.5 | 13.0 | 12.3 | 12.9 | 13/21 |
-| November | 279/279 | 17.25:1 | 4.78:1 | 100.0% | 96.7% | 26.3 | 13.3 | 12.5 | 12.5 | 10/21 |
-| December | 279/279 | 17.86:1 | 4.94:1 | 100.0% | 97.8% | 19.6 | 12.8 | 12.5 | 13.0 | 14/21 |
+| January | 279/279 | 16.66:1 | 4.62:1 | 100.0% | 97.8% | 21.6 | 13.3 | 12.9 | 12.4 | 13/21 |
+| February | 279/279 | 16.75:1 | 4.62:1 | 100.0% | 97.8% | 20.0 | 12.5 | 12.9 | 12.9 | 8/21 |
+| March | 279/279 | 16.80:1 | 4.71:1 | 100.0% | 97.8% | 25.7 | 12.6 | 12.8 | 13.0 | 9/21 |
+| April | 279/279 | 16.98:1 | 4.71:1 | 100.0% | 97.8% | 21.1 | 13.3 | 12.9 | 13.0 | 12/21 |
+| May | 279/279 | 17.00:1 | 4.71:1 | 100.0% | 97.8% | 19.3 | 12.5 | 12.9 | 12.3 | 13/21 |
+| June | 279/279 | 17.78:1 | 4.94:1 | 100.0% | 97.8% | 23.0 | 12.1 | 12.9 | 13.0 | 12/21 |
+| July | 279/279 | 17.16:1 | 4.78:1 | 100.0% | 97.8% | 16.9 | 13.3 | 12.2 | 12.9 | 8/21 |
+| August | 279/279 | 18.52:1 | 5.17:1 | 100.0% | 97.8% | 18.6 | 12.3 | 12.7 | 13.0 | 10/21 |
+| September | 279/279 | 16.73:1 | 4.62:1 | 100.0% | 97.8% | 26.7 | 12.1 | 12.1 | 12.8 | 10/21 |
+| October | 279/279 | 16.85:1 | 4.71:1 | 100.0% | 97.8% | 18.5 | 13.0 | 12.3 | 12.9 | 13/21 |
+| November | 279/279 | 17.25:1 | 4.78:1 | 100.0% | 97.8% | 26.3 | 13.3 | 12.7 | 12.5 | 10/21 |
+| December | 279/279 | 17.86:1 | 4.94:1 | 100.0% | 97.8% | 19.6 | 12.8 | 12.9 | 13.0 | 14/21 |
 
 Smallest difference between main syntax colors with CIEDE2000, for information:
 
@@ -245,17 +245,17 @@ Scores out of 100:
 
 | Month | Protanopia | Deuteranopia | Tritanopia | Protanomaly | Deuteranomaly | Tritanomaly | Achromatopsia | Low vision 20/40 | Low vision 20/80 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| January | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
-| February | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 97 |
-| March | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 97 |
-| April | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 97 |
-| May | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
+| January | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 98 |
+| February | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 98 |
+| March | 100 | 100 | 100 | 100 | 100 | 100 | 57 | 100 | 98 |
+| April | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 98 |
+| May | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 98 |
 | June | 100 | 100 | 100 | 100 | 100 | 100 | 43 | 100 | 98 |
-| July | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 97 |
+| July | 100 | 100 | 100 | 100 | 100 | 100 | 62 | 100 | 98 |
 | August | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
-| September | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 97 |
-| October | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 97 |
-| November | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 97 |
+| September | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
+| October | 100 | 100 | 100 | 100 | 100 | 100 | 38 | 100 | 98 |
+| November | 100 | 100 | 100 | 100 | 100 | 100 | 52 | 100 | 98 |
 | December | 100 | 100 | 100 | 100 | 100 | 100 | 33 | 100 | 98 |
 
 Difference between months:

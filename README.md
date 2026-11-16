@@ -32,7 +32,7 @@ Frost in January, young shoots in March, a lagoon in July, autumn leaves in Octo
 
 ### 👁️ Built to stay readable
 
-Text reaches a contrast of at least 4.5:1 (WCAG AA) in Light and Dark themes, and 7:1 (WCAG AAA) for nearly all text in High Contrast themes. Syntax colors, errors and Git changes stay distinct in color blindness simulations, and comments, deprecated and invalid code also differ by italics, strikethrough or underline.
+Text reaches a contrast of at least 4.5:1 (WCAG AA) in Light and Dark themes, and 7:1 (WCAG AAA) for all text in High Contrast themes, except selected lines in the debug console (4.5:1). Syntax colors, errors and Git changes stay distinct in color blindness simulations, and comments, deprecated and invalid code also differ by italics, strikethrough or underline.
 
 **The proof:** every theme must pass an automated audit of more than 250 checks before each release, and [the full report](docs/AUDIT.md) gives the results of each theme and the limits of the audit. Color blindness is checked with simulations, so feedback from real eyes is very welcome: [join the call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
@@ -86,7 +86,7 @@ You can then choose your hours. A new time applies about 2 seconds after you sto
 
 ## Accessibility
 
-- **Readable text:** WCAG AA in Light and Dark themes, AAA for nearly all text in High Contrast themes.
+- **Readable text:** WCAG AA in Light and Dark themes, AAA for all text in High Contrast themes, except selected lines in the debug console.
 - **Color blindness:** syntax colors and alerts are simulated for protanopia, deuteranopia and tritanopia.
 - **Not color alone:** comments, parameters and attributes are in *italics*, deprecated code is ~~struck through~~, invalid code is underlined.
 - **Keyboard and screen readers:** High Contrast themes have a strong focus outline, and each part of the status bar button has its own spoken label.
@@ -115,7 +115,7 @@ No. Automatic mode is off by default. Without it, the theme only changes when yo
 Of course. Pick it in the theme picker (`Ctrl+K Ctrl+T`) and leave automatic mode off.
 
 **What are the High Contrast themes for?**
-They are designed for low vision, bright environments or long coding sessions. They use AAA contrast (7:1) for nearly all text, visible borders and a strong focus outline. Each month has two: High Contrast, on a dark background, and High Contrast Light, on a light background for bright environments.
+They are designed for low vision, bright environments or long coding sessions. They use AAA contrast (7:1) for all text (4.5:1 for selected lines in the debug console), visible borders and a strong focus outline. Each month has two: High Contrast, on a dark background, and High Contrast Light, on a light background for bright environments.
 
 **How do I try a new version before everyone else?**
 When a pre-release exists, open the extension page in the Extensions view and click **Switch to Pre-Release Version**. VS Code then installs the pre-release and its updates. To go back to the release version, click **Switch to Release Version** on the same page. Feedback on a pre-release is welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). A [call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) is open, with a short list of things to check.

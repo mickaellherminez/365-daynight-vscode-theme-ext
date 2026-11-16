@@ -30,8 +30,11 @@ python3 scripts/themes/audit.py -v themes/365-10-light-theme.json  # détail de 
 
 Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
 
-- **Contraste** : texte et jetons de syntaxe ≥ 4.5:1 (AA) ; ≥ 7:1 (AAA) pour les thèmes High Contrast, sombres
-  ou clairs (`uiTheme` `hc-black` ou `hc-light`) ; indicateurs (curseur, soulignements, gouttière, focus) ≥ 3:1.
+- **Contraste** : texte et jetons de syntaxe ≥ 4.5:1 (AA) ; ≥ 7:1 (AAA) pour tout le texte des thèmes High Contrast,
+  sombres ou clairs (`uiTheme` `hc-black` ou `hc-light`), interface comprise ; indicateurs (curseur, soulignements,
+  gouttière, focus) ≥ 3:1. Seule exception : une ligne sélectionnée de la console de débogage garde la couleur de son
+  texte, qui reste à 4.5:1 sur la sélection (`aa_only` dans `audit.py`). Exiger 7:1 à la fois sur le fond et sur une
+  sélection visible rendrait les couleurs info, avertissement et erreur presque noires en High Contrast Light.
 - **Sélection** : visible dans l'éditeur, le terminal et la console de débogage, distincte de la ligne
   courante, et texte sélectionné toujours lisible.
 - **Interface** : barre latérale, onglets, barre d'état, boutons, champs, menus, notifications, vue peek, etc.
