@@ -4,7 +4,7 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.3] - 2026-11-17
 
 ### Changed
 - High Contrast themes: all text now reaches 7:1 (WCAG AAA), the sidebar included, and the audit requires it. The only exception is selected lines in the debug console, which keep the color of their text on the selection and stay at 4.5:1 (WCAG AA). In High Contrast Light, the warning color of the sidebar (files in conflict, list warnings) is a slightly more orange brown, also easier to tell from the error color with deuteranopia.
