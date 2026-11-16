@@ -172,7 +172,13 @@ def checks(theme, hc):
     if not bg:
         return [('editor.background', None, 0, 'MANQUANT')]
 
-    def chk(label, fg, back, minimum):
+    def chk(label, fg, back, minimum, aa_only=False):
+        # En contraste élevé, tout texte demande 7:1 (WCAG AAA), y compris celui de l'interface.
+        # Seule exception (aa_only) : le texte sélectionné de la console de débogage, qui garde
+        # sa couleur sur la sélection ; 7:1 sur le fond et sur la sélection rendrait ses couleurs
+        # presque noires en High Contrast Light, sans distinction entre erreur, avertissement et info.
+        if hc and minimum == 4.5 and not aa_only:
+            minimum = 7
         if fg is None or back is None:
             rows.append((label, None, minimum, 'MANQUANT'))
             return
@@ -232,7 +238,7 @@ def checks(theme, hc):
                 'debugConsole.errorForeground', 'debugConsole.sourceForeground'):
         name = key.split('.')[-1]
         chk(f'Console : {name}', g(key), tbg, text)
-        chk(f'Console : {name} sélectionné', g(key), over(wsel, tbg) if wsel and tbg else None, 4.5)
+        chk(f'Console : {name} sélectionné', g(key), over(wsel, tbg) if wsel and tbg else None, 4.5, aa_only=True)
 
     # Interface
     side = g('sideBar.background', bg)

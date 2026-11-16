@@ -196,7 +196,7 @@ def to_markdown(data):
         '## How to read the tables', '',
         '- **Checks:** contrast, font style and required color checks passed by the theme.',
         '- **Editor text:** contrast of normal text on the editor background.',
-        '- **Lowest text:** the lowest contrast among all the text checks. The minimum is 4.5:1, and 7:1 for most text in High Contrast themes.',
+        '- **Lowest text:** the lowest contrast among all the text checks. The minimum is 4.5:1, and 7:1 in High Contrast themes, except for selected lines in the debug console, which keep their color on the selection (4.5:1).',
         '- **≥ 4.5:1 and ≥ 7:1:** share of the text checks above each level. The W3C links these levels to a visual acuity of about 20/40 and 20/80 ([WCAG, Understanding 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)).',
         f"- **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE, CIE76) between syntax colors or between alerts, after simulation ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)). The audit fails under {data['thresholds']['colorDistinctionDeltaE']}.",
         '- **Achromatopsia:** pairs of main syntax colors closer than the threshold in lightness alone. For information, it never fails the audit.', '',

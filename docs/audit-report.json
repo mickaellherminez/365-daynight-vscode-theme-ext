@@ -6186,7 +6186,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [
@@ -6235,7 +6235,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 01-January High Contrast Light",
@@ -6244,7 +6244,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -6366,7 +6366,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [
@@ -6415,7 +6415,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 02-February High Contrast Light",
@@ -6424,7 +6424,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -6543,10 +6543,10 @@
           "colorVision": {
             "deuteranopia": {
               "closest": [
-                "error",
-                "warning"
+                "comment",
+                "number"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.8
             },
             "normal": {
               "closest": [
@@ -6595,7 +6595,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 03-March High Contrast Light",
@@ -6604,7 +6604,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -6726,7 +6726,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [
@@ -6775,7 +6775,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 04-April High Contrast Light",
@@ -6784,7 +6784,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -6906,7 +6906,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [
@@ -6955,7 +6955,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 05-May High Contrast Light",
@@ -6964,7 +6964,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -7086,7 +7086,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [
@@ -7315,7 +7315,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 07-July High Contrast Light",
@@ -7324,7 +7324,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -7443,10 +7443,10 @@
           "colorVision": {
             "deuteranopia": {
               "closest": [
-                "error",
-                "warning"
+                "Git graph 1",
+                "Git graph 5"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.7
             },
             "normal": {
               "closest": [
@@ -7675,7 +7675,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 09-September High Contrast Light",
@@ -7684,7 +7684,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -7855,7 +7855,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 10-October High Contrast Light",
@@ -7864,7 +7864,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -7983,10 +7983,10 @@
           "colorVision": {
             "deuteranopia": {
               "closest": [
-                "error",
-                "warning"
+                "comment",
+                "number"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.7
             },
             "normal": {
               "closest": [
@@ -8035,7 +8035,7 @@
           },
           "lowVision": {
             "atLeast4.5": 100.0,
-            "atLeast7": 96.7,
+            "atLeast7": 97.8,
             "textChecks": 182
           },
           "name": "365 11-November High Contrast Light",
@@ -8044,7 +8044,7 @@
             "deuteranomaly": 100,
             "deuteranopia": 100,
             "lowVision20/40": 100,
-            "lowVision20/80": 97,
+            "lowVision20/80": 98,
             "protanomaly": 100,
             "protanopia": 100,
             "tritanomaly": 100,
@@ -8166,7 +8166,7 @@
                 "error",
                 "warning"
               ],
-              "deltaE": 12.5
+              "deltaE": 12.9
             },
             "normal": {
               "closest": [

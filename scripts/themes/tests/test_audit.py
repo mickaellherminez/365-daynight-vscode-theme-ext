@@ -42,6 +42,31 @@ class HighContrastDefaultsTest(unittest.TestCase):
         self.assertEqual(self.status(theme)[label], 'ÉCHEC')
 
 
+class HighContrastTextTest(unittest.TestCase):
+    """En contraste élevé, tout texte demande 7:1, sauf une ligne sélectionnée de la console de débogage (4.5:1)."""
+
+    WARNING = 'list.warningForeground / sideBar.background'
+
+    def rows(self, theme, hc=True):
+        return {label: (minimum, status) for label, _, minimum, status in checks(theme, hc)}
+
+    def setUp(self):
+        self.theme = load_theme(os.path.join(ROOT, 'themes', '365-01-hc-light-theme.json'))
+
+    def test_interface_text_requires_7_to_1(self):
+        self.assertEqual(self.rows(self.theme)[self.WARNING], (7, 'OK'))
+        theme = copy.deepcopy(self.theme)
+        theme['colors']['list.warningForeground'] = '#6B4A00'  # 6.61:1 sur la barre latérale de janvier
+        self.assertEqual(self.rows(theme)[self.WARNING], (7, 'ÉCHEC'))
+
+    def test_light_and_dark_themes_keep_4_5_to_1(self):
+        self.assertEqual(self.rows(load_theme(THEME), False)[self.WARNING][0], 4.5)
+
+    def test_selected_debug_console_text_keeps_4_5_to_1(self):
+        rows = self.rows(self.theme)
+        self.assertEqual(rows['Console : errorForeground sélectionné'], (4.5, 'OK'))
+        self.assertEqual(rows['Console : errorForeground'], (7, 'OK'))
+
 class StyleCheckTest(unittest.TestCase):
     """WCAG 2.2, critère 1.4.1 : les styles qui portent un sens doivent être présents."""
 
