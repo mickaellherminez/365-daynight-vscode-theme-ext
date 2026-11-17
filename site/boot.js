@@ -11,4 +11,7 @@
   root.dataset.month = month;
   root.dataset.mode = mode;
   root.style.colorScheme = mode;
+  // Shows the interactive blocks from the first paint, so their space is reserved before app.js fills them
+  // and nothing moves while the page loads. A browser that cannot run app.js (no module support) keeps them hidden.
+  if ('noModule' in document.createElement('script')) root.classList.add('js');
 })();
