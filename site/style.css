@@ -68,6 +68,8 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .panel-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; padding: 16px 24px; border-bottom: 1px solid var(--rule); }
 .picker-body { padding: clamp(12px, 2.4vw, 28px) clamp(12px, 2vw, 20px) clamp(12px, 1.6vw, 16px); }
 .picker { width: 100%; }
+/* Until app.js draws the logo, its box keeps the size of the drawing (viewBox of picker.js), so the panel does not grow on load. */
+.picker:empty { aspect-ratio: 1112 / 544; }
 .pk-wide { display: block; }
 .pk-compact { display: none; }
 .pk .dh { fill: none; stroke: currentColor; stroke-opacity: 0; cursor: pointer; pointer-events: stroke; transition: stroke-opacity .12s ease; }
@@ -90,6 +92,9 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .palette-current { display: flex; align-items: center; gap: 16px; }
 .current-swatches { display: flex; gap: 3px; flex: none; overflow: hidden; border-radius: 5px; }
 .current-swatches span { width: 18px; height: 36px; border: 1px solid var(--rule); }
+/* Same reservation for the readout: 4 swatches, and one line for each text that app.js writes. */
+.current-swatches:empty { width: 81px; height: 36px; }
+.current-month:empty::before, .current-mode:empty::before, .contrast-stats dd:empty::before { content: '\a0'; }
 .current-month { margin: 0; font: 700 20.72px/1.1 var(--mono); }
 .current-mode { margin: 4px 0 0; font-size: 15px; }
 .contrast-stats { display: flex; gap: 28px; margin: 0; }
@@ -241,6 +246,9 @@ dialog[open]::backdrop { opacity: 1; }
   .pk-wide { display: none !important; }
   .pk-compact { display: block !important; }
   .mode-options { display: grid; }
+  /* 4 variant buttons on 2 rows of 52 px, before app.js adds them. */
+  .mode-options:empty { min-height: 112px; }
+  .picker:empty { aspect-ratio: 1; max-width: 480px; margin-inline: auto; }
   .palette-readout { padding-inline: 16px; flex-direction: column; align-items: flex-start; }
   .contrast-stats { gap: 20px; }
   .section-heading { gap: 16px; }
@@ -250,6 +258,7 @@ dialog[open]::backdrop { opacity: 1; }
 @media (max-width: 420px) {
   .palette-readout { gap: 20px; }
   .current-swatches span { width: 14px; }
+  .current-swatches:empty { width: 65px; }
   .hero-stats { justify-content: space-between; gap: 16px; }
   .hero-stats dd { font-size: 21px; }
   .hero-stats dt { font-size: 12px; }

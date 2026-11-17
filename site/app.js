@@ -407,8 +407,6 @@ const scale = document.querySelector('.scale');
 scale.style.setProperty('--lowest', `${(Number(scale.dataset.lowest) - 1) / 20 * 100}%`);
 refreshDate();
 setSplit(split);
-// Only reveal interactive sections after every control is initialized.
-root.classList.add('js');
 
 // The header chip keeps the width of its longest label, so a longer theme name
 // never pushes it to a new line and moves the page when the theme changes.
