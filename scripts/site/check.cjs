@@ -127,6 +127,10 @@ async function checkView(browser, axe, url, code, [width, scheme], problems) {
 	const where = `${code} ${width}px ${scheme}`;
 	watchErrors(page, where, problems);
 	await page.goto(url, { waitUntil: 'networkidle' });
+	// Sections out of sight are not laid out (content-visibility: auto). axe needs them rendered to check every contrast.
+	await page.evaluate(() => {
+		for (const node of document.querySelectorAll('main > .section, body > footer')) node.style.contentVisibility = 'visible';
+	});
 	await checkLanguage(page, code, where, problems);
 	await checkLanguageMenu(page, where, problems);
 	await checkAccessibility(page, axe, code === 'en' ? VARIANTS : [null], where, problems);

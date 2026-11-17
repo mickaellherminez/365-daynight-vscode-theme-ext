@@ -461,7 +461,6 @@ window.addEventListener('scroll', () => {
     siteHeader.classList.toggle('scrolled', window.scrollY > 0);
   });
 }, { passive: true });
-siteHeader.classList.toggle('scrolled', window.scrollY > 0);
 // Escape hides an open tooltip until the pointer or the focus moves again (WCAG 1.4.13).
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') root.classList.add('tooltips-off');
@@ -469,8 +468,16 @@ document.addEventListener('keydown', (event) => {
 for (const type of ['pointermove', 'focusin']) {
   document.addEventListener(type, () => root.classList.remove('tooltips-off'), { passive: true });
 }
-reserveTextSpace();
-if (document.fonts) document.fonts.ready.then(reserveTextSpace);
+// Measuring forces a layout of the whole page. It waits until the page is painted, in a task of its own,
+// so the start-up of this module stays short on slow phones.
+function afterPaint(callback) {
+  window.requestAnimationFrame(() => window.setTimeout(callback, 0));
+}
+afterPaint(() => {
+  siteHeader.classList.toggle('scrolled', window.scrollY > 0);
+  reserveTextSpace();
+  if (document.fonts) document.fonts.ready.then(() => afterPaint(reserveTextSpace));
+});
 let resizeFrame = 0;
 window.addEventListener('resize', () => {
   window.cancelAnimationFrame(resizeFrame);
