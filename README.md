@@ -9,6 +9,8 @@
 [![Open VSX downloads](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/LICENSE)
+[![Listed in the VS Code documentation](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Accessibility audit report](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](docs/AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ Frost in January, young shoots in March, a lagoon in July, autumn leaves in Octo
 Text reaches a contrast of at least 4.5:1 (WCAG AA) in Light and Dark themes, and 7:1 (WCAG AAA) for all text in High Contrast themes, except selected lines in the debug console (4.5:1). Syntax colors, errors and Git changes stay distinct in color blindness simulations, and comments, deprecated and invalid code also differ by italics, strikethrough or underline.
 
 **The proof:** every theme must pass an automated audit of more than 250 checks before each release, and [the full report](docs/AUDIT.md) gives the results of each theme and the limits of the audit. Color blindness is checked with simulations, so feedback from real eyes is very welcome: [join the call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+
+**Listed by VS Code:** the [VS Code documentation](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) lists these themes under *Recommended themes for color vision accessibility*.
 
 ### 🌗 Day and night, without thinking about it
 

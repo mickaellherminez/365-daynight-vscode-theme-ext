@@ -47,6 +47,7 @@
       "title": "Un nouveau style chaque mois.",
       "titleAccent": "Lisible. Mesuré.",
       "lead": "{{THEMES}} thèmes de couleurs pour VS Code, avec des contrastes mesurés et des simulations de vision des couleurs publiées. Passez du jour à la nuit en un clic ou automatiquement.",
+      "listed": "Cité dans la documentation de VS Code, parmi les <a href=\"{{VSCODE_DOCS_URL}}\">thèmes recommandés pour la vision des couleurs</a> (en anglais).",
       "install": "Installer depuis le Marketplace",
       "statThemes": "thèmes",
       "statChecks": "contrôles réussis",

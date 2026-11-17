@@ -9,6 +9,8 @@
 [![Descargas en Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![Estado de la CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Licencia MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![Incluido en la documentación de VS Code](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Informe de auditoría de accesibilidad](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ Escarcha en enero, brotes tiernos en marzo, una laguna en julio, hojas otoñales
 El texto alcanza un contraste de al menos 4,5:1 (WCAG AA) en los temas Light y Dark, y de 7:1 (WCAG AAA) en todo el texto de los temas High Contrast, salvo en las líneas seleccionadas de la consola de depuración (4,5:1). Los colores de sintaxis, los errores y los cambios de Git siguen siendo distinguibles en las simulaciones de daltonismo, y los comentarios y el código obsoleto o no válido también se diferencian con cursiva, tachado o subrayado.
 
 **La prueba:** cada tema debe superar una auditoría automática de más de 250 comprobaciones antes de cada publicación, y [el informe completo](AUDIT.md) da los resultados de cada tema y los límites de la auditoría. El daltonismo se comprueba con simulaciones, así que los comentarios de personas reales son muy bienvenidos: [únete a la convocatoria de probadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+
+**Incluido por VS Code:** la [documentación de VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (en inglés) incluye estos temas entre los *Recommended themes for color vision accessibility* (temas recomendados para la visión de los colores).
 
 ### 🌗 El día y la noche, sin pensarlo
 

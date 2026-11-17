@@ -9,6 +9,8 @@
 [![Downloads auf Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI-Status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Lizenz MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![In der VS-Code-Dokumentation gelistet](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Prüfbericht zur Barrierefreiheit](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ Raureif im Januar, junge Triebe im März, eine Lagune im Juli, Herbstlaub im Okt
 Text erreicht einen Kontrast von mindestens 4,5:1 (WCAG AA) in den Light- und Dark-Themes und 7:1 (WCAG AAA) für den gesamten Text der High-Contrast-Themes, außer für ausgewählte Zeilen in der Debugkonsole (4,5:1). Syntaxfarben, Fehler und Git-Änderungen bleiben in den Simulationen der Farbenblindheit unterscheidbar, und Kommentare, veralteter und ungültiger Code unterscheiden sich auch durch Kursivschrift, Durchstreichung oder Unterstreichung.
 
 **Der Beweis:** Jedes Theme muss vor jeder Veröffentlichung ein automatisches Audit mit mehr als 250 Prüfungen bestehen, und [der vollständige Bericht](AUDIT.md) nennt die Ergebnisse jedes Themes und die Grenzen des Audits. Farbenblindheit wird per Simulation geprüft, daher sind Rückmeldungen von echten Menschen sehr willkommen: [Mach beim Testaufruf mit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+
+**Von VS Code gelistet:** Die [VS-Code-Dokumentation](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (auf Englisch) führt diese Themes unter *Recommended themes for color vision accessibility* (empfohlene Themes für das Farbsehen).
 
 ### 🌗 Tag und Nacht, ganz ohne Nachdenken
 

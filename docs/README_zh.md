@@ -9,6 +9,8 @@
 [![Open VSX 下载量](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI 状态](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT 许可证](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![已收录于 VS Code 文档](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![无障碍审核报告](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 文本对比度在 Light 和 Dark 主题中至少为 4.5:1（WCAG AA），High Contrast 主题中所有文本至少为 7:1（WCAG AAA），调试控制台中选中的行除外（4.5:1）。在色觉障碍模拟中，语法颜色、错误和 Git 更改仍可区分，注释、已弃用代码和无效代码还会用斜体、删除线或下划线来区分。
 
 **依据：** 每款主题在每次发布前都必须通过 250 多项自动审核，[完整报告](AUDIT.md)列出了每款主题的结果和审核的局限。色觉障碍通过模拟进行检查，因此非常欢迎真实用户的反馈：[参加测试招募](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
+
+**VS Code 收录：** [VS Code 文档](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)（英文）将这些主题列入 *Recommended themes for color vision accessibility*（推荐的色觉无障碍主题）。
 
 ### 🌗 白天与夜晚，无需操心
 

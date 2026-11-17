@@ -9,6 +9,8 @@
 [![Downloads no Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![Status da CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Licença MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![Listado na documentação do VS Code](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Relatório de auditoria de acessibilidade](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ Geada em janeiro, brotos novos em março, uma lagoa em julho, folhas de outono e
 O texto atinge contraste de pelo menos 4,5:1 (WCAG AA) nos temas Light e Dark, e 7:1 (WCAG AAA) em todo o texto dos temas High Contrast, exceto nas linhas selecionadas do console de depuração (4,5:1). As cores de sintaxe, os erros e as alterações do Git continuam distintos nas simulações de daltonismo, e comentários, código obsoleto e código inválido também se diferenciam por itálico, riscado ou sublinhado.
 
 **A prova:** cada tema precisa passar por uma auditoria automática de mais de 250 verificações antes de cada publicação, e [o relatório completo](AUDIT.md) traz os resultados de cada tema e os limites da auditoria. O daltonismo é verificado com simulações, então a opinião de pessoas reais é muito bem-vinda: [participe da chamada para testadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+
+**Listado pelo VS Code:** a [documentação do VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (em inglês) inclui estes temas entre os *Recommended themes for color vision accessibility* (temas recomendados para a visão de cores).
 
 ### 🌗 Dia e noite, sem precisar pensar
 

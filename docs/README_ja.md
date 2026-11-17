@@ -9,6 +9,8 @@
 [![Open VSX のダウンロード数](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI の状態](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT ライセンス](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![VS Code のドキュメントに掲載](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![アクセシビリティ監査レポート](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 テキストのコントラストは、Light と Dark のテーマで 4.5:1 以上（WCAG AA）、High Contrast のテーマではすべてのテキストが 7:1 以上（WCAG AAA）です（デバッグ コンソールで選択した行は 4.5:1）。構文の色、エラー、Git の変更は色覚シミュレーションでも区別でき、コメント、非推奨のコード、無効なコードは斜体、取り消し線、下線でも区別されます。
 
 **根拠：** 各テーマは公開のたびに 250 項目以上の自動監査に合格する必要があり、[詳しいレポート](AUDIT.md)で各テーマの結果と監査の限界を確認できます。色覚はシミュレーションで確認しているため、実際の利用者の声を歓迎します。[テスター募集に参加する](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
+
+**VS Code に掲載：** [VS Code のドキュメント](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)（英語）は、これらのテーマを *Recommended themes for color vision accessibility*（色覚のアクセシビリティに推奨されるテーマ）に掲載しています。
 
 ### 🌗 昼も夜も、意識せずに
 

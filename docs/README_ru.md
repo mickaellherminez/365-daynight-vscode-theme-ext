@@ -9,6 +9,8 @@
 [![Загрузки в Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![Статус CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Лицензия MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![В документации VS Code](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Отчёт о проверке доступности](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 Контраст текста составляет не менее 4,5:1 (WCAG AA) в темах Light и Dark и 7:1 (WCAG AAA) для всего текста в темах High Contrast, кроме выделенных строк в консоли отладки (4,5:1). Цвета синтаксиса, ошибки и изменения Git остаются различимыми в симуляциях дальтонизма, а комментарии, устаревший и недопустимый код отличаются ещё и курсивом, зачёркиванием или подчёркиванием.
 
 **Доказательство:** перед каждой публикацией каждая тема должна пройти автоматический аудит из более чем 250 проверок, а [полный отчёт](AUDIT.md) содержит результаты каждой темы и ограничения аудита. Дальтонизм проверяется моделированием, поэтому отзывы реальных людей очень важны: [примите участие в тестировании](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
+
+**В списке VS Code:** [документация VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (на английском) включает эти темы в раздел *Recommended themes for color vision accessibility* (рекомендуемые темы для цветового зрения).
 
 ### 🌗 День и ночь, не задумываясь
 

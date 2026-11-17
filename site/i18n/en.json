@@ -46,6 +46,7 @@
       "title": "A new look every month.",
       "titleAccent": "Readable. Measured.",
       "lead": "{{THEMES}} color themes for VS Code, with measured contrast and published color vision simulations. Switch from day to night in one click or automatically.",
+      "listed": "Listed in the VS Code documentation, under <a href=\"{{VSCODE_DOCS_URL}}\">Recommended themes for color vision accessibility</a>.",
       "install": "Install from the Marketplace",
       "statThemes": "themes",
       "statChecks": "checks passed",

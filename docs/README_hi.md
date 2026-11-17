@@ -9,6 +9,8 @@
 [![Open VSX पर डाउनलोड](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI की स्थिति](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT लाइसेंस](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![VS Code के दस्तावेज़ में सूचीबद्ध](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![सुलभता ऑडिट रिपोर्ट](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
@@ -35,6 +37,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 टेक्स्ट का कंट्रास्ट Light और Dark थीम में कम से कम 4.5:1 (WCAG AA) और High Contrast थीम में सारे टेक्स्ट के लिए 7:1 (WCAG AAA) होता है, सिवाय डीबग कंसोल की चुनी गई पंक्तियों के (4.5:1)। सिंटैक्स रंग, त्रुटियाँ और Git बदलाव वर्णांधता के सिमुलेशन में भी अलग दिखते हैं, और टिप्पणियाँ, अप्रचलित कोड और अमान्य कोड इटैलिक, कटी रेखा या रेखांकन से भी अलग पहचाने जाते हैं।
 
 **प्रमाण:** हर प्रकाशन से पहले प्रत्येक थीम को 250 से अधिक जाँचों का स्वचालित ऑडिट पास करना होता है, और [पूरी रिपोर्ट](AUDIT.md) में हर थीम के परिणाम और ऑडिट की सीमाएँ दी गई हैं। वर्णांधता की जाँच सिमुलेशन से होती है, इसलिए वास्तविक लोगों की प्रतिक्रिया का बहुत स्वागत है: [टेस्टरों के आमंत्रण में शामिल हों](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)।
+
+**VS Code में सूचीबद्ध:** [VS Code का दस्तावेज़](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (अंग्रेज़ी में) इन थीम को *Recommended themes for color vision accessibility* (रंग दृष्टि के लिए सुझाई गई थीम) में शामिल करता है।
 
 ### 🌗 दिन और रात, बिना सोचे
 

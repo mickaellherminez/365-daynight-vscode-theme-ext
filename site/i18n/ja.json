@@ -46,6 +46,7 @@
       "title": "毎月、新しい雰囲気に。",
       "titleAccent": "読みやすく、測定済み。",
       "lead": "VS Code 用の {{THEMES}} のカラーテーマ。コントラストを測定し、色覚シミュレーションを公開しています。ワンクリックでも自動でも昼と夜を切り替えられます。",
+      "listed": "VS Code のドキュメントの<a href=\"{{VSCODE_DOCS_URL}}\">色覚のアクセシビリティに推奨されるテーマ</a>（英語）に掲載されています。",
       "install": "Marketplace からインストール",
       "statThemes": "テーマ",
       "statChecks": "件のチェックに合格",
