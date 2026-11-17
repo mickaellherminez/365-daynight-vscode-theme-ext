@@ -101,6 +101,28 @@ h3 { font-size: 19.24px; line-height: 1.35; letter-spacing: -.003em; }
 .contrast-stats dt { font: 400 11px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .contrast-stats dd { margin: 0; font: 700 17.76px/1.1 var(--mono); font-variant-numeric: tabular-nums; }
 .section { padding-top: clamp(64px, 8vw, 112px); scroll-margin-top: 24px; }
+/* Sections below the hero are laid out only when the visitor scrolls near them: the page has about 4,600 elements,
+   and slow phones spent most of their start-up laying out sections out of sight. Each placeholder has the height
+   measured for that section (phone first, then 1,024 px and wider); `auto` then keeps the real height once seen. */
+main > .section, body > footer { content-visibility: auto; contain-intrinsic-size: auto var(--section-height, 600px); }
+[aria-labelledby=editor-title] { --section-height: 1150px; }
+[aria-labelledby=year-title] { --section-height: 490px; }
+[aria-labelledby=variants-title] { --section-height: 1780px; }
+[aria-labelledby=numbers-title] { --section-height: 6170px; }
+[aria-labelledby=method-title] { --section-height: 1280px; }
+[aria-labelledby=limits-title] { --section-height: 1530px; }
+[aria-labelledby=verify-title] { --section-height: 520px; }
+[aria-labelledby=references-title] { --section-height: 990px; }
+body > footer { --section-height: 310px; }
+@media (min-width: 1024px) {
+  [aria-labelledby=editor-title] { --section-height: 1600px; }
+  [aria-labelledby=variants-title] { --section-height: 650px; }
+  [aria-labelledby=numbers-title] { --section-height: 4550px; }
+  [aria-labelledby=method-title] { --section-height: 710px; }
+  [aria-labelledby=limits-title] { --section-height: 890px; }
+  [aria-labelledby=references-title] { --section-height: 610px; }
+  body > footer { --section-height: 280px; }
+}
 .section-heading { display: flex; gap: 24px; padding-top: 20px; margin-bottom: 36px; border-top: 1px solid var(--text); }
 .section-number { width: 44px; flex: none; padding-top: 6px; color: var(--accent); font: 400 12px/1.5 var(--mono); letter-spacing: .08em; }
 .section-heading > div { flex: 1; min-width: 0; }
@@ -420,3 +442,4 @@ dialog[open]::backdrop { opacity: 1; }
 /* Month names are lowercase inside French, Spanish, Portuguese and Russian sentences;
    shown on their own (header chip, palette name, dialog), they start with a capital. */
 .chip-label::first-letter, .current-month::first-letter, .dialog-selection::first-letter { text-transform: uppercase; }
+
