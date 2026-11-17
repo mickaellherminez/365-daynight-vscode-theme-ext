@@ -36,6 +36,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 **Доказательство:** перед каждой публикацией каждая тема должна пройти автоматический аудит из более чем 250 проверок, а [полный отчёт](AUDIT.md) содержит результаты каждой темы и ограничения аудита. Дальтонизм проверяется моделированием, поэтому отзывы реальных людей очень важны: [примите участие в тестировании](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
+**В списке VS Code:** [документация VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (на английском) включает эти темы в раздел *Recommended themes for color vision accessibility* (рекомендуемые темы для цветового зрения).
+
 ### 🌗 День и ночь, не задумываясь
 
 Нажмите кнопку в строке состояния, чтобы переключиться между Light и Dark. Или пусть расширение следует за часами, в выбранное вами время, или за оформлением вашей системы.

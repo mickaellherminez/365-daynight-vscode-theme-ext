@@ -46,6 +46,7 @@
       "title": "Jeden Monat ein neuer Look.",
       "titleAccent": "Lesbar. Gemessen.",
       "lead": "{{THEMES}} Farbthemes für VS Code, mit gemessenen Kontrasten und veröffentlichten Simulationen des Farbsehens. Wechsle per Klick oder automatisch zwischen Tag und Nacht.",
+      "listed": "In der VS-Code-Dokumentation gelistet, unter den <a href=\"{{VSCODE_DOCS_URL}}\">empfohlenen Themes für das Farbsehen</a> (auf Englisch).",
       "install": "Aus dem Marketplace installieren",
       "statThemes": "Themes",
       "statChecks": "bestandene Prüfungen",

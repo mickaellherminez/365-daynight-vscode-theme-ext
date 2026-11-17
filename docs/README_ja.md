@@ -36,6 +36,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 **根拠：** 各テーマは公開のたびに 250 項目以上の自動監査に合格する必要があり、[詳しいレポート](AUDIT.md)で各テーマの結果と監査の限界を確認できます。色覚はシミュレーションで確認しているため、実際の利用者の声を歓迎します。[テスター募集に参加する](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
 
+**VS Code に掲載：** [VS Code のドキュメント](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)（英語）は、これらのテーマを *Recommended themes for color vision accessibility*（色覚のアクセシビリティに推奨されるテーマ）に掲載しています。
+
 ### 🌗 昼も夜も、意識せずに
 
 ステータスバーのボタンをクリックすると Light と Dark を切り替えられます。指定した時刻や、システムの外観に合わせて自動で切り替えることもできます。

@@ -36,6 +36,8 @@ O texto atinge contraste de pelo menos 4,5:1 (WCAG AA) nos temas Light e Dark, e
 
 **A prova:** cada tema precisa passar por uma auditoria automática de mais de 250 verificações antes de cada publicação, e [o relatório completo](AUDIT.md) traz os resultados de cada tema e os limites da auditoria. O daltonismo é verificado com simulações, então a opinião de pessoas reais é muito bem-vinda: [participe da chamada para testadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
+**Listado pelo VS Code:** a [documentação do VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (em inglês) inclui estes temas entre os *Recommended themes for color vision accessibility* (temas recomendados para a visão de cores).
+
 ### 🌗 Dia e noite, sem precisar pensar
 
 Clique no botão da barra de status para alternar entre Light e Dark. Ou deixe a extensão seguir o relógio, nos horários que você escolher, ou a aparência do seu sistema.

@@ -36,6 +36,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 **प्रमाण:** हर प्रकाशन से पहले प्रत्येक थीम को 250 से अधिक जाँचों का स्वचालित ऑडिट पास करना होता है, और [पूरी रिपोर्ट](AUDIT.md) में हर थीम के परिणाम और ऑडिट की सीमाएँ दी गई हैं। वर्णांधता की जाँच सिमुलेशन से होती है, इसलिए वास्तविक लोगों की प्रतिक्रिया का बहुत स्वागत है: [टेस्टरों के आमंत्रण में शामिल हों](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)।
 
+**VS Code में सूचीबद्ध:** [VS Code का दस्तावेज़](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (अंग्रेज़ी में) इन थीम को *Recommended themes for color vision accessibility* (रंग दृष्टि के लिए सुझाई गई थीम) में शामिल करता है।
+
 ### 🌗 दिन और रात, बिना सोचे
 
 Light और Dark के बीच बदलने के लिए स्टेटस बार का बटन क्लिक करें। या एक्सटेंशन को अपने चुने समय पर घड़ी का, या अपने सिस्टम की दिखावट का पालन करने दें।

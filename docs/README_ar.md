@@ -42,6 +42,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 **الدليل:** يجب أن تجتاز كل سمة تدقيقًا آليًا يضم أكثر من 250 فحصًا قبل كل إصدار، ويعرض [التقرير الكامل](AUDIT.md) نتائج كل سمة وحدود التدقيق. يُفحص عمى الألوان بالمحاكاة، لذا نرحب كثيرًا بملاحظات الأشخاص الحقيقيين: [انضم إلى دعوة المختبرين](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
+**مُدرجة لدى VS Code:** تُدرج [وثائق VS Code](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (بالإنجليزية) هذه السمات ضمن *Recommended themes for color vision accessibility* (السمات الموصى بها لرؤية الألوان).
+
 ### 🌗 النهار والليل دون تفكير
 
 انقر على زر شريط الحالة للتبديل بين Light وDark. أو دع الإضافة تتبع الساعة في الأوقات التي تختارها، أو مظهر نظامك.

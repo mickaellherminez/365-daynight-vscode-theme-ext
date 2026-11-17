@@ -46,6 +46,7 @@
       "title": "每个月，焕然一新。",
       "titleAccent": "清晰易读，有据可查。",
       "lead": "{{THEMES}} 款 VS Code 配色主题，对比度经过测量，并公开色觉模拟结果。一键或自动在白天与夜晚之间切换。",
+      "listed": "已收录于 VS Code 文档的<a href=\"{{VSCODE_DOCS_URL}}\">推荐色觉无障碍主题</a>（英文）。",
       "install": "从 Marketplace 安装",
       "statThemes": "款主题",
       "statChecks": "项检查通过",

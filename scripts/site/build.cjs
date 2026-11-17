@@ -295,6 +295,7 @@ function pageValues(report, locale = loadLocale('en'), locales = [locale]) {
 		REPO_URL: REPO,
 		AUDIT_URL: `${REPO}/blob/main/docs/AUDIT.md`,
 		TESTERS_URL: `${REPO}/issues/47`,
+		VSCODE_DOCS_URL: 'https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility',
 		LICENSE_URL: `${REPO}/blob/main/LICENSE`,
 	};
 }

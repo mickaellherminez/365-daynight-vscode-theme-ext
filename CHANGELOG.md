@@ -4,6 +4,11 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- The README, its translations and the website mention that the VS Code documentation lists these themes under [Recommended themes for color vision accessibility](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility).
+
 ## [1.0.3] - 2026-11-17
 
 ### Changed

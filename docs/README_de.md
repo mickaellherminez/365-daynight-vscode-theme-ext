@@ -36,6 +36,8 @@ Text erreicht einen Kontrast von mindestens 4,5:1 (WCAG AA) in den Light- und Da
 
 **Der Beweis:** Jedes Theme muss vor jeder Veröffentlichung ein automatisches Audit mit mehr als 250 Prüfungen bestehen, und [der vollständige Bericht](AUDIT.md) nennt die Ergebnisse jedes Themes und die Grenzen des Audits. Farbenblindheit wird per Simulation geprüft, daher sind Rückmeldungen von echten Menschen sehr willkommen: [Mach beim Testaufruf mit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
+**Von VS Code gelistet:** Die [VS-Code-Dokumentation](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) (auf Englisch) führt diese Themes unter *Recommended themes for color vision accessibility* (empfohlene Themes für das Farbsehen).
+
 ### 🌗 Tag und Nacht, ganz ohne Nachdenken
 
 Klicke auf die Schaltfläche in der Statusleiste, um zwischen Light und Dark zu wechseln. Oder lass die Erweiterung der Uhr folgen, zu Zeiten deiner Wahl, oder dem Erscheinungsbild deines Systems.

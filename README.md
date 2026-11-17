@@ -36,6 +36,8 @@ Text reaches a contrast of at least 4.5:1 (WCAG AA) in Light and Dark themes, an
 
 **The proof:** every theme must pass an automated audit of more than 250 checks before each release, and [the full report](docs/AUDIT.md) gives the results of each theme and the limits of the audit. Color blindness is checked with simulations, so feedback from real eyes is very welcome: [join the call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
 
+**Listed by VS Code:** the [VS Code documentation](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility) lists these themes under *Recommended themes for color vision accessibility*.
+
 ### 🌗 Day and night, without thinking about it
 
 Click the status bar button to switch between Light and Dark. Or let the extension follow the clock, with hours you choose, or the appearance of your system.

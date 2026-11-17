@@ -36,6 +36,8 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 **依据：** 每款主题在每次发布前都必须通过 250 多项自动审核，[完整报告](AUDIT.md)列出了每款主题的结果和审核的局限。色觉障碍通过模拟进行检查，因此非常欢迎真实用户的反馈：[参加测试招募](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)。
 
+**VS Code 收录：** [VS Code 文档](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)（英文）将这些主题列入 *Recommended themes for color vision accessibility*（推荐的色觉无障碍主题）。
+
 ### 🌗 白天与夜晚，无需操心
 
 点击状态栏按钮即可在 Light 和 Dark 之间切换。也可以让扩展按你选择的时间跟随时钟，或跟随系统外观。
