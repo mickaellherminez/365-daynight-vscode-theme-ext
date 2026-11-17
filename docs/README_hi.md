@@ -9,6 +9,8 @@
 [![Open VSX पर डाउनलोड](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI की स्थिति](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![MIT लाइसेंस](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![VS Code के दस्तावेज़ में सूचीबद्ध](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![सुलभता ऑडिट रिपोर्ट](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext

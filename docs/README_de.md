@@ -9,6 +9,8 @@
 [![Downloads auf Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![CI-Status](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![Lizenz MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![In der VS-Code-Dokumentation gelistet](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![Prüfbericht zur Barrierefreiheit](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 ```sh
 code --install-extension mickaellherminez.365-daynight-vscode-theme-ext

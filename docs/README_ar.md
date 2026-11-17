@@ -11,6 +11,8 @@
 [![عدد التنزيلات على Open VSX](https://img.shields.io/open-vsx/dt/mickaellherminez/365-daynight-vscode-theme-ext?label=Open%20VSX%20downloads)](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext)
 [![حالة CI](https://img.shields.io/github/actions/workflow/status/mickaellherminez/365-daynight-vscode-theme-ext/ci.yml?branch=main&label=CI)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/actions/workflows/ci.yml)
 [![رخصة MIT](https://img.shields.io/github/license/mickaellherminez/365-daynight-vscode-theme-ext)](../LICENSE)
+[![مُدرجة في وثائق VS Code](https://img.shields.io/badge/VS%20Code%20docs-listed-0A66C2)](https://code.visualstudio.com/docs/configure/accessibility/accessibility#_recommended-themes-for-color-vision-accessibility)
+[![تقرير تدقيق إمكانية الوصول](https://img.shields.io/badge/accessibility%20audit-report-0A66C2)](AUDIT.md)
 
 <div dir="ltr">
 
