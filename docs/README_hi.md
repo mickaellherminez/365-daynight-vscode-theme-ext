@@ -126,7 +126,7 @@ Mac पर `Ctrl` की जगह `Cmd` का उपयोग करें।
 
 ## थीम पसंद आईं?
 
-⭐ [Marketplace पर एक रिव्यू](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) दूसरे डेवलपर्स को इन्हें खोजने में मदद करता है।
+⭐ [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) या [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) पर एक रिव्यू दूसरे डेवलपर्स को इन्हें खोजने में मदद करता है।
 
 कोई बग, न पढ़ा जाने वाला रंग या सुझाव? [एक issue खोलें](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose)। योगदान देना चाहते हैं? [CONTRIBUTING.md](../CONTRIBUTING.md) देखें। रिलीज़ नोट्स [CHANGELOG](../CHANGELOG.md) में हैं।
 

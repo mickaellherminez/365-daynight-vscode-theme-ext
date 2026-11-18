@@ -4,6 +4,11 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- The README, in the 10 languages, asks for a review on Open VSX as well as on the Marketplace.
+
 ## [1.0.4] - 2026-11-18
 
 ### Changed

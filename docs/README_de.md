@@ -126,7 +126,7 @@ Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiter
 
 ## Gefallen dir die Themes?
 
-⭐ Eine [Bewertung im Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) hilft anderen Entwicklern, sie zu finden.
+⭐ Eine Bewertung im [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) oder auf [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) hilft anderen Entwicklern, sie zu finden.
 
 Ein Fehler, eine unlesbare Farbe oder eine Idee? [Öffne ein Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). Du möchtest mitwirken? Siehe [CONTRIBUTING.md](../CONTRIBUTING.md). Die Versionshinweise stehen im [CHANGELOG](../CHANGELOG.md).
 
