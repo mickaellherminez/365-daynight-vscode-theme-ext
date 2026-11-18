@@ -4,7 +4,7 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.5] - 2026-11-18
 
 ### Added
 - The README, in the 10 languages, shows a chart of the daily install and download totals on the Visual Studio Marketplace and Open VSX. It is drawn every day in the `stats` branch, so it stays up to date without a new release.
