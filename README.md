@@ -26,6 +26,15 @@ Both APIs are public and only give the current totals, with no history. A day th
 
 The Marketplace sometimes lowers its counters slightly when it corrects them. Such a decrease is kept as it was published.
 
+## downloads.png and downloads.svg
+
+The chart of `downloads.csv`, shown in the README of the extension. It is drawn by `scripts/stats/chart.cjs` from `main`, after each collection, and only when it changes.
+
+- Two panels, because the scales differ too much for one axis: the Visual Studio Marketplace (installs, updates and downloads) and Open VSX (downloads).
+- Running totals, as published. A day that was not measured has no point: the line crosses it with dashes up to the next measured day, so the catch-up after a gap is not shown as a spike.
+- A dotted vertical line marks each release, read from the CHANGELOG of `main`.
+- The image has its own light background, so it reads the same on a light or a dark page. `downloads.svg` is the same chart, used to know whether the PNG must be drawn again.
+
 ## How it is collected
 
-The workflow runs at 00:17, 06:17, 12:17 and 18:17 UTC. A run stops at once when the line of the day is complete, so the later runs are only retries. From the 18:17 run on, a missing value is copied from the previous day and the run fails, so a real gap is reported once.
+The workflow runs at 00:17, 06:17, 12:17 and 18:17 UTC. A run stops reading the registries once the line of the day is complete, so the later runs are only retries. From the 18:17 run on, a missing value is copied from the previous day and the run fails, so a real gap is reported once.
