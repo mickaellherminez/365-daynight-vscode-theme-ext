@@ -126,7 +126,7 @@ Mac では `Ctrl` の代わりに `Cmd` を使います。
 
 ## テーマを気に入っていただけましたか？
 
-⭐ [Marketplace でのレビュー](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details)が、ほかの開発者に見つけてもらう助けになります。
+⭐ [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) または [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) でのレビューが、ほかの開発者に見つけてもらう助けになります。
 
 バグ、読みにくい色、アイデアがあれば [Issue を作成](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose)してください。貢献したい方は [CONTRIBUTING.md](../CONTRIBUTING.md) をご覧ください。リリースノートは [CHANGELOG](../CHANGELOG.md) にあります。
 

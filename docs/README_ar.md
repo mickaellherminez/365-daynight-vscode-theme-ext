@@ -132,7 +132,7 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 
 ## هل أعجبتك السمات؟
 
-⭐ [تقييم على Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) يساعد مطورين آخرين على اكتشافها.
+⭐ تقييم على [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) أو على [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) يساعد مطورين آخرين على اكتشافها.
 
 خطأ أو لون غير مقروء أو فكرة؟ [افتح بلاغًا](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). هل تريد المساهمة؟ راجع [CONTRIBUTING.md](../CONTRIBUTING.md). ملاحظات الإصدارات في [CHANGELOG](../CHANGELOG.md).
 

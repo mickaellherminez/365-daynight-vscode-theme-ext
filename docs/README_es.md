@@ -126,7 +126,7 @@ Cuando exista una versión preliminar, abre la página de la extensión en la vi
 
 ## ¿Te gustan los temas?
 
-⭐ Una [reseña en el Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) ayuda a otros desarrolladores a descubrirlos.
+⭐ Una reseña en el [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) o en [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) ayuda a otros desarrolladores a descubrirlos.
 
 ¿Un error, un color ilegible o una idea? [Abre una incidencia](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/new/choose). ¿Quieres contribuir? Consulta [CONTRIBUTING.md](../CONTRIBUTING.md). Las notas de versión están en el [CHANGELOG](../CHANGELOG.md).
 
