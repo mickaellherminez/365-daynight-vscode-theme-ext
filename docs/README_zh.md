@@ -124,6 +124,12 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 **如何抢先试用新版本？**
 当有预发布版本时，在扩展视图中打开扩展页面，点击 **Switch to Pre-Release Version**（切换到预发布版本）。VS Code 随后会安装预发布版本及其更新。要回到正式版本，请在同一页面点击 **Switch to Release Version**。欢迎在 [GitHub Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) 中反馈预发布版本的问题。我们正在[招募测试者](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)，并提供了一份简短的检查清单。
 
+## 安装量和下载量
+
+[![扩展每日累计数据图表：Visual Studio Marketplace 上的安装量、更新量和下载量，以及 Open VSX 上的下载量。确切数字见 downloads.csv。](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+每日累计数据，每天根据 Visual Studio Marketplace 和 Open VSX 的公开数据更新。下载量和更新量统计的是次数，而不是用户数。确切数字见 [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)。
+
 ## 喜欢这些主题？
 
 ⭐ 在 [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) 或 [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) 上留下评价，帮助其他开发者发现它们。

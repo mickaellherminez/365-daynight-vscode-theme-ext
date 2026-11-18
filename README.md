@@ -124,6 +124,12 @@ They are designed for low vision, bright environments or long coding sessions. T
 **How do I try a new version before everyone else?**
 When a pre-release exists, open the extension page in the Extensions view and click **Switch to Pre-Release Version**. VS Code then installs the pre-release and its updates. To go back to the release version, click **Switch to Release Version** on the same page. Feedback on a pre-release is welcome in the [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). A [call for testers](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) is open, with a short list of things to check.
 
+## Installs and downloads
+
+[![Chart of the daily running totals of the extension: installs, updates and downloads on the Visual Studio Marketplace, and downloads on Open VSX. The exact numbers are in downloads.csv.](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+Running totals per day, updated every day from the public numbers of the Visual Studio Marketplace and Open VSX. Downloads and updates count events, not users. The exact numbers are in [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv).
+
 ## Enjoying the themes?
 
 ⭐ A review on the [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) or on [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) helps other developers find them.
