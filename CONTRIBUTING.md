@@ -241,12 +241,14 @@ The [Site workflow](.github/workflows/site.yml) builds and checks the page on ev
 
 ## Download statistics
 
-The [Stats workflow](.github/workflows/stats.yml) records every day the install and download totals of the extension in the `stats` branch. That branch only holds data, shares no history with `main` and is written only by the workflow. It is created on the first run.
+The [Stats workflow](.github/workflows/stats.yml) records every day the install and download totals of the extension in the `stats` branch, and draws them as a chart that the README shows. That branch only holds data, shares no history with `main` and is written only by the workflow. It is created on the first run.
 
 | File in `stats` | Content |
 | --- | --- |
 | `downloads.csv` | One line per day (UTC): `date,marketplace_install,marketplace_update,marketplace_download,openvsx_download,status` |
-| `README.md` | What each column and status means. It is copied from `scripts/stats/branch-readme.md` on each run, so edit that file instead |
+| `downloads.png` | The chart shown in the README and its translations, through `https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png` |
+| `downloads.svg` | The same chart as an SVG. The PNG is only drawn again when this file would change |
+| `README.md` | What each column, status and file means. It is copied from `scripts/stats/branch-readme.md` on each run, so edit that file instead |
 
 **Sources.** Both are public and need no token: the Marketplace gallery API (`install`, `updateCount` and `downloadCount`, recorded as they are, since `downloadCount` is not the sum of the other two) and the Open VSX API (`downloadCount`). They only give the current totals, so a day that is not recorded is lost.
 
@@ -260,7 +262,16 @@ The [Stats workflow](.github/workflows/stats.yml) records every day the install 
 - A counter going down is kept, with a notice in the log: the Marketplace sometimes corrects its numbers.
 - The very first line is only written once both registries have answered, since there is no previous day to copy.
 
-**Failures and emails.** The runs of 00:17, 06:17 and 12:17 never fail because of a registry: they only add a warning to the log. A run fails only when it had to copy a value, or when it found nothing at all from 18:00 on. GitHub then sends a single email. The values are still committed before the run fails.
+**Chart.** After the collection, [`scripts/stats/chart.cjs`](scripts/stats/chart.cjs) draws `downloads.svg` from `downloads.csv`, then has the Google Chrome of the runner turn it into `downloads.png` (1920 × 1248 px). No package is installed in this job.
+
+- Two panels, one per registry, because their scales differ too much for one axis: the Marketplace (installs, updates and downloads) and Open VSX (downloads). The legend keeps the names of the registries, and the subtitle says that downloads and updates count events, not users.
+- Running totals. A copied day has no point: the line crosses it with dashes up to the next measured day, so the catch-up after a gap is not a false spike.
+- A dotted vertical line for each release, read from the `## [x.y.z] - YYYY-MM-DD` headings of `CHANGELOG.md` on `main`. A new release appears on the chart at the next run.
+- One image with its own light background, readable on a light or dark page, since the Marketplace may not support `<picture>`. Its colors keep a contrast of at least 3:1 with the background and stay apart with color blindness, and each line has its name and latest value at its end.
+- The PNG is drawn again only when the SVG changes, so the runs that find a complete day commit nothing. The SVG is only written after a successful rendering.
+- The README shows the image through its fixed address in the `stats` branch, so it updates without a commit on `main`. The Marketplace and Open VSX show the README of the last published version: the image appears there once a version with it is published, then updates on its own. Its alt text cannot hold the latest numbers, since the README does not change; the SVG description and the CSV hold them.
+
+**Failures and emails.** The runs of 00:17, 06:17 and 12:17 never fail because of a registry: they only add a warning to the log. A run fails only when it had to copy a value, when it found nothing at all from 18:00 on, or when the chart could not be drawn. GitHub then sends an email. The values are still committed before the run fails, and a failed chart is drawn again at the next run.
 
 **Security.** No secret: the job's `GITHUB_TOKEN` gets `contents: write`, for this job only, and the workflow never runs in forks. Actions are pinned to a commit. The job stops after 5 minutes, and two runs never overlap.
 
@@ -268,6 +279,8 @@ The [Stats workflow](.github/workflows/stats.yml) records every day the install 
 
 - Run it now: **Actions** > **Stats** > **Run workflow**, on `main`, or `gh workflow run stats.yml`. A run after 18:00 UTC can turn a `carried` line of the day back into a measured one.
 - Test the script locally, without touching the branch: `node scripts/stats/collect.cjs <empty folder>`. It writes `downloads.csv` and `README.md` there, from the live APIs. `npm run test:unit` covers it with fake answers.
+- Draw the chart locally from the real data: `git fetch origin stats && mkdir -p /tmp/stats && git show origin/stats:downloads.csv > /tmp/stats/downloads.csv && node scripts/stats/chart.cjs /tmp/stats CHANGELOG.md`, then open `/tmp/stats/downloads.png`. Chrome is looked for in the usual places; set `CHROME_PATH` otherwise. `npm run test:unit` covers the chart, and renders it with Chrome when Chrome is found.
+- Change the chart: edit `scripts/stats/chart.cjs` on `main`. The next run draws it again, since the SVG changes.
 - Read the data: open the `stats` branch on GitHub, or `git fetch origin stats && git show origin/stats:downloads.csv`.
 - Pause it: **Actions** > **Stats** > **...** > **Disable workflow** (**Enable workflow** to start again). The days in between are then copied with the `carried` status on the next run, so check the line count before pausing for long. GitHub also disables scheduled workflows after 60 days without activity in the repository.
 - Delete the data: delete the `stats` branch on GitHub (**Branches** > the bin icon), after removing its protection rule. The next run starts a new branch with no history.

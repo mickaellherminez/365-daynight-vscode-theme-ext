@@ -124,6 +124,12 @@ Mac पर `Ctrl` की जगह `Cmd` का उपयोग करें।
 **नया संस्करण सबसे पहले कैसे आज़माएँ?**
 जब कोई प्री-रिलीज़ संस्करण उपलब्ध हो, तो एक्सटेंशन व्यू में एक्सटेंशन का पेज खोलें और **Switch to Pre-Release Version** (प्री-रिलीज़ संस्करण पर जाएँ) पर क्लिक करें। इसके बाद VS Code प्री-रिलीज़ संस्करण और उसके अपडेट इंस्टॉल करता है। सामान्य संस्करण पर लौटने के लिए उसी पेज पर **Switch to Release Version** पर क्लिक करें। प्री-रिलीज़ पर आपकी प्रतिक्रिया का [GitHub issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) में स्वागत है। [टेस्टरों के लिए एक आमंत्रण](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) खुला है, जिसमें जाँचने योग्य बातों की एक छोटी सूची है।
 
+## इंस्टॉल और डाउनलोड
+
+[![एक्सटेंशन के हर दिन के कुल योग का चार्ट: Visual Studio Marketplace पर इंस्टॉल, अपडेट और डाउनलोड, और Open VSX पर डाउनलोड। सटीक संख्याएँ downloads.csv में हैं।](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+हर दिन का कुल योग, जो Visual Studio Marketplace और Open VSX की सार्वजनिक संख्याओं से रोज़ अपडेट होता है। डाउनलोड और अपडेट घटनाएँ गिनते हैं, उपयोगकर्ता नहीं। सटीक संख्याएँ [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv) में हैं।
+
 ## थीम पसंद आईं?
 
 ⭐ [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) या [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) पर एक रिव्यू दूसरे डेवलपर्स को इन्हें खोजने में मदद करता है।

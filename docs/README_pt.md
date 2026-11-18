@@ -124,6 +124,12 @@ Eles foram pensados para baixa visão, ambientes muito claros ou longas sessões
 **Como experimentar uma nova versão antes de todo mundo?**
 Quando houver uma versão prévia, abra a página da extensão na visualização de Extensões e clique em **Switch to Pre-Release Version** (mudar para a versão prévia). O VS Code instala então a versão prévia e suas atualizações. Para voltar à versão normal, clique em **Switch to Release Version** na mesma página. Comentários sobre uma versão prévia são bem-vindos nas [issues do GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Há uma [chamada para testadores](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) aberta, com uma lista curta de pontos a verificar.
 
+## Instalações e downloads
+
+[![Gráfico dos totais acumulados por dia da extensão: instalações, atualizações e downloads no Visual Studio Marketplace, e downloads no Open VSX. Os números exatos estão em downloads.csv.](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+Totais acumulados por dia, atualizados todos os dias com os números públicos do Visual Studio Marketplace e do Open VSX. Downloads e atualizações contam eventos, não usuários. Os números exatos estão em [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv).
+
 ## Gostou dos temas?
 
 ⭐ Uma avaliação no [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) ou no [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) ajuda outros desenvolvedores a encontrá-los.

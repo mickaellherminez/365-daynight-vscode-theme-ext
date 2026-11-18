@@ -124,6 +124,12 @@ Mac では `Ctrl` の代わりに `Cmd` を使います。
 **新しいバージョンをいち早く試すには？**
 プレリリース版がある場合は、拡張機能ビューで拡張機能のページを開き、**Switch to Pre-Release Version**（プレリリース版に切り替え）をクリックします。VS Code がプレリリース版とその更新をインストールします。通常のバージョンに戻すには、同じページで **Switch to Release Version** をクリックします。プレリリース版へのフィードバックは [GitHub の Issue](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) で歓迎しています。[テスター募集](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47)も行っており、確認項目の短いリストを用意しています。
 
+## インストール数とダウンロード数
+
+[![拡張機能の日ごとの累計を示すグラフ：Visual Studio Marketplace のインストール数、更新数、ダウンロード数と、Open VSX のダウンロード数。正確な数値は downloads.csv にあります。](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+日ごとの累計で、Visual Studio Marketplace と Open VSX の公開データから毎日更新されます。ダウンロード数と更新数は回数であり、ユーザー数ではありません。正確な数値は [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv) にあります。
+
 ## テーマを気に入っていただけましたか？
 
 ⭐ [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) または [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) でのレビューが、ほかの開発者に見つけてもらう助けになります。

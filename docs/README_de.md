@@ -124,6 +124,12 @@ Sie sind für Sehschwäche, sehr helle Umgebungen oder lange Programmiersitzunge
 **Wie kann ich eine neue Version vor allen anderen ausprobieren?**
 Wenn es eine Vorabversion gibt, öffne die Seite der Erweiterung in der Erweiterungsansicht und klicke auf **Switch to Pre-Release Version** (zur Vorabversion wechseln). VS Code installiert dann die Vorabversion und ihre Updates. Um zur normalen Version zurückzukehren, klicke auf derselben Seite auf **Switch to Release Version**. Rückmeldungen zu einer Vorabversion sind in den [GitHub-Issues](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues) willkommen. Ein [Aufruf an Testende](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) ist offen, mit einer kurzen Liste von Punkten zum Prüfen.
 
+## Installationen und Downloads
+
+[![Diagramm der täglichen Gesamtzahlen der Erweiterung: Installationen, Updates und Downloads im Visual Studio Marketplace sowie Downloads auf Open VSX. Die genauen Zahlen stehen in downloads.csv.](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+Laufende Gesamtzahlen pro Tag, täglich aktualisiert aus den öffentlichen Zahlen des Visual Studio Marketplace und von Open VSX. Downloads und Updates zählen Vorgänge, keine Nutzer. Die genauen Zahlen stehen in [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv).
+
 ## Gefallen dir die Themes?
 
 ⭐ Eine Bewertung im [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) oder auf [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) hilft anderen Entwicklern, sie zu finden.

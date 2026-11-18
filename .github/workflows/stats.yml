@@ -1,12 +1,16 @@
 # Records the daily install and download totals of the extension on the
-# Visual Studio Marketplace and Open VSX, in the "stats" branch.
+# Visual Studio Marketplace and Open VSX, in the "stats" branch, and draws
+# them as a chart (downloads.png) that the README shows.
 # - Runs at 00:17, 06:17, 12:17 and 18:17 UTC, and manually. A run stops at
 #   once when the line of the day is complete, so the later runs are retries.
 #   Not on the hour: scheduled runs are often delayed or dropped at 00:00.
 # - Only reads public APIs, so it needs no secret. Its token can only write
 #   the repository contents, and the data never goes to main.
 # - Fails only when a value had to be copied from the previous day (from the
-#   18:17 run on), so a real gap sends a single email.
+#   18:17 run on), so a real gap sends a single email, or when the chart could
+#   not be drawn. The data are committed in both cases.
+# - The chart uses the Google Chrome of the runner, so no package is installed
+#   in this job.
 # - Creates the "stats" branch on its first run.
 # See "Download statistics" in CONTRIBUTING.md.
 # Actions are pinned to a commit, so a changed tag cannot run other code.
@@ -40,10 +44,12 @@ jobs:
         with:
           node-version: 22
 
-      # The script runs from main, then the working tree switches to the stats branch.
+      # The scripts run from main, then the working tree switches to the stats branch.
+      # The CHANGELOG gives the release dates of the chart.
       - name: Open the stats branch
         run: |
           cp -R scripts/stats "$RUNNER_TEMP/stats-script"
+          cp CHANGELOG.md "$RUNNER_TEMP/stats-script/CHANGELOG.md"
           if git ls-remote --exit-code --heads origin stats > /dev/null; then
             git fetch --depth=1 origin stats
             git switch --detach FETCH_HEAD
@@ -57,6 +63,11 @@ jobs:
       - name: Collect
         id: collect
         run: node "$RUNNER_TEMP/stats-script/collect.cjs" . || echo "failed=true" >> "$GITHUB_OUTPUT"
+
+      # Redrawn only when the chart changes. A failure does not block the data.
+      - name: Draw the chart
+        id: chart
+        run: node "$RUNNER_TEMP/stats-script/chart.cjs" . "$RUNNER_TEMP/stats-script/CHANGELOG.md" || echo "failed=true" >> "$GITHUB_OUTPUT"
 
       - name: Commit and push
         run: |
@@ -74,4 +85,10 @@ jobs:
         if: steps.collect.outputs.failed == 'true'
         run: |
           echo "::error::A value could not be read today. See the Collect step."
+          exit 1
+
+      - name: Report a chart failure
+        if: ${{ !cancelled() && steps.chart.outputs.failed == 'true' }}
+        run: |
+          echo "::error::The chart could not be drawn. See the Draw the chart step."
           exit 1

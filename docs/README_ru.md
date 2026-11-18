@@ -124,6 +124,12 @@ code --install-extension mickaellherminez.365-daynight-vscode-theme-ext
 **Как попробовать новую версию раньше всех?**
 Когда есть предварительная версия, откройте страницу расширения в представлении «Расширения» и нажмите **Switch to Pre-Release Version** (перейти на предварительную версию). VS Code установит предварительную версию и её обновления. Чтобы вернуться к обычной версии, нажмите **Switch to Release Version** на той же странице. Отзывы о предварительной версии приветствуются в [issues на GitHub](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues). Открыт [набор тестировщиков](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47) с коротким списком того, что стоит проверить.
 
+## Установки и загрузки
+
+[![График накопленных итогов расширения по дням: установки, обновления и загрузки в Visual Studio Marketplace и загрузки в Open VSX. Точные числа — в downloads.csv.](https://raw.githubusercontent.com/mickaellherminez/365-daynight-vscode-theme-ext/stats/downloads.png)](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv)
+
+Накопленные итоги по дням, обновляются ежедневно по открытым данным Visual Studio Marketplace и Open VSX. Загрузки и обновления считают события, а не пользователей. Точные числа — в [downloads.csv](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/stats/downloads.csv).
+
 ## Нравятся темы?
 
 ⭐ Отзыв в [Marketplace](https://marketplace.visualstudio.com/items?itemName=mickaellherminez.365-daynight-vscode-theme-ext&ssr=false#review-details) или на [Open VSX](https://open-vsx.org/extension/mickaellherminez/365-daynight-vscode-theme-ext/reviews) поможет другим разработчикам их найти.

@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ## [Unreleased]
 
+### Added
+- The README, in the 10 languages, shows a chart of the daily install and download totals on the Visual Studio Marketplace and Open VSX. It is drawn every day in the `stats` branch, so it stays up to date without a new release.
+
 ### Changed
 - The README, in the 10 languages, asks for a review on Open VSX as well as on the Marketplace.
 
