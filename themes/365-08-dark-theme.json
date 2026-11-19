@@ -97,10 +97,10 @@
     "editor.wordHighlightTextBackground": "#6A553980",
     "editor.wordHighlightTextBorder": "#B3A18B",
     "editorBracketHighlight.foreground1": "#23E1A3",
-    "editorBracketHighlight.foreground2": "#EC8BD0",
+    "editorBracketHighlight.foreground2": "#DE94C7",
     "editorBracketHighlight.foreground3": "#FEBB3E",
     "editorBracketHighlight.foreground4": "#23E1A3",
-    "editorBracketHighlight.foreground5": "#EC8BD0",
+    "editorBracketHighlight.foreground5": "#DE94C7",
     "editorBracketHighlight.foreground6": "#FEBB3E",
     "editorBracketHighlight.unexpectedBracket.foreground": "#F07A8A",
     "editorBracketMatch.background": "#2F4C6B44",
@@ -322,7 +322,7 @@
     "quickInputTitle.background": "#322617",
     "sash.hoverBorder": "#5CA0E8",
     "scmGraph.foreground1": "#23E1A3",
-    "scmGraph.foreground2": "#EC8BD0",
+    "scmGraph.foreground2": "#DE94C7",
     "scmGraph.foreground3": "#BBC4FA",
     "scmGraph.foreground4": "#F98E79",
     "scmGraph.foreground5": "#FEBB3E",
@@ -382,15 +382,15 @@
     "symbolIcon.booleanForeground": "#F98E79",
     "symbolIcon.classForeground": "#FEBB3E",
     "symbolIcon.constantForeground": "#F98E79",
-    "symbolIcon.constructorForeground": "#EC8BD0",
+    "symbolIcon.constructorForeground": "#DE94C7",
     "symbolIcon.enumeratorForeground": "#FEBB3E",
     "symbolIcon.enumeratorMemberForeground": "#F98E79",
     "symbolIcon.eventForeground": "#FEBB3E",
     "symbolIcon.fieldForeground": "#DDCAB4",
-    "symbolIcon.functionForeground": "#EC8BD0",
+    "symbolIcon.functionForeground": "#DE94C7",
     "symbolIcon.interfaceForeground": "#FEBB3E",
     "symbolIcon.keywordForeground": "#23E1A3",
-    "symbolIcon.methodForeground": "#EC8BD0",
+    "symbolIcon.methodForeground": "#DE94C7",
     "symbolIcon.moduleForeground": "#DDCAB4",
     "symbolIcon.namespaceForeground": "#DDCAB4",
     "symbolIcon.nullForeground": "#F98E79",
@@ -543,7 +543,7 @@
         "variable.function"
       ],
       "settings": {
-        "foreground": "#EC8BD0"
+        "foreground": "#DE94C7"
       }
     },
     {
@@ -566,7 +566,7 @@
         "meta.method.declaration"
       ],
       "settings": {
-        "foreground": "#EC8BD0"
+        "foreground": "#DE94C7"
       }
     },
     {
@@ -690,7 +690,7 @@
         "string.other.link"
       ],
       "settings": {
-        "foreground": "#EC8BD0",
+        "foreground": "#DE94C7",
         "fontStyle": "underline"
       }
     },
@@ -848,14 +848,14 @@
       "name": "JSON Keys",
       "scope": "support.type.property-name.json",
       "settings": {
-        "foreground": "#EC8BD0"
+        "foreground": "#DE94C7"
       }
     },
     {
       "name": "YAML Keys",
       "scope": "entity.name.tag.yaml",
       "settings": {
-        "foreground": "#EC8BD0"
+        "foreground": "#DE94C7"
       }
     },
     {
@@ -894,8 +894,8 @@
       "foreground": "#EEE3D6",
       "fontStyle": "italic"
     },
-    "function": "#EC8BD0",
-    "method": "#EC8BD0",
+    "function": "#DE94C7",
+    "method": "#DE94C7",
     "class": "#FEBB3E",
     "enum": "#FEBB3E",
     "interface": {
@@ -919,5 +919,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette sombre (sable chaud) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette sombre (sable chaud) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999)."
 }

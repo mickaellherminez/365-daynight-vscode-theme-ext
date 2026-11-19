@@ -139,12 +139,14 @@
     },
     "references": {
       "title": "Références",
-      "machado": "Utilisé pour les simulations du daltonisme.",
+      "machado": "L’un des trois modèles de simulation du daltonisme, et le seul pour les formes partielles.",
       "wcag": "Ratio de contraste, niveaux 4,5:1 et 7:1, et utilisation de la couleur.",
       "understanding": "Relie 4,5:1 à une acuité visuelle d’environ 20/40, et 7:1 à environ 20/80.",
-      "cie": "CIELAB et l’écart de couleur CIE76 utilisé pour les seuils.",
-      "sharma": "CIEDE2000, et les données de test qui vérifient les outils.",
-      "birch": "Environ 8 % des hommes et 0,4 % des femmes d’origine européenne."
+      "cie": "CIELAB et l’écart de couleur CIE76 utilisé pour les seuils de variété.",
+      "sharma": "CIEDE2000, utilisé pour le seuil de distinction des couleurs, et les données de test qui vérifient les outils.",
+      "birch": "Environ 8 % des hommes et 0,4 % des femmes d’origine européenne.",
+      "brettel": "Modèle de simulation du daltonisme, le seul utilisé pour la tritanopie.",
+      "vienot": "Modèle de simulation du daltonisme, pour la protanopie et la deutéranopie."
     },
     "noscript": "Les aperçus interactifs nécessitent JavaScript. Vous pouvez quand même regarder la démonstration dans VS Code, lire l’audit et installer les 48 thèmes.",
     "footer": {
@@ -156,10 +158,11 @@
   },
   "limits": [
     "**Pas encore d’essais avec de vrais utilisateurs.** Le daltonisme et la basse vision sont simulés ou calculés. Aucun calcul ne remplace des essais avec les personnes concernées, et [les retours sont les bienvenus](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).",
-    "**Les formes partielles sont mesurées, pas imposées.** Les formes partielles du daltonisme, les plus fréquentes, apparaissent dans les scores pour des sévérités de 0,1 à 0,9. Seules les formes complètes peuvent faire échouer l’audit.",
+    "**Les formes partielles sont mesurées, pas imposées.** Les formes partielles du daltonisme, les plus fréquentes, apparaissent dans les scores pour des sévérités de 0,1 à 0,9. Seules les formes complètes peuvent faire échouer l’audit. Seul le modèle de Machado et al. couvre les formes partielles, et il est moins fiable pour la tritanomalie.",
     "**L’achromatopsie est donnée à titre d’information.** Sans couleur, beaucoup de couleurs de syntaxe ont une clarté proche, comme le montre le tableau. Elles ne se distinguent alors que par le style, là où le thème en définit un, par exemple pour les commentaires, le code obsolète et le code invalide.",
-    "**Les seuils sont des règles du projet.** Les WCAG fixent les minimums de contraste. Le seuil de distinction des couleurs (ΔE 12 sur l’échelle CIE76) et les seuils de variété sont des règles pratiques choisies pour ce projet, pas des normes.",
-    "**CIE76 est une mesure simple.** Les seuils s’appliquent à CIE76. CIEDE2000 est plus proche de la perception, surtout pour les bleus et les couleurs peu saturées : le [rapport d’audit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) le donne donc aussi, pour information, dans un tableau sous chaque variante. Il utilise une autre échelle, et les seuils ne sont pas calibrés pour lui.",
+    "**Les seuils sont des règles du projet.** Les WCAG fixent les minimums de contraste. Le seuil de distinction des couleurs (ΔE2000 7 sur l’échelle CIEDE2000) et les seuils de variété sont des règles pratiques choisies pour ce projet, pas des normes.",
+    "**Les modèles de simulation ne concordent pas.** Le daltonisme est simulé avec trois modèles publiés pour la protanopie et la deutéranopie, et avec celui de Brettel et al. pour la tritanopie, le seul des trois qui soit fiable pour elle. Une paire de couleurs doit rester distincte avec chaque modèle. Aucun modèle ne montre exactement ce que voit une personne donnée.",
+    "**Deux formules d’écart de couleur.** La distinction des couleurs utilise CIEDE2000, plus proche de la perception, surtout pour les bleus et les couleurs peu saturées. Les seuils de variété entre les mois utilisent encore CIE76, une formule plus simple, et le [rapport d’audit](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) donne aussi CIE76 pour la distinction des couleurs, pour information, dans un tableau sous chaque variante.",
     "**Uniquement le contraste WCAG 2.** APCA, le modèle de contraste en projet pour WCAG 3, n’est pas appliqué.",
     "**Des couleurs, pas un rendu.** L’audit lit les fichiers des thèmes. Il vérifie les paires de couleurs listées dans son code, avec une portée TextMate par catégorie de jeton. Il n’examine ni une fenêtre affichée, ni l’anticrénelage, ni votre écran.",
     "**Pas toutes les couleurs de VS Code.** Un thème définit environ 485 des quelque 970 couleurs documentées par VS Code. Les autres utilisent les valeurs par défaut de VS Code, et seules celles des surfaces récentes sont auditées, telles qu’elles sont dans VS Code 1.145. Une version future peut les changer.",
@@ -224,10 +227,10 @@
         "achromatopsia": "Achromatopsie"
       },
       "scores": {
-        "protanopia": { "label": "Protanopie", "formula": "Part des 21 paires de couleurs de syntaxe principales qui restent séparées d’au moins {{distance}}, simulées à sévérité complète." },
+        "protanopia": { "label": "Protanopie", "formula": "Part des 21 paires de couleurs de syntaxe principales qui restent séparées d’au moins {{distance}} avec chaque modèle de simulation, à sévérité complète." },
         "deuteranopia": { "label": "Deutéranopie", "formula": "Même calcul, pour la deutéranopie." },
         "tritanopia": { "label": "Tritanopie", "formula": "Même calcul, pour la tritanopie." },
-        "protanomaly": { "label": "Protanomalie (partielle)", "formula": "Même calcul pour des sévérités de 0,1 à 0,9, en gardant le résultat le plus bas." },
+        "protanomaly": { "label": "Protanomalie (partielle)", "formula": "Même calcul avec le modèle de Machado et al. pour des sévérités de 0,1 à 0,9, en gardant le résultat le plus bas." },
         "deuteranomaly": { "label": "Deutéranomalie (partielle)", "formula": "Idem, pour la deutéranopie partielle." },
         "tritanomaly": { "label": "Tritanomalie (partielle)", "formula": "Idem, pour la tritanopie partielle." },
         "achromatopsia": { "label": "Achromatopsie", "formula": "Part des mêmes paires qui restent séparées d’au moins {{distance}} par la seule clarté." },

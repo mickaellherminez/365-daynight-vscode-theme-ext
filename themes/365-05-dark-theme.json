@@ -324,7 +324,7 @@
     "scmGraph.foreground1": "#FF8CF6",
     "scmGraph.foreground2": "#8AE696",
     "scmGraph.foreground3": "#F27846",
-    "scmGraph.foreground4": "#44A4D7",
+    "scmGraph.foreground4": "#57A3CC",
     "scmGraph.foreground5": "#22CBBE",
     "scmGraph.historyItemBaseRefColor": "#D9B84A",
     "scmGraph.historyItemHoverAdditionsForeground": "#3FE0D0",
@@ -379,12 +379,12 @@
     "statusBarItem.prominentHoverBackground": "#7D7400",
     "statusBarItem.remoteBackground": "#7D7600",
     "statusBarItem.remoteForeground": "#FFFFFF",
-    "symbolIcon.booleanForeground": "#44A4D7",
+    "symbolIcon.booleanForeground": "#57A3CC",
     "symbolIcon.classForeground": "#22CBBE",
-    "symbolIcon.constantForeground": "#44A4D7",
+    "symbolIcon.constantForeground": "#57A3CC",
     "symbolIcon.constructorForeground": "#8AE696",
     "symbolIcon.enumeratorForeground": "#22CBBE",
-    "symbolIcon.enumeratorMemberForeground": "#44A4D7",
+    "symbolIcon.enumeratorMemberForeground": "#57A3CC",
     "symbolIcon.eventForeground": "#22CBBE",
     "symbolIcon.fieldForeground": "#BAD3C0",
     "symbolIcon.functionForeground": "#8AE696",
@@ -393,8 +393,8 @@
     "symbolIcon.methodForeground": "#8AE696",
     "symbolIcon.moduleForeground": "#BAD3C0",
     "symbolIcon.namespaceForeground": "#BAD3C0",
-    "symbolIcon.nullForeground": "#44A4D7",
-    "symbolIcon.numberForeground": "#44A4D7",
+    "symbolIcon.nullForeground": "#57A3CC",
+    "symbolIcon.numberForeground": "#57A3CC",
     "symbolIcon.operatorForeground": "#FF8CF6",
     "symbolIcon.packageForeground": "#BAD3C0",
     "symbolIcon.propertyForeground": "#BAD3C0",
@@ -578,7 +578,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#44A4D7"
+        "foreground": "#57A3CC"
       }
     },
     {
@@ -591,7 +591,7 @@
         "constant.numeric.octal"
       ],
       "settings": {
-        "foreground": "#44A4D7"
+        "foreground": "#57A3CC"
       }
     },
     {
@@ -634,7 +634,7 @@
         "entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#44A4D7",
+        "foreground": "#57A3CC",
         "fontStyle": "italic"
       }
     },
@@ -889,7 +889,7 @@
     }
   ],
   "semanticTokenColors": {
-    "variable.readonly": "#44A4D7",
+    "variable.readonly": "#57A3CC",
     "parameter": {
       "foreground": "#DAE8DD",
       "fontStyle": "italic"
@@ -907,7 +907,7 @@
       "foreground": "#22CBBE",
       "fontStyle": "italic"
     },
-    "enumMember": "#44A4D7",
+    "enumMember": "#57A3CC",
     "property": "#BAD3C0",
     "variable.defaultLibrary": "#22CBBE",
     "keyword": "#FF8CF6",
@@ -919,5 +919,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette sombre (prairie fleurie) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette sombre (prairie fleurie) : texte et jetons ≥ 4.5:1 (AA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999)."
 }

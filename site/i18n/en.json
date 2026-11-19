@@ -138,12 +138,14 @@
     },
     "references": {
       "title": "References",
-      "machado": "Used for the color blindness simulations.",
+      "machado": "One of the three color blindness simulation models, and the only one for partial forms.",
       "wcag": "Contrast ratio, the 4.5:1 and 7:1 levels, and the use of color.",
       "understanding": "Links 4.5:1 to a visual acuity of about 20/40, and 7:1 to about 20/80.",
-      "cie": "CIELAB and the CIE76 color difference used for the thresholds.",
-      "sharma": "CIEDE2000, and the test data that check the tools.",
-      "birch": "About 8% of men and 0.4% of women of European descent."
+      "cie": "CIELAB and the CIE76 color difference used for the variety thresholds.",
+      "sharma": "CIEDE2000, used for the color distinction threshold, and the test data that check the tools.",
+      "birch": "About 8% of men and 0.4% of women of European descent.",
+      "brettel": "Color blindness simulation model, the only one used for tritanopia.",
+      "vienot": "Color blindness simulation model, for protanopia and deuteranopia."
     },
     "noscript": "The interactive previews need JavaScript. You can still watch the VS Code demonstration, read the audit and install all 48 themes.",
     "footer": {
@@ -213,10 +215,10 @@
         "achromatopsia": "Achromatopsia"
       },
       "scores": {
-        "protanopia": { "label": "Protanopia", "formula": "Share of the 21 pairs of main syntax colors that stay at least {{distance}} apart, simulated at full severity." },
+        "protanopia": { "label": "Protanopia", "formula": "Share of the 21 pairs of main syntax colors that stay at least {{distance}} apart with every simulation model, at full severity." },
         "deuteranopia": { "label": "Deuteranopia", "formula": "Same calculation, for deuteranopia." },
         "tritanopia": { "label": "Tritanopia", "formula": "Same calculation, for tritanopia." },
-        "protanomaly": { "label": "Protanomaly (partial)", "formula": "Same calculation for severities 0.1 to 0.9, keeping the lowest result." },
+        "protanomaly": { "label": "Protanomaly (partial)", "formula": "Same calculation with the model of Machado et al. for severities 0.1 to 0.9, keeping the lowest result." },
         "deuteranomaly": { "label": "Deuteranomaly (partial)", "formula": "Same, for partial deuteranopia." },
         "tritanomaly": { "label": "Tritanomaly (partial)", "formula": "Same, for partial tritanopia." },
         "achromatopsia": { "label": "Achromatopsia", "formula": "Share of the same pairs that stay at least {{distance}} apart in lightness alone." },

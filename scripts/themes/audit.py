@@ -1,5 +1,8 @@
 """Audit d'accessibilité des thèmes : contrastes WCAG et distinction des couleurs pour les daltoniens.
 
+La distinction des couleurs se mesure avec CIEDE2000 en vision normale et pour les 3 dichromaties, avec chaque
+modèle de simulation retenu (voir MODELS dans colorlib.py). Une paire doit rester distincte avec tous les modèles.
+
 Usage :
     python3 scripts/themes/audit.py                      # tous les thèmes de package.json
     python3 scripts/themes/audit.py themes/365-10-*.json # thèmes choisis
@@ -83,7 +86,11 @@ INHERITED = {
     'agentsChatInput.placeholderForeground': 'input.placeholderForeground',
     'agentsBadge.background': 'activityBarBadge.background', 'agentsBadge.foreground': 'activityBarBadge.foreground',
 }
-MIN_DELTA_E = 12
+# Écart CIEDE2000 minimal entre deux couleurs à distinguer, dans chaque vision et avec chaque modèle (issue #96).
+# C'est une règle du projet, pas une norme. Choisie d'après les 48 thèmes de la version 1.0.5 : 4 passaient à 7,
+# et une retouche des seules couleurs de syntaxe atteint 13 à 14 si l'on ignore la teinte de chaque mois.
+MIN_DELTA_E_2000 = 7
+# Écart CIE76 entre le bouton de la barre d'état et son texte, en vision normale
 MIN_BUTTON_DELTA_E = 15
 
 
@@ -406,8 +413,23 @@ def checks(theme, hc):
     return rows
 
 
-def distinctness(theme):
-    """Paires de couleurs les plus proches pour chaque vision (normale, protan, deutan, tritan)."""
+def closest(colors, pairs, models):
+    """Écart de chaque paire avec le modèle qui rapproche le plus ses deux couleurs, du plus petit au plus grand.
+
+    Chaque entrée est (ΔE2000, couleur 1, couleur 2, modèle, ΔE CIE76 avec ce modèle)."""
+    result = []
+    for a, b in pairs:
+        if not (colors[a] and colors[b]):
+            continue
+        model, simulation = min(models.items(), key=lambda item: delta_e_2000(colors[a], colors[b], item[1]))
+        result.append((delta_e_2000(colors[a], colors[b], simulation), a, b, model,
+                       delta_e(colors[a], colors[b], simulation)))
+    return sorted(result)
+
+
+def distinctions(theme):
+    """Toutes les paires à distinguer pour chaque vision (normale, protan, deutan, tritan), tous modèles :
+    {vision: (paires de jetons, paires d'alertes)}, chaque liste du plus petit écart au plus grand."""
     tokens = {k: v for k, v in token_colors(theme).items() if k in DISTINCT_TOKENS}
     c = theme.get('colors', {})
     alerts = {k: c.get(v) for k, v in ALERT_KEYS.items()}
@@ -417,47 +439,60 @@ def distinctness(theme):
     alerts.update({name: c.get(f'scmGraph.foreground{i}') for i, name in enumerate(graph, 1)})
     alert_pairs = list(DISTINCT_ALERTS) + [('test réussi', 'test échoué')] + list(itertools.combinations(graph, 2))
     result = {}
-    for view, matrix in VIEWS.items():
-        pairs = sorted((delta_e(tokens[a], tokens[b], matrix), a, b) for a, b in itertools.combinations(tokens, 2))
-        apairs = sorted((delta_e(alerts[a], alerts[b], matrix), a, b) for a, b in alert_pairs if alerts[a] and alerts[b])
-        result[view] = (pairs[:3], apairs[:1])
+    for view, models in VIEWS.items():
+        pairs = closest(tokens, itertools.combinations(tokens, 2), models)
+        apairs = closest(alerts, alert_pairs, models)
+        result[view] = (pairs, apairs)
     return result
+
+
+def distinctness(theme):
+    """Paires les plus proches pour chaque vision : les 3 premières paires de jetons et la première d'alertes."""
+    return {view: (pairs[:3], apairs[:1]) for view, (pairs, apairs) in distinctions(theme).items()}
+
+
+def distinction_checks(theme):
+    """Un contrôle par paire à distinguer et par vision : liste de (libellé, ΔE2000, minimum, statut)."""
+    return [(f'Distinction {view} : {a} / {b}', delta, MIN_DELTA_E_2000,
+             'OK' if delta >= MIN_DELTA_E_2000 else 'CONFUSION')
+            for view, (pairs, apairs) in distinctions(theme).items() for delta, a, b, _, _ in pairs + apairs]
 
 
 def information(theme):
-    """Mesures à titre d'information, qui ne font jamais échouer l'audit, sur les jetons principaux :
-    CIEDE2000 pour chaque vision, et l'achromatopsie (seul l'écart de clarté reste)."""
+    """Mesure à titre d'information, qui ne fait jamais échouer l'audit : les jetons principaux en achromatopsie,
+    où seul l'écart de clarté reste. Mêmes entrées que closest()."""
     tokens = {k: v for k, v in token_colors(theme).items() if k in DISTINCT_TOKENS}
-    pairs = list(itertools.combinations(tokens, 2))
-    result = {}
-    for view, matrix in VIEWS.items():
-        result['ΔE2000 ' + view] = sorted((delta_e_2000(tokens[a], tokens[b], matrix), a, b) for a, b in pairs)
-    result['achromatopsie'] = sorted((delta_e(tokens[a], tokens[b], ACHROMATOPSIA), a, b) for a, b in pairs)
-    return result
+    return {'achromatopsie': closest(tokens, itertools.combinations(tokens, 2), {'': ACHROMATOPSIA})}
+
+
+def pair_text(entry):
+    """Paire lisible : « mot-clé/classe 6.2 (Brettel 1997, CIE76 9) »."""
+    delta, a, b, model, cie76 = entry
+    return f'{a}/{b} {delta:.1f} ({model + ", " if model else ""}CIE76 {cie76:.0f})'
 
 
 def report(theme, hc, verbose=False):
     """Affiche le rapport d'un thème et renvoie le nombre de contrôles en échec."""
     rows = checks(theme, hc)
     bad = [r for r in rows if r[3] != 'OK']
-    print(f"== {theme.get('name')} : {len(rows) - len(bad)}/{len(rows)} contrôles OK")
+    pairs_checked = distinction_checks(theme)
+    confusions = [r for r in pairs_checked if r[3] != 'OK']
+    total = len(rows) + len(pairs_checked)
+    print(f"== {theme.get('name')} : {total - len(bad) - len(confusions)}/{total} contrôles OK")
     for label, ratio, minimum, status in (rows if verbose else bad):
         value = '%.2f' % ratio if ratio else '-'
         expected = f'(attendu : {STYLE_NAMES[minimum]})' if minimum in STYLE_NAMES else f'(min {minimum})'
         print(f'   {status:8} {label:72} {value:>6} {expected}')
     for view, (pairs, apairs) in distinctness(theme).items():
-        line = ', '.join(f'{a}/{b} {d:.0f}' for d, a, b in pairs + apairs)
-        flag = '' if all(d >= MIN_DELTA_E for d, _, _ in pairs + apairs) else '   <-- confusion possible'
-        print(f'   ΔE {view:7} : {line}{flag}')
-        bad += [p for p in pairs + apairs if p[0] < MIN_DELTA_E]
+        line = ', '.join(pair_text(p) for p in pairs + apairs)
+        below = sum(1 for r in confusions if r[0].startswith(f'Distinction {view} :'))
+        flag = f'   <-- confusion possible ({below} paire(s) sous {MIN_DELTA_E_2000})' if below else ''
+        print(f'   ΔE2000 {view:7} : {line}{flag}')
+    bad += confusions
     for name, pairs in information(theme).items():
-        line = ', '.join(f'{a}/{b} {d:.0f}' for d, a, b in pairs[:3])
-        # Le seuil de 12 est sur l'échelle CIE76 : il ne s'applique pas à CIEDE2000. En achromatopsie,
-        # l'écart CIE76 entre deux gris est leur écart de clarté, sur la même échelle.
-        if name == 'achromatopsie':
-            below = sum(1 for d, _, _ in pairs if d < MIN_DELTA_E)
-            line += f' ; {below}/{len(pairs)} paires sous {MIN_DELTA_E}'
-        print(f'   info {name:18} : {line}')
+        below = sum(1 for p in pairs if p[0] < MIN_DELTA_E_2000)
+        line = ', '.join(pair_text(p) for p in pairs[:3])
+        print(f'   info {name} : {line} ; {below}/{len(pairs)} paires sous {MIN_DELTA_E_2000}')
     return len(bad)
 
 

@@ -6,7 +6,7 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-from audit import ROOT, checks, load_theme, style_checks  # noqa: E402
+from audit import MIN_DELTA_E_2000, ROOT, checks, distinction_checks, load_theme, style_checks  # noqa: E402
 
 THEME = os.path.join(ROOT, 'themes', '365-10-light-theme.json')
 
@@ -66,6 +66,28 @@ class HighContrastTextTest(unittest.TestCase):
         rows = self.rows(self.theme)
         self.assertEqual(rows['Console : errorForeground sélectionné'], (4.5, 'OK'))
         self.assertEqual(rows['Console : errorForeground'], (7, 'OK'))
+
+class DistinctionCheckTest(unittest.TestCase):
+    """Chaque paire à distinguer compte comme un contrôle, dans chacune des 4 visions."""
+
+    def setUp(self):
+        self.theme = load_theme(THEME)
+
+    def test_every_pair_is_a_check(self):
+        # 21 paires de jetons principaux, puis 5 paires d'alertes, les tests réussi et échoué, 10 paires du graphe Git
+        rows = distinction_checks(self.theme)
+        self.assertEqual(len(rows), 4 * (21 + 5 + 1 + 10))
+        for view in ('normal', 'protan', 'deutan', 'tritan'):
+            self.assertEqual(sum(1 for r in rows if r[0].startswith(f'Distinction {view} :')), 37)
+
+    def test_identical_alerts_fail_in_every_vision(self):
+        theme = copy.deepcopy(self.theme)
+        theme['colors']['editorWarning.foreground'] = theme['colors']['editorError.foreground']
+        failed = [r for r in distinction_checks(theme) if r[3] != 'OK' and 'erreur / avertissement' in r[0]]
+        self.assertEqual(len(failed), 4)
+        for row in failed:
+            self.assertLess(row[1], MIN_DELTA_E_2000)
+
 
 class StyleCheckTest(unittest.TestCase):
     """WCAG 2.2, critère 1.4.1 : les styles qui portent un sens doivent être présents."""

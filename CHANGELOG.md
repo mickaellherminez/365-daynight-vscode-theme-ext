@@ -4,6 +4,13 @@ All notable changes to the "365-daynight-vscode-theme-ext" extension will be doc
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Color blindness is now checked with three published simulation models instead of one: Machado et al. (2009), Brettel et al. (1997) and Viénot et al. (1999) for protanopia and deuteranopia, and Brettel et al. for tritanopia, the only one of the three that is reliable for it. A pair of colors must stay distinct with every model, measured with CIEDE2000 (ΔE2000 of at least 7), which is closer to perception than CIE76. The [audit report](docs/AUDIT.md) and the website show the model that brings each pair closest.
+- Syntax colors are slightly adjusted in 40 of the 48 themes, and the alert colors in the Light and High Contrast Light themes, to pass this check. Most changes are barely visible.
+- The audit report counts each pair of colors to tell apart as a check, in each of the 4 visions.
+
 ## [1.0.5] - 2026-11-18
 
 ### Added

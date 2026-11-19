@@ -138,12 +138,14 @@
     },
     "references": {
       "title": "Quellen",
-      "machado": "Verwendet für die Simulationen der Farbenblindheit.",
+      "machado": "Eines der drei Modelle zur Simulation der Farbenblindheit und das einzige für Teilformen.",
       "wcag": "Kontrastverhältnis, die Stufen 4,5:1 und 7:1 und die Verwendung von Farbe.",
       "understanding": "Verknüpft 4,5:1 mit einer Sehschärfe von etwa 20/40 und 7:1 mit etwa 20/80.",
-      "cie": "CIELAB und der Farbabstand CIE76, der für die Schwellen verwendet wird.",
-      "sharma": "CIEDE2000 und die Testdaten, mit denen die Werkzeuge geprüft werden.",
-      "birch": "Etwa 8 % der Männer und 0,4 % der Frauen europäischer Herkunft."
+      "cie": "CIELAB und der Farbabstand CIE76, der für die Schwellen der Vielfalt verwendet wird.",
+      "sharma": "CIEDE2000, verwendet für die Schwelle der Farbunterscheidung, und die Testdaten, mit denen die Werkzeuge geprüft werden.",
+      "birch": "Etwa 8 % der Männer und 0,4 % der Frauen europäischer Herkunft.",
+      "brettel": "Modell zur Simulation der Farbenblindheit, das einzige für Tritanopie.",
+      "vienot": "Modell zur Simulation der Farbenblindheit, für Protanopie und Deuteranopie."
     },
     "noscript": "Die interaktiven Vorschauen benötigen JavaScript. Du kannst trotzdem die Demo in VS Code ansehen, den Prüfbericht lesen und alle 48 Themes installieren.",
     "footer": {
@@ -155,10 +157,11 @@
   },
   "limits": [
     "**Noch keine Tests mit echten Nutzern.** Farbenblindheit und Sehbehinderung werden simuliert oder berechnet. Keine Berechnung ersetzt Tests mit den betroffenen Menschen, und [Rückmeldungen sind willkommen](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).",
-    "**Teilformen werden gemessen, nicht erzwungen.** Teilformen der Farbenblindheit, die häufigsten, erscheinen in den Punktzahlen für Schweregrade von 0,1 bis 0,9. Nur vollständige Formen können die Prüfung scheitern lassen.",
+    "**Teilformen werden gemessen, nicht erzwungen.** Teilformen der Farbenblindheit, die häufigsten, erscheinen in den Punktzahlen für Schweregrade von 0,1 bis 0,9. Nur vollständige Formen können die Prüfung scheitern lassen. Nur das Modell von Machado et al. deckt Teilformen ab, und für die Tritanomalie ist es weniger zuverlässig.",
     "**Achromatopsie dient nur zur Information.** Ohne Farbe liegen viele Syntaxfarben in der Helligkeit nah beieinander, wie die Tabelle zeigt. Sie unterscheiden sich dann nur durch den Stil, wo das Theme einen festlegt, zum Beispiel bei Kommentaren sowie veraltetem und ungültigem Code.",
-    "**Die Schwellen sind Projektregeln.** Die WCAG legen die Mindestkontraste fest. Die Schwelle für die Unterscheidung von Farben (ΔE 12 auf der CIE76-Skala) und die Schwellen für die Vielfalt sind praktische Regeln, die für dieses Projekt gewählt wurden, keine Normen.",
-    "**CIE76 ist ein einfaches Maß.** Die Schwellen gelten für CIE76. CIEDE2000 liegt näher an der Wahrnehmung, besonders bei Blautönen und wenig gesättigten Farben, und steht daher zur Information zusätzlich im [Prüfbericht](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light), in einer Tabelle unter jeder Variante. Es verwendet eine andere Skala, und die Schwellen sind nicht darauf abgestimmt.",
+    "**Die Schwellen sind Projektregeln.** Die WCAG legen die Mindestkontraste fest. Die Schwelle für die Unterscheidung von Farben (ΔE2000 7 auf der CIEDE2000-Skala) und die Schwellen für die Vielfalt sind praktische Regeln, die für dieses Projekt gewählt wurden, keine Normen.",
+    "**Die Simulationsmodelle stimmen nicht überein.** Farbenblindheit wird für Protanopie und Deuteranopie mit drei veröffentlichten Modellen simuliert, für Tritanopie mit dem von Brettel et al., dem einzigen der drei, das dafür zuverlässig ist. Ein Farbpaar muss mit jedem Modell unterscheidbar bleiben. Kein Modell zeigt genau, was eine bestimmte Person sieht.",
+    "**Zwei Formeln für den Farbabstand.** Die Unterscheidung von Farben verwendet CIEDE2000, das näher an der Wahrnehmung liegt, besonders bei Blautönen und wenig gesättigten Farben. Die Schwellen für die Vielfalt zwischen den Monaten verwenden weiterhin CIE76, eine einfachere Formel, und der [Prüfbericht](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) gibt zur Information auch CIE76 für die Unterscheidung von Farben an, in einer Tabelle unter jeder Variante.",
     "**Nur Kontrast nach WCAG 2.** APCA, das für WCAG 3 entworfene Kontrastmodell, wird nicht angewendet.",
     "**Farben, keine Darstellung.** Die Prüfung liest die Theme-Dateien. Sie prüft die in ihrem Code aufgeführten Farbpaare, mit einem TextMate-Scope pro Token-Kategorie. Ein dargestelltes Fenster, die Kantenglättung oder dein Bildschirm werden nicht betrachtet.",
     "**Nicht jede Farbe von VS Code.** Ein Theme legt etwa 485 der rund 970 von VS Code dokumentierten Farben fest. Die übrigen nutzen die Standardwerte von VS Code, und nur die der neueren Oberflächen werden geprüft, so wie sie in VS Code 1.145 sind. Eine künftige Version kann sie ändern.",
@@ -223,10 +226,10 @@
         "achromatopsia": "Achromatopsie"
       },
       "scores": {
-        "protanopia": { "label": "Protanopie", "formula": "Anteil der 21 Paare der wichtigsten Syntaxfarben, die mindestens {{distance}} auseinanderliegen, simuliert bei vollem Schweregrad." },
+        "protanopia": { "label": "Protanopie", "formula": "Anteil der 21 Paare der wichtigsten Syntaxfarben, die mit jedem Simulationsmodell mindestens {{distance}} auseinanderliegen, bei vollem Schweregrad." },
         "deuteranopia": { "label": "Deuteranopie", "formula": "Dieselbe Berechnung, für Deuteranopie." },
         "tritanopia": { "label": "Tritanopie", "formula": "Dieselbe Berechnung, für Tritanopie." },
-        "protanomaly": { "label": "Protanomalie (teilweise)", "formula": "Dieselbe Berechnung für Schweregrade von 0,1 bis 0,9, wobei das niedrigste Ergebnis zählt." },
+        "protanomaly": { "label": "Protanomalie (teilweise)", "formula": "Dieselbe Berechnung mit dem Modell von Machado et al. für Schweregrade von 0,1 bis 0,9, wobei das niedrigste Ergebnis zählt." },
         "deuteranomaly": { "label": "Deuteranomalie (teilweise)", "formula": "Ebenso, für teilweise Deuteranopie." },
         "tritanomaly": { "label": "Tritanomalie (teilweise)", "formula": "Ebenso, für teilweise Tritanopie." },
         "achromatopsia": { "label": "Achromatopsie", "formula": "Anteil derselben Paare, die allein in der Helligkeit mindestens {{distance}} auseinanderliegen." },

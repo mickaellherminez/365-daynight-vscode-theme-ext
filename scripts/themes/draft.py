@@ -9,8 +9,8 @@ Puis générer les thèmes : python3 scripts/themes/build.py 01 --write
 Modèle de structure : les 4 palettes d'octobre d'avant la refonte (draft-template.json). Les surfaces prennent
 la teinte du fond du mois, l'accent et les barres celle de l'accent. Les alertes, la sélection et le terminal
 restent ceux du modèle, puis sont adaptés au nouveau fond. La syntaxe est cherchée dans les teintes du mois :
-contraste WCAG sur toutes les surfaces du code, ΔE d'au moins 12 visé pour les 3 daltonismes simulés (Machado
-2009), clartés étagées pour l'achromatopsie.
+contraste WCAG sur toutes les surfaces du code, ΔE2000 d'au moins 7 visé pour les 3 daltonismes simulés, avec
+chaque modèle de colorlib.MODELS, clartés étagées pour l'achromatopsie.
 """
 import itertools
 import json
@@ -21,7 +21,8 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from colorlib import ACHROMATOPSIA, CVD, contrast, delta_e, lab, lch_to_hex, over  # noqa: E402
+from audit import MIN_DELTA_E_2000  # noqa: E402
+from colorlib import ACHROMATOPSIA, SIMULATIONS, contrast, delta_e_2000, lab, lch_to_hex, over  # noqa: E402
 
 TEMPLATE = json.load(open(os.path.join(HERE, 'draft-template.json'), encoding='utf-8'))
 DIRECTION = json.load(open(os.path.join(HERE, 'direction.json'), encoding='utf-8'))['months']
@@ -259,15 +260,14 @@ def pick_syntax(p, variant, plan, comment_chroma, seed=1, rounds=20000):
         candidates[role] = sorted(found)
 
     fixed = {'variable': p['fg']}
-    views = [None] + list(CVD.values())
 
     def score(cur):
         tokens = {**fixed, **cur}
         pairs = list(itertools.combinations(tokens.values(), 2))
-        cvd = min(delta_e(a, b, m) for a, b in pairs for m in views)
-        achroma = sum(1 for a, b in pairs if delta_e(a, b, ACHROMATOPSIA) >= 10)
+        cvd = min(delta_e_2000(a, b, m) for a, b in pairs for m in SIMULATIONS)
+        achroma = sum(1 for a, b in pairs if delta_e_2000(a, b, ACHROMATOPSIA) >= MIN_DELTA_E_2000)
         vivid = sum(math.sqrt(math.hypot(*lab(c)[1:])) for r, c in cur.items() if r != 'comment')
-        return 3 * achroma + 0.8 * vivid - 60 * max(0, 12 - cvd)
+        return 3 * achroma + 0.8 * vivid - 85 * max(0, MIN_DELTA_E_2000 - cvd)
 
     cur = {r: random.choice(c) for r, c in candidates.items()}
     s = score(cur)
@@ -286,9 +286,8 @@ def pick_syntax(p, variant, plan, comment_chroma, seed=1, rounds=20000):
 
 
 def cvd_margin(tokens):
-    """Plus petit ΔE entre deux couleurs de code, en vision normale et pour les 3 daltonismes simulés."""
-    views = [None] + list(CVD.values())
-    return min(delta_e(a, b, m) for a, b in itertools.combinations(tokens.values(), 2) for m in views)
+    """Plus petit ΔE2000 entre deux couleurs de code, en vision normale et pour les 3 daltonismes, tous modèles."""
+    return min(delta_e_2000(a, b, m) for a, b in itertools.combinations(tokens.values(), 2) for m in SIMULATIONS)
 
 
 def apply_syntax(p, variant, syntax, regex_plan):
@@ -340,22 +339,22 @@ def draft(month):
         print(f'{int(month):02d} {variant}…', file=sys.stderr)
         tint_chroma = 12 if variant in ('hc', 'hcLight') else 14
         p = repair(derive(variant, seed(d[variant]['bg']), seed(d[variant]['accent']), tint_chroma), variant)
-        # Plusieurs tirages si le premier ne garde pas ΔE 12 entre les couleurs de code pour les 3 daltonismes
+        # Plusieurs tirages si le premier ne garde pas ΔE2000 7 entre les couleurs de code pour les 3 daltonismes
         best = None
         for attempt in range(4):
             syntax = pick_syntax(p, variant, plan, comment_chroma=12, seed=int(month) + 100 * attempt)
             margin = cvd_margin({'variable': p['fg'], **syntax})
             if best is None or margin > best[0]:
                 best = (margin, syntax)
-            if margin >= 12:
+            if margin >= MIN_DELTA_E_2000:
                 break
-            print(f'   {variant} : ΔE {margin:.1f} pour le daltonisme au tirage {attempt + 1}', file=sys.stderr)
+            print(f'   {variant} : ΔE2000 {margin:.1f} pour le daltonisme au tirage {attempt + 1}', file=sys.stderr)
         syntax = best[1]
         p = apply_syntax(p, variant, syntax, regex_color(p, variant, d['regexHue']))
         name, level = VARIANT_TEXT[variant]
         p['note'] = (f'Palette {name} ({d["mood"]}) : texte et jetons {level} sur le fond, syntaxe étagée en clarté '
                      "pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. "
-                     'Vérifié par script (contraste WCAG + simulation Machado 2009).')
+                     'Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999).')
         out[variant] = p
     return out
 

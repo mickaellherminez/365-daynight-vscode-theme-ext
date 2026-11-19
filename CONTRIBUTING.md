@@ -53,7 +53,7 @@ The integration tests run twice: on the latest VS Code and on the minimum versio
 
 | Check | Command | What it verifies |
 | --- | --- | --- |
-| Theme audit | `npm run themes:audit` | Contrast and color blind distinction (ΔE of at least 12 for the three simulated types) in every theme, including semantic token colors, and the font styles that carry meaning (WCAG 1.4.1). A missing color role or style counts as a failure |
+| Theme audit | `npm run themes:audit` | Contrast and color blind distinction (CIEDE2000 ΔE2000 of at least 7 for the three simulated types, with every simulation model) in every theme, including semantic token colors, and the font styles that carry meaning (WCAG 1.4.1). A missing color role or style counts as a failure |
 | Generated themes | `npm run themes:check` | Each file in `themes/` is exactly what the generator produces from its palette: no hand edit, no palette change without `--write`, no missing or extra file |
 | Variety | `npm run themes:variety` | Two months of the same variant do not look alike: background, frame, accent and syntax. See below |
 | Measuring tools | `npm run themes:test` | The color calculations match published reference data, and the audit and the variety test fail when they should. See below |
@@ -71,11 +71,12 @@ The audit and the variety test are only as good as their color calculations. `np
 | WCAG contrast ratio: 21:1 for black on white, 4.54:1 for `#767676` on white, 4.48:1 for `#777777`, and the luminance of the primaries | WCAG 2.2 definitions of contrast ratio and relative luminance |
 | CIEDE2000: the 34 test pairs, to four decimals, in both orders | Sharma, Wu and Dalal (2005), *Color Research & Application* 30(1) |
 | Color vision deficiency simulation: the matrices are the published ones for severity 1.0 | Machado, Oliveira and Fernandes (2009), *IEEE TVCG* 15(6), DOI 10.1109/TVCG.2009.113 |
+| Other simulation models: the same colors as DaltonLens for 216 colors | Brettel, Viénot and Mollon (1997), *JOSA A* 14(10); Viénot, Brettel and Mollon (1999), *Color Research & Application* 24(4); DaltonLens-Python 0.1.5 |
 | Achromatopsia: every color becomes the gray of the same luminance | sRGB relative luminance |
 
 The same command tests the audit's font style check and the variety test with synthetic themes.
 
-The audit also shows two measures for information only, which never fail it: CIEDE2000 for the closest token pairs, and achromatopsia (lightness differences only). Thresholds stay in CIE76 until they are recalibrated for CIEDE2000, whose scale is different.
+Color blindness is simulated with the models of Machado et al. (2009), Brettel et al. (1997) and Viénot et al. (1999) for protanopia and deuteranopia, and with the one of Brettel et al. for tritanopia. A pair of colors must stay distinct with every model. The threshold of 7 on the CIEDE2000 scale is a project rule, not a standard. The audit also shows achromatopsia (lightness differences only) for information: it never fails the audit. The variety thresholds stay in CIE76.
 
 ## Status bar button rules
 

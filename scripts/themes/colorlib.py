@@ -42,8 +42,63 @@ CVD = {
     'tritan': [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.303900]],
 }
 
-# Vision normale + les 3 formes de dichromatie
-VIEWS = {'normal': None, **CVD}
+# Viénot, Brettel et Mollon (1999), « Digital video colourmaps for checking the legibility of displays by
+# dichromats », Color Research & Application 24(4), p. 243-252. Une seule projection par dichromatie, valable pour
+# la protanopie et la deutéranopie seulement. Matrices en RGB linéaire, calculées par DaltonLens 0.1.5 (modèle LMS
+# de Smith et Pokorny adapté à sRGB) et vérifiées contre ses résultats (scripts/themes/tests/).
+VIENOT = {
+    'protan': [[0.1088893110253553, 0.8911106889746441, 0.0], [0.10888931102535536, 0.8911106889746446, 0.0],
+               [0.004471314172181988, -0.004471314172181949, 1.0]],
+    'deutan': [[0.2903053212655528, 0.7096946787344469, 0.0], [0.29030532126555286, 0.7096946787344469, 0.0],
+               [-0.02197353944733135, 0.021973539447331363, 1.0]],
+}
+
+# Brettel, Viénot et Mollon (1997), « Computerized simulation of color appearance for dichromats », Journal of the
+# Optical Society of America A 14(10), p. 2647-2655. Deux demi-plans par dichromatie : une couleur est projetée sur
+# le premier ou le second selon le côté du plan de séparation où elle se trouve. C'est le seul des trois modèles qui
+# vaille pour la tritanopie. Matrices en RGB linéaire, calculées comme les précédentes.
+BRETTEL = {
+    'protan': {
+        'plane1': [[0.14509618931338164, 1.2016532157622424, -0.34674940507562363],
+                   [0.10446500989201518, 0.8531639308397114, 0.04237105926827329],
+                   [0.0042896394038027625, -0.006029519250709631, 1.0017398798469068]],
+        'plane2': [[0.1411517215232287, 1.1678219369471488, -0.30897365847037833],
+                   [0.10494700431240045, 0.8572979454877919, 0.0377550501998077],
+                   [0.004309431507017369, -0.005859764495996709, 1.0015503329889792]],
+        'separation': [0.00048454953529869423, 0.004155929595708196, -0.0046404791310068905],
+    },
+    'deutan': {
+        'plane1': [[0.36198239320435854, 0.8675466622532473, -0.2295290554576064],
+                   [0.2609853389970158, 0.6451242766151196, 0.0938903843878646],
+                   [-0.01975427669264204, 0.026860946512120308, 0.9928933301805217]],
+        'plane2': [[0.37009000982854123, 0.8854017912522372, -0.25549180108077885],
+                   [0.2576688645759613, 0.6378205175260239, 0.10451061789801484],
+                   [-0.019503248977409616, 0.02741377633197485, 0.9920894726454347]],
+        'separation': [-0.0029279800414292994, -0.006448191098510094, 0.009376171139939394],
+    },
+    'tritan': {
+        'plane1': [[1.0135416153085874, 0.14268231071503093, -0.1562239260236198],
+                   [-0.01180536477256513, 0.8756118316612331, 0.1361935331113322],
+                   [0.07707253450633182, 0.812080912463489, 0.11084655303017935]],
+        'plane2': [[0.9333697629350477, 0.19999004994381192, -0.13335981287886017],
+                   [0.05808718055484977, 0.8256518563946372, 0.11626096305051282],
+                   [-0.3792281148392172, 1.1382497341689028, 0.24097838067031496]],
+        'separation': [0.03960095072164182, -0.028307203712766432, -0.011293747008875398],
+    },
+}
+
+# Modèles retenus pour chaque dichromatie (décision du 19 novembre 2026, issue #96) : une paire de couleurs doit
+# rester distincte avec chacun d'eux. Machado 2009 ne vaut pas pour la tritanopie, ni Viénot 1999.
+MODELS = {
+    'protan': {'Machado 2009': CVD['protan'], 'Brettel 1997': BRETTEL['protan'], 'Viénot 1999': VIENOT['protan']},
+    'deutan': {'Machado 2009': CVD['deutan'], 'Brettel 1997': BRETTEL['deutan'], 'Viénot 1999': VIENOT['deutan']},
+    'tritan': {'Brettel 1997': BRETTEL['tritan']},
+}
+
+# Vision normale + les 3 formes de dichromatie, chacune avec ses modèles. La vision normale n'a pas de modèle (nom vide)
+VIEWS = {'normal': {'': None}, **MODELS}
+# Toutes les simulations à vérifier, vision normale comprise
+SIMULATIONS = [simulation for models in VIEWS.values() for simulation in models.values()]
 
 # Achromatopsie (vision sans couleur) : chaque couleur devient le gris de même luminance (CIE Y, coefficients
 # de sRGB). C'est une approximation : les personnes achromates voient avec les bâtonnets, dont la sensibilité
@@ -55,20 +110,30 @@ def _gamma(v):
     return 12.92 * v if v <= 0.0031308 else 1.055 * v ** (1 / 2.4) - 0.055
 
 
-def simulate(color, matrix):
-    """Couleur telle qu'elle est vue après simulation : '#RRGGBB' -> '#RRGGBB'."""
+def project(v, simulation):
+    """Applique une simulation à une couleur en RGB linéaire, sans écrêtage.
+
+    La simulation est une matrice 3×3 (Machado, Viénot, achromatopsie) ou les deux demi-plans de Brettel.
+    """
+    if isinstance(simulation, dict):
+        side = sum(n * x for n, x in zip(simulation['separation'], v))
+        simulation = simulation['plane2'] if side < 0 else simulation['plane1']
+    return [sum(simulation[i][j] * v[j] for j in range(3)) for i in range(3)]
+
+
+def simulate(color, simulation):
+    """Couleur telle qu'elle est vue après simulation : '#RRGGBB' -> '#RRGGBB', arrondie à 8 bits comme à l'écran."""
     (r, g, b), _ = parse(color)
-    v = [_linear(r), _linear(g), _linear(b)]
-    linear = [max(0, min(1, sum(matrix[i][j] * v[j] for j in range(3)))) for i in range(3)]
+    linear = [max(0, min(1, x)) for x in project([_linear(r), _linear(g), _linear(b)], simulation)]
     return '#%02X%02X%02X' % tuple(round(_gamma(x) * 255) for x in linear)
 
 
-def lab(color, matrix=None):
-    """Couleur -> CIE L*a*b* (D65), éventuellement après simulation de daltonisme."""
+def lab(color, simulation=None):
+    """Couleur -> CIE L*a*b* (D65), éventuellement après simulation (couleur simulée arrondie à 8 bits)."""
+    if simulation:
+        color = simulate(color, simulation)
     (r, g, b), _ = parse(color)
     v = [_linear(r), _linear(g), _linear(b)]
-    if matrix:
-        v = [max(0, min(1, sum(matrix[i][j] * v[j] for j in range(3)))) for i in range(3)]
     X = (0.4124 * v[0] + 0.3576 * v[1] + 0.1805 * v[2]) / 0.95047
     Y = 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]
     Z = (0.0193 * v[0] + 0.1192 * v[1] + 0.9505 * v[2]) / 1.08883
@@ -76,9 +141,9 @@ def lab(color, matrix=None):
     return 116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))
 
 
-def delta_e(a, b, matrix=None):
+def delta_e(a, b, simulation=None):
     """Différence perçue (CIE76). En dessous de ~10, deux couleurs de texte se confondent."""
-    return math.dist(lab(a, matrix), lab(b, matrix))
+    return math.dist(lab(a, simulation), lab(b, simulation))
 
 
 def ciede2000(lab1, lab2):
@@ -134,14 +199,9 @@ def ciede2000(lab1, lab2):
     return math.sqrt(dl ** 2 + dc ** 2 + dh ** 2 + r_t * dc * dh)
 
 
-def delta_e_2000(a, b, matrix=None):
+def delta_e_2000(a, b, simulation=None):
     """Différence perçue CIEDE2000 entre deux couleurs, éventuellement après simulation de daltonisme."""
-    return ciede2000(lab(a, matrix), lab(b, matrix))
-
-
-def min_delta_e(a, b):
-    """Plus petite différence perçue entre deux couleurs, toutes visions confondues."""
-    return min((delta_e(a, b, m), name) for name, m in VIEWS.items())
+    return ciede2000(lab(a, simulation), lab(b, simulation))
 
 
 def readable_on(color, background, minimum):
