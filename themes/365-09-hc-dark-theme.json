@@ -103,10 +103,10 @@
     "editor.wordHighlightTextBorder": "#D0B9C5",
     "editorBracketHighlight.foreground1": "#0DB0FC",
     "editorBracketHighlight.foreground2": "#FBC75D",
-    "editorBracketHighlight.foreground3": "#FDAFFD",
+    "editorBracketHighlight.foreground3": "#ECB8F4",
     "editorBracketHighlight.foreground4": "#0DB0FC",
     "editorBracketHighlight.foreground5": "#FBC75D",
-    "editorBracketHighlight.foreground6": "#FDAFFD",
+    "editorBracketHighlight.foreground6": "#ECB8F4",
     "editorBracketHighlight.unexpectedBracket.foreground": "#FF8A94",
     "editorBracketMatch.background": "#9FD0FF44",
     "editorBracketMatch.border": "#F9A3FF",
@@ -199,7 +199,7 @@
     "gitDecoration.renamedResourceForeground": "#7FB0FF",
     "gitDecoration.stageDeletedResourceForeground": "#FF8A94",
     "gitDecoration.stageModifiedResourceForeground": "#7FB0FF",
-    "gitDecoration.submoduleResourceForeground": "#FDAFFD",
+    "gitDecoration.submoduleResourceForeground": "#ECB8F4",
     "gitDecoration.untrackedResourceForeground": "#4FF5E0",
     "icon.foreground": "#EED7E3",
     "input.background": "#15050E",
@@ -330,7 +330,7 @@
     "scmGraph.foreground2": "#FBC75D",
     "scmGraph.foreground3": "#FF7E88",
     "scmGraph.foreground4": "#8BB703",
-    "scmGraph.foreground5": "#FDAFFD",
+    "scmGraph.foreground5": "#ECB8F4",
     "scmGraph.historyItemBaseRefColor": "#E8D44D",
     "scmGraph.historyItemHoverAdditionsForeground": "#4FF5E0",
     "scmGraph.historyItemHoverDeletionsForeground": "#FF8A94",
@@ -385,15 +385,15 @@
     "statusBarItem.remoteBackground": "#3B213D",
     "statusBarItem.remoteForeground": "#FFFFFF",
     "symbolIcon.booleanForeground": "#8BB703",
-    "symbolIcon.classForeground": "#FDAFFD",
+    "symbolIcon.classForeground": "#ECB8F4",
     "symbolIcon.constantForeground": "#8BB703",
     "symbolIcon.constructorForeground": "#FBC75D",
-    "symbolIcon.enumeratorForeground": "#FDAFFD",
+    "symbolIcon.enumeratorForeground": "#ECB8F4",
     "symbolIcon.enumeratorMemberForeground": "#8BB703",
-    "symbolIcon.eventForeground": "#FDAFFD",
+    "symbolIcon.eventForeground": "#ECB8F4",
     "symbolIcon.fieldForeground": "#FADAEA",
     "symbolIcon.functionForeground": "#FBC75D",
-    "symbolIcon.interfaceForeground": "#FDAFFD",
+    "symbolIcon.interfaceForeground": "#ECB8F4",
     "symbolIcon.keywordForeground": "#0DB0FC",
     "symbolIcon.methodForeground": "#FBC75D",
     "symbolIcon.moduleForeground": "#FADAEA",
@@ -404,8 +404,8 @@
     "symbolIcon.packageForeground": "#FADAEA",
     "symbolIcon.propertyForeground": "#FADAEA",
     "symbolIcon.stringForeground": "#FF7E88",
-    "symbolIcon.structForeground": "#FDAFFD",
-    "symbolIcon.typeParameterForeground": "#FDAFFD",
+    "symbolIcon.structForeground": "#ECB8F4",
+    "symbolIcon.typeParameterForeground": "#ECB8F4",
     "symbolIcon.variableForeground": "#FFF1F8",
     "tab.activeBackground": "#160810",
     "tab.activeBorder": "#160810",
@@ -563,7 +563,7 @@
         "support.class"
       ],
       "settings": {
-        "foreground": "#FDAFFD"
+        "foreground": "#ECB8F4"
       }
     },
     {
@@ -654,7 +654,7 @@
         "support.variable"
       ],
       "settings": {
-        "foreground": "#FDAFFD"
+        "foreground": "#ECB8F4"
       }
     },
     {
@@ -820,7 +820,7 @@
         "meta.diff.header"
       ],
       "settings": {
-        "foreground": "#FDAFFD",
+        "foreground": "#ECB8F4",
         "fontStyle": "bold"
       }
     },
@@ -890,7 +890,7 @@
         "entity.other.inherited-class"
       ],
       "settings": {
-        "foreground": "#FDAFFD",
+        "foreground": "#ECB8F4",
         "fontStyle": "italic"
       }
     }
@@ -903,20 +903,20 @@
     },
     "function": "#FBC75D",
     "method": "#FBC75D",
-    "class": "#FDAFFD",
-    "enum": "#FDAFFD",
+    "class": "#ECB8F4",
+    "enum": "#ECB8F4",
     "interface": {
-      "foreground": "#FDAFFD",
+      "foreground": "#ECB8F4",
       "fontStyle": "italic"
     },
     "namespace": "#FADAEA",
     "typeParameter": {
-      "foreground": "#FDAFFD",
+      "foreground": "#ECB8F4",
       "fontStyle": "italic"
     },
     "enumMember": "#8BB703",
     "property": "#FADAEA",
-    "variable.defaultLibrary": "#FDAFFD",
+    "variable.defaultLibrary": "#ECB8F4",
     "keyword": "#0DB0FC",
     "*.deprecated": {
       "strikethrough": true
@@ -926,5 +926,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette à contraste élevé (vendanges) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette à contraste élevé (vendanges) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999)."
 }

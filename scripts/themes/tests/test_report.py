@@ -20,13 +20,23 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(sum(len(v['themes']) for v in self.data['variants'].values()), 48)
 
     def test_limits_are_published(self):
-        for limit in ('No testing with real users', 'Partial forms', 'APCA', 'project rules', 'CIE76 is a simple measure'):
+        for limit in ('No testing with real users', 'Partial forms', 'APCA', 'project rules', 'Simulation models disagree', 'Two color difference formulas'):
             self.assertIn(limit, self.markdown)
 
-    def test_ciede2000_is_reported_for_each_vision(self):
+    def test_cie76_is_reported_for_each_vision(self):
         for variant in self.data['variants'].values():
             for theme in variant['themes']:
-                self.assertEqual(set(theme['ciede2000']), {'normal', 'protanopia', 'deuteranopia', 'tritanopia'})
+                self.assertEqual(set(theme['cie76']), {'normal', 'protanopia', 'deuteranopia', 'tritanopia'})
+
+    def test_closest_pair_names_its_model(self):
+        models = self.data['colorVisionModels']
+        self.assertEqual(models['tritanopia'], ['Brettel 1997'])
+        for variant in self.data['variants'].values():
+            for theme in variant['themes']:
+                vision = theme['colorVision']
+                self.assertIsNone(vision['normal']['model'])
+                for view in ('protanopia', 'deuteranopia', 'tritanopia'):
+                    self.assertIn(vision[view]['model'], models[view], theme['name'])
 
     def test_each_theme_has_all_the_scores(self):
         names = {'protanopia', 'deuteranopia', 'tritanopia', 'protanomaly', 'deuteranomaly', 'tritanomaly',

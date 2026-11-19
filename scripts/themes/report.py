@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import audit  # noqa: E402
 import variety  # noqa: E402
-from colorlib import simulate  # noqa: E402
+from colorlib import MODELS, delta_e, delta_e_2000, simulate  # noqa: E402
 
 ROOT = audit.ROOT
 OUTPUTS = {'markdown': os.path.join('docs', 'AUDIT.md'), 'json': os.path.join('docs', 'audit-report.json')}
@@ -37,7 +37,13 @@ SEVERITIES = tuple(f'0.{i}' for i in range(1, 10))
 PARTIAL_NAMES = {'protan': 'protanomaly', 'deutan': 'deuteranomaly', 'tritan': 'tritanomaly'}
 MACHADO = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tests', 'data', 'machado2009-cvd.json')
 BASELINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'themes-0.12.0.json')
-SIMULATIONS = {**{VIEW_NAMES[view]: matrix for view, matrix in audit.CVD.items()}, 'achromatopsia': audit.ACHROMATOPSIA}
+# Aperçus simulés : Brettel 1997, le seul modèle retenu pour les 3 dichromaties
+PREVIEW_MODEL = 'Brettel 1997'
+SIMULATIONS = {**{VIEW_NAMES[view]: models[PREVIEW_MODEL] for view, models in MODELS.items()},
+               'achromatopsia': audit.ACHROMATOPSIA}
+BRETTEL = '[Brettel et al., 1997](https://doi.org/10.1364/JOSAA.14.002647)'
+VIENOT = '[Viénot et al., 1999](https://doi.org/10.1002/(SICI)1520-6378(199908)24:4%3C243::AID-COL5%3E3.0.CO;2-3)'
+MACHADO_LINK = '[Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113)'
 
 
 def month_of(theme):
@@ -54,12 +60,14 @@ def vision_scores(theme, text):
     tokens = {k: v for k, v in audit.token_colors(theme).items() if k in audit.DISTINCT_TOKENS}
     pairs = list(itertools.combinations(tokens.values(), 2))
 
-    def distinct(matrix):
-        return percent(sum(audit.delta_e(a, b, matrix) >= audit.MIN_DELTA_E for a, b in pairs), len(pairs))
+    def distinct(*simulations):
+        """Part des paires qui restent distinctes avec chacune des simulations."""
+        kept = sum(all(delta_e_2000(a, b, s) >= audit.MIN_DELTA_E_2000 for s in simulations) for a, b in pairs)
+        return percent(kept, len(pairs))
 
     with open(MACHADO, encoding='utf-8') as handle:
         table = json.load(handle)
-    scores = {VIEW_NAMES[view]: distinct(matrix) for view, matrix in audit.CVD.items()}
+    scores = {VIEW_NAMES[view]: distinct(*models.values()) for view, models in MODELS.items()}
     for view, name in PARTIAL_NAMES.items():
         scores[name] = min(distinct(table[severity][view]) for severity in SEVERITIES)
     scores['achromatopsia'] = distinct(audit.ACHROMATOPSIA)
@@ -101,21 +109,31 @@ def month_grids(ui, months):
                         'syntax': grid(tokens, variety.syntax_delta)}, 'before': before}
 
 
+def cie76(theme):
+    """Plus petit ΔE CIE76 entre les jetons principaux, pour chaque vision et tous ses modèles, à titre d'information."""
+    tokens = [v for k, v in audit.token_colors(theme).items() if k in audit.DISTINCT_TOKENS]
+    return {VIEW_NAMES[view]: round(min(delta_e(a, b, s) for a, b in itertools.combinations(tokens, 2)
+                                        for s in models.values()), 1)
+            for view, models in audit.VIEWS.items()}
+
+
 def theme_result(theme, hc):
     """Résultats d'un thème : contrôles, contraste, basse vision, distinction des couleurs."""
     rows = audit.checks(theme, hc)
+    # Contrastes, styles et couleurs requises, puis chaque paire à distinguer dans chaque vision
+    checked = rows + audit.distinction_checks(theme)
     text = [r for r in rows if r[2] in TEXT_MINIMUMS and r[1]]
     editor = next(r[1] for r in text if r[0] == 'Éditeur : texte / fond')
     worst = min(text, key=lambda r: r[1])
     vision = {}
     for view, (pairs, alert_pairs) in audit.distinctness(theme).items():
-        delta, first, second = min(pairs + alert_pairs)
-        vision[VIEW_NAMES[view]] = {'deltaE': round(delta, 1), 'closest': [ROLE_NAMES[first], ROLE_NAMES[second]]}
-    information = audit.information(theme)
-    grays = information['achromatopsie']
+        delta, first, second, model, _ = min(pairs + alert_pairs)
+        vision[VIEW_NAMES[view]] = {'deltaE2000': round(delta, 1), 'closest': [ROLE_NAMES[first], ROLE_NAMES[second]],
+                                    'model': model or None}
+    grays = audit.information(theme)['achromatopsie']
     return {
         'name': theme['name'],
-        'checks': {'passed': sum(r[3] == 'OK' for r in rows), 'total': len(rows)},
+        'checks': {'passed': sum(r[3] == 'OK' for r in checked), 'total': len(checked)},
         'contrast': {'editorText': round(editor, 2), 'lowestText': round(worst[1], 2)},
         'lowVision': {
             'textChecks': len(text),
@@ -123,8 +141,8 @@ def theme_result(theme, hc):
             'atLeast7': round(100 * sum(r[1] >= 7 for r in text) / len(text), 1),
         },
         'colorVision': vision,
-        'ciede2000': {VIEW_NAMES[view]: round(information['ΔE2000 ' + view][0][0], 1) for view in VIEW_NAMES},
-        'achromatopsia': {'pairsBelowThreshold': sum(d < audit.MIN_DELTA_E for d, _, _ in grays), 'pairs': len(grays)},
+        'cie76': cie76(theme),
+        'achromatopsia': {'pairsBelowThreshold': sum(p[0] < audit.MIN_DELTA_E_2000 for p in grays), 'pairs': len(grays)},
         'scores': vision_scores(theme, text),
         **preview_colors(theme),
     }
@@ -161,7 +179,9 @@ def collect():
         'themeCount': len(themes),
         'checks': {'passed': sum(t['checks']['passed'] for t in themes.values()),
                    'total': sum(t['checks']['total'] for t in themes.values())},
-        'thresholds': {'colorDistinctionDeltaE': audit.MIN_DELTA_E, 'textContrast': 4.5, 'textContrastHighContrast': 7},
+        'thresholds': {'colorDistinctionDeltaE2000': audit.MIN_DELTA_E_2000, 'textContrast': 4.5, 'textContrastHighContrast': 7},
+        'colorVisionModels': {VIEW_NAMES[view]: list(models) for view, models in MODELS.items()},
+        'previewModel': PREVIEW_MODEL,
         'variants': variants,
     }
 
@@ -171,10 +191,11 @@ LIMITS = """## Limits of this audit
 These results are measurements and simulations. Here is what they do not show.
 
 - **No testing with real users yet.** Color blindness and low vision are simulated or calculated. No calculation replaces testing with the people concerned, and [feedback is welcome](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).
-- **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit.
+- **Partial forms are measured, not enforced.** Partial forms of color blindness, which are the most common, appear in the scores for severities 0.1 to 0.9. Only complete forms can fail the audit. Only the model of Machado et al. covers partial forms, and it is less reliable for tritanomaly.
 - **Achromatopsia is information only.** Without color, many syntax colors are close in lightness, as the table shows. They then differ only by style where the theme sets one, for comments, deprecated and invalid code for example.
-- **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE 12 on the CIE76 scale) and the variety thresholds are practical rules chosen for this project, not standards.
-- **CIE76 is a simple measure.** The thresholds apply to CIE76. CIEDE2000 is closer to perception, especially for blues and low saturation colors, so the [audit report](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) also gives it, for information, in a table under each variant. It uses another scale, and the thresholds are not calibrated for it.
+- **Thresholds are project rules.** WCAG sets the contrast minimums. The color distinction threshold (ΔE2000 7 on the CIEDE2000 scale) and the variety thresholds are practical rules chosen for this project, not standards.
+- **Simulation models disagree.** Color blindness is simulated with three published models for protanopia and deuteranopia, and with the one of Brettel et al. for tritanopia, the only one of the three that is reliable for it. A pair of colors must stay distinct with every model. No model shows exactly what a given person sees.
+- **Two color difference formulas.** Color distinction uses CIEDE2000, closer to perception, especially for blues and low saturation colors. The variety thresholds between months still use CIE76, a simpler formula, and the [audit report](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) also gives CIE76 for color distinction, for information, in a table under each variant.
 - **WCAG 2 contrast only.** APCA, the contrast model drafted for WCAG 3, is not applied.
 - **Colors, not rendering.** The audit reads the theme files. It checks the color pairs listed in its code, with one TextMate scope per token category. It does not look at a rendered window, antialiasing or your display.
 - **Not every VS Code color.** A theme defines about 485 of the roughly 970 colors documented by VS Code. The others use the defaults of VS Code, and only those of the recent surfaces are audited, as they are in VS Code 1.145. A future version may change them.
@@ -198,14 +219,14 @@ def to_markdown(data):
         '- **Editor text:** contrast of normal text on the editor background.',
         '- **Lowest text:** the lowest contrast among all the text checks. The minimum is 4.5:1, and 7:1 in High Contrast themes, except for selected lines in the debug console, which keep their color on the selection (4.5:1).',
         '- **≥ 4.5:1 and ≥ 7:1:** share of the text checks above each level. The W3C links these levels to a visual acuity of about 20/40 and 20/80 ([WCAG, Understanding 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)).',
-        f"- **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE, CIE76) between syntax colors or between alerts, after simulation ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)). The audit fails under {data['thresholds']['colorDistinctionDeltaE']}.",
+        f"- **Normal, Protanopia, Deuteranopia, Tritanopia:** the smallest color difference (ΔE2000, CIEDE2000) between syntax colors or between alerts, after simulation with the model that brings them closest: {MACHADO_LINK}, {BRETTEL} or {VIENOT} for protanopia and deuteranopia, {BRETTEL} for tritanopia. The audit fails under {data['thresholds']['colorDistinctionDeltaE2000']}.",
         '- **Achromatopsia:** pairs of main syntax colors closer than the threshold in lightness alone. For information, it never fails the audit.', '',
         '## How the scores are calculated', '',
         'Each theme gets a score out of 100 for each vision situation. A score helps to choose a theme, and it is calculated, not observed with real users.', '',
         '| Score | Formula | Reference |', '| --- | --- | --- |',
-        f"| Protanopia, Deuteranopia, Tritanopia | Share of the 21 pairs of main syntax colors with a ΔE of at least {data['thresholds']['colorDistinctionDeltaE']}, after simulation at full severity | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |",
-        '| Partial forms (protanomaly, deuteranomaly, tritanomaly) | Same calculation for severities 0.1 to 0.9, keeping the lowest result | [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113) |',
-        f"| Achromatopsia | Share of the same pairs with a ΔE of at least {data['thresholds']['colorDistinctionDeltaE']} once each color becomes a gray of the same luminance | Relative luminance of sRGB |",
+        f"| Protanopia, Deuteranopia, Tritanopia | Share of the 21 pairs of main syntax colors with a ΔE2000 of at least {data['thresholds']['colorDistinctionDeltaE2000']} with every model, after simulation at full severity | {MACHADO_LINK}, {BRETTEL}, {VIENOT} |",
+        f'| Partial forms (protanomaly, deuteranomaly, tritanomaly) | Same calculation with the model of Machado et al. for severities 0.1 to 0.9, keeping the lowest result | {MACHADO_LINK} |',
+        f"| Achromatopsia | Share of the same pairs with a ΔE2000 of at least {data['thresholds']['colorDistinctionDeltaE2000']} once each color becomes a gray of the same luminance | Relative luminance of sRGB |",
         '| Low vision 20/40 | Share of the text checks at 4.5:1 or more | [WCAG 2.2, 1.4.3](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) |',
         '| Low vision 20/80 | Share of the text checks at 7:1 or more | [WCAG 2.2, 1.4.6](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html) |', '',
     ]
@@ -221,13 +242,13 @@ def to_markdown(data):
                 f"| {MONTHS[month_of(theme) - 1]} | {theme['checks']['passed']}/{theme['checks']['total']}"
                 f" | {theme['contrast']['editorText']:.2f}:1 | {theme['contrast']['lowestText']:.2f}:1"
                 f" | {fmt(low['atLeast4.5'])}% | {fmt(low['atLeast7'])}%"
-                f" | {fmt(vision['normal']['deltaE'])} | {fmt(vision['protanopia']['deltaE'])}"
-                f" | {fmt(vision['deuteranopia']['deltaE'])} | {fmt(vision['tritanopia']['deltaE'])}"
+                f" | {fmt(vision['normal']['deltaE2000'])} | {fmt(vision['protanopia']['deltaE2000'])}"
+                f" | {fmt(vision['deuteranopia']['deltaE2000'])} | {fmt(vision['tritanopia']['deltaE2000'])}"
                 f" | {gray['pairsBelowThreshold']}/{gray['pairs']} |")
-        lines += ['', 'Smallest difference between main syntax colors with CIEDE2000, for information:', '',
+        lines += ['', 'Smallest difference between main syntax colors with CIE76, with every model, for information:', '',
                   '| Month | Normal | Protanopia | Deuteranopia | Tritanopia |', '| --- | --- | --- | --- | --- |']
         for theme in variant['themes']:
-            value = theme['ciede2000']
+            value = theme['cie76']
             lines.append(f"| {MONTHS[month_of(theme) - 1]} | {fmt(value['normal'])} | {fmt(value['protanopia'])}"
                          f" | {fmt(value['deuteranopia'])} | {fmt(value['tritanopia'])} |")
         lines += ['', 'Scores out of 100:', '',

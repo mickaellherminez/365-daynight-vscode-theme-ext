@@ -138,12 +138,14 @@
     },
     "references": {
       "title": "Referências",
-      "machado": "Usado nas simulações de daltonismo.",
+      "machado": "Um dos três modelos de simulação de daltonismo, e o único para as formas parciais.",
       "wcag": "Razão de contraste, os níveis 4,5:1 e 7:1, e o uso da cor.",
       "understanding": "Relaciona 4,5:1 a uma acuidade visual de cerca de 20/40, e 7:1 a cerca de 20/80.",
-      "cie": "CIELAB e a diferença de cor CIE76 usada nos limites.",
-      "sharma": "CIEDE2000, e os dados de teste que verificam as ferramentas.",
-      "birch": "Cerca de 8% dos homens e 0,4% das mulheres de ascendência europeia."
+      "cie": "CIELAB e a diferença de cor CIE76 usada nos limites de variedade.",
+      "sharma": "CIEDE2000, usado no limite de distinção de cores, e os dados de teste que verificam as ferramentas.",
+      "birch": "Cerca de 8% dos homens e 0,4% das mulheres de ascendência europeia.",
+      "brettel": "Modelo de simulação de daltonismo, o único usado para a tritanopia.",
+      "vienot": "Modelo de simulação de daltonismo, para a protanopia e a deuteranopia."
     },
     "noscript": "As pré-visualizações interativas precisam de JavaScript. Mesmo assim, você pode assistir à demonstração no VS Code, ler a auditoria e instalar os 48 temas.",
     "footer": {
@@ -155,10 +157,11 @@
   },
   "limits": [
     "**Ainda não há testes com usuários reais.** O daltonismo e a baixa visão são simulados ou calculados. Nenhum cálculo substitui testes com as pessoas envolvidas, e [comentários são bem-vindos](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/issues/47).",
-    "**As formas parciais são medidas, não exigidas.** As formas parciais do daltonismo, que são as mais comuns, aparecem nas pontuações para severidades de 0,1 a 0,9. Só as formas completas podem reprovar a auditoria.",
+    "**As formas parciais são medidas, não exigidas.** As formas parciais do daltonismo, que são as mais comuns, aparecem nas pontuações para severidades de 0,1 a 0,9. Só as formas completas podem reprovar a auditoria. Só o modelo de Machado et al. abrange as formas parciais, e ele é menos confiável para a tritanomalia.",
     "**A acromatopsia é apenas informativa.** Sem cor, muitas cores de sintaxe têm luminosidade parecida, como mostra a tabela. Elas então só se distinguem pelo estilo, quando o tema define um, por exemplo nos comentários e no código obsoleto ou inválido.",
-    "**Os limites são regras do projeto.** As WCAG definem os contrastes mínimos. O limite de distinção de cores (ΔE 12 na escala CIE76) e os limites de variedade são regras práticas escolhidas para este projeto, não normas.",
-    "**CIE76 é uma medida simples.** Os limites se aplicam ao CIE76. O CIEDE2000 é mais próximo da percepção, sobretudo nos azuis e nas cores pouco saturadas, por isso o [relatório de auditoria](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) também o apresenta, a título informativo, em uma tabela sob cada variante. Ele usa outra escala, e os limites não estão calibrados para ele.",
+    "**Os limites são regras do projeto.** As WCAG definem os contrastes mínimos. O limite de distinção de cores (ΔE2000 7 na escala CIEDE2000) e os limites de variedade são regras práticas escolhidas para este projeto, não normas.",
+    "**Os modelos de simulação não concordam.** O daltonismo é simulado com três modelos publicados para a protanopia e a deuteranopia, e com o de Brettel et al. para a tritanopia, o único dos três confiável para ela. Um par de cores deve continuar distinto com cada modelo. Nenhum modelo mostra exatamente o que uma pessoa específica vê.",
+    "**Duas fórmulas de diferença de cor.** A distinção de cores usa o CIEDE2000, mais próximo da percepção, sobretudo nos azuis e nas cores pouco saturadas. Os limites de variedade entre os meses ainda usam o CIE76, uma fórmula mais simples, e o [relatório de auditoria](https://github.com/mickaellherminez/365-daynight-vscode-theme-ext/blob/main/docs/AUDIT.md#light) também apresenta o CIE76 para a distinção de cores, a título informativo, em uma tabela sob cada variante.",
     "**Apenas contraste WCAG 2.** O APCA, o modelo de contraste em rascunho para as WCAG 3, não é aplicado.",
     "**Cores, não renderização.** A auditoria lê os arquivos dos temas. Ela verifica os pares de cores listados no seu código, com um escopo TextMate por categoria de token. Não analisa uma janela renderizada, a suavização de fontes nem a sua tela.",
     "**Nem todas as cores do VS Code.** Um tema define cerca de 485 das aproximadamente 970 cores documentadas pelo VS Code. As demais usam os padrões do VS Code, e só as das superfícies recentes são auditadas, como estão no VS Code 1.145. Uma versão futura pode alterá-las.",
@@ -223,10 +226,10 @@
         "achromatopsia": "Acromatopsia"
       },
       "scores": {
-        "protanopia": { "label": "Protanopia", "formula": "Proporção dos 21 pares das principais cores de sintaxe que ficam a pelo menos {{distance}} de distância, simulados na severidade máxima." },
+        "protanopia": { "label": "Protanopia", "formula": "Proporção dos 21 pares das principais cores de sintaxe que ficam a pelo menos {{distance}} de distância com cada modelo de simulação, na severidade máxima." },
         "deuteranopia": { "label": "Deuteranopia", "formula": "Mesmo cálculo, para a deuteranopia." },
         "tritanopia": { "label": "Tritanopia", "formula": "Mesmo cálculo, para a tritanopia." },
-        "protanomaly": { "label": "Protanomalia (parcial)", "formula": "Mesmo cálculo para severidades de 0,1 a 0,9, mantendo o resultado mais baixo." },
+        "protanomaly": { "label": "Protanomalia (parcial)", "formula": "Mesmo cálculo com o modelo de Machado et al. para severidades de 0,1 a 0,9, mantendo o resultado mais baixo." },
         "deuteranomaly": { "label": "Deuteranomalia (parcial)", "formula": "Igual, para a deuteranopia parcial." },
         "tritanomaly": { "label": "Tritanomalia (parcial)", "formula": "Igual, para a tritanopia parcial." },
         "achromatopsia": { "label": "Acromatopsia", "formula": "Proporção dos mesmos pares que ficam a pelo menos {{distance}} de distância apenas pela luminosidade." },

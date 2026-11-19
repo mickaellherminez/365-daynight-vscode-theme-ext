@@ -10,7 +10,8 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-from colorlib import ACHROMATOPSIA, CVD, simulate, ciede2000, contrast, delta_e, delta_e_2000, lab  # noqa: E402
+from colorlib import (ACHROMATOPSIA, BRETTEL, CVD, MODELS, VIENOT, _linear, ciede2000, contrast, delta_e,  # noqa: E402
+                      delta_e_2000, lab, parse, project, simulate)
 
 DATA = os.path.join(HERE, 'data')
 
@@ -106,17 +107,60 @@ class ColorVisionDeficiencyTest(unittest.TestCase):
         self.assertGreater(delta_e(red, green, CVD['tritan']), 30)
 
 
+class OtherModelsTest(unittest.TestCase):
+    """Brettel 1997 et Viénot 1999 donnent les couleurs calculées par DaltonLens, sur 216 couleurs."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(DATA, 'daltonlens-cvd.json'), encoding='utf-8') as file:
+            cls.reference = json.load(file)
+
+    def test_same_colors_as_daltonlens(self):
+        self.assertEqual(len(self.reference['input']), 216)
+        for model, simulations in (('Brettel 1997', BRETTEL), ('Viénot 1999', VIENOT)):
+            self.assertEqual(sorted(self.reference[model]), sorted(simulations))
+            for deficiency, expected in self.reference[model].items():
+                for color, want in zip(self.reference['input'], expected):
+                    linear = [_linear(x) for x in parse(color)[0]]
+                    got = project(linear, simulations[deficiency])
+                    with self.subTest(model=model, deficiency=deficiency, color=color):
+                        for a, b in zip(got, want):
+                            self.assertAlmostEqual(a, b, delta=1e-9)
+
+    def test_models_kept_for_each_deficiency(self):
+        # Décision du 19 novembre 2026 (issue #96) : Machado et Viénot ne valent pas pour la tritanopie
+        self.assertEqual(sorted(MODELS), ['deutan', 'protan', 'tritan'])
+        for name in ('protan', 'deutan'):
+            self.assertEqual(sorted(MODELS[name]), ['Brettel 1997', 'Machado 2009', 'Viénot 1999'])
+        self.assertEqual(list(MODELS['tritan']), ['Brettel 1997'])
+
+    def test_white_and_grays_are_unchanged(self):
+        for name, simulations in MODELS.items():
+            for model, simulation in simulations.items():
+                for gray in ('#000000', '#808080', '#FFFFFF'):
+                    with self.subTest(view=name, model=model, color=gray):
+                        self.assertEqual(simulate(gray, simulation), gray)
+
+    def test_tritanopia_merges_yellow_green_and_lavender(self):
+        # Mot-clé et classe de décembre High Contrast Dark (version 1.0.5) : très différents en vision normale, presque
+        # confondus en tritanopie avec Brettel, alors que Machado les garde à l'écart
+        lime, lavender = '#A4E05C', '#C1CDFC'
+        self.assertGreater(delta_e(lime, lavender), 40)
+        self.assertLess(delta_e(lime, lavender, BRETTEL['tritan']), 2)
+        self.assertGreater(delta_e(lime, lavender, CVD['tritan']), 10)
+
+
 class SimulateTest(unittest.TestCase):
     def test_grays_are_unchanged(self):
         for matrix in CVD.values():
             self.assertEqual(simulate('#808080', matrix), '#808080')
 
     def test_matches_the_color_used_for_the_distances(self):
-        for matrix in list(CVD.values()) + [ACHROMATOPSIA]:
+        # Les distances se calculent sur la couleur simulée arrondie à 8 bits, celle que montre l'écran
+        simulations = [simulation for models in MODELS.values() for simulation in models.values()]
+        for simulation in simulations + [ACHROMATOPSIA]:
             for color in ('#C0392B', '#2ECC71', '#2980B9'):
-                expected, seen = lab(color, matrix), lab(simulate(color, matrix))
-                for a, b in zip(expected, seen):
-                    self.assertAlmostEqual(a, b, delta=0.6)
+                self.assertEqual(lab(color, simulation), lab(simulate(color, simulation)))
 
 
 class AchromatopsiaTest(unittest.TestCase):
@@ -128,7 +172,8 @@ class AchromatopsiaTest(unittest.TestCase):
                 lightness, a, b = lab(color, ACHROMATOPSIA)
                 self.assertLess(abs(a), 0.05)
                 self.assertLess(abs(b), 0.05)
-                self.assertAlmostEqual(lightness, lab(color)[0], delta=0.05)
+                # Le gris simulé est arrondi à 8 bits, comme à l'écran : sa clarté s'écarte au plus d'un demi-pas
+                self.assertAlmostEqual(lightness, lab(color)[0], delta=0.25)
 
     def test_only_lightness_differences_remain(self):
         red, green = '#B5443D', '#5E7F2B'

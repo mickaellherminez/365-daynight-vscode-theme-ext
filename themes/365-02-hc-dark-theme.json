@@ -328,8 +328,8 @@
     "sash.hoverBorder": "#DFD6FF",
     "scmGraph.foreground1": "#A899FC",
     "scmGraph.foreground2": "#EF964B",
-    "scmGraph.foreground3": "#B0E86D",
-    "scmGraph.foreground4": "#81EE95",
+    "scmGraph.foreground3": "#ABE962",
+    "scmGraph.foreground4": "#87ED98",
     "scmGraph.foreground5": "#23E3FB",
     "scmGraph.historyItemBaseRefColor": "#E8D44D",
     "scmGraph.historyItemHoverAdditionsForeground": "#4FF5E0",
@@ -384,12 +384,12 @@
     "statusBarItem.prominentHoverBackground": "#585468",
     "statusBarItem.remoteBackground": "#403D4A",
     "statusBarItem.remoteForeground": "#FFFFFF",
-    "symbolIcon.booleanForeground": "#81EE95",
+    "symbolIcon.booleanForeground": "#87ED98",
     "symbolIcon.classForeground": "#23E3FB",
-    "symbolIcon.constantForeground": "#81EE95",
+    "symbolIcon.constantForeground": "#87ED98",
     "symbolIcon.constructorForeground": "#EF964B",
     "symbolIcon.enumeratorForeground": "#23E3FB",
-    "symbolIcon.enumeratorMemberForeground": "#81EE95",
+    "symbolIcon.enumeratorMemberForeground": "#87ED98",
     "symbolIcon.eventForeground": "#23E3FB",
     "symbolIcon.fieldForeground": "#E8DEF8",
     "symbolIcon.functionForeground": "#EF964B",
@@ -398,12 +398,12 @@
     "symbolIcon.methodForeground": "#EF964B",
     "symbolIcon.moduleForeground": "#E8DEF8",
     "symbolIcon.namespaceForeground": "#E8DEF8",
-    "symbolIcon.nullForeground": "#81EE95",
-    "symbolIcon.numberForeground": "#81EE95",
+    "symbolIcon.nullForeground": "#87ED98",
+    "symbolIcon.numberForeground": "#87ED98",
     "symbolIcon.operatorForeground": "#A899FC",
     "symbolIcon.packageForeground": "#E8DEF8",
     "symbolIcon.propertyForeground": "#E8DEF8",
-    "symbolIcon.stringForeground": "#B0E86D",
+    "symbolIcon.stringForeground": "#ABE962",
     "symbolIcon.structForeground": "#23E3FB",
     "symbolIcon.typeParameterForeground": "#23E3FB",
     "symbolIcon.variableForeground": "#F8F3FF",
@@ -477,7 +477,7 @@
     "textCodeBlock.background": "#181221",
     "textLink.activeForeground": "#DFD6FF",
     "textLink.foreground": "#6CCBFF",
-    "textPreformat.foreground": "#B0E86D",
+    "textPreformat.foreground": "#ABE962",
     "textSeparator.foreground": "#B2AABE",
     "titleBar.activeBackground": "#110A18",
     "titleBar.activeForeground": "#F8F3FF",
@@ -526,7 +526,7 @@
         "string.quoted.double"
       ],
       "settings": {
-        "foreground": "#B0E86D"
+        "foreground": "#ABE962"
       }
     },
     {
@@ -585,7 +585,7 @@
         "constant.other"
       ],
       "settings": {
-        "foreground": "#81EE95"
+        "foreground": "#87ED98"
       }
     },
     {
@@ -598,7 +598,7 @@
         "constant.numeric.octal"
       ],
       "settings": {
-        "foreground": "#81EE95"
+        "foreground": "#87ED98"
       }
     },
     {
@@ -641,7 +641,7 @@
         "entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#81EE95",
+        "foreground": "#87ED98",
         "fontStyle": "italic"
       }
     },
@@ -708,7 +708,7 @@
         "markup.inline.raw"
       ],
       "settings": {
-        "foreground": "#B0E86D"
+        "foreground": "#ABE962"
       }
     },
     {
@@ -896,7 +896,7 @@
     }
   ],
   "semanticTokenColors": {
-    "variable.readonly": "#81EE95",
+    "variable.readonly": "#87ED98",
     "parameter": {
       "foreground": "#F8F3FF",
       "fontStyle": "italic"
@@ -914,7 +914,7 @@
       "foreground": "#23E3FB",
       "fontStyle": "italic"
     },
-    "enumMember": "#81EE95",
+    "enumMember": "#87ED98",
     "property": "#E8DEF8",
     "variable.defaultLibrary": "#23E3FB",
     "keyword": "#A899FC",
@@ -926,5 +926,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette à contraste élevé (brume lavande) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette à contraste élevé (brume lavande) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999)."
 }

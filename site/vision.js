@@ -70,7 +70,7 @@ export function createVisionPanel(container, code, thresholds) {
     value.append(number, track);
     const formula = element('td', 'score-formula');
     formula.append(tNodes(`vision.scores.${score.key}.formula`, {
-      distance: ltr(`ΔE ${num(thresholds.colorDistinctionDeltaE)}`),
+      distance: ltr(`ΔE2000 ${num(thresholds.colorDistinctionDeltaE2000)}`),
       aa: ltr(ratio(thresholds.textContrast, 1)), aaa: ltr(ratio(thresholds.textContrastHighContrast, 0)),
     }));
     const reference = element('td', 'score-ref');

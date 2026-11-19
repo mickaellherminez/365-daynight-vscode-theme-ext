@@ -1,8 +1,8 @@
 """Aide au choix des couleurs de syntaxe d'une nouvelle palette.
 
 Pour chaque rôle (mot-clé, nombre, fonction...), cherche dans sa famille de teintes les couleurs qui
-respectent le contraste demandé et qui restent le plus distinctes entre elles pour les 4 visions
-(normale, protanopie, deutéranopie, tritanopie). Les propositions sont un point de départ :
+respectent le contraste demandé et qui restent le plus distinctes entre elles (ΔE2000) pour les 4 visions
+(normale, protanopie, deutéranopie, tritanopie), avec chaque modèle de simulation de colorlib.MODELS. Les propositions sont un point de départ :
 elles maximisent la distinction mais pas l'esthétique, à ajuster à la main puis à vérifier avec build.py.
 
 Usage :
@@ -15,7 +15,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from colorlib import VIEWS, contrast, delta_e, lch_to_hex  # noqa: E402
+from colorlib import SIMULATIONS, contrast, delta_e_2000, lch_to_hex  # noqa: E402
 
 # Familles : (teinte min, teinte max, chroma min, chroma max) en CIE LCh
 TOKEN_FAMILIES = {
@@ -35,8 +35,8 @@ ALERT_FAMILIES = {
 
 
 def score(colors):
-    """Plus petite distance perçue entre deux couleurs, toutes paires et toutes visions confondues."""
-    return min(delta_e(colors[a], colors[b], m) for a, b in itertools.combinations(colors, 2) for m in VIEWS.values())
+    """Plus petit ΔE2000 entre deux couleurs, toutes paires, toutes visions et tous modèles confondus."""
+    return min(delta_e_2000(colors[a], colors[b], m) for a, b in itertools.combinations(colors, 2) for m in SIMULATIONS)
 
 
 def optimize(families, fixed, accept, rounds=6):
@@ -77,11 +77,11 @@ def main():
         return contrast(c, args.bg) >= (args.alert_min or args.min)
 
     tokens, s1 = optimize(TOKEN_FAMILIES, {'variable': args.fg}, accept_token)
-    print('Jetons  (ΔE minimal %.1f) :' % s1)
+    print('Jetons  (ΔE2000 minimal %.1f) :' % s1)
     for role, color in tokens.items():
         print(f'   {role:9} {color}  contraste {contrast(color, args.bg):.2f}')
     alerts, s2 = optimize(ALERT_FAMILIES, {}, accept_alert)
-    print('Alertes (ΔE minimal %.1f) :' % s2)
+    print('Alertes (ΔE2000 minimal %.1f) :' % s2)
     for role, color in alerts.items():
         print(f'   {role:9} {color}  contraste {contrast(color, args.bg):.2f}')
 

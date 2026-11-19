@@ -12,7 +12,7 @@ et distinction des couleurs pour les personnes daltoniennes.
 | `report.py` | Génère le rapport public `docs/AUDIT.md` et `docs/audit-report.json` (`npm run themes:report`). `npm run themes:report-check` échoue s'ils ne sont plus à jour, dans la CI et avant chaque publication |
 | `draft.py` | Ébauche les 4 palettes d'un mois à partir de son ambiance (`direction.json`) et du modèle `draft-template.json` |
 | `direction.json` | Ambiance de chaque mois : fonds et accents de départ, plages de teinte des couleurs de syntaxe |
-| `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte, avec l'ajout Git du High Contrast Light retouché pour le seuil de 12 |
+| `draft-template.json` | Modèle de structure des ébauches : les 4 palettes d'octobre d'avant la refonte, avec l'ajout Git du High Contrast Light retouché pour l'ancien seuil de 12 (CIE76) |
 | `optimize.py` | Propose des couleurs de syntaxe distinctes pour un fond donné (point de départ d'une palette) |
 | `preview.py` | Génère l'image `year.png` des README (`assets/screenshots/`, ou un autre dossier avec `--out`) avec Google Chrome en mode headless : `year.png` montre les 12 mois avec, pour chaque variante, le code, une bande de l'accent et la barre d'état avec le bouton de l'extension |
 | `colorlib.py` | Calculs de couleur : contraste, composition alpha, simulation du daltonisme et de l'achromatopsie, ΔE CIE76 et CIEDE2000 |
@@ -55,23 +55,25 @@ Le script renvoie le code 1 si un contrôle échoue. Il vérifie notamment :
   fond défini par le thème ou, à défaut, sur celui de VS Code 1.145. Ces valeurs sont dans `checks()`, dans `audit.py`.
 - **Daltonisme** : les jetons principaux (mot-clé, fonction, chaîne, nombre, classe, commentaire, variable)
   et les alertes (erreur, avertissement, ajout, suppression, test réussi ou échoué, lignes du graphe Git) sont simulés en protanopie, deutéranopie et
-  tritanopie ([Machado et al., 2009](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html)).
-  Une différence perçue (ΔE) inférieure à 12 est signalée comme confusion possible et fait échouer l'audit. Le seuil
-  était de 10 jusqu'à l'ébauche des 12 mois, qui a montré qu'une marge de 12 était tenable dans les 48 thèmes.
+  tritanopie, avec plusieurs modèles publiés : [Machado et al., 2009](https://doi.org/10.1109/TVCG.2009.113),
+  [Brettel et al., 1997](https://doi.org/10.1364/JOSAA.14.002647) et
+  [Viénot et al., 1999](https://doi.org/10.1002/(SICI)1520-6378(199908)24:4%3C243::AID-COL5%3E3.0.CO;2-3) pour la
+  protanopie et la deutéranopie, Brettel et al. seul pour la tritanopie, car Machado et Viénot n'y sont pas fiables.
+  La liste est `MODELS` dans `colorlib.py`. Une paire doit rester distincte avec chaque modèle : une différence perçue
+  CIEDE2000 (ΔE2000) inférieure à 7 en vision normale ou avec un seul modèle est signalée comme confusion possible et
+  fait échouer l'audit. Chaque ligne indique le modèle qui rapproche le plus la paire, et son écart CIE76 pour
+  comparaison : `mot-clé/classe 0.6 (Brettel 1997, CIE76 1)`. Le seuil de 7 est une règle du projet (issue #96),
+  choisie d'après les 48 thèmes de la version 1.0.5 ; avant, l'audit exigeait un ΔE CIE76 de 12 avec Machado seul.
 - **Pas seulement la couleur** ([WCAG 2.2, critère 1.4.1](https://www.w3.org/TR/WCAG22/#use-of-color)) : les styles
   qui portent un sens doivent être présents. Commentaires en italique, code invalide souligné, code obsolète barré
   (règle TextMate et jeton sémantique `*.deprecated`), liens soulignés, titres et gras Markdown en gras, italique
   Markdown en italique. La liste est `REQUIRED_STYLES` dans `audit.py`. Un style manquant fait échouer l'audit.
 
-Après les contrôles, le rapport affiche deux mesures **à titre d'information**, qui ne le font jamais échouer :
+Après les contrôles, le rapport affiche une mesure **à titre d'information**, qui ne le fait jamais échouer :
 
-- **CIEDE2000** (lignes `info ΔE2000`) : les trois paires de jetons principaux les plus proches, pour chaque vision,
-  avec la formule CIEDE2000. Elle est plus fidèle à la perception que CIE76, surtout pour les bleus et les couleurs
-  peu saturées, mais sur une autre échelle : un ΔE2000 est en général plus petit que le ΔE CIE76 de la même paire.
-  Le seuil de 12 reste donc appliqué en CIE76, tant que les seuils n'ont pas été recalibrés pour CIEDE2000.
 - **Achromatopsie** (ligne `info achromatopsie`), c'est-à-dire la vision sans couleur : chaque couleur devient le gris
   de même luminance, et seul l'écart de clarté reste. La ligne donne les trois paires de jetons principaux les plus
-  proches et le nombre de paires sous 12, sur 21. C'est la mesure qui varie le plus d'un thème à l'autre : deux
+  proches et le nombre de paires sous 7 (ΔE2000), sur 21. C'est la mesure qui varie le plus d'un thème à l'autre : deux
   jetons de même clarté ne se distinguent alors que par leur style.
 
 Une clé manquante compte comme un échec : VS Code la remplacerait par sa couleur par défaut, sans rapport avec le thème.
@@ -94,6 +96,7 @@ CI et avant chaque publication, comparent `colorlib.py` à des valeurs publiées
 | Contraste WCAG : 21:1 pour le noir sur blanc, 4,54:1 pour `#767676` sur blanc (le gris le plus clair qui passe AA), 4,48:1 pour `#777777`, et la luminance des trois primaires | [WCAG 2.2, définitions du ratio de contraste et de la luminance relative](https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio) |
 | CIEDE2000 : les 34 paires de test, au dix-millième près, dans les deux sens | Sharma, Wu et Dalal (2005), *Color Research & Application* 30(1), p. 21–30 |
 | Simulation du daltonisme : les matrices de `colorlib.py` sont celles publiées pour la sévérité 1,0 ; le tableau complet (sévérités 0,0 à 1,0) laisse le blanc et les gris inchangés ; un rouge-orangé et un vert sur une même ligne de confusion se confondent en protanopie et en deutéranopie, pas en tritanopie | Machado, Oliveira et Fernandes (2009), *IEEE TVCG* 15(6), p. 1291–1298, DOI 10.1109/TVCG.2009.113 |
+| Autres modèles : Brettel 1997 (3 dichromaties) et Viénot 1999 (protanopie, deutéranopie) donnent les mêmes couleurs que DaltonLens sur 216 couleurs ; le blanc et les gris restent inchangés ; un vert-jaune et un lavande se confondent en tritanopie avec Brettel, pas avec Machado | Brettel, Viénot et Mollon (1997), *JOSA A* 14(10), p. 2647–2655 ; Viénot, Brettel et Mollon (1999), *Color Research & Application* 24(4), p. 243–252 ; [DaltonLens-Python](https://github.com/DaltonLens/DaltonLens-Python) 0.1.5 |
 | Achromatopsie : chaque couleur devient un gris de même clarté, et seul l'écart de clarté reste | Luminance relative de sRGB (coefficients 0,2126, 0,7152, 0,0722) |
 
 Les mêmes tests vérifient aussi l'audit et le test de variété eux-mêmes : un style manquant fait bien échouer
@@ -119,7 +122,8 @@ npm run themes:report-check  # échoue si ces fichiers ne correspondent plus aux
 ```
 
 Le rapport reprend les résultats de l'audit et du test de variété, et calcule un score sur 100 par situation de vision :
-daltonismes complets, formes partielles (sévérités 0,1 à 0,9 de Machado et al., le résultat le plus bas), achromatopsie,
+daltonismes complets (ΔE2000 d'au moins 7 avec chaque modèle), formes partielles (sévérités 0,1 à 0,9 de Machado et al.,
+le seul modèle qui les couvre, le résultat le plus bas), achromatopsie,
 basse vision. Ces scores sont informatifs : seuls les daltonismes complets peuvent faire échouer l'audit. Les formules
 et les limites sont dans le rapport. Après tout changement de thème, relancer `npm run themes:report` et commiter le résultat.
 
@@ -203,11 +207,11 @@ L'audit garantit les contrôles listés ci-dessus, rien de plus. En particulier 
 - **Langages** : chaque catégorie de jeton est testée avec un seul scope TextMate représentatif. Une grammaire qui
   utilise d'autres scopes peut afficher d'autres couleurs.
 - **Norme** : les ratios sont ceux de WCAG 2.x. Le futur modèle APCA (WCAG 3) n'est pas appliqué.
-- **Daltonisme** : la simulation de Machado et al. (2009) porte sur les dichromaties complètes (protanopie,
-  deutéranopie, tritanopie). Les formes partielles, plus fréquentes, sont moins sévères mais pas simulées à part.
-  Le seuil ΔE de 12 (CIE76) est une règle pratique, pas une norme.
-- **CIEDE2000** : il est seulement affiché. Les seuils restent en CIE76, une formule plus simple et moins fidèle,
-  tant qu'ils n'ont pas été recalibrés.
+- **Daltonisme** : l'audit porte sur les dichromaties complètes (protanopie, deutéranopie, tritanopie). Les formes
+  partielles, plus fréquentes, sont moins sévères : elles sont mesurées dans les scores du rapport, avec le seul modèle
+  de Machado et al., moins fiable pour la tritanomalie. Les modèles ne s'accordent pas sur toutes les couleurs, et aucun
+  ne montre exactement ce que voit une personne donnée. Le seuil ΔE2000 de 7 est une règle pratique, pas une norme.
+- **CIE76** : les seuils du test de variété restent en CIE76, une formule plus simple et moins fidèle que CIEDE2000.
 - **Achromatopsie** : la simulation utilise la luminance de la vision de jour. Les personnes achromates voient avec
   les bâtonnets, dont la sensibilité rend le bleu un peu plus clair et le rouge plus sombre : c'est une
   approximation, affichée à titre d'information.
@@ -253,15 +257,18 @@ aussi la teinte du fond : un peu plus foncé que l'éditeur, en sombre comme en 
 terminal restent ceux du modèle, puis sont ajustés au nouveau fond jusqu'à passer l'audit.
 
 La syntaxe est cherchée dans les plages du mois : contraste WCAG sur toutes les surfaces du code, clartés étagées pour
-l'achromatopsie, et un ΔE d'au moins 12 visé entre les couleurs de code pour les 3 daltonismes simulés. Le script fait
-jusqu'à 4 tirages pour l'atteindre et garde le meilleur ; il signale sur la sortie d'erreur un tirage sous 12, ou une
+l'achromatopsie, et un ΔE2000 d'au moins 7 visé entre les couleurs de code pour les 3 daltonismes simulés, avec chaque
+modèle. Le script fait jusqu'à 4 tirages pour l'atteindre et garde le meilleur ; il signale sur la sortie d'erreur un
+tirage sous 7, ou une
 plage trop étroite qu'il a dû élargir. Pour éviter que deux mois se ressemblent, garder des plages de syntaxe qui ne se
 chevauchent pas entre mois voisins de teinte, puis lancer `npm run themes:variety`.
 
 Une ébauche est un point de départ : l'ajuster ensuite à la main dans `palettes/<mois>.json`, puis `build.py`. Les
 palettes actuelles ont été retouchées après l'ébauche : les couleurs de code de janvier (Light et High Contrast Light),
-mai (Light et High Contrast Light) et octobre (High Contrast Light), pour atteindre le seuil de 12 en daltonisme.
-Relancer `draft.py --write` sur ces mois effacerait ces retouches.
+mai (Light et High Contrast Light) et octobre (High Contrast Light), pour atteindre l'ancien seuil de 12 en daltonisme.
+Pour le passage à plusieurs modèles et à CIEDE2000 (issue #96), les couleurs de syntaxe de 40 thèmes et les alertes des
+variantes Light et High Contrast Light ont ensuite été retouchées au plus près des couleurs d'origine. Relancer
+`draft.py --write` sur un mois effacerait ces retouches.
 
 ## Créer la palette d'un autre mois à la main
 
@@ -277,7 +284,7 @@ Relancer `draft.py --write` sur ces mois effacerait ces retouches.
    ```
 
    Sur fond clair, le minimum de 7:1 impose des couleurs foncées et proches en clarté : jouer aussi sur la clarté
-   et la saturation pour garder un ΔE d'au moins 12 entre les rôles.
+   et la saturation pour garder un ΔE2000 d'au moins 7 entre les rôles, avec chaque modèle de simulation.
 
    Les propositions maximisent la distinction, pas l'esthétique : les ajuster à la main en gardant les
    écarts de clarté entre rôles, c'est ce qui compte le plus pour les daltoniens.

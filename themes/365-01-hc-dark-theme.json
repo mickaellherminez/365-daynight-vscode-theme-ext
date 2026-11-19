@@ -101,10 +101,10 @@
     "editor.wordHighlightStrongBorder": "#5DC6FF",
     "editor.wordHighlightTextBackground": "#FDFEFE14",
     "editor.wordHighlightTextBorder": "#B1C1D2",
-    "editorBracketHighlight.foreground1": "#20B3F8",
+    "editorBracketHighlight.foreground1": "#0EBAFC",
     "editorBracketHighlight.foreground2": "#40E5FA",
     "editorBracketHighlight.foreground3": "#DB8FD4",
-    "editorBracketHighlight.foreground4": "#20B3F8",
+    "editorBracketHighlight.foreground4": "#0EBAFC",
     "editorBracketHighlight.foreground5": "#40E5FA",
     "editorBracketHighlight.foreground6": "#DB8FD4",
     "editorBracketHighlight.unexpectedBracket.foreground": "#FF8A94",
@@ -326,7 +326,7 @@
     "quickInputList.focusIconForeground": "#FFFFFF",
     "quickInputTitle.background": "#010F1A",
     "sash.hoverBorder": "#5DC6FF",
-    "scmGraph.foreground1": "#20B3F8",
+    "scmGraph.foreground1": "#0EBAFC",
     "scmGraph.foreground2": "#40E5FA",
     "scmGraph.foreground3": "#80DFB0",
     "scmGraph.foreground4": "#FCB74E",
@@ -394,13 +394,13 @@
     "symbolIcon.fieldForeground": "#CFE5FC",
     "symbolIcon.functionForeground": "#40E5FA",
     "symbolIcon.interfaceForeground": "#DB8FD4",
-    "symbolIcon.keywordForeground": "#20B3F8",
+    "symbolIcon.keywordForeground": "#0EBAFC",
     "symbolIcon.methodForeground": "#40E5FA",
     "symbolIcon.moduleForeground": "#CFE5FC",
     "symbolIcon.namespaceForeground": "#CFE5FC",
     "symbolIcon.nullForeground": "#FCB74E",
     "symbolIcon.numberForeground": "#FCB74E",
-    "symbolIcon.operatorForeground": "#20B3F8",
+    "symbolIcon.operatorForeground": "#0EBAFC",
     "symbolIcon.packageForeground": "#CFE5FC",
     "symbolIcon.propertyForeground": "#CFE5FC",
     "symbolIcon.stringForeground": "#80DFB0",
@@ -538,7 +538,7 @@
         "storage.modifier"
       ],
       "settings": {
-        "foreground": "#20B3F8"
+        "foreground": "#0EBAFC"
       }
     },
     {
@@ -632,7 +632,7 @@
         "punctuation.definition.tag"
       ],
       "settings": {
-        "foreground": "#20B3F8"
+        "foreground": "#0EBAFC"
       }
     },
     {
@@ -664,7 +664,7 @@
         "punctuation.definition.heading"
       ],
       "settings": {
-        "foreground": "#20B3F8",
+        "foreground": "#0EBAFC",
         "fontStyle": "bold"
       }
     },
@@ -718,7 +718,7 @@
         "markup.list.numbered"
       ],
       "settings": {
-        "foreground": "#20B3F8"
+        "foreground": "#0EBAFC"
       }
     },
     {
@@ -881,7 +881,7 @@
         "meta.tag.yaml"
       ],
       "settings": {
-        "foreground": "#20B3F8"
+        "foreground": "#0EBAFC"
       }
     },
     {
@@ -917,7 +917,7 @@
     "enumMember": "#FCB74E",
     "property": "#CFE5FC",
     "variable.defaultLibrary": "#DB8FD4",
-    "keyword": "#20B3F8",
+    "keyword": "#0EBAFC",
     "*.deprecated": {
       "strikethrough": true
     },
@@ -926,5 +926,5 @@
       "fontStyle": "italic"
     }
   },
-  "_accessibilityNote": "Palette à contraste élevé (givre) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulation Machado 2009)."
+  "_accessibilityNote": "Palette à contraste élevé (givre) : texte et jetons ≥ 7:1 (AAA) sur le fond, syntaxe étagée en clarté pour l'achromatopsie, alertes, sélection et terminal adaptés au fond. Vérifié par script (contraste WCAG + simulations Machado 2009, Brettel 1997 et Viénot 1999)."
 }
